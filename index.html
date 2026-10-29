@@ -3,15 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+      content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 
 <meta name="theme-color" content="#fff8eb">
-<meta name="description" content="Kids Teacher - Learn, Play and Grow Together">
+<title>Kids Teacher | Parent Login</title>
 
-<title>Kids Teacher - Parent Login</title>
-
-<script src="https://accounts.google.com/gsi/client"
-        async defer></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 
 <style>
 * {
@@ -21,10 +18,11 @@
 
 html, body {
   margin: 0;
+  padding: 0;
   width: 100%;
   min-height: 100%;
-  font-family: Arial, sans-serif;
   background: #fff8eb;
+  font-family: Arial, sans-serif;
 }
 
 body {
@@ -35,169 +33,93 @@ button, input {
   font: inherit;
 }
 
-button {
-  cursor: pointer;
-  touch-action: manipulation;
-}
-
 .app {
+  position: relative;
   width: 100%;
   max-width: 600px;
-  min-height: 100dvh;
   margin: 0 auto;
-  position: relative;
-  background: #fff8eb;
   overflow: hidden;
+  background: #fff8eb;
 }
 
-.hero {
-  width: 100%;
-  position: relative;
-}
-
-#parentImage {
+.login-image {
   display: block;
   width: 100%;
   height: auto;
-  min-height: 100dvh;
-  object-fit: contain;
-  object-position: top center;
 }
 
-.login-controls {
+/*
+  Transparent click zones positioned over the buttons
+  in the original parent_login_ui.png image.
+
+  These percentages are initial estimates based on the
+  screenshot. Adjust them if your PNG has different dimensions
+  or the buttons are positioned differently.
+*/
+
+.touch-zone {
   position: absolute;
-  left: 10%;
-  width: 80%;
-  top: 75%;
   z-index: 5;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 12px;
-}
-
-/* Google button container: large, real, accessible tap area */
-.google-wrap {
-  width: 100%;
-  min-height: 58px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fff;
-  border: 1px solid #e4e0dc;
-  border-radius: 40px;
-  box-shadow: 0 4px 10px #5d3d281c;
-  overflow: hidden;
-  position: relative;
-}
-
-/* The official Google button is rendered inside this element */
-#googleButton {
-  width: 100%;
-  min-height: 58px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Email button */
-.email-button {
-  min-height: 58px;
-  width: 100%;
   border: 0;
-  border-radius: 40px;
-  background: linear-gradient(135deg, #ffb58f, #f28b68);
-  color: white;
-  font-size: 17px;
-  font-weight: 700;
-  box-shadow: 0 4px 10px #5d3d2820;
+  padding: 0;
+  margin: 0;
+  background: transparent;
   touch-action: manipulation;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
-.google-help {
-  color: #68422e;
-  font-size: 12px;
-  line-height: 1.5;
-  text-align: center;
-  padding: 0 8px;
-  overflow-wrap: anywhere;
+/* Google button location in the original image */
+#googleZone {
+  left: 18%;
+  top: 70.1%;
+  width: 64%;
+  height: 5.3%;
 }
 
-/* Email form dialog */
-.overlay {
-  display: none;
-  position: fixed;
+/* Email button location in the original image */
+#emailZone {
+  left: 18%;
+  top: 76.0%;
+  width: 64%;
+  height: 5.3%;
+}
+
+/*
+  The Google iframe is transparent to the image underneath.
+  It receives taps directly, while the original image remains
+  visually unchanged.
+*/
+#googleButtonHost {
+  position: absolute;
   inset: 0;
-  z-index: 100;
-  background: rgba(35, 23, 17, 0.65);
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  overflow: hidden;
+  border-radius: 40px;
 }
 
-.overlay.show {
-  display: flex;
-}
-
-.dialog {
-  width: 100%;
-  max-width: 390px;
-  padding: 24px;
-  background: #fffaf0;
-  border-radius: 24px;
-  box-shadow: 0 12px 40px #0003;
-  color: #593b29;
-}
-
-.dialog h2 {
-  margin: 0 0 12px;
-  text-align: center;
-}
-
-.dialog p {
-  line-height: 1.5;
-  font-size: 14px;
-}
-
-.dialog input {
-  display: block;
-  width: 100%;
-  min-height: 52px;
-  margin: 12px 0;
-  padding: 12px;
-  border: 1px solid #d9c8b8;
-  border-radius: 12px;
-  background: white;
-  color: #38271d;
-  font-size: 16px;
-}
-
-.action-button {
-  display: block;
-  width: 100%;
-  min-height: 50px;
-  margin-top: 12px;
-  border: 0;
-  border-radius: 14px;
-  background: #f39470;
-  color: white;
-  font-weight: bold;
-}
-
-.close-button {
-  background: #eee1d5;
-  color: #593b29;
+#googleButtonHost iframe {
+  max-width: 100% !important;
 }
 
 .status {
-  display: none;
-  margin: 12px 0;
-  padding: 12px;
-  border-radius: 12px;
-  background: #fff0d9;
-  color: #70401f;
+  position: fixed;
+  z-index: 50;
+  left: 5%;
+  right: 5%;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  max-width: 500px;
+  margin: auto;
+  padding: 13px 16px;
+  border-radius: 14px;
+  background: #fff6e8;
+  color: #68432e;
+  box-shadow: 0 5px 22px #0002;
   font-size: 14px;
   line-height: 1.5;
+  display: none;
   overflow-wrap: anywhere;
 }
 
@@ -205,49 +127,95 @@ button {
   display: block;
 }
 
-/* Fallback if image is missing */
+.email-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: #24160dcc;
+}
+
+.email-overlay.show {
+  display: flex;
+}
+
+.email-card {
+  width: 100%;
+  max-width: 380px;
+  padding: 24px;
+  border-radius: 24px;
+  background: #fffaf0;
+  color: #593b29;
+  box-shadow: 0 10px 40px #0003;
+}
+
+.email-card h2 {
+  text-align: center;
+  margin: 0 0 10px;
+}
+
+.email-card p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.email-card input {
+  width: 100%;
+  min-height: 52px;
+  margin: 8px 0;
+  padding: 12px;
+  border: 1px solid #dac8b8;
+  border-radius: 12px;
+  background: white;
+  color: #38271d;
+  font-size: 16px;
+}
+
+.email-card button {
+  width: 100%;
+  min-height: 50px;
+  margin-top: 10px;
+  border: 0;
+  border-radius: 14px;
+  background: #f39470;
+  color: white;
+  font-weight: bold;
+}
+
+.email-card .close {
+  background: #eadfd5;
+  color: #593b29;
+}
+
+.email-message {
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 .fallback {
   display: none;
-  min-height: 100dvh;
-  padding: 32px 20px;
+  padding: 30px 20px;
   text-align: center;
   color: #593b29;
-  background: #fff8eb;
 }
 
-.fallback h1 {
-  font-size: 32px;
+.fallback button {
+  min-height: 50px;
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 30px;
+  background: #f39470;
+  color: white;
 }
 
-.fallback .card {
-  max-width: 360px;
-  margin: 25px auto;
-  padding: 22px;
-  background: white;
-  border-radius: 24px;
-  box-shadow: 0 4px 20px #0001;
-}
-
-/* Keep controls reachable on small screens */
 @media (max-width: 380px) {
-  .login-controls {
-    left: 7%;
-    width: 86%;
-    gap: 9px;
-  }
-
-  .google-wrap,
-  #googleButton,
-  .email-button {
-    min-height: 54px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    scroll-behavior: auto !important;
-    animation: none !important;
-    transition: none !important;
+  #googleZone,
+  #emailZone {
+    height: 6%;
   }
 }
 </style>
@@ -255,300 +223,300 @@ button {
 
 <body>
 
-<main class="app">
+<main class="app" id="app">
 
-  <section class="hero" id="mainScreen">
+  <!-- Keep this image in the same repository folder as index.html -->
+  <img
+    class="login-image"
+    id="loginImage"
+    src="./parent_login_ui.png"
+    alt="Kids Teacher Parent Login"
+  >
 
-    <!-- Keep parent_login_ui.png in the same GitHub folder as index.html -->
-    <img
-      id="parentImage"
-      src="./parent_login_ui.png"
-      alt="Kids Teacher Parent Login"
-    >
+  <!-- Original image's Google button: transparent hit area -->
+  <div
+    class="touch-zone"
+    id="googleZone"
+    role="group"
+    aria-label="Continue with Google"
+  >
+    <div id="googleButtonHost"></div>
+  </div>
 
-    <!-- Large mobile touch targets -->
-    <div class="login-controls" id="loginControls">
-
-      <div class="google-wrap">
-        <div id="googleButton" aria-label="Continue with Google">
-          <span id="googleLoading">Loading Google Sign-In...</span>
-        </div>
-      </div>
-
-      <button class="email-button"
-              id="emailButton"
-              type="button">
-        ✉️ Login with Email
-      </button>
-
-      <div class="google-help" id="googleHelp" aria-live="polite"></div>
-      <div class="status" id="pageStatus" role="status" aria-live="polite"></div>
-
-    </div>
-  </section>
-
-  <section class="fallback" id="fallbackScreen">
-    <h1>📚 Kids Teacher</h1>
-    <div class="card">
-      <h2>Parent Login</h2>
-      <p>The original login image could not be loaded.</p>
-      <p>Check that <b>parent_login_ui.png</b> exists beside index.html in GitHub.</p>
-      <div class="google-wrap">
-        <div id="googleButtonFallback"></div>
-      </div>
-      <button class="email-button" id="emailButtonFallback" type="button">
-        ✉️ Login with Email
-      </button>
-    </div>
-  </section>
+  <!-- Original image's Email button: transparent hit area -->
+  <button
+    class="touch-zone"
+    id="emailZone"
+    type="button"
+    aria-label="Login with Email"
+  ></button>
 
 </main>
 
+<div id="status" class="status" role="status" aria-live="polite"></div>
+
 <!-- Email form -->
-<div class="overlay" id="emailOverlay" role="dialog"
+<div class="email-overlay" id="emailOverlay" role="dialog"
      aria-modal="true" aria-labelledby="emailTitle">
-  <div class="dialog">
+  <section class="email-card">
     <h2 id="emailTitle">Parent Login</h2>
-    <p>Enter your email to continue. Email authentication must be connected to a secure backend before this can log you in.</p>
+
+    <p>
+      Email login needs a secure authentication service.
+      The form below is a user-interface placeholder until
+      Firebase Auth or Supabase Auth is connected.
+    </p>
 
     <form id="emailForm">
-      <input id="emailInput"
-             type="email"
-             autocomplete="email"
-             placeholder="Parent email address"
-             required>
+      <input
+        id="emailInput"
+        type="email"
+        autocomplete="email"
+        placeholder="Email address"
+        required
+      >
 
-      <input id="passwordInput"
-             type="password"
-             autocomplete="current-password"
-             placeholder="Password"
-             required>
+      <input
+        id="passwordInput"
+        type="password"
+        autocomplete="current-password"
+        placeholder="Password"
+        required
+      >
 
-      <button class="action-button" type="submit">
-        Continue
-      </button>
+      <button type="submit">Continue</button>
     </form>
 
-    <div class="status" id="emailStatus" role="status"></div>
+    <div id="emailMessage" class="email-message" aria-live="polite"></div>
 
-    <button class="action-button close-button"
-            id="closeEmail"
-            type="button">
-      Close
-    </button>
-  </div>
+    <button class="close" id="closeEmail" type="button">Close</button>
+  </section>
+</div>
+
+<div class="fallback" id="fallback">
+  <h1>📚 Kids Teacher</h1>
+  <p>The parent login image could not be loaded.</p>
+  <p>Make sure <b>parent_login_ui.png</b> exists beside index.html.</p>
 </div>
 
 <script>
 (() => {
   "use strict";
 
-  /*
-    Kids Teacher Google OAuth Web Client ID.
-    Client IDs are public identifiers, not client secrets.
-  */
-  const GOOGLE_CLIENT_ID =
+  const CLIENT_ID =
     "232165749609-3443t410rpk35a5d9jik4rg54ot0v8ej.apps.googleusercontent.com";
 
-  const image = document.getElementById("parentImage");
-  const mainScreen = document.getElementById("mainScreen");
-  const fallbackScreen = document.getElementById("fallbackScreen");
-
-  const googleButton = document.getElementById("googleButton");
-  const googleLoading = document.getElementById("googleLoading");
-  const googleHelp = document.getElementById("googleHelp");
-
-  const pageStatus = document.getElementById("pageStatus");
+  const image = document.getElementById("loginImage");
+  const app = document.getElementById("app");
+  const fallback = document.getElementById("fallback");
+  const googleZone = document.getElementById("googleZone");
+  const googleHost = document.getElementById("googleButtonHost");
+  const emailZone = document.getElementById("emailZone");
+  const status = document.getElementById("status");
   const emailOverlay = document.getElementById("emailOverlay");
-  const emailButton = document.getElementById("emailButton");
-  const emailButtonFallback = document.getElementById("emailButtonFallback");
-  const closeEmail = document.getElementById("closeEmail");
   const emailForm = document.getElementById("emailForm");
-  const emailStatus = document.getElementById("emailStatus");
+  const emailMessage = document.getElementById("emailMessage");
 
-  let googleInitialized = false;
+  let initialized = false;
+  let resizeTimer = null;
 
-  function showStatus(element, message) {
-    element.textContent = message;
-    element.classList.add("show");
+  function showStatus(message) {
+    status.textContent = message;
+    status.classList.add("show");
   }
 
-  function hideStatus(element) {
-    element.textContent = "";
-    element.classList.remove("show");
+  function hideStatus() {
+    status.textContent = "";
+    status.classList.remove("show");
   }
 
-  function showOfflineState() {
-    if (!navigator.onLine) {
-      showStatus(pageStatus, "You are offline. Turn on your internet connection and try again.");
-    } else {
-      hideStatus(pageStatus);
-    }
+  function syncImageLayout() {
+    /*
+      Keep the invisible click zones aligned with the full image.
+      Since zones use percentage coordinates, they scale with it.
+    */
+    if (!image.naturalWidth) return;
+
+    app.style.width = "100%";
   }
 
-  window.addEventListener("offline", showOfflineState);
-  window.addEventListener("online", showOfflineState);
+  image.addEventListener("load", syncImageLayout);
 
   image.addEventListener("error", () => {
-    mainScreen.style.display = "none";
-    fallbackScreen.style.display = "block";
-    renderGoogleButton("googleButtonFallback");
+    app.style.display = "none";
+    fallback.style.display = "block";
   });
 
-  function decodeJwtPayload(token) {
-    try {
-      const parts = token.split(".");
-      if (parts.length !== 3) return null;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(syncImageLayout, 150);
+  });
 
-      const base64 = parts[1]
+  window.addEventListener("offline", () => {
+    showStatus("Internet connection is off. Reconnect and try again.");
+  });
+
+  window.addEventListener("online", hideStatus);
+
+  function decodeCredential(token) {
+    try {
+      const payload = token.split(".")[1];
+      const base64 = payload
         .replace(/-/g, "+")
         .replace(/_/g, "/");
 
       const padded = base64 + "=".repeat((4 - base64.length % 4) % 4);
       return JSON.parse(atob(padded));
-    } catch (error) {
+    } catch (_) {
       return null;
     }
   }
 
   function handleGoogleResponse(response) {
-    hideStatus(pageStatus);
+    hideStatus();
 
     if (!response || !response.credential) {
-      showStatus(pageStatus, "Google sign-in did not return a credential. Please try again.");
+      showStatus("Google sign-in did not complete. Please tap the Google button again.");
+      return;
+    }
+
+    const user = decodeCredential(response.credential);
+
+    if (!user) {
+      showStatus("Could not read the Google response. Please try again.");
       return;
     }
 
     /*
-      This decodes the token for display only.
-      Decoding is NOT verification. Never grant private data access
-      until a backend verifies the ID token's signature, audience,
-      issuer and expiry.
+      IMPORTANT:
+      This is not a secure application login by itself.
+      The ID token must be sent to a trusted backend or handled
+      by Firebase/Supabase Auth. Do not grant access to private
+      child data based only on the decoded token.
     */
-    const profile = decodeJwtPayload(response.credential);
-
-    if (!profile) {
-      showStatus(pageStatus, "Google returned an unreadable response. Please try again.");
-      return;
-    }
-
     showStatus(
-      pageStatus,
       "Google account selected: " +
-      (profile.name || profile.email || "Parent") +
-      ". Secure account login still needs backend token verification."
+      (user.name || user.email || "Parent") +
+      ". Secure login needs backend authentication."
     );
 
-    /*
-      Do not save the ID token in localStorage or sessionStorage.
-      Do not treat this frontend-only callback as a secure session.
-      Connect a backend/Firebase/Supabase Auth before using private data.
-    */
-    console.info("Google credential received. Backend verification is required.");
+    console.info("Google credential received. Verify it server-side.");
   }
 
-  function renderGoogleButton(targetId) {
-    const target = document.getElementById(targetId);
-    if (!target) return;
+  function initializeGoogle() {
+    if (initialized) return;
 
-    const started = Date.now();
+    if (!navigator.onLine) {
+      showStatus("Internet connection is off. Reconnect and reload.");
+      return;
+    }
 
-    const waitForGoogle = () => {
-      if (!target.isConnected) return;
+    if (!window.google ||
+        !google.accounts ||
+        !google.accounts.id) {
+      showStatus("Google Sign-In is still loading. Wait a moment and try again.");
+      return;
+    }
 
-      if (window.google &&
-          google.accounts &&
-          google.accounts.id) {
-        try {
-          google.accounts.id.initialize({
-            client_id: GOOGLE_CLIENT_ID,
-            callback: handleGoogleResponse,
-            auto_select: false,
-            cancel_on_tap_outside: true,
-            itp_support: true
-          });
+    try {
+      google.accounts.id.initialize({
+        client_id: CLIENT_ID,
+        callback: handleGoogleResponse,
+        auto_select: false,
+        cancel_on_tap_outside: true
+      });
 
-          googleInitialized = true;
-          target.innerHTML = "";
+      initialized = true;
+      renderGoogleButton();
+    } catch (error) {
+      console.error(error);
+      showStatus("Google Sign-In could not initialize. Check OAuth settings.");
+    }
+  }
 
-          google.accounts.id.renderButton(target, {
-            type: "standard",
-            theme: "outline",
-            size: "large",
-            text: "continue_with",
-            shape: "pill",
-            logo_alignment: "left",
-            width: Math.max(220, Math.floor(target.clientWidth || 300)),
-            locale: "en"
-          });
+  function renderGoogleButton() {
+    if (!initialized || !googleHost) return;
 
-          googleHelp.textContent = "";
-          return;
-        } catch (error) {
-          googleHelp.textContent =
-            "Google Sign-In could not initialize. Check OAuth settings and reload.";
-          console.error("Google initialization error:", error);
-          return;
-        }
-      }
+    googleHost.innerHTML = "";
 
-      if (Date.now() - started > 15000) {
-        target.innerHTML = "";
-        googleHelp.textContent = navigator.onLine
-          ? "Google Sign-In could not load. Check internet, browser settings and OAuth configuration, then reload."
-          : "You are offline. Connect to the internet and reload.";
-        return;
-      }
+    const width = Math.max(
+      180,
+      Math.floor(googleZone.getBoundingClientRect().width)
+    );
 
-      setTimeout(waitForGoogle, 250);
-    };
-
-    waitForGoogle();
+    google.accounts.id.renderButton(googleHost, {
+      type: "standard",
+      theme: "outline",
+      size: "large",
+      text: "continue_with",
+      shape: "pill",
+      logo_alignment: "left",
+      width: width,
+      locale: "en"
+    });
   }
 
   /*
-    Render the real Google button rather than attempting to force
-    the One Tap popup to open from a custom image hotspot.
+    Wait for Google's external script to load.
+    Avoid calling One Tap prompt manually; the visible button is
+    the reliable user-initiated sign-in entry point.
   */
-  window.addEventListener("load", () => {
-    renderGoogleButton("googleButton");
-  });
+  let attempts = 0;
 
-  emailButton.addEventListener("click", () => {
+  function waitForGoogle() {
+    if (window.google &&
+        google.accounts &&
+        google.accounts.id) {
+      initializeGoogle();
+      return;
+    }
+
+    attempts++;
+
+    if (attempts < 60) {
+      setTimeout(waitForGoogle, 250);
+    } else {
+      showStatus(
+        navigator.onLine
+          ? "Google Sign-In did not load. Check internet and OAuth configuration, then reload."
+          : "Internet connection is off."
+      );
+    }
+  }
+
+  window.addEventListener("load", waitForGoogle);
+
+  /*
+    Email button: one tap opens the email form.
+    This form is not a working authentication system until
+    a real provider is connected.
+  */
+  emailZone.addEventListener("click", () => {
     emailOverlay.classList.add("show");
-    hideStatus(emailStatus);
+    emailMessage.textContent = "";
     setTimeout(() => {
       document.getElementById("emailInput").focus();
     }, 100);
   });
 
-  if (emailButtonFallback) {
-    emailButtonFallback.addEventListener("click", () => {
-      emailOverlay.classList.add("show");
-      hideStatus(emailStatus);
-    });
-  }
-
-  closeEmail.addEventListener("click", () => {
+  document.getElementById("closeEmail").addEventListener("click", () => {
     emailOverlay.classList.remove("show");
   });
 
-  emailOverlay.addEventListener("click", (event) => {
+  emailOverlay.addEventListener("click", event => {
     if (event.target === emailOverlay) {
       emailOverlay.classList.remove("show");
     }
   });
 
-  emailForm.addEventListener("submit", (event) => {
+  emailForm.addEventListener("submit", event => {
     event.preventDefault();
 
-    showStatus(
-      emailStatus,
-      "Email form is working, but email/password login is not connected to an authentication service yet. Do not enter a real password until secure authentication is configured."
-    );
+    emailMessage.textContent =
+      "Email/password authentication is not connected yet. Do not enter a real password until a secure authentication provider is configured.";
   });
 
-  showOfflineState();
+  syncImageLayout();
 })();
 </script>
 
