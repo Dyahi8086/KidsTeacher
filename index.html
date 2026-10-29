@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Final Kids Teacher App UI</title>
+  <title>Kids Teacher - 3D UI</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -19,10 +19,10 @@
       justify-content: center;
       align-items: center;
       background: #0f172a;
-      padding: 20px;
+      padding: 15px;
     }
 
-    /* App Phone Frame */
+    /* Outer Phone Container */
     .app-screen {
       width: 100%;
       max-width: 390px;
@@ -32,14 +32,15 @@
       overflow: hidden;
       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
       
-      /* STEP 1: APNI NEW 3D FAMILY IMAGE LAGAYEIN */
-      /* Note: Replace 'image_2.png' with your actual image file name */
-      background: url('image_2.png') no-repeat center top;
+      /* 3D Background Image Link */
+      background-image: url('./image_2.png');
+      background-repeat: no-repeat;
+      background-position: center top;
       background-size: cover;
       background-color: #fce8d5;
     }
 
-    /* Bottom Clay Card Overlay */
+    /* Bottom Overlay Card Wrapper */
     .clay-card-wrapper {
       position: absolute;
       bottom: 0;
@@ -49,7 +50,7 @@
       z-index: 10;
     }
 
-    /* Green 3D Leaves (Clay style) */
+    /* Decorative Green Clay Leaves */
     .leaf {
       position: absolute;
       width: 45px;
@@ -62,6 +63,7 @@
     .leaf-left-1 { top: -15px; left: 15px; transform: rotate(-25deg); }
     .leaf-right-1 { top: -15px; right: 15px; transform: rotate(75deg); }
 
+    /* Main White Clay Card */
     .clay-card {
       background: #ffffff;
       border-radius: 35px 35px 30px 30px;
@@ -70,12 +72,12 @@
       position: relative;
       z-index: 5;
       box-shadow: 
-        0 -10px 25px rgba(0, 0, 0, 0.1),
+        0 -10px 25px rgba(0, 0, 0, 0.12),
         inset 0 -6px 0 #f1f5f9,
         inset 0 4px 10px rgba(255, 255, 255, 1);
     }
 
-    /* 3D Sun Badge overlapping */
+    /* 3D Sun Icon Badge */
     .sun-badge {
       width: 65px;
       height: 65px;
@@ -93,6 +95,7 @@
       border: 3px solid #ffffff;
     }
 
+    /* Header Title */
     .app-title {
       font-size: 28px;
       color: #451a03;
@@ -100,7 +103,7 @@
       margin-bottom: 18px;
     }
 
-    /* Buttons */
+    /* 3D Action Buttons */
     .btn-3d {
       width: 100%;
       padding: 13px;
@@ -135,7 +138,7 @@
       box-shadow: 0 1px 0 transparent !important;
     }
 
-    /* Feature Grid */
+    /* Bottom 4 Feature Boxes */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -170,11 +173,11 @@
   <div class="app-screen">
     
     <div class="clay-card-wrapper">
-      <!-- Leaves -->
+      <!-- Decorative Leaves -->
       <div class="leaf leaf-left-1"></div>
       <div class="leaf leaf-right-1"></div>
 
-      <!-- Card -->
+      <!-- Main Login Card -->
       <div class="clay-card">
         <div class="sun-badge">☀️</div>
         <h1 class="app-title">Kids Teacher</h1>
@@ -188,6 +191,7 @@
           ✉️ Login with Email
         </button>
 
+        <!-- Features Grid -->
         <div class="features-grid">
           <div class="feature-card f-blue">
             <div style="font-size: 18px;">📊</div>
