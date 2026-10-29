@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kids Teacher - Parents Portal</title>
-  <!-- Rounded & Cool Playful Fonts -->
+  <title>Parent Login - Kids App</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -41,7 +40,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 68%;
+      height: 65%;
       object-fit: cover;
       object-position: center top;
     }
@@ -59,21 +58,21 @@
     /* 3D Clay Leaves */
     .leaf {
       position: absolute;
-      width: 48px;
-      height: 48px;
+      width: 45px;
+      height: 45px;
       background: #4ade80;
       border-radius: 0 70% 0 70%;
       box-shadow: inset -3px -3px 0 #16a34a, 0 6px 12px rgba(0,0,0,0.15);
       z-index: 4;
     }
-    .leaf-left-1 { top: -16px; left: 15px; transform: rotate(-25deg); }
-    .leaf-right-1 { top: -16px; right: 15px; transform: rotate(75deg); }
+    .leaf-left-1 { top: -14px; left: 15px; transform: rotate(-25deg); }
+    .leaf-right-1 { top: -14px; right: 15px; transform: rotate(75deg); }
 
     /* Main White Claymorphism Card */
     .clay-card {
       background: #ffffff;
       border-radius: 35px 35px 30px 30px;
-      padding: 22px 18px 18px 18px;
+      padding: 20px 16px 16px 16px;
       text-align: center;
       position: relative;
       z-index: 5;
@@ -83,169 +82,150 @@
         inset 0 4px 12px rgba(255, 255, 255, 1);
     }
 
-    /* 3D Sun + Shield Badge */
-    .sun-badge {
-      width: 68px;
-      height: 68px;
+    /* 3D Sun + Shield Badge (Reference Style) */
+    .badge-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin: -52px auto 8px auto;
+    }
+
+    .sun-icon {
+      width: 55px;
+      height: 55px;
       background: linear-gradient(135deg, #fbbf24, #f59e0b);
       border-radius: 50%;
-      margin: -56px auto 6px auto;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
-      box-shadow: 
-        0 6px 0 #d97706,
-        0 10px 18px rgba(217, 119, 6, 0.35);
-      position: relative;
-      border: 4px solid #ffffff;
+      font-size: 28px;
+      box-shadow: 0 5px 0 #d97706, 0 8px 15px rgba(217, 119, 6, 0.3);
+      border: 3px solid #ffffff;
     }
 
-    .sun-badge::after {
-      content: "🛡️";
-      position: absolute;
-      bottom: -4px;
-      right: -4px;
-      font-size: 18px;
-      background: #ffffff;
-      border-radius: 50%;
-      padding: 2px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    .shield-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #facc15, #eab308);
+      border-radius: 10px 10px 20px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 4px 0 #ca8a04, 0 6px 12px rgba(202, 138, 4, 0.3);
+      border: 2.5px solid #ffffff;
+      margin-top: 10px;
     }
 
-    /* Title Styling & Parents Tag */
-    .title-container {
-      margin-bottom: 16px;
-    }
-
+    /* Title Styling */
     .app-title {
       font-size: 28px;
       color: #3b1803;
       font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+      letter-spacing: 0.3px;
       text-shadow: 0 2px 0 rgba(255, 255, 255, 0.9);
-    }
-
-    .parents-tag {
-      display: inline-block;
-      margin-top: 4px;
-      padding: 3px 12px;
-      background: #fef3c7;
-      color: #d97706;
-      font-size: 11px;
-      font-weight: 700;
-      border-radius: 12px;
-      border: 1.5px dashed #f59e0b;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
     }
 
     /* 3D Action Buttons */
     .btn-3d {
       width: 100%;
-      padding: 13px;
-      border-radius: 18px;
+      padding: 12px;
+      border-radius: 16px;
       border: none;
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       transition: all 0.15s ease;
     }
 
     .btn-google {
       background: #ffffff;
       color: #334155;
-      box-shadow: 0 5px 0 #cbd5e1, 0 8px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 0 #cbd5e1, 0 6px 10px rgba(0,0,0,0.06);
       border: 1.5px solid #e2e8f0;
     }
 
     .btn-email {
       background: linear-gradient(135deg, #ff7e5f, #ff6b4a);
       color: #ffffff;
-      box-shadow: 0 5px 0 #c2410c, 0 8px 16px rgba(255, 126, 95, 0.4);
+      box-shadow: 0 4px 0 #c2410c, 0 6px 12px rgba(255, 126, 95, 0.35);
     }
 
     .btn-3d:active {
-      transform: translateY(3px);
+      transform: translateY(2px);
       box-shadow: 0 1px 0 transparent !important;
     }
 
     /* --------------------------------------------------------
-       COOL 3D CLAY FEATURE CARDS (Track Progress, etc.)
+       BALANCED & COMPACT 3D FEATURE CARDS
     -------------------------------------------------------- */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-top: 14px;
+      gap: 6px;
+      margin-top: 12px;
     }
 
     .feature-card {
-      border-radius: 18px;
-      padding: 10px 4px 8px 4px;
+      border-radius: 14px;
+      padding: 8px 2px 6px 2px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 5px;
-      position: relative;
-      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      gap: 4px;
       cursor: pointer;
-      text-decoration: none;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-4px);
     }
 
     .feature-icon-wrapper {
-      width: 36px;
-      height: 36px;
-      border-radius: 12px;
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 16px;
       background: #ffffff;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.08), inset 0 -2px 0 rgba(0,0,0,0.05);
+      box-shadow: 0 3px 5px rgba(0,0,0,0.06), inset 0 -2px 0 rgba(0,0,0,0.04);
     }
 
     .feature-card span {
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 700;
-      line-height: 1.15;
+      line-height: 1.1;
       color: #1e293b;
       font-family: 'Quicksand', sans-serif;
     }
 
-    /* Distinct 3D Clay Color Styles */
+    /* Compact 3D Clay Colors */
     .f-blue {
       background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%);
-      border: 2px solid #ffffff;
-      box-shadow: 0 6px 0 #38bdf8, 0 8px 12px rgba(56, 189, 248, 0.2);
+      border: 1.5px solid #ffffff;
+      box-shadow: 0 4px 0 #38bdf8, 0 6px 10px rgba(56, 189, 248, 0.15);
     }
 
     .f-yellow {
       background: linear-gradient(180deg, #fef9c3 0%, #fef08a 100%);
-      border: 2px solid #ffffff;
-      box-shadow: 0 6px 0 #facc15, 0 8px 12px rgba(250, 204, 21, 0.2);
+      border: 1.5px solid #ffffff;
+      box-shadow: 0 4px 0 #facc15, 0 6px 10px rgba(250, 204, 21, 0.15);
     }
 
     .f-green {
       background: linear-gradient(180deg, #dcfce7 0%, #bbf7d0 100%);
-      border: 2px solid #ffffff;
-      box-shadow: 0 6px 0 #4ade80, 0 8px 12px rgba(74, 222, 128, 0.2);
+      border: 1.5px solid #ffffff;
+      box-shadow: 0 4px 0 #4ade80, 0 6px 10px rgba(74, 222, 128, 0.15);
     }
 
     .f-pink {
       background: linear-gradient(180deg, #ffe4e6 0%, #fecdd3 100%);
-      border: 2px solid #ffffff;
-      box-shadow: 0 6px 0 #fb7185, 0 8px 12px rgba(251, 113, 133, 0.2);
+      border: 1.5px solid #ffffff;
+      box-shadow: 0 4px 0 #fb7185, 0 6px 10px rgba(251, 113, 133, 0.15);
     }
 
   </style>
@@ -265,18 +245,18 @@
       <!-- Main Clay Card -->
       <div class="clay-card">
         
-        <!-- Sun + Shield Icon -->
-        <div class="sun-badge">☀️</div>
-
-        <!-- Header Title with Parents Portal Tag -->
-        <div class="title-container">
-          <h1 class="app-title">Kids Teacher</h1>
-          <span class="parents-tag">👨‍👩‍👧‍👦 Parents Login</span>
+        <!-- Sun + Shield Reference Badge -->
+        <div class="badge-container">
+          <div class="sun-icon">☀️</div>
+          <div class="shield-icon">🛡️</div>
         </div>
+
+        <!-- Title -->
+        <h1 class="app-title">Parent Login</h1>
 
         <!-- Action Buttons -->
         <button class="btn-3d btn-google">
-          <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
           Continue with Google
         </button>
 
@@ -284,7 +264,7 @@
           ✉️ Login with Email
         </button>
 
-        <!-- Upgraded 3D Feature Grid -->
+        <!-- Compact 3D Feature Grid -->
         <div class="features-grid">
           <div class="feature-card f-blue">
             <div class="feature-icon-wrapper">📈</div>
