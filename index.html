@@ -1,11 +1,16 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#FF956B">
 <meta name="description" content="Kids Teacher - Learn, Play and Grow Together">
 <title>Kids Teacher - Parent Login</title>
-<link rel="manifest" href="./manifest.json"><style>
+
+<link rel="manifest" href="./manifest.json">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+
+<style>
 * {
   box-sizing: border-box;
   margin: 0;
@@ -25,9 +30,10 @@ body {
 }
 
 .screen {
+  position: relative;
   width: 100%;
-  min-height: 100vh;
-  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   background: #FFF4DF;
 }
@@ -35,10 +41,29 @@ body {
 #parentImage {
   display: block;
   width: 100%;
-  height: 100vh;
-  height: 100dvh;
+  height: 100%;
   object-fit: cover;
   object-position: center;
+}
+
+/* Transparent button area placed over the Google button in your PNG */
+#googleClickArea {
+  position: absolute;
+  left: 17%;
+  top: 71.5%;
+  width: 66%;
+  height: 5.2%;
+  border: 0;
+  border-radius: 40px;
+  background: transparent;
+  cursor: pointer;
+  z-index: 5;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#googleClickArea:focus-visible {
+  outline: 3px solid #4285F4;
+  outline-offset: 2px;
 }
 
 #networkMessage {
@@ -126,38 +151,120 @@ body {
   margin-bottom: 8px;
 }
 
-</style></head><body><div id="networkMessage" role="status" aria-live="polite"></div><main class="screen"><img
-id="parentImage"
-src="./parent_login_ui.png"
-alt="Kids Teacher Parent Login"
+#statusBackdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #0006;
+  z-index: 9999;
+}
 
-«»
+#loginStatus {
+  display: none;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(90%, 360px);
+  z-index: 10000;
+  padding: 24px 20px;
+  border-radius: 22px;
+  background: #FFF9EE;
+  color: #60341F;
+  text-align: center;
+  box-shadow: 0 8px 35px #0005;
+}
+
+#loginStatus h2 {
+  margin-bottom: 12px;
+}
+
+#loginStatus p {
+  overflow-wrap: anywhere;
+  line-height: 1.5;
+}
+
+#closeStatus {
+  margin-top: 18px;
+  border: 0;
+  border-radius: 24px;
+  padding: 12px 24px;
+  background: #FF956B;
+  color: #FFFFFF;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div id="networkMessage" role="status" aria-live="polite"></div>
+
+<main class="screen">
+
+  <img
+    id="parentImage"
+    src="./parent_login_ui.png"
+    alt="Kids Teacher Parent Login"
+  >
+
+  <button
+    id="googleClickArea"
+    type="button"
+    aria-label="Continue with Google"
+    title="Continue with Google">
+  </button>
 
   <section id="backup">
     <div class="sun">🌞📚</div>
     <h1>Parent Login 💗</h1>
-    <p>Learn • Play • Grow Together</p><button class="login-button" onclick="alert('Google login abhi setup nahi hai.')">
-  🌐 Continue with Google
-</button>
+    <p>Learn • Play • Grow Together</p>
 
-<button class="login-button email" onclick="alert('Email login abhi setup nahi hai.')">
-  ✉️ Login with Email
-</button>
+    <button class="login-button" id="backupGoogle">
+      🌐 Continue with Google
+    </button>
 
-<div class="features">
-  <div class="feature"><span>📊</span>Track Progress</div>
-  <div class="feature"><span>👁️</span>Monitor Activities</div>
-  <div class="feature"><span>🔒</span>Safe &amp; Secure</div>
-  <div class="feature"><span>💗</span>Child Support</div>
-</div>
+    <button class="login-button email" id="emailButton">
+      ✉️ Login with Email
+    </button>
 
-  </section></main><script>
+    <div class="features">
+      <div class="feature">
+        <span>📊</span>Track Progress
+      </div>
+      <div class="feature">
+        <span>👁️</span>Monitor Activities
+      </div>
+      <div class="feature">
+        <span>🔒</span>Safe &amp; Secure
+      </div>
+      <div class="feature">
+        <span>💗</span>Support Your Child
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div id="statusBackdrop"></div>
+
+<section id="loginStatus" role="dialog" aria-modal="true" aria-live="polite">
+  <h2 id="statusTitle">Kids Teacher</h2>
+  <p id="statusText"></p>
+  <button id="closeStatus" type="button">OK</button>
+</section>
+
+<script>
+/*
+  Google OAuth Web Client ID.
+  Never put a Google Client Secret in frontend HTML.
+*/
+const CLIENT_ID =
+  "232165749609-3443t410rpk35a5d9jik4rg54ot0v8ej.apps.googleusercontent.com";
+
 const networkMessage = document.getElementById("networkMessage");
 const parentImage = document.getElementById("parentImage");
 const backup = document.getElementById("backup");
-
-let slowTimer;
-let testController;
 
 function showMessage(text) {
   networkMessage.textContent = text;
@@ -170,83 +277,117 @@ function hideMessage() {
 
 function showBackup() {
   parentImage.style.display = "none";
+  document.getElementById("googleClickArea").style.display = "none";
   backup.style.display = "block";
 }
 
+function showStatus(title, text) {
+  document.getElementById("statusTitle").textContent = title;
+  document.getElementById("statusText").textContent = text;
+
+  document.getElementById("statusBackdrop").style.display = "block";
+  document.getElementById("loginStatus").style.display = "block";
+}
+
+function closeStatus() {
+  document.getElementById("statusBackdrop").style.display = "none";
+  document.getElementById("loginStatus").style.display = "none";
+}
+
+document.getElementById("closeStatus")
+  .addEventListener("click", closeStatus);
+
+document.getElementById("statusBackdrop")
+  .addEventListener("click", closeStatus);
+
+/* Show fallback only if the PNG image cannot load */
 parentImage.addEventListener("error", showBackup);
 
 if (parentImage.complete && parentImage.naturalWidth === 0) {
   showBackup();
 }
 
-async function checkConnection() {
-  clearTimeout(slowTimer);
+/*
+  This callback confirms that Google returned a credential.
+  A secure backend must verify the ID token before granting access
+  to private parent or child information.
+*/
+function handleGoogleCredential(response) {
+  showStatus(
+    "Google sign-in response received 💗",
+    "Google returned a sign-in credential. Secure server-side verification is required before this account can access private child information."
+  );
+}
 
+function startGoogleLogin() {
   if (!navigator.onLine) {
-    showMessage("⚠️ No Internet Connection");
+    showStatus(
+      "No internet connection",
+      "Connect to the internet and try again."
+    );
     return;
   }
 
-  showMessage("⚠️ Checking network...");
-
-  if (testController) {
-    testController.abort();
-  }
-
-  testController = new AbortController();
-
-  slowTimer = setTimeout(() => {
-    showMessage("⚠️ Slow Network. Please wait...");
-  }, 1500);
-
-  try {
-    const response = await fetch(
-      "https://www.gstatic.com/generate_204?check=" + Date.now(),
-      {
-        method: "GET",
-        cache: "no-store",
-        signal: testController.signal
-      }
+  if (
+    !window.google ||
+    !google.accounts ||
+    !google.accounts.id
+  ) {
+    showStatus(
+      "Google Login is loading",
+      "Wait a few seconds, reload the page, and tap the Google button again."
     );
-
-    clearTimeout(slowTimer);
-
-    if (!navigator.onLine) {
-      showMessage("⚠️ No Internet Connection");
-    } else if (!response.ok) {
-      showMessage("⚠️ Slow Network. Please wait...");
-    } else {
-      hideMessage();
-    }
-  } catch (error) {
-    clearTimeout(slowTimer);
-
-    if (!navigator.onLine) {
-      showMessage("⚠️ No Internet Connection");
-    } else if (error.name !== "AbortError") {
-      showMessage("⚠️ Slow Network. Please wait...");
-    }
+    return;
   }
+
+  google.accounts.id.initialize({
+    client_id: CLIENT_ID,
+    callback: handleGoogleCredential,
+    auto_select: false
+  });
+
+  google.accounts.id.prompt(function(notice) {
+    if (
+      notice.isNotDisplayed() ||
+      notice.isSkippedMoment()
+    ) {
+      showStatus(
+        "Google Login did not open",
+        "Open Google Cloud Console → OAuth Web Client → Authorized JavaScript origins. Confirm that it contains exactly https://dyahi8086.github.io, then reload the website and try again."
+      );
+    }
+  });
 }
 
-window.addEventListener("offline", () => {
-  clearTimeout(slowTimer);
+/* Click handlers */
+document.getElementById("googleClickArea")
+  .addEventListener("click", startGoogleLogin);
 
-  if (testController) {
-    testController.abort();
-  }
+document.getElementById("backupGoogle")
+  .addEventListener("click", startGoogleLogin);
 
+document.getElementById("emailButton")
+  .addEventListener("click", function() {
+    showStatus(
+      "Email Login",
+      "Email login has not been connected yet."
+    );
+  });
+
+/*
+  Removed the automatic network speed test.
+  Only show a warning if the browser reports the device is offline.
+*/
+window.addEventListener("offline", function() {
   showMessage("⚠️ No Internet Connection");
 });
 
-window.addEventListener("online", checkConnection);
+window.addEventListener("online", hideMessage);
 
-window.addEventListener("load", () => {
-  if (!navigator.onLine) {
-    showMessage("⚠️ No Internet Connection");
-  } else {
-    checkConnection();
-  }
-});
-</script></body>
+if (!navigator.onLine) {
+  showMessage("⚠️ No Internet Connection");
+}
+</script>
+
+</body>
 </html>
