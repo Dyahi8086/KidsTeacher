@@ -1,1 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fff7e9">
+<title>Kids Teacher - Parent Login</title>
 
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#fff7e9;color:#613d2d;font-family:Arial,sans-serif}
+button,input{font:inherit}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+#app{width:100%;max-width:700px;margin:auto;min-height:100vh}
+#parentImage{display:block;width:100%;height:auto}
+#googleButton{display:block;width:calc(100% - 40px);max-width:400px;margin:15px auto;min-height:52px;border:0;border-radius:30px;background:#fff;color:#493527;font-weight:bold;box-shadow:0 4px 10px #0002}
+#googleButton:disabled,.action:disabled{opacity:.6;cursor:wait}
+#status{margin:12px 16px 24px;padding:14px;border-radius:16px;background:#fffaf1;box-shadow:0 5px 18px #6c4a301c;text-align:center;line-height:1.5;overflow-wrap:anywhere}
+#status:empty{display:none}
+#emailPanel,#accountPanel{display:none;margin:16px;padding:24px 18px;border-radius:24px;background:#fffaf0;box-shadow:0 10px 35px #0002}
+#emailPanel h2,#accountPanel h2{text-align:center;margin-top:0}
+input{width:100%;min-height:54px;padding:14px;margin:8px 0;border:1px solid #d9c8b8;border-radius:14px;background:#fff;color:#34251d;outline-color:#ef9876}
+.action{width:100%;min-height:52px;margin-top:10px;border:0;border-radius:14px;background:#f29572;color:white;font-weight:bold}
+.secondary{background:#eee2d5;color:#603f2e}
+#accountPanel{text-align:center}
+#profileImage{width:64px;height:64px;border-radius:50%;object-fit:cover}
+#loader{display:none;text-align:center;padding:12px}
+.spinner{display:inline-block;width:18px;height:18px;border:3px solid #e9cbb9;border-top-color:#ef8e6c;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+.error{color:#a12626}.success{color:#176b38}
+.small{font-size:13px;line-height:1.5}
+#googleOfficialButton{display:flex;justify-content:center;margin:10px auto}
+@media(prefers-reduced-motion:reduce){.spinner{animation:none}}
+</style>
+</head>
+
+<body>
+<main id="app">
+
+  <!-- Original 3D Parent Login image: keep parent_login_ui.png in repo -->
+  <img id="parentImage" src="./parent_login_ui.png" alt="Kids Teacher Parent Login">
+
+  <!-- Official Google sign-in button is rendered here -->
+  <div id="googleOfficialButton"></div>
+
+  <div id="loader" aria-live="polite">
+    <span class="spinner"></span>
+    <span id="loaderText"> Please wait...</span>
+  </div>
+
+  <div id="status" role="status" aria-live="polite"></div>
+
+  <section id="emailPanel">
+    <h2>Parent Login</h2>
+    <p class="small">Sign in with your parent account or create a new account.</p>
+
+    <form id="emailForm">
+      <label for="email">Parent email</label>
+      <input id="email" type="email" autocomplete="email" placeholder="Enter email" required>
+
+      <label for="password">Password</label>
+      <input id="password" type="password" autocomplete="current-password" placeholder="Password (minimum 6 characters)" minlength="6" required>
+
+      <button class="action" type="submit">Login</button>
+    </form>
+
+    <button class="action" id="createAccount" type="button">Create New Parent Account</button>
+    <button class="action secondary" id="resetPassword" type="button">Forgot Password?</button>
+    <button class="action secondary" id="closeEmail" type="button">Close</button>
+  </section>
+
+  <section id="accountPanel">
+    <img id="profileImage" alt="Profile picture" hidden>
+    <h2 id="profileName">Parent Account</h2>
+    <p id="profileEmail"></p>
+    <p class="small">You are signed in to Kids Teacher.</p>
+    <button class="action" id="signOutButton" type="button">Sign Out</button>
+  </section>
+</main>
+
+<script type="module">
+import { initializeApp }
+  from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+/*
+  Firebase web configuration:
+  The web apiKey is not a private server secret.
+  Never put a Google OAuth Client Secret or service-account private key here.
+*/
+const firebaseConfig = {
+  apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
+  authDomain: "kids-teacher-4387e.firebaseapp.com",
+  projectId: "kids-teacher-4387e",
+  storageBucket: "kids-teacher-4387e.firebasestorage.app",
+  messagingSenderId: "420221167346",
+  appId: "1:420221167346:web:da7ac80acdfd52339d526b",
+  measurementId: "G-VJVS2ZMNLY"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: "select_account" });
+
+const $ = id => document.getElementById(id);
+const statusBox = $("status");
+const loader = $("loader");
+const googleButtonContainer = $("googleOfficialButton");
+let busy = false;
+
+function message(text, type = "") {
+  statusBox.textContent = text;
+  statusBox.className = type;
+}
+
+function loading(active, text = "Please wait...") {
+  busy = active;
+  loader.style.display = active ? "block" : "none";
+  $("loaderText").textContent = " " + text;
+  document.querySelectorAll("button").forEach(button => {
+    button.disabled = active;
+  });
+}
+
+function explainError(error) {
+  const messages = {
+    "auth/invalid-email": "Email address sahi nahi hai.",
+    "auth/invalid-credential": "Email ya password galat hai.",
+    "auth/user-not-found": "Account nahi mila. Naya account banao.",
+    "auth/email-already-in-use": "Is email ka account pehle se hai. Login karo.",
+    "auth/weak-password": "Password kam se kam 6 characters ka rakho.",
+    "auth/too-many-requests": "Bahut attempts hue. Thodi der baad try karo.",
+    "auth/network-request-failed": "Internet connection check karo.",
+    "auth/unauthorized-domain": "Firebase Authentication mein website domain add karo.",
+    "auth/operation-not-allowed": "Firebase mein ye sign-in provider enable karo.",
+    "auth/popup-closed-by-user": "Google login band ho gaya. Dobara try karo.",
+    "auth/popup-blocked": "Popup block hua. Dobara try karo."
+  };
+  return messages[error.code] || "Login error: " + (error.message || error.code || "Unknown error");
+}
+
+function showLogin() {
+  $("accountPanel").style.display = "none";
+  googleButtonContainer.style.display = "flex";
+}
+
+function showAccount(user) {
+  $("emailPanel").style.display = "none";
+  $("accountPanel").style.display = "block";
+  googleButtonContainer.style.display = "none";
+
+  $("profileName").textContent = user.displayName || "Parent Account";
+  $("profileEmail").textContent = user.email || "";
+
+  const photo = $("profileImage");
+  if (user.photoURL) {
+    photo.src = user.photoURL;
+    photo.hidden = false;
+  } else {
+    photo.hidden = true;
+    photo.removeAttribute("src");
+  }
+  message("Login successful.", "success");
+}
+
+/* Google login: use popup first; redirect fallback for mobile browsers. */
+async function googleLogin() {
+  if (busy) return;
+  if (!navigator.onLine) {
+    message("Internet band hai. Connection check karo.", "error");
+    return;
+  }
+
+  try {
+    loading(true, "Opening Google sign-in...");
+    await signInWithPopup(auth, googleProvider);
+  } catch (error) {
+    if (error.code === "auth/popup-blocked" ||
+        error.code === "auth/operation-not-supported-in-this-environment") {
+      try {
+        await signInWithRedirect(auth, googleProvider);
+        return;
+      } catch (redirectError) {
+        message(explainError(redirectError), "error");
+      }
+    } else if (error.code !== "auth/popup-closed-by-user") {
+      message(explainError(error), "error");
+    } else {
+      message("Google login cancel hua. Dobara try kar sakte ho.");
+    }
+  } finally {
+    loading(false);
+  }
+}
+
+/* Render Google's official sign-in button. */
+async function setupGoogleButton() {
+  try {
+    const { GoogleAuthProvider } = await import(
+      "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js"
+    );
+
+    // A real button is provided below because it can be placed
+    // in the design without relying on a click area over the image.
+    const button = document.createElement("button");
+    button.id = "googleButton";
+    button.type = "button";
+    button.textContent = "🌐 Continue with Google";
+    button.addEventListener("click", googleLogin);
+    googleButtonContainer.appendChild(button);
+  } catch (error) {
+    message("Google button load nahi hua. Internet check karo.", "error");
+  }
+}
+
+$("emailForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  if (!navigator.onLine) {
+    message("Internet band hai. Connection check karo.", "error");
+    return;
+  }
+
+  try {
+    loading(true, "Signing in...");
+    await signInWithEmailAndPassword(
+      auth,
+      $("email").value.trim(),
+      $("password").value
+    );
+  } catch (error) {
+    message(explainError(error), "error");
+  } finally {
+    loading(false);
+  }
+});
+
+$("createAccount").addEventListener("click", async () => {
+  const email = $("email").value.trim();
+  const password = $("password").value;
+
+  if (!email || !password) {
+    message("Pehle email aur password bharo.", "error");
+    return;
+  }
+  if (password.length < 6) {
+    message("Password kam se kam 6 characters ka hona chahiye.", "error");
+    return;
+  }
+
+  try {
+    loading(true, "Creating parent account...");
+    await createUserWithEmailAndPassword(auth, email, password);
+  } catch (error) {
+    message(explainError(error), "error");
+  } finally {
+    loading(false);
+  }
+});
+
+$("resetPassword").addEventListener("click", async () => {
+  const email = $("email").value.trim();
+  if (!email) {
+    message("Pehle email box mein apna email bharo.", "error");
+    return;
+  }
+
+  try {
+    loading(true, "Sending reset email...");
+    await sendPasswordResetEmail(auth, email);
+    message("Password reset email bhej diya gaya hai.", "success");
+  } catch (error) {
+    message(explainError(error), "error");
+  } finally {
+    loading(false);
+  }
+});
+
+$("closeEmail").addEventListener("click", () => {
+  $("emailPanel").style.display = "none";
+  message("");
+});
+
+$("signOutButton").addEventListener("click", async () => {
+  try {
+    loading(true, "Signing out...");
+    await signOut(auth);
+    message("You have signed out.", "success");
+  } catch (error) {
+    message(explainError(error), "error");
+  } finally {
+    loading(false);
+  }
+});
+
+/* The original image is preserved. Tap the Login with Email artwork
+   to open the email form. Coordinates are approximate for this artwork. */
+$("parentImage").addEventListener("click", event => {
+  const rect = event.currentTarget.getBoundingClientRect();
+  const x = (event.clientX - rect.left) / rect.width;
+  const y = (event.clientY - rect.top) / rect.height;
+
+  if (x >= 0.15 && x <= 0.85 && y >= 0.77 && y <= 0.84) {
+    $("emailPanel").style.display = "block";
+    $("emailPanel").scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+});
+
+$("parentImage").addEventListener("error", () => {
+  message("parent_login_ui.png nahi mili. GitHub repo mein image file ka naam check karo.", "error");
+});
+
+window.addEventListener("offline", () => {
+  message("Internet connection lost.", "error");
+});
+window.addEventListener("online", () => {
+  if (!auth.currentUser) message("Internet connection restored.", "success");
+});
+
+try {
+  loading(true, "Checking sign-in...");
+  await getRedirectResult(auth);
+} catch (error) {
+  message(explainError(error), "error");
+} finally {
+  loading(false);
+}
+
+onAuthStateChanged(auth, user => {
+  if (user) showAccount(user);
+  else showLogin();
+});
+
+setupGoogleButton();
+</script>
+</body>
+</html>
