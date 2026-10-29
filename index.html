@@ -1,221 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kids Learning App</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Comic Sans MS', cursive, sans-serif; }
-        body { background-color: #f0f8ff; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Kids Teacher - Parent Login</title>  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        /* Dashboard Styles */
-        .header { display: flex; justify-content: space-between; padding: 15px 20px; align-items: center; }
-        .user-info { display: flex; align-items: center; gap: 10px; }
-        .stats { color: #d4af37; font-size: 14px; font-weight: bold; }
-        .content { flex: 1; padding: 10px 20px; overflow-y: auto; }
-        .class-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; background: white; padding: 15px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .class-btn { padding: 10px; border-radius: 15px; border: 1px solid #e0e0e0; background: transparent; font-weight: bold; cursor: pointer; }
-        .class-btn.active { background-color: #fce16d; border-color: #fce16d; }
-        .subjects-grid { display: flex; gap: 15px; margin-top: 10px; }
-        .subject-card { flex: 1; background: white; padding: 20px; border-radius: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); cursor: pointer; }
-        
-        /* Bottom Nav */
-        .bottom-nav { display: flex; background: white; padding: 10px; border-top: 1px solid #ddd; z-index: 10; }
-        .nav-item { flex: 1; text-align: center; font-size: 14px; color: #777; cursor: pointer; padding: 10px; font-weight: bold; }
-        .nav-item.active { color: #333; }
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #38251c;
+    }
 
-        /* Parent Login Screen Container */
-        #parentLoginScreen {
-            display: none;
-            position: absolute;
-            top: 0; left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: #f0f8ff;
-            z-index: 100;
-        }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-        /* Loading Spinner */
-        .loader-container {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            z-index: 101;
-        }
-        .spinner {
-            border: 6px solid #f3f3f3;
-            border-top: 6px solid #3498db;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 10px auto;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .loader-text { font-size: 14px; color: #555; font-weight: bold; }
+    .screen {
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-        /* The Image */
-        .parent-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Photo screen par fit ho jayegi */
-            display: none; /* Jab tak load na ho, chhupi rahegi */
-        }
-
-        /* Error Message Box (Agar net nahi hai) */
-        .error-box {
-            display: none;
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 20px 30px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            z-index: 102;
-        }
-        .error-box p { color: #e74c3c; font-weight: bold; margin-bottom: 15px; }
-        .retry-btn {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* Back Button */
-        .back-btn {
-            position: absolute;
-            top: 20px; left: 20px;
-            padding: 10px 15px;
-            background: rgba(255, 255, 255, 0.9);
-            border: none;
-            border-radius: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            z-index: 103;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- MAIN DASHBOARD -->
-    <div id="mainDashboard">
-        <div class="header">
-            <div class="user-info">
-                <span style="font-size: 30px;">🌞</span>
-                <div>
-                    <p style="font-size: 12px; color: #777;">Hello</p>
-                    <h2>D</h2>
-                </div>
-            </div>
-            <div class="stats">⭐ 0 &nbsp; 🔥 0 &nbsp; Level 1</div>
-        </div>
-
-        <div class="content">
-            <h2 style="margin-bottom: 10px;">Your class</h2>
-            <div class="class-grid">
-                <button class="class-btn active">KG-1</button>
-                <button class="class-btn">KG-2</button>
-                <button class="class-btn">1</button>
-                <button class="class-btn">2</button>
-            </div>
-            <h2 style="margin: 15px 0 10px 0;">Subjects • KG-1</h2>
-            <div class="subjects-grid">
-                <div class="subject-card"><h3>Counting</h3></div>
-                <div class="subject-card"><h3>Shapes</h3></div>
-            </div>
-        </div>
-
-        <div class="bottom-nav">
-            <div class="nav-item active">🏠 Home</div>
-            <div class="nav-item">📊 Progress</div>
-            <!-- Parent Tab Click par function call hoga -->
-            <div class="nav-item" onclick="openParentLogin()">👨‍👩‍👧 Parents</div>
-        </div>
-    </div>
-
-    <!-- PARENT LOGIN SCREEN (Image with Loader) -->
-    <div id="parentLoginScreen">
-        <button class="back-btn" onclick="closeParentLogin()">← Back</button>
-        
-        <!-- Loading Spinner (Jab tak image load ho rahi hai) -->
-        <div class="loader-container" id="loadingSpinner">
-            <div class="spinner"></div>
-            <div class="loader-text">Loading Login Page...</div>
-        </div>
-
-        <!-- Error Box (Agar image load fail ho jaye) -->
-        <div class="error-box" id="errorBox">
-            <p>⚠️ Photo load nahi ho payi.<br>Internet check karein.</p>
-            <button class="retry-btn" onclick="retryLoadImage()">Try Again</button>
-        </div>
-
-        <!-- Ye rahi aapki image -->
-        <img 
-            id="loginImage" 
-            class="parent-image" 
-            src="parent_login_ui.png" 
-            onload="imageLoaded()" 
-            onerror="imageFailed()" 
-            alt="Parent Login" 
-        />
-    </div>
-
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        const loginScreen = document.getElementById('parentLoginScreen');
-        const loginImage = document.getElementById('loginImage');
-        const loadingSpinner = document.getElementById('loadingSpinner');
-        const errorBox = document.getElementById('errorBox');
-
-        // 1. Screen kholne ka function
-        function openParentLogin() {
-            loginScreen.style.display = 'block';
-            
-            // Agar image pehle se load ho chuki hai, toh direct dikhao
-            if(loginImage.complete && loginImage.naturalWidth > 0) {
-                imageLoaded();
-            } else {
-                // Agar nahi hui, toh spinner dikhao aur image load karo
-                loadingSpinner.style.display = 'block';
-                errorBox.style.display = 'none';
-                loginImage.style.display = 'none';
-                loginImage.src = "parent_login_ui.png?t=" + new Date().getTime(); // Cache bypass trick
-            }
-        }
-
-        // 2. Screen band karne ka function
-        function closeParentLogin() {
-            loginScreen.style.display = 'none';
-        }
-
-        // 3. Jab Image successfully load ho jaye
-        function imageLoaded() {
-            loadingSpinner.style.display = 'none';
-            errorBox.style.display = 'none';
-            loginImage.style.display = 'block'; // Image dikhao
-        }
-
-        // 4. Jab Image load fail ho jaye (Net nahi hai)
-        function imageFailed() {
-            loadingSpinner.style.display = 'none';
-            loginImage.style.display = 'none';
-            errorBox.style.display = 'block'; // Error dikhao
-        }
-
-        // 5. Retry Button ka function
-        function retryLoadImage() {
-            errorBox.style.display = 'none';
-            loadingSpinner.style.display = 'block';
-            // Image ko dobara load karne ki koshish karo (naya timestamp laga kar)
-            loginImage.src = "parent_login_ui.png?retry=" + new Date().getTime();
-        }
-    </script>
+    .screen img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+    }
+  </style></head><body>
+  <main class="screen">
+    <img
+      src="parent_login_ui.png"
+      alt="Kids Teacher Parent Login"
+    >
+  </main>
 </body>
 </html>
