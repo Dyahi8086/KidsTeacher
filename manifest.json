@@ -1,0 +1,19 @@
+{
+"name": "Kids Teacher",
+"short_name": "KidsTeacher",
+"description": "Kids learning app for classes KG-1 to Class 12",
+"start_url": "./",
+"scope": "./",
+"display": "standalone",
+"orientation": "portrait",
+"background_color": "#FFF4DF",
+"theme_color": "#FF956B",
+"icons": [
+{
+"src": "./parent_login_ui.png",
+"sizes": "512x512",
+"type": "image/png",
+"purpose": "any"
+}
+]
+}
