@@ -1,438 +1,518 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#fff8eb">
-<title>Kids Teacher - Parent Login</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff7e9">
+  <title>Kids Teacher - Parent Login</title>
 
-<script src="https://accounts.google.com/gsi/client" async defer></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-<style>
-* {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #fff7e9;
+      color: #613d2d;
+      font-family: Arial, sans-serif;
+    }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  min-height: 100%;
-  background: #fff8eb;
-  font-family: Arial, sans-serif;
-}
+    button, input {
+      font: inherit;
+    }
 
-body {
-  overflow-x: hidden;
-}
+    button {
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-.app {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  position: relative;
-  overflow: hidden;
-  line-height: 0;
-}
+    #app {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      min-height: 100vh;
+    }
 
-#loginImage {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 0;
-  padding: 0;
-}
+    #parentImage {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
 
-/* Invisible touch areas over the original image buttons */
-.touch-area {
-  position: absolute;
-  z-index: 10;
-  display: block;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  outline: none;
-  background: transparent;
-  touch-action: manipulation;
-  cursor: pointer;
-}
+    #status {
+      margin: 12px 16px 24px;
+      padding: 14px;
+      border-radius: 16px;
+      background: #fffaf1;
+      box-shadow: 0 5px 18px #6c4a301c;
+      text-align: center;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
 
-/*
-  Position estimates based on your screenshot.
-  The areas scale with the image on mobile.
-*/
-#googleTouch {
-  left: 18%;
-  top: 70.1%;
-  width: 64%;
-  height: 5.2%;
-}
+    #status:empty {
+      display: none;
+    }
 
-#emailTouch {
-  left: 18%;
-  top: 76%;
-  width: 64%;
-  height: 5.2%;
-}
+    #googleButton {
+      display: block;
+      width: calc(100% - 40px);
+      max-width: 400px;
+      margin: 15px auto;
+      min-height: 52px;
+      border: 0;
+      border-radius: 30px;
+      background: white;
+      color: #493527;
+      font-weight: bold;
+      box-shadow: 0 4px 10px #0002;
+    }
 
-.message {
-  display: none;
-  position: fixed;
-  z-index: 100;
-  left: 5%;
-  right: 5%;
-  bottom: max(16px, env(safe-area-inset-bottom));
-  padding: 14px 16px;
-  max-width: 500px;
-  margin: auto;
-  border-radius: 14px;
-  background: #fff9ed;
-  color: #603e29;
-  box-shadow: 0 5px 20px #0003;
-  font-size: 14px;
-  line-height: 1.5;
-  overflow-wrap: anywhere;
-}
+    #googleButton:disabled,
+    .action:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
 
-.message.show {
-  display: block;
-}
+    #emailPanel {
+      display: none;
+      margin: 16px;
+      padding: 24px 18px;
+      border-radius: 24px;
+      background: #fffaf0;
+      box-shadow: 0 10px 35px #0002;
+    }
 
-.overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  padding: 20px;
-  background: #0009;
-  align-items: center;
-  justify-content: center;
-}
+    #emailPanel h2 {
+      text-align: center;
+      margin-top: 0;
+    }
 
-.overlay.show {
-  display: flex;
-}
+    input {
+      width: 100%;
+      min-height: 54px;
+      padding: 14px;
+      margin: 8px 0;
+      border: 1px solid #d9c8b8;
+      border-radius: 14px;
+      background: #fff;
+      color: #34251d;
+      outline-color: #ef9876;
+    }
 
-.dialog {
-  width: 100%;
-  max-width: 380px;
-  padding: 24px;
-  border-radius: 22px;
-  background: #fff9ed;
-  color: #603e29;
-  line-height: 1.5;
-  box-shadow: 0 8px 35px #0003;
-}
+    .action {
+      width: 100%;
+      min-height: 52px;
+      margin-top: 10px;
+      border: 0;
+      border-radius: 14px;
+      background: #f29572;
+      color: white;
+      font-weight: bold;
+    }
 
-.dialog h2 {
-  margin: 0 0 12px;
-  text-align: center;
-}
+    .secondary {
+      background: #eee2d5;
+      color: #603f2e;
+    }
 
-.dialog p {
-  font-size: 14px;
-}
+    #accountPanel {
+      display: none;
+      margin: 16px;
+      padding: 22px;
+      border-radius: 22px;
+      background: #fffaf0;
+      text-align: center;
+    }
 
-.dialog input {
-  width: 100%;
-  min-height: 52px;
-  padding: 12px;
-  margin: 7px 0;
-  border: 1px solid #dcc8b6;
-  border-radius: 12px;
-  background: white;
-  font-size: 16px;
-}
+    #accountPanel img {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
 
-.dialog button {
-  width: 100%;
-  min-height: 50px;
-  margin-top: 10px;
-  border: 0;
-  border-radius: 14px;
-  background: #f39470;
-  color: white;
-  font-weight: bold;
-}
+    #loader {
+      display: none;
+      text-align: center;
+      padding: 12px;
+    }
 
-.dialog .close {
-  background: #eadfd5;
-  color: #603e29;
-}
+    .spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 3px solid #e9cbb9;
+      border-top-color: #ef8e6c;
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+      vertical-align: middle;
+    }
 
-.dialog-note {
-  font-size: 13px;
-  overflow-wrap: anywhere;
-}
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
 
-.fallback {
-  display: none;
-  padding: 24px;
-  text-align: center;
-  color: #603e29;
-  line-height: 1.5;
-}
+    .error {
+      color: #a12626;
+    }
 
-@media (max-width: 380px) {
-  #googleTouch,
-  #emailTouch {
-    height: 5.8%;
-  }
-}
-</style>
+    .success {
+      color: #176b38;
+    }
+
+    .small {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .spinner { animation: none; }
+    }
+  </style>
 </head>
 
 <body>
+  <main id="app">
 
-<main class="app" id="app">
+    <!-- Original 3D Parent Login design -->
+    <img
+      id="parentImage"
+      src="./parent_login_ui.png"
+      alt="Kids Teacher Parent Login"
+    >
 
-  <!-- Keep parent_login_ui.png beside index.html -->
-  <img
-    id="loginImage"
-    src="./parent_login_ui.png"
-    alt="Kids Teacher Parent Login"
-  >
+    <!-- Actual Google sign-in button -->
+    <button id="googleButton" type="button">
+      🌐 Continue with Google
+    </button>
 
-  <!-- These are invisible; no duplicate buttons are displayed -->
-  <button
-    id="googleTouch"
-    class="touch-area"
-    type="button"
-    aria-label="Continue with Google">
-  </button>
+    <div id="loader" aria-live="polite">
+      <span class="spinner"></span>
+      <span id="loaderText"> Please wait...</span>
+    </div>
 
-  <button
-    id="emailTouch"
-    class="touch-area"
-    type="button"
-    aria-label="Login with Email">
-  </button>
+    <div id="status" role="status" aria-live="polite"></div>
 
-</main>
+    <!-- Email/password login -->
+    <section id="emailPanel">
+      <h2>Parent Login</h2>
 
-<div id="message" class="message" role="status" aria-live="polite"></div>
+      <p class="small">
+        Sign in with your parent account, or create a new account.
+      </p>
 
-<!-- Email dialog -->
-<div id="emailOverlay" class="overlay" role="dialog"
-     aria-modal="true" aria-labelledby="emailTitle">
+      <form id="emailForm">
+        <label for="email">Parent email</label>
+        <input
+          id="email"
+          type="email"
+          autocomplete="email"
+          placeholder="Enter email"
+          required
+        >
 
-  <section class="dialog">
-    <h2 id="emailTitle">Parent Login</h2>
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          autocomplete="current-password"
+          placeholder="Enter password (minimum 6 characters)"
+          minlength="6"
+          required
+        >
 
-    <p>
-      Email login is not connected to an authentication provider yet.
-      Connect Firebase Authentication or Supabase Auth before using
-      real parent accounts.
-    </p>
+        <button class="action" type="submit">
+          Login
+        </button>
+      </form>
 
-    <form id="emailForm">
-      <input
-        type="email"
-        id="email"
-        placeholder="Parent email"
-        autocomplete="email"
-        required>
+      <button class="action" id="createAccount" type="button">
+        Create New Parent Account
+      </button>
 
-      <input
-        type="password"
-        id="password"
-        placeholder="Password"
-        autocomplete="current-password"
-        required>
+      <button class="action secondary" id="resetPassword" type="button">
+        Forgot Password?
+      </button>
 
-      <button type="submit">Continue</button>
-    </form>
+      <button class="action secondary" id="closeEmail" type="button">
+        Close
+      </button>
+    </section>
 
-    <div id="emailNote" class="dialog-note" aria-live="polite"></div>
+    <!-- Signed-in account -->
+    <section id="accountPanel">
+      <img id="profileImage" alt="Profile picture" hidden>
+      <h2 id="profileName">Parent Account</h2>
+      <p id="profileEmail"></p>
+      <p class="small">
+        You are signed in to Kids Teacher.
+      </p>
+      <button class="action" id="signOutButton" type="button">
+        Sign Out
+      </button>
+    </section>
+  </main>
 
-    <button type="button" class="close" id="closeEmail">Close</button>
-  </section>
-</div>
+  <script type="module">
+    import { initializeApp }
+      from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 
-<div id="fallback" class="fallback">
-  <h2>Kids Teacher</h2>
-  <p>Parent login image could not be loaded.</p>
-  <p>Check that parent_login_ui.png exists in the same folder as index.html.</p>
-</div>
+    import {
+      getAuth,
+      GoogleAuthProvider,
+      signInWithRedirect,
+      getRedirectResult,
+      onAuthStateChanged,
+      signInWithEmailAndPassword,
+      createUserWithEmailAndPassword,
+      sendPasswordResetEmail,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
-<script>
-(() => {
-  "use strict";
+    const firebaseConfig = {
+      apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
+      authDomain: "kids-teacher-4387e.firebaseapp.com",
+      projectId: "kids-teacher-4387e",
+      storageBucket: "kids-teacher-4387e.firebasestorage.app",
+      messagingSenderId: "420221167346",
+      appId: "1:420221167346:web:da7ac80acdfd52339d526b",
+      measurementId: "G-VJVS2ZMNLY"
+    };
 
-  const GOOGLE_CLIENT_ID =
-    "232165749609-3443t410rpk35a5d9jik4rg54ot0v8ej.apps.googleusercontent.com";
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const googleProvider = new GoogleAuthProvider();
 
-  const app = document.getElementById("app");
-  const image = document.getElementById("loginImage");
-  const fallback = document.getElementById("fallback");
-  const googleTouch = document.getElementById("googleTouch");
-  const emailTouch = document.getElementById("emailTouch");
-  const message = document.getElementById("message");
-  const emailOverlay = document.getElementById("emailOverlay");
-  const emailForm = document.getElementById("emailForm");
-  const emailNote = document.getElementById("emailNote");
+    const $ = id => document.getElementById(id);
 
-  let googleReady = false;
-  let googleFailed = false;
-  let waitCount = 0;
+    const googleButton = $("googleButton");
+    const emailPanel = $("emailPanel");
+    const accountPanel = $("accountPanel");
+    const statusBox = $("status");
+    const loader = $("loader");
+    const loaderText = $("loaderText");
 
-  function showMessage(text) {
-    message.textContent = text;
-    message.classList.add("show");
-  }
+    let busy = false;
 
-  function hideMessage() {
-    message.textContent = "";
-    message.classList.remove("show");
-  }
-
-  image.addEventListener("error", () => {
-    app.style.display = "none";
-    fallback.style.display = "block";
-  });
-
-  window.addEventListener("offline", () => {
-    showMessage("Internet is off. Reconnect and try again.");
-  });
-
-  window.addEventListener("online", hideMessage);
-
-  function readCredential(token) {
-    try {
-      const part = token.split(".")[1];
-      const normalized = part.replace(/-/g, "+").replace(/_/g, "/");
-      const padded = normalized + "=".repeat((4 - normalized.length % 4) % 4);
-      return JSON.parse(atob(padded));
-    } catch (_) {
-      return null;
-    }
-  }
-
-  function onGoogleResponse(response) {
-    if (!response || !response.credential) {
-      showMessage("Google sign-in did not complete. Please try again.");
-      return;
+    function message(text, type = "") {
+      statusBox.textContent = text;
+      statusBox.className = type;
     }
 
-    const profile = readCredential(response.credential);
-
-    if (!profile) {
-      showMessage("Google returned an invalid response. Please try again.");
-      return;
-    }
-
-    /*
-      Decoding a token does not verify it.
-      A secure backend or Firebase/Supabase Auth must verify
-      the token before granting access to private information.
-    */
-    showMessage(
-      "Google account selected: " +
-      (profile.name || profile.email || "Parent") +
-      ". Secure login still requires backend authentication."
-    );
-
-    console.info("Google credential received. Server-side verification is required.");
-  }
-
-  function waitForGoogle() {
-    if (window.google &&
-        google.accounts &&
-        google.accounts.id) {
-      initializeGoogle();
-      return;
-    }
-
-    waitCount++;
-
-    if (waitCount >= 60) {
-      googleFailed = true;
-      return;
-    }
-
-    setTimeout(waitForGoogle, 250);
-  }
-
-  function initializeGoogle() {
-    if (googleReady) return;
-
-    try {
-      google.accounts.id.initialize({
-        client_id: GOOGLE_CLIENT_ID,
-        callback: onGoogleResponse,
-        auto_select: false,
-        cancel_on_tap_outside: true
+    function loading(active, text = "Please wait...") {
+      busy = active;
+      loader.style.display = active ? "block" : "none";
+      loaderText.textContent = " " + text;
+      googleButton.disabled = active;
+      document.querySelectorAll(".action").forEach(button => {
+        button.disabled = active;
       });
+    }
 
-      googleReady = true;
+    function errorMessage(error) {
+      const messages = {
+        "auth/invalid-email": "Email address sahi nahi hai.",
+        "auth/invalid-credential": "Email ya password galat hai.",
+        "auth/user-not-found": "Account nahi mila. Pehle account banao.",
+        "auth/email-already-in-use": "Is email ka account pehle se hai. Login karo.",
+        "auth/weak-password": "Password kam se kam 6 characters ka rakho.",
+        "auth/too-many-requests": "Bahut attempts hue. Thodi der baad try karo.",
+        "auth/network-request-failed": "Internet connection check karo.",
+        "auth/popup-blocked": "Sign-in redirect block hua. Dobara try karo.",
+        "auth/unauthorized-domain": "Firebase mein website domain authorize nahi hai.",
+        "auth/operation-not-allowed": "Firebase Console mein sign-in provider enable karo."
+      };
+
+      return messages[error.code] ||
+        "Login nahi hua: " + (error.message || error.code || "Unknown error");
+    }
+
+    function showAccount(user) {
+      emailPanel.style.display = "none";
+      accountPanel.style.display = "block";
+      googleButton.style.display = "none";
+
+      $("profileName").textContent =
+        user.displayName || "Parent Account";
+      $("profileEmail").textContent = user.email || "";
+
+      const photo = $("profileImage");
+      if (user.photoURL) {
+        photo.src = user.photoURL;
+        photo.hidden = false;
+      } else {
+        photo.hidden = true;
+        photo.removeAttribute("src");
+      }
+
+      message("Login successful.", "success");
+    }
+
+    function showLogin() {
+      accountPanel.style.display = "none";
+      googleButton.style.display = "block";
+    }
+
+    // Google sign-in: redirect is generally more reliable on mobile.
+    googleButton.addEventListener("click", async () => {
+      if (busy) return;
+
+      if (!navigator.onLine) {
+        message("Internet band hai. Connection check karke dobara try karo.", "error");
+        return;
+      }
+
+      try {
+        loading(true, "Google sign-in opening...");
+        await signInWithRedirect(auth, googleProvider);
+      } catch (error) {
+        loading(false);
+        message(errorMessage(error), "error");
+      }
+    });
+
+    // Process Google redirect result when returning to the page.
+    try {
+      loading(true, "Checking sign-in...");
+      const result = await getRedirectResult(auth);
+
+      if (result?.user) {
+        message("Google login successful.", "success");
+      }
     } catch (error) {
-      console.error("Google initialization failed:", error);
-      googleFailed = true;
-    }
-  }
-
-  /*
-    A custom image button cannot safely imitate Google's real
-    sign-in button. Use Google's supported button UI for sign-in.
-
-    Since the original Google button is part of a PNG, Google
-    Sign-In does not provide a supported way to attach its official
-    iframe invisibly to that artwork. We do not create duplicate
-    visible buttons or trigger One Tap manually here.
-  */
-  googleTouch.addEventListener("click", () => {
-    if (!navigator.onLine) {
-      showMessage("Internet is off. Reconnect and try again.");
-      return;
+      message(errorMessage(error), "error");
+    } finally {
+      loading(false);
     }
 
-    if (!googleReady) {
-      showMessage(
-        "Google Sign-In is not ready. Reload the page and try again."
+    // Email login.
+    $("emailForm").addEventListener("submit", async event => {
+      event.preventDefault();
+
+      if (!navigator.onLine) {
+        message("Internet band hai. Connection check karo.", "error");
+        return;
+      }
+
+      const email = $("email").value.trim();
+      const password = $("password").value;
+
+      try {
+        loading(true, "Signing in...");
+        await signInWithEmailAndPassword(auth, email, password);
+      } catch (error) {
+        message(errorMessage(error), "error");
+      } finally {
+        loading(false);
+      }
+    });
+
+    // Create a new parent account.
+    $("createAccount").addEventListener("click", async () => {
+      const email = $("email").value.trim();
+      const password = $("password").value;
+
+      if (!email || !password) {
+        message("Pehle email aur password bharo.", "error");
+        return;
+      }
+
+      if (password.length < 6) {
+        message("Password kam se kam 6 characters ka hona chahiye.", "error");
+        return;
+      }
+
+      try {
+        loading(true, "Creating account...");
+        await createUserWithEmailAndPassword(auth, email, password);
+      } catch (error) {
+        message(errorMessage(error), "error");
+      } finally {
+        loading(false);
+      }
+    });
+
+    // Password reset.
+    $("resetPassword").addEventListener("click", async () => {
+      const email = $("email").value.trim();
+
+      if (!email) {
+        message("Pehle email box mein apna email bharo.", "error");
+        return;
+      }
+
+      try {
+        loading(true, "Sending reset email...");
+        await sendPasswordResetEmail(auth, email);
+        message("Password reset email bhej diya gaya hai.", "success");
+      } catch (error) {
+        message(errorMessage(error), "error");
+      } finally {
+        loading(false);
+      }
+    });
+
+    $("closeEmail").addEventListener("click", () => {
+      emailPanel.style.display = "none";
+      message("");
+    });
+
+    $("signOutButton").addEventListener("click", async () => {
+      try {
+        loading(true, "Signing out...");
+        await signOut(auth);
+        message("You have signed out.", "success");
+      } catch (error) {
+        message(errorMessage(error), "error");
+      } finally {
+        loading(false);
+      }
+    });
+
+    // Allow opening email login from the original image's button area.
+    // Coordinates correspond approximately to the Login with Email button.
+    const image = $("parentImage");
+
+    image.addEventListener("click", event => {
+      const rect = image.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width;
+      const y = (event.clientY - rect.top) / rect.height;
+
+      if (x >= 0.15 && x <= 0.85 && y >= 0.77 && y <= 0.84) {
+        emailPanel.style.display = "block";
+        emailPanel.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    });
+
+    // Only show an offline warning when the device is actually offline.
+    window.addEventListener("offline", () => {
+      message("Internet connection lost.", "error");
+    });
+
+    window.addEventListener("online", () => {
+      if (!auth.currentUser) message("Internet connection restored.", "success");
+    });
+
+    // Keep login screen/account screen in sync with Firebase.
+    onAuthStateChanged(auth, user => {
+      loading(false);
+      if (user) {
+        showAccount(user);
+      } else {
+        showLogin();
+      }
+    });
+
+    // If the original image cannot load, show a clear error.
+    image.addEventListener("error", () => {
+      message(
+        "parent_login_ui.png file nahi mili. GitHub mein filename aur location check karo.",
+        "error"
       );
-      return;
-    }
-
-    /*
-      The Google Identity Services API does not expose a method
-      to launch the official button flow from an arbitrary custom
-      image click. Render its official button or integrate Firebase
-      Auth to complete this action reliably.
-    */
-    showMessage(
-      "Google sign-in needs the official Google button or Firebase Auth integration. The original image has been preserved."
-    );
-  });
-
-  emailTouch.addEventListener("click", () => {
-    emailNote.textContent = "";
-    emailOverlay.classList.add("show");
-    setTimeout(() => {
-      document.getElementById("email").focus();
-    }, 100);
-  });
-
-  document.getElementById("closeEmail").addEventListener("click", () => {
-    emailOverlay.classList.remove("show");
-  });
-
-  emailOverlay.addEventListener("click", event => {
-    if (event.target === emailOverlay) {
-      emailOverlay.classList.remove("show");
-    }
-  });
-
-  emailForm.addEventListener("submit", event => {
-    event.preventDefault();
-
-    emailNote.textContent =
-      "This form is only a UI. Secure email/password authentication has not been connected. Do not enter real account passwords until a secure authentication provider is configured.";
-  });
-
-  waitForGoogle();
-})();
-</script>
-
+    });
+  </script>
 </body>
 </html>
