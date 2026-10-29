@@ -2,391 +2,554 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#FF956B">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<meta name="theme-color" content="#fff8eb">
 <meta name="description" content="Kids Teacher - Learn, Play and Grow Together">
+
 <title>Kids Teacher - Parent Login</title>
 
-<link rel="manifest" href="./manifest.json">
-<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://accounts.google.com/gsi/client"
+        async defer></script>
 
 <style>
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html, body {
+  margin: 0;
   width: 100%;
   min-height: 100%;
   font-family: Arial, sans-serif;
-  background: #FFF4DF;
+  background: #fff8eb;
 }
 
 body {
-  min-height: 100vh;
-  min-height: 100dvh;
+  overflow-x: hidden;
 }
 
-.screen {
-  position: relative;
+button, input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.app {
   width: 100%;
-  height: 100vh;
-  height: 100dvh;
+  max-width: 600px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  position: relative;
+  background: #fff8eb;
   overflow: hidden;
-  background: #FFF4DF;
+}
+
+.hero {
+  width: 100%;
+  position: relative;
 }
 
 #parentImage {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+  height: auto;
+  min-height: 100dvh;
+  object-fit: contain;
+  object-position: top center;
 }
 
-/* Transparent button area placed over the Google button in your PNG */
-#googleClickArea {
+.login-controls {
   position: absolute;
-  left: 17%;
-  top: 71.5%;
-  width: 66%;
-  height: 5.2%;
+  left: 10%;
+  width: 80%;
+  top: 75%;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+}
+
+/* Google button container: large, real, accessible tap area */
+.google-wrap {
+  width: 100%;
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid #e4e0dc;
+  border-radius: 40px;
+  box-shadow: 0 4px 10px #5d3d281c;
+  overflow: hidden;
+  position: relative;
+}
+
+/* The official Google button is rendered inside this element */
+#googleButton {
+  width: 100%;
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Email button */
+.email-button {
+  min-height: 58px;
+  width: 100%;
   border: 0;
   border-radius: 40px;
-  background: transparent;
-  cursor: pointer;
-  z-index: 5;
-  -webkit-tap-highlight-color: transparent;
+  background: linear-gradient(135deg, #ffb58f, #f28b68);
+  color: white;
+  font-size: 17px;
+  font-weight: 700;
+  box-shadow: 0 4px 10px #5d3d2820;
+  touch-action: manipulation;
 }
 
-#googleClickArea:focus-visible {
-  outline: 3px solid #4285F4;
-  outline-offset: 2px;
-}
-
-#networkMessage {
-  display: none;
-  position: fixed;
-  top: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 9999;
-  width: max-content;
-  max-width: 94%;
-  padding: 9px 14px;
-  color: #D40000;
-  background: #FFFFFF;
-  border: 1px solid #D40000;
-  border-radius: 10px;
-  font-size: 13px;
-  font-weight: bold;
+.google-help {
+  color: #68422e;
+  font-size: 12px;
+  line-height: 1.5;
   text-align: center;
-  box-shadow: 0 3px 12px #0002;
+  padding: 0 8px;
+  overflow-wrap: anywhere;
 }
 
-#backup {
-  display: none;
-  min-height: 100vh;
-  min-height: 100dvh;
-  padding: 25px 18px;
-  text-align: center;
-  background: linear-gradient(#FFF4DF, #FFD7A5);
-  color: #60341F;
-}
-
-#backup .sun {
-  font-size: 60px;
-  margin: 20px 0;
-}
-
-#backup h1 {
-  font-size: 30px;
-  margin: 15px 0;
-}
-
-#backup p {
-  margin: 12px 0 22px;
-}
-
-.login-button {
-  display: block;
-  width: 100%;
-  max-width: 390px;
-  min-height: 54px;
-  margin: 14px auto;
-  border: 0;
-  border-radius: 30px;
-  font-size: 16px;
-  font-weight: bold;
-  background: #FFFFFF;
-  color: #60341F;
-}
-
-.email {
-  background: #FF956B;
-  color: #FFFFFF;
-}
-
-.features {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  max-width: 390px;
-  margin: 28px auto;
-}
-
-.feature {
-  padding: 16px 8px;
-  border-radius: 16px;
-  background: #FFFFFF;
-  font-size: 13px;
-  font-weight: bold;
-}
-
-.feature span {
-  display: block;
-  font-size: 28px;
-  margin-bottom: 8px;
-}
-
-#statusBackdrop {
+/* Email form dialog */
+.overlay {
   display: none;
   position: fixed;
   inset: 0;
-  background: #0006;
-  z-index: 9999;
+  z-index: 100;
+  background: rgba(35, 23, 17, 0.65);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
-#loginStatus {
-  display: none;
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: min(90%, 360px);
-  z-index: 10000;
-  padding: 24px 20px;
-  border-radius: 22px;
-  background: #FFF9EE;
-  color: #60341F;
-  text-align: center;
-  box-shadow: 0 8px 35px #0005;
+.overlay.show {
+  display: flex;
 }
 
-#loginStatus h2 {
-  margin-bottom: 12px;
-}
-
-#loginStatus p {
-  overflow-wrap: anywhere;
-  line-height: 1.5;
-}
-
-#closeStatus {
-  margin-top: 18px;
-  border: 0;
+.dialog {
+  width: 100%;
+  max-width: 390px;
+  padding: 24px;
+  background: #fffaf0;
   border-radius: 24px;
-  padding: 12px 24px;
-  background: #FF956B;
-  color: #FFFFFF;
+  box-shadow: 0 12px 40px #0003;
+  color: #593b29;
+}
+
+.dialog h2 {
+  margin: 0 0 12px;
+  text-align: center;
+}
+
+.dialog p {
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.dialog input {
+  display: block;
+  width: 100%;
+  min-height: 52px;
+  margin: 12px 0;
+  padding: 12px;
+  border: 1px solid #d9c8b8;
+  border-radius: 12px;
+  background: white;
+  color: #38271d;
+  font-size: 16px;
+}
+
+.action-button {
+  display: block;
+  width: 100%;
+  min-height: 50px;
+  margin-top: 12px;
+  border: 0;
+  border-radius: 14px;
+  background: #f39470;
+  color: white;
   font-weight: bold;
+}
+
+.close-button {
+  background: #eee1d5;
+  color: #593b29;
+}
+
+.status {
+  display: none;
+  margin: 12px 0;
+  padding: 12px;
+  border-radius: 12px;
+  background: #fff0d9;
+  color: #70401f;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.status.show {
+  display: block;
+}
+
+/* Fallback if image is missing */
+.fallback {
+  display: none;
+  min-height: 100dvh;
+  padding: 32px 20px;
+  text-align: center;
+  color: #593b29;
+  background: #fff8eb;
+}
+
+.fallback h1 {
+  font-size: 32px;
+}
+
+.fallback .card {
+  max-width: 360px;
+  margin: 25px auto;
+  padding: 22px;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 4px 20px #0001;
+}
+
+/* Keep controls reachable on small screens */
+@media (max-width: 380px) {
+  .login-controls {
+    left: 7%;
+    width: 86%;
+    gap: 9px;
+  }
+
+  .google-wrap,
+  #googleButton,
+  .email-button {
+    min-height: 54px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div id="networkMessage" role="status" aria-live="polite"></div>
+<main class="app">
 
-<main class="screen">
+  <section class="hero" id="mainScreen">
 
-  <img
-    id="parentImage"
-    src="./parent_login_ui.png"
-    alt="Kids Teacher Parent Login"
-  >
+    <!-- Keep parent_login_ui.png in the same GitHub folder as index.html -->
+    <img
+      id="parentImage"
+      src="./parent_login_ui.png"
+      alt="Kids Teacher Parent Login"
+    >
 
-  <button
-    id="googleClickArea"
-    type="button"
-    aria-label="Continue with Google"
-    title="Continue with Google">
-  </button>
+    <!-- Large mobile touch targets -->
+    <div class="login-controls" id="loginControls">
 
-  <section id="backup">
-    <div class="sun">🌞📚</div>
-    <h1>Parent Login 💗</h1>
-    <p>Learn • Play • Grow Together</p>
-
-    <button class="login-button" id="backupGoogle">
-      🌐 Continue with Google
-    </button>
-
-    <button class="login-button email" id="emailButton">
-      ✉️ Login with Email
-    </button>
-
-    <div class="features">
-      <div class="feature">
-        <span>📊</span>Track Progress
+      <div class="google-wrap">
+        <div id="googleButton" aria-label="Continue with Google">
+          <span id="googleLoading">Loading Google Sign-In...</span>
+        </div>
       </div>
-      <div class="feature">
-        <span>👁️</span>Monitor Activities
+
+      <button class="email-button"
+              id="emailButton"
+              type="button">
+        ✉️ Login with Email
+      </button>
+
+      <div class="google-help" id="googleHelp" aria-live="polite"></div>
+      <div class="status" id="pageStatus" role="status" aria-live="polite"></div>
+
+    </div>
+  </section>
+
+  <section class="fallback" id="fallbackScreen">
+    <h1>📚 Kids Teacher</h1>
+    <div class="card">
+      <h2>Parent Login</h2>
+      <p>The original login image could not be loaded.</p>
+      <p>Check that <b>parent_login_ui.png</b> exists beside index.html in GitHub.</p>
+      <div class="google-wrap">
+        <div id="googleButtonFallback"></div>
       </div>
-      <div class="feature">
-        <span>🔒</span>Safe &amp; Secure
-      </div>
-      <div class="feature">
-        <span>💗</span>Support Your Child
-      </div>
+      <button class="email-button" id="emailButtonFallback" type="button">
+        ✉️ Login with Email
+      </button>
     </div>
   </section>
 
 </main>
 
-<div id="statusBackdrop"></div>
+<!-- Email form -->
+<div class="overlay" id="emailOverlay" role="dialog"
+     aria-modal="true" aria-labelledby="emailTitle">
+  <div class="dialog">
+    <h2 id="emailTitle">Parent Login</h2>
+    <p>Enter your email to continue. Email authentication must be connected to a secure backend before this can log you in.</p>
 
-<section id="loginStatus" role="dialog" aria-modal="true" aria-live="polite">
-  <h2 id="statusTitle">Kids Teacher</h2>
-  <p id="statusText"></p>
-  <button id="closeStatus" type="button">OK</button>
-</section>
+    <form id="emailForm">
+      <input id="emailInput"
+             type="email"
+             autocomplete="email"
+             placeholder="Parent email address"
+             required>
+
+      <input id="passwordInput"
+             type="password"
+             autocomplete="current-password"
+             placeholder="Password"
+             required>
+
+      <button class="action-button" type="submit">
+        Continue
+      </button>
+    </form>
+
+    <div class="status" id="emailStatus" role="status"></div>
+
+    <button class="action-button close-button"
+            id="closeEmail"
+            type="button">
+      Close
+    </button>
+  </div>
+</div>
 
 <script>
-/*
-  Google OAuth Web Client ID.
-  Never put a Google Client Secret in frontend HTML.
-*/
-const CLIENT_ID =
-  "232165749609-3443t410rpk35a5d9jik4rg54ot0v8ej.apps.googleusercontent.com";
+(() => {
+  "use strict";
 
-const networkMessage = document.getElementById("networkMessage");
-const parentImage = document.getElementById("parentImage");
-const backup = document.getElementById("backup");
+  /*
+    Kids Teacher Google OAuth Web Client ID.
+    Client IDs are public identifiers, not client secrets.
+  */
+  const GOOGLE_CLIENT_ID =
+    "232165749609-3443t410rpk35a5d9jik4rg54ot0v8ej.apps.googleusercontent.com";
 
-function showMessage(text) {
-  networkMessage.textContent = text;
-  networkMessage.style.display = "block";
-}
+  const image = document.getElementById("parentImage");
+  const mainScreen = document.getElementById("mainScreen");
+  const fallbackScreen = document.getElementById("fallbackScreen");
 
-function hideMessage() {
-  networkMessage.style.display = "none";
-}
+  const googleButton = document.getElementById("googleButton");
+  const googleLoading = document.getElementById("googleLoading");
+  const googleHelp = document.getElementById("googleHelp");
 
-function showBackup() {
-  parentImage.style.display = "none";
-  document.getElementById("googleClickArea").style.display = "none";
-  backup.style.display = "block";
-}
+  const pageStatus = document.getElementById("pageStatus");
+  const emailOverlay = document.getElementById("emailOverlay");
+  const emailButton = document.getElementById("emailButton");
+  const emailButtonFallback = document.getElementById("emailButtonFallback");
+  const closeEmail = document.getElementById("closeEmail");
+  const emailForm = document.getElementById("emailForm");
+  const emailStatus = document.getElementById("emailStatus");
 
-function showStatus(title, text) {
-  document.getElementById("statusTitle").textContent = title;
-  document.getElementById("statusText").textContent = text;
+  let googleInitialized = false;
 
-  document.getElementById("statusBackdrop").style.display = "block";
-  document.getElementById("loginStatus").style.display = "block";
-}
-
-function closeStatus() {
-  document.getElementById("statusBackdrop").style.display = "none";
-  document.getElementById("loginStatus").style.display = "none";
-}
-
-document.getElementById("closeStatus")
-  .addEventListener("click", closeStatus);
-
-document.getElementById("statusBackdrop")
-  .addEventListener("click", closeStatus);
-
-/* Show fallback only if the PNG image cannot load */
-parentImage.addEventListener("error", showBackup);
-
-if (parentImage.complete && parentImage.naturalWidth === 0) {
-  showBackup();
-}
-
-/*
-  This callback confirms that Google returned a credential.
-  A secure backend must verify the ID token before granting access
-  to private parent or child information.
-*/
-function handleGoogleCredential(response) {
-  showStatus(
-    "Google sign-in response received 💗",
-    "Google returned a sign-in credential. Secure server-side verification is required before this account can access private child information."
-  );
-}
-
-function startGoogleLogin() {
-  if (!navigator.onLine) {
-    showStatus(
-      "No internet connection",
-      "Connect to the internet and try again."
-    );
-    return;
+  function showStatus(element, message) {
+    element.textContent = message;
+    element.classList.add("show");
   }
 
-  if (
-    !window.google ||
-    !google.accounts ||
-    !google.accounts.id
-  ) {
-    showStatus(
-      "Google Login is loading",
-      "Wait a few seconds, reload the page, and tap the Google button again."
-    );
-    return;
+  function hideStatus(element) {
+    element.textContent = "";
+    element.classList.remove("show");
   }
 
-  google.accounts.id.initialize({
-    client_id: CLIENT_ID,
-    callback: handleGoogleCredential,
-    auto_select: false
+  function showOfflineState() {
+    if (!navigator.onLine) {
+      showStatus(pageStatus, "You are offline. Turn on your internet connection and try again.");
+    } else {
+      hideStatus(pageStatus);
+    }
+  }
+
+  window.addEventListener("offline", showOfflineState);
+  window.addEventListener("online", showOfflineState);
+
+  image.addEventListener("error", () => {
+    mainScreen.style.display = "none";
+    fallbackScreen.style.display = "block";
+    renderGoogleButton("googleButtonFallback");
   });
 
-  google.accounts.id.prompt(function(notice) {
-    if (
-      notice.isNotDisplayed() ||
-      notice.isSkippedMoment()
-    ) {
-      showStatus(
-        "Google Login did not open",
-        "Open Google Cloud Console → OAuth Web Client → Authorized JavaScript origins. Confirm that it contains exactly https://dyahi8086.github.io, then reload the website and try again."
-      );
+  function decodeJwtPayload(token) {
+    try {
+      const parts = token.split(".");
+      if (parts.length !== 3) return null;
+
+      const base64 = parts[1]
+        .replace(/-/g, "+")
+        .replace(/_/g, "/");
+
+      const padded = base64 + "=".repeat((4 - base64.length % 4) % 4);
+      return JSON.parse(atob(padded));
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function handleGoogleResponse(response) {
+    hideStatus(pageStatus);
+
+    if (!response || !response.credential) {
+      showStatus(pageStatus, "Google sign-in did not return a credential. Please try again.");
+      return;
+    }
+
+    /*
+      This decodes the token for display only.
+      Decoding is NOT verification. Never grant private data access
+      until a backend verifies the ID token's signature, audience,
+      issuer and expiry.
+    */
+    const profile = decodeJwtPayload(response.credential);
+
+    if (!profile) {
+      showStatus(pageStatus, "Google returned an unreadable response. Please try again.");
+      return;
+    }
+
+    showStatus(
+      pageStatus,
+      "Google account selected: " +
+      (profile.name || profile.email || "Parent") +
+      ". Secure account login still needs backend token verification."
+    );
+
+    /*
+      Do not save the ID token in localStorage or sessionStorage.
+      Do not treat this frontend-only callback as a secure session.
+      Connect a backend/Firebase/Supabase Auth before using private data.
+    */
+    console.info("Google credential received. Backend verification is required.");
+  }
+
+  function renderGoogleButton(targetId) {
+    const target = document.getElementById(targetId);
+    if (!target) return;
+
+    const started = Date.now();
+
+    const waitForGoogle = () => {
+      if (!target.isConnected) return;
+
+      if (window.google &&
+          google.accounts &&
+          google.accounts.id) {
+        try {
+          google.accounts.id.initialize({
+            client_id: GOOGLE_CLIENT_ID,
+            callback: handleGoogleResponse,
+            auto_select: false,
+            cancel_on_tap_outside: true,
+            itp_support: true
+          });
+
+          googleInitialized = true;
+          target.innerHTML = "";
+
+          google.accounts.id.renderButton(target, {
+            type: "standard",
+            theme: "outline",
+            size: "large",
+            text: "continue_with",
+            shape: "pill",
+            logo_alignment: "left",
+            width: Math.max(220, Math.floor(target.clientWidth || 300)),
+            locale: "en"
+          });
+
+          googleHelp.textContent = "";
+          return;
+        } catch (error) {
+          googleHelp.textContent =
+            "Google Sign-In could not initialize. Check OAuth settings and reload.";
+          console.error("Google initialization error:", error);
+          return;
+        }
+      }
+
+      if (Date.now() - started > 15000) {
+        target.innerHTML = "";
+        googleHelp.textContent = navigator.onLine
+          ? "Google Sign-In could not load. Check internet, browser settings and OAuth configuration, then reload."
+          : "You are offline. Connect to the internet and reload.";
+        return;
+      }
+
+      setTimeout(waitForGoogle, 250);
+    };
+
+    waitForGoogle();
+  }
+
+  /*
+    Render the real Google button rather than attempting to force
+    the One Tap popup to open from a custom image hotspot.
+  */
+  window.addEventListener("load", () => {
+    renderGoogleButton("googleButton");
+  });
+
+  emailButton.addEventListener("click", () => {
+    emailOverlay.classList.add("show");
+    hideStatus(emailStatus);
+    setTimeout(() => {
+      document.getElementById("emailInput").focus();
+    }, 100);
+  });
+
+  if (emailButtonFallback) {
+    emailButtonFallback.addEventListener("click", () => {
+      emailOverlay.classList.add("show");
+      hideStatus(emailStatus);
+    });
+  }
+
+  closeEmail.addEventListener("click", () => {
+    emailOverlay.classList.remove("show");
+  });
+
+  emailOverlay.addEventListener("click", (event) => {
+    if (event.target === emailOverlay) {
+      emailOverlay.classList.remove("show");
     }
   });
-}
 
-/* Click handlers */
-document.getElementById("googleClickArea")
-  .addEventListener("click", startGoogleLogin);
+  emailForm.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-document.getElementById("backupGoogle")
-  .addEventListener("click", startGoogleLogin);
-
-document.getElementById("emailButton")
-  .addEventListener("click", function() {
     showStatus(
-      "Email Login",
-      "Email login has not been connected yet."
+      emailStatus,
+      "Email form is working, but email/password login is not connected to an authentication service yet. Do not enter a real password until secure authentication is configured."
     );
   });
 
-/*
-  Removed the automatic network speed test.
-  Only show a warning if the browser reports the device is offline.
-*/
-window.addEventListener("offline", function() {
-  showMessage("⚠️ No Internet Connection");
-});
-
-window.addEventListener("online", hideMessage);
-
-if (!navigator.onLine) {
-  showMessage("⚠️ No Internet Connection");
-}
+  showOfflineState();
+})();
 </script>
 
 </body>
