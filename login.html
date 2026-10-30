@@ -26,46 +26,53 @@
       font-family: 'Quicksand', sans-serif;
     }
 
-    /* Transparent Glass Card Effect */
+    /* Glass Card matching exact reference */
     .login-card {
       width: min(92%, 420px);
-      max-height: 92vh;
+      max-height: 94vh;
       overflow-y: auto;
-      background: rgba(255, 255, 255, 0.62); /* Transparent white */
-      backdrop-filter: blur(16px); /* Frosted glass blur effect */
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.68);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       border-radius: 36px;
-      padding: 30px 22px;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1), inset 0 1px 2px rgba(255, 255, 255, 0.8);
-      border: 1.5px solid rgba(255, 255, 255, 0.5);
+      padding: 28px 22px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+      border: 1.5px solid rgba(255, 255, 255, 0.7);
       text-align: center;
       position: relative;
       z-index: 10;
     }
 
     .brand-header {
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
-    .logo-icon {
-      font-size: 42px;
-      margin-bottom: 4px;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+    /* Exact 3D Book & Star Icon Style matching reference */
+    .logo-3d-container {
+      width: 75px;
+      height: 60px;
+      margin: 0 auto 6px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 46px;
+      filter: drop-shadow(0 6px 8px rgba(0,0,0,0.12));
     }
 
     .app-title {
       font-family: 'Baloo 2', cursive, sans-serif;
-      font-size: 32px;
+      font-size: 33px;
       font-weight: 800;
       color: #1e293b;
       line-height: 1.1;
+      letter-spacing: 0.3px;
     }
 
     .app-subtitle {
       font-size: 13.5px;
-      color: #475569;
+      color: #334155;
       font-weight: 700;
-      margin-top: 4px;
+      margin-top: 3px;
     }
 
     .form-group {
@@ -89,10 +96,10 @@
     .form-input {
       width: 100%;
       padding: 13px 16px;
-      padding-left: 45px;
-      padding-right: 45px;
-      background: rgba(255, 255, 255, 0.75);
-      border: 2px solid rgba(226, 232, 240, 0.8);
+      padding-left: 46px;
+      padding-right: 46px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 2px solid rgba(226, 232, 240, 0.9);
       border-radius: 18px;
       font-size: 14px;
       color: #1e293b;
@@ -135,7 +142,7 @@
       text-decoration: underline;
     }
 
-    /* 3D Gradient Orange Login Button */
+    /* 3D Gradient Orange Login Button matching reference */
     .btn-login {
       width: 100%;
       padding: 15px;
@@ -162,7 +169,7 @@
       align-items: center;
       text-align: center;
       margin: 14px 0;
-      color: #64748b;
+      color: #475569;
       font-size: 12px;
       font-weight: 700;
     }
@@ -179,7 +186,7 @@
     .btn-google {
       width: 100%;
       padding: 13px;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.9);
       color: #334155;
       border: 2px solid rgba(226, 232, 240, 0.9);
       border-radius: 18px;
@@ -204,7 +211,7 @@
     .create-account-text {
       text-align: center;
       font-size: 13.5px;
-      color: #475569;
+      color: #334155;
       font-weight: 700;
     }
 
@@ -223,7 +230,7 @@
 
   <div class="login-card">
     <div class="brand-header">
-      <div class="logo-icon">📖✨</div>
+      <div class="logo-3d-container">📖✨</div>
       <h1 class="app-title">Parents Login</h1>
       <p class="app-subtitle">Manage your child’s learning journey</p>
     </div>
