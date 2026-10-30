@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parent Login - Kids App</title>
+  <title>Kids Teacher - Welcome</title>
+  <!-- Google Fonts: Playful & Rounded -->
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -22,7 +23,7 @@
       padding: 15px;
     }
 
-    /* Outer Phone Frame Container */
+    /* Phone Outer Frame */
     .app-screen {
       width: 100%;
       max-width: 390px;
@@ -31,203 +32,107 @@
       border-radius: 40px;
       overflow: hidden;
       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
-      background-color: #fce8d5;
+      background-color: #fef08a;
     }
 
-    /* Background Image */
+    /* Background Image (3D Cloud Classroom) */
     .bg-image {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 65%;
+      height: 100%;
       object-fit: cover;
       object-position: center top;
+      /* Duolingo style Floating Animation */
+      animation: floatBg 5s ease-in-out infinite;
+    }
+
+    @keyframes floatBg {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
     }
 
     /* Bottom Overlay Card Wrapper */
-    .clay-card-wrapper {
+    .bottom-wrapper {
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
-      padding: 0 10px 10px 10px;
-      z-index: 10;
-    }
-
-    /* 3D Clay Leaves */
-    .leaf {
-      position: absolute;
-      width: 45px;
-      height: 45px;
-      background: #4ade80;
-      border-radius: 0 70% 0 70%;
-      box-shadow: inset -3px -3px 0 #16a34a, 0 6px 12px rgba(0,0,0,0.15);
-      z-index: 4;
-    }
-    .leaf-left-1 { top: -14px; left: 15px; transform: rotate(-25deg); }
-    .leaf-right-1 { top: -14px; right: 15px; transform: rotate(75deg); }
-
-    /* Main White Claymorphism Card */
-    .clay-card {
-      background: #ffffff;
-      border-radius: 35px 35px 30px 30px;
-      padding: 20px 16px 16px 16px;
+      padding: 20px;
       text-align: center;
-      position: relative;
-      z-index: 5;
-      box-shadow: 
-        0 -12px 28px rgba(0, 0, 0, 0.12),
-        inset 0 -6px 0 #f1f5f9,
-        inset 0 4px 12px rgba(255, 255, 255, 1);
+      z-index: 10;
+      background: linear-gradient(180deg, rgba(255, 248, 240, 0) 0%, rgba(255, 248, 240, 0.85) 25%, #fff8f0 100%);
+      border-radius: 40px 40px 0 0;
+      backdrop-filter: blur(2px);
     }
 
-    /* 3D Sun + Shield Badge (Reference Style) */
-    .badge-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 6px;
-      margin: -52px auto 8px auto;
-    }
-
-    .sun-icon {
-      width: 55px;
-      height: 55px;
-      background: linear-gradient(135deg, #fbbf24, #f59e0b);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      box-shadow: 0 5px 0 #d97706, 0 8px 15px rgba(217, 119, 6, 0.3);
-      border: 3px solid #ffffff;
-    }
-
-    .shield-icon {
-      width: 44px;
-      height: 44px;
-      background: linear-gradient(135deg, #facc15, #eab308);
-      border-radius: 10px 10px 20px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      box-shadow: 0 4px 0 #ca8a04, 0 6px 12px rgba(202, 138, 4, 0.3);
-      border: 2.5px solid #ffffff;
-      margin-top: 10px;
-    }
-
-    /* Title Styling */
-    .app-title {
-      font-size: 28px;
-      color: #3b1803;
+    /* Title Text */
+    .hero-title {
+      font-size: 27px;
+      color: #9a3412;
       font-weight: 700;
-      margin-bottom: 14px;
-      letter-spacing: 0.3px;
-      text-shadow: 0 2px 0 rgba(255, 255, 255, 0.9);
+      line-height: 1.25;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 0 rgba(255, 255, 255, 0.8);
     }
 
-    /* 3D Action Buttons */
-    .btn-3d {
+    /* Subtitle Description */
+    .hero-subtitle {
+      font-size: 13.5px;
+      color: #475569;
+      font-weight: 600;
+      margin-bottom: 22px;
+    }
+
+    /* 3D Big Orange Button (Let's Start) */
+    .btn-start {
       width: 100%;
-      padding: 12px;
-      border-radius: 16px;
+      padding: 16px;
+      background: linear-gradient(135deg, #ff7e33, #f97316);
+      color: #ffffff;
       border: none;
-      font-size: 14.5px;
+      border-radius: 25px;
+      font-size: 20px;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      margin-bottom: 10px;
+      box-shadow: 
+        0 6px 0 #c2410c, 
+        0 12px 20px rgba(249, 115, 22, 0.4);
       transition: all 0.15s ease;
+      text-decoration: none;
     }
 
-    .btn-google {
-      background: #ffffff;
-      color: #334155;
-      box-shadow: 0 4px 0 #cbd5e1, 0 6px 10px rgba(0,0,0,0.06);
-      border: 1.5px solid #e2e8f0;
+    .btn-start:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 #c2410c, 0 4px 10px rgba(249, 115, 22, 0.3) !important;
     }
 
-    .btn-email {
-      background: linear-gradient(135deg, #ff7e5f, #ff6b4a);
-      color: #ffffff;
-      box-shadow: 0 4px 0 #c2410c, 0 6px 12px rgba(255, 126, 95, 0.35);
-    }
-
-    .btn-3d:active {
-      transform: translateY(2px);
-      box-shadow: 0 1px 0 transparent !important;
-    }
-
-    /* --------------------------------------------------------
-       BALANCED & COMPACT 3D FEATURE CARDS
-    -------------------------------------------------------- */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
-      margin-top: 12px;
-    }
-
-    .feature-card {
-      border-radius: 14px;
-      padding: 8px 2px 6px 2px;
+    /* Slider Dots */
+    .dots-container {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      cursor: pointer;
-    }
-
-    .feature-icon-wrapper {
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
       justify-content: center;
-      font-size: 16px;
-      background: #ffffff;
-      box-shadow: 0 3px 5px rgba(0,0,0,0.06), inset 0 -2px 0 rgba(0,0,0,0.04);
+      gap: 8px;
+      margin-top: 18px;
     }
 
-    .feature-card span {
-      font-size: 9.5px;
-      font-weight: 700;
-      line-height: 1.1;
-      color: #1e293b;
-      font-family: 'Quicksand', sans-serif;
+    .dot {
+      width: 100%;
+      max-width: 10px;
+      height: 10px;
+      background: #fdba74;
+      border-radius: 50%;
     }
 
-    /* Compact 3D Clay Colors */
-    .f-blue {
-      background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%);
-      border: 1.5px solid #ffffff;
-      box-shadow: 0 4px 0 #38bdf8, 0 6px 10px rgba(56, 189, 248, 0.15);
+    .dot.active {
+      max-width: 22px;
+      background: #f97316;
+      border-radius: 10px;
     }
-
-    .f-yellow {
-      background: linear-gradient(180deg, #fef9c3 0%, #fef08a 100%);
-      border: 1.5px solid #ffffff;
-      box-shadow: 0 4px 0 #facc15, 0 6px 10px rgba(250, 204, 21, 0.15);
-    }
-
-    .f-green {
-      background: linear-gradient(180deg, #dcfce7 0%, #bbf7d0 100%);
-      border: 1.5px solid #ffffff;
-      box-shadow: 0 4px 0 #4ade80, 0 6px 10px rgba(74, 222, 128, 0.15);
-    }
-
-    .f-pink {
-      background: linear-gradient(180deg, #ffe4e6 0%, #fecdd3 100%);
-      border: 1.5px solid #ffffff;
-      box-shadow: 0 4px 0 #fb7185, 0 6px 10px rgba(251, 113, 133, 0.15);
-    }
-
   </style>
 </head>
 <body>
@@ -235,58 +140,23 @@
   <div class="app-screen">
     
     <!-- Background Image -->
-    <img src="image_2.png" alt="Family Background" class="bg-image">
+    <img src="welcome_bg.png" alt="Kids Teacher Cloud Classroom" class="bg-image">
 
-    <div class="clay-card-wrapper">
-      <!-- Decorative Leaves -->
-      <div class="leaf leaf-left-1"></div>
-      <div class="leaf leaf-right-1"></div>
+    <!-- Bottom Content Overlay -->
+    <div class="bottom-wrapper">
+      <h1 class="hero-title">Learning Is an<br>Adventure!</h1>
+      <p class="hero-subtitle">Explore, discover and grow every day.</p>
 
-      <!-- Main Clay Card -->
-      <div class="clay-card">
-        
-        <!-- Sun + Shield Reference Badge -->
-        <div class="badge-container">
-          <div class="sun-icon">☀️</div>
-          <div class="shield-icon">🛡️</div>
-        </div>
+      <!-- 3D Action Button linking to login.html -->
+      <a href="login.html" class="btn-start">
+        Let's Start ➔
+      </a>
 
-        <!-- Title -->
-        <h1 class="app-title">Parent Login</h1>
-
-        <!-- Action Buttons -->
-        <button class="btn-3d btn-google">
-          <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
-          Continue with Google
-        </button>
-
-        <button class="btn-3d btn-email">
-          ✉️ Login with Email
-        </button>
-
-        <!-- Compact 3D Feature Grid -->
-        <div class="features-grid">
-          <div class="feature-card f-blue">
-            <div class="feature-icon-wrapper">📈</div>
-            <span>Track Progress</span>
-          </div>
-
-          <div class="feature-card f-yellow">
-            <div class="feature-icon-wrapper">👁️</div>
-            <span>Monitor Activity</span>
-          </div>
-
-          <div class="feature-card f-green">
-            <div class="feature-icon-wrapper">🛡️</div>
-            <span>Safe & Secure</span>
-          </div>
-
-          <div class="feature-card f-pink">
-            <div class="feature-icon-wrapper">💖</div>
-            <span>Support Child</span>
-          </div>
-        </div>
-
+      <!-- Carousel Pagination Dots -->
+      <div class="dots-container">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
       </div>
     </div>
 
