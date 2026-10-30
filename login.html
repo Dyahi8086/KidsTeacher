@@ -37,7 +37,7 @@
       background-color: #fce8d5;
     }
 
-    /* Background Image jo poori screen par cover karegi */
+    /* Background Image */
     .bg-image {
       position: absolute;
       top: 0;
@@ -48,7 +48,7 @@
       object-position: center;
     }
 
-    /* Reference image jaisa centered floating card */
+    /* Centered Floating Login Card */
     .login-card {
       position: relative;
       z-index: 10;
@@ -65,29 +65,22 @@
       overflow-y: auto;
     }
 
-    /* Logo & Header */
+    /* Brand Header & Logo */
     .brand-header {
       text-align: center;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
+    /* 3D Open Book & Star Logo matching reference */
     .logo-badge {
-      width: 50px;
-      height: 50px;
-      background: linear-gradient(135deg, #facc15, #f59e0b);
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-      margin: 0 auto 6px auto;
-      box-shadow: 0 4px 0 #d97706, 0 6px 12px rgba(245, 158, 11, 0.3);
-      border: 2px solid #ffffff;
+      font-size: 38px;
+      margin-bottom: 2px;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
     }
 
     .app-title {
-      font-size: 24px;
-      color: #1e293b;
+      font-size: 25px;
+      color: #111827;
       font-weight: 700;
       letter-spacing: 0.2px;
     }
@@ -100,9 +93,9 @@
       font-family: 'Quicksand', sans-serif;
     }
 
-    /* Form Styles */
+    /* Form Styles with Input Icons */
     .form-group {
-      margin-bottom: 12px;
+      margin-bottom: 11px;
       text-align: left;
     }
 
@@ -112,9 +105,17 @@
       align-items: center;
     }
 
+    .input-icon {
+      position: absolute;
+      left: 14px;
+      font-size: 16px;
+      color: #94a3b8;
+    }
+
     .form-input {
       width: 100%;
       padding: 11px 14px;
+      padding-left: 42px;
       padding-right: 40px;
       background: #f8fafc;
       border: 2px solid #e2e8f0;
@@ -128,9 +129,9 @@
     }
 
     .form-input:focus {
-      border-color: #3b82f6;
+      border-color: #6366f1;
       background: #ffffff;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
     }
 
     .toggle-password {
@@ -152,7 +153,7 @@
 
     .forgot-link {
       font-size: 12px;
-      color: #2563eb;
+      color: #4f46e5;
       text-decoration: none;
       font-weight: 700;
       font-family: 'Quicksand', sans-serif;
@@ -166,21 +167,21 @@
     .btn-login {
       width: 100%;
       padding: 13px;
-      background: linear-gradient(135deg, #3b82f6, #6366f1);
+      background: linear-gradient(135deg, #6366f1, #a855f7);
       color: #ffffff;
       border: none;
       border-radius: 16px;
       font-size: 15px;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 4px 0 #1d4ed8, 0 6px 12px rgba(59, 130, 246, 0.3);
+      box-shadow: 0 4px 0 #4338ca, 0 6px 12px rgba(99, 102, 241, 0.3);
       transition: transform 0.1s;
       margin-bottom: 10px;
     }
 
     .btn-login:active {
       transform: translateY(2px);
-      box-shadow: 0 1px 0 #1d4ed8;
+      box-shadow: 0 1px 0 #4338ca;
     }
 
     /* OR Divider */
@@ -240,7 +241,7 @@
     }
 
     .create-account-link {
-      color: #2563eb;
+      color: #4f46e5;
       text-decoration: none;
       font-weight: 700;
     }
@@ -261,7 +262,7 @@
       
       <!-- Brand Header -->
       <div class="brand-header">
-        <div class="logo-badge">📖</div>
+        <div class="logo-badge">📖✨</div>
         <h1 class="app-title">Kids Teacher</h1>
         <p class="app-subtitle">Learn, Play & Grow!</p>
       </div>
@@ -271,12 +272,14 @@
         
         <div class="form-group">
           <div class="input-box-wrapper">
+            <span class="input-icon">✉️</span>
             <input type="text" id="email" class="form-input" placeholder="Email or Username" required>
           </div>
         </div>
 
         <div class="form-group">
           <div class="input-box-wrapper">
+            <span class="input-icon">🔒</span>
             <input type="password" id="password" class="form-input" placeholder="Password" required>
             <button type="button" class="toggle-password" onclick="togglePasswordVisibility()">👁️</button>
           </div>
