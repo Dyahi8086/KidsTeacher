@@ -2,9 +2,9 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Parent Login - Kids Teacher</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -19,18 +19,20 @@
       justify-content: center;
       align-items: center;
       background: #0f172a;
-      padding: 15px;
+      padding: 0;
     }
 
     .app-screen {
       width: 100%;
-      max-width: 390px;
-      height: 780px;
+      max-width: 420px;
+      height: 100vh;
+      max-height: 850px;
       position: relative;
-      border-radius: 40px;
-      overflow: hidden;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+      overflow-y: auto;
       background-color: #fce8d5;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
     }
 
     .bg-image {
@@ -38,219 +40,303 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 65%;
+      height: 45vh;
       object-fit: cover;
       object-position: center top;
     }
 
-    .clay-card-wrapper {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      padding: 0 10px 10px 10px;
-      z-index: 10;
-    }
-
-    .leaf {
-      position: absolute;
-      width: 45px;
-      height: 45px;
-      background: #4ade80;
-      border-radius: 0 70% 0 70%;
-      box-shadow: inset -3px -3px 0 #16a34a, 0 6px 12px rgba(0,0,0,0.15);
-      z-index: 4;
-    }
-    .leaf-left-1 { top: -14px; left: 15px; transform: rotate(-25deg); }
-    .leaf-right-1 { top: -14px; right: 15px; transform: rotate(75deg); }
-
-    .clay-card {
-      background: #ffffff;
-      border-radius: 35px 35px 30px 30px;
-      padding: 20px 16px 16px 16px;
-      text-align: center;
+    .login-card-wrapper {
       position: relative;
-      z-index: 5;
-      box-shadow: 
-        0 -12px 28px rgba(0, 0, 0, 0.12),
-        inset 0 -6px 0 #f1f5f9,
-        inset 0 4px 12px rgba(255, 255, 255, 1);
+      width: 100%;
+      background: #ffffff;
+      border-radius: 35px 35px 0 0;
+      padding: 24px 20px 30px 20px;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+      margin-top: 35vh;
     }
 
-    .badge-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 6px;
-      margin: -52px auto 8px auto;
+    /* Logo & Header */
+    .brand-header {
+      text-align: center;
+      margin-bottom: 20px;
     }
 
-    .sun-icon {
+    .logo-badge {
       width: 55px;
       height: 55px;
-      background: linear-gradient(135deg, #fbbf24, #f59e0b);
-      border-radius: 50%;
+      background: linear-gradient(135deg, #ff7e33, #f97316);
+      border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 28px;
-      box-shadow: 0 5px 0 #d97706, 0 8px 15px rgba(217, 119, 6, 0.3);
-      border: 3px solid #ffffff;
-    }
-
-    .shield-icon {
-      width: 44px;
-      height: 44px;
-      background: linear-gradient(135deg, #facc15, #eab308);
-      border-radius: 10px 10px 20px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      box-shadow: 0 4px 0 #ca8a04, 0 6px 12px rgba(202, 138, 4, 0.3);
-      border: 2.5px solid #ffffff;
-      margin-top: 10px;
+      margin: 0 auto 8px auto;
+      box-shadow: 0 4px 0 #c2410c, 0 8px 15px rgba(249, 115, 22, 0.3);
+      border: 2px solid #ffffff;
     }
 
     .app-title {
-      font-size: 28px;
-      color: #3b1803;
+      font-size: 26px;
+      color: #1e293b;
       font-weight: 700;
-      margin-bottom: 14px;
       letter-spacing: 0.3px;
-      text-shadow: 0 2px 0 rgba(255, 255, 255, 0.9);
     }
 
-    .btn-3d {
+    .app-subtitle {
+      font-size: 13.5px;
+      color: #64748b;
+      font-weight: 600;
+      margin-top: 2px;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 14px;
+      text-align: left;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 5px;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    .input-box-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 14px;
+      padding-right: 45px;
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 14px;
+      font-size: 14px;
+      color: #1e293b;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 600;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .form-input:focus {
+      border-color: #f97316;
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15);
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      color: #64748b;
+    }
+
+    /* Forgot Password */
+    .forgot-container {
+      text-align: right;
+      margin-top: -6px;
+      margin-bottom: 16px;
+    }
+
+    .forgot-link {
+      font-size: 12px;
+      color: #f97316;
+      text-decoration: none;
+      font-weight: 700;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    .forgot-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Buttons */
+    .btn-login {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #ff7e33, #f97316);
+      color: #ffffff;
+      border: none;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 0 #c2410c, 0 6px 12px rgba(249, 115, 22, 0.3);
+      transition: transform 0.1s;
+      margin-bottom: 14px;
+    }
+
+    .btn-login:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 #c2410c;
+    }
+
+    /* OR Divider */
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 14px 0;
+      color: #94a3b8;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1.5px solid #e2e8f0;
+    }
+
+    .divider::before { margin-right: 10px; }
+    .divider::after { margin-left: 10px; }
+
+    /* Google Button */
+    .btn-google {
       width: 100%;
       padding: 12px;
+      background: #ffffff;
+      color: #334155;
+      border: 2px solid #e2e8f0;
       border-radius: 16px;
-      border: none;
-      font-size: 14.5px;
+      font-size: 14px;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      margin-bottom: 10px;
-      transition: all 0.15s ease;
+      box-shadow: 0 4px 0 #cbd5e1;
+      transition: transform 0.1s;
+      margin-bottom: 16px;
       text-decoration: none;
     }
 
-    .btn-google {
-      background: #ffffff;
-      color: #334155;
-      box-shadow: 0 4px 0 #cbd5e1, 0 6px 10px rgba(0,0,0,0.06);
-      border: 1.5px solid #e2e8f0;
-    }
-
-    .btn-email {
-      background: linear-gradient(135deg, #ff7e5f, #ff6b4a);
-      color: #ffffff;
-      box-shadow: 0 4px 0 #c2410c, 0 6px 12px rgba(255, 126, 95, 0.35);
-    }
-
-    .btn-3d:active {
+    .btn-google:active {
       transform: translateY(2px);
-      box-shadow: 0 1px 0 transparent !important;
+      box-shadow: 0 1px 0 #cbd5e1;
     }
 
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
-      margin-top: 12px;
-    }
-
-    .feature-card {
-      border-radius: 14px;
-      padding: 8px 2px 6px 2px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .feature-icon-wrapper {
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      background: #ffffff;
-      box-shadow: 0 3px 5px rgba(0,0,0,0.06), inset 0 -2px 0 rgba(0,0,0,0.04);
-    }
-
-    .feature-card span {
-      font-size: 9.5px;
-      font-weight: 700;
-      line-height: 1.1;
-      color: #1e293b;
+    /* Create Account Footer */
+    .create-account-text {
+      text-align: center;
+      font-size: 13px;
+      color: #64748b;
+      font-weight: 600;
       font-family: 'Quicksand', sans-serif;
     }
 
-    .f-blue { background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%); border: 1.5px solid #ffffff; box-shadow: 0 4px 0 #38bdf8; }
-    .f-yellow { background: linear-gradient(180deg, #fef9c3 0%, #fef08a 100%); border: 1.5px solid #ffffff; box-shadow: 0 4px 0 #facc15; }
-    .f-green { background: linear-gradient(180deg, #dcfce7 0%, #bbf7d0 100%); border: 1.5px solid #ffffff; box-shadow: 0 4px 0 #4ade80; }
-    .f-pink { background: linear-gradient(180deg, #ffe4e6 0%, #fecdd3 100%); border: 1.5px solid #ffffff; box-shadow: 0 4px 0 #fb7185; }
+    .create-account-link {
+      color: #f97316;
+      text-decoration: none;
+      font-weight: 700;
+    }
 
+    .create-account-link:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
 
   <div class="app-screen">
-    
-    <!-- Background Family Image (Yahan apni login image ka naam check kar lena) -->
-    <img src="kids_teacher_login_background.png" alt="Family Background" class="bg-image">
+    <!-- Background Image -->
+    <img src="kids_teacher_login_background.png" alt="Login Background" class="bg-image">
 
-    <div class="clay-card-wrapper">
-      <div class="leaf leaf-left-1"></div>
-      <div class="leaf leaf-right-1"></div>
-
-      <div class="clay-card">
-        
-        <div class="badge-container">
-          <div class="sun-icon">☀️</div>
-          <div class="shield-icon">🛡️</div>
-        </div>
-
-        <h1 class="app-title">Parent Login</h1>
-
-        <button class="btn-3d btn-google">
-          <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
-          Continue with Google
-        </button>
-
-        <button class="btn-3d btn-email">
-          ✉️ Login with Email
-        </button>
-
-        <div class="features-grid">
-          <div class="feature-card f-blue">
-            <div class="feature-icon-wrapper">📈</div>
-            <span>Track Progress</span>
-          </div>
-          <div class="feature-card f-yellow">
-            <div class="feature-icon-wrapper">👁️</div>
-            <span>Monitor Activity</span>
-          </div>
-          <div class="feature-card f-green">
-            <div class="feature-icon-wrapper">🛡️</div>
-            <span>Safe & Secure</span>
-          </div>
-          <div class="feature-card f-pink">
-            <div class="feature-icon-wrapper">💖</div>
-            <span>Support Child</span>
-          </div>
-        </div>
-
+    <div class="login-card-wrapper">
+      
+      <!-- Brand Header -->
+      <div class="brand-header">
+        <div class="logo-badge">📖</div>
+        <h1 class="app-title">Kids Teacher</h1>
+        <p class="app-subtitle">Learn, Play & Grow!</p>
       </div>
-    </div>
 
+      <!-- Login Form -->
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        
+        <div class="form-group">
+          <label class="form-label" for="email">Email or Username</label>
+          <div class="input-box-wrapper">
+            <input type="text" id="email" class="form-input" placeholder="Enter your email" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <div class="input-box-wrapper">
+            <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
+            <button type="button" class="toggle-password" onclick="togglePasswordVisibility()">👁️</button>
+          </div>
+        </div>
+
+        <div class="forgot-container">
+          <a href="#" class="forgot-link" onclick="handleForgotPassword(event)">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="btn-login">Log In</button>
+
+      </form>
+
+      <div class="divider">OR</div>
+
+      <!-- Google Sign In -->
+      <button type="button" class="btn-google" onclick="handleGoogleLogin()">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+        Continue with Google
+      </button>
+
+      <!-- Create Account -->
+      <div class="create-account-text">
+        Don't have an account? <a href="#" class="create-account-link" onclick="handleCreateAccount(event)">Create Account</a>
+      </div>
+
+    </div>
   </div>
 
+  <script>
+    // Show/Hide Password Toggle
+    function togglePasswordVisibility() {
+      const passwordInput = document.getElementById('password');
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+      } else {
+        passwordInput.type = 'password';
+      }
+    }
+
+    // Placeholder handlers for auth actions until Firebase is fully connected
+    function handleLogin(event) {
+      event.preventDefault();
+      alert("Login feature will be active once Firebase authentication is configured.");
+    }
+
+    function handleForgotPassword(event) {
+      event.preventDefault();
+      alert("Password reset instructions will be sent to your email.");
+    }
+
+    function handleGoogleLogin() {
+      alert("Google Sign-In requires Firebase authorized domain configuration.");
+    }
+
+    function handleCreateAccount(event) {
+      event.preventDefault();
+      alert("Account creation workflow will be connected with Firebase.");
+    }
+  </script>
 </body>
 </html>
