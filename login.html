@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Parents Login - Kids Teacher</title>
+  <link rel="manifest" href="manifest.json">
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Fredoka:wght@600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -26,7 +27,6 @@
       font-family: 'Quicksand', sans-serif;
     }
 
-    /* Initial Splash Loader to prevent screen flicker */
     #authLoader {
       position: fixed;
       top: 0;
@@ -306,7 +306,6 @@
 </head>
 <body>
 
-  <!-- Smooth Loader Overlay to block any unwanted page flash -->
   <div id="authLoader">
     <div class="spinner"></div>
     <div class="loader-text">Loading Kids Teacher...</div>
@@ -402,7 +401,6 @@
 
     const loader = document.getElementById('authLoader');
 
-    // Handle Redirect Result first
     getRedirectResult(auth)
       .then((result) => {
         if (result && result.user) {
@@ -418,7 +416,6 @@
         setTimeout(() => loader.style.display = 'none', 300);
       });
 
-    // Check auth state immediately
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const savedAge = localStorage.getItem('kidsAgeGroup');
