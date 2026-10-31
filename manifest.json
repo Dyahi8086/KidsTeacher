@@ -5,13 +5,13 @@
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#faf08a",
-  "theme_color": "#faf08a",
+  "theme_color": "#f97316",
   "icons": [
     {
       "src": "welcome_bg.png",
-      "sizes": "192x192",
+      "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }
