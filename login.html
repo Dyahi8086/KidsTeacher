@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Parents Login - Kids Teacher</title>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts for Premium Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Fredoka:wght@600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -26,18 +27,18 @@
       font-family: 'Quicksand', sans-serif;
     }
 
-    /* True Frosted Glassmorphism Card */
+    /* Ultra Glassmorphism Transparent Card */
     .login-card {
       width: min(92%, 410px);
       max-height: 94vh;
       overflow-y: auto;
-      background: rgba(255, 255, 255, 0.55) !important;
-      backdrop-filter: blur(20px) saturate(180%) !important;
-      -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+      background: rgba(255, 255, 255, 0.45) !important; /* Higher Transparency */
+      backdrop-filter: blur(24px) saturate(190%) !important;
+      -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
       border-radius: 36px;
       padding: 28px 22px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), inset 0 1px 2px rgba(255, 255, 255, 0.8);
-      border: 1.5px solid rgba(255, 255, 255, 0.65);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.14), inset 0 1.5px 3px rgba(255, 255, 255, 0.95);
+      border: 1.5px solid rgba(255, 255, 255, 0.7);
       text-align: center;
       position: relative;
       z-index: 10;
@@ -47,21 +48,27 @@
       margin-bottom: 18px;
     }
 
-    /* Combined 3D Star Book Emblem */
-    .logo-3d-container {
-      font-size: 44px;
-      line-height: 1;
-      margin-bottom: 6px;
-      filter: drop-shadow(0 4px 10px rgba(255, 126, 95, 0.3));
+    /* Custom Real-looking 3D Star & Book Vector Graphic */
+    .emblem-3d {
+      width: 80px;
+      height: 60px;
+      margin: 0 auto 6px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      filter: drop-shadow(0 8px 12px rgba(249, 115, 22, 0.25));
     }
 
+    /* Premium Rounded Header Font */
     .app-title {
-      font-family: 'Baloo 2', cursive, sans-serif;
-      font-size: 32px;
-      font-weight: 800;
+      font-family: 'Fredoka', 'Baloo 2', cursive, sans-serif;
+      font-size: 34px;
+      font-weight: 700;
       color: #1e293b;
-      line-height: 1.1;
-      letter-spacing: 0.2px;
+      line-height: 1.15;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
     }
 
     .app-subtitle {
@@ -226,7 +233,21 @@
 
   <div class="login-card">
     <div class="brand-header">
-      <div class="logo-3d-container">⭐📖</div>
+      <!-- High Quality 3D Star & Book Graphic -->
+      <div class="emblem-3d">
+        <svg width="70" height="55" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- 3D Open Book Base -->
+          <path d="M10 50 C30 40, 48 48, 50 55 C52 48, 70 40, 90 50 L90 25 C70 15, 52 22, 50 30 C48 22, 30 15, 10 25 Z" fill="#ff7e5f" />
+          <path d="M14 47 C32 38, 48 45, 50 50 C52 45, 68 38, 86 47 L86 23 C68 15, 52 20, 50 27 C48 20, 32 15, 14 23 Z" fill="#ffffff" />
+          <path d="M50 27 L50 50" stroke="#f97316" stroke-width="2" />
+          <!-- 3D Glowing Star on top -->
+          <path d="M50 0 L54 10 L65 11 L57 18 L60 29 L50 23 L40 29 L43 18 L35 11 L46 10 Z" fill="#facc15" stroke="#eab308" stroke-width="1.5" />
+          <!-- Small sparkles -->
+          <circle cx="25" cy="12" r="3" fill="#fcd34d" />
+          <circle cx="75" cy="15" r="2.5" fill="#fcd34d" />
+        </svg>
+      </div>
+
       <h1 class="app-title">Parents Login</h1>
       <p class="app-subtitle">Manage your child’s learning journey</p>
     </div>
