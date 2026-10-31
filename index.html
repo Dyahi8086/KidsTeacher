@@ -14,21 +14,18 @@
       font-family: 'Fredoka', 'Quicksand', sans-serif;
     }
 
-    /* Body ko poori screen ka size aur background de diya hai */
-    body {
-      width: 100vw;
-      height: 100dvh;
-      background: #faf08a;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    /* App screen ab mobile ki poori width aur height legi, koi chota box nahi banega */
-    .app-screen {
+    html, body {
       width: 100%;
       height: 100%;
+      background: #faf08a;
+      overflow: hidden;
+      position: fixed;
+    }
+
+    .app-screen {
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
       position: relative;
       overflow: hidden;
       background-color: #faf08a;
