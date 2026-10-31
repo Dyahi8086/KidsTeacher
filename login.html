@@ -363,8 +363,12 @@
         }
       })
       .catch((error) => {
-        showAlert(getFriendlyErrorMessage(error.code));
-      });
+  console.error("Google Redirect Error:", error.code, error.message);
+  showAlert(
+    "Google Login Error: " +
+    (error.code || error.message || "Unknown error")
+  );
+});
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
