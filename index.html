@@ -2,7 +2,7 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Kids Teacher - Welcome</title>
   <link rel="manifest" href="manifest.json">
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
@@ -14,21 +14,21 @@
       font-family: 'Fredoka', 'Quicksand', sans-serif;
     }
 
+    /* Body ko poori screen ka size aur background de diya hai */
     body {
-      min-height: 100vh;
+      width: 100vw;
+      height: 100dvh;
+      background: #faf08a;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #0f172a;
-      padding: 0;
-      overflow: hidden;
     }
 
+    /* App screen ab mobile ki poori width aur height legi, koi chota box nahi banega */
     .app-screen {
       width: 100%;
-      max-width: 420px;
-      height: 100vh;
-      max-height: 850px;
+      height: 100%;
       position: relative;
       overflow: hidden;
       background-color: #faf08a;
@@ -50,7 +50,7 @@
     .bottom-wrapper {
       position: relative;
       width: 100%;
-      padding: 24px 20px 32px 20px;
+      padding: 24px 20px 36px 20px;
       text-align: center;
       z-index: 10;
       background: linear-gradient(180deg, rgba(255, 248, 240, 0) 0%, rgba(255, 248, 240, 0.92) 25%, #fff8f0 100%);
@@ -75,7 +75,7 @@
 
     .btn-start {
       width: 100%;
-      padding: 15px;
+      padding: 16px;
       background: linear-gradient(135deg, #ff7e5f, #f97316);
       color: #ffffff;
       border: none;
