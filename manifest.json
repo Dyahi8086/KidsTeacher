@@ -2,7 +2,7 @@
   "name": "Kids Teacher",
   "short_name": "KidsTeacher",
   "start_url": "index.html",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "portrait",
   "background_color": "#faf08a",
   "theme_color": "#faf08a",
@@ -10,7 +10,8 @@
     {
       "src": "welcome_bg.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
