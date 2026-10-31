@@ -1,500 +1,571 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Parents Login - Kids Teacher</title>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Fredoka:wght@600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kids Teacher - Parent Login</title>
 
-    body {
-      min-height: 100dvh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-image: url('kids_teacher_login_background.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-color: #fce8d5;
-      padding: 16px;
-      font-family: 'Quicksand', sans-serif;
-    }
-
-    .login-card {
-      width: min(92%, 410px);
-      max-height: 94vh;
-      overflow-y: auto;
-      background: rgba(255, 255, 255, 0.45);
-      backdrop-filter: blur(24px) saturate(190%);
-      -webkit-backdrop-filter: blur(24px) saturate(190%);
-      border-radius: 36px;
-      padding: 28px 22px;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.14), inset 0 1.5px 3px rgba(255, 255, 255, 0.95);
-      border: 1.5px solid rgba(255, 255, 255, 0.7);
-      text-align: center;
-      position: relative;
-      z-index: 10;
-    }
-
-    .brand-header {
-      margin-bottom: 18px;
-    }
-
-    .emblem-3d {
-      width: 80px;
-      height: 60px;
-      margin: 0 auto 6px auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      filter: drop-shadow(0 8px 12px rgba(249, 115, 22, 0.25));
-    }
-
-    .app-title {
-      font-family: 'Fredoka', 'Baloo 2', cursive, sans-serif;
-      font-size: 30px;
-      font-weight: 700;
-      color: #1e293b;
-      line-height: 1.15;
-      letter-spacing: 0.5px;
-      text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
-    }
-
-    .app-subtitle {
-      font-size: 13.5px;
-      color: #334155;
-      font-weight: 700;
-      margin-top: 3px;
-    }
-
-    #alertBox {
-      display: none;
-      padding: 10px 14px;
-      margin-bottom: 14px;
-      border-radius: 14px;
-      font-size: 13px;
-      font-weight: 700;
-      text-align: left;
-    }
-    #alertBox.error {
-      background: rgba(254, 226, 226, 0.9);
-      color: #b91c1c;
-      border: 1px solid #f87171;
-    }
-    #alertBox.success {
-      background: rgba(220, 252, 231, 0.9);
-      color: #15803d;
-      border: 1px solid #4ade80;
-    }
-
-    .form-group {
-      margin-bottom: 14px;
-      text-align: left;
-    }
-
-    .input-box-wrapper {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-    .input-icon {
-      position: absolute;
-      left: 16px;
-      font-size: 16px;
-      color: #64748b;
-    }
-
-    .form-input {
-      width: 100%;
-      padding: 13px 16px;
-      padding-left: 46px;
-      padding-right: 46px;
-      background: rgba(255, 255, 255, 0.75);
-      border: 2px solid rgba(226, 232, 240, 0.85);
-      border-radius: 18px;
-      font-size: 14px;
-      color: #1e293b;
-      font-family: 'Quicksand', sans-serif;
-      font-weight: 700;
-      outline: none;
-      transition: all 0.2s ease;
-    }
-
-    .form-input:focus {
-      border-color: #ff7e33;
-      background: rgba(255, 255, 255, 0.95);
-      box-shadow: 0 0 0 4px rgba(255, 126, 51, 0.15);
-    }
-
-    .toggle-password {
-      position: absolute;
-      right: 14px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-      color: #64748b;
-    }
-
-    .action-row {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      margin-top: 2px;
-      margin-bottom: 16px;
-    }
-
-    .forgot-link {
-      font-size: 12.5px;
-      color: #1e293b;
-      text-decoration: none;
-      font-weight: 700;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      font-family: 'Quicksand', sans-serif;
-    }
-    .forgot-link:hover {
-      text-decoration: underline;
-      color: #f97316;
-    }
-
-    .btn-login {
-      width: 100%;
-      padding: 15px;
-      background: linear-gradient(135deg, #ff7e5f, #f97316);
-      color: #ffffff;
-      border: none;
-      border-radius: 20px;
-      font-size: 17px;
-      font-family: 'Baloo 2', cursive, sans-serif;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 6px 0 #c2410c, 0 10px 20px rgba(249, 115, 22, 0.35);
-      transition: transform 0.1s ease;
-      margin-bottom: 10px;
-    }
-
-    .btn-login:active, .btn-google:active {
-      transform: translateY(3px);
-      box-shadow: 0 2px 0 #c2410c;
-    }
-
-    .btn-signup-alt {
-      width: 100%;
-      padding: 11px;
-      background: rgba(255, 255, 255, 0.6);
-      color: #c2410c;
-      border: 2px dashed #f97316;
-      border-radius: 16px;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      margin-bottom: 14px;
-      transition: background 0.2s;
-    }
-    .btn-signup-alt:hover {
-      background: rgba(255, 255, 255, 0.9);
-    }
-
-    .divider {
-      display: flex;
-      align-items: center;
-      text-align: center;
-      margin: 10px 0;
-      color: #475569;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .divider::before, .divider::after {
-      content: '';
-      flex: 1;
-      border-bottom: 1.5px solid rgba(203, 213, 225, 0.8);
-    }
-    .divider::before { margin-right: 10px; }
-    .divider::after { margin-left: 10px; }
-
-    .btn-google {
-      width: 100%;
-      padding: 13px;
-      background: rgba(255, 255, 255, 0.85);
-      color: #334155;
-      border: 2px solid rgba(226, 232, 240, 0.9);
-      border-radius: 18px;
-      font-size: 14.5px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      box-shadow: 0 4px 0 #cbd5e1;
-      transition: transform 0.1s ease;
-      margin-bottom: 12px;
-      text-decoration: none;
-    }
-
-    .create-account-text {
-      text-align: center;
-      font-size: 13.5px;
-      color: #334155;
-      font-weight: 700;
-    }
-
-    .create-account-link {
-      color: #f97316;
-      text-decoration: none;
-      font-weight: 800;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: 'Quicksand', sans-serif;
-      font-size: 13.5px;
-    }
-    .create-account-link:hover {
-      text-decoration: underline;
-    }
-  </style>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  padding:20px 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:"Trebuchet MS",Arial,sans-serif;
+  color:#20283d;
+  background:#b9d6ff url("kids_teacher_login_background.png") center/cover no-repeat fixed;
+}
+.card{
+  width:min(100%,590px);
+  padding:30px 24px;
+  text-align:center;
+  border:2px solid white;
+  border-radius:36px;
+  background:linear-gradient(160deg,rgba(205,239,255,.96),rgba(255,253,229,.96),rgba(222,229,255,.97));
+  box-shadow:0 18px 55px #374a7c33;
+}
+.logo{font-size:50px;margin-bottom:12px}
+h1{font-size:clamp(30px,6vw,44px);margin:8px 0}
+.subtitle{font-size:17px;font-weight:bold;margin-bottom:25px}
+.alert{
+  display:none;
+  padding:13px;
+  margin-bottom:16px;
+  border:1px solid #e58a8a;
+  border-radius:18px;
+  background:#ffe7e7;
+  color:#a6222c;
+  text-align:left;
+  overflow-wrap:anywhere;
+}
+.alert.success{background:#e5ffed;color:#176b37;border-color:#73c991}
+.field{
+  display:flex;
+  align-items:center;
+  min-height:64px;
+  margin-bottom:17px;
+  border:2px solid #e3e8ef;
+  border-radius:25px;
+  background:white;
+}
+.icon{width:48px;font-size:22px;flex-shrink:0}
+.field input{
+  width:100%;
+  min-width:0;
+  padding:16px 8px;
+  border:0;
+  outline:0;
+  background:transparent;
+  font:inherit;
+  font-size:17px;
+}
+.show{
+  border:0;
+  background:transparent;
+  font-size:20px;
+  padding:10px;
+  cursor:pointer;
+}
+.forgot{text-align:right;margin:0 0 22px}
+.text-button,.bottom button{
+  border:0;
+  background:transparent;
+  font:inherit;
+  font-weight:bold;
+  cursor:pointer;
+}
+.primary,.outline,.google{
+  width:100%;
+  min-height:62px;
+  border-radius:25px;
+  font:inherit;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.primary{
+  border:0;
+  color:white;
+  background:linear-gradient(110deg,#ff7547,#ff6b18);
+  box-shadow:0 7px 0 #d94a0b;
+  margin-bottom:18px;
+}
+.outline{
+  border:2px dashed #f18a41;
+  color:#b54a1f;
+  background:#ffffffbf;
+  font-style:italic;
+  margin-bottom:24px;
+}
+.divider{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin:20px 0;
+  font-weight:bold;
+}
+.divider:before,.divider:after{
+  content:"";
+  flex:1;
+  height:2px;
+  background:#6f7f9d33;
+}
+.google{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:14px;
+  border:2px solid #e5e9f0;
+  background:white;
+  color:#30384b;
+}
+.g{font:bold 29px Arial;color:#4285f4}
+.bottom{margin-top:25px;font-size:17px;font-weight:bold}
+.bottom button{color:#e8782d}
+.small{font-size:12px;color:#596276;margin-top:15px}
+button:disabled{opacity:.65;cursor:wait}
+.spinner{
+  display:inline-block;
+  width:17px;height:17px;
+  margin-right:8px;
+  vertical-align:middle;
+  border:2px solid #ffffff70;
+  border-top-color:white;
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:420px){
+  body{padding:12px 9px}
+  .card{padding:23px 16px;border-radius:30px}
+  .field{min-height:59px}
+  .primary,.outline,.google{min-height:58px;font-size:16px}
+}
+</style>
 </head>
+
 <body>
+<main class="card">
 
-  <div class="login-card">
-    <div class="brand-header">
-      <div class="emblem-3d">
-        <svg width="70" height="55" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 50 C30 40, 48 48, 50 55 C52 48, 70 40, 90 50 L90 25 C70 15, 52 22, 50 30 C48 22, 30 15, 10 25 Z" fill="#ff7e5f" />
-          <path d="M14 47 C32 38, 48 45, 50 50 C52 45, 68 38, 86 47 L86 23 C68 15, 52 20, 50 27 C48 20, 32 15, 14 23 Z" fill="#ffffff" />
-          <path d="M50 27 L50 50" stroke="#f97316" stroke-width="2" />
-          <path d="M50 0 L54 10 L65 11 L57 18 L60 29 L50 23 L40 29 L43 18 L35 11 L46 10 Z" fill="#facc15" stroke="#eab308" stroke-width="1.5" />
-          <circle cx="25" cy="12" r="3" fill="#fcd34d" />
-          <circle cx="75" cy="15" r="2.5" fill="#fcd34d" />
-        </svg>
-      </div>
+  <div class="logo">📖⭐</div>
 
-      <h1 class="app-title">Welcome Back!</h1>
-      <p class="app-subtitle">Manage your child's learning journey</p>
+  <h1>Welcome Back!</h1>
+  <p class="subtitle">Manage your child's learning journey</p>
+
+  <div id="alertBox" class="alert" role="status" aria-live="polite"></div>
+
+  <form id="loginForm" novalidate>
+
+    <label class="field">
+      <span class="icon">✉</span>
+      <input id="email" type="email" autocomplete="email"
+        placeholder="Email Address" aria-label="Email Address" required>
+    </label>
+
+    <label class="field">
+      <span class="icon">🔒</span>
+      <input id="password" type="password" autocomplete="current-password"
+        placeholder="Password" aria-label="Password" required>
+      <button class="show" type="button" id="togglePassword"
+        aria-label="Show password">👁️</button>
+    </label>
+
+    <div class="forgot">
+      <button class="text-button" type="button" id="forgotBtn">
+        Forgot Password?
+      </button>
     </div>
 
-    <div id="alertBox"></div>
-
-    <form id="authForm" onsubmit="handleFormSubmit(event)">
-      <div class="form-group">
-        <div class="input-box-wrapper">
-          <span class="input-icon">✉️</span>
-          <input type="email" id="email" class="form-input" placeholder="Email Address" required>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="input-box-wrapper">
-          <span class="input-icon">🔒</span>
-          <input type="password" id="password" class="form-input" placeholder="Password" required>
-          <button type="button" class="toggle-password" onclick="togglePasswordVisibility()">👁️</button>
-        </div>
-      </div>
-
-      <div class="action-row">
-        <button type="button" class="forgot-link" onclick="handleForgotPassword()">Forgot Password?</button>
-      </div>
-
-      <button type="submit" id="submitBtn" class="btn-login">Log In ➔</button>
-      <button type="button" id="signupBtn" class="btn-signup-alt" onclick="handleCreateAccount()">Create New Account</button>
-    </form>
-
-    <div class="divider">— OR —</div>
-
-    <button type="button" id="googleBtn" class="btn-google" onclick="handleGoogleLogin()">
-      <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
-      Continue with Google
+    <button class="primary" type="submit" id="loginBtn">
+      Log In ➜
     </button>
 
-    <div class="create-account-text">
-      New here? <button type="button" class="create-account-link" onclick="handleCreateAccount()">Create Account</button>
-    </div>
-  </div>
+    <button class="outline" type="button" id="createBtn">
+      Create New Account
+    </button>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { 
-      getAuth, 
-      signInWithEmailAndPassword, 
-      createUserWithEmailAndPassword, 
-      sendPasswordResetEmail, 
-      GoogleAuthProvider, 
-      signInWithRedirect,
-      getRedirectResult,
-      onAuthStateChanged,
-      setPersistence,
-      browserLocalPersistence
-    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+  </form>
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyDidkZxQGLjJO4_Ido5FI6Q0s9vay0E3mA",
-      authDomain: "kids-teacher-4387e.firebaseapp.com",
-      projectId: "kids-teacher-4387e",
-      storageBucket: "kids-teacher-4387e.firebasestorage.app",
-      messagingSenderId: "420221167346",
-      appId: "1:420221167346:web:da7ac80acdfd52339d526b",
-      measurementId: "G-VJVS2ZMNLY"
-    };
+  <div class="divider">— OR —</div>
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+  <button class="google" type="button" id="googleBtn">
+    <span class="g">G</span>
+    <span>Continue with Google</span>
+  </button>
 
-    setPersistence(auth, browserLocalPersistence).catch((error) => {
-      console.error("Persistence error:", error);
-    });
+  <p class="bottom">
+    New here?
+    <button type="button" id="createTextBtn">Create Account</button>
+  </p>
 
-    // Handle Google Redirect Result (Automatic Signup/Signin when returning from Google)
-    getRedirectResult(auth)
-      .then((result) => {
-        if (result) {
-          window.location.href = "index.html";
-        }
-      })
-      .catch((error) => {
-  console.error("Google Redirect Error:", error.code, error.message);
-  showAlert(
-    "Google Login Error: " +
-    (error.code || error.message || "Unknown error")
+  <p class="small">Your account is securely managed by Firebase.</p>
+
+</main>
+
+<script type="module">
+import { initializeApp }
+  from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+
+import {
+  getAuth,
+  setPersistence,
+  browserLocalPersistence,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  GoogleAuthProvider,
+  signInWithRedirect,
+  getRedirectResult
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+
+/* FIREBASE CONFIG */
+const firebaseConfig = {
+  apiKey: "AIzaSyDidkZxkQGLjJO4_Ido5FI6Q0s9vay0E3mA",
+  authDomain: "kids-teacher-4387e.firebaseapp.com",
+  projectId: "kids-teacher-4387e",
+  storageBucket: "kids-teacher-4387e.firebasestorage.app",
+  messagingSenderId: "420221167346",
+  appId: "1:420221167346:web:da7ac80acdfd52339d526b",
+  measurementId: "G-VJVS2ZMNLY"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+const alertBox = document.getElementById("alertBox");
+const loginBtn = document.getElementById("loginBtn");
+
+const buttons = [
+  "loginBtn",
+  "createBtn",
+  "createTextBtn",
+  "googleBtn",
+  "forgotBtn"
+].map(id => document.getElementById(id));
+
+let busy = false;
+
+
+/* ALERT MESSAGE */
+function showAlert(message, type = "error") {
+  alertBox.textContent = message;
+  alertBox.className =
+    type === "success" ? "alert success" : "alert";
+  alertBox.style.display = "block";
+}
+
+function hideAlert() {
+  alertBox.style.display = "none";
+  alertBox.textContent = "";
+}
+
+
+/* LOADING INDICATOR */
+function setLoading(active, message = "") {
+  busy = active;
+
+  buttons.forEach(button => {
+    button.disabled = active;
+  });
+
+  loginBtn.innerHTML = active
+    ? '<span class="spinner"></span>' + message
+    : "Log In ➜";
+}
+
+
+/* FRIENDLY ERROR MESSAGES */
+function friendlyError(error) {
+  const code = error?.code || "";
+
+  if (
+    code === "auth/api-key-not-valid" ||
+    code === "auth/invalid-api-key"
+  ) {
+    return "Firebase API key invalid hai. Firebase Project Settings mein Web API key aur API restrictions check karo.";
+  }
+
+  if (code === "auth/unauthorized-domain") {
+    return "Website domain Firebase Authentication mein authorized nahi hai.";
+  }
+
+  if (code === "auth/operation-not-allowed") {
+    return "Firebase Console mein ye login method enable nahi hai.";
+  }
+
+  if ([
+    "auth/invalid-credential",
+    "auth/wrong-password",
+    "auth/user-not-found",
+    "auth/invalid-login-credentials"
+  ].includes(code)) {
+    return "Incorrect email or password. Please try again.";
+  }
+
+  if (code === "auth/email-already-in-use") {
+    return "This email is already registered. Please log in.";
+  }
+
+  if (code === "auth/weak-password") {
+    return "Password must be at least 6 characters.";
+  }
+
+  if (code === "auth/invalid-email") {
+    return "Please enter a valid email address.";
+  }
+
+  if (code === "auth/too-many-requests") {
+    return "Too many attempts. Please try again later.";
+  }
+
+  if (code === "auth/network-request-failed") {
+    return "Please check your internet connection.";
+  }
+
+  if (code === "auth/popup-closed-by-user") {
+    return "Google sign-in was cancelled. Please try again.";
+  }
+
+  if (code === "auth/account-exists-with-different-credential") {
+    return "This email already uses another login method. Try that method.";
+  }
+
+  return "Firebase error: " + (code || "Unknown error");
+}
+
+
+/* HOME PAGE */
+function goHome() {
+  window.location.replace(
+    new URL("./index.html", window.location.href).href
   );
+}
+
+
+/* EMAIL VALIDATION */
+function validEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+
+/* SHOW / HIDE PASSWORD */
+document.getElementById("togglePassword")
+  .addEventListener("click", () => {
+
+    const password = document.getElementById("password");
+    const show = password.type === "password";
+
+    password.type = show ? "text" : "password";
+
+    document.getElementById("togglePassword")
+      .setAttribute(
+        "aria-label",
+        show ? "Hide password" : "Show password"
+      );
 });
 
-    onAuthStateChanged(auth, (user) => {
+
+/* EMAIL LOGIN */
+document.getElementById("loginForm")
+  .addEventListener("submit", async event => {
+
+    event.preventDefault();
+
+    if (busy) return;
+
+    hideAlert();
+
+    const email =
+      document.getElementById("email").value.trim();
+
+    const password =
+      document.getElementById("password").value;
+
+    if (!validEmail(email)) {
+      showAlert("Please enter a valid email address.");
+      return;
+    }
+
+    if (!password) {
+      showAlert("Please enter your password.");
+      return;
+    }
+
+    setLoading(true, "Logging in...");
+
+    try {
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      goHome();
+
+    } catch (error) {
+      console.error("Email login error:", error.code, error.message);
+      showAlert(friendlyError(error));
+
+    } finally {
+      setLoading(false);
+    }
+});
+
+
+/* CREATE ACCOUNT */
+async function createAccount() {
+  if (busy) return;
+
+  hideAlert();
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  if (!validEmail(email)) {
+    showAlert("Please enter a valid email address.");
+    return;
+  }
+
+  if (password.length < 6) {
+    showAlert("Password must be at least 6 characters.");
+    return;
+  }
+
+  setLoading(true, "Creating account...");
+
+  try {
+    await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    showAlert(
+      "Account created successfully. Opening Kids Teacher...",
+      "success"
+    );
+
+    setTimeout(goHome, 500);
+
+  } catch (error) {
+    console.error("Create account error:", error.code, error.message);
+    showAlert(friendlyError(error));
+
+  } finally {
+    setLoading(false);
+  }
+}
+
+document.getElementById("createBtn")
+  .addEventListener("click", createAccount);
+
+document.getElementById("createTextBtn")
+  .addEventListener("click", createAccount);
+
+
+/* GOOGLE LOGIN */
+document.getElementById("googleBtn")
+  .addEventListener("click", async () => {
+
+    if (busy) return;
+
+    hideAlert();
+    setLoading(true, "Opening Google...");
+
+    try {
+      await setPersistence(auth, browserLocalPersistence);
+
+      const provider = new GoogleAuthProvider();
+
+      provider.setCustomParameters({
+        prompt: "select_account"
+      });
+
+      await signInWithRedirect(auth, provider);
+
+    } catch (error) {
+      console.error("Google Login Error:", error.code, error.message);
+      setLoading(false);
+      showAlert(friendlyError(error));
+    }
+});
+
+
+/* FORGOT PASSWORD */
+document.getElementById("forgotBtn")
+  .addEventListener("click", async () => {
+
+    if (busy) return;
+
+    hideAlert();
+
+    const email =
+      document.getElementById("email").value.trim();
+
+    if (!validEmail(email)) {
+      showAlert("Enter your email address above first.");
+      return;
+    }
+
+    setLoading(true, "Sending reset email...");
+
+    try {
+      await sendPasswordResetEmail(auth, email);
+
+      showAlert(
+        "If an account exists for this email, password reset instructions will be sent.",
+        "success"
+      );
+
+    } catch (error) {
+      console.error("Password reset error:", error.code, error.message);
+      showAlert(friendlyError(error));
+
+    } finally {
+      setLoading(false);
+    }
+});
+
+
+/* SAVE LOGIN SESSION + GOOGLE REDIRECT RESULT */
+async function initializeAuth() {
+  try {
+    await setPersistence(auth, browserLocalPersistence);
+
+    const result = await getRedirectResult(auth);
+
+    if (result?.user) {
+      goHome();
+      return;
+    }
+
+    onAuthStateChanged(auth, user => {
       if (user) {
-        window.location.href = "index.html";
+        goHome();
       }
     });
 
-    window.togglePasswordVisibility = function() {
-      const passwordInput = document.getElementById('password');
-      passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
-    }
+  } catch (error) {
+    console.error(
+      "Firebase initialization error:",
+      error.code,
+      error.message
+    );
 
-    function showAlert(message, type = 'error') {
-      const alertBox = document.getElementById('alertBox');
-      alertBox.textContent = message;
-      alertBox.className = type;
-      alertBox.style.display = 'block';
-    }
+    showAlert(friendlyError(error));
+  }
+}
 
-    function hideAlert() {
-      const alertBox = document.getElementById('alertBox');
-      alertBox.style.display = 'none';
-    }
+initializeAuth();
 
-    function setLoading(isLoading, text = '') {
-      const submitBtn = document.getElementById('submitBtn');
-      const signupBtn = document.getElementById('signupBtn');
-      const googleBtn = document.getElementById('googleBtn');
-      
-      submitBtn.disabled = isLoading;
-      signupBtn.disabled = isLoading;
-      googleBtn.disabled = isLoading;
-      if (isLoading) {
-        submitBtn.textContent = text;
-      } else {
-        submitBtn.textContent = "Log In ➔";
-      }
-    }
-
-    function getFriendlyErrorMessage(errorCode) {
-      switch (errorCode) {
-        case 'auth/invalid-email': return "Please enter a valid email address.";
-        case 'auth/user-not-found':
-        case 'auth/wrong-password':
-        case 'auth/invalid-credential': return "Incorrect email or password. Please try again.";
-        case 'auth/email-already-in-use': return "This email is already registered. Please log in.";
-        case 'auth/weak-password': return "Password must be at least 6 characters.";
-        case 'auth/too-many-requests': return "Too many unsuccessful attempts. Please try again later.";
-        case 'auth/network-request-failed': return "Please check your internet connection.";
-        default: return "An error occurred. Please try again.";
-      }
-    }
-
-    window.handleFormSubmit = async function(event) {
-      event.preventDefault();
-      hideAlert();
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
-
-      if (!email || !password) {
-        showAlert("Please fill in all fields.");
-        return;
-      }
-
-      setLoading(true, "Logging in...");
-      try {
-        await signInWithEmailAndPassword(auth, email, password);
-        window.location.href = "index.html";
-      } catch (error) {
-        setLoading(false);
-        showAlert(getFriendlyErrorMessage(error.code));
-      }
-    }
-
-    window.handleCreateAccount = async function() {
-      hideAlert();
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
-
-      if (!email || !password) {
-        showAlert("Please enter email and password to create an account.");
-        return;
-      }
-
-      setLoading(true, "Creating account...");
-      try {
-        await createUserWithEmailAndPassword(auth, email, password);
-        window.location.href = "index.html";
-      } catch (error) {
-        setLoading(false);
-        showAlert(getFriendlyErrorMessage(error.code));
-      }
-    }
-
-    // Google Sign In using Redirect (Works smoothly on Android Mobile & GitHub Pages)
-    window.handleGoogleLogin = async function() {
-      hideAlert();
-      setLoading(true, "Redirecting to Google...");
-      const provider = new GoogleAuthProvider();
-      try {
-        await signInWithRedirect(auth, provider);
-      } catch (error) {
-  setLoading(false);
-  console.error("Google Login Error:", error.code, error.message);
-  showAlert("Google Login Error: " + (error.code || error.message || "Unknown error"));
-      }
-    }
-
-    window.handleForgotPassword = async function() {
-      hideAlert();
-      const email = document.getElementById('email').value.trim();
-      if (!email) {
-        showAlert("Please enter your email address above first.");
-        return;
-      }
-
-      setLoading(true, "Sending reset email...");
-      try {
-        await sendPasswordResetEmail(auth, email);
-        setLoading(false);
-        showAlert("Password reset email sent! Check your inbox.", "success");
-      } catch (error) {
-        setLoading(false);
-        showAlert(getFriendlyErrorMessage(error.code));
-      }
-    }
-  </script>
+</script>
 </body>
 </html>
