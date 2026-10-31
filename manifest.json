@@ -2,9 +2,10 @@
   "name": "Kids Teacher",
   "short_name": "KidsTeacher",
   "start_url": "index.html",
-  "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#f97316",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#faf08a",
+  "theme_color": "#faf08a",
   "icons": [
     {
       "src": "welcome_bg.png",
