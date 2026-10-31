@@ -471,8 +471,9 @@
       try {
         await signInWithRedirect(auth, provider);
       } catch (error) {
-        setLoading(false);
-        showAlert(getFriendlyErrorMessage(error.code));
+  setLoading(false);
+  console.error("Google Login Error:", error.code, error.message);
+  showAlert("Google Login Error: " + (error.code || error.message || "Unknown error"));
       }
     }
 
