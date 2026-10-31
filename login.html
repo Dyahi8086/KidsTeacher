@@ -405,7 +405,7 @@
       .then((result) => {
         if (result && result.user) {
           const savedAge = localStorage.getItem('kidsAgeGroup');
-          window.location.replace(!savedAge ? "age-select.html" : "index.html");
+          window.location.replace(!savedAge ? "age-select.html" : "index-home.html");
         } else {
           loader.style.opacity = '0';
           setTimeout(() => loader.style.display = 'none', 300);
@@ -422,7 +422,7 @@
         if (!savedAge) {
           window.location.replace("age-select.html");
         } else {
-          window.location.replace("index.html");
+          window.location.replace("index-home.html");
         }
       } else {
         loader.style.opacity = '0';
@@ -491,7 +491,7 @@
       try {
         await signInWithEmailAndPassword(auth, email, password);
         const savedAge = localStorage.getItem('kidsAgeGroup');
-        window.location.replace(!savedAge ? "age-select.html" : "index.html");
+        window.location.replace(!savedAge ? "age-select.html" : "index-home.html");
       } catch (error) {
         setLoading(false);
         showAlert(getFriendlyErrorMessage(error.code));
@@ -527,7 +527,7 @@
         const result = await signInWithPopup(auth, provider);
         if (result && result.user) {
           const savedAge = localStorage.getItem('kidsAgeGroup');
-          window.location.replace(!savedAge ? "age-select.html" : "index.html");
+          window.location.replace(!savedAge ? "age-select.html" : "index-home.html");
         }
       } catch (error) {
         if (error.code === 'auth/popup-blocked' || error.code === 'auth/popup-closed-by-user') {
