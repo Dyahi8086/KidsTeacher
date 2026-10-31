@@ -331,6 +331,7 @@
       createUserWithEmailAndPassword, 
       sendPasswordResetEmail, 
       GoogleAuthProvider, 
+      signInWithPopup, 
       signInWithRedirect,
       getRedirectResult,
       onAuthStateChanged,
@@ -355,20 +356,18 @@
       console.error("Persistence error:", error);
     });
 
-    // Handle Google Redirect Result -> Redirect to age-select.html
     getRedirectResult(auth)
       .then((result) => {
-        if (result) {
+        if (result && result.user) {
           window.location.href = "age-select.html";
         }
       })
       .catch((error) => {
-        showAlert(getFriendlyErrorMessage(error.code));
+        console.error("Redirect error:", error);
       });
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // If already logged in, check if age is selected; if not go to age-select, else index
         const savedAge = localStorage.getItem('kidsAgeGroup');
         if (!savedAge) {
           window.location.href = "age-select.html";
@@ -467,13 +466,25 @@
 
     window.handleGoogleLogin = async function() {
       hideAlert();
-      setLoading(true, "Redirecting to Google...");
+      setLoading(true, "Signing in with Google...");
       const provider = new GoogleAuthProvider();
       try {
-        await signInWithRedirect(auth, provider);
+        const result = await signInWithPopup(auth, provider);
+        if (result && result.user) {
+          window.location.href = "age-select.html";
+        }
       } catch (error) {
-        setLoading(false);
-        showAlert(getFriendlyErrorMessage(error.code));
+        if (error.code === 'auth/popup-blocked' || error.code === 'auth/popup-closed-by-user') {
+          try {
+            await signInWithRedirect(auth, provider);
+          } catch (redirectError) {
+            setLoading(false);
+            showAlert(getFriendlyErrorMessage(redirectError.code));
+          }
+        } else {
+          setLoading(false);
+          showAlert(getFriendlyErrorMessage(error.code));
+        }
       }
     }
 
