@@ -3,119 +3,145 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Kids Teacher - Main Dashboard</title>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Fredoka:wght@600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  <title>Kids Teacher - Welcome</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Quicksand', sans-serif;
+      font-family: 'Fredoka', 'Quicksand', sans-serif;
     }
 
     body {
-      min-height: 100dvh;
-      background: #fce8d5;
+      min-height: 100vh;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      padding: 20px;
+      background: #0f172a;
+      padding: 0;
     }
 
-    .container {
+    .app-screen {
       width: 100%;
       max-width: 420px;
-      text-align: center;
-      margin-top: 40px;
+      height: 100vh;
+      max-height: 850px;
+      position: relative;
+      overflow: hidden;
+      background-color: #fef08a;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
     }
 
-    .welcome-title {
-      font-family: 'Fredoka', 'Baloo 2', cursive, sans-serif;
-      font-size: 32px;
-      color: #1e293b;
+    .bg-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .bottom-wrapper {
+      position: relative;
+      width: 100%;
+      padding: 24px 20px 32px 20px;
+      text-align: center;
+      z-index: 10;
+      background: linear-gradient(180deg, rgba(255, 248, 240, 0) 0%, rgba(255, 248, 240, 0.92) 25%, #fff8f0 100%);
+      border-radius: 35px 35px 0 0;
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-title {
+      font-size: 26px;
+      color: #9a3412;
+      font-weight: 700;
+      line-height: 1.2;
       margin-bottom: 8px;
     }
 
-    .welcome-subtitle {
+    .hero-subtitle {
       font-size: 14px;
       color: #475569;
-      font-weight: 700;
-      margin-bottom: 30px;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(16px);
-      border-radius: 28px;
-      padding: 24px;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-      border: 1.5px solid rgba(255,255,255,0.8);
-      margin-bottom: 20px;
-      text-align: left;
-    }
-
-    .card h3 {
-      font-family: 'Baloo 2', cursive;
-      font-size: 20px;
-      color: #1e293b;
-      margin-bottom: 8px;
-    }
-
-    .card p {
-      font-size: 13.5px;
-      color: #475569;
       font-weight: 600;
+      margin-bottom: 20px;
     }
 
-    /* Logout Button Style */
-    .btn-logout {
+    .btn-start {
       width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, #ef4444, #dc2626);
+      padding: 15px;
+      background: linear-gradient(135deg, #ff7e33, #f97316);
       color: #ffffff;
       border: none;
-      border-radius: 18px;
-      font-size: 16px;
-      font-family: 'Baloo 2', cursive, sans-serif;
+      border-radius: 22px;
+      font-size: 18px;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 5px 0 #991b1b, 0 8px 15px rgba(239, 68, 68, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 5px 0 #c2410c, 0 10px 18px rgba(249, 115, 22, 0.4);
+      text-decoration: none;
       transition: transform 0.1s ease;
-      margin-top: 20px;
     }
 
-    .btn-logout:active {
+    .btn-start:active {
       transform: translateY(3px);
-      box-shadow: 0 2px 0 #991b1b;
+      box-shadow: 0 2px 0 #c2410c;
+    }
+
+    .dots-container {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 16px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: #fdba74;
+      border-radius: 50%;
+    }
+
+    .dot.active {
+      width: 20px;
+      background: #f97316;
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1 class="welcome-title">Kids Teacher Hub 🌟</h1>
-    <p class="welcome-subtitle">Welcome to your child's learning dashboard!</p>
+  <div class="app-screen">
+    <img src="welcome_bg.png" alt="Welcome Background" class="bg-image">
 
-    <div class="card">
-      <h3>📚 Learning Modules</h3>
-      <p>Alphabets, Numbers, Rhymes, and Interactive Quizzes are ready here for your kids.</p>
+    <div class="bottom-wrapper">
+      <h1 class="hero-title">Learning Is an<br>Adventure!</h1>
+      <p class="hero-subtitle">Explore, discover and grow every day.</p>
+
+      <a href="login.html" class="btn-start">
+        Let's Start ➔
+      </a>
+
+      <div class="dots-container">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
     </div>
-
-    <div class="card">
-      <h3>🔒 Parent Controls</h3>
-      <p>You are successfully logged in and authenticated securely via Firebase.</p>
-    </div>
-
-    <!-- Logout Button -->
-    <button type="button" class="btn-logout" onclick="logoutUser()">Log Out 🚪</button>
   </div>
 
-  <!-- Firebase Authentication & Security Script -->
+  <!-- Optional: Auto redirect if already logged in -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    
     const firebaseConfig = {
       apiKey: "AIzaSyDidkZxQGLjJO4_Ido5FI6Q0s9vay0E3mA",
       authDomain: "kids-teacher-4387e.firebaseapp.com",
@@ -125,25 +151,17 @@
       appId: "1:420221167346:web:da7ac80acdfd52339d526b",
       measurementId: "G-VJVS2ZMNLY"
     };
-
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    // Security Check: Agar user logged-in nahi hai, toh automatic login.html par bhej do
+    // Uncomment below if you want logged-in users to bypass welcome page directly to dashboard/main features
+    /*
     onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        window.location.href = "login.html";
+      if (user) {
+        // window.location.href = "dashboard.html";
       }
     });
-
-    // Global Logout Function
-    window.logoutUser = function() {
-      signOut(auth).then(() => {
-        window.location.href = "login.html";
-      }).catch((error) => {
-        console.error("Sign out error", error);
-      });
-    }
+    */
   </script>
 </body>
 </html>
