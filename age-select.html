@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Select Age - Kids Teacher</title>
+  <title>Select Age Group - Kids Teacher</title>
+  <link rel="manifest" href="manifest.json">
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Fredoka:wght@600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -17,126 +18,113 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-image: url('kids_teacher_login_background.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-color: #fce8d5;
+      background: linear-gradient(135deg, #fef08a, #fed7aa, #fbcfe8);
       padding: 16px;
       font-family: 'Quicksand', sans-serif;
     }
 
-    .age-card {
-      width: min(92%, 410px);
-      background: rgba(255, 255, 255, 0.45);
-      backdrop-filter: blur(24px) saturate(190%);
-      -webkit-backdrop-filter: blur(24px) saturate(190%);
+    .card {
+      width: min(92%, 420px);
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-radius: 36px;
       padding: 30px 22px;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.14), inset 0 1.5px 3px rgba(255, 255, 255, 0.95);
-      border: 1.5px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.8);
       text-align: center;
     }
 
-    .app-title {
-      font-family: 'Fredoka', 'Baloo 2', cursive, sans-serif;
+    .title {
+      font-family: 'Baloo 2', cursive;
       font-size: 28px;
-      font-weight: 700;
-      color: #1e293b;
+      color: #9a3412;
       margin-bottom: 6px;
     }
 
-    .app-subtitle {
-      font-size: 13.5px;
+    .subtitle {
+      font-size: 14px;
       color: #475569;
       font-weight: 700;
       margin-bottom: 24px;
     }
 
-    .age-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-bottom: 20px;
+    .age-options {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
     }
 
     .age-btn {
+      width: 100%;
       padding: 16px;
-      background: rgba(255, 255, 255, 0.8);
-      border: 2px solid rgba(226, 232, 240, 0.9);
+      background: rgba(255, 255, 255, 0.85);
+      border: 2px solid #fed7aa;
       border-radius: 20px;
-      font-family: 'Baloo 2', cursive, sans-serif;
       font-size: 18px;
+      font-family: 'Baloo 2', cursive;
       font-weight: 700;
       color: #1e293b;
       cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-
-    .age-btn:hover, .age-btn.selected {
-      background: linear-gradient(135deg, #ff7e5f, #f97316);
-      color: #ffffff;
-      border-color: #f97316;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(249, 115, 22, 0.35);
-    }
-
-    .btn-continue {
-      width: 100%;
-      padding: 15px;
-      background: linear-gradient(135deg, #34d399, #059669);
-      color: #ffffff;
-      border: none;
-      border-radius: 20px;
-      font-size: 17px;
-      font-family: 'Baloo 2', cursive, sans-serif;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 6px 0 #047857, 0 10px 20px rgba(5, 150, 105, 0.3);
+      box-shadow: 0 6px 0 #fdba74;
       transition: transform 0.1s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
     }
 
-    .btn-continue:active {
+    .age-btn:active {
       transform: translateY(3px);
-      box-shadow: 0 2px 0 #047857;
+      box-shadow: 0 2px 0 #fdba74;
+    }
+
+    .age-btn:hover {
+      background: #fff;
+      border-color: #f97316;
+      color: #f97316;
     }
   </style>
 </head>
 <body>
 
-  <div class="age-card">
-    <h1 class="app-title">How old is your kid?</h1>
-    <p class="app-subtitle">Select age group for personalized learning</p>
+  <div class="card">
+    <h1 class="title">Select Age Group 🎈</h1>
+    <p class="subtitle">Choose your little learner's age</p>
 
-    <div class="age-grid">
-      <button class="age-btn" onclick="selectAge('2-3', this)">2 - 3 Years</button>
-      <button class="age-btn" onclick="selectAge('3-4', this)">3 - 4 Years</button>
-      <button class="age-btn" onclick="selectAge('4-5', this)">4 - 5 Years</button>
-      <button class="age-btn" onclick="selectAge('5-7', this)">5 - 7 Years</button>
+    <div class="age-options">
+      <button class="age-btn" onclick="selectAge('2-4')">🧸 2 - 4 Years (Toddlers)</button>
+      <button class="age-btn" onclick="selectAge('4-6')">🎨 4 - 6 Years (Preschool)</button>
+      <button class="age-btn" onclick="selectAge('6-8')">🚀 6 - 8 Years (Juniors)</button>
     </div>
-
-    <button type="button" class="btn-continue" onclick="proceedToDashboard()">Start Learning 🚀</button>
   </div>
 
-  <script>
-    let selectedAgeGroup = "";
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-    function selectAge(age, element) {
-      // Remove selected class from all buttons
-      document.querySelectorAll('.age-btn').forEach(btn => btn.classList.remove('selected'));
-      // Add to clicked button
-      element.classList.add('selected');
-      selectedAgeGroup = age;
-      localStorage.setItem('kidsAgeGroup', age);
-    }
+    const firebaseConfig = {
+      apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
+      authDomain: "kids-teacher-4387e.firebaseapp.com",
+      projectId: "kids-teacher-4387e",
+      storageBucket: "kids-teacher-4387e.firebasestorage.app",
+      messagingSenderId: "420221167346",
+      appId: "1:420221167346:web:da7ac80acdfd52339d526b",
+      measurementId: "G-VJVS2ZMNLY"
+    };
 
-    function proceedToDashboard() {
-      if (!selectedAgeGroup) {
-        alert("Please select an age group first!");
-        return;
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.replace("login.html");
       }
-      window.location.href = "index.html";
+    });
+
+    window.selectAge = function(ageGroup) {
+      localStorage.setItem('kidsAgeGroup', ageGroup);
+      window.location.replace("index-home.html");
     }
   </script>
 </body>
