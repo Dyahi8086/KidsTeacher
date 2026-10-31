@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Kids Teacher - Welcome</title>
+  <link rel="manifest" href="manifest.json">
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -20,6 +21,7 @@
       align-items: center;
       background: #0f172a;
       padding: 0;
+      overflow: hidden;
     }
 
     .app-screen {
@@ -29,7 +31,7 @@
       max-height: 850px;
       position: relative;
       overflow: hidden;
-      background-color: #fef08a;
+      background-color: #faf08a;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -74,7 +76,7 @@
     .btn-start {
       width: 100%;
       padding: 15px;
-      background: linear-gradient(135deg, #ff7e33, #f97316);
+      background: linear-gradient(135deg, #ff7e5f, #f97316);
       color: #ffffff;
       border: none;
       border-radius: 22px;
@@ -85,7 +87,7 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      box-shadow: 0 5px 0 #c2410c, 0 10px 18px rgba(249, 115, 22, 0.4);
+      box-shadow: 0 6px 0 #c2410c, 0 10px 20px rgba(249, 115, 22, 0.35);
       text-decoration: none;
       transition: transform 0.1s ease;
     }
@@ -94,46 +96,20 @@
       transform: translateY(3px);
       box-shadow: 0 2px 0 #c2410c;
     }
-
-    .dots-container {
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-      margin-top: 16px;
-    }
-
-    .dot {
-      width: 8px;
-      height: 8px;
-      background: #fdba74;
-      border-radius: 50%;
-    }
-
-    .dot.active {
-      width: 20px;
-      background: #f97316;
-      border-radius: 10px;
-    }
   </style>
 </head>
 <body>
 
   <div class="app-screen">
-    <img src="welcome_bg.png" alt="Welcome Background" class="bg-image">
-
+    <img src="welcome_bg.png" alt="Kids Teacher" class="bg-image">
+    
     <div class="bottom-wrapper">
-      <h1 class="hero-title">Learning Is an<br>Adventure!</h1>
-      <p class="hero-subtitle">Explore, discover and grow every day.</p>
-
+      <h1 class="hero-title">Welcome to Kids Teacher! 🌟</h1>
+      <p class="hero-subtitle">A magical learning journey for your little ones</p>
+      
       <a href="login.html" class="btn-start">
-        Let's Start ➔
+        Let's Start 🚀
       </a>
-
-      <div class="dots-container">
-        <div class="dot active"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-      </div>
     </div>
   </div>
 
