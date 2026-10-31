@@ -1,161 +1,141 @@
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { 
-      getAuth, 
-      signInWithEmailAndPassword, 
-      createUserWithEmailAndPassword, 
-      sendPasswordResetEmail, 
-      GoogleAuthProvider, 
-      signInWithPopup, 
-      onAuthStateChanged,
-      setPersistence,
-      browserLocalPersistence
-    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyDidkZxQGLjJO4_Ido5FI6Q0s9vay0E3mA",
-      authDomain: "kids-teacher-4387e.firebaseapp.com",
-      projectId: "kids-teacher-4387e",
-      storageBucket: "kids-teacher-4387e.firebasestorage.app",
-      messagingSenderId: "420221167346",
-      appId: "1:420221167346:web:da7ac80acdfd52339d526b",
-      measurementId: "G-VJVS2ZMNLY"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    setPersistence(auth, browserLocalPersistence).catch((error) => {
-      console.error("Persistence error:", error);
-    });
-
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        window.location.href = "index.html";
-      }
-    });
-
-    window.togglePasswordVisibility = function() {
-      const passwordInput = document.getElementById('password');
-      passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Kids Teacher - Welcome</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Fredoka', 'Quicksand', sans-serif;
     }
 
-    function showAlert(message, type = 'error') {
-      const alertBox = document.getElementById('alertBox');
-      alertBox.textContent = message;
-      alertBox.className = type;
-      alertBox.style.display = 'block';
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #0f172a;
+      padding: 0;
     }
 
-    function hideAlert() {
-      const alertBox = document.getElementById('alertBox');
-      alertBox.style.display = 'none';
+    .app-screen {
+      width: 100%;
+      max-width: 420px;
+      height: 100vh;
+      max-height: 850px;
+      position: relative;
+      overflow: hidden;
+      background-color: #fef08a;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
     }
 
-    function setLoading(isLoading, text = '') {
-      const submitBtn = document.getElementById('submitBtn');
-      const signupBtn = document.getElementById('signupBtn');
-      const googleBtn = document.getElementById('googleBtn');
-      
-      submitBtn.disabled = isLoading;
-      signupBtn.disabled = isLoading;
-      googleBtn.disabled = isLoading;
-      if (isLoading) {
-        submitBtn.textContent = text;
-      } else {
-        submitBtn.textContent = "Log In ➔";
-      }
+    .bg-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
     }
 
-    function getFriendlyErrorMessage(errorCode) {
-      switch (errorCode) {
-        case 'auth/invalid-email': return "Please enter a valid email address.";
-        case 'auth/user-not-found':
-        case 'auth/wrong-password':
-        case 'auth/invalid-credential': return "Incorrect email or password. Please try again.";
-        case 'auth/email-already-in-use': return "This email is already registered. Please log in.";
-        case 'auth/weak-password': return "Password must be at least 6 characters.";
-        case 'auth/too-many-requests': return "Too many unsuccessful attempts. Please try again later.";
-        case 'auth/network-request-failed': return "Please check your internet connection.";
-        case 'auth/popup-closed-by-user': return "Sign-in cancelled. Please try again.";
-        default: return "An error occurred. Please try again.";
-      }
+    .bottom-wrapper {
+      position: relative;
+      width: 100%;
+      padding: 24px 20px 32px 20px;
+      text-align: center;
+      z-index: 10;
+      background: linear-gradient(180deg, rgba(255, 248, 240, 0) 0%, rgba(255, 248, 240, 0.92) 25%, #fff8f0 100%);
+      border-radius: 35px 35px 0 0;
+      backdrop-filter: blur(4px);
     }
 
-    window.handleFormSubmit = async function(event) {
-      event.preventDefault();
-      hideAlert();
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
-
-      if (!email || !password) {
-        showAlert("Please fill in all fields.");
-        return;
-      }
-
-      setLoading(true, "Logging in...");
-      try {
-        await signInWithEmailAndPassword(auth, email, password);
-        window.location.href = "index.html";
-      } catch (error) {
-        setLoading(false);
-        showAlert(getFriendlyErrorMessage(error.code));
-      }
+    .hero-title {
+      font-size: 26px;
+      color: #9a3412;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 8px;
     }
 
-    window.handleCreateAccount = async function() {
-      hideAlert();
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
-
-      if (!email || !password) {
-        showAlert("Please enter email and password to create an account.");
-        return;
-      }
-
-      setLoading(true, "Creating account...");
-      try {
-        await createUserWithEmailAndPassword(auth, email, password);
-        window.location.href = "index.html";
-      } catch (error) {
-        setLoading(false);
-        showAlert(getFriendlyErrorMessage(error.code));
-      }
+    .hero-subtitle {
+      font-size: 14px;
+      color: #475569;
+      font-weight: 600;
+      margin-bottom: 20px;
     }
 
-    // Google Sign In using Popup (Best for mobile Chrome & automatic account creation)
-    window.handleGoogleLogin = async function() {
-      hideAlert();
-      setLoading(true, "Signing in with Google...");
-      const provider = new GoogleAuthProvider();
-      try {
-        await signInWithPopup(auth, provider);
-        window.location.href = "index.html";
-      } catch (error) {
-        setLoading(false);
-        if (error.code !== 'auth/popup-closed-by-user') {
-          showAlert(getFriendlyErrorMessage(error.code));
-        }
-      }
+    .btn-start {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #ff7e33, #f97316);
+      color: #ffffff;
+      border: none;
+      border-radius: 22px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 5px 0 #c2410c, 0 10px 18px rgba(249, 115, 22, 0.4);
+      text-decoration: none;
+      transition: transform 0.1s ease;
     }
 
-    window.handleForgotPassword = async function() {
-      hideAlert();
-      const email = document.getElementById('email').value.trim();
-      if (!email) {
-        showAlert("Please enter your email address above first.");
-        return;
-      }
-
-      setLoading(true, "Sending reset email...");
-      try {
-        await sendPasswordResetEmail(auth, email);
-        setLoading(false);
-        showAlert("Password reset email sent! Check your inbox.", "success");
-      } catch (error) {
-        setLoading(false);
-        showAlert(getFriendlyErrorMessage(error.code));
-      }
+    .btn-start:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 #c2410c;
     }
-  </script>
-  
+
+    .dots-container {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 16px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: #fdba74;
+      border-radius: 50%;
+    }
+
+    .dot.active {
+      width: 20px;
+      background: #f97316;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-screen">
+    <img src="welcome_bg.png" alt="Welcome Background" class="bg-image">
+
+    <div class="bottom-wrapper">
+      <h1 class="hero-title">Learning Is an<br>Adventure!</h1>
+      <p class="hero-subtitle">Explore, discover and grow every day.</p>
+
+      <a href="login.html" class="btn-start">
+        Let's Start ➔
+      </a>
+
+      <div class="dots-container">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
