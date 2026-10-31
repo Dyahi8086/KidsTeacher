@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Kids Teacher - Dashboard</title>
+  <link rel="manifest" href="manifest.json">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Fredoka:wght@600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    body {
+      min-height: 100dvh;
+      background: linear-gradient(135deg, #fef08a, #fed7aa, #fbcfe8);
+      background-size: cover;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .dashboard-container {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-bottom: 24px;
+    }
+
+    /* Top Header */
+    .header-card {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(16px);
+      border-radius: 28px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .welcome-text h2 {
+      font-family: 'Baloo 2', cursive;
+      font-size: 22px;
+      color: #9a3412;
+      line-height: 1.1;
+    }
+
+    .welcome-text p {
+      font-size: 13px;
+      color: #475569;
+      font-weight: 700;
+    }
+
+    .logout-btn {
+      background: #fee2e2;
+      color: #dc2626;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      box-shadow: 0 4px 0 #fca5a5;
+    }
+    .logout-btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #fca5a5;
+    }
+
+    /* Banner Card */
+    .banner-card {
+      background: linear-gradient(135deg, #ff7e5f, #f97316);
+      border-radius: 28px;
+      padding: 20px;
+      color: white;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(249, 115, 22, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .banner-card h1 {
+      font-family: 'Baloo 2', cursive;
+      font-size: 26px;
+      margin-bottom: 4px;
+    }
+
+    .banner-card p {
+      font-size: 14px;
+      font-weight: 600;
+      opacity: 0.95;
+    }
+
+    /* Grid Categories */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .menu-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 20px 14px;
+      text-align: center;
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.1s ease;
+    }
+
+    .menu-card:active {
+      transform: scale(0.96);
+    }
+
+    .menu-icon {
+      font-size: 38px;
+      margin-bottom: 8px;
+    }
+
+    .menu-title {
+      font-family: 'Baloo 2', cursive;
+      font-size: 18px;
+      color: #1e293b;
+      margin-bottom: 2px;
+    }
+
+    .menu-desc {
+      font-size: 12px;
+      color: #64748b;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-container">
+    
+    <!-- Top Bar -->
+    <div class="header-card">
+      <div class="welcome-text">
+        <h2>Hello, Bachha! 👋</h2>
+        <p>Let's learn & play today</p>
+      </div>
+      <button class="logout-btn" onclick="handleLogout()">Log Out</button>
+    </div>
+
+    <!-- Banner -->
+    <div class="banner-card">
+      <h1>EduSpark Hub 🌟</h1>
+      <p>Choose an activity to start your magic journey!</p>
+    </div>
+
+    <!-- Menu Grid -->
+    <div class="menu-grid">
+      <a href="#" class="menu-card" onclick="alert('Alphabets section coming up!')">
+        <div class="menu-icon">🔤</div>
+        <div class="menu-title">Alphabets</div>
+        <div class="menu-desc">Learn A to Z</div>
+      </a>
+
+      <a href="#" class="menu-card" onclick="alert('Numbers section coming up!')">
+        <div class="menu-icon">🔢</div>
+        <div class="menu-title">Numbers</div>
+        <div class="menu-desc">Count 1 to 100</div>
+      </a>
+
+      <a href="#" class="menu-card" onclick="alert('Rhymes section coming up!')">
+        <div class="menu-icon">🎵</div>
+        <div class="menu-title">Rhymes</div>
+        <div class="menu-desc">Sing & Enjoy</div>
+      </a>
+
+      <a href="#" class="menu-card" onclick="alert('Quiz section coming up!')">
+        <div class="menu-icon">🎯</div>
+        <div class="menu-title">Mini Quiz</div>
+        <div class="menu-desc">Test your skills</div>
+      </a>
+    </div>
+
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
+      authDomain: "kids-teacher-4387e.firebaseapp.com",
+      projectId: "kids-teacher-4387e",
+      storageBucket: "kids-teacher-4387e.firebasestorage.app",
+      messagingSenderId: "420221167346",
+      appId: "1:420221167346:web:da7ac80acdfd52339d526b",
+      measurementId: "G-VJVS2ZMNLY"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Agar user logged-in nahi hai toh wapas login page par bhej do
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.replace("login.html");
+      }
+    });
+
+    window.handleLogout = async function() {
+      try {
+        await signOut(auth);
+        localStorage.removeItem('kidsAgeGroup');
+        window.location.replace("login.html");
+      } catch (error) {
+        console.error("Logout error:", error);
+      }
+    }
+  </script>
+</body>
+</html>
