@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Parents Login - Kids Teacher</title>
-  <!-- Google Fonts for Premium Typography -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Fredoka:wght@600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -32,9 +32,9 @@
       width: min(92%, 410px);
       max-height: 94vh;
       overflow-y: auto;
-      background: rgba(255, 255, 255, 0.45) !important; /* Higher Transparency */
-      backdrop-filter: blur(24px) saturate(190%) !important;
-      -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(24px) saturate(190%);
+      -webkit-backdrop-filter: blur(24px) saturate(190%);
       border-radius: 36px;
       padding: 28px 22px;
       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.14), inset 0 1.5px 3px rgba(255, 255, 255, 0.95);
@@ -48,7 +48,6 @@
       margin-bottom: 18px;
     }
 
-    /* Custom Real-looking 3D Star & Book Vector Graphic */
     .emblem-3d {
       width: 80px;
       height: 60px;
@@ -60,10 +59,9 @@
       filter: drop-shadow(0 8px 12px rgba(249, 115, 22, 0.25));
     }
 
-    /* Premium Rounded Header Font */
     .app-title {
       font-family: 'Fredoka', 'Baloo 2', cursive, sans-serif;
-      font-size: 34px;
+      font-size: 30px;
       font-weight: 700;
       color: #1e293b;
       line-height: 1.15;
@@ -76,6 +74,27 @@
       color: #334155;
       font-weight: 700;
       margin-top: 3px;
+    }
+
+    /* Alert / Status Messages */
+    #alertBox {
+      display: none;
+      padding: 10px 14px;
+      margin-bottom: 14px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: left;
+    }
+    #alertBox.error {
+      background: rgba(254, 226, 226, 0.9);
+      color: #b91c1c;
+      border: 1px solid #f87171;
+    }
+    #alertBox.success {
+      background: rgba(220, 252, 231, 0.9);
+      color: #15803d;
+      border: 1px solid #4ade80;
     }
 
     .form-group {
@@ -128,24 +147,31 @@
       color: #64748b;
     }
 
-    .forgot-container {
-      text-align: right;
+    .action-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-top: 2px;
       margin-bottom: 16px;
     }
 
-    .forgot-link {
-      font-size: 13px;
+    .forgot-link, .create-acc-link-btn {
+      font-size: 12.5px;
       color: #1e293b;
       text-decoration: none;
       font-weight: 700;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
     }
-
-    .forgot-link:hover {
+    .forgot-link:hover, .create-acc-link-btn:hover {
       text-decoration: underline;
+      color: #f97316;
     }
 
-    /* Orange Gradient Button */
+    /* Buttons */
     .btn-login {
       width: 100%;
       padding: 15px;
@@ -159,19 +185,36 @@
       cursor: pointer;
       box-shadow: 0 6px 0 #c2410c, 0 10px 20px rgba(249, 115, 22, 0.35);
       transition: transform 0.1s ease;
-      margin-bottom: 14px;
+      margin-bottom: 10px;
     }
 
-    .btn-login:active {
+    .btn-login:active, .btn-google:active {
       transform: translateY(3px);
       box-shadow: 0 2px 0 #c2410c;
+    }
+
+    .btn-signup-alt {
+      width: 100%;
+      padding: 11px;
+      background: rgba(255, 255, 255, 0.6);
+      color: #c2410c;
+      border: 2px dashed #f97316;
+      border-radius: 16px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-bottom: 14px;
+      transition: background 0.2s;
+    }
+    .btn-signup-alt:hover {
+      background: rgba(255, 255, 255, 0.9);
     }
 
     .divider {
       display: flex;
       align-items: center;
       text-align: center;
-      margin: 14px 0;
+      margin: 10px 0;
       color: #475569;
       font-size: 12px;
       font-weight: 700;
@@ -182,7 +225,6 @@
       flex: 1;
       border-bottom: 1.5px solid rgba(203, 213, 225, 0.8);
     }
-
     .divider::before { margin-right: 10px; }
     .divider::after { margin-left: 10px; }
 
@@ -202,13 +244,8 @@
       gap: 10px;
       box-shadow: 0 4px 0 #cbd5e1;
       transition: transform 0.1s ease;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       text-decoration: none;
-    }
-
-    .btn-google:active {
-      transform: translateY(2px);
-      box-shadow: 0 1px 0 #cbd5e1;
     }
 
     .create-account-text {
@@ -222,8 +259,12 @@
       color: #f97316;
       text-decoration: none;
       font-weight: 800;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 13.5px;
     }
-
     .create-account-link:hover {
       text-decoration: underline;
     }
@@ -233,30 +274,30 @@
 
   <div class="login-card">
     <div class="brand-header">
-      <!-- High Quality 3D Star & Book Graphic -->
       <div class="emblem-3d">
         <svg width="70" height="55" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- 3D Open Book Base -->
           <path d="M10 50 C30 40, 48 48, 50 55 C52 48, 70 40, 90 50 L90 25 C70 15, 52 22, 50 30 C48 22, 30 15, 10 25 Z" fill="#ff7e5f" />
           <path d="M14 47 C32 38, 48 45, 50 50 C52 45, 68 38, 86 47 L86 23 C68 15, 52 20, 50 27 C48 20, 32 15, 14 23 Z" fill="#ffffff" />
           <path d="M50 27 L50 50" stroke="#f97316" stroke-width="2" />
-          <!-- 3D Glowing Star on top -->
           <path d="M50 0 L54 10 L65 11 L57 18 L60 29 L50 23 L40 29 L43 18 L35 11 L46 10 Z" fill="#facc15" stroke="#eab308" stroke-width="1.5" />
-          <!-- Small sparkles -->
           <circle cx="25" cy="12" r="3" fill="#fcd34d" />
           <circle cx="75" cy="15" r="2.5" fill="#fcd34d" />
         </svg>
       </div>
 
-      <h1 class="app-title">Parents Login</h1>
-      <p class="app-subtitle">Manage your child’s learning journey</p>
+      <h1 class="app-title">Welcome Back!</h1>
+      <p class="app-subtitle">Manage your child's learning journey</p>
     </div>
 
-    <form id="loginForm" onsubmit="handleLogin(event)">
+    <!-- Status Alert Box -->
+    <div id="alertBox"></div>
+
+    <!-- Login Form -->
+    <form id="authForm" onsubmit="handleFormSubmit(event)">
       <div class="form-group">
         <div class="input-box-wrapper">
           <span class="input-icon">✉️</span>
-          <input type="text" id="email" class="form-input" placeholder="Email Address" required>
+          <input type="email" id="email" class="form-input" placeholder="Email Address" required>
         </div>
       </div>
 
@@ -268,52 +309,209 @@
         </div>
       </div>
 
-      <div class="forgot-container">
-        <a href="#" class="forgot-link" onclick="handleForgotPassword(event)">Forgot Password?</a>
+      <div class="action-row">
+        <button type="button" class="forgot-link" onclick="handleForgotPassword()">Forgot Password?</button>
       </div>
 
-      <button type="submit" class="btn-login">Log In ➔</button>
+      <button type="submit" id="submitBtn" class="btn-login">Log In ➔</button>
+      <button type="button" id="signupBtn" class="btn-signup-alt" onclick="handleCreateAccount()">Create New Account</button>
     </form>
 
     <div class="divider">— OR —</div>
 
-    <button type="button" class="btn-google" onclick="handleGoogleLogin()">
+    <!-- Google Sign In -->
+    <button type="button" id="googleBtn" class="btn-google" onclick="handleGoogleLogin()">
       <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
       Continue with Google
     </button>
 
     <div class="create-account-text">
-      New here? <a href="#" class="create-account-link" onclick="handleCreateAccount(event)">Create Account</a>
+      New here? <button type="button" class="create-account-link" onclick="handleCreateAccount()">Create Account</button>
     </div>
   </div>
 
-  <script>
-    function togglePasswordVisibility() {
+  <!-- Firebase SDKs (Modular v10) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { 
+      getAuth, 
+      signInWithEmailAndPassword, 
+      createUserWithEmailAndPassword, 
+      sendPasswordResetEmail, 
+      GoogleAuthProvider, 
+      signInWithPopup, 
+      onAuthStateChanged,
+      setPersistence,
+      browserLocalPersistence
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDidkZxQGLjJO4_Ido5FI6Q0s9vay0E3mA",
+      authDomain: "kids-teacher-4387e.firebaseapp.com",
+      projectId: "kids-teacher-4387e",
+      storageBucket: "kids-teacher-4387e.firebasestorage.app",
+      messagingSenderId: "420221167346",
+      appId: "1:420221167346:web:da7ac80acdfd52339d526b",
+      measurementId: "G-VJVS2ZMNLY"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Set Session Persistence (Keep user signed in)
+    setPersistence(auth, browserLocalPersistence).catch((error) => {
+      console.error("Persistence error:", error);
+    });
+
+    // Check if user is already logged in, redirect to index.html directly
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        window.location.href = "index.html";
+      }
+    });
+
+    // UI Helper Functions
+    window.togglePasswordVisibility = function() {
       const passwordInput = document.getElementById('password');
-      if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
+      passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+    }
+
+    function showAlert(message, type = 'error') {
+      const alertBox = document.getElementById('alertBox');
+      alertBox.textContent = message;
+      alertBox.className = type;
+      alertBox.style.display = 'block';
+    }
+
+    function hideAlert() {
+      const alertBox = document.getElementById('alertBox');
+      alertBox.style.display = 'none';
+    }
+
+    function setLoading(isLoading, text = '') {
+      const submitBtn = document.getElementById('submitBtn');
+      const signupBtn = document.getElementById('signupBtn');
+      const googleBtn = document.getElementById('googleBtn');
+      
+      submitBtn.disabled = isLoading;
+      signupBtn.disabled = isLoading;
+      googleBtn.disabled = isLoading;
+
+      if (isLoading) {
+        submitBtn.textContent = text;
       } else {
-        passwordInput.type = 'password';
+        submitBtn.textContent = "Log In ➔";
       }
     }
 
-    function handleLogin(event) {
-      event.preventDefault();
-      alert("Login feature will be active once Firebase authentication is configured.");
+    function getFriendlyErrorMessage(errorCode) {
+      switch (errorCode) {
+        case 'auth/invalid-email':
+          return "Please enter a valid email address.";
+        case 'auth/user-not-found':
+        case 'auth/wrong-password':
+        case 'auth/invalid-credential':
+          return "Incorrect email or password. Please try again.";
+        case 'auth/email-already-in-use':
+          return "This email is already registered. Please log in.";
+        case 'auth/weak-password':
+          return "Password must be at least 6 characters.";
+        case 'auth/too-many-requests':
+          return "Too many unsuccessful attempts. Please try again later.";
+        case 'auth/network-request-failed':
+          return "Please check your internet connection.";
+        default:
+          return "An error occurred. Please try again.";
+      }
     }
 
-    function handleForgotPassword(event) {
+    // 1. Email/Password Login
+    window.handleFormSubmit = async function(event) {
       event.preventDefault();
-      alert("Password reset instructions will be sent to your email.");
+      hideAlert();
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (!email || !password) {
+        showAlert("Please fill in all fields.");
+        return;
+      }
+
+      setLoading(true, "Logging in...");
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        showAlert("Login successful! Redirecting...", "success");
+        setTimeout(() => { window.location.href = "index.html"; }, 800);
+      } catch (error) {
+        setLoading(false);
+        showAlert(getFriendlyErrorMessage(error.code));
+      }
     }
 
-    function handleGoogleLogin() {
-      alert("Google Sign-In requires Firebase authorized domain configuration.");
+    // 2. Create New Account
+    window.handleCreateAccount = async function() {
+      hideAlert();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (!email || !password) {
+        showAlert("Please enter email and password to create an account.");
+        return;
+      }
+
+      setLoading(true, "Creating account...");
+
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        showAlert("Account created successfully! Redirecting...", "success");
+        setTimeout(() => { window.location.href = "index.html"; }, 800);
+      } catch (error) {
+        setLoading(false);
+        showAlert(getFriendlyErrorMessage(error.code));
+      }
     }
 
-    function handleCreateAccount(event) {
-      event.preventDefault();
-      alert("Account creation workflow will be connected with Firebase.");
+    // 3. Google Login
+    window.handleGoogleLogin = async function() {
+      hideAlert();
+      setLoading(true, "Signing in with Google...");
+      const provider = new GoogleAuthProvider();
+
+      try {
+        await signInWithPopup(auth, provider);
+        showAlert("Google Sign-In successful! Redirecting...", "success");
+        setTimeout(() => { window.location.href = "index.html"; }, 800);
+      } catch (error) {
+        setLoading(false);
+        if (error.code !== 'auth/popup-closed-by-user') {
+          showAlert(getFriendlyErrorMessage(error.code));
+        }
+      }
+    }
+
+    // 4. Forgot Password
+    window.handleForgotPassword = async function() {
+      hideAlert();
+      const email = document.getElementById('email').value.trim();
+
+      if (!email) {
+        showAlert("Please enter your email address above first, then click Forgot Password.");
+        return;
+      }
+
+      setLoading(true, "Sending reset email...");
+
+      try {
+        await sendPasswordResetEmail(auth, email);
+        setLoading(false);
+        showAlert("Password reset email sent! Check your inbox.", "success");
+      } catch (error) {
+        setLoading(false);
+        showAlert(getFriendlyErrorMessage(error.code));
+      }
     }
   </script>
 </body>
