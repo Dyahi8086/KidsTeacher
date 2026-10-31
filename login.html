@@ -26,6 +26,44 @@
       font-family: 'Quicksand', sans-serif;
     }
 
+    /* Initial Splash Loader to prevent screen flicker */
+    #authLoader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: #fce8d5;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      transition: opacity 0.3s ease;
+    }
+
+    .spinner {
+      width: 45px;
+      height: 45px;
+      border: 4px solid rgba(249, 115, 22, 0.2);
+      border-top: 4px solid #f97316;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 12px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loader-text {
+      font-family: 'Fredoka', cursive;
+      font-size: 16px;
+      color: #1e293b;
+      font-weight: 700;
+    }
+
     .login-card {
       width: min(92%, 410px);
       max-height: 94vh;
@@ -268,6 +306,12 @@
 </head>
 <body>
 
+  <!-- Smooth Loader Overlay to block any unwanted page flash -->
+  <div id="authLoader">
+    <div class="spinner"></div>
+    <div class="loader-text">Loading Kids Teacher...</div>
+  </div>
+
   <div class="login-card">
     <div class="brand-header">
       <div class="emblem-3d">
@@ -356,24 +400,36 @@
       console.error("Persistence error:", error);
     });
 
+    const loader = document.getElementById('authLoader');
+
+    // Handle Redirect Result first
     getRedirectResult(auth)
       .then((result) => {
         if (result && result.user) {
-          window.location.href = "age-select.html";
+          const savedAge = localStorage.getItem('kidsAgeGroup');
+          window.location.replace(!savedAge ? "age-select.html" : "index.html");
+        } else {
+          loader.style.opacity = '0';
+          setTimeout(() => loader.style.display = 'none', 300);
         }
       })
       .catch((error) => {
-        console.error("Redirect error:", error);
+        loader.style.opacity = '0';
+        setTimeout(() => loader.style.display = 'none', 300);
       });
 
+    // Check auth state immediately
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const savedAge = localStorage.getItem('kidsAgeGroup');
         if (!savedAge) {
-          window.location.href = "age-select.html";
+          window.location.replace("age-select.html");
         } else {
-          window.location.href = "index.html";
+          window.location.replace("index.html");
         }
+      } else {
+        loader.style.opacity = '0';
+        setTimeout(() => loader.style.display = 'none', 300);
       }
     });
 
@@ -437,7 +493,8 @@
       setLoading(true, "Logging in...");
       try {
         await signInWithEmailAndPassword(auth, email, password);
-        window.location.href = "age-select.html";
+        const savedAge = localStorage.getItem('kidsAgeGroup');
+        window.location.replace(!savedAge ? "age-select.html" : "index.html");
       } catch (error) {
         setLoading(false);
         showAlert(getFriendlyErrorMessage(error.code));
@@ -457,7 +514,7 @@
       setLoading(true, "Creating account...");
       try {
         await createUserWithEmailAndPassword(auth, email, password);
-        window.location.href = "age-select.html";
+        window.location.replace("age-select.html");
       } catch (error) {
         setLoading(false);
         showAlert(getFriendlyErrorMessage(error.code));
@@ -468,10 +525,12 @@
       hideAlert();
       setLoading(true, "Signing in with Google...");
       const provider = new GoogleAuthProvider();
+      
       try {
         const result = await signInWithPopup(auth, provider);
         if (result && result.user) {
-          window.location.href = "age-select.html";
+          const savedAge = localStorage.getItem('kidsAgeGroup');
+          window.location.replace(!savedAge ? "age-select.html" : "index.html");
         }
       } catch (error) {
         if (error.code === 'auth/popup-blocked' || error.code === 'auth/popup-closed-by-user') {
