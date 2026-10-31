@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Select Age - Kids Teacher</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Fredoka:wght@600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100dvh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: url('kids_teacher_login_background.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #fce8d5;
+      padding: 16px;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    .age-card {
+      width: min(92%, 410px);
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(24px) saturate(190%);
+      -webkit-backdrop-filter: blur(24px) saturate(190%);
+      border-radius: 36px;
+      padding: 30px 22px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.14), inset 0 1.5px 3px rgba(255, 255, 255, 0.95);
+      border: 1.5px solid rgba(255, 255, 255, 0.7);
+      text-align: center;
+    }
+
+    .app-title {
+      font-family: 'Fredoka', 'Baloo 2', cursive, sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 6px;
+    }
+
+    .app-subtitle {
+      font-size: 13.5px;
+      color: #475569;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .age-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .age-btn {
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.8);
+      border: 2px solid rgba(226, 232, 240, 0.9);
+      border-radius: 20px;
+      font-family: 'Baloo 2', cursive, sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #1e293b;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .age-btn:hover, .age-btn.selected {
+      background: linear-gradient(135deg, #ff7e5f, #f97316);
+      color: #ffffff;
+      border-color: #f97316;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(249, 115, 22, 0.35);
+    }
+
+    .btn-continue {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #34d399, #059669);
+      color: #ffffff;
+      border: none;
+      border-radius: 20px;
+      font-size: 17px;
+      font-family: 'Baloo 2', cursive, sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 0 #047857, 0 10px 20px rgba(5, 150, 105, 0.3);
+      transition: transform 0.1s ease;
+    }
+
+    .btn-continue:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 #047857;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="age-card">
+    <h1 class="app-title">How old is your kid?</h1>
+    <p class="app-subtitle">Select age group for personalized learning</p>
+
+    <div class="age-grid">
+      <button class="age-btn" onclick="selectAge('2-3', this)">2 - 3 Years</button>
+      <button class="age-btn" onclick="selectAge('3-4', this)">3 - 4 Years</button>
+      <button class="age-btn" onclick="selectAge('4-5', this)">4 - 5 Years</button>
+      <button class="age-btn" onclick="selectAge('5-7', this)">5 - 7 Years</button>
+    </div>
+
+    <button type="button" class="btn-continue" onclick="proceedToDashboard()">Start Learning 🚀</button>
+  </div>
+
+  <script>
+    let selectedAgeGroup = "";
+
+    function selectAge(age, element) {
+      // Remove selected class from all buttons
+      document.querySelectorAll('.age-btn').forEach(btn => btn.classList.remove('selected'));
+      // Add to clicked button
+      element.classList.add('selected');
+      selectedAgeGroup = age;
+      localStorage.setItem('kidsAgeGroup', age);
+    }
+
+    function proceedToDashboard() {
+      if (!selectedAgeGroup) {
+        alert("Please select an age group first!");
+        return;
+      }
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
