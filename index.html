@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Kids Teacher - Welcome</title>
     
-    <!-- Advanced Google Font (Fredoka - bilkul aapki photo jaisa) -->
+    <!-- Advanced Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
@@ -44,12 +44,11 @@
             background-repeat: no-repeat;
         }
 
-        /* --- 2. EXACT TEXT MATCHING YOUR PHOTO --- */
+        /* --- 2. EXACT TEXT --- */
         .text-content {
             text-align: center;
             margin-bottom: 20px; 
             z-index: 10;
-            /* Entry Animation (Bounce Effect) */
             animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
             opacity: 0;
             transform: scale(0.9);
@@ -57,7 +56,7 @@
 
         .text-content h1 {
             font-size: 28px; 
-            color: #8B3A00; /* Exact Dark Brown/Orange color */
+            color: #8B3A00; 
             font-weight: 700;
             line-height: 1.2;
             margin-bottom: 8px;
@@ -66,11 +65,11 @@
 
         .text-content p {
             font-size: 14px;
-            color: #6B5B4D; /* Soft brown text */
+            color: #6B5B4D; 
             font-weight: 500;
         }
 
-        /* --- 3. EXACT BUTTON (Let's Start →) --- */
+        /* --- 3. EXACT BUTTON --- */
         .start-btn {
             position: relative;
             width: 88%;
@@ -79,18 +78,16 @@
             font-size: 20px;
             font-weight: 700;
             color: white;
-            background: #FF6B35; /* Exact Orange Color */
+            background: #FF6B35; 
             border: none;
             border-radius: 50px; 
             cursor: pointer;
             z-index: 10;
             overflow: hidden; 
             
-            /* 3D Shadow Effect */
             box-shadow: 0 6px 0 #cc4e20, 0 10px 20px rgba(255, 107, 53, 0.3);
             transition: transform 0.1s, box-shadow 0.1s;
             
-            /* Entry Animation */
             animation: slideUp 0.8s ease-out forwards;
             animation-delay: 0.2s;
             opacity: 0;
@@ -102,7 +99,7 @@
             box-shadow: 0 0px 0 #cc4e20, 0 4px 10px rgba(0,0,0,0.2);
         }
 
-        /* Advanced Ripple Effect (Click par lehar) */
+        /* Ripple Effect */
         .ripple {
             position: absolute;
             background: rgba(255, 255, 255, 0.4);
@@ -112,7 +109,7 @@
             pointer-events: none;
         }
 
-        /* --- 4. BOTTOM DOTS (Pagination) --- */
+        /* --- 4. BOTTOM DOTS --- */
         .pagination {
             display: flex;
             gap: 6px;
@@ -130,7 +127,7 @@
 
         .dot.active {
             width: 24px;
-            background-color: #FF6B35; /* Orange active dot */
+            background-color: #FF6B35; 
         }
 
         /* --- 5. KEYFRAMES --- */
@@ -151,16 +148,13 @@
 
     <div class="welcome-container">
         
-        <!-- Text (Exact Match) -->
         <div class="text-content">
             <h1>Learning Is an<br>Adventure!</h1>
             <p>Explore, discover and grow every day.</p>
         </div>
 
-        <!-- Button (Exact Match) -->
         <button class="start-btn" id="startBtn">Let's Start →</button>
 
-        <!-- Dots (3 Dashes) -->
         <div class="pagination">
             <div class="dot active"></div>
             <div class="dot"></div>
@@ -169,17 +163,14 @@
 
     </div>
 
-    <!-- --- ADVANCED JAVASCRIPT --- -->
     <script>
         const btn = document.getElementById('startBtn');
 
         btn.addEventListener('click', function(e) {
-            // 1. Haptic Vibration (Phone halka sa vibrate karega)
             if (navigator.vibrate) {
                 navigator.vibrate([40, 30, 40]); 
             }
 
-            // 2. Ripple Effect
             let rect = this.getBoundingClientRect();
             let x = e.clientX - rect.left;
             let y = e.clientY - rect.top;
@@ -194,7 +185,6 @@
 
             setTimeout(() => { ripple.remove(); }, 600);
 
-            // 3. Redirect to Login Page (Thoda delay taaki effect dikhe)
             setTimeout(() => {
                 window.location.href = "login.html"; 
             }, 200); 
