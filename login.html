@@ -11,24 +11,31 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
   
   <style>
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
+    /* --- BASE & ADVANCED VARIABLES --- */
+    :root {
+      --primary: #f97316;
+      --primary-dark: #c2410c;
+      --bg-gradient: linear-gradient(180deg, #fff8f0 0%, #ffe4c4 50%, #ffd6a5 100%);
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
     }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
     body {
       min-height: 100dvh;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end; /* Niche se upar aane ke liye */
-      /* Premium Peach/Gold Coins Background */
-      background: linear-gradient(180deg, #fff8f0 0%, #ffe4c4 50%, #ffd6a5 100%);
+      justify-content: flex-end; 
+      background: var(--bg-gradient);
       font-family: 'Nunito', sans-serif;
       overflow: hidden;
       position: relative;
     }
 
-    /* --- BACKGROUND FLOATING ELEMENTS --- */
+    /* --- FLOATING BG SHAPES --- */
     .bg-shape {
       position: absolute;
       background: rgba(255, 255, 255, 0.5);
@@ -37,120 +44,71 @@
       box-shadow: inset -10px -10px 20px rgba(0,0,0,0.05), 10px 10px 20px rgba(255,255,255,0.8);
       z-index: 0;
     }
-    .shape-1 { width: 150px; height: 150px; top: -30px; left: -40px; background: radial-gradient(circle at 30% 30%, #ffffff, #ffedd5); animation: float 6s ease-in-out infinite; }
+    .shape-1 { width: 150px; height: 150px; top: -30px; left: -40px; animation: float 6s ease-in-out infinite; }
     .shape-2 { width: 100px; height: 100px; top: 20%; right: -20px; background: radial-gradient(circle at 30% 30%, #ffffff, #fef08a); animation: float 8s ease-in-out infinite reverse; }
-    
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(10deg); }
-    }
+    @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(10deg); } }
 
-    /* --- LOGIN CARD (Bottom Sheet Style) --- */
+    /* --- MAIN CARD (Slow Slide Up) --- */
     .login-card {
       width: 100%;
       max-width: 450px;
       margin: 0 auto;
-      background: rgba(255, 255, 255, 0.95);
+      background: var(--card-bg);
       backdrop-filter: blur(20px);
       border-radius: 35px 35px 0 0;
       padding: 25px 25px 40px 25px;
       box-shadow: 0 -15px 40px rgba(249, 115, 22, 0.1);
       position: relative;
       z-index: 10;
-      animation: slideUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      /* Dhire dhire aane ke liye 1.2s animation */
+      animation: slideUpSlow 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      transform: translateY(100%);
     }
 
-    @keyframes slideUp {
-      from { transform: translateY(100%); }
+    @keyframes slideUpSlow {
       to { transform: translateY(0); }
     }
 
-    /* --- TABS --- */
-    .tabs {
-      display: flex; background: #f1f5f9;
-      border-radius: 16px; padding: 5px; margin-bottom: 25px;
-    }
-    .tab-btn {
-      flex: 1; padding: 12px; border: none; background: transparent;
-      font-family: 'Fredoka', sans-serif; font-size: 16px; font-weight: 600;
-      color: #94a3b8; cursor: pointer; border-radius: 12px; transition: all 0.3s ease;
-    }
-    .tab-btn.active {
-      background: #ffffff; color: #f97316;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
+    /* --- ADVANCED CLASSES --- */
+    .tabs { display: flex; background: #f1f5f9; border-radius: 16px; padding: 5px; margin-bottom: 25px; }
+    .tab-btn { flex: 1; padding: 12px; border: none; background: transparent; font-family: 'Fredoka'; font-size: 16px; font-weight: 600; color: var(--text-muted); cursor: pointer; border-radius: 12px; transition: 0.3s; }
+    .tab-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 
     .brand-header { text-align: center; margin-bottom: 20px; }
-    .app-title { font-family: 'Fredoka', sans-serif; font-size: 28px; color: #1e293b; font-weight: 700; }
-    .app-subtitle { font-size: 13px; color: #64748b; font-weight: 700; margin-top: 5px; }
+    .app-title { font-family: 'Fredoka'; font-size: 28px; color: var(--text-main); font-weight: 700; }
+    .app-subtitle { font-size: 13px; color: var(--text-muted); font-weight: 700; margin-top: 5px; }
 
-    /* --- ALERTS --- */
-    #alertBox {
-      display: none; padding: 12px; margin-bottom: 15px; border-radius: 12px;
-      font-size: 13px; font-weight: 800; text-align: center;
-    }
-    #alertBox.error { background: #fee2e2; color: #b91c1c; border: 1px solid #f87171; }
-    #alertBox.success { background: #dcfce7; color: #15803d; border: 1px solid #4ade80; }
+    .alert-box { display: none; padding: 12px; margin-bottom: 15px; border-radius: 12px; font-size: 13px; font-weight: 800; text-align: center; }
+    .alert-error { background: #fee2e2; color: #b91c1c; border: 1px solid #f87171; }
+    .alert-success { background: #dcfce7; color: #15803d; border: 1px solid #4ade80; }
 
-    /* --- INPUTS --- */
     .input-group { position: relative; margin-bottom: 15px; text-align: left; }
-    .input-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 18px; color: #94a3b8; z-index: 2; }
+    .input-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 18px; color: var(--text-muted); z-index: 2; }
+    .form-input { width: 100%; padding: 22px 45px 8px 48px; background: #ffffff; border: 2px solid var(--border-color); border-radius: 16px; font-size: 15px; color: var(--text-main); font-family: 'Nunito'; font-weight: 800; outline: none; transition: 0.2s; }
+    .form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15); }
     
-    .form-input {
-      width: 100%; padding: 22px 45px 8px 48px;
-      background: #ffffff; border: 2px solid #e2e8f0;
-      border-radius: 16px; font-size: 15px; color: #1e293b;
-      font-family: 'Nunito', sans-serif; font-weight: 800;
-      outline: none; transition: all 0.2s ease;
-    }
-    .form-input:focus { border-color: #f97316; box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15); }
-    
-    .floating-label {
-      position: absolute; left: 48px; top: 50%; transform: translateY(-50%);
-      font-size: 15px; color: #94a3b8; font-weight: 700;
-      pointer-events: none; transition: all 0.2s ease;
-    }
-    .form-input:focus ~ .floating-label,
-    .form-input:not(:placeholder-shown) ~ .floating-label { top: 12px; font-size: 11px; color: #f97316; }
+    .floating-label { position: absolute; left: 48px; top: 50%; transform: translateY(-50%); font-size: 15px; color: var(--text-muted); font-weight: 700; pointer-events: none; transition: 0.2s; }
+    .form-input:focus ~ .floating-label, .form-input:not(:placeholder-shown) ~ .floating-label { top: 12px; font-size: 11px; color: var(--primary); }
 
-    /* --- REAL EYE ICON BUTTON --- */
-    .toggle-password { 
-      position: absolute; right: 12px; top: 50%; transform: translateY(-50%); 
-      background: none; border: none; cursor: pointer; width: 32px; height: 32px;
-      display: flex; align-items: center; justify-content: center; color: #94a3b8;
-    }
+    .toggle-password { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); }
     .toggle-password:active { transform: translateY(-50%) scale(0.9); }
+    .hidden { display: none !important; }
 
-    /* --- BUTTONS --- */
-    .forgot-link { display: block; text-align: right; font-size: 13px; color: #64748b; font-weight: 800; background: none; border: none; cursor: pointer; margin-bottom: 20px; width: 100%; }
+    .forgot-link { display: block; text-align: right; font-size: 13px; color: var(--text-muted); font-weight: 800; background: none; border: none; cursor: pointer; margin-bottom: 20px; width: 100%; }
     
-    .btn-main {
-      width: 100%; padding: 16px;
-      background: linear-gradient(135deg, #f97316, #ea580c);
-      color: #ffffff; border: none; border-radius: 16px;
-      font-size: 18px; font-family: 'Fredoka', sans-serif; font-weight: 700;
-      cursor: pointer; box-shadow: 0 6px 0 #c2410c, 0 10px 15px rgba(249, 115, 22, 0.3);
-      transition: all 0.1s ease; margin-bottom: 20px;
-      position: relative; overflow: hidden;
-    }
-    .btn-main:active { transform: translateY(6px); box-shadow: 0 0 0 #c2410c; }
+    .btn-main { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--primary), #ea580c); color: #ffffff; border: none; border-radius: 16px; font-size: 18px; font-family: 'Fredoka'; font-weight: 700; cursor: pointer; box-shadow: 0 6px 0 var(--primary-dark), 0 10px 15px rgba(249, 115, 22, 0.3); transition: 0.1s; margin-bottom: 20px; position: relative; overflow: hidden; }
+    .btn-main:active { transform: translateY(6px); box-shadow: 0 0 0 var(--primary-dark); }
+    .btn-main:disabled { background: #cbd5e1; box-shadow: 0 6px 0 #94a3b8; color: #fff; cursor: not-allowed; }
 
     .ripple { position: absolute; background: rgba(255,255,255,0.4); border-radius: 50%; transform: scale(0); animation: rippleAnim 0.6s linear; pointer-events: none; }
     @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
 
     .divider { display: flex; align-items: center; text-align: center; margin: 15px 0; color: #cbd5e1; font-size: 12px; font-weight: 800; }
-    .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 2px solid #e2e8f0; }
+    .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 2px solid var(--border-color); }
     .divider::before { margin-right: 12px; } .divider::after { margin-left: 12px; }
 
-    .btn-google {
-      width: 100%; padding: 14px; background: #ffffff; color: #334155;
-      border: 2px solid #e2e8f0; border-radius: 16px; font-size: 15px; font-weight: 800;
-      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
-      box-shadow: 0 4px 0 #e2e8f0; transition: all 0.1s ease;
-    }
-    .btn-google:active { transform: translateY(4px); box-shadow: 0 0 0 #e2e8f0; }
-
-    .hidden { display: none !important; }
+    .btn-google { width: 100%; padding: 14px; background: #ffffff; color: #334155; border: 2px solid var(--border-color); border-radius: 16px; font-size: 15px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 0 var(--border-color); transition: 0.1s; }
+    .btn-google:active { transform: translateY(4px); box-shadow: 0 0 0 var(--border-color); }
   </style>
 </head>
 <body>
@@ -170,7 +128,7 @@
       <p class="app-subtitle" id="formSubtitle">Log in to guide your child's journey</p>
     </div>
 
-    <div id="alertBox"></div>
+    <div id="alertBox" class="alert-box"></div>
 
     <form id="authForm" onsubmit="handleFormSubmit(event)">
       
@@ -185,7 +143,6 @@
         <input type="password" id="password" class="form-input" placeholder=" " required>
         <label class="floating-label">Password</label>
         
-        <!-- REAL SVG EYE ICON -->
         <button type="button" class="toggle-password" id="eyeBtn" onclick="togglePasswordVisibility()">
           <svg id="eyeOpen" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
           <svg id="eyeClosed" class="hidden" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
@@ -225,10 +182,28 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    
+    // Session persistence (Login ko yaad rakhne ke liye)
     setPersistence(auth, browserLocalPersistence).catch(console.error);
 
     let currentMode = 'login';
+    const MAX_ATTEMPTS = 4;
+    const LOCKOUT_TIME = 30 * 1000; // 30 seconds
 
+    // ==========================================
+    // 1. SESSION CHECK (Direct Home Page Logic)
+    // ==========================================
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const savedAge = localStorage.getItem('kidsAgeGroup');
+        // Agar user logged in hai, toh seedha home ya age-select par bhej do
+        window.location.replace(!savedAge ? "age-select.html" : "index-home.html");
+      }
+    });
+
+    // ==========================================
+    // 2. TAB SWITCHING (Login / Signup)
+    // ==========================================
     window.switchTab = function(mode) {
       currentMode = mode;
       const tabLogin = document.getElementById('tabLogin');
@@ -257,15 +232,9 @@
       }
     }
 
-    // Google Login Page Redirect Fix (Yahan sabse bada change hai)
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const savedAge = localStorage.getItem('kidsAgeGroup');
-        window.location.replace(!savedAge ? "age-select.html" : "index-home.html");
-      }
-    });
-
-    // REAL EYE ICON TOGGLE LOGIC
+    // ==========================================
+    // 3. UI HELPERS (Eye Icon, Alerts, Loading)
+    // ==========================================
     window.togglePasswordVisibility = function() {
       const passwordInput = document.getElementById('password');
       const eyeOpen = document.getElementById('eyeOpen');
@@ -285,7 +254,7 @@
     function showAlert(message, type = 'error') {
       const alertBox = document.getElementById('alertBox');
       alertBox.textContent = message;
-      alertBox.className = type;
+      alertBox.className = `alert-box alert-${type}`;
       alertBox.style.display = 'block';
     }
     function hideAlert() { document.getElementById('alertBox').style.display = 'none'; }
@@ -307,14 +276,53 @@
         case 'auth/invalid-credential': return "Incorrect email or password.";
         case 'auth/email-already-in-use': return "Email already registered. Please Log In.";
         case 'auth/weak-password': return "Password must be at least 6 characters.";
-        case 'auth/popup-blocked': return "Popup blocked! Please enable popups or try again.";
+        case 'auth/too-many-requests': return "Too many attempts. Try again later.";
         default: return "An error occurred. Please try again.";
       }
     }
 
+    // ==========================================
+    // 4. RATE LIMITING LOGIC (4 Attempts Lock)
+    // ==========================================
+    function checkRateLimit() {
+      const attempts = parseInt(localStorage.getItem('loginAttempts') || '0');
+      const lockoutUntil = parseInt(localStorage.getItem('lockoutUntil') || '0');
+      const now = Date.now();
+
+      if (now < lockoutUntil) {
+        const secondsLeft = Math.ceil((lockoutUntil - now) / 1000);
+        showAlert(`Too many failed attempts. Please wait ${secondsLeft} seconds.`);
+        return false; // Blocked
+      }
+      
+      if (now > lockoutUntil && attempts >= MAX_ATTEMPTS) {
+        // Reset attempts if lockout time has passed
+        localStorage.setItem('loginAttempts', '0');
+        localStorage.removeItem('lockoutUntil');
+      }
+      return true; // Allowed
+    }
+
+    function handleFailedAttempt() {
+      let attempts = parseInt(localStorage.getItem('loginAttempts') || '0');
+      attempts++;
+      localStorage.setItem('loginAttempts', attempts.toString());
+
+      if (attempts >= MAX_ATTEMPTS) {
+        localStorage.setItem('lockoutUntil', (Date.now() + LOCKOUT_TIME).toString());
+        showAlert("Account temporarily locked. Please wait 30 seconds.");
+      }
+    }
+
+    // ==========================================
+    // 5. AUTHENTICATION ACTIONS
+    // ==========================================
     window.handleFormSubmit = async function(event) {
       event.preventDefault();
       hideAlert();
+
+      if (!checkRateLimit()) return; // Block if rate limited
+
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value;
 
@@ -325,35 +333,45 @@
       try {
         if (currentMode === 'login') {
           await signInWithEmailAndPassword(auth, email, password);
+          localStorage.setItem('loginAttempts', '0'); // Reset on success
         } else {
           await createUserWithEmailAndPassword(auth, email, password);
         }
       } catch (error) {
         setLoading(false);
         showAlert(getFriendlyErrorMessage(error.code));
+        
+        // Rate limiting track karein agar password galat ho
+        if(currentMode === 'login' && (error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential')) {
+          handleFailedAttempt();
+        }
       }
     }
 
-    // GOOGLE LOGIN DIRECT TAB FIX
+    // ==========================================
+    // 6. GOOGLE LOGIN (Direct Popup Fix)
+    // ==========================================
     window.handleGoogleLogin = async function() {
       hideAlert();
       setLoading(true, "Connecting...");
       const provider = new GoogleAuthProvider();
       
       try {
-        // Pop-up block bypass karne ke liye direct call
+        // Yeh direct connect karega, blank page nahi khulega
         await signInWithPopup(auth, provider);
-        // Redirect handled by onAuthStateChanged
       } catch (error) {
         setLoading(false);
         if(error.code === 'auth/popup-blocked') {
-           showAlert("Please allow pop-ups from this site to login with Google.", "error");
+           showAlert("Popup blocked! Please allow popups for this site to log in with Google.", "error");
         } else {
            showAlert(getFriendlyErrorMessage(error.code));
         }
       }
     }
 
+    // ==========================================
+    // 7. FORGOT PASSWORD
+    // ==========================================
     window.handleForgotPassword = async function() {
       hideAlert();
       const email = document.getElementById('email').value.trim();
