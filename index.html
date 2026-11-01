@@ -24,10 +24,9 @@
             height: 100%;
             width: 100%;
             background-color: #e0f2fe;
-            overflow: hidden; /* Scroll lock */
+            overflow: hidden;
         }
 
-        /* --- 2. MAIN CONTAINER WITH PARALLAX --- */
         .welcome-container {
             position: relative;
             width: 100vw;
@@ -35,56 +34,22 @@
             height: 100dvh; 
             display: flex;
             flex-direction: column;
-            justify-content: flex-end; 
+            justify-content: flex-end; /* Content ko niche rakhega */
             align-items: center;
-            padding-bottom: 60px; 
+            padding-bottom: 80px; /* Button ko thoda upar kiya */
             
             background-image: url('welcome_bg.png');
             background-size: cover; 
             background-position: top center; 
             background-repeat: no-repeat;
-            
-            /* Smooth transition for parallax */
-            transition: background-position 0.1s ease-out;
         }
 
-        /* --- 3. ADVANCED TEXT ANIMATIONS --- */
-        .text-content {
-            text-align: center;
-            margin-bottom: 25px; 
-            z-index: 10;
-            position: relative;
-        }
-
-        /* Spring Animation (Load hote waqt bounce) */
-        .spring-in {
-            animation: springBounce 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            opacity: 0;
-            transform: scale(0.8) translateY(20px);
-        }
-
-        .text-content h1 {
-            font-size: 34px; 
-            color: #4a2c11; /* Dark Brown */
-            font-weight: 700;
-            line-height: 1.1;
-            text-shadow: 2px 2px 0px rgba(255,255,255,0.9), 4px 4px 10px rgba(0,0,0,0.15);
-            transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
-            cursor: default;
-        }
-
-        /* Text ko touch karne par 3D press effect */
-        .text-content h1:active {
-            transform: scale(0.95);
-            text-shadow: 1px 1px 0px rgba(255,255,255,0.9);
-        }
-
-        /* --- 4. ADVANCED BUTTON --- */
+        /* --- 2. ADVANCED BUTTON WITH BREATHING & GLOW --- */
         .start-btn {
             position: relative;
             width: 85%;
             max-width: 320px;
-            padding: 18px 20px;
+            padding: 20px;
             font-size: 22px;
             font-weight: 700;
             color: white;
@@ -96,14 +61,19 @@
             overflow: hidden; 
             
             /* 3D Shadow */
-            box-shadow: 0 8px 0 #b83b23, 0 15px 25px rgba(255, 87, 51, 0.4);
+            box-shadow: 0 10px 0 #b83b23, 0 20px 30px rgba(255, 87, 51, 0.4);
+            
+            /* Breathing & Glow Animation */
+            animation: breathe 3s infinite alternate ease-in-out, glow 3s infinite alternate ease-in-out;
             transition: transform 0.1s, box-shadow 0.1s;
         }
 
         /* Button dabane par andar jayega */
         .start-btn:active {
-            transform: translateY(8px); 
+            transform: translateY(10px); 
             box-shadow: 0 0px 0 #b83b23, 0 5px 10px rgba(0,0,0,0.2);
+            /* Animation ko pause karega jab click ho */
+            animation: none; 
         }
 
         /* Ripple Effect */
@@ -116,15 +86,21 @@
             pointer-events: none;
         }
 
-        /* --- 5. KEYFRAMES FOR ANIMATIONS --- */
+        /* --- 3. KEYFRAMES FOR ANIMATIONS --- */
         @keyframes rippleAnim {
             to { transform: scale(4); opacity: 0; }
         }
 
-        @keyframes springBounce {
-            0% { opacity: 0; transform: scale(0.8) translateY(20px); }
-            60% { opacity: 1; transform: scale(1.05) translateY(-5px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
+        /* Button ka saans lene wala effect */
+        @keyframes breathe {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.03); }
+        }
+
+        /* Button ke peeche glow */
+        @keyframes glow {
+            0% { box-shadow: 0 10px 0 #b83b23, 0 0px 20px rgba(255, 122, 89, 0.4); }
+            100% { box-shadow: 0 10px 0 #b83b23, 0 0px 40px rgba(255, 122, 89, 0.8); }
         }
     </style>
 </head>
@@ -132,39 +108,24 @@
 
     <div class="welcome-container" id="parallaxContainer">
         
-        <!-- Text Sirf Ek Line, No Niche Wala Text -->
-        <div class="text-content spring-in" style="animation-delay: 0.1s;">
-            <h1>Ignite Your<br>Child's Potential</h1>
-        </div>
-
-        <!-- Button with Spring Animation -->
-        <button class="start-btn spring-in" id="startBtn" style="animation-delay: 0.3s;">Let's Start 🚀</button>
+        <!-- Koi Text Nahi, Bas Ek Solid Button -->
+        <button class="start-btn" id="startBtn">Let's Start 🚀</button>
 
     </div>
 
     <!-- --- ADVANCED JAVASCRIPT --- -->
     <script>
-        // 1. PARALLAX TOUCH/MOUSE EFFECT (Background move hoga)
-        const container = document.getElementById('parallaxContainer');
+        const btn = document.getElementById('startBtn');
         
-        document.addEventListener('touchmove', function(e) {
-            let touch = e.touches[0];
-            let x = (touch.clientX / window.innerWidth - 0.5) * 20; // 20px move
-            let y = (touch.clientY / window.innerHeight - 0.5) * 20;
-            
-            // Background ko halka sa move karega (Depth effect)
-            container.style.backgroundPosition = `calc(50% + ${x}px) calc(0% + ${y}px)`;
+        // 1. Continuous Haptic Feedback (Jab touch karein)
+        btn.addEventListener('touchstart', function() {
+            if (navigator.vibrate) {
+                navigator.vibrate([20, 30, 20]); // Halka sa vibrate hoga
+            }
         });
 
-        // 2. ADVANCED BUTTON CLICK (Haptic + Ripple + Redirect)
-        const btn = document.getElementById('startBtn');
-
+        // 2. Button Click Logic
         btn.addEventListener('click', function(e) {
-            // Haptic Vibration
-            if (navigator.vibrate) {
-                navigator.vibrate([50, 30, 50]); // Double vibrate for premium feel
-            }
-
             // Ripple Effect Calculate
             let rect = this.getBoundingClientRect();
             let x = e.clientX - rect.left;
@@ -180,10 +141,19 @@
 
             setTimeout(() => { ripple.remove(); }, 600);
 
-            // Redirect to login page
+            // Login Page par Redirect
             setTimeout(() => {
                 window.location.href = "login.html"; 
             }, 200); 
+        });
+
+        // 3. Advanced Parallax (Touch par background halka sa move hoga)
+        const container = document.getElementById('parallaxContainer');
+        document.addEventListener('touchmove', function(e) {
+            let touch = e.touches[0];
+            let x = (touch.clientX / window.innerWidth - 0.5) * 15; 
+            let y = (touch.clientY / window.innerHeight - 0.5) * 15;
+            container.style.backgroundPosition = `calc(50% + ${x}px) calc(0% + ${y}px)`;
         });
     </script>
 </body>
