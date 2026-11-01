@@ -4,109 +4,175 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Kids Teacher - Welcome</title>
+    
+    <!-- Advanced Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        /* Basic Reset */
+        /* --- 1. ADVANCED CSS SETUP --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
+            font-family: 'Fredoka', sans-serif; /* Bachhon ke liye best rounded font */
         }
 
         body, html {
             height: 100%;
             width: 100%;
             background-color: #e0f2fe;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow: hidden;
         }
 
-        /* Container - Fast Load */
         .welcome-container {
             position: relative;
             width: 100vw;
             height: 100vh;
-            height: 100dvh; /* Mobile fit */
+            height: 100dvh; 
             display: flex;
             flex-direction: column;
             justify-content: flex-end; 
             align-items: center;
-            padding-bottom: 40px; 
+            padding-bottom: 60px; 
             
-            /* Aapki Original Background */
             background-image: url('welcome_bg.png');
             background-size: cover; 
             background-position: top center; 
             background-repeat: no-repeat;
         }
 
-        /* Text Area */
+        /* --- 2. TEXT BUG FIX & NEW DESIGN --- */
         .text-content {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px; /* Button se gap set kiya */
             width: 90%;
             z-index: 10;
         }
 
         .text-content h1 {
-            font-size: 24px; 
-            color: #ff5733; /* Orange color */
+            font-size: 32px; 
+            color: #4a2c11; /* Dark Brown (Premium look) */
             margin-bottom: 5px;
-            font-weight: 800;
+            font-weight: 700;
+            line-height: 1.1;
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.8), 2px 2px 5px rgba(0,0,0,0.1); /* 3D Text Effect */
         }
 
         .text-content p {
-            font-size: 14px;
-            color: #333;
-            font-weight: 600;
+            font-size: 16px;
+            color: #444;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.5); /* Halka sa glass effect text ke peeche */
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
 
-        /* Button */
+        /* --- 3. ADVANCED BUTTON (Ripple & Haptic) --- */
         .start-btn {
+            position: relative;
             width: 85%;
             max-width: 320px;
             padding: 16px 20px;
-            font-size: 18px;
-            font-weight: 800;
+            font-size: 20px;
+            font-weight: 700;
             color: white;
             background: linear-gradient(145deg, #ff7a59, #ff5733); 
             border: none;
             border-radius: 50px; 
             cursor: pointer;
             z-index: 10;
-            box-shadow: 0 8px 0 #c0392b, 0 10px 15px rgba(0,0,0,0.2);
-            transition: all 0.1s ease; 
+            overflow: hidden; /* For Ripple */
+            
+            /* Perfect 3D Shadow */
+            box-shadow: 0 8px 0 #b83b23, 0 15px 20px rgba(0,0,0,0.3);
+            transition: transform 0.1s, box-shadow 0.1s;
         }
 
-        /* Button Click Effect */
         .start-btn:active {
             transform: translateY(8px); 
-            box-shadow: 0 0px 0 #c0392b, 0 5px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 0px 0 #b83b23, 0 5px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Advanced Ripple Effect (Click par paani ki lehar) */
+        .ripple {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: rippleAnim 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes rippleAnim {
+            to { transform: scale(4); opacity: 0; }
+        }
+
+        /* --- 4. ADVANCED LOAD ANIMATION (Smooth Entry) --- */
+        .animate-up {
+            animation: slideUpFade 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        @keyframes slideUpFade {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
-
-    <!-- Image Preload -->
-    <link rel="preload" as="image" href="welcome_bg.png">
 </head>
 <body>
 
     <div class="welcome-container">
         
-        <div class="text-content">
-            <h1>Welcome to Kids Teacher</h1>
-            <p>A magical learning journey for your little ones</p>
+        <!-- Naya Text aur Badhiya Design -->
+        <div class="text-content animate-up" style="animation-delay: 0.2s;">
+            <h1>Ignite Your Child's<br>Potential</h1>
+            <p>Fun, safe & magical learning!</p>
         </div>
 
-        <!-- YAHAN CLICK KARNE PAR LOGIN PAGE KHULEGA -->
-        <button class="start-btn" onclick="goToLogin()">Let's Start 🚀</button>
+        <!-- Advanced Button -->
+        <button class="start-btn animate-up" id="startBtn" style="animation-delay: 0.4s;">Let's Start 🚀</button>
 
     </div>
 
     <script>
-        function goToLogin() {
-            // Yeh line aapke login page (login.html) par le jayegi
-            window.location.href = "login.html"; 
-        }
+        // --- ADVANCED JAVASCRIPT ---
+        const btn = document.getElementById('startBtn');
+
+        btn.addEventListener('click', function(e) {
+            // 1. Haptic Feedback (Phone halka sa vibrate karega)
+            if (navigator.vibrate) {
+                navigator.vibrate(40); 
+            }
+
+            // 2. Ripple Effect Generate karna
+            let x = e.clientX - e.target.offsetLeft;
+            let y = e.clientY - e.target.offsetTop;
+            
+            let ripple = document.createElement("span");
+            ripple.classList.add("ripple");
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+            ripple.style.width = ripple.style.height = `30px`; 
+            
+            this.appendChild(ripple);
+
+            // Ripple ko remove karna 600ms baad
+            setTimeout(() => { ripple.remove(); }, 600);
+
+            // 3. Page Redirect (Thoda delay taaki animation dikh jaye)
+            setTimeout(() => {
+                window.location.href = "login.html"; 
+            }, 250); 
+        });
     </script>
 </body>
 </html>
