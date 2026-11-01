@@ -6,7 +6,7 @@
   <title>Parents Login - Kids Teacher</title>
   <link rel="manifest" href="manifest.json">
   
-  <!-- Modern Fonts -->
+  <!-- Premium Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
@@ -24,66 +24,108 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); /* Clean Premium Background */
-      padding: 20px;
+      /* Soft Animated Background */
+      background: linear-gradient(135deg, #e0f2fe 0%, #fdf4ff 50%, #fff7ed 100%);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
       font-family: 'Nunito', sans-serif;
+      position: relative;
+      overflow: hidden;
     }
 
-    /* Advanced Loader */
-    #authLoader {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100vh;
-      background: #ffffff;
-      display: flex; flex-direction: column;
-      justify-content: center; align-items: center;
-      z-index: 999;
-      transition: opacity 0.4s ease;
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
-    .spinner {
-      width: 45px; height: 45px;
-      border: 4px solid #f3f3f3;
-      border-top: 4px solid #FF6B35;
+    /* --- ADVANCED 3D FLOATING BACKGROUND ELEMENTS --- */
+    .bg-shape {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(10px);
       border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin-bottom: 15px;
+      box-shadow: inset -10px -10px 20px rgba(0,0,0,0.05), 10px 10px 20px rgba(255,255,255,0.8);
+      z-index: 0;
     }
 
-    @keyframes spin { 100% { transform: rotate(360deg); } }
+    .shape-1 {
+      width: 150px; height: 150px;
+      top: -30px; left: -40px;
+      background: radial-gradient(circle at 30% 30%, #ffffff, #e0f2fe);
+      animation: float 6s ease-in-out infinite;
+    }
 
-    /* Main Card */
+    .shape-2 {
+      width: 100px; height: 100px;
+      bottom: 50px; right: -20px;
+      background: radial-gradient(circle at 30% 30%, #ffffff, #fdf4ff);
+      animation: float 8s ease-in-out infinite reverse;
+    }
+
+    .shape-3 {
+      width: 60px; height: 60px;
+      top: 20%; right: 15%;
+      background: radial-gradient(circle at 30% 30%, #fef08a, #fde047); /* Yellow Star shape illusion */
+      border-radius: 20% 80% 20% 80%; /* Star-like rough shape */
+      animation: float 5s ease-in-out infinite 1s;
+    }
+    
+    .shape-4 {
+      width: 120px; height: 120px;
+      bottom: 10%; left: 10%;
+      background: radial-gradient(circle at 30% 30%, #ffffff, #ffedd5);
+      animation: float 7s ease-in-out infinite 0.5s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(10deg); }
+    }
+
+    /* --- LOGIN CARD (ADVANCED GLASSMORPHISM) --- */
     .login-card {
-      width: 100%;
+      width: 92%;
       max-width: 400px;
-      background: #ffffff;
-      border-radius: 28px;
-      padding: 40px 28px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0,0,0,0.05);
+      background: rgba(255, 255, 255, 0.7); /* Transparent */
+      backdrop-filter: blur(25px) saturate(180%);
+      -webkit-backdrop-filter: blur(25px) saturate(180%);
+      border-radius: 32px;
+      padding: 40px 25px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.6);
       text-align: center;
       position: relative;
       z-index: 10;
+      animation: breatheGlow 4s ease-in-out infinite alternate;
     }
 
-    .brand-header {
-      margin-bottom: 30px;
+    /* Breathing Glow Effect */
+    @keyframes breatheGlow {
+      0% { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.6); }
+      100% { box-shadow: 0 25px 60px -10px rgba(255, 107, 53, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.8); }
     }
 
-    /* Clean 3D Icon */
-    .icon-3d {
-      width: 70px;
-      height: 70px;
-      background: #FFF3EE;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    /* --- HEADER & LOGO --- */
+    .brand-header { margin-bottom: 25px; }
+
+    .logo-container {
+      width: 75px; height: 75px;
+      background: #fff;
+      border-radius: 24px;
+      display: flex; align-items: center; justify-content: center;
       margin: 0 auto 15px auto;
-      box-shadow: inset 0 -4px 0 rgba(255, 107, 53, 0.1);
+      box-shadow: 0 10px 20px rgba(255, 107, 53, 0.15);
+      animation: floatIcon 3s ease-in-out infinite;
+    }
+
+    @keyframes floatIcon {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
     }
 
     .app-title {
       font-family: 'Fredoka', sans-serif;
-      font-size: 32px;
+      font-size: 30px;
       font-weight: 700;
       color: #1e293b;
       letter-spacing: -0.5px;
@@ -92,159 +134,138 @@
     .app-subtitle {
       font-size: 14px;
       color: #64748b;
-      font-weight: 600;
+      font-weight: 700;
       margin-top: 5px;
     }
 
-    /* Alerts */
+    /* --- ALERTS --- */
     #alertBox {
       display: none;
       padding: 12px;
       margin-bottom: 20px;
       border-radius: 12px;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 800;
+      animation: shake 0.4s;
     }
-    #alertBox.error { background: #fee2e2; color: #b91c1c; }
-    #alertBox.success { background: #dcfce7; color: #15803d; }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+    #alertBox.error { background: #fee2e2; color: #b91c1c; border-left: 4px solid #ef4444;}
+    #alertBox.success { background: #dcfce7; color: #15803d; border-left: 4px solid #22c55e;}
 
-    /* Input Fields */
+    /* --- INPUTS WITH FLOATING LABELS --- */
     .input-group {
       position: relative;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
       text-align: left;
     }
 
     .input-icon {
       position: absolute;
-      left: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 18px;
-      color: #94a3b8;
+      left: 16px; top: 50%; transform: translateY(-50%);
+      font-size: 18px; color: #94a3b8; z-index: 2;
     }
 
     .form-input {
       width: 100%;
-      padding: 16px 16px 16px 48px;
-      background: #f8fafc;
-      border: 2px solid #e2e8f0;
+      padding: 22px 16px 8px 48px; /* Space for floating label */
+      background: #ffffff;
+      border: 2px solid transparent;
       border-radius: 16px;
       font-size: 15px;
       color: #1e293b;
       font-family: 'Nunito', sans-serif;
-      font-weight: 700;
+      font-weight: 800;
       outline: none;
       transition: all 0.2s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.02);
     }
 
     .form-input:focus {
-      border-color: #FF6B35;
-      background: #ffffff;
-      box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+      border-color: #ff6b35; /* Neon Orange Glow */
+      box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.15);
+    }
+
+    .floating-label {
+      position: absolute;
+      left: 48px; top: 50%; transform: translateY(-50%);
+      font-size: 15px; color: #94a3b8; font-weight: 700;
+      pointer-events: none; transition: all 0.2s ease;
+    }
+
+    .form-input:focus ~ .floating-label,
+    .form-input:not(:placeholder-shown) ~ .floating-label {
+      top: 12px; font-size: 11px; color: #ff6b35;
     }
 
     .toggle-password {
-      position: absolute;
-      right: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none; border: none;
-      cursor: pointer;
-      font-size: 18px; color: #94a3b8;
+      position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer; font-size: 18px; color: #94a3b8;
     }
 
+    /* --- BUTTONS --- */
     .forgot-link {
-      display: block;
-      text-align: right;
-      font-size: 13px;
-      color: #64748b;
-      font-weight: 700;
-      background: none; border: none; cursor: pointer;
-      margin-bottom: 24px;
-      width: 100%;
+      display: block; text-align: right; font-size: 13px; color: #64748b;
+      font-weight: 800; background: none; border: none; cursor: pointer;
+      margin-bottom: 20px; width: 100%;
     }
 
-    /* Advanced 3D Button */
     .btn-login {
-      width: 100%;
-      padding: 16px;
-      background: #FF6B35;
-      color: #ffffff;
-      border: none;
-      border-radius: 16px;
-      font-size: 18px;
-      font-family: 'Fredoka', sans-serif;
-      font-weight: 700;
+      width: 100%; padding: 16px;
+      background: linear-gradient(135deg, #ff7e5f, #f97316);
+      color: #ffffff; border: none; border-radius: 16px;
+      font-size: 18px; font-family: 'Fredoka', sans-serif; font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 6px 0 #cc4e20;
+      box-shadow: 0 6px 0 #c2410c, 0 10px 15px rgba(249, 115, 22, 0.3);
       transition: all 0.1s ease;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
+      position: relative; overflow: hidden;
     }
 
-    .btn-login:active {
-      transform: translateY(6px);
-      box-shadow: 0 0px 0 #cc4e20;
-    }
+    .btn-login:active { transform: translateY(6px); box-shadow: 0 0 0 #c2410c; }
 
-    /* Divider */
+    /* Ripple Effect */
+    .ripple { position: absolute; background: rgba(255,255,255,0.4); border-radius: 50%; transform: scale(0); animation: rippleAnim 0.6s linear; pointer-events: none; }
+    @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
+
     .divider {
       display: flex; align-items: center; text-align: center;
       margin: 20px 0; color: #cbd5e1; font-size: 12px; font-weight: 800;
     }
-    .divider::before, .divider::after {
-      content: ''; flex: 1; border-bottom: 2px solid #e2e8f0;
-    }
-    .divider::before { margin-right: 12px; }
-    .divider::after { margin-left: 12px; }
+    .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 2px solid rgba(203, 213, 225, 0.5); }
+    .divider::before { margin-right: 12px; } .divider::after { margin-left: 12px; }
 
-    /* Google Button */
     .btn-google {
-      width: 100%;
-      padding: 14px;
-      background: #ffffff;
-      color: #334155;
-      border: 2px solid #e2e8f0;
-      border-radius: 16px;
-      font-size: 15px;
-      font-weight: 800;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-      box-shadow: 0 4px 0 #e2e8f0;
-      transition: all 0.1s ease;
-      margin-bottom: 30px;
+      width: 100%; padding: 14px; background: #ffffff; color: #334155;
+      border: 2px solid #e2e8f0; border-radius: 16px; font-size: 15px; font-weight: 800;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+      box-shadow: 0 4px 0 #e2e8f0; transition: all 0.1s ease; margin-bottom: 25px;
     }
-    .btn-google:active { transform: translateY(4px); box-shadow: 0 0px 0 #e2e8f0; }
+    .btn-google:active { transform: translateY(4px); box-shadow: 0 0 0 #e2e8f0; }
 
-    /* Bottom Link */
-    .bottom-signup {
-      font-size: 14px;
-      color: #64748b;
-      font-weight: 700;
-    }
-    .bottom-signup button {
-      color: #FF6B35; font-weight: 800;
-      background: none; border: none; cursor: pointer;
-      font-family: 'Nunito', sans-serif; font-size: 14px;
-    }
+    .bottom-signup { font-size: 14px; color: #64748b; font-weight: 800; }
+    .bottom-signup button { color: #f97316; background: none; border: none; cursor: pointer; font-weight: 800; font-size: 14px; }
   </style>
 </head>
 <body>
 
-  <div id="authLoader">
-    <div class="spinner"></div>
-  </div>
+  <!-- 3D Floating Background Elements -->
+  <div class="bg-shape shape-1"></div>
+  <div class="bg-shape shape-2"></div>
+  <div class="bg-shape shape-3"></div>
+  <div class="bg-shape shape-4"></div>
 
   <div class="login-card">
     <div class="brand-header">
-      <div class="icon-3d">
-        <!-- Clean 3D Book Icon -->
+      <div class="logo-container">
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
           <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
         </svg>
       </div>
-      <!-- Changed to Parents Login -->
       <h1 class="app-title">Parents Login</h1>
       <p class="app-subtitle">Guide your child's learning journey</p>
     </div>
@@ -252,15 +273,16 @@
     <div id="alertBox"></div>
 
     <form id="authForm" onsubmit="handleFormSubmit(event)">
-      
       <div class="input-group">
         <span class="input-icon">✉️</span>
-        <input type="email" id="email" class="form-input" placeholder="Email Address" required>
+        <input type="email" id="email" class="form-input" placeholder=" " required>
+        <label class="floating-label">Email Address</label>
       </div>
 
       <div class="input-group">
         <span class="input-icon">🔒</span>
-        <input type="password" id="password" class="form-input" placeholder="Password" required autocomplete="new-password">
+        <input type="password" id="password" class="form-input" placeholder=" " required>
+        <label class="floating-label">Password</label>
         <button type="button" class="toggle-password" onclick="togglePasswordVisibility()">👁️</button>
       </div>
 
@@ -281,12 +303,8 @@
     </div>
   </div>
 
+  <!-- Firebase Script (Aapka same script, bas thoda smooth kiya hai) -->
   <script type="module">
-    // Aapka Firebase wala pura script yahan aayega (jo maine pichli baar diya tha)
-    // Main isko chhota kar raha hoon taaki aapko pura code easily mil jaye.
-    // Bas yeh script tag kholiye aur apna purana Firebase code yahan paste kar dein.
-    // Main niche aapke reference ke liye wahi important functions de raha hoon:
-
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { 
       getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, 
@@ -309,24 +327,14 @@
     const auth = getAuth(app);
     setPersistence(auth, browserLocalPersistence).catch(console.error);
 
+    // Loader ko hatana kyunki ab humne stylish 3D background lagaya hai
     const loader = document.getElementById('authLoader');
-
-    // Loader Hide Logic
-    getRedirectResult(auth).then((result) => {
-        loader.style.opacity = '0';
-        setTimeout(() => loader.style.display = 'none', 400);
-    }).catch((error) => {
-        loader.style.opacity = '0';
-        setTimeout(() => loader.style.display = 'none', 400);
-    });
+    if(loader) loader.style.display = 'none';
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const savedAge = localStorage.getItem('kidsAgeGroup');
         window.location.replace(!savedAge ? "age-select.html" : "index-home.html");
-      } else {
-        loader.style.opacity = '0';
-        setTimeout(() => loader.style.display = 'none', 400);
       }
     });
 
@@ -341,7 +349,6 @@
       alertBox.className = type;
       alertBox.style.display = 'block';
     }
-
     function hideAlert() { document.getElementById('alertBox').style.display = 'none'; }
 
     function setLoading(isLoading, text = '') {
@@ -358,9 +365,9 @@
         case 'auth/user-not-found':
         case 'auth/wrong-password':
         case 'auth/invalid-credential': return "Incorrect email or password.";
-        case 'auth/email-already-in-use': return "Email already registered.";
+        case 'auth/email-already-in-use': return "Email already registered. Please log in.";
         case 'auth/weak-password': return "Password must be at least 6 characters.";
-        default: return "An error occurred. Try again.";
+        default: return "An error occurred. Please try again.";
       }
     }
 
@@ -371,12 +378,10 @@
       const password = document.getElementById('password').value;
 
       if (!email || !password) { showAlert("Please fill in all fields."); return; }
-
-      setLoading(true, "Logging in...");
+      setLoading(true, "Signing in...");
+      
       try {
         await signInWithEmailAndPassword(auth, email, password);
-        const savedAge = localStorage.getItem('kidsAgeGroup');
-        window.location.replace(!savedAge ? "age-select.html" : "index-home.html");
       } catch (error) {
         setLoading(false);
         showAlert(getFriendlyErrorMessage(error.code));
@@ -387,9 +392,9 @@
       hideAlert();
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value;
-      if (!email || !password) { showAlert("Enter email and password to create account."); return; }
+      if (!email || !password) { showAlert("Enter email and password."); return; }
 
-      setLoading(true, "Creating account...");
+      setLoading(true, "Creating...");
       try {
         await createUserWithEmailAndPassword(auth, email, password);
         window.location.replace("age-select.html");
@@ -401,19 +406,16 @@
 
     window.handleGoogleLogin = async function() {
       hideAlert();
-      setLoading(true, "Signing in...");
+      setLoading(true, "Connecting...");
       const provider = new GoogleAuthProvider();
       try {
-        const result = await signInWithPopup(auth, provider);
-        if (result && result.user) {
-          const savedAge = localStorage.getItem('kidsAgeGroup');
-          window.location.replace(!savedAge ? "age-select.html" : "index-home.html");
-        }
+        await signInWithPopup(auth, provider);
       } catch (error) {
+        setLoading(false);
         if (error.code === 'auth/popup-blocked') {
-          try { await signInWithRedirect(auth, provider); } catch (e) { setLoading(false); showAlert("Error."); }
-        } else {
-          setLoading(false); showAlert("Error signing in with Google.");
+          showAlert("Please allow pop-ups for this site.");
+        } else if (error.code !== 'auth/popup-closed-by-user') {
+          showAlert(getFriendlyErrorMessage(error.code));
         }
       }
     }
@@ -421,13 +423,13 @@
     window.handleForgotPassword = async function() {
       hideAlert();
       const email = document.getElementById('email').value.trim();
-      if (!email) { showAlert("Enter your email address first."); return; }
+      if (!email) { showAlert("Enter email address first."); return; }
 
-      setLoading(true, "Sending email...");
+      setLoading(true, "Sending...");
       try {
         await sendPasswordResetEmail(auth, email);
         setLoading(false);
-        showAlert("Reset email sent! Check your inbox.", "success");
+        showAlert("Reset link sent! Check inbox.", "success");
       } catch (error) {
         setLoading(false);
         showAlert(getFriendlyErrorMessage(error.code));
