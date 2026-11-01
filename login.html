@@ -19,12 +19,34 @@
       justify-content: center;
       align-items: center;
       background-image: url('kids_teacher_login_background.png');
-      background-size: 100% 100%;
-background-position: center center;
+      background-size: cover;
+      background-position: center;
       background-repeat: no-repeat;
       background-color: #fce8d5;
       padding: 16px;
       font-family: 'Quicksand', sans-serif;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Moving Clouds Unique Animation */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 200%;
+      height: 100%;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><path fill="rgba(255,255,255,0.3)" d="M150,150 Q180,120 210,150 Q240,110 280,140 Q320,120 350,150 Z M600,100 Q630,70 660,100 Q690,60 730,90 Q770,70 800,100 Z"/></svg>');
+      background-repeat: repeat-x;
+      animation: moveClouds 30s linear infinite;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    @keyframes moveClouds {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(50%); }
     }
 
     #authLoader {
