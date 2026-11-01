@@ -4,35 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Kids Teacher - Welcome</title>
+    
+    <!-- Google Fonts (Advanced: Variable Font for premium look) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+
     <style>
-        /* --- 1. CSS RESET & BASE SETUP --- */
+        /* --- ADVANCED CSS VARIABLES --- */
+        :root {
+            --primary-color: #ff5733;
+            --primary-shadow: #c0392b;
+            --text-color: #3b2a5c;
+            --glass-bg: rgba(255, 255, 255, 0.4);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
+            font-family: 'Nunito', sans-serif; /* Advanced Font */
         }
 
         body, html {
             height: 100%;
             width: 100%;
-            overflow: hidden;
             background-color: #e0f2fe;
-            /* Font change kiya hai taaki thoda modern lage */
-            font-family: 'Nunito', 'Segoe UI', Tahoma, sans-serif; 
+            overflow: hidden;
         }
 
-        /* --- 2. MAIN CONTAINER (Mobile Fit) --- */
         .welcome-container {
             position: relative;
             width: 100vw;
             height: 100vh;
-            height: 100dvh; /* Advanced mobile fit */
+            height: 100dvh; /* Advanced Mobile Fit */
             display: flex;
             flex-direction: column;
             justify-content: flex-end; 
             align-items: center;
-            padding-bottom: 5vh; /* Bottom se space */
+            padding-bottom: 5vh; 
             
             background-image: url('welcome_bg.png');
             background-size: cover; 
@@ -40,153 +51,129 @@
             background-repeat: no-repeat;
         }
 
-        /* --- 3. TEXT CONTENT (Advanced Animations) --- */
+        /* --- ADVANCED GLASSMORPHISM TEXT BOX --- */
         .text-content {
             text-align: center;
             margin-bottom: 20px;
-            z-index: 10;
             width: 90%;
-            /* Animation add ki hai */
-            animation: slideUpFade 1.2s ease-out forwards;
-            opacity: 0;
-            transform: translateY(20px);
+            padding: 15px 10px;
+            /* Glass Effect */
+            background: var(--glass-bg);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            /* Instant Load but Premium Glow Animation */
+            animation: softGlow 3s infinite alternate;
         }
 
         .text-content h1 {
-            font-size: 22px; /* Size chota kiya */
-            color: #6A5ACD; /* Naya Color: Slate Blue (Purple-Blue mix) */
-            margin-bottom: 6px;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            /* Text Shadow for premium look */
-            text-shadow: 1px 1px 0px #fff, 2px 2px 5px rgba(106, 90, 205, 0.3); 
+            font-size: 26px;
+            color: var(--text-color);
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
         }
 
         .text-content p {
-            font-size: 13px; /* Size chota kiya */
-            color: #333;
+            font-size: 14px;
+            color: #555;
             font-weight: 600;
-            margin-bottom: 20px;
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
-            font-style: italic;
         }
 
-        /* --- 4. ADVANCED 3D BUTTON --- */
+        /* --- ADVANCED 3D BUTTON WITH RIPPLE --- */
         .start-btn {
+            position: relative;
             width: 85%;
             max-width: 320px;
-            padding: 16px 20px;
-            font-size: 18px;
-            font-weight: 800;
+            padding: 18px 20px;
+            font-size: 20px;
+            font-weight: 900;
             color: white;
-            background: linear-gradient(145deg, #ff7a59, #ff5733); 
+            background: linear-gradient(145deg, #ff7a59, var(--primary-color)); 
             border: none;
             border-radius: 50px; 
             cursor: pointer;
             z-index: 10;
+            overflow: hidden; /* For Ripple effect */
             
-            /* 3D Shadow Effect */
-            box-shadow: 0 8px 0 #c0392b, 0 15px 20px rgba(0,0,0,0.2);
-            transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1); 
-            
-            /* Button Animation */
-            animation: slideUpFade 1.5s ease-out forwards;
-            opacity: 0;
-            transform: translateY(20px);
+            /* 3D Look */
+            box-shadow: 0 8px 0 var(--primary-shadow), 0 15px 20px rgba(0,0,0,0.2);
+            transition: transform 0.1s, box-shadow 0.1s;
         }
 
         .start-btn:active {
             transform: translateY(8px); 
-            box-shadow: 0 0px 0 #c0392b, 0 5px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 0px 0 var(--primary-shadow), 0 5px 10px rgba(0,0,0,0.2);
         }
 
-        /* --- 5. PRELOADER --- */
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #e0f2fe;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #cce5ff;
-            border-top: 5px solid #ff5733;
+        /* Advanced Ripple Animation */
+        .ripple {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            transform: scale(0);
+            animation: rippleAnim 0.6s linear;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @keyframes rippleAnim {
+            to { transform: scale(4); opacity: 0; }
         }
 
-        /* Animation Keyframes */
-        @keyframes slideUpFade {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hidden {
-            opacity: 0;
-            pointer-events: none;
+        /* Advanced Soft Glow Keyframe */
+        @keyframes softGlow {
+            0% { box-shadow: 0 0 10px rgba(255,255,255,0.2); }
+            100% { box-shadow: 0 0 20px rgba(255,255,255,0.6); }
         }
     </style>
-
-    <!-- Preload image for faster loading -->
-    <link rel="preload" as="image" href="welcome_bg.png">
 </head>
 <body>
 
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="spinner"></div>
-    </div>
-
-    <!-- Main Screen -->
     <div class="welcome-container">
         
-        <!-- Upar shift kiya gaya, naye color ke saath -->
+        <!-- Text with Glass Effect -->
         <div class="text-content">
-            <h1>Start Your Magical Journey ✨</h1>
-            <p>Fun learning for little explorers!</p>
+            <h1>Welcome to Kids Teacher</h1>
+            <p>A magical learning journey for your little ones</p>
         </div>
 
-        <button class="start-btn" onclick="startApp()">Let's Start 🚀</button>
+        <!-- Button -->
+        <button class="start-btn" id="startBtn">Let's Start 🚀</button>
 
     </div>
 
     <script>
-        window.addEventListener('load', function() {
-            const preloader = document.getElementById('preloader');
-            preloader.classList.add('hidden');
-            setTimeout(() => { preloader.style.display = 'none'; }, 500);
-        });
+        // ADVANCED JAVASCRIPT: Haptic Feedback & Ripple Effect
+        const btn = document.getElementById('startBtn');
 
-        function startApp() {
-            // Yahan apna login page link daalein
-            // window.location.href = "login.html"; 
-            alert("Welcome! Let's go to Login.");
-        }
-
-        // Backup timer for slow internet
-        setTimeout(function() {
-            const preloader = document.getElementById('preloader');
-            if(preloader) {
-                preloader.classList.add('hidden');
-                setTimeout(() => { preloader.style.display = 'none'; }, 500);
+        btn.addEventListener('click', function(e) {
+            // 1. Haptic Feedback (Phone vibrate hoga)
+            if (navigator.vibrate) {
+                navigator.vibrate(50); // 50 milliseconds ki vibration
             }
-        }, 3000);
+
+            // 2. Advanced Ripple Effect (Lehar banega)
+            let x = e.clientX - e.target.offsetLeft;
+            let y = e.clientY - e.target.offsetTop;
+            
+            let ripple = document.createElement("span");
+            ripple.classList.add("ripple");
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+            ripple.style.width = ripple.style.height = `20px`; // Starting size
+            
+            this.appendChild(ripple);
+
+            // Ripple ko thodi der baad hata do
+            setTimeout(() => { ripple.remove(); }, 600);
+
+            // 3. App Start Logic (0.3 sec delay taaki animation dikh jaye)
+            setTimeout(() => {
+                // window.location.href = "login.html"; // Aapka login page
+                alert("App Starting..."); 
+            }, 300);
+        });
     </script>
 </body>
 </html>
