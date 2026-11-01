@@ -10,15 +10,16 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent; /* Mobile me click par blue box nahi aayega */
+            -webkit-tap-highlight-color: transparent;
         }
 
         body, html {
             height: 100%;
             width: 100%;
-            overflow: hidden; /* Scroll bar nahi aayega */
-            background-color: #e0f2fe; /* Fallback color agar image load na ho */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            background-color: #e0f2fe;
+            /* Font change kiya hai taaki thoda modern lage */
+            font-family: 'Nunito', 'Segoe UI', Tahoma, sans-serif; 
         }
 
         /* --- 2. MAIN CONTAINER (Mobile Fit) --- */
@@ -26,69 +27,80 @@
             position: relative;
             width: 100vw;
             height: 100vh;
-            height: 100dvh; /* Advanced: Mobile browser ki address bar ko adjust karta hai */
+            height: 100dvh; /* Advanced mobile fit */
             display: flex;
             flex-direction: column;
-            justify-content: flex-end; /* Text aur Button ko niche push karega */
+            justify-content: flex-end; 
             align-items: center;
-            padding-bottom: 50px; /* Niche se thoda gap */
+            padding-bottom: 5vh; /* Bottom se space */
             
-            /* BACKGROUND IMAGE SETUP */
             background-image: url('welcome_bg.png');
-            background-size: cover; /* Image puri screen cover karegi, stretch nahi hogi */
-            background-position: top center; /* Image ka upar wala hissa (Kids Teacher text) dikhega */
+            background-size: cover; 
+            background-position: top center; 
             background-repeat: no-repeat;
         }
 
-        /* --- 3. TEXT & BUTTON STYLES (Glassmorphism) --- */
+        /* --- 3. TEXT CONTENT (Advanced Animations) --- */
         .text-content {
             text-align: center;
             margin-bottom: 20px;
             z-index: 10;
             width: 90%;
+            /* Animation add ki hai */
+            animation: slideUpFade 1.2s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
         }
 
         .text-content h1 {
-            font-size: 28px;
-            color: #4a2c11; /* Dark brown text */
-            margin-bottom: 8px;
+            font-size: 22px; /* Size chota kiya */
+            color: #6A5ACD; /* Naya Color: Slate Blue (Purple-Blue mix) */
+            margin-bottom: 6px;
             font-weight: 800;
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+            letter-spacing: 0.5px;
+            /* Text Shadow for premium look */
+            text-shadow: 1px 1px 0px #fff, 2px 2px 5px rgba(106, 90, 205, 0.3); 
         }
 
         .text-content p {
-            font-size: 15px;
-            color: #555;
+            font-size: 13px; /* Size chota kiya */
+            color: #333;
             font-weight: 600;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+            font-style: italic;
         }
 
         /* --- 4. ADVANCED 3D BUTTON --- */
         .start-btn {
             width: 85%;
-            max-width: 350px;
-            padding: 18px 20px;
-            font-size: 20px;
-            font-weight: bold;
+            max-width: 320px;
+            padding: 16px 20px;
+            font-size: 18px;
+            font-weight: 800;
             color: white;
-            background: linear-gradient(145deg, #ff7a59, #ff5733); /* Orange Gradient */
+            background: linear-gradient(145deg, #ff7a59, #ff5733); 
             border: none;
-            border-radius: 50px; /* Gol button */
+            border-radius: 50px; 
             cursor: pointer;
             z-index: 10;
             
             /* 3D Shadow Effect */
             box-shadow: 0 8px 0 #c0392b, 0 15px 20px rgba(0,0,0,0.2);
-            transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth click animation */
+            transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1); 
+            
+            /* Button Animation */
+            animation: slideUpFade 1.5s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
         }
 
-        /* Button dabane par ka effect */
         .start-btn:active {
-            transform: translateY(8px); /* Button niche jayega */
+            transform: translateY(8px); 
             box-shadow: 0 0px 0 #c0392b, 0 5px 10px rgba(0,0,0,0.2);
         }
 
-        /* --- 5. ADVANCED: PRELOADER (Bina net ke bhi instantly dikhega) --- */
+        /* --- 5. PRELOADER --- */
         #preloader {
             position: fixed;
             top: 0;
@@ -103,7 +115,6 @@
             transition: opacity 0.5s ease;
         }
 
-        /* Spinner Design */
         .spinner {
             width: 50px;
             height: 50px;
@@ -118,62 +129,57 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Hide Class */
+        /* Animation Keyframes */
+        @keyframes slideUpFade {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .hidden {
             opacity: 0;
             pointer-events: none;
         }
     </style>
 
-    <!-- ADVANCED TRICK: Background image ko pehle hi load karna (Bina net ke bhi cache se aayega) -->
+    <!-- Preload image for faster loading -->
     <link rel="preload" as="image" href="welcome_bg.png">
 </head>
 <body>
 
-    <!-- Preloader (Jab tak image download ho rahi hai tab tak dikhega) -->
+    <!-- Preloader -->
     <div id="preloader">
         <div class="spinner"></div>
     </div>
 
-    <!-- Main Welcome Screen -->
-    <div class="welcome-container" id="welcomeScreen">
+    <!-- Main Screen -->
+    <div class="welcome-container">
         
-        <!-- Text Content (Aapki photo ke hisaab se) -->
+        <!-- Upar shift kiya gaya, naye color ke saath -->
         <div class="text-content">
-            <h1>Welcome to Kids Teacher! 🌟</h1>
-            <p>A magical learning journey for your little ones</p>
+            <h1>Start Your Magical Journey ✨</h1>
+            <p>Fun learning for little explorers!</p>
         </div>
 
-        <!-- Start Button -->
         <button class="start-btn" onclick="startApp()">Let's Start 🚀</button>
 
     </div>
 
-    <!-- ADVANCED JAVASCRIPT LOGIC -->
     <script>
-        // 1. Page load hone par kya karna hai
         window.addEventListener('load', function() {
-            // Jab saari files (image + code) load ho jayein, toh preloader hata do
             const preloader = document.getElementById('preloader');
             preloader.classList.add('hidden');
-            
-            // 500ms baad preloader ko poora remove kar do DOM se
-            setTimeout(() => {
-                preloader.style.display = 'none';
-            }, 500);
+            setTimeout(() => { preloader.style.display = 'none'; }, 500);
         });
 
-        // 2. Start Button ka function
         function startApp() {
-            // Yahan aap login page par redirect kar sakte hain
-            // alert("Welcome! Let's go to Login.");
-            
-            // Example: Login page par jane ke liye
-            window.location.href = "login.html"; // Agar aapka login page alag file hai
+            // Yahan apna login page link daalein
+            // window.location.href = "login.html"; 
+            alert("Welcome! Let's go to Login.");
         }
 
-        // 3. ADVANCED TRICK: Agar internet bahut slow hai aur image load nahi ho rahi
-        // Toh 3 second baad preloader forcefully hata do taaki user atka na rahe.
+        // Backup timer for slow internet
         setTimeout(function() {
             const preloader = document.getElementById('preloader');
             if(preloader) {
