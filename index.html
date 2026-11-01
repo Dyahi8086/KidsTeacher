@@ -8,7 +8,7 @@
     <!-- Advanced Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
 
     <style>
         /* --- 1. ADVANCED CSS SETUP --- */
@@ -17,16 +17,17 @@
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
-            font-family: 'Fredoka', sans-serif; /* Bachhon ke liye best rounded font */
+            font-family: 'Fredoka', sans-serif; 
         }
 
         body, html {
             height: 100%;
             width: 100%;
             background-color: #e0f2fe;
-            overflow: hidden;
+            overflow: hidden; /* Scroll lock */
         }
 
+        /* --- 2. MAIN CONTAINER WITH PARALLAX --- */
         .welcome-container {
             position: relative;
             width: 100vw;
@@ -42,44 +43,49 @@
             background-size: cover; 
             background-position: top center; 
             background-repeat: no-repeat;
+            
+            /* Smooth transition for parallax */
+            transition: background-position 0.1s ease-out;
         }
 
-        /* --- 2. TEXT BUG FIX & NEW DESIGN --- */
+        /* --- 3. ADVANCED TEXT ANIMATIONS --- */
         .text-content {
             text-align: center;
-            margin-bottom: 25px; /* Button se gap set kiya */
-            width: 90%;
+            margin-bottom: 25px; 
             z-index: 10;
+            position: relative;
+        }
+
+        /* Spring Animation (Load hote waqt bounce) */
+        .spring-in {
+            animation: springBounce 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            opacity: 0;
+            transform: scale(0.8) translateY(20px);
         }
 
         .text-content h1 {
-            font-size: 32px; 
-            color: #4a2c11; /* Dark Brown (Premium look) */
-            margin-bottom: 5px;
+            font-size: 34px; 
+            color: #4a2c11; /* Dark Brown */
             font-weight: 700;
             line-height: 1.1;
-            text-shadow: 1px 1px 0px rgba(255,255,255,0.8), 2px 2px 5px rgba(0,0,0,0.1); /* 3D Text Effect */
+            text-shadow: 2px 2px 0px rgba(255,255,255,0.9), 4px 4px 10px rgba(0,0,0,0.15);
+            transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: default;
         }
 
-        .text-content p {
-            font-size: 16px;
-            color: #444;
-            font-weight: 500;
-            background: rgba(255, 255, 255, 0.5); /* Halka sa glass effect text ke peeche */
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+        /* Text ko touch karne par 3D press effect */
+        .text-content h1:active {
+            transform: scale(0.95);
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.9);
         }
 
-        /* --- 3. ADVANCED BUTTON (Ripple & Haptic) --- */
+        /* --- 4. ADVANCED BUTTON --- */
         .start-btn {
             position: relative;
             width: 85%;
             max-width: 320px;
-            padding: 16px 20px;
-            font-size: 20px;
+            padding: 18px 20px;
+            font-size: 22px;
             font-weight: 700;
             color: white;
             background: linear-gradient(145deg, #ff7a59, #ff5733); 
@@ -87,75 +93,82 @@
             border-radius: 50px; 
             cursor: pointer;
             z-index: 10;
-            overflow: hidden; /* For Ripple */
+            overflow: hidden; 
             
-            /* Perfect 3D Shadow */
-            box-shadow: 0 8px 0 #b83b23, 0 15px 20px rgba(0,0,0,0.3);
+            /* 3D Shadow */
+            box-shadow: 0 8px 0 #b83b23, 0 15px 25px rgba(255, 87, 51, 0.4);
             transition: transform 0.1s, box-shadow 0.1s;
         }
 
+        /* Button dabane par andar jayega */
         .start-btn:active {
             transform: translateY(8px); 
             box-shadow: 0 0px 0 #b83b23, 0 5px 10px rgba(0,0,0,0.2);
         }
 
-        /* Advanced Ripple Effect (Click par paani ki lehar) */
+        /* Ripple Effect */
         .ripple {
             position: absolute;
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
             transform: scale(0);
             animation: rippleAnim 0.6s linear;
             pointer-events: none;
         }
 
+        /* --- 5. KEYFRAMES FOR ANIMATIONS --- */
         @keyframes rippleAnim {
             to { transform: scale(4); opacity: 0; }
         }
 
-        /* --- 4. ADVANCED LOAD ANIMATION (Smooth Entry) --- */
-        .animate-up {
-            animation: slideUpFade 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        @keyframes slideUpFade {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        @keyframes springBounce {
+            0% { opacity: 0; transform: scale(0.8) translateY(20px); }
+            60% { opacity: 1; transform: scale(1.05) translateY(-5px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <div class="welcome-container">
+    <div class="welcome-container" id="parallaxContainer">
         
-        <!-- Naya Text aur Badhiya Design -->
-        <div class="text-content animate-up" style="animation-delay: 0.2s;">
-            <h1>Ignite Your Child's<br>Potential</h1>
-            <p>Fun, safe & magical learning!</p>
+        <!-- Text Sirf Ek Line, No Niche Wala Text -->
+        <div class="text-content spring-in" style="animation-delay: 0.1s;">
+            <h1>Ignite Your<br>Child's Potential</h1>
         </div>
 
-        <!-- Advanced Button -->
-        <button class="start-btn animate-up" id="startBtn" style="animation-delay: 0.4s;">Let's Start 🚀</button>
+        <!-- Button with Spring Animation -->
+        <button class="start-btn spring-in" id="startBtn" style="animation-delay: 0.3s;">Let's Start 🚀</button>
 
     </div>
 
+    <!-- --- ADVANCED JAVASCRIPT --- -->
     <script>
-        // --- ADVANCED JAVASCRIPT ---
+        // 1. PARALLAX TOUCH/MOUSE EFFECT (Background move hoga)
+        const container = document.getElementById('parallaxContainer');
+        
+        document.addEventListener('touchmove', function(e) {
+            let touch = e.touches[0];
+            let x = (touch.clientX / window.innerWidth - 0.5) * 20; // 20px move
+            let y = (touch.clientY / window.innerHeight - 0.5) * 20;
+            
+            // Background ko halka sa move karega (Depth effect)
+            container.style.backgroundPosition = `calc(50% + ${x}px) calc(0% + ${y}px)`;
+        });
+
+        // 2. ADVANCED BUTTON CLICK (Haptic + Ripple + Redirect)
         const btn = document.getElementById('startBtn');
 
         btn.addEventListener('click', function(e) {
-            // 1. Haptic Feedback (Phone halka sa vibrate karega)
+            // Haptic Vibration
             if (navigator.vibrate) {
-                navigator.vibrate(40); 
+                navigator.vibrate([50, 30, 50]); // Double vibrate for premium feel
             }
 
-            // 2. Ripple Effect Generate karna
-            let x = e.clientX - e.target.offsetLeft;
-            let y = e.clientY - e.target.offsetTop;
+            // Ripple Effect Calculate
+            let rect = this.getBoundingClientRect();
+            let x = e.clientX - rect.left;
+            let y = e.clientY - rect.top;
             
             let ripple = document.createElement("span");
             ripple.classList.add("ripple");
@@ -165,13 +178,12 @@
             
             this.appendChild(ripple);
 
-            // Ripple ko remove karna 600ms baad
             setTimeout(() => { ripple.remove(); }, 600);
 
-            // 3. Page Redirect (Thoda delay taaki animation dikh jaye)
+            // Redirect to login page
             setTimeout(() => {
                 window.location.href = "login.html"; 
-            }, 250); 
+            }, 200); 
         });
     </script>
 </body>
