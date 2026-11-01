@@ -12,82 +12,71 @@
   
   <style>
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+      margin: 0; padding: 0; box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
     }
 
     body {
       min-height: 100dvh;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      /* Premium Gold/Coin & Peach Theme */
-      background: linear-gradient(135deg, #fff5e1 0%, #ffdfba 50%, #ffecd2 100%);
+      flex-direction: column;
+      justify-content: flex-end; /* Niche se upar aane ke liye */
+      /* Premium Peach/Gold Coins Background */
+      background: linear-gradient(180deg, #fff8f0 0%, #ffe4c4 50%, #ffd6a5 100%);
       font-family: 'Nunito', sans-serif;
       overflow: hidden;
       position: relative;
     }
 
-    /* --- 3D Floating Background Elements (Coins/Stars) --- */
+    /* --- BACKGROUND FLOATING ELEMENTS --- */
     .bg-shape {
       position: absolute;
-      background: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.5);
       backdrop-filter: blur(10px);
       border-radius: 50%;
       box-shadow: inset -10px -10px 20px rgba(0,0,0,0.05), 10px 10px 20px rgba(255,255,255,0.8);
       z-index: 0;
     }
     .shape-1 { width: 150px; height: 150px; top: -30px; left: -40px; background: radial-gradient(circle at 30% 30%, #ffffff, #ffedd5); animation: float 6s ease-in-out infinite; }
-    .shape-2 { width: 100px; height: 100px; bottom: 50px; right: -20px; background: radial-gradient(circle at 30% 30%, #ffffff, #fef08a); animation: float 8s ease-in-out infinite reverse; }
-    .shape-3 { width: 70px; height: 70px; top: 15%; right: 15%; background: radial-gradient(circle at 30% 30%, #fde047, #facc15); border-radius: 20% 80% 20% 80%; animation: float 5s ease-in-out infinite 1s; }
-
+    .shape-2 { width: 100px; height: 100px; top: 20%; right: -20px; background: radial-gradient(circle at 30% 30%, #ffffff, #fef08a); animation: float 8s ease-in-out infinite reverse; }
+    
     @keyframes float {
       0%, 100% { transform: translateY(0) rotate(0deg); }
       50% { transform: translateY(-20px) rotate(10deg); }
     }
 
-    /* --- MAIN LOGIN CARD --- */
+    /* --- LOGIN CARD (Bottom Sheet Style) --- */
     .login-card {
-      width: 92%;
-      max-width: 400px;
-      background: rgba(255, 255, 255, 0.85);
+      width: 100%;
+      max-width: 450px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: 32px;
-      padding: 30px 25px;
-      box-shadow: 0 25px 50px -12px rgba(249, 115, 22, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+      border-radius: 35px 35px 0 0;
+      padding: 25px 25px 40px 25px;
+      box-shadow: 0 -15px 40px rgba(249, 115, 22, 0.1);
       position: relative;
       z-index: 10;
+      animation: slideUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    /* --- TOP TABS (Log In / Sign Up) --- */
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+
+    /* --- TABS --- */
     .tabs {
-      display: flex;
-      background: #f1f5f9;
-      border-radius: 16px;
-      padding: 5px;
-      margin-bottom: 25px;
+      display: flex; background: #f1f5f9;
+      border-radius: 16px; padding: 5px; margin-bottom: 25px;
     }
-    
     .tab-btn {
-      flex: 1;
-      padding: 12px;
-      border: none;
-      background: transparent;
-      font-family: 'Fredoka', sans-serif;
-      font-size: 16px;
-      font-weight: 600;
-      color: #94a3b8;
-      cursor: pointer;
-      border-radius: 12px;
-      transition: all 0.3s ease;
+      flex: 1; padding: 12px; border: none; background: transparent;
+      font-family: 'Fredoka', sans-serif; font-size: 16px; font-weight: 600;
+      color: #94a3b8; cursor: pointer; border-radius: 12px; transition: all 0.3s ease;
     }
-
     .tab-btn.active {
-      background: #ffffff;
-      color: #f97316;
+      background: #ffffff; color: #f97316;
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
 
@@ -108,7 +97,7 @@
     .input-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 18px; color: #94a3b8; z-index: 2; }
     
     .form-input {
-      width: 100%; padding: 22px 16px 8px 48px;
+      width: 100%; padding: 22px 45px 8px 48px;
       background: #ffffff; border: 2px solid #e2e8f0;
       border-radius: 16px; font-size: 15px; color: #1e293b;
       font-family: 'Nunito', sans-serif; font-weight: 800;
@@ -124,7 +113,13 @@
     .form-input:focus ~ .floating-label,
     .form-input:not(:placeholder-shown) ~ .floating-label { top: 12px; font-size: 11px; color: #f97316; }
 
-    .toggle-password { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 18px; color: #94a3b8; }
+    /* --- REAL EYE ICON BUTTON --- */
+    .toggle-password { 
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%); 
+      background: none; border: none; cursor: pointer; width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center; color: #94a3b8;
+    }
+    .toggle-password:active { transform: translateY(-50%) scale(0.9); }
 
     /* --- BUTTONS --- */
     .forgot-link { display: block; text-align: right; font-size: 13px; color: #64748b; font-weight: 800; background: none; border: none; cursor: pointer; margin-bottom: 20px; width: 100%; }
@@ -155,7 +150,6 @@
     }
     .btn-google:active { transform: translateY(4px); box-shadow: 0 0 0 #e2e8f0; }
 
-    /* Hide Section */
     .hidden { display: none !important; }
   </style>
 </head>
@@ -163,11 +157,9 @@
 
   <div class="bg-shape shape-1"></div>
   <div class="bg-shape shape-2"></div>
-  <div class="bg-shape shape-3"></div>
 
   <div class="login-card">
     
-    <!-- TABS (Log In / Sign Up) -->
     <div class="tabs">
       <button class="tab-btn active" id="tabLogin" onclick="switchTab('login')">Log In</button>
       <button class="tab-btn" id="tabSignup" onclick="switchTab('signup')">Sign Up</button>
@@ -192,19 +184,21 @@
         <span class="input-icon">🔒</span>
         <input type="password" id="password" class="form-input" placeholder=" " required>
         <label class="floating-label">Password</label>
-        <button type="button" class="toggle-password" onclick="togglePasswordVisibility()">👁️</button>
+        
+        <!-- REAL SVG EYE ICON -->
+        <button type="button" class="toggle-password" id="eyeBtn" onclick="togglePasswordVisibility()">
+          <svg id="eyeOpen" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          <svg id="eyeClosed" class="hidden" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+        </button>
       </div>
 
-      <!-- Forgot Password (Only visible on Login) -->
       <button type="button" id="forgotBtn" class="forgot-link" onclick="handleForgotPassword()">Forgot Password?</button>
 
-      <!-- Main Action Button (Changes text based on tab) -->
       <button type="submit" id="submitBtn" class="btn-main">Log In</button>
     </form>
 
     <div class="divider">OR</div>
 
-    <!-- Google Button (Works for both Login & Signup) -->
     <button type="button" id="googleBtn" class="btn-google" onclick="handleGoogleLogin()">
       <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
       Continue with Google
@@ -233,8 +227,7 @@
     const auth = getAuth(app);
     setPersistence(auth, browserLocalPersistence).catch(console.error);
 
-    // --- UI LOGIC (Tabs) ---
-    let currentMode = 'login'; // 'login' or 'signup'
+    let currentMode = 'login';
 
     window.switchTab = function(mode) {
       currentMode = mode;
@@ -260,11 +253,11 @@
         formTitle.textContent = "Create Account";
         formSubtitle.textContent = "Join us to start the magical journey";
         submitBtn.textContent = "Sign Up";
-        forgotBtn.classList.add('hidden'); // Hide forgot password in signup
+        forgotBtn.classList.add('hidden'); 
       }
     }
 
-    // Auth State Check
+    // Google Login Page Redirect Fix (Yahan sabse bada change hai)
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const savedAge = localStorage.getItem('kidsAgeGroup');
@@ -272,9 +265,21 @@
       }
     });
 
+    // REAL EYE ICON TOGGLE LOGIC
     window.togglePasswordVisibility = function() {
       const passwordInput = document.getElementById('password');
-      passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+      const eyeOpen = document.getElementById('eyeOpen');
+      const eyeClosed = document.getElementById('eyeClosed');
+      
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        eyeOpen.classList.add('hidden');
+        eyeClosed.classList.remove('hidden');
+      } else {
+        passwordInput.type = 'password';
+        eyeOpen.classList.remove('hidden');
+        eyeClosed.classList.add('hidden');
+      }
     }
 
     function showAlert(message, type = 'error') {
@@ -302,12 +307,11 @@
         case 'auth/invalid-credential': return "Incorrect email or password.";
         case 'auth/email-already-in-use': return "Email already registered. Please Log In.";
         case 'auth/weak-password': return "Password must be at least 6 characters.";
-        case 'auth/popup-blocked': return "Please allow pop-ups in your browser for Google Login.";
+        case 'auth/popup-blocked': return "Popup blocked! Please enable popups or try again.";
         default: return "An error occurred. Please try again.";
       }
     }
 
-    // --- MAIN FORM SUBMIT ---
     window.handleFormSubmit = async function(event) {
       event.preventDefault();
       hideAlert();
@@ -316,14 +320,13 @@
 
       if (!email || !password) { showAlert("Please fill in all fields."); return; }
       
-      setLoading(true, currentMode === 'login' ? "Signing in..." : "Creating account...");
+      setLoading(true, currentMode === 'login' ? "Signing in..." : "Creating...");
       
       try {
         if (currentMode === 'login') {
           await signInWithEmailAndPassword(auth, email, password);
         } else {
           await createUserWithEmailAndPassword(auth, email, password);
-          // Note: Redirect will happen automatically due to onAuthStateChanged
         }
       } catch (error) {
         setLoading(false);
@@ -331,25 +334,30 @@
       }
     }
 
-    // --- GOOGLE LOGIN ---
+    // GOOGLE LOGIN DIRECT TAB FIX
     window.handleGoogleLogin = async function() {
       hideAlert();
       setLoading(true, "Connecting...");
       const provider = new GoogleAuthProvider();
+      
       try {
+        // Pop-up block bypass karne ke liye direct call
         await signInWithPopup(auth, provider);
         // Redirect handled by onAuthStateChanged
       } catch (error) {
         setLoading(false);
-        showAlert(getFriendlyErrorMessage(error.code));
+        if(error.code === 'auth/popup-blocked') {
+           showAlert("Please allow pop-ups from this site to login with Google.", "error");
+        } else {
+           showAlert(getFriendlyErrorMessage(error.code));
+        }
       }
     }
 
-    // --- FORGOT PASSWORD ---
     window.handleForgotPassword = async function() {
       hideAlert();
       const email = document.getElementById('email').value.trim();
-      if (!email) { showAlert("Please type your email in the box above first."); return; }
+      if (!email) { showAlert("Please type your email above first."); return; }
 
       setLoading(true, "Sending...");
       try {
