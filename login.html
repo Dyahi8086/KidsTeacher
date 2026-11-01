@@ -18,13 +18,42 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      /* Advanced Glassmorphic & Warm Gradient Background */
-      background: linear-gradient(135deg, #fef08a, #fed7aa, #fbcfe8);
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+      /* Advanced Mesh & Glow Gradient Background */
+      background: linear-gradient(135deg, #fbcfe8 0%, #fed7aa 50%, #bae6fd 100%);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
       padding: 16px;
       font-family: 'Quicksand', sans-serif;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Soft glowing background decorative elements */
+    body::before, body::after {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      z-index: 0;
+      filter: blur(60px);
+      opacity: 0.5;
+    }
+    body::before {
+      background: #ffedd5;
+      top: -50px;
+      left: -50px;
+    }
+    body::after {
+      background: #e0f2fe;
+      bottom: -50px;
+      right: -50px;
     }
 
     #authLoader {
@@ -68,13 +97,14 @@
       width: min(92%, 410px);
       max-height: 94vh;
       overflow-y: auto;
-      background: rgba(255, 255, 255, 0.65);
-      backdrop-filter: blur(25px) saturate(190%);
-      -webkit-backdrop-filter: blur(25px) saturate(190%);
-      border-radius: 36px;
+      /* Advanced Frosted Glass Effect */
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-radius: 32px;
       padding: 28px 22px;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12), inset 0 1.5px 3px rgba(255, 255, 255, 0.9);
-      border: 2px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+      border: 1.5px solid rgba(255, 255, 255, 0.7);
       text-align: center;
       position: relative;
       z-index: 10;
@@ -85,28 +115,27 @@
     }
 
     .emblem-3d {
-      width: 80px;
-      height: 60px;
+      width: 70px;
+      height: 55px;
       margin: 0 auto 6px auto;
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
-      filter: drop-shadow(0 8px 12px rgba(249, 115, 22, 0.25));
+      filter: drop-shadow(0 6px 10px rgba(249, 115, 22, 0.2));
     }
 
     .app-title {
-      font-family: 'Baloo 2', 'Fredoka', cursive, sans-serif;
-      font-size: 28px;
+      font-family: 'Baloo 2', cursive, sans-serif;
+      font-size: 26px;
       font-weight: 800;
       color: #9a3412;
       line-height: 1.15;
       letter-spacing: 0.5px;
-      text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+      text-shadow: 0 2px 4px rgba(255, 255, 255, 0.6);
     }
 
     .app-subtitle {
-      font-size: 14px;
+      font-size: 13.5px;
       color: #475569;
       font-weight: 700;
       margin-top: 4px;
@@ -155,9 +184,9 @@
       padding: 13px 16px;
       padding-left: 46px;
       padding-right: 46px;
-      background: rgba(255, 255, 255, 0.85);
-      border: 2px solid rgba(226, 232, 240, 0.9);
-      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.8);
+      border: 2px solid rgba(226, 232, 240, 0.8);
+      border-radius: 16px;
       font-size: 14px;
       color: #1e293b;
       font-family: 'Quicksand', sans-serif;
@@ -167,9 +196,9 @@
     }
 
     .form-input:focus {
-      border-color: #ff7e33;
+      border-color: #f97316;
       background: rgba(255, 255, 255, 1);
-      box-shadow: 0 0 0 4px rgba(255, 126, 51, 0.15);
+      box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15);
     }
 
     .toggle-password {
@@ -212,12 +241,12 @@
       background: linear-gradient(135deg, #ff7e5f, #f97316);
       color: #ffffff;
       border: none;
-      border-radius: 20px;
+      border-radius: 18px;
       font-size: 17px;
       font-family: 'Baloo 2', cursive, sans-serif;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 6px 0 #c2410c, 0 10px 20px rgba(249, 115, 22, 0.35);
+      box-shadow: 0 6px 0 #c2410c, 0 10px 20px rgba(249, 115, 22, 0.3);
       transition: transform 0.1s ease;
       margin-bottom: 10px;
     }
@@ -230,7 +259,7 @@
     .btn-signup-alt {
       width: 100%;
       padding: 11px;
-      background: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.4);
       color: #c2410c;
       border: 2px dashed #f97316;
       border-radius: 16px;
@@ -241,7 +270,7 @@
       transition: background 0.2s;
     }
     .btn-signup-alt:hover {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.7);
     }
 
     .divider {
@@ -257,7 +286,7 @@
     .divider::before, .divider::after {
       content: '';
       flex: 1;
-      border-bottom: 1.5px solid rgba(203, 213, 225, 0.8);
+      border-bottom: 1.5px solid rgba(203, 213, 225, 0.7);
     }
     .divider::before { margin-right: 10px; }
     .divider::after { margin-left: 10px; }
@@ -265,10 +294,10 @@
     .btn-google {
       width: 100%;
       padding: 13px;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.85);
       color: #334155;
-      border: 2px solid rgba(226, 232, 240, 0.9);
-      border-radius: 18px;
+      border: 2px solid rgba(226, 232, 240, 0.8);
+      border-radius: 16px;
       font-size: 14.5px;
       font-weight: 700;
       cursor: pointer;
@@ -314,7 +343,7 @@
   <div class="login-card">
     <div class="brand-header">
       <div class="emblem-3d">
-        <svg width="70" height="55" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="65" height="50" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M10 50 C30 40, 48 48, 50 55 C52 48, 70 40, 90 50 L90 25 C70 15, 52 22, 50 30 C48 22, 30 15, 10 25 Z" fill="#ff7e5f" />
           <path d="M14 47 C32 38, 48 45, 50 50 C52 45, 68 38, 86 47 L86 23 C68 15, 52 20, 50 27 C48 20, 32 15, 14 23 Z" fill="#ffffff" />
           <path d="M50 27 L50 50" stroke="#f97316" stroke-width="2" />
