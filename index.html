@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Kids Teacher - Welcome</title>
     
-    <!-- Advanced Google Font -->
+    <!-- Advanced Google Font (Fredoka - bilkul aapki photo jaisa) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- 1. ADVANCED CSS SETUP --- */
+        /* --- 1. SETUP --- */
         * {
             margin: 0;
             padding: 0;
@@ -34,9 +34,9 @@
             height: 100dvh; 
             display: flex;
             flex-direction: column;
-            justify-content: flex-end; /* Content ko niche rakhega */
+            justify-content: flex-end; 
             align-items: center;
-            padding-bottom: 80px; /* Button ko thoda upar kiya */
+            padding-bottom: 30px; 
             
             background-image: url('welcome_bg.png');
             background-size: cover; 
@@ -44,89 +44,142 @@
             background-repeat: no-repeat;
         }
 
-        /* --- 2. ADVANCED BUTTON WITH BREATHING & GLOW --- */
+        /* --- 2. EXACT TEXT MATCHING YOUR PHOTO --- */
+        .text-content {
+            text-align: center;
+            margin-bottom: 20px; 
+            z-index: 10;
+            /* Entry Animation (Bounce Effect) */
+            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        .text-content h1 {
+            font-size: 28px; 
+            color: #8B3A00; /* Exact Dark Brown/Orange color */
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.6);
+        }
+
+        .text-content p {
+            font-size: 14px;
+            color: #6B5B4D; /* Soft brown text */
+            font-weight: 500;
+        }
+
+        /* --- 3. EXACT BUTTON (Let's Start →) --- */
         .start-btn {
             position: relative;
-            width: 85%;
-            max-width: 320px;
-            padding: 20px;
-            font-size: 22px;
+            width: 88%;
+            max-width: 350px;
+            padding: 16px 20px;
+            font-size: 20px;
             font-weight: 700;
             color: white;
-            background: linear-gradient(145deg, #ff7a59, #ff5733); 
+            background: #FF6B35; /* Exact Orange Color */
             border: none;
             border-radius: 50px; 
             cursor: pointer;
             z-index: 10;
             overflow: hidden; 
             
-            /* 3D Shadow */
-            box-shadow: 0 10px 0 #b83b23, 0 20px 30px rgba(255, 87, 51, 0.4);
-            
-            /* Breathing & Glow Animation */
-            animation: breathe 3s infinite alternate ease-in-out, glow 3s infinite alternate ease-in-out;
+            /* 3D Shadow Effect */
+            box-shadow: 0 6px 0 #cc4e20, 0 10px 20px rgba(255, 107, 53, 0.3);
             transition: transform 0.1s, box-shadow 0.1s;
+            
+            /* Entry Animation */
+            animation: slideUp 0.8s ease-out forwards;
+            animation-delay: 0.2s;
+            opacity: 0;
+            transform: translateY(20px);
         }
 
-        /* Button dabane par andar jayega */
         .start-btn:active {
-            transform: translateY(10px); 
-            box-shadow: 0 0px 0 #b83b23, 0 5px 10px rgba(0,0,0,0.2);
-            /* Animation ko pause karega jab click ho */
-            animation: none; 
+            transform: translateY(6px); 
+            box-shadow: 0 0px 0 #cc4e20, 0 4px 10px rgba(0,0,0,0.2);
         }
 
-        /* Ripple Effect */
+        /* Advanced Ripple Effect (Click par lehar) */
         .ripple {
             position: absolute;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.4);
             border-radius: 50%;
             transform: scale(0);
             animation: rippleAnim 0.6s linear;
             pointer-events: none;
         }
 
-        /* --- 3. KEYFRAMES FOR ANIMATIONS --- */
+        /* --- 4. BOTTOM DOTS (Pagination) --- */
+        .pagination {
+            display: flex;
+            gap: 6px;
+            margin-top: 20px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #FFDAB9;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            width: 24px;
+            background-color: #FF6B35; /* Orange active dot */
+        }
+
+        /* --- 5. KEYFRAMES --- */
+        @keyframes popIn {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         @keyframes rippleAnim {
             to { transform: scale(4); opacity: 0; }
-        }
-
-        /* Button ka saans lene wala effect */
-        @keyframes breathe {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.03); }
-        }
-
-        /* Button ke peeche glow */
-        @keyframes glow {
-            0% { box-shadow: 0 10px 0 #b83b23, 0 0px 20px rgba(255, 122, 89, 0.4); }
-            100% { box-shadow: 0 10px 0 #b83b23, 0 0px 40px rgba(255, 122, 89, 0.8); }
         }
     </style>
 </head>
 <body>
 
-    <div class="welcome-container" id="parallaxContainer">
+    <div class="welcome-container">
         
-        <!-- Koi Text Nahi, Bas Ek Solid Button -->
-        <button class="start-btn" id="startBtn">Let's Start 🚀</button>
+        <!-- Text (Exact Match) -->
+        <div class="text-content">
+            <h1>Learning Is an<br>Adventure!</h1>
+            <p>Explore, discover and grow every day.</p>
+        </div>
+
+        <!-- Button (Exact Match) -->
+        <button class="start-btn" id="startBtn">Let's Start →</button>
+
+        <!-- Dots (3 Dashes) -->
+        <div class="pagination">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
 
     </div>
 
     <!-- --- ADVANCED JAVASCRIPT --- -->
     <script>
         const btn = document.getElementById('startBtn');
-        
-        // 1. Continuous Haptic Feedback (Jab touch karein)
-        btn.addEventListener('touchstart', function() {
-            if (navigator.vibrate) {
-                navigator.vibrate([20, 30, 20]); // Halka sa vibrate hoga
-            }
-        });
 
-        // 2. Button Click Logic
         btn.addEventListener('click', function(e) {
-            // Ripple Effect Calculate
+            // 1. Haptic Vibration (Phone halka sa vibrate karega)
+            if (navigator.vibrate) {
+                navigator.vibrate([40, 30, 40]); 
+            }
+
+            // 2. Ripple Effect
             let rect = this.getBoundingClientRect();
             let x = e.clientX - rect.left;
             let y = e.clientY - rect.top;
@@ -141,19 +194,10 @@
 
             setTimeout(() => { ripple.remove(); }, 600);
 
-            // Login Page par Redirect
+            // 3. Redirect to Login Page (Thoda delay taaki effect dikhe)
             setTimeout(() => {
                 window.location.href = "login.html"; 
             }, 200); 
-        });
-
-        // 3. Advanced Parallax (Touch par background halka sa move hoga)
-        const container = document.getElementById('parallaxContainer');
-        document.addEventListener('touchmove', function(e) {
-            let touch = e.touches[0];
-            let x = (touch.clientX / window.innerWidth - 0.5) * 15; 
-            let y = (touch.clientY / window.innerHeight - 0.5) * 15;
-            container.style.backgroundPosition = `calc(50% + ${x}px) calc(0% + ${y}px)`;
         });
     </script>
 </body>
