@@ -14,14 +14,13 @@
     }
 
     body {
+      min-height: 100vh;
       min-height: 100dvh;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
       background: linear-gradient(180deg, #dbeafe 0%, #fef08a 50%, #fed7aa 100%);
-      background-size: cover;
-      background-position: center;
       padding: 24px 16px;
       font-family: 'Quicksand', sans-serif;
       overflow-x: hidden;
@@ -34,18 +33,18 @@
       position: absolute;
       top: 0;
       left: -100%;
-      width: 200%;
+      width: 300%;
       height: 100%;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><path fill="rgba(255,255,255,0.4)" d="M100,100 Q130,70 160,100 Q190,60 230,90 Q270,70 300,100 Z M800,200 Q830,170 860,200 Q890,160 930,190 Q970,170 1000,200 Z"/></svg>');
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><path fill="rgba(255,255,255,0.4)" d="M100,150 Q130,110 160,150 Q190,100 230,130 Q270,110 300,150 Z M700,250 Q730,210 760,250 Q790,200 830,230 Q870,210 900,250 Z"/></svg>');
       background-repeat: repeat-x;
-      animation: moveCloudsSlow 35s linear infinite;
+      animation: moveCloudsSmooth 40s linear infinite;
       z-index: 1;
       pointer-events: none;
     }
 
-    @keyframes moveCloudsSlow {
+    @keyframes moveCloudsSmooth {
       0% { transform: translateX(0); }
-      100% { transform: translateX(50%); }
+      100% { transform: translateX(33.33%); }
     }
 
     .welcome-container {
@@ -59,34 +58,30 @@
       text-align: center;
       flex: 1;
       justify-content: space-between;
-      padding: 10px 0;
     }
 
     .header-branding {
       width: 100%;
     }
 
-    .hero-card-wrapper {
+    .hero-image-container {
       width: 100%;
-      background: rgba(255, 255, 255, 0.55);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: 30px;
-      padding: 20px;
-      border: 2px solid rgba(255, 255, 255, 0.8);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-      margin: 15px 0;
+      margin: 10px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .hero-image {
       width: 100%;
-      border-radius: 20px;
-      height: auto;
+      max-height: 400px;
+      object-fit: contain;
       display: block;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
     }
 
     .welcome-text-box {
-      margin: 15px 0;
+      margin: 10px 0;
     }
 
     .welcome-heading {
@@ -94,8 +89,8 @@
       font-size: 26px;
       font-weight: 800;
       color: #9a3412;
-      text-shadow: 0 2px 4px rgba(255,255,255,0.8);
-      margin-bottom: 6px;
+      margin-bottom: 4px;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.9);
     }
 
     .welcome-subtext {
@@ -120,6 +115,7 @@
       text-decoration: none;
       display: inline-block;
       letter-spacing: 0.5px;
+      margin-top: 10px;
     }
 
     .btn-get-started:active {
@@ -132,17 +128,16 @@
 
   <div class="welcome-container">
     <div class="header-branding">
-      <h2 style="font-family: 'Baloo 2', cursive; font-size: 32px; color: #1e3a8a; font-weight: 800; text-shadow: 0 2px 4px rgba(255,255,255,0.8);">Kid's Teacher</h2>
+      <h2 style="font-family: 'Baloo 2', cursive; font-size: 28px; color: #1e3a8a; font-weight: 800; text-shadow: 0 2px 4px rgba(255,255,255,0.8);">Kid's Teacher</h2>
     </div>
 
-    <div class="hero-card-wrapper">
-      <!-- Yahan sahi image file ka naam set kar diya hai -->
+    <div class="hero-image-container">
       <img src="welcome_bg.png" alt="Kids Learning Playground" class="hero-image">
-      
-      <div class="welcome-text-box">
-        <h1 class="welcome-heading">Welcome to Kids Teacher! ✨</h1>
-        <p class="welcome-subtext">A magical learning journey for your little ones</p>
-      </div>
+    </div>
+
+    <div class="welcome-text-box">
+      <h1 class="welcome-heading">Little Steps, Big Dreams! ✨</h1>
+      <p class="welcome-subtext">A magical learning journey for your little ones</p>
     </div>
 
     <div style="width: 100%;">
