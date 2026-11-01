@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Kids Teacher - Welcome</title>
+  <title>Kids Teacher</title>
   <link rel="manifest" href="manifest.json">
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Fredoka:wght@600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
   <style>
@@ -21,7 +21,7 @@
       justify-content: space-between;
       align-items: center;
       background: linear-gradient(180deg, #dbeafe 0%, #fef08a 50%, #fed7aa 100%);
-      padding: 24px 16px;
+      padding: 16px;
       font-family: 'Quicksand', sans-serif;
       overflow-x: hidden;
       position: relative;
@@ -51,71 +51,66 @@
       position: relative;
       z-index: 2;
       width: 100%;
-      max-width: 420px;
+      max-width: 400px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      flex: 1;
+      height: 100%;
       justify-content: space-between;
     }
 
-    .header-branding {
+    .hero-image-wrapper {
       width: 100%;
-    }
-
-    .hero-image-container {
-      width: 100%;
-      margin: 10px 0;
+      flex: 1;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      margin: 5px 0;
     }
 
     .hero-image {
       width: 100%;
-      max-height: 400px;
+      max-height: 60vh;
       object-fit: contain;
       display: block;
-      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
     }
 
     .welcome-text-box {
-      margin: 10px 0;
+      margin-bottom: 12px;
     }
 
     .welcome-heading {
       font-family: 'Baloo 2', cursive;
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 800;
       color: #9a3412;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
       text-shadow: 0 1px 2px rgba(255,255,255,0.9);
     }
 
     .welcome-subtext {
-      font-size: 14px;
+      font-size: 13px;
       color: #334155;
       font-weight: 700;
     }
 
     .btn-get-started {
       width: 100%;
-      padding: 16px;
+      padding: 15px;
       background: linear-gradient(135deg, #ff7e5f, #f97316);
       color: #ffffff;
       border: none;
-      border-radius: 22px;
+      border-radius: 20px;
       font-size: 18px;
       font-family: 'Baloo 2', cursive;
       font-weight: 800;
       cursor: pointer;
-      box-shadow: 0 6px 0 #c2410c, 0 10px 20px rgba(249, 115, 22, 0.4);
+      box-shadow: 0 5px 0 #c2410c, 0 8px 16px rgba(249, 115, 22, 0.4);
       transition: transform 0.1s ease;
       text-decoration: none;
-      display: inline-block;
+      display: block;
       letter-spacing: 0.5px;
-      margin-top: 10px;
     }
 
     .btn-get-started:active {
@@ -127,12 +122,9 @@
 <body>
 
   <div class="welcome-container">
-    <div class="header-branding">
-      <h2 style="font-family: 'Baloo 2', cursive; font-size: 28px; color: #1e3a8a; font-weight: 800; text-shadow: 0 2px 4px rgba(255,255,255,0.8);">Kid's Teacher</h2>
-    </div>
-
-    <div class="hero-image-container">
-      <img src="welcome_bg.png" alt="Kids Learning Playground" class="hero-image">
+    <!-- Faltu ka koi upar text nahi hai, sirf original image dikhegi -->
+    <div class="hero-image-wrapper">
+      <img src="welcome_bg.png" alt="Kids Teacher" class="hero-image">
     </div>
 
     <div class="welcome-text-box">
