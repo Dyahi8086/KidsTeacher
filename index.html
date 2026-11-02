@@ -10,184 +10,95 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
+        /* Top orange patti hatane ke liye background color same rakha hai */
         body, html {
-            height: 100%;
-            width: 100%;
-            background-color: #e0f2fe;
+            height: 100%; width: 100%;
+            background-color: #e0f2fe; /* Sky blue color (photo se match) */
             overflow: hidden;
         }
 
-        /* --- MAIN CONTAINER --- */
         .welcome-container {
             position: relative;
-            width: 100vw;
-            height: 100vh;
-            height: 100dvh; 
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end; 
-            align-items: center;
-            padding-bottom: 40px; 
+            width: 100vw; height: 100vh; height: 100dvh; 
+            display: flex; flex-direction: column;
+            justify-content: flex-end; align-items: center;
+            padding-bottom: 30px; 
             overflow: hidden;
         }
 
-        /* --- BACKGROUND IMAGE WITH ZOOM EFFECT --- */
+        /* Background Image with Zoom */
         .bg-image-layer {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%;
-            height: 100%;
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
             background-image: url('welcome_bg.png');
-            background-size: cover;
-            background-position: center top;
+            background-size: cover; background-position: center top;
             z-index: 1;
-            /* Background dhire dhire zoom in hoga (Hilne jaisa lagega) */
             animation: slowZoom 20s ease-in-out infinite alternate;
         }
 
-        @keyframes slowZoom {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.1); }
-        }
+        @keyframes slowZoom { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
 
-        /* --- TEXT ANIMATION --- */
         .text-content {
-            text-align: center;
-            margin-bottom: 20px; 
-            z-index: 10;
+            text-align: center; margin-bottom: 20px; z-index: 10;
             animation: popUp 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            opacity: 0;
-            transform: translateY(30px) scale(0.9);
+            opacity: 0; transform: translateY(30px) scale(0.9);
         }
 
         .text-content h1 {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 28px; 
-            color: #8B3A00; 
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 8px;
+            font-family: 'Fredoka', sans-serif; font-size: 28px; color: #8B3A00; 
+            font-weight: 700; line-height: 1.2; margin-bottom: 8px;
             text-shadow: 1px 1px 0px rgba(255,255,255,0.8), 2px 2px 5px rgba(0,0,0,0.1);
         }
 
         .text-content p {
-            font-family: 'Nunito', sans-serif;
-            font-size: 15px;
-            color: #6B5B4D; 
-            font-weight: 700;
+            font-family: 'Nunito', sans-serif; font-size: 15px; color: #6B5B4D; font-weight: 700;
         }
 
-        /* --- BUTTON --- */
         .start-btn {
-            position: relative;
-            width: 88%;
-            max-width: 350px;
-            padding: 16px 20px;
-            font-size: 20px;
-            font-family: 'Fredoka', sans-serif;
-            font-weight: 700;
-            color: white;
-            background: #FF6B35; 
-            border: none;
-            border-radius: 50px; 
-            cursor: pointer;
-            z-index: 10;
-            overflow: hidden; 
-            
-            /* 3D Shadow */
+            position: relative; width: 88%; max-width: 350px; padding: 16px 20px;
+            font-size: 20px; font-family: 'Fredoka', sans-serif; font-weight: 700; color: white;
+            background: #FF6B35; border: none; border-radius: 50px; cursor: pointer; z-index: 10;
             box-shadow: 0 6px 0 #cc4e20, 0 10px 20px rgba(255, 107, 53, 0.4);
             transition: transform 0.1s, box-shadow 0.1s;
-            
-            opacity: 0;
-            transform: translateY(20px);
+            opacity: 0; transform: translateY(20px);
             animation: slideUp 0.8s ease-out forwards 0.3s;
         }
 
-        .start-btn:active {
-            transform: translateY(6px); 
-            box-shadow: 0 0px 0 #cc4e20, 0 4px 10px rgba(0,0,0,0.2);
-        }
+        .start-btn:active { transform: translateY(6px); box-shadow: 0 0px 0 #cc4e20, 0 4px 10px rgba(0,0,0,0.2); }
 
-        /* --- ANIMATIONS --- */
-        @keyframes popUp {
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
+        @keyframes popUp { to { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes slideUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Ripple Effect */
-        .ripple {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.4);
-            border-radius: 50%;
-            transform: scale(0);
-            animation: rippleAnim 0.6s linear;
-            pointer-events: none;
-        }
-
-        @keyframes rippleAnim {
-            to { transform: scale(4); opacity: 0; }
-        }
-
-        /* Dots hata diye gaye hain */
-
+        .ripple { position: absolute; background: rgba(255, 255, 255, 0.4); border-radius: 50%; transform: scale(0); animation: rippleAnim 0.6s linear; pointer-events: none; }
+        @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
     </style>
 </head>
 <body>
 
     <div class="welcome-container">
-        
-        <!-- Background Image Layer (Jo zoom hoga) -->
         <div class="bg-image-layer"></div>
-
-        <!-- Text Content -->
         <div class="text-content">
             <h1>Learning Is an<br>Adventure!</h1>
             <p>Explore, discover and grow every day.</p>
         </div>
-
-        <!-- Start Button -->
         <button class="start-btn" id="startBtn">Let's Start →</button>
-
     </div>
 
     <script>
         const btn = document.getElementById('startBtn');
-
         btn.addEventListener('click', function(e) {
-            // Haptic Vibration
-            if (navigator.vibrate) {
-                navigator.vibrate([40, 30, 40]); 
-            }
-
-            // Ripple Effect
+            if (navigator.vibrate) navigator.vibrate([40, 30, 40]); 
             let rect = this.getBoundingClientRect();
-            let x = e.clientX - rect.left;
-            let y = e.clientY - rect.top;
-            
             let ripple = document.createElement("span");
             ripple.classList.add("ripple");
-            ripple.style.left = `${x}px`;
-            ripple.style.top = `${y}px`;
+            ripple.style.left = `${e.clientX - rect.left}px`;
+            ripple.style.top = `${e.clientY - rect.top}px`;
             ripple.style.width = ripple.style.height = `30px`; 
-            
             this.appendChild(ripple);
-
             setTimeout(() => { ripple.remove(); }, 600);
-
-            // Login page par redirect
-            setTimeout(() => {
-                window.location.href = "login.html"; 
-            }, 250); 
+            setTimeout(() => { window.location.href = "login.html"; }, 250); 
         });
     </script>
 </body>
