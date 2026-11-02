@@ -1,27 +1,27 @@
 {
   "name": "Kids Teacher",
-  "short_name": "Kids Teacher",
-  "start_url": "/KidsTeacher/index.html",
-  "scope": "/KidsTeacher/",
+  "short_name": "KidsTeacher",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#e0f2fe",
   "theme_color": "#e0f2fe",
   "icons": [
     {
-      "src": "/KidsTeacher/icons/icon-192x192.png",
+      "src": "./icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/KidsTeacher/icons/icon-512x512.png",
+      "src": "./icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/KidsTeacher/icons/icon-maskable-512x512.png",
+      "src": "./icons/icon-maskable-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
