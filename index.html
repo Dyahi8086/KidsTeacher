@@ -22,8 +22,8 @@
     body {
       min-height: 100vh;
       min-height: 100dvh;
-      /* इमेज को सीधे स्क्रीन का फुल कवर बैकग्राउंड बना दिया है, कोई गैप नहीं बचेगा */
-      background: url('welcome_bg.png') center center / cover no-repeat;
+      /* Yahan 'top center' kar diya hai taaki image bilkul upar se shuru ho */
+      background: url('welcome_bg.png') top center / cover no-repeat;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -33,7 +33,7 @@
       position: relative;
     }
 
-    /* बादलों की स्मूथ एनिमेशन ऊपर से चलेगी */
+    /* Badalon ki smooth animation upar se chalegi */
     body::before {
       content: "";
       position: absolute;
