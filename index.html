@@ -72,7 +72,7 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
 
     .welcome-text-box {
@@ -80,7 +80,7 @@
       background: transparent;
       padding: 4px 8px;
       text-align: center;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .welcome-heading {
@@ -99,26 +99,26 @@
       text-shadow: 0 1px 2px #ffffff, 0 2px 5px rgba(0,0,0,0.1);
     }
 
-    /* Bouncing 3D Start Button without any background sheet */
+    /* Bouncing 3D Start Button without any white backdrop */
     @keyframes buttonBounce {
       0%, 100% {
         transform: translateY(0);
-        box-shadow: 0 6px 0 #c23807, 0 10px 20px rgba(249, 87, 22, 0.45);
+        box-shadow: 0 5px 0 #b43505, 0 10px 20px rgba(249, 87, 22, 0.4);
       }
       50% {
-        transform: translateY(-6px);
-        box-shadow: 0 12px 0 #c23807, 0 18px 25px rgba(249, 87, 22, 0.55);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 0 #b43505, 0 15px 25px rgba(249, 87, 22, 0.5);
       }
     }
 
     .btn-get-started {
       width: 100%;
-      padding: 15px 20px;
+      padding: 14px 20px;
       background: linear-gradient(180deg, #ff8c37 0%, #f95716 100%);
       color: #ffffff;
-      border: 3px solid #ffffff;
+      border: none;
       border-radius: 30px;
-      font-size: 19px;
+      font-size: 18px;
       font-family: 'Baloo 2', cursive;
       font-weight: 800;
       cursor: pointer;
@@ -130,14 +130,12 @@
       letter-spacing: 0.5px;
       text-shadow: 0 2px 3px rgba(0,0,0,0.25);
       animation: buttonBounce 1.8s ease-in-out infinite;
-      /* Ensuring zero background sheet behind the button container */
-      background-clip: padding-box;
     }
 
     .btn-get-started:active {
-      transform: translateY(3px);
+      transform: translateY(2px);
       animation: none;
-      box-shadow: 0 2px 0 #c23807, 0 4px 10px rgba(249, 87, 22, 0.4);
+      box-shadow: 0 2px 0 #b43505, 0 4px 8px rgba(249, 87, 22, 0.4);
     }
   </style>
 </head>
