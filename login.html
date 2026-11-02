@@ -6,7 +6,6 @@
   <meta name="theme-color" content="#e0f2fe">
   <title>Parents Login - Kids Teacher</title>
   
-  <!-- PWA Manifest Link -->
   <link rel="manifest" href="/KidsTeacher/manifest.json">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,6 +41,7 @@
     .shape-2 { width: 140px; height: 140px; top: 15%; right: -30px; background: radial-gradient(circle at 30% 30%, #ffffff, #e9d5ff); animation: float 9s ease-in-out infinite reverse; }
     @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-25px) rotate(15deg); } }
 
+    /* Book Image Path Fixed */
     .logo-container {
       width: 140px; 
       margin: 5vh auto 2vh auto; 
@@ -161,7 +161,7 @@
     </button>
   </div>
 
-  <!-- Firebase Script (Bilkul safe aur waisa hi hai) -->
+  <!-- Firebase Script -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { 
