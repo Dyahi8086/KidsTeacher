@@ -6,7 +6,6 @@
     <meta name="theme-color" content="#e0f2fe"> 
     <title>Kids Teacher - Welcome</title>
     
-    <!-- Install Button ke liye zaroori -->
     <link rel="manifest" href="manifest.json">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,6 +17,7 @@
 
         body, html {
             height: 100%; width: 100%;
+            /* Khali jagah ka color photo ke background se match karne ke liye */
             background-color: #e0f2fe; 
             overflow: hidden; 
         }
@@ -34,9 +34,11 @@
             padding-bottom: calc(30px + env(safe-area-inset-bottom)); 
             overflow: hidden;
             
-            /* YEH BACKGROUND KO PERFECT FIT KAREGA BINA CUT KIYE */
-            background-image: url('welcome_bg.png');
-            background-size: 100% 100%; 
+            /* BACKGROUND IMAGE SETTINGS */
+            background-image: url('welcome_bg.png'); /* Aapki PNG ka naam */
+            
+            /* YEH LINE PHOTO KO KATNE SE ROKEGI (Bina crop kiye puri fit karegi) */
+            background-size: contain; 
             background-position: center;
             background-repeat: no-repeat;
         }
@@ -55,6 +57,11 @@
         .text-content {
             text-align: center; 
             margin-bottom: 20px;
+            /* Text ke peeche halka sa safed background taaki padhne mein aasani ho */
+            background: rgba(255, 255, 255, 0.6);
+            padding: 10px 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
         }
 
         .text-content h1 {
@@ -112,8 +119,7 @@
             if (navigator.vibrate) navigator.vibrate([40, 30, 40]); 
             setTimeout(() => { window.location.href = "login.html"; }, 200); 
         });
-
-        // Service Worker Register (For Install)
+        
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('service-worker.js');
