@@ -1,17 +1,16 @@
-const CACHE_NAME = 'kids-teacher-v1';
+const CACHE_NAME = 'kids-teacher-v2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './login.html',
-  './manifest.json',
   './welcome_bg.png',
   './book_logo.png',
-  './icons/icon-192x192.png',
-  './icons/icon-512x512.png',
-  ];
+  './manifest.json'
+];
 
+// Install Event
 self.addEventListener('install', (event) => {
-  self.skipWaiting();
+  self.skipWaiting(); // Force update
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return Promise.all(
@@ -23,6 +22,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
+// Activate Event (Purana cache delete karega)
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -38,6 +38,7 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
+// Fetch Event
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     fetch(event.request).catch(() => {
