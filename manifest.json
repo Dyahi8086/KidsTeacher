@@ -4,14 +4,20 @@
   "start_url": "index.html",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#faf08a",
-  "theme_color": "#f97316",
+  "background_color": "#e0f2fe",
+  "theme_color": "#e0f2fe",
   "icons": [
     {
-      "src": "welcome_bg.png",
+      "src": "app_icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "app_icon.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
     }
   ]
 }
