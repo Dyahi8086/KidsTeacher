@@ -99,7 +99,7 @@
       text-shadow: 0 1px 2px #ffffff, 0 2px 5px rgba(0,0,0,0.1);
     }
 
-    /* Bouncing 3D Start Button */
+    /* Bouncing 3D Start Button without any background sheet */
     @keyframes buttonBounce {
       0%, 100% {
         transform: translateY(0);
@@ -130,6 +130,8 @@
       letter-spacing: 0.5px;
       text-shadow: 0 2px 3px rgba(0,0,0,0.25);
       animation: buttonBounce 1.8s ease-in-out infinite;
+      /* Ensuring zero background sheet behind the button container */
+      background-clip: padding-box;
     }
 
     .btn-get-started:active {
