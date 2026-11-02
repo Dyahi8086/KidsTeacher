@@ -7,7 +7,7 @@
     <title>Kids Teacher - Welcome</title>
     
     <!-- PWA Manifest -->
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="./manifest.json">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,10 +31,9 @@
             flex-direction: column;
             justify-content: flex-end; 
             align-items: center;
-            padding-bottom: 40px; /* Button thoda upar aayega */
+            padding-bottom: 40px;
             overflow: hidden;
             
-            /* Background Image - No Animation, Instant Load */
             background-image: url('welcome_bg.png');
             background-size: cover;
             background-position: center top;
@@ -110,9 +109,9 @@
         // Service Worker Register
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('service-worker.js')
-                    .then(reg => console.log('SW Registered'))
-                    .catch(err => console.log('SW Error: ', err));
+                navigator.serviceWorker.register('./service-worker.js')
+                    .then(reg => console.log('Service Worker Registered Successfully:', reg.scope))
+                    .catch(err => console.log('Service Worker Registration Failed:', err));
             });
         }
     </script>
