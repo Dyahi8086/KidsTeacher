@@ -6,7 +6,6 @@
     <meta name="theme-color" content="#e0f2fe"> 
     <title>Kids Teacher - Welcome</title>
     
-    <!-- PWA Manifest Link -->
     <link rel="manifest" href="/KidsTeacher/manifest.json">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,6 +34,7 @@
             overflow: hidden;
         }
 
+        /* Background Image Path Fixed */
         .bg-image-layer {
             position: absolute; top: 0; left: 0;
             width: 100%; height: 100%;
@@ -140,7 +140,7 @@
         });
     </script>
 
-    <!-- PWA SERVICE WORKER REGISTRATION -->
+    <!-- Service Worker Registration -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
