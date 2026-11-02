@@ -1,14 +1,14 @@
 const CACHE_NAME = 'kids-teacher-v1';
 const ASSETS_TO_CACHE = [
-  '/KidsTeacher/',
-  '/KidsTeacher/index.html',
-  '/KidsTeacher/login.html',
-  '/KidsTeacher/manifest.json',
-  '/KidsTeacher/welcome_bg.png',
-  '/KidsTeacher/book_logo.png',
-  '/KidsTeacher/icons/icon-192x192.png',
-  '/KidsTeacher/icons/icon-512x512.png',
-  '/KidsTeacher/icons/icon-maskable-512x512.png'
+  './',
+  './index.html',
+  './login.html',
+  './manifest.json',
+  './welcome_bg.png',
+  './book_logo.png',
+  './icons/icon-192x192.png',
+  './icons/icon-512x512.png',
+  './icons/icon-maskable-512x512.png'
 ];
 
 self.addEventListener('install', (event) => {
