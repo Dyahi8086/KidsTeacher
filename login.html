@@ -11,11 +11,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
   
   <style>
-    /* --- THEME VARIABLES --- */
+    /* --- PREMIUM SOFT BACKGROUND --- */
     :root {
       --primary: #6366f1;
       --primary-dark: #4338ca;
-      --bg-gradient: linear-gradient(180deg, #e0f2fe 0%, #ede9fe 50%, #ffffff 100%);
+      --bg-gradient: linear-gradient(180deg, #e0f2fe 0%, #ede9fe 50%, #ffffff 100%); /* Sky Blue to Purple */
       --card-bg: #ffffff;
       --text-main: #1e293b;
       --text-muted: #64748b;
@@ -25,50 +25,32 @@
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
     body {
-      min-height: 100dvh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end; 
+      min-height: 100dvh; display: flex; flex-direction: column; justify-content: flex-end; 
       background: var(--bg-gradient);
-      font-family: 'Nunito', sans-serif;
-      overflow: hidden;
-      position: relative;
+      font-family: 'Nunito', sans-serif; overflow: hidden; position: relative;
     }
 
-    /* --- FLOATING BOOK LOGO ANIMATION --- */
+    /* Background Floating Shapes */
+    .bg-shape { position: absolute; background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(15px); border-radius: 50%; z-index: 0; }
+    .shape-1 { width: 180px; height: 180px; top: -40px; left: -50px; background: radial-gradient(circle at 30% 30%, #ffffff, #bfdbfe); animation: float 7s ease-in-out infinite; }
+    .shape-2 { width: 140px; height: 140px; top: 15%; right: -30px; background: radial-gradient(circle at 30% 30%, #ffffff, #e9d5ff); animation: float 9s ease-in-out infinite reverse; }
+    @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-25px) rotate(15deg); } }
+
+    /* --- FLOATING BOOK LOGO --- */
     .logo-container {
-      position: absolute;
-      top: 5%; /* Screen ke upar */
-      left: 50%;
-      transform: translateX(-50%);
-      width: 220px;
-      z-index: 5;
-      /* Hawa mein tairne wala effect */
-      animation: floatBook 3s ease-in-out infinite; 
+      position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+      width: 180px; z-index: 5; animation: floatBook 3s ease-in-out infinite; 
     }
-
-    .logo-container img {
-      width: 100%;
-      height: auto;
-      filter: drop-shadow(0 15px 25px rgba(0,0,0,0.15)); /* 3D shadow */
-    }
-
-    @keyframes floatBook {
-      0%, 100% { transform: translate(-50%, 0); }
-      50% { transform: translate(-50%, -15px); }
-    }
+    .logo-container img { width: 100%; height: auto; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.15)); }
+    @keyframes floatBook { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -15px); } }
 
     /* --- MAIN CARD (SLOW ANIMATION) --- */
     .login-card {
-      width: 100%;
-      max-width: 450px;
-      margin: 0 auto;
-      background: var(--card-bg);
-      border-radius: 35px 35px 0 0;
+      width: 100%; max-width: 450px; margin: 0 auto;
+      background: var(--card-bg); border-radius: 35px 35px 0 0;
       padding: 25px 25px 40px 25px;
       box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.05);
-      position: relative;
-      z-index: 10;
+      position: relative; z-index: 10;
       animation: slideUpSlow 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
       transform: translateY(100%);
     }
@@ -118,13 +100,14 @@
 </head>
 <body>
 
-  <!-- Tairti hui 3D Book -->
+  <div class="bg-shape shape-1"></div>
+  <div class="bg-shape shape-2"></div>
+
   <div class="logo-container">
     <img src="book_logo.png" alt="Magical Book">
   </div>
 
   <div class="login-card">
-    
     <div class="tabs">
       <button class="tab-btn active" id="tabLogin" onclick="switchTab('login')">Log In</button>
       <button class="tab-btn" id="tabSignup" onclick="switchTab('signup')">Sign Up</button>
@@ -193,7 +176,7 @@
 
     let currentMode = 'login';
     const MAX_ATTEMPTS = 4;
-    const LOCKOUT_TIME = 60 * 1000; // 1 minute
+    const LOCKOUT_TIME = 60 * 1000;
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -214,19 +197,13 @@
       hideAlert();
 
       if (mode === 'login') {
-        tabLogin.classList.add('active');
-        tabSignup.classList.remove('active');
-        formTitle.textContent = "Parents Login";
-        formSubtitle.textContent = "Log in to guide your child's journey";
-        submitBtn.textContent = "Log In";
-        forgotBtn.classList.remove('hidden');
+        tabLogin.classList.add('active'); tabSignup.classList.remove('active');
+        formTitle.textContent = "Parents Login"; formSubtitle.textContent = "Log in to guide your child's journey";
+        submitBtn.textContent = "Log In"; forgotBtn.classList.remove('hidden');
       } else {
-        tabLogin.classList.remove('active');
-        tabSignup.classList.add('active');
-        formTitle.textContent = "Create Account";
-        formSubtitle.textContent = "Join us to start the magical journey";
-        submitBtn.textContent = "Sign Up";
-        forgotBtn.classList.add('hidden'); 
+        tabLogin.classList.remove('active'); tabSignup.classList.add('active');
+        formTitle.textContent = "Create Account"; formSubtitle.textContent = "Join us to start the magical journey";
+        submitBtn.textContent = "Sign Up"; forgotBtn.classList.add('hidden'); 
       }
     }
 
@@ -236,29 +213,21 @@
       const eyeClosed = document.getElementById('eyeClosed');
       
       if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        eyeOpen.classList.add('hidden');
-        eyeClosed.classList.remove('hidden');
+        passwordInput.type = 'text'; eyeOpen.classList.add('hidden'); eyeClosed.classList.remove('hidden');
       } else {
-        passwordInput.type = 'password';
-        eyeOpen.classList.remove('hidden');
-        eyeClosed.classList.add('hidden');
+        passwordInput.type = 'password'; eyeOpen.classList.remove('hidden'); eyeClosed.classList.add('hidden');
       }
     }
 
     function showAlert(message, type = 'error') {
       const alertBox = document.getElementById('alertBox');
-      alertBox.textContent = message;
-      alertBox.className = `alert-box alert-${type}`;
-      alertBox.style.display = 'block';
+      alertBox.textContent = message; alertBox.className = `alert-box alert-${type}`; alertBox.style.display = 'block';
     }
     function hideAlert() { document.getElementById('alertBox').style.display = 'none'; }
 
     function setLoading(isLoading, text = '') {
-      const submitBtn = document.getElementById('submitBtn');
-      const googleBtn = document.getElementById('googleBtn');
-      submitBtn.disabled = isLoading;
-      googleBtn.disabled = isLoading;
+      const submitBtn = document.getElementById('submitBtn'); const googleBtn = document.getElementById('googleBtn');
+      submitBtn.disabled = isLoading; googleBtn.disabled = isLoading;
       if(isLoading) submitBtn.textContent = text;
       else submitBtn.textContent = currentMode === 'login' ? "Log In" : "Sign Up";
     }
@@ -283,22 +252,17 @@
 
       if (now < lockoutUntil) {
         const secondsLeft = Math.ceil((lockoutUntil - now) / 1000);
-        showAlert(`Too many failed attempts. Please wait ${secondsLeft} seconds.`);
-        return false; 
+        showAlert(`Too many failed attempts. Please wait ${secondsLeft} seconds.`); return false; 
       }
-      
       if (now > lockoutUntil && attempts >= MAX_ATTEMPTS) {
-        localStorage.setItem('loginAttempts', '0');
-        localStorage.removeItem('lockoutUntil');
+        localStorage.setItem('loginAttempts', '0'); localStorage.removeItem('lockoutUntil');
       }
       return true; 
     }
 
     function handleFailedAttempt() {
       let attempts = parseInt(localStorage.getItem('loginAttempts') || '0');
-      attempts++;
-      localStorage.setItem('loginAttempts', attempts.toString());
-
+      attempts++; localStorage.setItem('loginAttempts', attempts.toString());
       if (attempts >= MAX_ATTEMPTS) {
         localStorage.setItem('lockoutUntil', (Date.now() + LOCKOUT_TIME).toString());
         showAlert("Account locked for 1 minute due to multiple failed attempts.");
@@ -306,68 +270,38 @@
     }
 
     window.handleFormSubmit = async function(event) {
-      event.preventDefault();
-      hideAlert();
-
+      event.preventDefault(); hideAlert();
       if (!checkRateLimit()) return;
-
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
-
+      const email = document.getElementById('email').value.trim(); const password = document.getElementById('password').value;
       if (!email || !password) { showAlert("Please fill in all fields."); return; }
       
       setLoading(true, currentMode === 'login' ? "Signing in..." : "Creating...");
-      
       try {
-        if (currentMode === 'login') {
-          await signInWithEmailAndPassword(auth, email, password);
-          localStorage.setItem('loginAttempts', '0');
-        } else {
-          await createUserWithEmailAndPassword(auth, email, password);
-        }
+        if (currentMode === 'login') { await signInWithEmailAndPassword(auth, email, password); localStorage.setItem('loginAttempts', '0'); } 
+        else { await createUserWithEmailAndPassword(auth, email, password); }
       } catch (error) {
-        setLoading(false);
-        showAlert(getFriendlyErrorMessage(error.code));
-        
-        if(currentMode === 'login' && (error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential')) {
-          handleFailedAttempt();
-        }
+        setLoading(false); showAlert(getFriendlyErrorMessage(error.code));
+        if(currentMode === 'login' && (error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential')) { handleFailedAttempt(); }
       }
     }
 
     window.handleGoogleLogin = async function() {
-      hideAlert();
-      setLoading(true, "Connecting...");
-      const provider = new GoogleAuthProvider();
-      provider.setCustomParameters({ prompt: 'select_account' });
-      
-      try {
-        const result = await signInWithPopup(auth, provider);
-        // Redirect handled by onAuthStateChanged
-      } catch (error) {
+      hideAlert(); setLoading(true, "Connecting...");
+      const provider = new GoogleAuthProvider(); provider.setCustomParameters({ prompt: 'select_account' });
+      try { await signInWithPopup(auth, provider); } 
+      catch (error) {
         setLoading(false);
-        if(error.code === 'auth/popup-blocked') {
-           showAlert("Popup blocked! Please allow popups in settings.", "error");
-        } else if (error.code !== 'auth/popup-closed-by-user') {
-           showAlert(getFriendlyErrorMessage(error.code));
-        }
+        if(error.code === 'auth/popup-blocked') { showAlert("Popup blocked! Please allow popups in settings.", "error"); } 
+        else if (error.code !== 'auth/popup-closed-by-user') { showAlert(getFriendlyErrorMessage(error.code)); }
       }
     }
 
     window.handleForgotPassword = async function() {
-      hideAlert();
-      const email = document.getElementById('email').value.trim();
+      hideAlert(); const email = document.getElementById('email').value.trim();
       if (!email) { showAlert("Please type your email above first."); return; }
-
       setLoading(true, "Sending...");
-      try {
-        await sendPasswordResetEmail(auth, email);
-        setLoading(false);
-        showAlert("Password reset link sent to your email!", "success");
-      } catch (error) {
-        setLoading(false);
-        showAlert(getFriendlyErrorMessage(error.code));
-      }
+      try { await sendPasswordResetEmail(auth, email); setLoading(false); showAlert("Password reset link sent to your email!", "success"); } 
+      catch (error) { setLoading(false); showAlert(getFriendlyErrorMessage(error.code)); }
     }
   </script>
 </body>
