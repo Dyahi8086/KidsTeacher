@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Kids Teacher</title>
   <link rel="manifest" href="manifest.json">
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Fredoka:wght@600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -22,100 +22,117 @@
     body {
       min-height: 100vh;
       min-height: 100dvh;
-      background: url('welcome_bg.png') top center / 100% 100% no-repeat;
+      /* Background gradient matches exact color of PNG top and bottom edges */
+      background: linear-gradient(180deg, #dceeff 0%, #fef3c7 60%, #ffd8b8 100%);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       align-items: center;
-      padding: 20px 16px;
-      font-family: 'Quicksand', sans-serif;
+      padding: 16px 20px;
+      font-family: 'Fredoka', sans-serif;
       position: relative;
     }
 
-    /* Smooth Moving Clouds Animation */
-    body::before {
-      content: "";
+    /* Full Background PNG Layer */
+    .bg-layer {
       position: absolute;
       top: 0;
-      left: -100%;
-      width: 300%;
+      left: 0;
+      width: 100%;
       height: 100%;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><path fill="rgba(255,255,255,0.3)" d="M100,150 Q130,110 160,150 Q190,100 230,130 Q270,110 300,150 Z M700,250 Q730,210 760,250 Q790,200 830,230 Q870,210 900,250 Z"/></svg>');
-      background-repeat: repeat-x;
-      animation: moveCloudsSmooth 30s linear infinite;
+      background: url('welcome_bg.png') top center / 100% 100% no-repeat;
       z-index: 1;
+    }
+
+    /* Fixed Moving Clouds Layer */
+    .clouds-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 100%;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400"><path fill="rgba(255,255,255,0.45)" d="M50 120 Q 75 90 110 100 Q 140 70 180 90 Q 220 70 250 100 Q 280 90 300 120 Z M550 180 Q 575 150 610 160 Q 640 130 680 150 Q 720 130 750 160 Q 780 150 800 180 Z"/></svg>');
+      background-repeat: repeat-x;
+      background-size: 50% auto;
+      animation: cloudLoop 22s linear infinite;
+      z-index: 2;
       pointer-events: none;
     }
 
-    @keyframes moveCloudsSmooth {
+    @keyframes cloudLoop {
       0% { transform: translateX(0); }
-      100% { transform: translateX(33.33%); }
+      100% { transform: translateX(-50%); }
     }
 
     .welcome-container {
       position: relative;
-      z-index: 2;
+      z-index: 3;
       width: 100%;
-      max-width: 400px;
+      max-width: 380px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      margin-bottom: 12px;
+      margin-bottom: 15px;
     }
 
     .welcome-text-box {
       width: 100%;
       background: transparent;
-      padding: 8px 12px;
+      padding: 4px 8px;
       text-align: center;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .welcome-heading {
       font-family: 'Baloo 2', cursive;
-      font-size: 24px;
+      font-size: 23px;
       font-weight: 800;
-      color: #7c2d12;
-      margin-bottom: 4px;
-      text-shadow: 2px 2px 0px #ffffff, -2px -2px 0px #ffffff, 2px -2px 0px #ffffff, -2px 2px 0px #ffffff, 0 4px 8px rgba(0,0,0,0.15);
+      color: #6c2bd9;
+      margin-bottom: 3px;
+      text-shadow: 0 2px 0 #ffffff, 0 -2px 0 #ffffff, 2px 0 0 #ffffff, -2px 0 0 #ffffff, 0 4px 10px rgba(0,0,0,0.1);
     }
 
     .welcome-subtext {
-      font-size: 14px;
-      color: #1e293b;
-      font-weight: 700;
-      text-shadow: 1px 1px 2px #ffffff, 0 2px 4px rgba(0,0,0,0.1);
+      font-size: 13px;
+      color: #334155;
+      font-weight: 600;
+      text-shadow: 0 1px 2px #ffffff;
     }
 
-    /* Ultra 3D Button Style */
+    /* 3D Toy Capsule Button */
     .btn-get-started {
       width: 100%;
-      padding: 16px;
-      background: linear-gradient(135deg, #ff8c42, #f97316);
+      padding: 15px 20px;
+      background: linear-gradient(180deg, #ff8c37 0%, #f95716 100%);
       color: #ffffff;
-      border: none;
-      border-radius: 22px;
+      border: 3px solid #ffffff;
+      border-radius: 30px;
       font-size: 19px;
       font-family: 'Baloo 2', cursive;
       font-weight: 800;
       cursor: pointer;
-      box-shadow: 0 7px 0 #c2410c, 0 12px 20px rgba(249, 115, 22, 0.4);
+      box-shadow: 0 6px 0 #c23807, 0 10px 20px rgba(249, 87, 22, 0.45);
       text-decoration: none;
-      display: block;
-      text-align: center;
-      letter-spacing: 0.8px;
-      transition: all 0.1s ease;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      letter-spacing: 0.5px;
+      transition: all 0.12s ease;
+      text-shadow: 0 2px 3px rgba(0,0,0,0.25);
     }
 
     .btn-get-started:active {
-      transform: translateY(5px);
-      box-shadow: 0 2px 0 #c2410c, 0 5px 10px rgba(249, 115, 22, 0.4);
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 #c23807, 0 4px 10px rgba(249, 87, 22, 0.4);
     }
   </style>
 </head>
 <body>
+
+  <div class="bg-layer"></div>
+  <div class="clouds-layer"></div>
 
   <div class="welcome-container">
     <div class="welcome-text-box">
@@ -123,7 +140,9 @@
       <p class="welcome-subtext">Explore, discover and grow every day.</p>
     </div>
 
-    <a href="login.html" class="btn-get-started">Let's Start →</a>
+    <a href="login.html" class="btn-get-started">
+      Let's Start <span>→</span>
+    </a>
   </div>
 
 </body>
