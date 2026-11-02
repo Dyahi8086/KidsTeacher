@@ -6,6 +6,7 @@
     <meta name="theme-color" content="#e0f2fe"> 
     <title>Kids Teacher - Welcome</title>
     
+    <!-- Install Button ke liye zaroori -->
     <link rel="manifest" href="manifest.json">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,16 +31,13 @@
             flex-direction: column;
             justify-content: flex-end; 
             align-items: center;
-            /* Niche ka safe area maintain rakha hai */
-            padding-bottom: calc(20px + env(safe-area-inset-bottom)); 
+            padding-bottom: calc(30px + env(safe-area-inset-bottom)); 
             overflow: hidden;
             
-            /* Background Image fix */
+            /* YEH BACKGROUND KO PERFECT FIT KAREGA BINA CUT KIYE */
             background-image: url('welcome_bg.png');
-            /* '100% auto' se image apni aspect ratio maintain karegi aur stretch nahi hogi */
-            background-size: 100% auto; 
-            /* 'center -60px' upar ki khali jagah ko khatam karega aur logo upar aayega */
-            background-position: center -60px; 
+            background-size: 100% 100%; 
+            background-position: center;
             background-repeat: no-repeat;
         }
 
@@ -51,15 +49,12 @@
             align-items: center;
             width: 100%;
             padding: 0 20px;
-            /* Text aur button ka spacing set kiya hai */
-            margin-bottom: 20px; 
+            margin-bottom: 10px;
         }
 
         .text-content {
             text-align: center; 
-            margin-bottom: 24px;
-            animation: popUp 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            opacity: 0; transform: translateY(20px);
+            margin-bottom: 20px;
         }
 
         .text-content h1 {
@@ -94,17 +89,9 @@
             cursor: pointer; 
             box-shadow: 0 6px 0 #cc4e20, 0 10px 20px rgba(255, 107, 53, 0.4);
             transition: transform 0.1s, box-shadow 0.1s;
-            opacity: 0; transform: translateY(20px);
-            animation: slideUp 0.8s ease-out forwards 0.3s;
         }
 
         .start-btn:active { transform: translateY(6px); box-shadow: 0 0px 0 #cc4e20, 0 4px 10px rgba(0,0,0,0.2); }
-
-        @keyframes popUp { to { opacity: 1; transform: translateY(0); } }
-        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
-
-        .ripple { position: absolute; background: rgba(255, 255, 255, 0.4); border-radius: 50%; transform: scale(0); animation: rippleAnim 0.6s linear; pointer-events: none; }
-        @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
     </style>
 </head>
 <body>
@@ -123,24 +110,13 @@
         const btn = document.getElementById('startBtn');
         btn.addEventListener('click', function(e) {
             if (navigator.vibrate) navigator.vibrate([40, 30, 40]); 
-            let rect = this.getBoundingClientRect();
-            let ripple = document.createElement("span");
-            ripple.classList.add("ripple");
-            ripple.style.left = `${e.clientX - rect.left}px`;
-            ripple.style.top = `${e.clientY - rect.top}px`;
-            ripple.style.width = ripple.style.height = `30px`; 
-            this.appendChild(ripple);
-            setTimeout(() => { ripple.remove(); }, 600);
-            setTimeout(() => { window.location.href = "login.html"; }, 250); 
+            setTimeout(() => { window.location.href = "login.html"; }, 200); 
         });
-    </script>
 
-    <script>
+        // Service Worker Register (For Install)
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('service-worker.js')
-                    .then(reg => console.log('SW Registered'))
-                    .catch(err => console.log('SW Error: ', err));
+                navigator.serviceWorker.register('service-worker.js');
             });
         }
     </script>
