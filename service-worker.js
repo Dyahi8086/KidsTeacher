@@ -11,12 +11,10 @@ const ASSETS_TO_CACHE = [
   '/KidsTeacher/icons/icon-maskable-512x512.png'
 ];
 
-// Install Event
 self.addEventListener('install', (event) => {
   self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      // Safe caching: Agar koi ek file missing bhi ho, toh pura install fail na ho
       return Promise.all(
         ASSETS_TO_CACHE.map(url => {
           return cache.add(url).catch(err => console.log('Failed to cache:', url, err));
@@ -26,7 +24,6 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Activate Event
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -42,7 +39,6 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Fetch Event (Network first, fallback to cache)
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     fetch(event.request).catch(() => {
