@@ -22,13 +22,13 @@
     body {
       min-height: 100vh;
       min-height: 100dvh;
-      /* Yahan 'top center' kar diya hai taaki image bilkul upar se shuru ho */
-      background: url('welcome_bg.png') top center / cover no-repeat;
+      /* Image ko exact 100% stretch kar diya hai taaki upar gap na bache */
+      background: url('welcome_bg.png') top center / 100% 100% no-repeat;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       align-items: center;
-      padding: 20px 16px;
+      padding: 16px;
       font-family: 'Quicksand', sans-serif;
       position: relative;
     }
@@ -67,29 +67,27 @@
 
     .welcome-text-box {
       width: 100%;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 12px 16px;
-      border-radius: 20px;
+      /* White box ko hata kar transparent kar diya hai */
+      background: transparent;
+      padding: 6px 12px;
       text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.9);
-      margin-bottom: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      margin-bottom: 10px;
     }
 
     .welcome-heading {
       font-family: 'Baloo 2', cursive;
-      font-size: 21px;
+      font-size: 22px;
       font-weight: 800;
-      color: #9a3412;
+      color: #7c2d12;
       margin-bottom: 2px;
+      text-shadow: 0 1px 3px rgba(255,255,255,0.9);
     }
 
     .welcome-subtext {
-      font-size: 12px;
-      color: #334155;
+      font-size: 13px;
+      color: #1e293b;
       font-weight: 700;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.9);
     }
 
     .btn-get-started {
