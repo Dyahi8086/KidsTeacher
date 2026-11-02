@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <!-- Theme color set kiya taaki upar ki orange patti na dikhe -->
   <meta name="theme-color" content="#e0f2fe">
   <title>Parents Login - Kids Teacher</title>
   <link rel="manifest" href="manifest.json">
@@ -26,64 +25,68 @@
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
     body {
-      min-height: 100dvh; 
+      height: 100vh;
+      height: 100dvh; 
       display: flex; 
       flex-direction: column; 
-      justify-content: flex-end; 
       background: var(--bg-gradient);
       font-family: 'Nunito', sans-serif; 
-      overflow: hidden; /* Body scroll lock */
+      overflow: hidden; 
       position: relative;
     }
 
-    /* Floating Shapes */
+    /* Background Floating Shapes */
     .bg-shape { position: absolute; background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(15px); border-radius: 50%; z-index: 0; }
     .shape-1 { width: 180px; height: 180px; top: -40px; left: -50px; background: radial-gradient(circle at 30% 30%, #ffffff, #bfdbfe); animation: float 7s ease-in-out infinite; }
     .shape-2 { width: 140px; height: 140px; top: 15%; right: -30px; background: radial-gradient(circle at 30% 30%, #ffffff, #e9d5ff); animation: float 9s ease-in-out infinite reverse; }
     @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-25px) rotate(15deg); } }
 
-    /* Floating Book */
+    /* Top Illustration - Now part of flex flow */
     .logo-container {
-      position: absolute; top: 5%; left: 50%; transform: translateX(-50%);
-      width: 160px; z-index: 5; animation: floatBook 3s ease-in-out infinite; 
+      width: 140px; 
+      margin: 5vh auto 2vh auto; /* Responsive top spacing */
+      z-index: 5; 
+      animation: floatBook 3s ease-in-out infinite; 
     }
     .logo-container img { width: 100%; height: auto; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.15)); }
-    @keyframes floatBook { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -15px); } }
+    @keyframes floatBook { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-    /* --- MAIN CARD (Scrollable Fix) --- */
+    /* Main Card - Flex-grow to fill space, scrollable internally */
     .login-card {
-      width: 100%; max-width: 450px; margin: 0 auto;
-      background: var(--card-bg); border-radius: 35px 35px 0 0;
-      padding: 25px 25px 30px 25px;
+      width: 100%; 
+      max-width: 450px; 
+      margin: 0 auto;
+      background: var(--card-bg); 
+      border-radius: 35px 35px 0 0;
+      padding: 25px 25px calc(25px + env(safe-area-inset-bottom)); /* Safe area for android nav */
       box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.05);
-      position: relative; z-index: 10;
-      animation: slideUpSlow 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-      transform: translateY(100%);
-      
-      /* YEH FIX HAI: Agar content zyada ho toh card scroll ho jayega */
-      max-height: 80vh; 
-      overflow-y: auto; 
-      -webkit-overflow-scrolling: touch;
+      position: relative; 
+      z-index: 10;
+      flex: 1; /* Takes remaining height */
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto; /* Scroll inside card if screen is small */
+      animation: slideUpSlow 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
 
-    @keyframes slideUpSlow { to { transform: translateY(0); } }
+    @keyframes slideUpSlow { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
     /* Tabs */
-    .tabs { display: flex; background: #f1f5f9; border-radius: 16px; padding: 5px; margin-bottom: 20px; }
+    .tabs { display: flex; background: #f1f5f9; border-radius: 16px; padding: 5px; margin-bottom: 20px; flex-shrink: 0; }
     .tab-btn { flex: 1; padding: 12px; border: none; background: transparent; font-family: 'Fredoka'; font-size: 16px; font-weight: 600; color: #94a3b8; cursor: pointer; border-radius: 12px; transition: 0.3s; }
     .tab-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 
-    .brand-header { text-align: center; margin-bottom: 20px; }
+    .brand-header { text-align: center; margin-bottom: 20px; flex-shrink: 0; }
     .app-title { font-family: 'Fredoka'; font-size: 26px; color: var(--text-main); font-weight: 700; }
-    .app-subtitle { font-size: 13px; color: var(--text-muted); font-weight: 700; margin-top: 5px; }
+    .app-subtitle { font-size: 13px; color: var(--text-muted); font-weight: 700; margin-top: 4px; }
 
     /* Alerts */
-    .alert-box { display: none; padding: 12px; margin-bottom: 15px; border-radius: 12px; font-size: 13px; font-weight: 800; text-align: center; }
+    .alert-box { display: none; padding: 12px; margin-bottom: 15px; border-radius: 12px; font-size: 13px; font-weight: 800; text-align: center; flex-shrink: 0; }
     .alert-error { background: #fee2e2; color: #b91c1c; border: 1px solid #f87171; }
     .alert-success { background: #dcfce7; color: #15803d; border: 1px solid #4ade80; }
 
     /* Inputs */
-    .input-group { position: relative; margin-bottom: 15px; text-align: left; }
+    .input-group { position: relative; margin-bottom: 15px; text-align: left; flex-shrink: 0; }
     .input-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 18px; color: #94a3b8; z-index: 2; }
     .form-input { width: 100%; padding: 22px 45px 8px 48px; background: #f8fafc; border: 2px solid var(--border-color); border-radius: 16px; font-size: 15px; color: var(--text-main); font-family: 'Nunito'; font-weight: 800; outline: none; transition: 0.2s; }
     .form-input:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15); }
@@ -94,18 +97,18 @@
     .toggle-password { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; color: #94a3b8; }
     .hidden { display: none !important; }
 
-    .forgot-link { display: block; text-align: right; font-size: 13px; color: var(--text-muted); font-weight: 800; background: none; border: none; cursor: pointer; margin-bottom: 20px; width: 100%; }
+    .forgot-link { display: block; text-align: right; font-size: 13px; color: var(--text-muted); font-weight: 800; background: none; border: none; cursor: pointer; margin-bottom: 20px; width: 100%; flex-shrink: 0; }
     
     /* Buttons */
-    .btn-main { width: 100%; padding: 16px; background: linear-gradient(135deg, #818cf8, #6366f1); color: #ffffff; border: none; border-radius: 16px; font-size: 18px; font-family: 'Fredoka'; font-weight: 700; cursor: pointer; box-shadow: 0 6px 0 #4338ca, 0 10px 15px rgba(99, 102, 241, 0.3); transition: 0.1s; margin-bottom: 20px; position: relative; overflow: hidden; }
+    .btn-main { width: 100%; padding: 16px; background: linear-gradient(135deg, #818cf8, #6366f1); color: #ffffff; border: none; border-radius: 16px; font-size: 18px; font-family: 'Fredoka'; font-weight: 700; cursor: pointer; box-shadow: 0 6px 0 #4338ca, 0 10px 15px rgba(99, 102, 241, 0.3); transition: 0.1s; margin-bottom: 20px; position: relative; overflow: hidden; flex-shrink: 0; }
     .btn-main:active { transform: translateY(6px); box-shadow: 0 0 0 #4338ca; }
     .btn-main:disabled { background: #cbd5e1; box-shadow: 0 6px 0 #94a3b8; color: #fff; cursor: not-allowed; }
 
-    .divider { display: flex; align-items: center; text-align: center; margin: 15px 0; color: #cbd5e1; font-size: 12px; font-weight: 800; }
+    .divider { display: flex; align-items: center; text-align: center; margin: 0 0 15px 0; color: #cbd5e1; font-size: 12px; font-weight: 800; flex-shrink: 0; }
     .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 2px solid #e2e8f0; }
     .divider::before { margin-right: 12px; } .divider::after { margin-left: 12px; }
 
-    .btn-google { width: 100%; padding: 14px; background: #ffffff; color: #334155; border: 2px solid #e2e8f0; border-radius: 16px; font-size: 15px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 0 #e2e8f0; transition: 0.1s; margin-bottom: 20px; }
+    .btn-google { width: 100%; padding: 14px; background: #ffffff; color: #334155; border: 2px solid #e2e8f0; border-radius: 16px; font-size: 15px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 0 #e2e8f0; transition: 0.1s; margin-bottom: 20px; flex-shrink: 0; }
     .btn-google:active { transform: translateY(4px); box-shadow: 0 0 0 #e2e8f0; }
   </style>
 </head>
@@ -131,7 +134,7 @@
 
     <div id="alertBox" class="alert-box"></div>
 
-    <form id="authForm" onsubmit="handleFormSubmit(event)">
+    <form id="authForm" onsubmit="handleFormSubmit(event)" style="display: flex; flex-direction: column; flex-shrink: 0;">
       
       <div class="input-group">
         <span class="input-icon">✉️</span>
@@ -163,9 +166,7 @@
     </button>
   </div>
 
-  <!-- Aapka purana Firebase script yahan aayega (isme koi change nahi karna) -->
   <script type="module">
-    /* Firebase script same as before */
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { 
       getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, 
