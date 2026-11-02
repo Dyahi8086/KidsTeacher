@@ -24,6 +24,7 @@
             overflow: hidden;
         }
 
+        /* --- MAIN CONTAINER --- */
         .welcome-container {
             position: relative;
             width: 100vw;
@@ -33,20 +34,27 @@
             flex-direction: column;
             justify-content: flex-end; 
             align-items: center;
-            padding-bottom: 30px; 
-            
-            background-image: url('welcome_bg.png');
-            background-size: cover; 
-            background-position: top center; 
-            background-repeat: no-repeat;
-            
-            /* Advanced Background Float Animation */
-            animation: bgFloat 20s ease-in-out infinite alternate;
+            padding-bottom: 40px; 
+            overflow: hidden;
         }
 
-        @keyframes bgFloat {
-            0% { background-position: top center; }
-            100% { background-position: center center; }
+        /* --- BACKGROUND IMAGE WITH ZOOM EFFECT --- */
+        .bg-image-layer {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('welcome_bg.png');
+            background-size: cover;
+            background-position: center top;
+            z-index: 1;
+            /* Background dhire dhire zoom in hoga (Hilne jaisa lagega) */
+            animation: slowZoom 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
         }
 
         /* --- TEXT ANIMATION --- */
@@ -54,7 +62,6 @@
             text-align: center;
             margin-bottom: 20px; 
             z-index: 10;
-            /* Smooth Pop-up Animation */
             animation: popUp 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
             opacity: 0;
             transform: translateY(30px) scale(0.9);
@@ -77,7 +84,7 @@
             font-weight: 700;
         }
 
-        /* --- BUTTON (3D + Pulse Animation) --- */
+        /* --- BUTTON --- */
         .start-btn {
             position: relative;
             width: 88%;
@@ -98,32 +105,23 @@
             box-shadow: 0 6px 0 #cc4e20, 0 10px 20px rgba(255, 107, 53, 0.4);
             transition: transform 0.1s, box-shadow 0.1s;
             
-            /* Button Entry Animation */
             opacity: 0;
             transform: translateY(20px);
-            animation: slideUp 0.8s ease-out forwards 0.3s, pulseBtn 2s infinite 1.5s;
+            animation: slideUp 0.8s ease-out forwards 0.3s;
         }
 
         .start-btn:active {
             transform: translateY(6px); 
             box-shadow: 0 0px 0 #cc4e20, 0 4px 10px rgba(0,0,0,0.2);
-            animation: none; /* Click par pulse ruk jaye */
         }
 
-        /* --- ANIMATION KEYFRAMES --- */
+        /* --- ANIMATIONS --- */
         @keyframes popUp {
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         @keyframes slideUp {
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Breathing Effect for Button */
-        @keyframes pulseBtn {
-            0% { transform: scale(1); box-shadow: 0 6px 0 #cc4e20, 0 10px 20px rgba(255, 107, 53, 0.4); }
-            50% { transform: scale(1.03); box-shadow: 0 6px 0 #cc4e20, 0 15px 25px rgba(255, 107, 53, 0.6); }
-            100% { transform: scale(1); box-shadow: 0 6px 0 #cc4e20, 0 10px 20px rgba(255, 107, 53, 0.4); }
         }
 
         /* Ripple Effect */
@@ -140,44 +138,25 @@
             to { transform: scale(4); opacity: 0; }
         }
 
-        /* --- BOTTOM DOTS --- */
-        .pagination {
-            display: flex;
-            gap: 6px;
-            margin-top: 20px;
-            z-index: 10;
-        }
+        /* Dots hata diye gaye hain */
 
-        .dot {
-            width: 8px;
-            height: 8px;
-            background-color: #FFDAB9;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
-            width: 24px;
-            background-color: #FF6B35; 
-        }
     </style>
 </head>
 <body>
 
     <div class="welcome-container">
         
+        <!-- Background Image Layer (Jo zoom hoga) -->
+        <div class="bg-image-layer"></div>
+
+        <!-- Text Content -->
         <div class="text-content">
             <h1>Learning Is an<br>Adventure!</h1>
             <p>Explore, discover and grow every day.</p>
         </div>
 
+        <!-- Start Button -->
         <button class="start-btn" id="startBtn">Let's Start →</button>
-
-        <div class="pagination">
-            <div class="dot active"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-        </div>
 
     </div>
 
@@ -205,7 +184,7 @@
 
             setTimeout(() => { ripple.remove(); }, 600);
 
-            // Redirect to Login
+            // Login page par redirect
             setTimeout(() => {
                 window.location.href = "login.html"; 
             }, 250); 
