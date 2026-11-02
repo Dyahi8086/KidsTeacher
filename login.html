@@ -11,15 +11,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
   
   <style>
-    /* --- COINS / GOLD PREMIUM THEME VARIABLES --- */
+    /* --- NEW PREMIUM PASTEL SKY THEME --- */
     :root {
-      --primary: #f59e0b; /* Gold */
-      --primary-dark: #b45309;
-      --bg-gradient: linear-gradient(180deg, #fffbf0 0%, #fef3c7 40%, #fde68a 100%); /* Soft Gold/Peach */
+      --primary: #6366f1; /* Indigo Blue */
+      --primary-dark: #4338ca;
+      --bg-gradient: linear-gradient(180deg, #e0f2fe 0%, #ede9fe 50%, #fae8ff 100%); /* Soft Sky Blue to Lavender */
       --card-bg: rgba(255, 255, 255, 0.98);
       --text-main: #1e293b;
       --text-muted: #64748b;
-      --border-color: #fcd34d;
+      --border-color: #c7d2fe;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -35,34 +35,34 @@
       position: relative;
     }
 
-    /* Background floating elements */
-    .bg-shape { position: absolute; background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border-radius: 50%; z-index: 0; }
-    .shape-1 { width: 150px; height: 150px; top: -30px; left: -40px; background: radial-gradient(circle at 30% 30%, #ffffff, #fde68a); animation: float 6s ease-in-out infinite; }
-    .shape-2 { width: 120px; height: 120px; top: 15%; right: -20px; background: radial-gradient(circle at 30% 30%, #ffffff, #fef08a); animation: float 8s ease-in-out infinite reverse; }
-    @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(10deg); } }
+    /* Background floating elements (Glowing Orbs) */
+    .bg-shape { position: absolute; background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(15px); border-radius: 50%; z-index: 0; }
+    .shape-1 { width: 180px; height: 180px; top: -40px; left: -50px; background: radial-gradient(circle at 30% 30%, #ffffff, #bfdbfe); animation: float 7s ease-in-out infinite; }
+    .shape-2 { width: 140px; height: 140px; top: 15%; right: -30px; background: radial-gradient(circle at 30% 30%, #ffffff, #e9d5ff); animation: float 9s ease-in-out infinite reverse; }
+    @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-25px) rotate(15deg); } }
 
-    /* --- MAIN CARD (SLOWER ANIMATION) --- */
+    /* --- MAIN CARD (UPDATED SLOWER ANIMATION) --- */
     .login-card {
       width: 100%;
       max-width: 450px;
       margin: 0 auto;
       background: var(--card-bg);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(25px);
       border-radius: 35px 35px 0 0;
       padding: 25px 25px 40px 25px;
-      box-shadow: 0 -15px 40px rgba(245, 158, 11, 0.15);
+      box-shadow: 0 -15px 50px rgba(99, 102, 241, 0.15);
       position: relative;
       z-index: 10;
-      /* Ab animation 1.8 seconds mein hogi (dhira upar aayega) */
-      animation: slideUpSlow 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      /* Ab animation 2.0 seconds mein hogi (dhira upar aayega) */
+      animation: slideUpSlow 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
       transform: translateY(100%);
     }
 
     @keyframes slideUpSlow { to { transform: translateY(0); } }
 
     /* Tabs */
-    .tabs { display: flex; background: #fef3c7; border-radius: 16px; padding: 5px; margin-bottom: 25px; }
-    .tab-btn { flex: 1; padding: 12px; border: none; background: transparent; font-family: 'Fredoka'; font-size: 16px; font-weight: 600; color: #b45309; cursor: pointer; border-radius: 12px; transition: 0.3s; }
+    .tabs { display: flex; background: #f1f5f9; border-radius: 16px; padding: 5px; margin-bottom: 25px; }
+    .tab-btn { flex: 1; padding: 12px; border: none; background: transparent; font-family: 'Fredoka'; font-size: 16px; font-weight: 600; color: #94a3b8; cursor: pointer; border-radius: 12px; transition: 0.3s; }
     .tab-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 
     .brand-header { text-align: center; margin-bottom: 20px; }
@@ -76,29 +76,29 @@
 
     /* Inputs */
     .input-group { position: relative; margin-bottom: 15px; text-align: left; }
-    .input-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 18px; color: var(--text-muted); z-index: 2; }
+    .input-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 18px; color: #94a3b8; z-index: 2; }
     .form-input { width: 100%; padding: 22px 45px 8px 48px; background: #ffffff; border: 2px solid var(--border-color); border-radius: 16px; font-size: 15px; color: var(--text-main); font-family: 'Nunito'; font-weight: 800; outline: none; transition: 0.2s; }
-    .form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2); }
+    .form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15); }
     
-    .floating-label { position: absolute; left: 48px; top: 50%; transform: translateY(-50%); font-size: 15px; color: var(--text-muted); font-weight: 700; pointer-events: none; transition: 0.2s; }
-    .form-input:focus ~ .floating-label, .form-input:not(:placeholder-shown) ~ .floating-label { top: 12px; font-size: 11px; color: var(--primary-dark); }
+    .floating-label { position: absolute; left: 48px; top: 50%; transform: translateY(-50%); font-size: 15px; color: #94a3b8; font-weight: 700; pointer-events: none; transition: 0.2s; }
+    .form-input:focus ~ .floating-label, .form-input:not(:placeholder-shown) ~ .floating-label { top: 12px; font-size: 11px; color: var(--primary); }
 
-    .toggle-password { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); }
+    .toggle-password { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; color: #94a3b8; }
     .hidden { display: none !important; }
 
     .forgot-link { display: block; text-align: right; font-size: 13px; color: var(--text-muted); font-weight: 800; background: none; border: none; cursor: pointer; margin-bottom: 20px; width: 100%; }
     
     /* Buttons */
-    .btn-main { width: 100%; padding: 16px; background: linear-gradient(135deg, #f59e0b, #d97706); color: #ffffff; border: none; border-radius: 16px; font-size: 18px; font-family: 'Fredoka'; font-weight: 700; cursor: pointer; box-shadow: 0 6px 0 #92400e, 0 10px 15px rgba(245, 158, 11, 0.3); transition: 0.1s; margin-bottom: 20px; position: relative; overflow: hidden; }
-    .btn-main:active { transform: translateY(6px); box-shadow: 0 0 0 #92400e; }
+    .btn-main { width: 100%; padding: 16px; background: linear-gradient(135deg, #818cf8, #6366f1); color: #ffffff; border: none; border-radius: 16px; font-size: 18px; font-family: 'Fredoka'; font-weight: 700; cursor: pointer; box-shadow: 0 6px 0 #4338ca, 0 10px 15px rgba(99, 102, 241, 0.3); transition: 0.1s; margin-bottom: 20px; position: relative; overflow: hidden; }
+    .btn-main:active { transform: translateY(6px); box-shadow: 0 0 0 #4338ca; }
     .btn-main:disabled { background: #cbd5e1; box-shadow: 0 6px 0 #94a3b8; color: #fff; cursor: not-allowed; }
 
     .divider { display: flex; align-items: center; text-align: center; margin: 15px 0; color: #cbd5e1; font-size: 12px; font-weight: 800; }
-    .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 2px solid var(--border-color); }
+    .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 2px solid #e2e8f0; }
     .divider::before { margin-right: 12px; } .divider::after { margin-left: 12px; }
 
-    .btn-google { width: 100%; padding: 14px; background: #ffffff; color: #334155; border: 2px solid var(--border-color); border-radius: 16px; font-size: 15px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 0 var(--border-color); transition: 0.1s; }
-    .btn-google:active { transform: translateY(4px); box-shadow: 0 0 0 var(--border-color); }
+    .btn-google { width: 100%; padding: 14px; background: #ffffff; color: #334155; border: 2px solid #e2e8f0; border-radius: 16px; font-size: 15px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 0 #e2e8f0; transition: 0.1s; }
+    .btn-google:active { transform: translateY(4px); box-shadow: 0 0 0 #e2e8f0; }
   </style>
 </head>
 <body>
@@ -176,9 +176,9 @@
 
     let currentMode = 'login';
     const MAX_ATTEMPTS = 4;
-    const LOCKOUT_TIME = 60 * 1000; // Ab 60 seconds (1 minute) ka lockout hai
+    const LOCKOUT_TIME = 60 * 1000; // 1 minute
 
-    // 1. Session Check (Direct Home Logic)
+    // 1. Direct Home Redirect (Agar pehle se login hai)
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const savedAge = localStorage.getItem('kidsAgeGroup');
@@ -186,7 +186,7 @@
       }
     });
 
-    // 2. Tab Switch
+    // 2. Tab Switch Logic
     window.switchTab = function(mode) {
       currentMode = mode;
       const tabLogin = document.getElementById('tabLogin');
@@ -215,7 +215,7 @@
       }
     }
 
-    // 3. UI Helpers
+    // 3. Eye Icon Toggle
     window.togglePasswordVisibility = function() {
       const passwordInput = document.getElementById('password');
       const eyeOpen = document.getElementById('eyeOpen');
@@ -262,7 +262,7 @@
       }
     }
 
-    // 4. Rate Limiting Logic (1 Minute Lock)
+    // 4. Rate Limiting Logic (60 Seconds)
     function checkRateLimit() {
       const attempts = parseInt(localStorage.getItem('loginAttempts') || '0');
       const lockoutUntil = parseInt(localStorage.getItem('lockoutUntil') || '0');
@@ -292,12 +292,12 @@
       }
     }
 
-    // 5. Form Submit
+    // 5. Submit Form (Login/Signup)
     window.handleFormSubmit = async function(event) {
       event.preventDefault();
       hideAlert();
 
-      if (!checkRateLimit()) return;
+      if (!checkRateLimit()) return; // Rate limit check
 
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value;
@@ -309,7 +309,7 @@
       try {
         if (currentMode === 'login') {
           await signInWithEmailAndPassword(auth, email, password);
-          localStorage.setItem('loginAttempts', '0');
+          localStorage.setItem('loginAttempts', '0'); // Reset on success
         } else {
           await createUserWithEmailAndPassword(auth, email, password);
         }
@@ -323,27 +323,21 @@
       }
     }
 
-    // 6. GOOGLE LOGIN (Blank Page Fix)
+    // 6. Google Login
     window.handleGoogleLogin = async function() {
       hideAlert();
       setLoading(true, "Connecting...");
       const provider = new GoogleAuthProvider();
-      
-      // Pop-up block hatane ke liye custom parameters
       provider.setCustomParameters({ prompt: 'select_account' });
       
       try {
         const result = await signInWithPopup(auth, provider);
-        // Redirect onAuthStateChanged handle karega, par safety ke liye
-        if(result.user) {
-           const savedAge = localStorage.getItem('kidsAgeGroup');
-           window.location.replace(!savedAge ? "age-select.html" : "index-home.html");
-        }
+        // Redirect handled by onAuthStateChanged
       } catch (error) {
         setLoading(false);
         if(error.code === 'auth/popup-blocked') {
-           showAlert("Browser ne popup block kiya hai. Please settings me jaakar is site ke popups allow karein.", "error");
-        } else {
+           showAlert("Popup blocked! Please allow popups in settings.", "error");
+        } else if (error.code !== 'auth/popup-closed-by-user') {
            showAlert(getFriendlyErrorMessage(error.code));
         }
       }
