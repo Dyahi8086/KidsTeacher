@@ -6,7 +6,8 @@
     <meta name="theme-color" content="#e0f2fe"> 
     <title>Kids Teacher - Welcome</title>
     
-    <link rel="manifest" href="manifest.json">
+    <!-- PWA Manifest Link -->
+    <link rel="manifest" href="/KidsTeacher/manifest.json">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +38,7 @@
         .bg-image-layer {
             position: absolute; top: 0; left: 0;
             width: 100%; height: 100%;
-            background-image: url('welcome_bg.png');
+            background-image: url('/KidsTeacher/welcome_bg.png');
             background-size: cover; 
             background-position: center top;
             z-index: 1;
@@ -135,20 +136,20 @@
             ripple.style.width = ripple.style.height = `30px`; 
             this.appendChild(ripple);
             setTimeout(() => { ripple.remove(); }, 600);
-            setTimeout(() => { window.location.href = "login.html"; }, 250); 
+            setTimeout(() => { window.location.href = "/KidsTeacher/login.html"; }, 250); 
         });
     </script>
 
-    <!-- PWA SERVICE WORKER REGISTRATION (Yeh naya code hai) -->
+    <!-- PWA SERVICE WORKER REGISTRATION -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./service-worker.js')
+                navigator.serviceWorker.register('/KidsTeacher/service-worker.js', { scope: '/KidsTeacher/' })
                     .then(registration => {
-                        console.log('Service Worker registered with scope:', registration.scope);
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
                     })
                     .catch(error => {
-                        console.log('Service Worker registration failed:', error);
+                        console.log('ServiceWorker registration failed: ', error);
                     });
             });
         }
