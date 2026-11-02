@@ -22,7 +22,6 @@
     body {
       min-height: 100vh;
       min-height: 100dvh;
-      /* Background gradient matches exact color of PNG top and bottom edges */
       background: linear-gradient(180deg, #dceeff 0%, #fef3c7 60%, #ffd8b8 100%);
       display: flex;
       flex-direction: column;
@@ -44,7 +43,7 @@
       z-index: 1;
     }
 
-    /* Fixed Moving Clouds Layer */
+    /* Moving Clouds Animation */
     .clouds-layer {
       position: absolute;
       top: 0;
@@ -86,21 +85,32 @@
 
     .welcome-heading {
       font-family: 'Baloo 2', cursive;
-      font-size: 23px;
+      font-size: 24px;
       font-weight: 800;
-      color: #6c2bd9;
+      color: #7c2d12;
       margin-bottom: 3px;
-      text-shadow: 0 2px 0 #ffffff, 0 -2px 0 #ffffff, 2px 0 0 #ffffff, -2px 0 0 #ffffff, 0 4px 10px rgba(0,0,0,0.1);
+      text-shadow: 0 2px 0 #ffffff, 0 -2px 0 #ffffff, 2px 0 0 #ffffff, -2px 0 0 #ffffff, 0 4px 10px rgba(0,0,0,0.15);
     }
 
     .welcome-subtext {
       font-size: 13px;
-      color: #334155;
-      font-weight: 600;
-      text-shadow: 0 1px 2px #ffffff;
+      color: #1e293b;
+      font-weight: 700;
+      text-shadow: 0 1px 2px #ffffff, 0 2px 5px rgba(0,0,0,0.1);
     }
 
-    /* 3D Toy Capsule Button */
+    /* Bouncing 3D Start Button */
+    @keyframes buttonBounce {
+      0%, 100% {
+        transform: translateY(0);
+        box-shadow: 0 6px 0 #c23807, 0 10px 20px rgba(249, 87, 22, 0.45);
+      }
+      50% {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 0 #c23807, 0 18px 25px rgba(249, 87, 22, 0.55);
+      }
+    }
+
     .btn-get-started {
       width: 100%;
       padding: 15px 20px;
@@ -112,19 +122,19 @@
       font-family: 'Baloo 2', cursive;
       font-weight: 800;
       cursor: pointer;
-      box-shadow: 0 6px 0 #c23807, 0 10px 20px rgba(249, 87, 22, 0.45);
       text-decoration: none;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
       letter-spacing: 0.5px;
-      transition: all 0.12s ease;
       text-shadow: 0 2px 3px rgba(0,0,0,0.25);
+      animation: buttonBounce 1.8s ease-in-out infinite;
     }
 
     .btn-get-started:active {
-      transform: translateY(4px);
+      transform: translateY(3px);
+      animation: none;
       box-shadow: 0 2px 0 #c23807, 0 4px 10px rgba(249, 87, 22, 0.4);
     }
   </style>
