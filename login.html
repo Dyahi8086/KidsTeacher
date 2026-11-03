@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#8b5cf6">
   <title>Parents Login - Kids Teacher</title>
   
+  <!-- PWA Links -->
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/png" href="./icons/icon-192.png">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
@@ -22,44 +23,46 @@
       flex-direction: column; 
       font-family: 'Nunito', sans-serif; 
       /* Photo ke background se match karta hua gradient */
-      background: linear-gradient(180deg, #e9d5ff 0%, #f3e8ff 100%);
+      background: linear-gradient(180deg, #d8b4fe 0%, #e9d5ff 100%);
       overflow: hidden;
     }
 
-    /* --- TOP IMAGE SECTION --- */
+    /* --- TOP IMAGE SECTION (Photo) --- */
     .top-image-section {
       width: 100%; 
-      /* Photo ki height taaki wo screen ka bada hissa cover kare */
-      height: 55vh; 
+      height: 65vh; /* Photo ki height badha di taaki gap na bache */
       background-image: url('login_bg.png'); 
       background-size: 100% 100%; 
       background-position: center top;
       background-repeat: no-repeat;
       flex-shrink: 0;
+      z-index: 10;
     }
 
-    /* --- GLASSMORPHISM LOGIN CARD --- */
+    /* --- GLASSMORPHISM LOGIN CARD (Photo ke saath seamless) --- */
     .login-card {
-      width: 90%;
-      max-width: 400px;
-      margin: -30px auto 0 auto; /* Box ko photo ke upar overlap karne ke liye */
-      
-      /* Glass Effect */
-      background: rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      border-radius: 30px;
-
-      box-shadow: 0 8px 32px rgba(139, 92, 246, 0.3);
-
-      padding: 30px 20px;
+      width: 100%;
+      flex: 1; /* Bachi hui jagah lega */
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       text-align: center;
-      z-index: 10;
+      padding: 0 20px 20px 20px;
+      
+      /* Glass Effect (Bina kisi box/gap ke, direct background par) */
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      
+      /* Top border ko photo ke wavy design se match karne ke liye hata diya hai */
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 30px 30px 0 0; /* Sirf upar ke corners gol */
+      
+      margin-top: -40px; /* Photo ke wavy part ke andar overlap karega */
+      z-index: 20;
+      box-shadow: 0 -5px 20px rgba(139, 92, 246, 0.1);
     }
 
     /* --- TEXT STYLING --- */
@@ -69,7 +72,7 @@
       color: #4c1d95; /* Dark Purple */
       font-weight: 700; 
       letter-spacing: -0.5px; 
-      margin-bottom: 25px;
+      margin-bottom: 30px;
       text-shadow: 0 2px 4px rgba(255,255,255,0.8);
     }
 
@@ -98,6 +101,7 @@
       transform: translateY(0);
     }
 
+    /* Button Shine Effect */
     .btn-google::after {
       content: '';
       position: absolute;
@@ -114,6 +118,7 @@
       100% { left: 200%; }
     }
 
+    /* Press Animation */
     .btn-google:active { 
       transform: translateY(6px); 
       box-shadow: 0 0px 0 #581c87, 0 4px 10px rgba(0,0,0,0.2); 
@@ -127,6 +132,7 @@
       cursor: not-allowed;
     }
 
+    /* Google Icon Background */
     .google-icon-bg {
       background: #ffffff;
       border-radius: 50%;
@@ -157,7 +163,7 @@
   <!-- Top Image -->
   <div class="top-image-section"></div>
 
-  <!-- Glassmorphism Login Card -->
+  <!-- Login Glass Card -->
   <div class="login-card">
     <h1 class="app-title">Parents Login</h1>
 
