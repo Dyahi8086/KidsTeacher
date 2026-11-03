@@ -6,11 +6,13 @@
   <meta name="theme-color" content="#ffffff">
   <title>Parents Login - Kids Teacher</title>
   
-  <!-- PWA & Favicon Links (Install App ke liye zaroori) -->
+  <!-- PWA Links -->
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/png" href="./icons/icon-192.png">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
   
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
   
   <style>
@@ -27,7 +29,7 @@
       position: relative;
     }
 
-    /* --- ADVANCED FLOATING ELEMENTS (Background me halke stars) --- */
+    /* Background Floating Elements */
     .floating-star {
       position: absolute;
       background: rgba(241, 245, 249, 0.8);
@@ -36,8 +38,8 @@
       z-index: 0;
       animation: float 6s infinite ease-in-out;
     }
-    .star-1 { width: 15px; height: 15px; top: 60%; left: 10%; animation-delay: 0s; }
-    .star-2 { width: 25px; height: 25px; top: 70%; right: 15%; animation-delay: 1.5s; }
+    .star-1 { width: 15px; height: 15px; top: 65%; left: 10%; animation-delay: 0s; }
+    .star-2 { width: 25px; height: 25px; top: 75%; right: 15%; animation-delay: 1.5s; }
     .star-3 { width: 12px; height: 12px; bottom: 15%; left: 20%; animation-delay: 0.8s; }
     .star-4 { width: 20px; height: 20px; bottom: 25%; right: 10%; animation-delay: 2s; }
 
@@ -46,15 +48,15 @@
       50% { transform: translateY(-15px); }
     }
 
-    /* --- TOP IMAGE SECTION --- */
+    /* --- TOP IMAGE SECTION (Thoda Bada aur Niche kheecha) --- */
     .top-image-section {
       width: 100%; 
-      height: 55vh; 
+      height: 60vh; /* Photo ab 60% jagah legi */
       background-image: url('login_bg.png'); 
-      background-size: cover;
+      background-size: 100% 100%; /* Stretch to fit without gaps */
       background-position: center top;
       background-repeat: no-repeat;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+      flex-shrink: 0;
       z-index: 10;
     }
 
@@ -64,18 +66,27 @@
       flex: 1; 
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: center; /* Text aur button ko beech me rakhega */
       align-items: center;
-      padding: 20px;
+      padding: 10px 20px 30px 20px;
       background: #ffffff; 
       z-index: 10;
+      text-align: center;
     }
 
-    .brand-header { text-align: center; margin-bottom: 25px; }
-    .app-title { font-family: 'Fredoka'; font-size: 30px; color: #1e293b; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 6px;}
-    .app-subtitle { font-size: 14px; color: #64748b; font-weight: 700; }
+    .brand-header { margin-bottom: 30px; }
+    
+    /* Premium Font */
+    .app-title { 
+      font-family: 'Fredoka', sans-serif; 
+      font-size: 34px; 
+      color: #1e293b; 
+      font-weight: 700; 
+      letter-spacing: -0.5px; 
+      margin-bottom: 0px;
+    }
 
-    /* --- ULTRA ADVANCED 3D GOOGLE BUTTON --- */
+    /* --- ADVANCED 3D GOOGLE BUTTON --- */
     .btn-google {
       width: 100%; 
       max-width: 340px;
@@ -101,7 +112,7 @@
       transform: translateY(0);
     }
 
-    /* Button Shine Effect (Chamak) */
+    /* Button Shine Effect */
     .btn-google::after {
       content: '';
       position: absolute;
@@ -124,7 +135,7 @@
       box-shadow: 0 0px 0 #cbd5e1, 0 4px 10px rgba(0,0,0,0.05); 
     }
     
-    /* Button Disabled State */
+    /* Disabled State */
     .btn-google:disabled {
       background: #f8fafc;
       color: #94a3b8;
@@ -133,46 +144,26 @@
       cursor: not-allowed;
       border-color: #e2e8f0;
     }
-    
+
     /* --- LOADING OVERLAY --- */
     #loadingOverlay {
-      display: none; 
-      position: fixed; 
-      top: 0; left: 0; 
-      width: 100%; height: 100vh;
-      background: rgba(255, 255, 255, 0.95); 
-      backdrop-filter: blur(5px);
-      z-index: 9999;
-      flex-direction: column; 
-      justify-content: center; 
-      align-items: center;
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+      background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px);
+      z-index: 9999; flex-direction: column; justify-content: center; align-items: center;
     }
     .spinner {
-      width: 50px; height: 50px; 
-      border: 5px solid #e2e8f0;
-      border-top: 5px solid #4285F4; 
-      border-radius: 50%;
-      animation: spin 1s linear infinite; 
-      margin-bottom: 20px;
+      width: 50px; height: 50px; border: 5px solid #e2e8f0;
+      border-top: 5px solid #4285F4; border-radius: 50%;
+      animation: spin 1s linear infinite; margin-bottom: 20px;
     }
     @keyframes spin { 100% { transform: rotate(360deg); } }
-    
-    .loading-text {
-      font-family: 'Fredoka'; 
-      font-size: 22px; 
-      color: #1e293b; 
-      font-weight: 600;
-      animation: pulseText 1.5s infinite;
-    }
-    @keyframes pulseText {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.6; }
-    }
+    .loading-text { font-family: 'Fredoka'; font-size: 22px; color: #1e293b; font-weight: 600; animation: pulseText 1.5s infinite; }
+    @keyframes pulseText { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
   </style>
 </head>
 <body>
 
-  <!-- Background Floating Stars -->
+  <!-- Floating Background -->
   <div class="floating-star star-1"></div>
   <div class="floating-star star-2"></div>
   <div class="floating-star star-3"></div>
@@ -185,7 +176,6 @@
   <div class="login-card">
     <div class="brand-header">
       <h1 class="app-title">Parents Login</h1>
-      <p class="app-subtitle">Continue with Google</p>
     </div>
 
     <!-- Advanced Button -->
@@ -195,7 +185,7 @@
     </button>
   </div>
 
-  <!-- Full Screen Loader -->
+  <!-- Loader -->
   <div id="loadingOverlay">
     <div class="spinner"></div>
     <p class="loading-text">Logging you in...</p>
@@ -221,7 +211,6 @@
     const overlay = document.getElementById('loadingOverlay');
     const googleBtn = document.getElementById('googleBtn');
 
-    // Auto redirect if already logged in
     onAuthStateChanged(auth, (user) => {
       if (user) {
         overlay.style.display = 'flex';
@@ -233,12 +222,9 @@
     });
 
     window.handleGoogleLogin = async function() {
-      // Haptic Feedback (Phone vibrate)
       if (navigator.vibrate) navigator.vibrate(50);
 
-      // Save original text
       const originalHTML = googleBtn.innerHTML;
-      
       googleBtn.innerHTML = "Connecting...";
       googleBtn.disabled = true;
       
@@ -249,21 +235,14 @@
         await signInWithPopup(auth, provider); 
       } 
       catch (error) { 
-        // Revert if error
         googleBtn.innerHTML = originalHTML;
         googleBtn.disabled = false;
-        
-        if(error.code !== 'auth/popup-closed-by-user') { 
-          alert("Login failed. Please try again."); 
-        }
+        if(error.code !== 'auth/popup-closed-by-user') { alert("Login failed. Please try again."); }
       }
     }
 
-    // Register PWA Service Worker
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => { 
-        navigator.serviceWorker.register('./service-worker.js'); 
-      });
+      window.addEventListener('load', () => { navigator.serviceWorker.register('./service-worker.js'); });
     }
   </script>
 </body>
