@@ -25,24 +25,26 @@
       
       /* PHOTO BACKGROUND */
       background-image: url('login_bg.png'); 
-      background-size: cover; /* Bina crop kiye puri screen cover karegi */
+      /* Yahan humne 'cover' use kiya hai taaki photo screen ke hisaab se khud ko adjust kare */
+      background-size: cover; 
       background-position: center top;
       background-repeat: no-repeat;
       
-      /* Fallback color photo ke lower part se match karta hua */
-      background-color: #d8b4fe;
-      
+      background-color: #d8b4fe; 
       overflow: hidden;
     }
 
-    /* --- LOGIN CONTAINER (Photo ke upar transparent) --- */
+    /* --- LOGIN CONTAINER --- */
     .login-container {
       flex: 1; 
       display: flex;
       flex-direction: column;
-      justify-content: flex-end; /* Box ko niche rakhega */
+      justify-content: flex-end; /* Box ko hamesha niche rakhega */
       align-items: center;
-      padding-bottom: 40px; /* Niche se thoda gap */
+      
+      /* YEH SABSE ZAROORI FIX HAI: Safe area add kiya taaki install hone par status bar ki jagah adjust ho */
+      padding-bottom: calc(30px + env(safe-area-inset-bottom)); 
+      
       padding-left: 20px;
       padding-right: 20px;
     }
@@ -53,13 +55,13 @@
       max-width: 400px;
       
       /* Glass Effect */
-      background: rgba(255, 255, 255, 0.15); /* Halka transparent white */
+      background: rgba(255, 255, 255, 0.15); 
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
 
       border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 30px;
-      box-shadow: 0 8px 32px rgba(139, 92, 246, 0.3); /* Purple shadow */
+      box-shadow: 0 8px 32px rgba(139, 92, 246, 0.3); 
 
       padding: 30px 20px;
       display: flex;
@@ -72,7 +74,7 @@
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
       font-size: 34px; 
-      color: #4c1d95; /* Dark Purple */
+      color: #4c1d95; 
       font-weight: 700; 
       letter-spacing: -0.5px; 
       margin-bottom: 25px;
@@ -103,7 +105,6 @@
       transform: translateY(0);
     }
 
-    /* Button Shine Effect */
     .btn-google::after {
       content: '';
       position: absolute;
@@ -120,7 +121,6 @@
       100% { left: 200%; }
     }
 
-    /* Press Animation */
     .btn-google:active { 
       transform: translateY(6px); 
       box-shadow: 0 0px 0 #581c87, 0 4px 10px rgba(0,0,0,0.2); 
@@ -134,7 +134,6 @@
       cursor: not-allowed;
     }
 
-    /* Google Icon Background */
     .google-icon-bg {
       background: #ffffff;
       border-radius: 50%;
