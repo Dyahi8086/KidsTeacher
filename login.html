@@ -28,7 +28,7 @@
     /* --- TOP IMAGE SECTION --- */
     .top-image-section {
       width: 100%; 
-      /* Photo ki height badha di hai taaki wo screen ka bada hissa cover kare */
+      /* Height ko badhaya hai taaki nayi photo ki white space puri screen cover kare */
       height: 65vh; 
       background-image: url('login_bg.png'); 
       background-size: 100% 100%; 
@@ -37,26 +37,25 @@
       flex-shrink: 0;
     }
 
-    /* --- LOGIN SECTION (Photo ke theek niche) --- */
+    /* --- LOGIN SECTION --- */
     .login-section {
       width: 100%; 
       flex: 1; 
       display: flex;
       flex-direction: column;
-      /* justify-content: flex-start; se text/button thoda upar aayenge */
-      justify-content: flex-start; 
+      justify-content: flex-start; /* Text ko upar rakhega */
       align-items: center;
-      padding-top: 40px; /* Photo aur text ke beech ka gap */
+      padding-top: 20px; 
       background: #ffffff;
     }
 
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
-      font-size: 34px; 
+      font-size: 32px; 
       color: #1e293b; 
       font-weight: 700; 
       letter-spacing: -0.5px; 
-      margin-bottom: 35px;
+      margin-bottom: 25px;
     }
 
     /* --- ADVANCED 3D GOOGLE BUTTON --- */
@@ -84,37 +83,17 @@
       transform: translateY(0);
     }
 
-    /* Button Shine Effect */
-    .btn-google::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 50%; height: 100%;
-      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
-      transform: skewX(-25deg);
-      animation: shine 3s infinite;
-    }
-
-    @keyframes shine {
-      0% { left: -100%; }
-      20% { left: 200%; }
-      100% { left: 200%; }
-    }
-
-    /* Press Animation */
     .btn-google:active { 
       transform: translateY(6px); 
       box-shadow: 0 0px 0 #cbd5e1, 0 4px 10px rgba(0,0,0,0.05); 
     }
     
-    /* Disabled State */
     .btn-google:disabled {
       background: #f8fafc;
       color: #94a3b8;
       box-shadow: none;
       transform: none;
       cursor: not-allowed;
-      border-color: #e2e8f0;
     }
 
     /* --- LOADING OVERLAY --- */
@@ -134,10 +113,8 @@
 </head>
 <body>
 
-  <!-- Top Image -->
   <div class="top-image-section"></div>
 
-  <!-- Login Section -->
   <div class="login-section">
     <h1 class="app-title">Parents Login</h1>
 
@@ -147,7 +124,6 @@
     </button>
   </div>
 
-  <!-- Loader -->
   <div id="loadingOverlay">
     <div class="spinner"></div>
     <p class="loading-text">Logging you in...</p>
