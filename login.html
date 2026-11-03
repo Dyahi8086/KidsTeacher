@@ -6,47 +6,51 @@
   <meta name="theme-color" content="#ffffff">
   <title>Parents Login - Kids Teacher</title>
   
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
   
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
     body {
-      height: 100vh;
-      height: 100dvh; 
-      display: flex; 
-      flex-direction: column; 
+      height: 100vh; height: 100dvh; 
+      display: flex; flex-direction: column; 
       font-family: 'Nunito', sans-serif; 
       background-color: #ffffff; 
       overflow: hidden;
     }
 
-    /* TOP IMAGE SECTION */
+    /* Top Image Section */
     .top-image-section {
       width: 100%;
-      flex: 1; /* Bachi hui jagah legi */
+      height: 55vh; /* Screen ka 55% */
       background-image: url('login_bg.png'); 
       background-size: cover;
       background-position: center top;
       background-repeat: no-repeat;
-      /* Photo ka size fix nahi kiya, flex se adjust hoga */
-      min-height: 45vh; /* Minimum itni jagah legi */
+      position: relative;
     }
 
-    /* LOGIN FORM SECTION */
+    /* Image Loader (Agar net slow ho) */
+    .image-loader {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 16px;
+      color: #64748b;
+      font-weight: bold;
+      display: none;
+    }
+
+    /* Login Form Section */
     .login-card {
       width: 100%; 
-      max-width: 450px; 
-      margin: 0 auto;
-      padding: 30px 25px;
+      flex: 1; /* Bachi hui 45% jagah legi */
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      padding: 20px;
       background: #ffffff;
-      z-index: 10;
     }
 
     .brand-header { text-align: center; margin-bottom: 25px; }
@@ -54,8 +58,7 @@
     .app-subtitle { font-size: 14px; color: #64748b; font-weight: 700; margin-top: 6px; }
 
     .btn-google {
-      width: 100%;
-      max-width: 350px;
+      width: 100%; max-width: 350px;
       padding: 16px;
       background: #ffffff;
       color: #334155;
@@ -69,26 +72,24 @@
       align-items: center;
       justify-content: center;
       gap: 12px;
-      box-shadow: 0 6px 0 #cbd5e1, 0 10px 15px rgba(0,0,0,0.05);
-      transition: all 0.1s ease;
+      box-shadow: 0 6px 0 #cbd5e1;
     }
     
-    .btn-google:active { 
-      transform: translateY(6px); 
-      box-shadow: 0 0px 0 #cbd5e1, 0 4px 10px rgba(0,0,0,0.05); 
-    }
+    .btn-google:active { transform: translateY(6px); box-shadow: 0 0px 0 #cbd5e1; }
   </style>
 </head>
 <body>
 
-  <!-- Upar wali Photo (Flex mein stretch hogi) -->
-  <div class="top-image-section"></div>
+  <!-- Photo Section -->
+  <div class="top-image-section" id="topImage">
+    <div class="image-loader" id="loader">Loading...</div>
+  </div>
 
-  <!-- Niche wala Login Section -->
+  <!-- Login Section -->
   <div class="login-card">
     <div class="brand-header">
       <h1 class="app-title">Parents Login</h1>
-      <p class="app-subtitle">Continue with Google to guide your child's journey</p>
+      <p class="app-subtitle">Continue with Google</p>
     </div>
 
     <button type="button" id="googleBtn" class="btn-google" onclick="handleGoogleLogin()">
@@ -97,7 +98,6 @@
     </button>
   </div>
 
-  <!-- Firebase Script -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -108,8 +108,7 @@
       projectId: "kids-teacher-4387e",
       storageBucket: "kids-teacher-4387e.firebasestorage.app",
       messagingSenderId: "420221167346",
-      appId: "1:420221167346:web:da7ac80acdfd52339d526b",
-      measurementId: "G-VJVS2ZMNLY"
+      appId: "1:420221167346:web:da7ac80acdfd52339d526b"
     };
 
     const app = initializeApp(firebaseConfig);
@@ -131,14 +130,24 @@
       const provider = new GoogleAuthProvider(); 
       provider.setCustomParameters({ prompt: 'select_account' });
       
-      try { 
-        await signInWithPopup(auth, provider); 
-      } 
+      try { await signInWithPopup(auth, provider); } 
       catch (error) { 
         btn.innerHTML = "Continue with Google";
         btn.disabled = false;
         alert("Login failed. Please try again."); 
       }
+    }
+
+    // Photo Load check karne ka code (Agar net slow ho)
+    const img = new Image();
+    img.src = 'login_bg.png';
+    img.onload = function() {
+      document.getElementById('loader').style.display = 'none';
+    }
+    img.onerror = function() {
+      // Agar photo load nahi hui, toh loader hatado aur background color set kardo
+      document.getElementById('loader').innerText = "Image not available";
+      document.getElementById('topImage').style.backgroundColor = "#f0f8ff";
     }
   </script>
 </body>
