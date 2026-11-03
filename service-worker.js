@@ -1,68 +1,51 @@
+const CACHE_NAME = 'kids-teacher-v6'; // Version badal diya hai taaki naya icon load ho
 
-const CACHE_NAME = "kids-teacher-v5";
-
-const APP_FILES = [
-  "./",
-  "./index.html",
-  "./manifest.json",
-  "./icons/icon-192.png",
-  "./icons/icon-512.png"
+const ASSETS_TO_CACHE = [
+  './',
+  './index.html',
+  './login.html',
+  './manifest.json',
+  './icons/icon-192.png',
+  './icons/icon-512.png'
 ];
 
-// Install
-self.addEventListener("install", (event) => {
+// Install Event
+self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(APP_FILES))
-      .then(() => self.skipWaiting())
+    caches.open(CACHE_NAME).then((cache) => {
+      // Safe caching: ek file missing ho toh pura install fail na ho
+      return Promise.all(
+        ASSETS_TO_CACHE.map(url => {
+          return cache.add(url).catch(err => console.log('Failed to cache:', url, err));
+        })
+      );
+    })
   );
 });
 
-// Activate and remove old cache
-self.addEventListener("activate", (event) => {
+// Activate Event (Purana cache delete karega)
+self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(
-        keys
-          .filter(
-            (key) =>
-              key.startsWith("kids-teacher-") &&
-              key !== CACHE_NAME
-          )
-          .map((key) => caches.delete(key))
-      )
-    ).then(() => self.clients.claim())
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cache) => {
+          if (cache !== CACHE_NAME) {
+            console.log('Deleting old cache:', cache);
+            return caches.delete(cache);
+          }
+        })
+      );
+    })
   );
+  self.clients.claim();
 });
 
-// Fetch
-self.addEventListener("fetch", (event) => {
-  const request = event.request;
-  const url = new URL(request.url);
-
-  if (request.method !== "GET") return;
-
-  if (url.origin !== self.location.origin) return;
-
-  // HTML navigation: network first
-  if (request.mode === "navigate") {
-    event.respondWith(
-      fetch(request).catch(async () => {
-        return (
-          await caches.match(request) ||
-          await caches.match("./index.html")
-        );
-      })
-    );
-    return;
-  }
-
-  // Other files: cache first
+// Fetch Event
+self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(request).then((cached) => {
-      if (cached) return cached;
-
-      return fetch(request);
+    fetch(event.request).catch(() => {
+      return caches.match(event.request);
     })
   );
 });
