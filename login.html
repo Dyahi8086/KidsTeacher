@@ -35,16 +35,14 @@
 
     /* --- LOGIN CONTAINER (Frame ke andar perfect center) --- */
     .login-container {
-      width: 65%; /* Width kam ki taaki frame se bahar na jaye */
-      max-width: 280px;
-      
+      width: 100%; /* Full width taaki center easily ho sake */
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       
-      /* Center me lane ke liye */
+      /* Screen ke exact center me lane ke liye */
       position: absolute;
       top: 50%;
       left: 50%;
@@ -69,9 +67,10 @@
       margin-bottom: 25px;
     }
 
-    /* --- ORANGE 3D GOOGLE BUTTON (Welcome Page wala color) --- */
+    /* --- ORANGE 3D GOOGLE BUTTON --- */
     .btn-google {
-      width: 100%; 
+      width: 65%; /* Button ki width kam ki taaki beech me chota lage */
+      max-width: 240px; /* Maximum size fix kiya */
       padding: 12px 10px;
       
       /* Welcome page wala Exact Orange Gradient */
@@ -80,7 +79,7 @@
       color: #ffffff; 
       border: 2px solid #ffffff;
       border-radius: 50px;
-      font-size: 14px; /* Font chota kiya */
+      font-size: 14px; 
       font-family: 'Fredoka', sans-serif;
       font-weight: 700;
       cursor: pointer;
@@ -91,8 +90,8 @@
       position: relative;
       overflow: hidden;
       
-      /* Orange 3D Shadow */
-      box-shadow: 0 5px 0 #cc4e20, 0 10px 20px rgba(255, 107, 53, 0.4);
+      /* 3D Shadow */
+      box-shadow: 0 6px 0 #d95d39, 0 10px 20px rgba(255, 107, 53, 0.4);
       transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
       transform: translateY(0);
       
@@ -106,10 +105,10 @@
       100% { transform: scale(1); }
     }
 
-    /* Button Press Effect */
+    /* Button Press Effect (Dabne par) */
     .btn-google:active { 
-      transform: translateY(5px) scale(1); 
-      box-shadow: 0 0px 0 #cc4e20, 0 4px 10px rgba(0,0,0,0.2); 
+      transform: translateY(6px) scale(1); 
+      box-shadow: 0 0px 0 #d95d39, 0 4px 10px rgba(0,0,0,0.2); 
       animation: none; 
     }
     
