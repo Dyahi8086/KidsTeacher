@@ -6,7 +6,6 @@
   <meta name="theme-color" content="#8b5cf6">
   <title>Parents Login - Kids Teacher</title>
   
-  <!-- PWA Links -->
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/png" href="./icons/icon-192.png">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
@@ -22,58 +21,45 @@
       display: flex; 
       flex-direction: column; 
       font-family: 'Nunito', sans-serif; 
-      /* Premium Purple Gradient Background */
-      background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 50%, #d8b4fe 100%);
+      /* Photo ke background se match karta hua gradient */
+      background: linear-gradient(180deg, #e9d5ff 0%, #f3e8ff 100%);
       overflow: hidden;
-      position: relative;
     }
 
     /* --- TOP IMAGE SECTION --- */
     .top-image-section {
       width: 100%; 
-      height: 60vh; 
+      /* Photo ki height taaki wo screen ka bada hissa cover kare */
+      height: 55vh; 
       background-image: url('login_bg.png'); 
       background-size: 100% 100%; 
       background-position: center top;
       background-repeat: no-repeat;
       flex-shrink: 0;
-      position: relative;
-      z-index: 5;
     }
 
-    /* --- GLASSMORPHISM LOGIN CARD (Aapka diya hua CSS) --- */
+    /* --- GLASSMORPHISM LOGIN CARD --- */
     .login-card {
       width: 90%;
       max-width: 400px;
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
+      margin: -30px auto 0 auto; /* Box ko photo ke upar overlap karne ke liye */
       
       /* Glass Effect */
-      background: rgba(255, 255, 255, 0.25); /* Thoda aur transparent kiya hai taaki purple dikhe */
+      background: rgba(255, 255, 255, 0.25);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
 
       border: 1px solid rgba(255, 255, 255, 0.5);
       border-radius: 30px;
 
-      box-shadow: 0 8px 32px rgba(139, 92, 246, 0.3); /* Purple shadow */
+      box-shadow: 0 8px 32px rgba(139, 92, 246, 0.3);
 
       padding: 30px 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      
-      /* Animation */
-      animation: floatCard 4s ease-in-out infinite;
-    }
-
-    @keyframes floatCard {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(-10px); }
+      z-index: 10;
     }
 
     /* --- TEXT STYLING --- */
@@ -83,18 +69,17 @@
       color: #4c1d95; /* Dark Purple */
       font-weight: 700; 
       letter-spacing: -0.5px; 
-      margin-bottom: 30px;
+      margin-bottom: 25px;
       text-shadow: 0 2px 4px rgba(255,255,255,0.8);
     }
 
-    /* --- ULTRA ADVANCED PURPLE GOOGLE BUTTON --- */
+    /* --- PURPLE GOOGLE BUTTON --- */
     .btn-google {
       width: 100%; 
       max-width: 320px;
       padding: 16px;
-      /* Purple Gradient */
       background: linear-gradient(135deg, #a855f7, #7e22ce);
-      color: #ffffff; /* White Text */
+      color: #ffffff; 
       border: none;
       border-radius: 50px;
       font-size: 18px;
@@ -108,13 +93,11 @@
       position: relative;
       overflow: hidden;
       
-      /* Deep 3D Purple Shadow */
       box-shadow: 0 6px 0 #581c87, 0 10px 20px rgba(126, 34, 206, 0.4);
       transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
       transform: translateY(0);
     }
 
-    /* Button Shine Effect */
     .btn-google::after {
       content: '';
       position: absolute;
@@ -131,7 +114,6 @@
       100% { left: 200%; }
     }
 
-    /* Press Animation */
     .btn-google:active { 
       transform: translateY(6px); 
       box-shadow: 0 0px 0 #581c87, 0 4px 10px rgba(0,0,0,0.2); 
@@ -145,7 +127,6 @@
       cursor: not-allowed;
     }
 
-    /* Google Icon ko white circle me dikhane ke liye */
     .google-icon-bg {
       background: #ffffff;
       border-radius: 50%;
