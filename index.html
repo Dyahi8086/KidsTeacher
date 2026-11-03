@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#e0f2fe"> 
-    <title>Kids Teacher - Welcome</title>
+    <title>Kids Teacher</title>
     <link rel="manifest" href="manifest.json">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
 
@@ -17,12 +17,39 @@
             overflow: hidden; 
         }
 
-        .welcome-container {
+        /* --- SPLASH SCREEN / LOADER (Jo flash rokega) --- */
+        #splash-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100vh;
+            background: #e0f2fe; /* Fallback color */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease;
+        }
+
+        .spinner {
+            width: 50px; height: 50px;
+            border: 5px solid #ffffff;
+            border-top: 5px solid #FF6B35;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .loading-text { font-family: 'Fredoka'; font-size: 20px; color: #8B3A00; font-weight: 600; }
+
+        /* --- WELCOME PAGE CONTENT (Jo baad me dikhega) --- */
+        #welcome-content {
+            display: none; /* Shuru mein chhupa hua hai */
             position: relative;
             width: 100vw; 
             height: 100vh; 
             height: 100dvh; 
-            display: flex; 
+            display: flex; /* Jab dikhega tab flex ho jayega */
             flex-direction: column;
             justify-content: flex-end; 
             align-items: center;
@@ -90,7 +117,15 @@
     </style>
 </head>
 <body>
-    <div class="welcome-container">
+
+    <!-- 1. YEH SPLASH SCREEN HAI (Pehle dikhegi) -->
+    <div id="splash-screen">
+        <div class="spinner"></div>
+        <div class="loading-text">Loading...</div>
+    </div>
+
+    <!-- 2. YEH WELCOME PAGE HAI (Baad me dikhega) -->
+    <div id="welcome-content">
         <div class="content-wrapper">
             <div class="text-content">
                 <h1>Learning Is an<br>Adventure!</h1>
@@ -116,12 +151,22 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        // --- AUTO REDIRECT LOGIC ---
-        // Agar user pehle se login hai, toh direct home bhej do
+        const splash = document.getElementById('splash-screen');
+        const welcomeContent = document.getElementById('welcome-content');
+
+        // Firebase Check: Kya user logged in hai?
         onAuthStateChanged(auth, (user) => {
             if (user) {
+                // Agar user logged in hai, toh seedha home bhej do (Welcome page dikhega hi nahi)
                 const savedAge = localStorage.getItem('kidsAgeGroup');
                 window.location.replace(!savedAge ? "age-select.html" : "index-home.html");
+            } else {
+                // Agar user logged in NAHI hai, toh Splash screen hatao aur Welcome page dikhao
+                splash.style.opacity = '0';
+                setTimeout(() => {
+                    splash.style.display = 'none';
+                    welcomeContent.style.display = 'flex';
+                }, 300);
             }
         });
 
@@ -130,6 +175,7 @@
             window.location.href = 'login.html';
         });
 
+        // PWA Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => { navigator.serviceWorker.register('service-worker.js'); });
         }
