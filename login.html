@@ -14,82 +14,74 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
   
   <style>
-    /* 1. BASE RESET & LAYOUT */
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
     body {
-      /* Use min-height to prevent clipping on short screens */
-      min-height: 100vh; 
-      min-height: 100dvh; 
+      height: 100vh; 
+      height: 100dvh; 
       display: flex; 
       flex-direction: column; 
       font-family: 'Nunito', sans-serif; 
-      /* Base background matches the purple theme */
-      background: linear-gradient(180deg, #d8b4fe 0%, #f3e8ff 100%);
-      overflow-x: hidden;
-    }
-
-    /* 2. TOP IMAGE - RESPONSIVE FIX */
-    .top-image-section {
-      width: 100%; 
-      /* Set to 42vh to keep the illustration prominent but leave room */
-      height: 42vh; 
-      /* Ensure object-fit: cover logic for backgrounds */
+      
+      /* YEH HAI ASLI JADU: Photo ko background me set kiya hai */
       background-image: url('login_bg.png'); 
-      background-size: cover; 
+      background-size: cover; /* Photo bina crop hue puri screen cover karegi */
       background-position: center top;
       background-repeat: no-repeat;
-      flex-shrink: 0;
+      
+      /* Photo ke lower part se match karta hua fallback color */
+      background-color: #d8b4fe;
+      
+      overflow: hidden;
     }
 
-    /* 3. MAIN CONTENT CONTAINER */
+    /* --- LOGIN CONTAINER (Photo ke upar transparent) --- */
     .login-container {
-      flex: 1; /* Takes remaining space */
+      flex: 1; 
       display: flex;
       flex-direction: column;
-      align-items: center; /* Centers the card horizontally */
-      padding: 15px 0 30px 0; /* Small top padding for the 12-20px gap rule */
+      justify-content: flex-end; /* Form ko niche rakhega */
+      align-items: center;
+      padding-bottom: 50px; /* Niche se thoda gap */
+      padding-left: 20px;
+      padding-right: 20px;
     }
 
-    /* 4. GLASSMORPHISM LOGIN CARD */
+    /* --- GLASSMORPHISM LOGIN CARD --- */
     .login-card {
-      width: 92%; /* Mobile first width */
-      max-width: 520px; /* Cap for larger screens */
+      width: 100%; 
+      max-width: 400px;
       
       /* Glass Effect */
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.25); /* Halka transparent white */
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
 
       border: 1px solid rgba(255, 255, 255, 0.5);
       border-radius: 30px;
-      box-shadow: 0 8px 32px rgba(139, 92, 246, 0.3);
+      box-shadow: 0 8px 32px rgba(139, 92, 246, 0.3); /* Purple shadow */
 
       padding: 30px 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      
-      /* No absolute positioning. Just normal document flow. */
-      position: relative;
     }
 
-    /* Typography */
+    /* --- TEXT STYLING --- */
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
       font-size: 34px; 
-      color: #4c1d95; 
+      color: #4c1d95; /* Dark Purple */
       font-weight: 700; 
       letter-spacing: -0.5px; 
       margin-bottom: 25px;
       text-shadow: 0 2px 4px rgba(255,255,255,0.8);
     }
 
-    /* 5. PURPLE GOOGLE BUTTON */
+    /* --- PURPLE GOOGLE BUTTON --- */
     .btn-google {
       width: 100%; 
-      max-width: 320px;
       padding: 16px;
       background: linear-gradient(135deg, #a855f7, #7e22ce);
       color: #ffffff; 
@@ -111,7 +103,24 @@
       transform: translateY(0);
     }
 
-    /* Button Hover/Active States */
+    /* Button Shine Effect */
+    .btn-google::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 50%; height: 100%;
+      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+      transform: skewX(-25deg);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+      0% { left: -100%; }
+      20% { left: 200%; }
+      100% { left: 200%; }
+    }
+
+    /* Press Animation */
     .btn-google:active { 
       transform: translateY(6px); 
       box-shadow: 0 0px 0 #581c87, 0 4px 10px rgba(0,0,0,0.2); 
@@ -125,6 +134,7 @@
       cursor: not-allowed;
     }
 
+    /* Google Icon Background */
     .google-icon-bg {
       background: #ffffff;
       border-radius: 50%;
@@ -135,7 +145,7 @@
       justify-content: center;
     }
 
-    /* 6. LOADING OVERLAY */
+    /* --- LOADING OVERLAY --- */
     #loadingOverlay {
       display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
       background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px);
@@ -152,11 +162,10 @@
 </head>
 <body>
 
-  <!-- Top Image -->
-  <div class="top-image-section"></div>
-
-  <!-- Login Container -->
+  <!-- Main Container -->
   <div class="login-container">
+    
+    <!-- Glassmorphism Login Card -->
     <div class="login-card">
       <h1 class="app-title">Parents Login</h1>
 
@@ -169,7 +178,6 @@
     </div>
   </div>
 
-  <!-- Loader -->
   <div id="loadingOverlay">
     <div class="spinner"></div>
     <p class="loading-text">Logging you in...</p>
