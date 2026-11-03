@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#8b5cf6">
   <title>Parents Login - Kids Teacher</title>
   
+  <!-- PWA Links -->
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/png" href="./icons/icon-192.png">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
@@ -21,15 +22,16 @@
       display: flex; 
       flex-direction: column; 
       font-family: 'Nunito', sans-serif; 
-      background-color: #ffffff; 
+      /* Photo ke background se match karta hua color */
+      background-color: #f3e8ff; 
       overflow: hidden;
     }
 
     /* --- TOP IMAGE SECTION --- */
     .top-image-section {
       width: 100%; 
-      /* Height ko badhaya hai taaki nayi photo ki white space puri screen cover kare */
-      height: 65vh; 
+      /* Height badhayi taaki photo screen ka bada hissa cover kare */
+      height: 68vh; 
       background-image: url('login_bg.png'); 
       background-size: 100% 100%; 
       background-position: center top;
@@ -43,10 +45,13 @@
       flex: 1; 
       display: flex;
       flex-direction: column;
-      justify-content: flex-start; /* Text ko upar rakhega */
+      justify-content: center; /* Text aur button ko beech me layega */
       align-items: center;
-      padding-top: 20px; 
       background: #ffffff;
+      border-radius: 30px 30px 0 0; /* Upar ke corners gol */
+      margin-top: -20px; /* Photo ke sath overlap karega taaki gap na bache */
+      z-index: 10;
+      box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
     }
 
     .app-title { 
@@ -104,7 +109,7 @@
     }
     .spinner {
       width: 50px; height: 50px; border: 5px solid #e2e8f0;
-      border-top: 5px solid #4285F4; border-radius: 50%;
+      border-top: 5px solid #8b5cf6; border-radius: 50%;
       animation: spin 1s linear infinite; margin-bottom: 20px;
     }
     @keyframes spin { 100% { transform: rotate(360deg); } }
@@ -113,8 +118,10 @@
 </head>
 <body>
 
+  <!-- Top Image -->
   <div class="top-image-section"></div>
 
+  <!-- Login Section -->
   <div class="login-section">
     <h1 class="app-title">Parents Login</h1>
 
