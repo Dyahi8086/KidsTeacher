@@ -7,16 +7,15 @@
     <title>Kids Teacher</title>
     
     <!-- PWA Manifest -->
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="./manifest.json">
     
-    <!-- YEH DO LINES FAVICON KE LIYE HAIN (Jo screenshot mein bataya gaya hai) -->
+    <!-- PWA Favicon Links (Yeh naya add kiya hai) -->
     <link rel="icon" type="image/png" href="./icons/icon-192.png">
     <link rel="apple-touch-icon" href="./icons/icon-192.png">
     
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* (Aapka pura purana CSS yahan rahega, kuch change nahi karna) */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body, html {
@@ -25,6 +24,7 @@
             overflow: hidden; 
         }
 
+        /* Splash Screen */
         #splash-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100vh;
@@ -43,6 +43,7 @@
         @keyframes spin { 100% { transform: rotate(360deg); } }
         .loading-text { font-family: 'Fredoka'; font-size: 20px; color: #8B3A00; font-weight: 600; }
 
+        /* Welcome Content */
         #welcome-content {
             display: none;
             position: relative;
