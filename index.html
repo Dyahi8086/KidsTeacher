@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#e0f2fe"> 
-    <title>Kids Teacher</title>
+    <title>Kids Teacher - Welcome</title>
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="./manifest.json">
     
-    <!-- PWA Favicon Links (Yeh naya add kiya hai) -->
+    <!-- PWA Favicon Links -->
     <link rel="icon" type="image/png" href="./icons/icon-192.png">
     <link rel="apple-touch-icon" href="./icons/icon-192.png">
     
@@ -24,7 +24,7 @@
             overflow: hidden; 
         }
 
-        /* Splash Screen */
+        /* Splash Screen (Jab tak photo load ho rahi hai) */
         #splash-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100vh;
@@ -43,16 +43,24 @@
         @keyframes spin { 100% { transform: rotate(360deg); } }
         .loading-text { font-family: 'Fredoka'; font-size: 20px; color: #8B3A00; font-weight: 600; }
 
-        /* Welcome Content */
+        /* Welcome Content (Aapki nayi image yahan lagegi) */
         #welcome-content {
             display: none;
             position: relative;
-            width: 100vw; height: 100vh; height: 100dvh; 
-            display: flex; flex-direction: column;
-            justify-content: flex-end; align-items: center;
-            padding-bottom: 40px; 
+            width: 100vw; 
+            height: 100vh; 
+            height: 100dvh; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: flex-end; /* Text/Button ko niche rakhega */
+            align-items: center;
+            padding-bottom: 30px; 
+            
+            /* IMAGE SETTINGS: Bina crop kiye, poori screen par fit */
             background-image: url('welcome_bg.png');
-            background-size: 100% 100%; background-position: center; background-repeat: no-repeat;
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
         .content-wrapper {
@@ -64,25 +72,46 @@
         .text-content { text-align: center; margin-bottom: 20px; }
 
         .text-content h1 {
-            font-family: 'Fredoka', sans-serif; font-size: clamp(24px, 6vw, 32px); 
-            color: #8B3A00; font-weight: 700; line-height: 1.2; margin-bottom: 8px;
+            font-family: 'Fredoka', sans-serif; 
+            font-size: clamp(24px, 6vw, 32px); 
+            color: #8B3A00; 
+            font-weight: 700; 
+            line-height: 1.2; 
+            margin-bottom: 8px;
             text-shadow: 1px 1px 0px rgba(255,255,255,0.8), 2px 2px 5px rgba(0,0,0,0.1);
         }
 
         .text-content p {
-            font-family: 'Nunito', sans-serif; font-size: clamp(13px, 4vw, 16px); 
-            color: #6B5B4D; font-weight: 700;
+            font-family: 'Nunito', sans-serif; 
+            font-size: clamp(13px, 4vw, 16px); 
+            color: #6B5B4D; 
+            font-weight: 700;
         }
 
+        /* Hilta hua Button */
         .start-btn {
-            position: relative; width: 100%; max-width: 350px; padding: 16px 20px;
-            font-size: 20px; font-family: 'Fredoka', sans-serif; font-weight: 700; color: white;
-            background: #FF6B35; border: none; border-radius: 50px; cursor: pointer; 
+            position: relative; 
+            width: 100%; 
+            max-width: 350px; 
+            padding: 16px 20px;
+            font-size: 20px; 
+            font-family: 'Fredoka', sans-serif; 
+            font-weight: 700; 
+            color: white;
+            background: #FF6B35; 
+            border: none; 
+            border-radius: 50px; 
+            cursor: pointer; 
             box-shadow: 0 6px 0 #cc4e20, 0 10px 20px rgba(255, 107, 53, 0.4);
-            transition: transform 0.1s; animation: pulseBtn 2s infinite; 
+            transition: transform 0.1s; 
+            animation: pulseBtn 2s infinite; 
         }
 
-        .start-btn:active { transform: translateY(6px); box-shadow: 0 0px 0 #cc4e20; animation: none; }
+        .start-btn:active { 
+            transform: translateY(6px); 
+            box-shadow: 0 0px 0 #cc4e20; 
+            animation: none; 
+        }
 
         @keyframes pulseBtn {
             0% { transform: scale(1); }
@@ -93,11 +122,13 @@
 </head>
 <body>
 
+    <!-- Loader -->
     <div id="splash-screen">
         <div class="spinner"></div>
         <div class="loading-text">Loading...</div>
     </div>
 
+    <!-- Welcome Page -->
     <div id="welcome-content">
         <div class="content-wrapper">
             <div class="text-content">
@@ -127,6 +158,7 @@
         const splash = document.getElementById('splash-screen');
         const welcomeContent = document.getElementById('welcome-content');
 
+        // Check if user is already logged in
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 const savedAge = localStorage.getItem('kidsAgeGroup');
@@ -140,10 +172,12 @@
             }
         });
 
+        // Button Click
         document.getElementById('startBtn').addEventListener('click', () => {
             window.location.href = 'login.html';
         });
 
+        // Register Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => { navigator.serviceWorker.register('service-worker.js'); });
         }
