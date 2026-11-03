@@ -25,11 +25,9 @@
       
       /* PHOTO BACKGROUND */
       background-image: url('login_bg.png'); 
-      /* Yahan humne 'cover' use kiya hai taaki photo screen ke hisaab se khud ko adjust kare */
       background-size: cover; 
       background-position: center top;
       background-repeat: no-repeat;
-      
       background-color: #d8b4fe; 
       overflow: hidden;
     }
@@ -39,11 +37,14 @@
       flex: 1; 
       display: flex;
       flex-direction: column;
-      justify-content: flex-end; /* Box ko hamesha niche rakhega */
+      
+      /* Yahan change kiya hai: 'flex-end' ki jagah 'center' se thoda niche */
+      justify-content: flex-end; 
+      
       align-items: center;
       
-      /* YEH SABSE ZAROORI FIX HAI: Safe area add kiya taaki install hone par status bar ki jagah adjust ho */
-      padding-bottom: calc(30px + env(safe-area-inset-bottom)); 
+      /* Yahan gap badha diya hai taaki button upar aa jaye */
+      padding-bottom: calc(80px + env(safe-area-inset-bottom)); 
       
       padding-left: 20px;
       padding-right: 20px;
@@ -63,7 +64,7 @@
       border-radius: 30px;
       box-shadow: 0 8px 32px rgba(139, 92, 246, 0.3); 
 
-      padding: 30px 20px;
+      padding: 25px 20px; /* Padding thodi kam ki hai */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -73,23 +74,23 @@
     /* --- TEXT STYLING --- */
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
-      font-size: 34px; 
+      font-size: 32px; /* Font thoda chota kiya */
       color: #4c1d95; 
       font-weight: 700; 
       letter-spacing: -0.5px; 
-      margin-bottom: 25px;
+      margin-bottom: 20px; /* Gap kam kiya */
       text-shadow: 0 2px 4px rgba(255,255,255,0.8);
     }
 
     /* --- PURPLE GOOGLE BUTTON --- */
     .btn-google {
       width: 100%; 
-      padding: 16px;
+      padding: 15px;
       background: linear-gradient(135deg, #a855f7, #7e22ce);
       color: #ffffff; 
       border: none;
       border-radius: 50px;
-      font-size: 18px;
+      font-size: 17px; /* Font chota kiya */
       font-family: 'Fredoka', sans-serif;
       font-weight: 600;
       cursor: pointer;
@@ -105,6 +106,7 @@
       transform: translateY(0);
     }
 
+    /* Button Shine Effect */
     .btn-google::after {
       content: '';
       position: absolute;
@@ -121,6 +123,7 @@
       100% { left: 200%; }
     }
 
+    /* Press Animation */
     .btn-google:active { 
       transform: translateY(6px); 
       box-shadow: 0 0px 0 #581c87, 0 4px 10px rgba(0,0,0,0.2); 
@@ -134,11 +137,12 @@
       cursor: not-allowed;
     }
 
+    /* Google Icon Background */
     .google-icon-bg {
       background: #ffffff;
       border-radius: 50%;
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       display: flex;
       align-items: center;
       justify-content: center;
