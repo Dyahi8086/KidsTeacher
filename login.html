@@ -6,7 +6,6 @@
   <meta name="theme-color" content="#ffffff">
   <title>Parents Login - Kids Teacher</title>
   
-  <!-- PWA Links -->
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/png" href="./icons/icon-192.png">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
@@ -26,10 +25,11 @@
       overflow: hidden;
     }
 
-    /* --- TOP IMAGE SECTION (Koi box nahi, direct image) --- */
+    /* --- TOP IMAGE SECTION --- */
     .top-image-section {
       width: 100%; 
-      height: 55vh; /* Photo screen ka 55% legi */
+      /* Photo ki height badha di hai taaki wo screen ka bada hissa cover kare */
+      height: 65vh; 
       background-image: url('login_bg.png'); 
       background-size: 100% 100%; 
       background-position: center top;
@@ -37,31 +37,31 @@
       flex-shrink: 0;
     }
 
-    /* --- LOGIN SECTION (Direct photo ke niche) --- */
+    /* --- LOGIN SECTION (Photo ke theek niche) --- */
     .login-section {
       width: 100%; 
-      flex: 1; /* Bachi hui 45% jagah lega */
+      flex: 1; 
       display: flex;
       flex-direction: column;
-      justify-content: center; /* Text aur button ko beech mein rakhega */
+      /* justify-content: flex-start; se text/button thoda upar aayenge */
+      justify-content: flex-start; 
       align-items: center;
-      padding: 20px;
+      padding-top: 40px; /* Photo aur text ke beech ka gap */
       background: #ffffff;
-      text-align: center;
     }
 
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
-      font-size: 32px; 
+      font-size: 34px; 
       color: #1e293b; 
       font-weight: 700; 
       letter-spacing: -0.5px; 
-      margin-bottom: 30px;
+      margin-bottom: 35px;
     }
 
     /* --- ADVANCED 3D GOOGLE BUTTON --- */
     .btn-google {
-      width: 100%; 
+      width: 90%; 
       max-width: 340px;
       padding: 16px;
       background: #ffffff;
@@ -78,8 +78,10 @@
       gap: 12px;
       position: relative;
       overflow: hidden;
+      
       box-shadow: 0 6px 0 #cbd5e1, 0 10px 15px rgba(0,0,0,0.05);
       transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transform: translateY(0);
     }
 
     /* Button Shine Effect */
@@ -99,11 +101,13 @@
       100% { left: 200%; }
     }
 
+    /* Press Animation */
     .btn-google:active { 
       transform: translateY(6px); 
       box-shadow: 0 0px 0 #cbd5e1, 0 4px 10px rgba(0,0,0,0.05); 
     }
     
+    /* Disabled State */
     .btn-google:disabled {
       background: #f8fafc;
       color: #94a3b8;
@@ -130,10 +134,10 @@
 </head>
 <body>
 
-  <!-- Top Image (No box, seamless) -->
+  <!-- Top Image -->
   <div class="top-image-section"></div>
 
-  <!-- Login Section (Seamlessly attached) -->
+  <!-- Login Section -->
   <div class="login-section">
     <h1 class="app-title">Parents Login</h1>
 
@@ -143,6 +147,7 @@
     </button>
   </div>
 
+  <!-- Loader -->
   <div id="loadingOverlay">
     <div class="spinner"></div>
     <p class="loading-text">Logging you in...</p>
