@@ -1,159 +1,125 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Kids Teacher</title>
-  <link rel="manifest" href="manifest.json">
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#e0f2fe"> 
+    <title>Kids Teacher - Welcome</title>
+    
+    <link rel="manifest" href="manifest.json">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
 
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-    body {
-      min-height: 100vh;
-      min-height: 100dvh;
-      background: linear-gradient(180deg, #dceeff 0%, #fef3c7 60%, #ffd8b8 100%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: center;
-      padding: 16px 20px;
-      font-family: 'Fredoka', sans-serif;
-      position: relative;
-    }
+        body, html {
+            height: 100%; width: 100%;
+            background-color: #e0f2fe; 
+            overflow: hidden; 
+        }
 
-    /* Full Background PNG Layer */
-    .bg-layer {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('welcome_bg.png') top center / 100% 100% no-repeat;
-      z-index: 1;
-    }
+        .welcome-container {
+            position: relative;
+            width: 100vw; 
+            height: 100vh; 
+            height: 100dvh; 
+            display: flex; 
+            flex-direction: column;
+            overflow: hidden;
+        }
 
-    /* Moving Clouds Animation */
-    .clouds-layer {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 200%;
-      height: 100%;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400"><path fill="rgba(255,255,255,0.45)" d="M50 120 Q 75 90 110 100 Q 140 70 180 90 Q 220 70 250 100 Q 280 90 300 120 Z M550 180 Q 575 150 610 160 Q 640 130 680 150 Q 720 130 750 160 Q 780 150 800 180 Z"/></svg>');
-      background-repeat: repeat-x;
-      background-size: 50% auto;
-      animation: cloudLoop 22s linear infinite;
-      z-index: 2;
-      pointer-events: none;
-    }
+        /* Photo layer fix kar diya gaya hai */
+        .bg-image-layer {
+            width: 100%;
+            height: 100%;
+            background-image: url('welcome_bg.png');
+            background-size: cover; 
+            /* 'top center' se photo upar se shuru hogi aur khali jagah nahi banegi */
+            background-position: top center; 
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 1;
+        }
 
-    @keyframes cloudLoop {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
+        /* Text aur Button ko photo ke upar set kiya hai */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end; /* Niche align karega */
+            height: 100%;
+            width: 100%;
+            padding: 0 20px 40px 20px; /* Niche se gap */
+        }
 
-    .welcome-container {
-      position: relative;
-      z-index: 3;
-      width: 100%;
-      max-width: 380px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      margin-bottom: 12px;
-    }
+        .text-content {
+            text-align: center; 
+            margin-bottom: 20px;
+        }
 
-    .welcome-text-box {
-      width: 100%;
-      background: transparent;
-      padding: 4px 8px;
-      text-align: center;
-      margin-bottom: 10px;
-    }
+        .text-content h1 {
+            font-family: 'Fredoka', sans-serif; 
+            font-size: clamp(24px, 6vw, 32px); 
+            color: #8B3A00; 
+            font-weight: 700; 
+            line-height: 1.2; 
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.8), 2px 2px 5px rgba(0,0,0,0.1);
+        }
 
-    .welcome-heading {
-      font-family: 'Baloo 2', cursive;
-      font-size: 24px;
-      font-weight: 800;
-      color: #7c2d12;
-      margin-bottom: 3px;
-      text-shadow: 0 2px 0 #ffffff, 0 -2px 0 #ffffff, 2px 0 0 #ffffff, -2px 0 0 #ffffff, 0 4px 10px rgba(0,0,0,0.15);
-    }
+        .text-content p {
+            font-family: 'Nunito', sans-serif; 
+            font-size: clamp(13px, 4vw, 16px); 
+            color: #6B5B4D; 
+            font-weight: 700;
+        }
 
-    .welcome-subtext {
-      font-size: 13px;
-      color: #1e293b;
-      font-weight: 700;
-      text-shadow: 0 1px 2px #ffffff, 0 2px 5px rgba(0,0,0,0.1);
-    }
+        .start-btn {
+            position: relative; 
+            width: 100%; 
+            max-width: 350px; 
+            padding: 16px 20px;
+            font-size: 20px; 
+            font-family: 'Fredoka', sans-serif; 
+            font-weight: 700; 
+            color: white;
+            background: #FF6B35; 
+            border: none; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            box-shadow: 0 6px 0 #cc4e20, 0 10px 20px rgba(255, 107, 53, 0.4);
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
 
-    /* Bouncing 3D Start Button without any white backdrop */
-    @keyframes buttonBounce {
-      0%, 100% {
-        transform: translateY(0);
-        box-shadow: 0 5px 0 #b43505, 0 10px 20px rgba(249, 87, 22, 0.4);
-      }
-      50% {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 0 #b43505, 0 15px 25px rgba(249, 87, 22, 0.5);
-      }
-    }
-
-    .btn-get-started {
-      width: 100%;
-      padding: 14px 20px;
-      background: linear-gradient(180deg, #ff8c37 0%, #f95716 100%);
-      color: #ffffff;
-      border: none;
-      border-radius: 30px;
-      font-size: 18px;
-      font-family: 'Baloo 2', cursive;
-      font-weight: 800;
-      cursor: pointer;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      letter-spacing: 0.5px;
-      text-shadow: 0 2px 3px rgba(0,0,0,0.25);
-      animation: buttonBounce 1.8s ease-in-out infinite;
-    }
-
-    .btn-get-started:active {
-      transform: translateY(2px);
-      animation: none;
-      box-shadow: 0 2px 0 #b43505, 0 4px 8px rgba(249, 87, 22, 0.4);
-    }
-  </style>
+        .start-btn:active { transform: translateY(6px); box-shadow: 0 0px 0 #cc4e20, 0 4px 10px rgba(0,0,0,0.2); }
+    </style>
 </head>
 <body>
 
-  <div class="bg-layer"></div>
-  <div class="clouds-layer"></div>
-
-  <div class="welcome-container">
-    <div class="welcome-text-box">
-      <h1 class="welcome-heading">Learning Is an Adventure!</h1>
-      <p class="welcome-subtext">Explore, discover and grow every day.</p>
+    <div class="welcome-container">
+        <div class="bg-image-layer"></div>
+        
+        <div class="content-wrapper">
+            <div class="text-content">
+                <h1>Learning Is an<br>Adventure!</h1>
+                <p>Explore, discover and grow every day.</p>
+            </div>
+            <button class="start-btn" id="startBtn">Let's Start →</button>
+        </div>
     </div>
 
-    <a href="login.html" class="btn-get-started">
-      Let's Start <span>→</span>
-    </a>
-  </div>
-
+    <script>
+        const btn = document.getElementById('startBtn');
+        btn.addEventListener('click', function(e) {
+            if (navigator.vibrate) navigator.vibrate([40, 30, 40]); 
+            setTimeout(() => { window.location.href = "login.html"; }, 200); 
+        });
+    </script>
 </body>
 </html>
