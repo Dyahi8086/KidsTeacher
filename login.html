@@ -22,42 +22,50 @@
       display: flex; 
       flex-direction: column; 
       font-family: 'Nunito', sans-serif; 
-      
-      /* PHOTO BACKGROUND */
+      overflow: hidden;
+      /* Photo ka fallback purple color */
+      background-color: #d8b4fe; 
+    }
+
+    /* --- TOP IMAGE (Proper Height) --- */
+    .top-image-section {
+      width: 100%; 
+      /* Screen ka 55% hissa photo legi */
+      height: 55vh; 
       background-image: url('login_bg.png'); 
-      background-size: cover; 
+      background-size: 100% 100%; /* Photo stretch hogi par crop nahi hogi */
       background-position: center top;
       background-repeat: no-repeat;
-      background-color: #d8b4fe; 
-      overflow: hidden;
+      flex-shrink: 0;
+      z-index: 10;
     }
 
-    /* --- LOGIN CONTAINER --- */
+    /* --- LOGIN CARD SECTION (Photo ke theek niche) --- */
     .login-container {
-      flex: 1; 
+      flex: 1; /* Bachi hui 45% jagah lega */
       display: flex;
       flex-direction: column;
+      /* justify-content: center se card beech mein aayega aur khali jagah nahi lagegi */
+      justify-content: center; 
       align-items: center;
+      padding: 0 20px 20px 20px;
       
-      /* YAHAN CHANGE HUA HAI: Button ~100px upar aane ke liye padding badhayi hai */
-      padding-bottom: calc(140px + env(safe-area-inset-bottom)); 
-      
-      padding-left: 20px;
-      padding-right: 20px;
+      /* Photo ke lower part se match karta hua background */
+      background: linear-gradient(180deg, #d8b4fe 0%, #c084fc 100%);
     }
 
-    /* --- GLASSMORPHISM LOGIN CARD (No changes) --- */
+    /* --- GLASSMORPHISM LOGIN CARD --- */
     .login-card {
       width: 100%; 
       max-width: 400px;
       
-      background: rgba(255, 255, 255, 0.15); 
+      background: rgba(255, 255, 255, 0.2); 
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
 
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.4);
       border-radius: 30px;
-      box-shadow: 0 8px 32px rgba(139, 92, 246, 0.3); 
+      box-shadow: 0 8px 32px rgba(88, 28, 135, 0.3); 
 
       padding: 25px 20px; 
       display: flex;
@@ -66,7 +74,7 @@
       text-align: center;
     }
 
-    /* --- TEXT STYLING (No changes) --- */
+    /* --- TEXT STYLING --- */
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
       font-size: 32px; 
@@ -74,10 +82,10 @@
       font-weight: 700; 
       letter-spacing: -0.5px; 
       margin-bottom: 20px; 
-      text-shadow: 0 2px 4px rgba(255,255,255,0.8);
+      text-shadow: 0 2px 4px rgba(255,255,255,0.6);
     }
 
-    /* --- PURPLE GOOGLE BUTTON (No changes) --- */
+    /* --- PURPLE GOOGLE BUTTON --- */
     .btn-google {
       width: 100%; 
       padding: 15px;
@@ -130,7 +138,6 @@
       cursor: not-allowed;
     }
 
-    /* --- GOOGLE ICON --- */
     .google-icon-bg {
       background: #ffffff;
       border-radius: 50%;
@@ -141,7 +148,7 @@
       justify-content: center;
     }
 
-    /* --- LOADING OVERLAY (No changes) --- */
+    /* --- LOADING OVERLAY --- */
     #loadingOverlay {
       display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
       background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px);
@@ -158,10 +165,11 @@
 </head>
 <body>
 
-  <!-- Main Container -->
+  <!-- Top Image -->
+  <div class="top-image-section"></div>
+
+  <!-- Login Section -->
   <div class="login-container">
-    
-    <!-- Glassmorphism Login Card -->
     <div class="login-card">
       <h1 class="app-title">Parents Login</h1>
 
