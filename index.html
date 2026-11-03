@@ -5,10 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#e0f2fe"> 
     <title>Kids Teacher</title>
+    
+    <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
+    
+    <!-- YEH DO LINES FAVICON KE LIYE HAIN (Jo screenshot mein bataya gaya hai) -->
+    <link rel="icon" type="image/png" href="./icons/icon-192.png">
+    <link rel="apple-touch-icon" href="./icons/icon-192.png">
+    
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
 
     <style>
+        /* (Aapka pura purana CSS yahan rahega, kuch change nahi karna) */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body, html {
@@ -17,94 +25,60 @@
             overflow: hidden; 
         }
 
-        /* --- SPLASH SCREEN / LOADER (Jo flash rokega) --- */
         #splash-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100vh;
-            background: #e0f2fe; /* Fallback color */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.3s ease;
+            background: #e0f2fe;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            z-index: 9999; transition: opacity 0.3s ease;
         }
 
         .spinner {
             width: 50px; height: 50px;
-            border: 5px solid #ffffff;
-            border-top: 5px solid #FF6B35;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 15px;
+            border: 5px solid #ffffff; border-top: 5px solid #FF6B35;
+            border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px;
         }
 
         @keyframes spin { 100% { transform: rotate(360deg); } }
         .loading-text { font-family: 'Fredoka'; font-size: 20px; color: #8B3A00; font-weight: 600; }
 
-        /* --- WELCOME PAGE CONTENT (Jo baad me dikhega) --- */
         #welcome-content {
-            display: none; /* Shuru mein chhupa hua hai */
+            display: none;
             position: relative;
-            width: 100vw; 
-            height: 100vh; 
-            height: 100dvh; 
-            display: flex; /* Jab dikhega tab flex ho jayega */
-            flex-direction: column;
-            justify-content: flex-end; 
-            align-items: center;
+            width: 100vw; height: 100vh; height: 100dvh; 
+            display: flex; flex-direction: column;
+            justify-content: flex-end; align-items: center;
             padding-bottom: 40px; 
             background-image: url('welcome_bg.png');
-            background-size: 100% 100%;
-            background-position: center;
-            background-repeat: no-repeat;
+            background-size: 100% 100%; background-position: center; background-repeat: no-repeat;
         }
 
         .content-wrapper {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            padding: 0 20px;
+            position: relative; z-index: 10;
+            display: flex; flex-direction: column; align-items: center;
+            width: 100%; padding: 0 20px;
         }
 
         .text-content { text-align: center; margin-bottom: 20px; }
 
         .text-content h1 {
-            font-family: 'Fredoka', sans-serif; 
-            font-size: clamp(24px, 6vw, 32px); 
-            color: #8B3A00; 
-            font-weight: 700; 
-            line-height: 1.2; 
-            margin-bottom: 8px;
+            font-family: 'Fredoka', sans-serif; font-size: clamp(24px, 6vw, 32px); 
+            color: #8B3A00; font-weight: 700; line-height: 1.2; margin-bottom: 8px;
             text-shadow: 1px 1px 0px rgba(255,255,255,0.8), 2px 2px 5px rgba(0,0,0,0.1);
         }
 
         .text-content p {
-            font-family: 'Nunito', sans-serif; 
-            font-size: clamp(13px, 4vw, 16px); 
-            color: #6B5B4D; 
-            font-weight: 700;
+            font-family: 'Nunito', sans-serif; font-size: clamp(13px, 4vw, 16px); 
+            color: #6B5B4D; font-weight: 700;
         }
 
         .start-btn {
-            position: relative; 
-            width: 100%; 
-            max-width: 350px; 
-            padding: 16px 20px;
-            font-size: 20px; 
-            font-family: 'Fredoka', sans-serif; 
-            font-weight: 700; 
-            color: white;
-            background: #FF6B35; 
-            border: none; 
-            border-radius: 50px; 
-            cursor: pointer; 
+            position: relative; width: 100%; max-width: 350px; padding: 16px 20px;
+            font-size: 20px; font-family: 'Fredoka', sans-serif; font-weight: 700; color: white;
+            background: #FF6B35; border: none; border-radius: 50px; cursor: pointer; 
             box-shadow: 0 6px 0 #cc4e20, 0 10px 20px rgba(255, 107, 53, 0.4);
-            transition: transform 0.1s;
-            animation: pulseBtn 2s infinite; 
+            transition: transform 0.1s; animation: pulseBtn 2s infinite; 
         }
 
         .start-btn:active { transform: translateY(6px); box-shadow: 0 0px 0 #cc4e20; animation: none; }
@@ -118,13 +92,11 @@
 </head>
 <body>
 
-    <!-- 1. YEH SPLASH SCREEN HAI (Pehle dikhegi) -->
     <div id="splash-screen">
         <div class="spinner"></div>
         <div class="loading-text">Loading...</div>
     </div>
 
-    <!-- 2. YEH WELCOME PAGE HAI (Baad me dikhega) -->
     <div id="welcome-content">
         <div class="content-wrapper">
             <div class="text-content">
@@ -154,14 +126,11 @@
         const splash = document.getElementById('splash-screen');
         const welcomeContent = document.getElementById('welcome-content');
 
-        // Firebase Check: Kya user logged in hai?
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                // Agar user logged in hai, toh seedha home bhej do (Welcome page dikhega hi nahi)
                 const savedAge = localStorage.getItem('kidsAgeGroup');
                 window.location.replace(!savedAge ? "age-select.html" : "index-home.html");
             } else {
-                // Agar user logged in NAHI hai, toh Splash screen hatao aur Welcome page dikhao
                 splash.style.opacity = '0';
                 setTimeout(() => {
                     splash.style.display = 'none';
@@ -170,12 +139,10 @@
             }
         });
 
-        // Let's Start Button
         document.getElementById('startBtn').addEventListener('click', () => {
             window.location.href = 'login.html';
         });
 
-        // PWA Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => { navigator.serviceWorker.register('service-worker.js'); });
         }
