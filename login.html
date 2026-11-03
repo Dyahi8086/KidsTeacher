@@ -19,32 +19,18 @@
       overflow: hidden;
     }
 
-    /* Top Image Section */
     .top-image-section {
       width: 100%;
-      height: 55vh; /* Screen ka 55% */
+      height: 55vh; 
       background-image: url('login_bg.png'); 
       background-size: cover;
       background-position: center top;
       background-repeat: no-repeat;
-      position: relative;
     }
 
-    /* Image Loader (Agar net slow ho) */
-    .image-loader {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 16px;
-      color: #64748b;
-      font-weight: bold;
-      display: none;
-    }
-
-    /* Login Form Section */
     .login-card {
       width: 100%; 
-      flex: 1; /* Bachi hui 45% jagah legi */
+      flex: 1; 
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -73,29 +59,58 @@
       justify-content: center;
       gap: 12px;
       box-shadow: 0 6px 0 #cbd5e1;
+      transition: all 0.1s ease;
     }
     
     .btn-google:active { transform: translateY(6px); box-shadow: 0 0px 0 #cbd5e1; }
+    .btn-google:disabled { background: #f1f5f9; color: #94a3b8; box-shadow: none; cursor: not-allowed; }
+
+    /* Loading Overlay Screen */
+    #loadingOverlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100vh;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(5px);
+      display: none; /* Shuru mein chhupa hai */
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+    .spinner {
+      width: 50px; height: 50px;
+      border: 5px solid #e2e8f0;
+      border-top: 5px solid #4285F4;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 15px;
+    }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    .loading-text { font-family: 'Fredoka'; font-size: 20px; color: #1e293b; font-weight: 600; }
   </style>
 </head>
 <body>
 
-  <!-- Photo Section -->
-  <div class="top-image-section" id="topImage">
-    <div class="image-loader" id="loader">Loading...</div>
-  </div>
+  <!-- Upar wali Photo -->
+  <div class="top-image-section"></div>
 
-  <!-- Login Section -->
+  <!-- Niche wala Login Section -->
   <div class="login-card">
     <div class="brand-header">
       <h1 class="app-title">Parents Login</h1>
-      <p class="app-subtitle">Continue with Google</p>
+      <p class="app-subtitle">Continue with Google to guide your child's journey</p>
     </div>
 
     <button type="button" id="googleBtn" class="btn-google" onclick="handleGoogleLogin()">
       <svg width="24" height="24" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
       Continue with Google
     </button>
+  </div>
+
+  <!-- Loading Overlay (Jab account select karne ke baad yeh dikhega) -->
+  <div id="loadingOverlay">
+    <div class="spinner"></div>
+    <div class="loading-text">Logging you in...</div>
   </div>
 
   <script type="module">
@@ -115,39 +130,42 @@
     const auth = getAuth(app);
     setPersistence(auth, browserLocalPersistence).catch(console.error);
 
+    // Agar user pehle se login hai, toh direct home bhej do
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const savedAge = localStorage.getItem('kidsAgeGroup');
+        // Yahan check karein ki aapki home file ka naam kya hai
         window.location.replace(!savedAge ? "age-select.html" : "index-home.html");
       }
     });
 
     window.handleGoogleLogin = async function() {
       const btn = document.getElementById('googleBtn');
+      const overlay = document.getElementById('loadingOverlay');
+      
       btn.innerHTML = "Connecting...";
       btn.disabled = true;
       
       const provider = new GoogleAuthProvider(); 
       provider.setCustomParameters({ prompt: 'select_account' });
       
-      try { await signInWithPopup(auth, provider); } 
+      try { 
+        // Popup khulega account select karne ke liye
+        await signInWithPopup(auth, provider); 
+        
+        // Jaise hi user account select karega, yeh line chalegi
+        // Aur onAuthStateChanged automatically redirect kar dega
+        
+        // User ko loading screen dikhao
+        overlay.style.display = 'flex'; 
+        
+      } 
       catch (error) { 
-        btn.innerHTML = "Continue with Google";
+        // Agar user popup band kar de ya error aaye
+        btn.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg> Continue with Google`;
         btn.disabled = false;
-        alert("Login failed. Please try again."); 
+        overlay.style.display = 'none';
       }
-    }
-
-    // Photo Load check karne ka code (Agar net slow ho)
-    const img = new Image();
-    img.src = 'login_bg.png';
-    img.onload = function() {
-      document.getElementById('loader').style.display = 'none';
-    }
-    img.onerror = function() {
-      // Agar photo load nahi hui, toh loader hatado aur background color set kardo
-      document.getElementById('loader').innerText = "Image not available";
-      document.getElementById('topImage').style.backgroundColor = "#f0f8ff";
     }
   </script>
 </body>
