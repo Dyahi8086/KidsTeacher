@@ -20,8 +20,8 @@
       height: 100vh; 
       height: 100dvh; 
       display: flex; 
-      justify-content: center; /* Horizontally center */
-      align-items: center; /* Vertically center */
+      justify-content: center; 
+      align-items: center; 
       font-family: 'Nunito', sans-serif; 
       
       /* PHOTO BACKGROUND */
@@ -34,12 +34,11 @@
     }
 
     /* --- LOGIN CONTAINER --- */
-    /* Photo ke beech wale frame ka size adjust kiya hai */
     .login-container {
-      width: 70%; /* Frame ki chaudai */
-      max-width: 320px;
-      height: 60%; /* Frame ki lambai */
-      max-height: 500px;
+      width: 68%; /* Frame ke andar fit karne ke liye width kam ki */
+      max-width: 300px;
+      height: 60%; 
+      max-height: 450px;
       
       display: flex;
       flex-direction: column;
@@ -47,63 +46,70 @@
       align-items: center;
       text-align: center;
       
-      /* Thoda sa upar shift kiya hai taaki exactly frame ke beech me ho */
-      margin-top: -5vh; 
+      /* Frame ke exact center me lane ke liye */
+      margin-top: -2vh; 
     }
 
-    /* --- TEXT STYLING --- */
+    /* --- TEXT STYLING (Chota kiya) --- */
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
-      font-size: 32px; 
-      color: #4c1d95; /* Purple color jo photo se match kare */
+      font-size: 26px; /* Size chota kiya */
+      color: #4c1d95; 
       font-weight: 700; 
       letter-spacing: -0.5px; 
-      margin-bottom: 30px;
+      margin-bottom: 20px; /* Gap kam kiya */
     }
 
-    /* --- PURPLE GOOGLE BUTTON --- */
+    /* --- RAINBOW GOOGLE BUTTON --- */
     .btn-google {
       width: 100%; 
-      padding: 15px;
-      background: linear-gradient(135deg, #a855f7, #7e22ce);
+      padding: 12px; /* Padding kam ki */
+      
+      /* RAINBOW GRADIENT (7 Colors) */
+      background: linear-gradient(90deg, 
+        #ff0000, /* Red */
+        #ff7f00, /* Orange */
+        #ffff00, /* Yellow */
+        #00ff00, /* Green */
+        #0000ff, /* Blue */
+        #4b0082, /* Indigo */
+        #9400d3  /* Violet */
+      );
+      background-size: 200% auto; /* Gradient animation ke liye */
+      
       color: #ffffff; 
-      border: none;
+      border: 2px solid #ffffff; /* White border premium look */
       border-radius: 50px;
-      font-size: 17px; 
+      font-size: 15px; /* Font chota kiya */
       font-family: 'Fredoka', sans-serif;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
       position: relative;
       overflow: hidden;
       
-      box-shadow: 0 6px 0 #581c87, 0 10px 20px rgba(126, 34, 206, 0.4);
-      transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
+      /* Stronger shadow for 3D look */
+      box-shadow: 0 5px 0 rgba(0,0,0,0.2), 0 10px 20px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
       transform: translateY(0);
+      
+      /* Animation */
+      animation: rainbowShift 3s linear infinite;
     }
 
-    .btn-google::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 50%; height: 100%;
-      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
-      transform: skewX(-25deg);
-      animation: shine 3s infinite;
+    /* Rainbow Animation */
+    @keyframes rainbowShift {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
     }
 
-    @keyframes shine {
-      0% { left: -100%; }
-      20% { left: 200%; }
-      100% { left: 200%; }
-    }
-
+    /* Hover/Active State */
     .btn-google:active { 
-      transform: translateY(6px); 
-      box-shadow: 0 0px 0 #581c87, 0 4px 10px rgba(0,0,0,0.2); 
+      transform: translateY(5px); 
+      box-shadow: 0 0px 0 rgba(0,0,0,0.2), 0 5px 10px rgba(0,0,0,0.2); 
     }
     
     .btn-google:disabled {
@@ -112,16 +118,20 @@
       box-shadow: none;
       transform: none;
       cursor: not-allowed;
+      animation: none;
+      border: none;
     }
 
+    /* White Circle for Google Icon */
     .google-icon-bg {
       background: #ffffff;
       border-radius: 50%;
-      width: 26px;
-      height: 26px;
+      width: 22px; /* Size chota kiya */
+      height: 22px;
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
     }
 
     /* --- LOADING OVERLAY --- */
@@ -141,13 +151,13 @@
 </head>
 <body>
 
-  <!-- Login Container (Inside the frame) -->
+  <!-- Login Container -->
   <div class="login-container">
     <h1 class="app-title">Parents Login</h1>
 
     <button type="button" id="googleBtn" class="btn-google" onclick="handleGoogleLogin()">
       <div class="google-icon-bg">
-        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
       </div>
       Continue with Google
     </button>
