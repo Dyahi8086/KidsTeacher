@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="theme-color" content="#fdfbfb">
+  <meta name="theme-color" content="#ffffff">
   <title>Parents Login - Kids Teacher</title>
   
+  <!-- PWA Links -->
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/png" href="./icons/icon-192.png">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
@@ -21,33 +22,25 @@
       height: 100vh; height: 100dvh; 
       display: flex; flex-direction: column; 
       font-family: 'Nunito', sans-serif; 
+      background-color: #ffffff;
       overflow: hidden;
-      /* Premium background jo photo ke saath match kare */
-      background: linear-gradient(180deg, #fdfbfb 0%, #fdf2f8 40%, #e0f2fe 100%);
-    }
-
-    /* --- TOP PHOTO CARD --- */
-    .image-wrapper {
-      width: 100%;
-      padding: 20px 20px 0 20px;
-      flex-shrink: 0;
-    }
-
-    .image-card {
-      width: 100%;
-      height: 52vh; /* Photo ki height adjust ki hai */
-      border-radius: 35px;
-      background-image: url('login_bg.png'); 
-      background-size: cover;
-      background-position: center top;
-      /* Premium shadow taaki photo bahar nikli hui lage */
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0,0,0,0.05);
       position: relative;
-      overflow: hidden;
-      border: 4px solid #ffffff; /* Safed border premium look ke liye */
     }
 
-    /* --- LOGIN SECTION --- */
+    /* --- TOP IMAGE (Seamless, No Box) --- */
+    .top-image-section {
+      width: 100%;
+      height: 55vh; /* Screen ka 55% hissa legi */
+      /* Background image ko stretch kiya hai taaki koi gap na bache */
+      background-image: url('login_bg.png'); 
+      background-size: 100% 100%;
+      background-position: center top;
+      background-repeat: no-repeat;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    /* --- BOTTOM LOGIN SECTION --- */
     .login-section {
       flex: 1;
       display: flex;
@@ -56,31 +49,40 @@
       align-items: center;
       text-align: center;
       padding: 20px;
-      margin-top: -20px; /* Card ko thoda upar overlap karne ke liye */
+      position: relative;
       z-index: 10;
+      /* Smooth fade-in animation */
+      animation: slideUpFade 0.8s ease-out forwards;
+      opacity: 0;
+      transform: translateY(30px);
     }
 
+    @keyframes slideUpFade {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- TEXT STYLING --- */
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
-      font-size: 32px; 
+      font-size: 34px; 
       color: #1e293b; 
       font-weight: 700; 
       margin-bottom: 8px;
-      text-shadow: 0 2px 4px rgba(255,255,255,0.8);
+      letter-spacing: -0.5px;
     }
     
     .app-subtitle { 
       font-size: 15px; 
       color: #64748b; 
       font-weight: 700; 
-      margin-bottom: 30px; 
+      margin-bottom: 35px; 
     }
 
-    /* --- PREMIUM 3D GOOGLE BUTTON --- */
+    /* --- ULTRA ADVANCED 3D GOOGLE BUTTON --- */
     .btn-google {
-      width: 100%; 
+      width: 90%; 
       max-width: 340px;
-      padding: 16px;
+      padding: 18px;
       background: #ffffff;
       color: #1e293b;
       border: 2px solid #e2e8f0;
@@ -96,27 +98,48 @@
       position: relative;
       overflow: hidden;
       
-      /* 3D Button Depth */
-      box-shadow: 0 6px 0 #cbd5e1, 0 10px 20px rgba(0,0,0,0.08);
-      transition: all 0.1s ease;
+      /* Deep 3D Shadow */
+      box-shadow: 0 8px 0 #cbd5e1, 0 15px 25px rgba(0,0,0,0.08);
+      transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transform: translateY(0);
     }
     
+    /* Button Shine Effect (Chamak) */
+    .btn-google::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 50%; height: 100%;
+      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0) 100%);
+      transform: skewX(-25deg);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+      0% { left: -100%; }
+      20% { left: 200%; }
+      100% { left: 200%; }
+    }
+
+    /* Press Animation (Dabne par) */
     .btn-google:active { 
-      transform: translateY(6px); 
-      box-shadow: 0 0px 0 #cbd5e1, 0 4px 10px rgba(0,0,0,0.05); 
+      transform: translateY(8px); 
+      box-shadow: 0 0px 0 #cbd5e1, 0 5px 10px rgba(0,0,0,0.05); 
     }
     
+    /* Disable state */
     .btn-google:disabled {
       background: #f8fafc;
       color: #94a3b8;
       box-shadow: none;
       transform: none;
+      cursor: not-allowed;
       border-color: #e2e8f0;
     }
 
-    /* Loading Spinner */
+    /* Button ke andar ka spinner */
     .btn-spinner {
-      width: 20px; height: 20px;
+      width: 22px; height: 22px;
       border: 3px solid #e2e8f0;
       border-top: 3px solid #4285F4;
       border-radius: 50%;
@@ -125,7 +148,7 @@
     }
     @keyframes spin { 100% { transform: rotate(360deg); } }
 
-    /* Full Screen Loader */
+    /* --- FULL SCREEN LOADER (Login ke time) --- */
     #loadingOverlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
       background: rgba(255, 255, 255, 0.95);
@@ -139,20 +162,44 @@
       border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px;
     }
     .loading-text { font-family: 'Fredoka'; font-size: 22px; color: #1e293b; font-weight: 600; }
+
+    /* --- FLOATING DECORATIVE STARS --- */
+    .floating-star {
+      position: absolute;
+      background: rgba(241, 245, 249, 0.8);
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      z-index: 1;
+      animation: float 6s infinite ease-in-out;
+    }
+    .star-1 { width: 15px; height: 15px; top: 60%; left: 10%; animation-delay: 0s; }
+    .star-2 { width: 25px; height: 25px; top: 70%; right: 15%; animation-delay: 1.5s; }
+    .star-3 { width: 12px; height: 12px; bottom: 15%; left: 20%; animation-delay: 0.8s; }
+    .star-4 { width: 20px; height: 20px; bottom: 25%; right: 10%; animation-delay: 2s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Top Photo -->
-  <div class="image-wrapper">
-    <div class="image-card"></div>
-  </div>
+  <!-- Top Seamless Image -->
+  <div class="top-image-section"></div>
+
+  <!-- Background Floating Elements -->
+  <div class="floating-star star-1"></div>
+  <div class="floating-star star-2"></div>
+  <div class="floating-star star-3"></div>
+  <div class="floating-star star-4"></div>
 
   <!-- Login Section -->
   <div class="login-section">
     <h1 class="app-title">Parents Login</h1>
     <p class="app-subtitle">Continue with Google to guide your child's journey</p>
 
+    <!-- Advanced 3D Button -->
     <button type="button" id="googleBtn" class="btn-google" onclick="handleGoogleLogin()">
       <svg id="googleIcon" width="24" height="24" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
       <div class="btn-spinner" id="btnSpinner"></div>
@@ -160,7 +207,7 @@
     </button>
   </div>
 
-  <!-- Full Screen Loader -->
+  <!-- Loading Overlay -->
   <div id="loadingOverlay">
     <div class="overlay-spinner"></div>
     <div class="loading-text">Logging you in...</div>
@@ -189,6 +236,7 @@
     const btnText = document.getElementById('btnText');
     const googleIcon = document.getElementById('googleIcon');
 
+    // Auto-redirect if already logged in
     onAuthStateChanged(auth, (user) => {
       if (user) {
         overlay.style.display = 'flex';
@@ -200,6 +248,10 @@
     });
 
     window.handleGoogleLogin = async function() {
+      // Haptic Feedback (Phone vibrate)
+      if (navigator.vibrate) navigator.vibrate(50);
+
+      // Loading State Start
       googleBtn.disabled = true;
       googleIcon.style.display = 'none';
       btnText.textContent = "Connecting...";
@@ -210,19 +262,22 @@
       
       try { 
         await signInWithPopup(auth, provider); 
+        // Redirect will be handled by onAuthStateChanged
       } 
       catch (error) { 
+        // Loading State Revert
         googleBtn.disabled = false;
         googleIcon.style.display = 'block';
         btnText.textContent = "Continue with Google";
         btnSpinner.style.display = 'none';
         
         if(error.code !== 'auth/popup-closed-by-user') { 
-          alert("Login failed. Please try again."); 
+          alert("Login failed. Please check your internet and try again."); 
         }
       }
     }
 
+    // Register Service Worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => { 
         navigator.serviceWorker.register('./service-worker.js'); 
