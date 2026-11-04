@@ -20,7 +20,9 @@
 
         body, html {
             height: 100%; width: 100%;
+            /* YEH HAI FALLBACK: Agar photo load na ho toh yeh color dikhega */
             background-color: #e0f2fe; 
+            background: linear-gradient(135deg, #e0f2fe 0%, #fdf2f8 100%);
             overflow: hidden; 
         }
 
@@ -52,15 +54,18 @@
             height: 100dvh; 
             display: flex; 
             flex-direction: column;
-            justify-content: flex-end; /* Text/Button ko niche rakhega */
+            justify-content: flex-end; 
             align-items: center;
             padding-bottom: 30px; 
             
-            /* IMAGE SETTINGS: Bina crop kiye, poori screen par fit */
+            /* IMAGE SETTINGS */
             background-image: url('welcome_bg.png');
             background-size: 100% 100%;
             background-position: center;
             background-repeat: no-repeat;
+            
+            /* YEH GRADIENT TAB DIKHEGA JAB IMAGE FAIL HO JAYEGI */
+            background-color: #e0f2fe;
         }
 
         .content-wrapper {
@@ -177,7 +182,7 @@
             window.location.href = 'login.html';
         });
 
-        // Register Service Worker
+        // Register Service Worker for Image Caching
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => { navigator.serviceWorker.register('service-worker.js'); });
         }
