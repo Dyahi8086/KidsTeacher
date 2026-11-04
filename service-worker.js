@@ -1,17 +1,17 @@
-const CACHE_NAME = 'kids-teacher-v10'; // Version badal diya hai, ab nayi png load hogi
+const CACHE_NAME = 'kids-teacher-v15'; // Version badal diya hai taaki purana cache clear ho jaye
 
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './login.html',
   './manifest.json',
-  './welcome_bg.png', // Aapki nayi png
-  './login_bg.png',
+  './welcome_bg.png', 
+  './login_frame.png', // Naya naam yahan bhi daal diya hai
   './icons/icon-192.png',
   './icons/icon-512.png'
 ];
 
-// Install Event (Nayi files download karega)
+// Install Event: Nayi files download karega
 self.addEventListener('install', (event) => {
   self.skipWaiting(); // Force update
   event.waitUntil(
@@ -25,7 +25,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Activate Event (Purana cache delete karega - YEH SABSE ZAROORI HAI)
+// Activate Event: Purana cache delete karega (Sabse Important)
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -47,29 +47,34 @@ self.addEventListener('fetch', (event) => {
   const request = event.request;
   const url = new URL(request.url);
 
-  // External images (Firebase/Google) ko cache mat karo
+  // External URLs ko ignore karega
   if (url.origin !== self.location.origin) return;
 
-  // Image ke liye Cache-First
+  // Images ke liye: Pehle Cache check karega, phir Network
   if (request.destination === 'image') {
     event.respondWith(
       caches.match(request).then((cachedResponse) => {
-        if (cachedResponse) return cachedResponse;
+        if (cachedResponse) {
+          return cachedResponse;
+        }
         return fetch(request).then((networkResponse) => {
-          if (!networkResponse || networkResponse.status !== 200) return networkResponse;
+          if (!networkResponse || networkResponse.status !== 200) {
+             return networkResponse;
+          }
           return caches.open(CACHE_NAME).then((cache) => {
             cache.put(request, networkResponse.clone());
             return networkResponse;
           });
         }).catch(() => {
-          return new Response('', { status: 404 });
+          // Agar net nahi hai aur image cache me bhi nahi hai
+          return new Response('', { status: 404, statusText: 'Image not found' });
         });
       })
     );
     return;
   }
 
-  // Pages ke liye Network-First
+  // Pages ke liye: Pehle Network check karega, phir Cache
   event.respondWith(
     fetch(request).catch(() => {
       return caches.match(request).then((cached) => {
