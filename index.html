@@ -1,140 +1,649 @@
 
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import {
-        getAuth,
-        onAuthStateChanged
-    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+<!DOCTYPE html>
+<html lang="en">
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
-        authDomain: "kids-teacher-4387e.firebaseapp.com",
-        projectId: "kids-teacher-4387e",
-        storageBucket: "kids-teacher-4387e.firebasestorage.app",
-        messagingSenderId: "420221167346",
-        appId: "1:420221167346:web:da7ac80acdfd52339d526b"
-    };
+<head>
+    <meta charset="UTF-8">
 
-    const splash = document.getElementById("splash-screen");
-    const welcome = document.getElementById("welcome-content");
-    const startBtn = document.getElementById("startBtn");
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 
-    let pageOpened = false;
-    let authResolved = false;
-    let authUnsubscribe = null;
-    let fallbackTimer = null;
+    <meta name="theme-color" content="#e0f2fe">
 
-    // Show welcome page and stop loader
-    function showWelcome() {
-        if (pageOpened) return;
+    <title>Kids Teacher - Welcome</title>
 
-        pageOpened = true;
+    <!-- PWA -->
+    <link rel="manifest" href="./manifest.json">
 
-        if (fallbackTimer) {
-            clearTimeout(fallbackTimer);
+    <!-- Icons -->
+    <link rel="icon" type="image/png" href="./icons/icon-192.png">
+    <link rel="apple-touch-icon" href="./icons/icon-192.png">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* RESET */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        splash.style.display = "none";
-        splash.style.opacity = "0";
-
-        welcome.style.display = "flex";
-    }
-
-    // Navigate only once
-    function openPage(url) {
-        if (pageOpened) return;
-
-        pageOpened = true;
-
-        if (fallbackTimer) {
-            clearTimeout(fallbackTimer);
+        html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
         }
 
-        window.location.replace(url);
-    }
+        body {
+            width: 100%;
+            height: 100%;
+            height: 100dvh;
+            overflow: hidden;
+            background: #e0f2fe;
+        }
 
-    // Firebase auth check
-    async function checkFirebaseAuth() {
-        try {
-            const app = initializeApp(firebaseConfig);
-            const auth = getAuth(app);
+        /* SPLASH SCREEN */
 
-            authUnsubscribe = onAuthStateChanged(
-                auth,
+        #splash-screen {
+            position: fixed;
+            inset: 0;
 
-                (user) => {
-                    authResolved = true;
+            width: 100%;
+            height: 100%;
+            height: 100dvh;
 
-                    if (fallbackTimer) {
+            background: #e0f2fe;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            z-index: 9999;
+
+            transition: opacity 0.3s ease;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+
+            border: 5px solid #ffffff;
+            border-top: 5px solid #ff6b35;
+
+            border-radius: 50%;
+
+            animation: spin 1s linear infinite;
+
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-text {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 20px;
+            color: #8b3a00;
+            font-weight: 600;
+        }
+
+        /* WELCOME CONTENT */
+
+        #welcome-content {
+            display: none;
+
+            position: relative;
+
+            width: 100%;
+            height: 100%;
+            height: 100dvh;
+
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        /* BACKGROUND IMAGE */
+
+        .image-container {
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            z-index: -1;
+            overflow: hidden;
+
+            background: linear-gradient(
+                180deg,
+                #d9efff,
+                #fff0e6,
+                #e0f2fe
+            );
+        }
+
+        .image-container img {
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: fill;
+            object-position: center;
+
+            border: none;
+        }
+
+        /* CONTENT */
+
+        .content-wrapper {
+            position: relative;
+
+            z-index: 2;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            width: 100%;
+
+            padding:
+                0
+                20px
+                calc(40px + env(safe-area-inset-bottom))
+                20px;
+        }
+
+        /* TEXT */
+
+        .text-content {
+            text-align: center;
+
+            width: 100%;
+
+            margin-bottom: 20px;
+        }
+
+        .text-content h1 {
+            font-family: 'Fredoka', sans-serif;
+
+            font-size: clamp(24px, 6vw, 32px);
+
+            color: #8b3a00;
+
+            font-weight: 700;
+            line-height: 1.2;
+
+            margin-bottom: 8px;
+
+            text-shadow:
+                1px 1px 0 rgba(255, 255, 255, 0.8),
+                2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .text-content p {
+            font-family: 'Nunito', sans-serif;
+
+            font-size: clamp(13px, 4vw, 16px);
+
+            color: #6b5b4d;
+
+            font-weight: 700;
+            line-height: 1.5;
+        }
+
+        /* START BUTTON */
+
+        .start-btn {
+            position: relative;
+
+            width: 100%;
+            max-width: 350px;
+
+            padding: 16px 20px;
+
+            font-size: 20px;
+
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+
+            color: #ffffff;
+
+            background: #ff6b35;
+
+            border: none;
+            border-radius: 50px;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 6px 0 #cc4e20,
+                0 10px 20px rgba(255, 107, 53, 0.4);
+
+            transition:
+                transform 0.15s ease,
+                box-shadow 0.15s ease;
+
+            animation: pulseBtn 2s infinite;
+        }
+
+        .start-btn:active {
+            transform: translateY(6px);
+
+            box-shadow:
+                0 0 0 #cc4e20;
+
+            animation: none;
+        }
+
+        .start-btn:focus-visible {
+            outline: 3px solid #8b3a00;
+            outline-offset: 4px;
+        }
+
+        @keyframes pulseBtn {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.04);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* SMALL PHONES */
+
+        @media (max-height: 650px) {
+            .content-wrapper {
+                padding-bottom:
+                    calc(20px + env(safe-area-inset-bottom));
+            }
+
+            .text-content {
+                margin-bottom: 12px;
+            }
+
+            .text-content h1 {
+                font-size: 24px;
+            }
+
+            .start-btn {
+                padding: 13px 18px;
+                font-size: 18px;
+            }
+        }
+
+        /* REDUCE MOTION */
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- LOADING SCREEN -->
+
+    <div id="splash-screen">
+
+        <div class="spinner"></div>
+
+        <div class="loading-text">
+            Loading Kids Teacher...
+        </div>
+
+    </div>
+
+
+    <!-- WELCOME PAGE -->
+
+    <main id="welcome-content">
+
+        <!-- BACKGROUND -->
+
+        <div class="image-container">
+
+            <img
+                id="welcomeImage"
+                src="./welcome_bg.png"
+                alt="Kids Teacher Learning Background"
+                fetchpriority="high">
+
+        </div>
+
+
+        <!-- CONTENT -->
+
+        <section class="content-wrapper">
+
+            <div class="text-content">
+
+                <h1>
+                    Learning Is an<br>
+                    Adventure!
+                </h1>
+
+                <p>
+                    Explore, discover and grow every day.
+                </p>
+
+            </div>
+
+
+            <!-- START BUTTON -->
+
+            <button
+                class="start-btn"
+                id="startBtn"
+                type="button">
+
+                Let's Start →
+
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!-- FIREBASE AND APP LOGIC -->
+
+    <script type="module">
+
+        import {
+            initializeApp
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+
+        import {
+            getAuth,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+
+        // FIREBASE CONFIG
+
+        const firebaseConfig = {
+
+            apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
+
+            authDomain: "kids-teacher-4387e.firebaseapp.com",
+
+            projectId: "kids-teacher-4387e",
+
+            storageBucket: "kids-teacher-4387e.firebasestorage.app",
+
+            messagingSenderId: "420221167346",
+
+            appId: "1:420221167346:web:da7ac80acdfd52339d526b"
+
+        };
+
+
+        // ELEMENTS
+
+        const splash = document.getElementById("splash-screen");
+
+        const welcome = document.getElementById("welcome-content");
+
+        const startBtn = document.getElementById("startBtn");
+
+        const welcomeImage = document.getElementById("welcomeImage");
+
+
+        // STATE
+
+        let pageOpened = false;
+
+        let authResolved = false;
+
+        let authUnsubscribe = null;
+
+        let fallbackTimer = null;
+
+
+        // SHOW WELCOME PAGE
+
+        function showWelcome() {
+
+            if (pageOpened) return;
+
+            pageOpened = true;
+
+            clearTimeout(fallbackTimer);
+
+            splash.style.display = "none";
+
+            splash.style.opacity = "0";
+
+            welcome.style.display = "flex";
+
+        }
+
+
+        // NAVIGATION
+
+        function openPage(url) {
+
+            if (pageOpened) return;
+
+            pageOpened = true;
+
+            clearTimeout(fallbackTimer);
+
+            window.location.replace(url);
+
+        }
+
+
+        // CHECK LOGIN
+
+        function checkFirebaseAuth() {
+
+            try {
+
+                const app = initializeApp(firebaseConfig);
+
+                const auth = getAuth(app);
+
+
+                authUnsubscribe = onAuthStateChanged(
+
+                    auth,
+
+                    (user) => {
+
+                        authResolved = true;
+
                         clearTimeout(fallbackTimer);
-                    }
 
-                    if (user) {
-                        const savedAge =
-                            localStorage.getItem("kidsAgeGroup");
 
-                        openPage(
-                            savedAge
-                                ? "index-home.html"
-                                : "age-select.html"
+                        if (user) {
+
+                            let savedAge = null;
+
+                            try {
+
+                                savedAge = localStorage.getItem(
+                                    "kidsAgeGroup"
+                                );
+
+                            } catch (error) {
+
+                                console.warn(
+                                    "Local storage unavailable:",
+                                    error
+                                );
+
+                            }
+
+
+                            if (savedAge) {
+
+                                openPage("index-home.html");
+
+                            } else {
+
+                                openPage("age-select.html");
+
+                            }
+
+                        } else {
+
+                            showWelcome();
+
+                        }
+
+                    },
+
+                    (error) => {
+
+                        console.error(
+                            "Firebase Auth Error:",
+                            error
                         );
-                    } else {
+
+                        authResolved = true;
+
                         showWelcome();
+
                     }
-                },
 
-                (error) => {
-                    console.error("Firebase Auth Error:", error);
+                );
 
-                    authResolved = true;
-                    showWelcome();
-                }
+            } catch (error) {
+
+                console.error(
+                    "Firebase Initialization Error:",
+                    error
+                );
+
+                authResolved = true;
+
+                showWelcome();
+
+            }
+
+        }
+
+
+        // FIREBASE TIMEOUT
+        // Infinite loading se bachata hai
+
+        fallbackTimer = setTimeout(() => {
+
+            if (!authResolved) {
+
+                console.warn(
+                    "Firebase is taking too long. Showing welcome page."
+                );
+
+                showWelcome();
+
+            }
+
+        }, 8000);
+
+
+        // START AUTH CHECK
+
+        checkFirebaseAuth();
+
+
+        // START BUTTON
+
+        startBtn.addEventListener("click", () => {
+
+            window.location.href = "./login.html";
+
+        });
+
+
+        // BACKGROUND IMAGE ERROR
+
+        welcomeImage.addEventListener("error", () => {
+
+            console.error(
+                "Welcome background image could not load."
             );
 
-        } catch (error) {
-            console.error("Firebase Initialization Error:", error);
-            showWelcome();
-        }
-    }
-
-    // Do not allow infinite loading
-    fallbackTimer = setTimeout(() => {
-        if (!authResolved) {
-            console.warn("Firebase timeout. Showing welcome page.");
-            showWelcome();
-        }
-    }, 8000);
-
-    // Start Firebase check
-    checkFirebaseAuth();
-
-    // Start button
-    startBtn.addEventListener("click", () => {
-        window.location.href = "login.html";
-    });
-
-    // Service worker registration
-    if ("serviceWorker" in navigator) {
-        window.addEventListener("load", async () => {
-            try {
-                await navigator.serviceWorker.register(
-                    "./service-worker.js"
-                );
-                console.log("Service Worker registered");
-            } catch (error) {
-                console.error("Service Worker Error:", error);
-            }
         });
-    }
 
-    // Cleanup
-    window.addEventListener("pagehide", () => {
-        if (fallbackTimer) {
+
+        // SERVICE WORKER
+
+        if ("serviceWorker" in navigator) {
+
+            window.addEventListener("load", async () => {
+
+                try {
+
+                    await navigator.serviceWorker.register(
+                        "./service-worker.js"
+                    );
+
+                    console.log(
+                        "Kids Teacher Service Worker registered."
+                    );
+
+                } catch (error) {
+
+                    console.error(
+                        "Service Worker registration failed:",
+                        error
+                    );
+
+                }
+
+            });
+
+        }
+
+
+        // CLEANUP
+
+        window.addEventListener("pagehide", () => {
+
             clearTimeout(fallbackTimer);
-        }
 
-        if (authUnsubscribe) {
-            authUnsubscribe();
-        }
-    });
-</script>
+            if (authUnsubscribe) {
+
+                authUnsubscribe();
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
