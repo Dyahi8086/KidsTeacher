@@ -35,7 +35,7 @@
 
     /* --- MAIN CONTAINER (Frame ke andar) --- */
     .login-container {
-      width: 75%; /* Frame ke hisaab se width adjust ki hai */
+      width: 72%; /* Frame ki chaudai ke hisaab se set kiya hai */
       max-width: 320px;
       
       display: flex;
@@ -44,19 +44,40 @@
       align-items: center;
       text-align: center;
       
-      /* Screen ke bilkul beech me lane ke liye */
+      /* Frame ke exact beech me lane ke liye */
       position: absolute;
-      top: 50%;
+      top: 52%; /* Thoda niche shift kiya taaki frame ke center me aaye */
       left: 50%;
       transform: translate(-50%, -50%);
     }
 
-    /* --- GOOGLE BUTTON --- */
+    /* --- TEXT STYLING --- */
+    .app-title { 
+      font-family: 'Fredoka', sans-serif; 
+      font-size: 30px; 
+      color: #4c1d95; /* Dark Purple */
+      font-weight: 700; 
+      letter-spacing: -0.5px; 
+      margin-bottom: 5px;
+    }
+
+    .app-subtitle {
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      color: #6b21a8; /* Halka purple */
+      font-weight: 700;
+      margin-bottom: 25px;
+    }
+
+    /* --- YELLOW 3D GOOGLE BUTTON --- */
     .btn-google {
       width: 100%; 
       padding: 14px 10px;
-      background: linear-gradient(135deg, #FF7E5F, #FEB47B); /* Orange Gradient */
-      color: #ffffff; 
+      
+      /* YELLOW GRADIENT */
+      background: linear-gradient(135deg, #facc15, #eab308); 
+      
+      color: #1e293b; /* Dark text yellow par acha lagega */
       border: 2px solid #ffffff;
       border-radius: 50px;
       font-size: 15px; 
@@ -70,14 +91,13 @@
       position: relative;
       overflow: hidden;
       
-      /* 3D Shadow */
-      box-shadow: 0 5px 0 #cc4e20, 0 10px 20px rgba(255, 107, 53, 0.4);
+      /* Yellow 3D Shadow */
+      box-shadow: 0 5px 0 #ca8a04, 0 10px 20px rgba(234, 179, 8, 0.4);
       transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
       transform: translateY(0);
       
       /* Pulse Animation */
       animation: pulseBtn 2s infinite;
-      margin-bottom: 15px; /* Text aur button ke beech gap */
     }
 
     @keyframes pulseBtn {
@@ -86,15 +106,16 @@
       100% { transform: scale(1); }
     }
 
+    /* Button Press Effect */
     .btn-google:active { 
       transform: translateY(5px) scale(1); 
-      box-shadow: 0 0px 0 #cc4e20, 0 4px 10px rgba(0,0,0,0.2); 
+      box-shadow: 0 0px 0 #ca8a04, 0 4px 10px rgba(0,0,0,0.2); 
       animation: none; 
     }
     
     .btn-google:disabled {
-      background: #d8b4fe;
-      color: #ffffff;
+      background: #fef08a;
+      color: #94a3b8;
       box-shadow: none;
       transform: none;
       cursor: not-allowed;
@@ -102,7 +123,7 @@
       border: none;
     }
 
-    /* Google Icon ka white circle */
+    /* White Circle for Google Icon */
     .google-icon-bg {
       background: #ffffff;
       border-radius: 50%;
@@ -114,23 +135,6 @@
       flex-shrink: 0;
     }
 
-    /* --- PRIVACY TEXT --- */
-    .privacy-text {
-      font-family: 'Nunito', sans-serif;
-      font-size: 10px;
-      color: #6b21a8; /* Dark purple */
-      line-height: 1.3;
-      font-weight: 700;
-      text-align: center;
-      padding: 0 10px;
-    }
-
-    .privacy-text a {
-      color: #4c1d95; /* Link color */
-      text-decoration: underline;
-      font-weight: 800;
-    }
-
     /* --- LOADING OVERLAY --- */
     #loadingOverlay {
       display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
@@ -139,7 +143,7 @@
     }
     .spinner {
       width: 50px; height: 50px; border: 5px solid #e9d5ff;
-      border-top: 5px solid #FF7E5F; border-radius: 50%;
+      border-top: 5px solid #eab308; border-radius: 50%;
       animation: spin 1s linear infinite; margin-bottom: 20px;
     }
     @keyframes spin { 100% { transform: rotate(360deg); } }
@@ -150,21 +154,15 @@
 
   <!-- Login Container -->
   <div class="login-container">
-    
-    <!-- Google Button -->
+    <h1 class="app-title">Parents Login</h1>
+    <p class="app-subtitle">Guide your child's learning journey</p>
+
     <button type="button" id="googleBtn" class="btn-google" onclick="handleGoogleLogin()">
       <div class="google-icon-bg">
         <svg width="12" height="12" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
       </div>
       Continue with Google
     </button>
-
-    <!-- Privacy & Terms Text -->
-    <p class="privacy-text">
-      By continuing, you agree to our<br>
-      <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a>
-    </p>
-
   </div>
 
   <div id="loadingOverlay">
