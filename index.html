@@ -6,10 +6,7 @@
     <meta name="theme-color" content="#e0f2fe"> 
     <title>Kids Teacher - Welcome</title>
     
-    <!-- PWA Manifest -->
     <link rel="manifest" href="./manifest.json">
-    
-    <!-- PWA Favicon Links -->
     <link rel="icon" type="image/png" href="./icons/icon-192.png">
     <link rel="apple-touch-icon" href="./icons/icon-192.png">
     
@@ -20,6 +17,7 @@
 
         body, html {
             height: 100%; width: 100%;
+            background-color: #e0f2fe; 
             overflow: hidden; 
         }
 
@@ -51,16 +49,18 @@
             height: 100dvh; 
             display: flex; 
             flex-direction: column;
-            justify-content: flex-end; /* Content niche rahega */
+            justify-content: flex-end; 
             align-items: center;
             padding-bottom: 40px;
             
-            /* YAHAN LAGI HAI NAYI PHOTO */
+            /* NAYI PHOTO KA PATH */
             background-image: url('welcome_bg.png');
-            background-size: cover; /* Photo screen ko puri tarah cover karegi, side se gap nahi hoga */
+            background-size: cover; 
             background-position: center top;
             background-repeat: no-repeat;
-            background-color: #fce7f3; /* Fallback color */
+            
+            /* Fallback color */
+            background-color: #fce7f3; 
         }
 
         .content-wrapper {
@@ -162,7 +162,6 @@
         const splash = document.getElementById('splash-screen');
         const welcomeContent = document.getElementById('welcome-content');
 
-        // Check if user is already logged in
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 const savedAge = localStorage.getItem('kidsAgeGroup');
@@ -176,14 +175,12 @@
             }
         });
 
-        // Button Click
         document.getElementById('startBtn').addEventListener('click', () => {
             window.location.href = 'login.html';
         });
 
-        // Register Service Worker
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => { navigator.serviceWorker.register('service-worker.js'); });
+            window.addEventListener('load', () => { navigator.serviceWorker.register('./service-worker.js'); });
         }
     </script>
 </body>
