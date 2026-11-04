@@ -1,19 +1,19 @@
-const CACHE_NAME = 'kids-teacher-v9'; // Version badal diya hai taaki nayi photo load ho
+const CACHE_NAME = 'kids-teacher-v10'; // Version badal diya hai, ab nayi png load hogi
 
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './login.html',
   './manifest.json',
-  './welcome_bg.png', // Aapki nayi photo
+  './welcome_bg.png', // Aapki nayi png
   './login_bg.png',
   './icons/icon-192.png',
   './icons/icon-512.png'
 ];
 
-// Install Event
+// Install Event (Nayi files download karega)
 self.addEventListener('install', (event) => {
-  self.skipWaiting();
+  self.skipWaiting(); // Force update
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return Promise.all(
@@ -25,7 +25,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Activate Event (Purana cache delete karega)
+// Activate Event (Purana cache delete karega - YEH SABSE ZAROORI HAI)
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -50,7 +50,7 @@ self.addEventListener('fetch', (event) => {
   // External images (Firebase/Google) ko cache mat karo
   if (url.origin !== self.location.origin) return;
 
-  // Image ke liye Cache-First strategy
+  // Image ke liye Cache-First
   if (request.destination === 'image') {
     event.respondWith(
       caches.match(request).then((cachedResponse) => {
