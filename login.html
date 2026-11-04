@@ -6,7 +6,6 @@
   <meta name="theme-color" content="#8b5cf6">
   <title>Parents Login - Kids Teacher</title>
   
-  <!-- PWA Links -->
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/png" href="./icons/icon-192.png">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
@@ -24,8 +23,8 @@
       align-items: center; 
       font-family: 'Nunito', sans-serif; 
       
-      /* NAYI PHOTO BACKGROUND */
-      background-image: url('login_frame.png'); /* Agar aapne naam badla hai toh yahan login_frame.png likhein, warna login_bg.png */
+      /* NAYI PHOTO BACKGROUND (Bina kisi white patti ke) */
+      background-image: url('login_frame.png'); 
       background-size: cover; 
       background-position: center;
       background-repeat: no-repeat;
@@ -44,14 +43,13 @@
       align-items: center;
       text-align: center;
       
-      /* Frame ke exact beech me lane ke liye */
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
     }
 
-    /* Naya 3D Icon */
+    /* 3D Icon */
     .icon-3d {
       font-size: 40px;
       margin-bottom: 10px;
@@ -78,12 +76,15 @@
       padding: 0 10px;
     }
 
-    /* --- YELLOW 3D GOOGLE BUTTON --- */
+    /* --- ORANGE 3D GOOGLE BUTTON --- */
     .btn-google {
       width: 100%; 
       padding: 16px 10px;
-      background: linear-gradient(135deg, #facc15, #eab308); 
-      color: #1e293b; 
+      
+      /* ORANGE GRADIENT */
+      background: linear-gradient(135deg, #FF7E5F, #FEB47B); 
+      
+      color: #ffffff; 
       border: 2px solid #ffffff;
       border-radius: 50px;
       font-size: 16px; 
@@ -97,7 +98,8 @@
       position: relative;
       overflow: hidden;
       
-      box-shadow: 0 6px 0 #ca8a04, 0 12px 20px rgba(234, 179, 8, 0.3);
+      /* Orange 3D Shadow */
+      box-shadow: 0 6px 0 #cc4e20, 0 12px 20px rgba(255, 107, 53, 0.4);
       transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
       transform: translateY(0);
       animation: pulseBtn 2s infinite;
@@ -111,7 +113,7 @@
 
     .btn-google:active { 
       transform: translateY(6px) scale(1); 
-      box-shadow: 0 0px 0 #ca8a04, 0 4px 10px rgba(0,0,0,0.2); 
+      box-shadow: 0 0px 0 #cc4e20, 0 4px 10px rgba(0,0,0,0.2); 
       animation: none; 
     }
     
@@ -145,7 +147,7 @@
     }
     .spinner {
       width: 50px; height: 50px; border: 5px solid #e9d5ff;
-      border-top: 5px solid #eab308; border-radius: 50%;
+      border-top: 5px solid #FF7E5F; border-radius: 50%;
       animation: spin 1s linear infinite; margin-bottom: 20px;
     }
     @keyframes spin { 100% { transform: rotate(360deg); } }
@@ -157,7 +159,6 @@
   <!-- Login Container -->
   <div class="login-container">
     
-    <!-- Naya 3D Icon jo frame ko bhar dega -->
     <div class="icon-3d">🎓</div>
 
     <h1 class="app-title">Parents Login</h1>
@@ -170,7 +171,6 @@
       Continue with Google
     </button>
 
-    <!-- Privacy Text (Agar chahiye ho toh) -->
     <p style="font-size: 10px; color: #6b21a8; margin-top: 15px; font-weight: 700;">
       By continuing, you agree to our<br>
       <a href="#" style="color: #4c1d95;">Privacy Policy</a> and <a href="#" style="color: #4c1d95;">Terms of Service</a>
