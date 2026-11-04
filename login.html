@@ -23,7 +23,7 @@
       align-items: center; 
       font-family: 'Nunito', sans-serif; 
       
-      /* NAYI PHOTO BACKGROUND (Bina kisi white patti ke) */
+      /* PHOTO KA NAAM YAHAN HAI */
       background-image: url('login_frame.png'); 
       background-size: cover; 
       background-position: center;
@@ -76,7 +76,7 @@
       padding: 0 10px;
     }
 
-    /* --- ORANGE 3D GOOGLE BUTTON --- */
+    /* --- ORANGE 3D GOOGLE BUTTON (No White Border) --- */
     .btn-google {
       width: 100%; 
       padding: 16px 10px;
@@ -85,7 +85,7 @@
       background: linear-gradient(135deg, #FF7E5F, #FEB47B); 
       
       color: #ffffff; 
-      border: 2px solid #ffffff;
+      border: none; /* White border removed */
       border-radius: 50px;
       font-size: 16px; 
       font-family: 'Fredoka', sans-serif;
@@ -124,7 +124,6 @@
       transform: none;
       cursor: not-allowed;
       animation: none;
-      border: none;
     }
 
     /* White Circle for Google Icon */
@@ -156,9 +155,7 @@
 </head>
 <body>
 
-  <!-- Login Container -->
   <div class="login-container">
-    
     <div class="icon-3d">🎓</div>
 
     <h1 class="app-title">Parents Login</h1>
