@@ -6,10 +6,7 @@
     <meta name="theme-color" content="#e0f2fe"> 
     <title>Kids Teacher - Welcome</title>
     
-    <!-- PWA Manifest -->
     <link rel="manifest" href="./manifest.json">
-    
-    <!-- PWA Favicon Links -->
     <link rel="icon" type="image/png" href="./icons/icon-192.png">
     <link rel="apple-touch-icon" href="./icons/icon-192.png">
     
@@ -24,7 +21,7 @@
             overflow: hidden; 
         }
 
-        /* Splash Screen (Loader) */
+        /* Loader */
         #splash-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100vh;
@@ -56,7 +53,7 @@
             align-items: center;
             padding-bottom: 40px;
             
-            background-image: url('welcome_bg.png');
+            background-image: url('./welcome_bg.png');
             background-size: cover; 
             background-position: center top;
             background-repeat: no-repeat;
@@ -122,17 +119,22 @@
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
+        
+        .btn-link {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Loader -->
     <div id="splash-screen">
         <div class="spinner"></div>
         <div class="loading-text">Loading...</div>
     </div>
 
-    <!-- Welcome Page -->
     <div id="welcome-content">
         <div class="content-wrapper">
             <div class="text-content">
@@ -140,11 +142,9 @@
                 <p>Explore, discover and grow every day.</p>
             </div>
             
-            <!-- LINK DIRECTLY ADDED TO BUTTON -->
-            <a href="login.html" style="text-decoration: none; width: 100%; display: flex; justify-content: center;">
+            <a href="login.html" class="btn-link">
                 <button class="start-btn" type="button">Let's Start →</button>
             </a>
-            
         </div>
     </div>
 
@@ -167,8 +167,20 @@
         const splash = document.getElementById('splash-screen');
         const welcomeContent = document.getElementById('welcome-content');
 
-        // Check if user is already logged in
+        // BUG FIX: Timeout to prevent infinite loading spinner
+        let isLoading = true;
+        setTimeout(() => {
+            if (isLoading) {
+                splash.style.opacity = '0';
+                setTimeout(() => {
+                    splash.style.display = 'none';
+                    welcomeContent.style.display = 'flex';
+                }, 300);
+            }
+        }, 3500); // 3.5 seconds max wait
+
         onAuthStateChanged(auth, (user) => {
+            isLoading = false; // Firebase responded, stop timeout
             if (user) {
                 const savedAge = localStorage.getItem('kidsAgeGroup');
                 window.location.replace(!savedAge ? "age-select.html" : "index-home.html");
@@ -181,9 +193,8 @@
             }
         });
 
-        // Register Service Worker
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => { navigator.serviceWorker.register('service-worker.js'); });
+            window.addEventListener('load', () => { navigator.serviceWorker.register('./service-worker.js'); });
         }
     </script>
 </body>
