@@ -52,19 +52,17 @@
             height: 100dvh; 
             display: flex; 
             flex-direction: column;
-            justify-content: flex-end; /* Text/Button niche rahega */
+            justify-content: flex-end; 
             align-items: center;
             padding-bottom: 40px;
             
-            /* Yahan aapki nayi welcome_bg.png puri screen par set hogi */
             background-image: url('welcome_bg.png');
             background-size: cover; 
             background-position: center top;
             background-repeat: no-repeat;
-            background-color: #fce7f3; /* Fallback color */
+            background-color: #fce7f3; 
         }
 
-        /* Content Wrapper (Koi white patti nahi hai iske peeche) */
         .content-wrapper {
             position: relative; 
             z-index: 10;
@@ -94,7 +92,7 @@
             font-weight: 700;
         }
 
-        /* ORANGE START BUTTON (Jaise pehle tha) */
+        /* ORANGE START BUTTON */
         .start-btn {
             position: relative; 
             width: 100%; 
@@ -104,7 +102,7 @@
             font-family: 'Fredoka', sans-serif; 
             font-weight: 700; 
             color: white;
-            background: #FF6B35; /* Exact Orange Color */
+            background: #FF6B35; 
             border: none; 
             border-radius: 50px; 
             cursor: pointer; 
@@ -141,8 +139,12 @@
                 <h1>Learning Is an<br>Adventure!</h1>
                 <p>Explore, discover and grow every day.</p>
             </div>
-            <!-- Orange Button -->
-            <button class="start-btn" id="startBtn">Let's Start →</button>
+            
+            <!-- LINK DIRECTLY ADDED TO BUTTON -->
+            <a href="login.html" style="text-decoration: none; width: 100%; display: flex; justify-content: center;">
+                <button class="start-btn" type="button">Let's Start →</button>
+            </a>
+            
         </div>
     </div>
 
@@ -177,11 +179,6 @@
                     welcomeContent.style.display = 'flex';
                 }, 300);
             }
-        });
-
-        // Button Click
-        document.getElementById('startBtn').addEventListener('click', () => {
-            window.location.href = 'login.html';
         });
 
         // Register Service Worker
