@@ -1,193 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="theme-color" content="#e0f2fe"> 
-    <title>Kids Teacher - Welcome</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#8b5cf6">
+  <title>Parents Login - Kids Teacher</title>
+  
+  <!-- PWA Links -->
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/png" href="./icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      height: 100vh; 
+      height: 100dvh; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      font-family: 'Nunito', sans-serif; 
+      
+      /* NAYI PHOTO BACKGROUND */
+      background-image: url('login_frame.png'); /* Agar aapne naam badla hai toh yahan login_frame.png likhein, warna login_bg.png */
+      background-size: cover; 
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #e9d5ff; 
+      overflow: hidden;
+    }
+
+    /* --- MAIN CONTAINER (Frame ke andar) --- */
+    .login-container {
+      width: 72%; 
+      max-width: 320px;
+      
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      
+      /* Frame ke exact beech me lane ke liye */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Naya 3D Icon */
+    .icon-3d {
+      font-size: 40px;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+    }
+
+    /* --- TEXT STYLING --- */
+    .app-title { 
+      font-family: 'Fredoka', sans-serif; 
+      font-size: 32px; 
+      color: #4c1d95; 
+      font-weight: 700; 
+      letter-spacing: -0.5px; 
+      margin-bottom: 8px;
+      text-shadow: 0 2px 4px rgba(255,255,255,0.8);
+    }
+
+    .app-subtitle {
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      color: #6b21a8; 
+      font-weight: 700;
+      margin-bottom: 30px;
+      padding: 0 10px;
+    }
+
+    /* --- YELLOW 3D GOOGLE BUTTON --- */
+    .btn-google {
+      width: 100%; 
+      padding: 16px 10px;
+      background: linear-gradient(135deg, #facc15, #eab308); 
+      color: #1e293b; 
+      border: 2px solid #ffffff;
+      border-radius: 50px;
+      font-size: 16px; 
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+      
+      box-shadow: 0 6px 0 #ca8a04, 0 12px 20px rgba(234, 179, 8, 0.3);
+      transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transform: translateY(0);
+      animation: pulseBtn 2s infinite;
+    }
+
+    @keyframes pulseBtn {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
+    .btn-google:active { 
+      transform: translateY(6px) scale(1); 
+      box-shadow: 0 0px 0 #ca8a04, 0 4px 10px rgba(0,0,0,0.2); 
+      animation: none; 
+    }
     
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="./manifest.json">
-    
-    <!-- PWA Favicon Links -->
-    <link rel="icon" type="image/png" href="./icons/icon-192.png">
-    <link rel="apple-touch-icon" href="./icons/icon-192.png">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+    .btn-google:disabled {
+      background: #fef08a;
+      color: #94a3b8;
+      box-shadow: none;
+      transform: none;
+      cursor: not-allowed;
+      animation: none;
+      border: none;
+    }
 
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    /* White Circle for Google Icon */
+    .google-icon-bg {
+      background: #ffffff;
+      border-radius: 50%;
+      width: 24px; 
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
 
-        body, html {
-            height: 100%; width: 100%;
-            background-color: #e0f2fe; 
-            overflow: hidden; 
-        }
-
-        /* Splash Screen (Loader) */
-        #splash-screen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100vh;
-            background: #e0f2fe;
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
-            z-index: 9999; transition: opacity 0.3s ease;
-        }
-
-        .spinner {
-            width: 50px; height: 50px;
-            border: 5px solid #ffffff; border-top: 5px solid #FF6B35;
-            border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px;
-        }
-
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        .loading-text { font-family: 'Fredoka'; font-size: 20px; color: #8B3A00; font-weight: 600; }
-
-        /* Welcome Content */
-        #welcome-content {
-            display: none;
-            position: relative;
-            width: 100vw; 
-            height: 100vh; 
-            height: 100dvh; 
-            display: flex; 
-            flex-direction: column;
-            justify-content: flex-end; /* Text/Button niche rahega */
-            align-items: center;
-            padding-bottom: 40px;
-            
-            /* Yahan aapki nayi welcome_bg.png puri screen par set hogi */
-            background-image: url('welcome_bg.png');
-            background-size: cover; 
-            background-position: center top;
-            background-repeat: no-repeat;
-            background-color: #fce7f3; /* Fallback color */
-        }
-
-        /* Content Wrapper (Koi white patti nahi hai iske peeche) */
-        .content-wrapper {
-            position: relative; 
-            z-index: 10;
-            display: flex; 
-            flex-direction: column; 
-            align-items: center;
-            width: 100%; 
-            padding: 0 20px;
-        }
-
-        .text-content { text-align: center; margin-bottom: 20px; }
-
-        .text-content h1 {
-            font-family: 'Fredoka', sans-serif; 
-            font-size: clamp(24px, 6vw, 32px); 
-            color: #8B3A00; 
-            font-weight: 700; 
-            line-height: 1.2; 
-            margin-bottom: 8px;
-            text-shadow: 1px 1px 0px rgba(255,255,255,0.8), 2px 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .text-content p {
-            font-family: 'Nunito', sans-serif; 
-            font-size: clamp(13px, 4vw, 16px); 
-            color: #6B5B4D; 
-            font-weight: 700;
-        }
-
-        /* ORANGE START BUTTON (Jaise pehle tha) */
-        .start-btn {
-            position: relative; 
-            width: 100%; 
-            max-width: 350px; 
-            padding: 16px 20px;
-            font-size: 20px; 
-            font-family: 'Fredoka', sans-serif; 
-            font-weight: 700; 
-            color: white;
-            background: #FF6B35; /* Exact Orange Color */
-            border: none; 
-            border-radius: 50px; 
-            cursor: pointer; 
-            box-shadow: 0 6px 0 #cc4e20, 0 10px 20px rgba(255, 107, 53, 0.4);
-            transition: transform 0.1s; 
-            animation: pulseBtn 2s infinite; 
-        }
-
-        .start-btn:active { 
-            transform: translateY(6px); 
-            box-shadow: 0 0px 0 #cc4e20; 
-            animation: none; 
-        }
-
-        @keyframes pulseBtn {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-    </style>
+    /* --- LOADING OVERLAY --- */
+    #loadingOverlay {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+      background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px);
+      z-index: 9999; flex-direction: column; justify-content: center; align-items: center;
+    }
+    .spinner {
+      width: 50px; height: 50px; border: 5px solid #e9d5ff;
+      border-top: 5px solid #eab308; border-radius: 50%;
+      animation: spin 1s linear infinite; margin-bottom: 20px;
+    }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    .loading-text { font-family: 'Fredoka'; font-size: 22px; color: #4c1d95; font-weight: 600; }
+  </style>
 </head>
 <body>
 
-    <!-- Loader -->
-    <div id="splash-screen">
-        <div class="spinner"></div>
-        <div class="loading-text">Loading...</div>
-    </div>
+  <!-- Login Container -->
+  <div class="login-container">
+    
+    <!-- Naya 3D Icon jo frame ko bhar dega -->
+    <div class="icon-3d">🎓</div>
 
-    <!-- Welcome Page -->
-    <div id="welcome-content">
-        <div class="content-wrapper">
-            <div class="text-content">
-                <h1>Learning Is an<br>Adventure!</h1>
-                <p>Explore, discover and grow every day.</p>
-            </div>
-            <!-- Orange Button -->
-            <button class="start-btn" id="startBtn">Let's Start →</button>
-        </div>
-    </div>
+    <h1 class="app-title">Parents Login</h1>
+    <p class="app-subtitle">Guide your child's learning journey</p>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    <button type="button" id="googleBtn" class="btn-google" onclick="handleGoogleLogin()">
+      <div class="google-icon-bg">
+        <svg width="14" height="14" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+      </div>
+      Continue with Google
+    </button>
 
-        const firebaseConfig = {
-          apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
-          authDomain: "kids-teacher-4387e.firebaseapp.com",
-          projectId: "kids-teacher-4387e",
-          storageBucket: "kids-teacher-4387e.firebasestorage.app",
-          messagingSenderId: "420221167346",
-          appId: "1:420221167346:web:da7ac80acdfd52339d526b"
-        };
+    <!-- Privacy Text (Agar chahiye ho toh) -->
+    <p style="font-size: 10px; color: #6b21a8; margin-top: 15px; font-weight: 700;">
+      By continuing, you agree to our<br>
+      <a href="#" style="color: #4c1d95;">Privacy Policy</a> and <a href="#" style="color: #4c1d95;">Terms of Service</a>
+    </p>
+  </div>
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
+  <div id="loadingOverlay">
+    <div class="spinner"></div>
+    <p class="loading-text">Logging you in...</p>
+  </div>
 
-        const splash = document.getElementById('splash-screen');
-        const welcomeContent = document.getElementById('welcome-content');
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-        // Check if user is already logged in
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const savedAge = localStorage.getItem('kidsAgeGroup');
-                window.location.replace(!savedAge ? "age-select.html" : "index-home.html");
-            } else {
-                splash.style.opacity = '0';
-                setTimeout(() => {
-                    splash.style.display = 'none';
-                    welcomeContent.style.display = 'flex';
-                }, 300);
-            }
-        });
+    const firebaseConfig = {
+      apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
+      authDomain: "kids-teacher-4387e.firebaseapp.com",
+      projectId: "kids-teacher-4387e",
+      storageBucket: "kids-teacher-4387e.firebasestorage.app",
+      messagingSenderId: "420221167346",
+      appId: "1:420221167346:web:da7ac80acdfd52339d526b"
+    };
 
-        // Button Click
-        document.getElementById('startBtn').addEventListener('click', () => {
-            window.location.href = 'login.html';
-        });
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    setPersistence(auth, browserLocalPersistence).catch(console.error);
 
-        // Register Service Worker
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => { navigator.serviceWorker.register('service-worker.js'); });
-        }
-    </script>
+    const overlay = document.getElementById('loadingOverlay');
+    const googleBtn = document.getElementById('googleBtn');
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        overlay.style.display = 'flex';
+        const savedAge = localStorage.getItem('kidsAgeGroup');
+        setTimeout(() => {
+            window.location.replace(!savedAge ? "age-select.html" : "index-home.html");
+        }, 800); 
+      }
+    });
+
+    window.handleGoogleLogin = async function() {
+      if (navigator.vibrate) navigator.vibrate(50);
+
+      const originalHTML = googleBtn.innerHTML;
+      googleBtn.innerHTML = "Connecting...";
+      googleBtn.disabled = true;
+      
+      const provider = new GoogleAuthProvider(); 
+      provider.setCustomParameters({ prompt: 'select_account' });
+      
+      try { 
+        await signInWithPopup(auth, provider); 
+      } 
+      catch (error) { 
+        googleBtn.innerHTML = originalHTML;
+        googleBtn.disabled = false;
+        if(error.code !== 'auth/popup-closed-by-user') { alert("Login failed. Please try again."); }
+      }
+    }
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => { navigator.serviceWorker.register('./service-worker.js'); });
+    }
+  </script>
 </body>
 </html>
