@@ -36,8 +36,9 @@
 
     /* --- MAIN CONTAINER (Frame ke andar center) --- */
     .login-container {
-      width: 78%; 
-      max-width: 330px;
+      /* Width ko thoda kam kiya taaki button bahar na nikle */
+      width: 70%; 
+      max-width: 300px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -60,14 +61,13 @@
     /* --- 3D BUBBLE FONT (Parents Login) --- */
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
-      font-size: 38px; 
+      font-size: 34px; /* Font size chota kiya */
       font-weight: 700; 
       letter-spacing: -0.5px; 
       margin-bottom: 8px;
       
       color: #4c1d95; 
       
-      /* 3D Text Shadow (Safed outline + Purple shadow) */
       text-shadow: 
         -1px -1px 0 #fff,  
          1px -1px 0 #fff,
@@ -79,30 +79,31 @@
 
     .app-subtitle {
       font-family: 'Nunito', sans-serif;
-      font-size: 14px;
+      font-size: 13px;
       color: #6b21a8; 
       font-weight: 700;
-      margin-bottom: 30px;
-      padding: 0 10px;
+      margin-bottom: 25px;
+      padding: 0 5px;
       line-height: 1.4;
     }
 
-    /* --- OFFICIAL WHITE GOOGLE BUTTON (With Pulse Animation) --- */
+    /* --- OFFICIAL WHITE GOOGLE BUTTON (FIXED SIZE) --- */
     .btn-google {
+      /* Width 100% rakhi par container chota hai, isliye bahar nahi jayega */
       width: 100%; 
-      padding: 14px 15px;
+      padding: 14px 10px; /* Padding adjust ki */
       background: #ffffff; 
       color: #3c4043; 
       border: 1px solid #dadce0; 
       border-radius: 50px;
-      font-size: 16px; 
+      font-size: 14px; /* Font chota kiya taaki text fit ho jaye */
       font-family: 'Nunito', sans-serif; 
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: 8px; /* Gap kam kiya */
       position: relative;
       overflow: hidden;
       
@@ -111,7 +112,7 @@
       transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
       transform: translateY(0);
       
-      /* BUTTON HILTA HUVA (Pulse Animation) */
+      /* Pulse Animation */
       animation: pulseBtn 2s infinite;
     }
 
@@ -135,11 +136,10 @@
     /* Pulse Animation Keyframes */
     @keyframes pulseBtn {
       0% { transform: scale(1); box-shadow: 0 5px 0 #e2e8f0, 0 10px 15px rgba(0,0,0,0.05); }
-      50% { transform: scale(1.03); box-shadow: 0 5px 0 #e2e8f0, 0 15px 25px rgba(139, 92, 246, 0.2); }
+      50% { transform: scale(1.02); box-shadow: 0 5px 0 #e2e8f0, 0 15px 25px rgba(139, 92, 246, 0.2); }
       100% { transform: scale(1); box-shadow: 0 5px 0 #e2e8f0, 0 10px 15px rgba(0,0,0,0.05); }
     }
 
-    /* Jab click kare to dabega aur pulse ruk jayega */
     .btn-google:active { 
       transform: translateY(5px) scale(1); 
       box-shadow: 0 0px 0 #e2e8f0, 0 4px 10px rgba(0,0,0,0.05); 
@@ -158,22 +158,22 @@
 
     /* Google Icon SVG Size */
     .google-icon-svg {
-      width: 20px;
-      height: 20px;
+      width: 18px; /* Icon chota kiya */
+      height: 18px;
       flex-shrink: 0;
     }
 
     /* --- READABLE & ELEGANT PRIVACY TEXT --- */
     .privacy-text {
       font-family: 'Nunito', sans-serif;
-      font-size: 11.5px;
+      font-size: 10.5px; /* Text size chota kiya */
       color: #3b0764; 
       font-weight: 700;
-      margin-top: 25px;
+      margin-top: 20px;
       line-height: 1.5;
       background: rgba(255, 255, 255, 0.4); 
-      padding: 10px 15px;
-      border-radius: 15px;
+      padding: 8px 12px;
+      border-radius: 12px;
       backdrop-filter: blur(5px);
       border: 1px solid rgba(255,255,255,0.6);
     }
@@ -210,7 +210,7 @@
     <h1 class="app-title">Parents Login</h1>
     <p class="app-subtitle">Guide your child's learning journey</p>
 
-    <!-- Official Google Button with Pulse -->
+    <!-- Official Google Button -->
     <button type="button" id="googleBtn" class="btn-google" onclick="handleGoogleLogin()">
       <svg class="google-icon-svg" viewBox="0 0 48 48">
         <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
