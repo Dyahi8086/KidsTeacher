@@ -24,10 +24,11 @@
       flex-direction: column; 
       font-family: 'Nunito', sans-serif; 
       
-      /* BACKGROUND IMAGE */
+      /* BACKGROUND IMAGE FIX */
       background-image: url('login_bg.png'); 
-      background-size: cover; 
-      background-position: center top; 
+      /* Image ko stretch kiya taaki har screen par fit ho jaye */
+      background-size: 100% 100%; 
+      background-position: center;
       background-repeat: no-repeat;
       background-color: #facc15; 
       overflow: hidden;
@@ -39,12 +40,13 @@
       flex: 1; 
       display: flex;
       flex-direction: column;
+      /* Content ko screen ke center se thoda niche rakhega */
       justify-content: flex-end; 
       align-items: center;
       text-align: center;
       
-      /* FIX: Button ko upar shift karne ke liye padding badhayi hai */
-      padding-bottom: calc(50px + env(safe-area-inset-bottom)); 
+      /* Fix spacing taaki text aur button sabhi devices par ek jaisa dikhe */
+      padding-bottom: calc(30px + env(safe-area-inset-bottom)); 
     }
 
     .text-content {
@@ -63,7 +65,6 @@
       /* Deep Chocolate Brown Color */
       color: #4a2c11; 
       
-      /* Simple soft shadow for depth */
       text-shadow: 0px 2px 4px rgba(255, 255, 255, 0.5), 0px 4px 8px rgba(0,0,0,0.1);
     }
 
@@ -96,7 +97,6 @@
       position: relative;
       overflow: hidden;
       
-      /* 3D Shadow */
       box-shadow: 0 6px 0 #cbd5e1, 0 15px 25px rgba(0,0,0,0.15);
       transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
       transform: translateY(-5px); 
