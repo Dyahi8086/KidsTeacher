@@ -27,13 +27,11 @@
       /* IMAGE PATH FIXED */
       background-image: url('login_bg.png'); 
       
-      /* Image ko stretch ya crop hone se bachane ke liye */
+      /* IMAGE CROP FIX: Ye line image ko crop hone se bachayegi */
       background-size: cover; 
-      
-      /* Image ko niche se align kiya taaki white area kam dikhe */
-      background-position: center bottom; 
+      background-position: center bottom; /* White area ko screen par fit karega */
       background-repeat: no-repeat;
-      background-color: #facc15; /* Fallback color */
+      background-color: #facc15; 
       overflow: hidden;
     }
 
@@ -46,9 +44,7 @@
       align-items: center;
       text-align: center;
       height: 100%;
-      
-      /* White area ke andar content ko set karne ke liye padding */
-      padding-bottom: 8vh; 
+      padding-bottom: 5vh; /* Niche se gap */
     }
 
     /* Text Content Wrapper */
@@ -60,12 +56,11 @@
     /* --- PREMIUM 3D FONT (Parents Login) --- */
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
-      font-size: 32px; 
+      font-size: 34px; 
       font-weight: 700; 
       letter-spacing: -0.5px; 
       margin-bottom: 5px;
       
-      /* Deep Purple Color */
       color: #4c1d95; 
       
       /* 3D Text Shadow */
@@ -81,25 +76,20 @@
     .app-subtitle {
       font-family: 'Nunito', sans-serif;
       font-size: 14px;
-      color: #475569; /* Dark grey */
+      color: #475569; 
       font-weight: 700;
       margin-bottom: 25px;
       padding: 0 10px;
       line-height: 1.4;
     }
 
-    /* --- GOOGLE BUTTON (Pop-out) --- */
+    /* --- GOOGLE BUTTON (White) --- */
     .btn-google {
       width: 85%; 
       max-width: 320px;
       padding: 16px 15px;
-      
-      /* White Background for Google */
       background: #ffffff; 
-      
-      /* Dark Text */
       color: #0f172a; 
-      
       border: 2px solid #e2e8f0; 
       border-radius: 50px;
       font-size: 16px; 
@@ -113,7 +103,7 @@
       position: relative;
       overflow: hidden;
       
-      /* 3D Shadow (Pop-out effect) */
+      /* 3D Shadow */
       box-shadow: 0 6px 0 #cbd5e1, 0 10px 20px rgba(0,0,0,0.1);
       transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
       transform: translateY(0);
@@ -152,7 +142,7 @@
     .privacy-text {
       font-family: 'Nunito', sans-serif;
       font-size: 11px;
-      color: #000000; /* Ink Black */
+      color: #000000; 
       font-weight: 800;
       margin-top: 20px;
       line-height: 1.5;
