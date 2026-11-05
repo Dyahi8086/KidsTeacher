@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kids-teacher-v25'; // Version incremented
+const CACHE_NAME = 'kids-teacher-v30'; // Version update kiya
 
 const ASSETS_TO_CACHE = [
   './',
@@ -6,7 +6,7 @@ const ASSETS_TO_CACHE = [
   './login.html',
   './manifest.json',
   './welcome_bg.png', 
-  './login_bg.png', // Corrected filename
+  './login_bg.png', // Image yahan cache hogi
   './icons/icon-192.png',
   './icons/icon-512.png'
 ];
@@ -25,7 +25,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Activate Event
+// Activate Event (Purana cache delete karega)
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -48,6 +48,7 @@ self.addEventListener('fetch', (event) => {
 
   if (url.origin !== self.location.origin) return;
 
+  // Images ke liye Cache-First
   if (request.destination === 'image') {
     event.respondWith(
       caches.match(request).then((cachedResponse) => {
@@ -64,6 +65,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Pages ke liye Network-First
   event.respondWith(
     fetch(request).catch(() => {
       return caches.match(request).then((cached) => {
