@@ -18,20 +18,23 @@
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
     body {
+      /* FIX: height aur min-height dono set kiye hain taaki choti screen par scroll ho sake */
       height: 100vh; 
       height: 100dvh; 
+      min-height: 100vh;
       display: flex; 
       flex-direction: column; 
       font-family: 'Nunito', sans-serif; 
       
-      /* BACKGROUND IMAGE FIX */
+      /* BACKGROUND IMAGE */
       background-image: url('login_bg.png'); 
-      /* Image ko stretch kiya taaki har screen par fit ho jaye */
-      background-size: 100% 100%; 
+      background-size: 100% 100%; /* Image stretch to fit */
       background-position: center;
       background-repeat: no-repeat;
       background-color: #facc15; 
-      overflow: hidden;
+      
+      /* FIX: overflow hidden hata kar auto kiya taaki text cut na ho */
+      overflow-y: auto; 
     }
 
     /* --- MAIN CONTAINER --- */
@@ -40,13 +43,15 @@
       flex: 1; 
       display: flex;
       flex-direction: column;
-      /* Content ko screen ke center se thoda niche rakhega */
+      
+      /* FIX: justify-content flex-end ki jagah center kiya taaki content screen ke beech me rahe */
       justify-content: flex-end; 
       align-items: center;
       text-align: center;
       
-      /* Fix spacing taaki text aur button sabhi devices par ek jaisa dikhe */
-      padding-bottom: calc(30px + env(safe-area-inset-bottom)); 
+      /* FIX: safe-area-inset-bottom ka sahi use, taaki home button text ko na kaate */
+      padding-top: 20px;
+      padding-bottom: calc(60px + env(safe-area-inset-bottom)); 
     }
 
     .text-content {
@@ -133,7 +138,7 @@
       flex-shrink: 0;
     }
 
-    /* --- PRIVACY TEXT --- */
+    /* --- PRIVACY TEXT (FIXED VISIBILITY) --- */
     .privacy-text {
       font-family: 'Nunito', sans-serif;
       font-size: 11px;
@@ -142,6 +147,8 @@
       line-height: 1.5;
       text-align: center;
       padding: 0 10px;
+      /* FIX: extra margin bottom taaki text screen ke end se thoda upar rahe */
+      margin-bottom: 10px; 
     }
 
     .privacy-text a {
