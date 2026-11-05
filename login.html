@@ -26,14 +26,14 @@
         body {
             min-height: 100vh;
             min-height: 100dvh;
-            /* Background image jo upar wali image se match karegi */
-            background: url('login_bg.png') center center / 100% 100% no-repeat;
+            /* Background image ko 100% 100% fit karne ke liye taaki stretch na ho */
+            background: url('login_bg.png') top center / 100% 100% no-repeat;
             background-color: #d8b4fe;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 16px;
             font-family: 'Fredoka', sans-serif;
             position: relative;
         }
@@ -43,63 +43,63 @@
             position: relative;
             z-index: 10;
             width: 100%;
-            max-width: 380px;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 2px solid rgba(255, 255, 255, 0.8);
-            border-radius: 32px;
-            padding: 30px 24px;
+            max-width: 360px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            border-radius: 28px;
+            padding: 24px 20px;
             text-align: center;
-            box-shadow: 0 15px 35px rgba(100, 50, 150, 0.15);
+            box-shadow: 0 12px 30px rgba(100, 50, 150, 0.2);
         }
 
         /* Hat Icon / Header Graphic */
         .icon-box {
-            width: 65px;
-            height: 65px;
+            width: 55px;
+            height: 55px;
             background: linear-gradient(135deg, #7c3aed, #4f46e5);
-            border-radius: 20px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 16px auto;
-            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
-            font-size: 30px;
+            margin: 0 auto 12px auto;
+            box-shadow: 0 6px 15px rgba(124, 58, 237, 0.3);
+            font-size: 26px;
         }
 
         .login-title {
             font-family: 'Baloo 2', cursive;
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 800;
             color: #4c1d95;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .login-subtitle {
-            font-size: 14px;
+            font-size: 13px;
             color: #6b7280;
             font-weight: 600;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         /* Official Branded Google Sign-In Button */
         .google-btn {
             width: 100%;
-            padding: 14px 20px;
+            padding: 13px 18px;
             background: #ffffff;
             color: #374151;
             border: 2px solid #e5e7eb;
             border-radius: 50px;
-            font-size: 16px;
+            font-size: 15px;
             font-family: 'Fredoka', sans-serif;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            gap: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
             transition: all 0.2s ease;
             text-decoration: none;
         }
@@ -110,16 +110,16 @@
         }
 
         .google-icon {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
         }
 
         /* Terms and Policies */
         .terms-text {
-            margin-top: 20px;
-            font-size: 11px;
+            margin-top: 16px;
+            font-size: 10.5px;
             color: #9ca3af;
-            line-height: 1.5;
+            line-height: 1.4;
             font-weight: 500;
         }
 
