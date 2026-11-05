@@ -2,600 +2,523 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width,
-          initial-scale=1.0,
-          maximum-scale=1.0,
-          user-scalable=no,
-          viewport-fit=cover">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-    <meta name="theme-color" content="#e0f2fe">
+<meta name="theme-color" content="#e0f2fe">
 
-    <title>Kids Teacher - Welcome</title>
+<title>Kids Teacher - Welcome</title>
 
-    <!-- PWA -->
-    <link rel="manifest" href="./manifest.json">
+<link rel="manifest" href="./manifest.json">
 
-    <link rel="icon"
-          type="image/png"
-          href="./icons/icon-192.png">
+<link rel="icon" type="image/png" href="./icons/icon-192.png">
 
-    <link rel="apple-touch-icon"
-          href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800&display=swap"
-          rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800&display=swap"
+rel="stylesheet">
 
-    <!-- Original PNG preload -->
-    <link rel="preload"
-          as="image"
-          href="./welcome_bg.png">
+<style>
 
-    <style>
-        /* =========================
-           RESET
-        ========================= */
+/* RESET */
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
 
-            -webkit-tap-highlight-color: transparent;
-        }
+/* PAGE */
 
-        html {
-            width: 100%;
-            height: 100%;
+html,
+body {
+    width: 100%;
+    height: 100%;
 
-            overflow: hidden;
+    margin: 0;
+    padding: 0;
 
-            background: #e0f2fe;
-        }
+    overflow: hidden;
 
-        body {
-            width: 100%;
-            height: 100%;
+    background: #fce7f3;
 
-            overflow: hidden;
+    font-family: 'Fredoka', sans-serif;
+}
 
-            position: fixed;
-            inset: 0;
+/* SPLASH */
 
-            background: #e0f2fe;
+#splash-screen {
 
-            font-family: 'Fredoka', sans-serif;
-        }
+    position: fixed;
+    inset: 0;
 
-        /* =========================
-           FULL SCREEN SPLASH
-        ========================= */
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
 
-        #splash-screen {
-            position: fixed;
+    display: flex;
+    flex-direction: column;
 
-            inset: 0;
+    justify-content: center;
+    align-items: center;
 
-            width: 100%;
-            height: 100%;
+    background: #e0f2fe;
 
-            height: 100vh;
-            height: 100dvh;
+    z-index: 9999;
 
-            display: flex;
+    transition: opacity 0.3s ease;
+}
 
-            flex-direction: column;
+.spinner {
 
-            justify-content: center;
-            align-items: center;
+    width: 50px;
+    height: 50px;
 
-            background: #e0f2fe;
+    border: 5px solid white;
+    border-top: 5px solid #FF6B35;
 
-            z-index: 9999;
+    border-radius: 50%;
 
-            transition: opacity 0.3s ease;
-        }
+    animation: spin 1s linear infinite;
 
-        .spinner {
-            width: 50px;
-            height: 50px;
+    margin-bottom: 15px;
+}
 
-            border: 5px solid #ffffff;
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
 
-            border-top: 5px solid #FF6B35;
+.loading-text {
 
-            border-radius: 50%;
+    font-family: 'Fredoka', sans-serif;
 
-            animation: spin 1s linear infinite;
+    font-size: 20px;
 
-            margin-bottom: 15px;
-        }
+    color: #8B3A00;
 
-        @keyframes spin {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
+    font-weight: 600;
+}
 
-        .loading-text {
-            font-family: 'Fredoka', sans-serif;
+/* WELCOME SCREEN */
 
-            font-size: 20px;
+#welcome-content {
 
-            color: #8B3A00;
+    display: none;
 
-            font-weight: 600;
-        }
+    position: fixed;
 
-        /* =========================
-           WELCOME SCREEN
-        ========================= */
+    inset: 0;
 
-        #welcome-content {
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
 
-            display: none;
+    overflow: hidden;
 
-            position: fixed;
+    background: #fce7f3;
 
-            inset: 0;
+    flex-direction: column;
 
-            width: 100%;
-            height: 100%;
+    justify-content: flex-end;
 
-            height: 100vh;
-            height: 100dvh;
+    align-items: center;
 
-            overflow: hidden;
+    padding-top: env(safe-area-inset-top);
 
-            flex-direction: column;
+    padding-left: env(safe-area-inset-left);
 
-            justify-content: flex-end;
+    padding-right: env(safe-area-inset-right);
 
-            align-items: center;
+    padding-bottom: calc(
+        25px + env(safe-area-inset-bottom)
+    );
+}
 
-            background-color: #fce7f3;
+/* FULL SCREEN ORIGINAL PNG */
 
-            /*
-              Original PNG.
-              Image will not be cropped.
-            */
+#welcome-background {
 
-            background-image: url("./welcome_bg.png");
+    position: absolute;
 
-            background-size: 100% 100%;
+    inset: 0;
 
-            background-position: center center;
+    width: 100%;
+    height: 100%;
 
-            background-repeat: no-repeat;
+    /*
+       Original image full screen.
+       No cropping.
+    */
 
-            /*
-              Safe area support
-            */
+    object-fit: fill;
 
-            padding-top: env(safe-area-inset-top);
+    object-position: center;
 
-            padding-left: env(safe-area-inset-left);
+    display: block;
 
-            padding-right: env(safe-area-inset-right);
+    z-index: 0;
 
-            padding-bottom: calc(
-                25px + env(safe-area-inset-bottom)
-            );
+    pointer-events: none;
+}
 
-            /*
-              Important:
-              Do not use 100vw/100vh
-              for child layout sizing.
-            */
+/* CONTENT */
 
-            isolation: isolate;
-        }
+.content-wrapper {
 
-        /* =========================
-           CONTENT
-        ========================= */
+    position: relative;
 
-        .content-wrapper {
+    z-index: 2;
 
-            position: relative;
+    width: 100%;
 
-            z-index: 10;
+    display: flex;
 
-            display: flex;
+    flex-direction: column;
 
-            flex-direction: column;
+    align-items: center;
 
-            align-items: center;
+    padding-left: 20px;
 
-            width: 100%;
+    padding-right: 20px;
 
-            padding-left: 20px;
+    flex-shrink: 0;
+}
 
-            padding-right: 20px;
+/* TEXT */
 
-            flex-shrink: 0;
-        }
+.text-content {
 
-        /* =========================
-           TEXT
-        ========================= */
+    width: 100%;
 
-        .text-content {
+    text-align: center;
 
-            width: 100%;
+    margin-bottom: 20px;
+}
 
-            text-align: center;
+.text-content h1 {
 
-            margin-bottom: 20px;
-        }
+    font-family: 'Fredoka', sans-serif;
 
-        .text-content h1 {
+    font-size: clamp(24px, 6vw, 32px);
 
-            font-family: 'Fredoka', sans-serif;
+    color: #8B3A00;
 
-            font-size: clamp(
-                24px,
-                6vw,
-                32px
-            );
+    font-weight: 700;
 
-            color: #8B3A00;
+    line-height: 1.2;
 
-            font-weight: 700;
+    margin-bottom: 8px;
 
-            line-height: 1.2;
+    text-shadow:
+        1px 1px 0 rgba(255,255,255,0.8),
+        2px 2px 5px rgba(0,0,0,0.1);
+}
 
-            margin-bottom: 8px;
+.text-content p {
 
-            text-shadow:
-                1px 1px 0px rgba(255,255,255,0.8),
-                2px 2px 5px rgba(0,0,0,0.1);
-        }
+    font-family: 'Nunito', sans-serif;
 
-        .text-content p {
+    font-size: clamp(14px, 4vw, 16px);
 
-            font-family: 'Nunito', sans-serif;
+    color: #6B5B4D;
 
-            font-size: clamp(
-                14px,
-                4vw,
-                16px
-            );
+    font-weight: 700;
 
-            color: #6B5B4D;
+    line-height: 1.4;
+}
 
-            font-weight: 700;
+/* BUTTON */
 
-            line-height: 1.4;
-        }
+.start-btn {
 
-        /* =========================
-           START BUTTON
-        ========================= */
+    position: relative;
 
-        .start-btn {
+    width: 100%;
 
-            position: relative;
+    max-width: 350px;
 
-            width: 100%;
+    padding: 18px 20px;
 
-            max-width: 350px;
+    font-size: 20px;
 
-            padding: 18px 20px;
+    font-family: 'Fredoka', sans-serif;
 
-            font-size: 20px;
+    font-weight: 700;
 
-            font-family: 'Fredoka', sans-serif;
+    color: white;
 
-            font-weight: 700;
+    background: #FF6B35;
 
-            color: white;
+    border: none;
 
-            background: #FF6B35;
+    border-radius: 50px;
 
-            border: none;
+    cursor: pointer;
 
-            border-radius: 50px;
+    box-shadow:
+        0 6px 0 #cc4e20,
+        0 10px 20px rgba(255,107,53,0.4);
 
-            cursor: pointer;
+    animation: pulseBtn 2s infinite;
 
-            box-shadow:
-                0 6px 0 #cc4e20,
-                0 10px 20px rgba(255,107,53,0.4);
+    flex-shrink: 0;
 
-            transition: transform 0.1s;
+    appearance: none;
+}
 
-            animation: pulseBtn 2s infinite;
+.start-btn:active {
 
-            flex-shrink: 0;
+    transform: translateY(6px);
 
-            -webkit-appearance: none;
+    box-shadow: 0 0 0 #cc4e20;
 
-            appearance: none;
-        }
+    animation: none;
+}
 
-        .start-btn:active {
+@keyframes pulseBtn {
 
-            transform: translateY(6px);
+    0% {
+        transform: scale(1);
+    }
 
-            box-shadow:
-                0 0 0 #cc4e20;
+    50% {
+        transform: scale(1.03);
+    }
 
-            animation: none;
-        }
+    100% {
+        transform: scale(1);
+    }
+}
 
-        @keyframes pulseBtn {
+/* SMALL SCREEN */
 
-            0% {
-                transform: scale(1);
-            }
+@media (max-height: 650px) {
 
-            50% {
-                transform: scale(1.03);
-            }
+    #welcome-content {
 
-            100% {
-                transform: scale(1);
-            }
-        }
+        padding-bottom: calc(
+            15px + env(safe-area-inset-bottom)
+        );
+    }
 
-        /* =========================
-           SHORT SCREEN FIX
-        ========================= */
+    .text-content {
 
-        @media (max-height: 650px) {
+        margin-bottom: 12px;
+    }
 
-            #welcome-content {
+    .text-content h1 {
 
-                padding-bottom: calc(
-                    15px + env(safe-area-inset-bottom)
-                );
-            }
+        font-size: 24px;
 
-            .text-content {
+        margin-bottom: 5px;
+    }
 
-                margin-bottom: 12px;
-            }
+    .text-content p {
 
-            .text-content h1 {
+        font-size: 14px;
+    }
 
-                font-size: 24px;
+    .start-btn {
 
-                margin-bottom: 5px;
-            }
+        padding: 14px 18px;
 
-            .text-content p {
+        font-size: 18px;
+    }
+}
 
-                font-size: 14px;
-            }
+/* REDUCED MOTION */
 
-            .start-btn {
+@media (prefers-reduced-motion: reduce) {
 
-                padding: 14px 18px;
+    .start-btn {
+        animation: none;
+    }
 
-                font-size: 18px;
-            }
-        }
+    .spinner {
+        animation-duration: 2s;
+    }
+}
 
-        /* =========================
-           REDUCED MOTION
-        ========================= */
-
-        @media (prefers-reduced-motion: reduce) {
-
-            .start-btn {
-
-                animation: none;
-            }
-
-            .spinner {
-
-                animation-duration: 2s;
-            }
-        }
-
-    </style>
+</style>
 </head>
 
 <body>
 
-    <!-- =========================
-         LOADING SCREEN
-    ========================= -->
+<!-- LOADING -->
 
-    <div id="splash-screen">
+<div id="splash-screen">
 
-        <div class="spinner"></div>
+    <div class="spinner"></div>
 
-        <div class="loading-text">
-            Loading...
-        </div>
-
+    <div class="loading-text">
+        Loading...
     </div>
 
+</div>
 
-    <!-- =========================
-         WELCOME SCREEN
-    ========================= -->
+<!-- WELCOME -->
 
-    <div id="welcome-content">
+<div id="welcome-content">
 
-        <div class="content-wrapper">
+    <!-- ORIGINAL PNG -->
 
-            <div class="text-content">
+    <img
+        id="welcome-background"
+        src="./welcome_bg.png"
+        alt=""
+        aria-hidden="true"
+    >
 
-                <h1>
-                    Learning Is an<br>
-                    Adventure!
-                </h1>
+    <!-- CONTENT -->
 
-                <p>
-                    Explore, discover and grow every day.
-                </p>
+    <div class="content-wrapper">
 
-            </div>
+        <div class="text-content">
 
-            <button
-                class="start-btn"
-                id="startBtn"
-                type="button">
+            <h1>
+                Learning Is an<br>
+                Adventure!
+            </h1>
 
-                Let's Start →
-
-            </button>
+            <p>
+                Explore, discover and grow every day.
+            </p>
 
         </div>
 
+        <button
+            class="start-btn"
+            id="startBtn"
+            type="button">
+
+            Let's Start →
+
+        </button>
+
     </div>
 
+</div>
 
-    <!-- =========================
-         FIREBASE
-    ========================= -->
+<!-- FIREBASE -->
 
-    <script type="module">
+<script type="module">
 
-        import {
-            initializeApp
-        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 
-        import {
-            getAuth,
-            onAuthStateChanged
-        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import {
+    getAuth,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
+/* FIREBASE CONFIG */
 
-        /* =========================
-           FIREBASE CONFIG
-        ========================= */
+const firebaseConfig = {
 
-        const firebaseConfig = {
+    apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
 
-            apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
+    authDomain: "kids-teacher-4387e.firebaseapp.com",
 
-            authDomain: "kids-teacher-4387e.firebaseapp.com",
+    projectId: "kids-teacher-4387e",
 
-            projectId: "kids-teacher-4387e",
+    storageBucket: "kids-teacher-4387e.firebasestorage.app",
 
-            storageBucket: "kids-teacher-4387e.firebasestorage.app",
+    messagingSenderId: "420221167346",
 
-            messagingSenderId: "420221167346",
+    appId: "1:420221167346:web:da7ac80acdfd52339d526b"
 
-            appId: "1:420221167346:web:da7ac80acdfd52339d526b"
+};
 
-        };
+/* INITIALIZE */
 
+const app = initializeApp(firebaseConfig);
 
-        /* =========================
-           INITIALIZE FIREBASE
-        ========================= */
+const auth = getAuth(app);
 
-        const app = initializeApp(firebaseConfig);
+/* ELEMENTS */
 
-        const auth = getAuth(app);
+const splash = document.getElementById("splash-screen");
 
+const welcomeContent = document.getElementById("welcome-content");
 
-        /* =========================
-           ELEMENTS
-        ========================= */
+const startBtn = document.getElementById("startBtn");
 
-        const splash = document.getElementById(
-            "splash-screen"
+/* SHOW WELCOME */
+
+function showWelcome() {
+
+    splash.style.opacity = "0";
+
+    setTimeout(() => {
+
+        splash.style.display = "none";
+
+        welcomeContent.style.display = "flex";
+
+    }, 300);
+
+}
+
+/* AUTH */
+
+onAuthStateChanged(auth, (user) => {
+
+    if (user) {
+
+        const savedAge = localStorage.getItem(
+            "kidsAgeGroup"
         );
 
-        const welcomeContent = document.getElementById(
-            "welcome-content"
+        window.location.replace(
+            !savedAge
+                ? "age-select.html"
+                : "index-home.html"
         );
 
-        const startBtn = document.getElementById(
-            "startBtn"
-        );
+    } else {
 
+        showWelcome();
 
-        /* =========================
-           SHOW WELCOME SCREEN
-        ========================= */
+    }
 
-        function showWelcome() {
+});
 
-            splash.style.opacity = "0";
+/* START BUTTON */
 
-            setTimeout(() => {
+startBtn.addEventListener("click", () => {
 
-                splash.style.display = "none";
+    window.location.href = "login.html";
 
-                welcomeContent.style.display = "flex";
+});
 
-            }, 300);
+/* SERVICE WORKER */
 
-        }
+if ("serviceWorker" in navigator) {
 
+    window.addEventListener("load", () => {
 
-        /* =========================
-           FIREBASE AUTH STATE
-        ========================= */
+        navigator.serviceWorker.register(
+            "./service-worker.js"
+        ).catch((error) => {
 
-        onAuthStateChanged(auth, (user) => {
-
-            if (user) {
-
-                const savedAge = localStorage.getItem(
-                    "kidsAgeGroup"
-                );
-
-                window.location.replace(
-                    !savedAge
-                        ? "age-select.html"
-                        : "index-home.html"
-                );
-
-            } else {
-
-                showWelcome();
-
-            }
+            console.error(
+                "Service Worker registration failed:",
+                error
+            );
 
         });
 
+    });
 
-        /* =========================
-           START BUTTON
-        ========================= */
+}
 
-        startBtn.addEventListener("click", () => {
-
-            window.location.href = "login.html";
-
-        });
-
-
-        /* =========================
-           SERVICE WORKER
-        ========================= */
-
-        if ("serviceWorker" in navigator) {
-
-            window.addEventListener("load", () => {
-
-                navigator.serviceWorker.register(
-                    "./service-worker.js"
-                ).catch((error) => {
-
-                    console.error(
-                        "Service Worker registration failed:",
-                        error
-                    );
-
-                });
-
-            });
-
-        }
-
-    </script>
+</script>
 
 </body>
 </html>
