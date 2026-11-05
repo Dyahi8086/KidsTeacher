@@ -57,21 +57,24 @@
       filter: drop-shadow(0 8px 12px rgba(0,0,0,0.15));
     }
 
-    /* --- PREMIUM DEEP PURPLE FONT (Parents Login) --- */
+    /* --- WAPAS 3D BUBBLE FONT (Parents Login) --- */
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
-      font-size: 32px; 
+      font-size: 36px; /* Size thoda bada kiya */
       font-weight: 700; 
       letter-spacing: -0.5px; 
       margin-bottom: 8px;
       
-      /* Deep Royal Purple Color */
-      color: #4a044e; 
+      color: #4c1d95; /* Deep Purple */
       
-      /* Soft White Glow */
+      /* 3D Text Shadow (Safed outline + Purple shadow) */
       text-shadow: 
-        0px 2px 4px rgba(255,255,255,0.9), 
-        0px 4px 10px rgba(255,255,255,0.6);
+        -1.5px -1.5px 0 #fff,  
+         1.5px -1.5px 0 #fff,
+        -1.5px  1.5px 0 #fff,
+         1.5px  1.5px 0 #fff,
+         0px  5px 0px #c084fc, /* Gehra purple base */
+         0px  8px 10px rgba(0,0,0,0.25);
     }
 
     .app-subtitle {
@@ -163,25 +166,25 @@
       flex-shrink: 0;
     }
 
-    /* --- READABLE & ELEGANT PRIVACY TEXT --- */
+    /* --- PRIVACY TEXT (INK BLACK) --- */
     .privacy-text {
       font-family: 'Nunito', sans-serif;
       font-size: 11px;
-      color: #3b0764; 
-      font-weight: 700;
+      color: #000000; /* INK BLACK */
+      font-weight: 800; /* Bold */
       margin-top: 25px;
-      line-height: 1.5;
-      background: rgba(255, 255, 255, 0.6); /* Thoda zyada solid white */
+      line-height: 1.6;
+      background: rgba(255, 255, 255, 0.7); /* Thoda zyada white taaki black text chamke */
       padding: 10px 15px;
       border-radius: 15px;
       backdrop-filter: blur(5px);
-      border: 1px solid rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.9);
     }
 
     .privacy-text a {
-      color: #4c1d95;
+      color: #000000; /* Link bhi black */
       text-decoration: underline;
-      font-weight: 800;
+      font-weight: 900;
     }
 
     /* --- LOADING OVERLAY --- */
@@ -206,11 +209,11 @@
     
     <div class="icon-3d">🎓</div>
 
-    <!-- PREMIUM DEEP PURPLE TEXT -->
+    <!-- 3D BUBBLE TEXT (Wapas) -->
     <h1 class="app-title">Parents Login</h1>
     <p class="app-subtitle">Guide your child's learning journey</p>
 
-    <!-- ULTIMATE GOOGLE BUTTON -->
+    <!-- Google Button -->
     <button type="button" id="googleBtn" class="btn-google" onclick="handleGoogleLogin()">
       <svg class="google-icon-svg" viewBox="0 0 48 48">
         <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
@@ -221,7 +224,7 @@
       Continue with Google
     </button>
 
-    <!-- Readable Privacy Text -->
+    <!-- Privacy Text (Ink Black) -->
     <p class="privacy-text">
       By continuing, you agree to our<br>
       <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a>
@@ -276,7 +279,8 @@
       
       try { 
         await signInWithPopup(auth, provider); 
-      } catch (error) { 
+      } 
+      catch (error) { 
         googleBtn.innerHTML = originalHTML;
         googleBtn.disabled = false;
         if(error.code !== 'auth/popup-closed-by-user') { alert("Login failed. Please try again."); }
