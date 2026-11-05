@@ -57,7 +57,7 @@
       filter: drop-shadow(0 8px 12px rgba(0,0,0,0.15));
     }
 
-    /* --- NAYA 3D BUBBLE FONT (Parents Login) --- */
+    /* --- 3D BUBBLE FONT (Parents Login) --- */
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
       font-size: 38px; 
@@ -65,7 +65,6 @@
       letter-spacing: -0.5px; 
       margin-bottom: 8px;
       
-      /* Deep Purple Color */
       color: #4c1d95; 
       
       /* 3D Text Shadow (Safed outline + Purple shadow) */
@@ -74,7 +73,7 @@
          1px -1px 0 #fff,
         -1px  1px 0 #fff,
          1px  1px 0 #fff,
-         0px  4px 0px #c084fc, /* Gehra purple base */
+         0px  4px 0px #c084fc, 
          0px  6px 10px rgba(0,0,0,0.3);
     }
 
@@ -88,7 +87,7 @@
       line-height: 1.4;
     }
 
-    /* --- OFFICIAL WHITE GOOGLE BUTTON (3D Premium) --- */
+    /* --- OFFICIAL WHITE GOOGLE BUTTON (With Pulse Animation) --- */
     .btn-google {
       width: 100%; 
       padding: 14px 15px;
@@ -111,6 +110,9 @@
       box-shadow: 0 5px 0 #e2e8f0, 0 10px 15px rgba(0,0,0,0.05);
       transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
       transform: translateY(0);
+      
+      /* BUTTON HILTA HUVA (Pulse Animation) */
+      animation: pulseBtn 2s infinite;
     }
 
     /* Button Shine Effect */
@@ -130,9 +132,18 @@
       100% { left: 200%; }
     }
 
+    /* Pulse Animation Keyframes */
+    @keyframes pulseBtn {
+      0% { transform: scale(1); box-shadow: 0 5px 0 #e2e8f0, 0 10px 15px rgba(0,0,0,0.05); }
+      50% { transform: scale(1.03); box-shadow: 0 5px 0 #e2e8f0, 0 15px 25px rgba(139, 92, 246, 0.2); }
+      100% { transform: scale(1); box-shadow: 0 5px 0 #e2e8f0, 0 10px 15px rgba(0,0,0,0.05); }
+    }
+
+    /* Jab click kare to dabega aur pulse ruk jayega */
     .btn-google:active { 
-      transform: translateY(5px); 
+      transform: translateY(5px) scale(1); 
       box-shadow: 0 0px 0 #e2e8f0, 0 4px 10px rgba(0,0,0,0.05); 
+      animation: none; 
     }
     
     .btn-google:disabled {
@@ -142,6 +153,7 @@
       transform: none;
       cursor: not-allowed;
       border-color: #e2e8f0;
+      animation: none;
     }
 
     /* Google Icon SVG Size */
@@ -198,7 +210,7 @@
     <h1 class="app-title">Parents Login</h1>
     <p class="app-subtitle">Guide your child's learning journey</p>
 
-    <!-- Official Google Button -->
+    <!-- Official Google Button with Pulse -->
     <button type="button" id="googleBtn" class="btn-google" onclick="handleGoogleLogin()">
       <svg class="google-icon-svg" viewBox="0 0 48 48">
         <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
