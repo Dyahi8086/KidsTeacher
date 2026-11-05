@@ -11,6 +11,7 @@
   <link rel="icon" type="image/png" href="./icons/icon-192.png">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
   
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
   
   <style>
@@ -56,15 +57,21 @@
       filter: drop-shadow(0 8px 12px rgba(0,0,0,0.15));
     }
 
-    /* --- TEXT STYLING --- */
+    /* --- NEW 3D GRADIENT FONT (PARENTS LOGIN) --- */
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
-      font-size: 34px; 
-      color: #4c1d95; 
+      font-size: 36px; 
       font-weight: 700; 
       letter-spacing: -0.5px; 
       margin-bottom: 8px;
-      text-shadow: 0 2px 4px rgba(255,255,255,0.8);
+      
+      /* Gradient Color (Orange to Purple) */
+      background: linear-gradient(to right, #FF8C42, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      
+      /* 3D Shadow Effect */
+      filter: drop-shadow(2px 2px 0px #ffffff) drop-shadow(4px 4px 5px rgba(0,0,0,0.2));
     }
 
     .app-subtitle {
@@ -183,6 +190,7 @@
     
     <div class="icon-3d">🎓</div>
 
+    <!-- NEW GRADIENT 3D TEXT -->
     <h1 class="app-title">Parents Login</h1>
     <p class="app-subtitle">Guide your child's learning journey</p>
 
