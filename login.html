@@ -24,12 +24,16 @@
       flex-direction: column; 
       font-family: 'Nunito', sans-serif; 
       
-      /* NAYI PHOTO BACKGROUND */
-      background-image: url('./login_bg.png'); 
+      /* IMAGE PATH FIXED */
+      background-image: url('login_bg.png'); 
+      
+      /* Image ko stretch ya crop hone se bachane ke liye */
       background-size: cover; 
-      background-position: center top;
+      
+      /* Image ko niche se align kiya taaki white area kam dikhe */
+      background-position: center bottom; 
       background-repeat: no-repeat;
-      background-color: #facc15; 
+      background-color: #facc15; /* Fallback color */
       overflow: hidden;
     }
 
@@ -38,59 +42,65 @@
       width: 100%; 
       display: flex;
       flex-direction: column;
-      justify-content: flex-end; /* Text aur button ko niche push karega */
+      justify-content: flex-end; /* Content ko niche push karega */
       align-items: center;
       text-align: center;
       height: 100%;
-      padding-bottom: 40px; /* Niche se gap */
+      
+      /* White area ke andar content ko set karne ke liye padding */
+      padding-bottom: 8vh; 
     }
 
     /* Text Content Wrapper */
     .text-content {
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       z-index: 10;
     }
 
     /* --- PREMIUM 3D FONT (Parents Login) --- */
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
-      font-size: 36px; 
+      font-size: 32px; 
       font-weight: 700; 
       letter-spacing: -0.5px; 
-      margin-bottom: 8px;
+      margin-bottom: 5px;
       
-      /* Gradient Color (Orange to Pink) */
-      background: linear-gradient(to right, #FF5E3A, #FF007F);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      /* Deep Purple Color */
+      color: #4c1d95; 
       
-      /* 3D Text Shadow (Safed outline + Gehra shadow) */
-      filter: drop-shadow(1px 1px 0px #ffffff) 
-              drop-shadow(-1px -1px 0px #ffffff) 
-              drop-shadow(3px 3px 5px rgba(0,0,0,0.15));
+      /* 3D Text Shadow */
+      text-shadow: 
+        -1px -1px 0 #fff,  
+         1px -1px 0 #fff,
+        -1px  1px 0 #fff,
+         1px  1px 0 #fff,
+         0px  4px 0px #c084fc, 
+         0px  6px 10px rgba(0,0,0,0.2);
     }
 
     .app-subtitle {
       font-family: 'Nunito', sans-serif;
       font-size: 14px;
-      color: #64748b; 
-      font-weight: 800;
+      color: #475569; /* Dark grey */
+      font-weight: 700;
       margin-bottom: 25px;
-      padding: 0 20px;
+      padding: 0 10px;
       line-height: 1.4;
     }
 
-    /* --- POP-OUT ORANGE BUTTON (Niche se bahar nikla hua) --- */
+    /* --- GOOGLE BUTTON (Pop-out) --- */
     .btn-google {
-      width: 80%; 
-      max-width: 300px;
-      padding: 18px 15px;
+      width: 85%; 
+      max-width: 320px;
+      padding: 16px 15px;
       
-      /* Vibrant Orange Gradient */
-      background: linear-gradient(135deg, #FF8C42, #FF5E3A); 
+      /* White Background for Google */
+      background: #ffffff; 
       
-      color: #ffffff; 
-      border: 3px solid #ffffff; /* White Border for Pop-out look */
+      /* Dark Text */
+      color: #0f172a; 
+      
+      border: 2px solid #e2e8f0; 
       border-radius: 50px;
       font-size: 16px; 
       font-family: 'Fredoka', sans-serif; 
@@ -103,52 +113,31 @@
       position: relative;
       overflow: hidden;
       
-      /* Gehra 3D Shadow (Button ko bahar nikalne ke liye) */
-      box-shadow: 0 8px 0 #C2410C, 0 15px 25px rgba(255, 94, 58, 0.4);
+      /* 3D Shadow (Pop-out effect) */
+      box-shadow: 0 6px 0 #cbd5e1, 0 10px 20px rgba(0,0,0,0.1);
       transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
-      transform: translateY(-5px); /* Thoda upar utha hua */
-      
-      /* Pulse Animation */
+      transform: translateY(0);
       animation: pulseBtn 2s infinite;
-      z-index: 20;
-    }
-
-    /* Button Shine Effect */
-    .btn-google::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 50%; height: 100%;
-      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
-      transform: skewX(-25deg);
-      animation: shine 3s infinite;
-    }
-
-    @keyframes shine {
-      0% { left: -100%; }
-      20% { left: 200%; }
-      100% { left: 200%; }
     }
 
     @keyframes pulseBtn {
-      0% { transform: scale(1) translateY(-5px); box-shadow: 0 8px 0 #C2410C, 0 15px 25px rgba(255, 94, 58, 0.4); }
-      50% { transform: scale(1.02) translateY(-5px); box-shadow: 0 8px 0 #C2410C, 0 20px 30px rgba(255, 94, 58, 0.5); }
-      100% { transform: scale(1) translateY(-5px); box-shadow: 0 8px 0 #C2410C, 0 15px 25px rgba(255, 94, 58, 0.4); }
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
     }
 
     .btn-google:active { 
-      transform: translateY(3px) scale(1); 
-      box-shadow: 0 0px 0 #C2410C, 0 5px 10px rgba(0,0,0,0.2); 
+      transform: translateY(6px) scale(1); 
+      box-shadow: 0 0px 0 #cbd5e1, 0 4px 10px rgba(0,0,0,0.1); 
       animation: none; 
     }
     
     .btn-google:disabled {
-      background: #cbd5e1;
+      background: #f1f5f9;
       color: #94a3b8;
       box-shadow: none;
       transform: none;
       cursor: not-allowed;
-      border-color: #cbd5e1;
       animation: none;
     }
 
@@ -157,6 +146,22 @@
       width: 20px;
       height: 20px;
       flex-shrink: 0;
+    }
+
+    /* --- PRIVACY TEXT --- */
+    .privacy-text {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px;
+      color: #000000; /* Ink Black */
+      font-weight: 800;
+      margin-top: 20px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .privacy-text a {
+      color: #000000;
+      text-decoration: underline;
     }
 
     /* --- LOADING OVERLAY --- */
@@ -179,13 +184,11 @@
   <!-- Login Container -->
   <div class="login-container">
     
-    <!-- Text Content -->
     <div class="text-content">
       <h1 class="app-title">Parents Login</h1>
       <p class="app-subtitle">Guide your child's learning journey</p>
     </div>
 
-    <!-- Pop-out Google Button -->
     <button type="button" id="googleBtn" class="btn-google" onclick="handleGoogleLogin()">
       <svg class="google-icon-svg" viewBox="0 0 48 48">
         <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
@@ -196,6 +199,10 @@
       Continue with Google
     </button>
 
+    <p class="privacy-text">
+      By continuing, you agree to our<br>
+      <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a>
+    </p>
   </div>
 
   <div id="loadingOverlay">
