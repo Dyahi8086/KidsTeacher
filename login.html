@@ -60,7 +60,7 @@
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
       font-size: 34px; 
-      color: #4c1d95; /* Deep Purple */
+      color: #4c1d95; 
       font-weight: 700; 
       letter-spacing: -0.5px; 
       margin-bottom: 8px;
@@ -77,16 +77,16 @@
       line-height: 1.4;
     }
 
-    /* --- OFFICIAL WHITE GOOGLE BUTTON --- */
+    /* --- OFFICIAL WHITE GOOGLE BUTTON (3D Premium) --- */
     .btn-google {
       width: 100%; 
       padding: 14px 15px;
-      background: #ffffff; /* Clean White */
-      color: #3c4043; /* Google's Official Text Color */
-      border: 1px solid #dadce0; /* Google's Official Border Color */
+      background: #ffffff; 
+      color: #3c4043; 
+      border: 1px solid #dadce0; 
       border-radius: 50px;
       font-size: 16px; 
-      font-family: 'Nunito', sans-serif; /* Official look needs cleaner font */
+      font-family: 'Nunito', sans-serif; 
       font-weight: 700;
       cursor: pointer;
       display: flex;
@@ -94,15 +94,33 @@
       justify-content: center;
       gap: 12px;
       position: relative;
+      overflow: hidden;
       
-      /* Soft 3D Shadow */
-      box-shadow: 0 4px 0 #e2e8f0, 0 8px 15px rgba(0,0,0,0.05);
+      /* 3D Shadow */
+      box-shadow: 0 5px 0 #e2e8f0, 0 10px 15px rgba(0,0,0,0.05);
       transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
       transform: translateY(0);
     }
 
+    /* Button Shine Effect */
+    .btn-google::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 50%; height: 100%;
+      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
+      transform: skewX(-25deg);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+      0% { left: -100%; }
+      20% { left: 200%; }
+      100% { left: 200%; }
+    }
+
     .btn-google:active { 
-      transform: translateY(4px); 
+      transform: translateY(5px); 
       box-shadow: 0 0px 0 #e2e8f0, 0 4px 10px rgba(0,0,0,0.05); 
     }
     
@@ -115,30 +133,32 @@
       border-color: #e2e8f0;
     }
 
-    /* Official Google G Logo */
+    /* Google Icon SVG Size */
     .google-icon-svg {
       width: 20px;
       height: 20px;
       flex-shrink: 0;
     }
 
-    /* --- READABLE PRIVACY TEXT --- */
+    /* --- READABLE & ELEGANT PRIVACY TEXT --- */
     .privacy-text {
       font-family: 'Nunito', sans-serif;
-      font-size: 12px; /* Size badhaya */
-      color: #3b0764; /* Darker purple for readability */
+      font-size: 11.5px;
+      color: #3b0764; 
       font-weight: 700;
       margin-top: 25px;
       line-height: 1.5;
-      background: rgba(255, 255, 255, 0.6); /* Light background for contrast */
-      padding: 8px 12px;
-      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.4); 
+      padding: 10px 15px;
+      border-radius: 15px;
       backdrop-filter: blur(5px);
+      border: 1px solid rgba(255,255,255,0.6);
     }
 
     .privacy-text a {
       color: #4c1d95;
       text-decoration: underline;
+      font-weight: 800;
     }
 
     /* --- LOADING OVERLAY --- */
