@@ -36,7 +36,6 @@
 
     /* --- MAIN CONTAINER (Frame ke andar center) --- */
     .login-container {
-      /* Width ko thoda kam kiya taaki button bahar na nikle */
       width: 70%; 
       max-width: 300px;
       display: flex;
@@ -61,7 +60,7 @@
     /* --- 3D BUBBLE FONT (Parents Login) --- */
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
-      font-size: 34px; /* Font size chota kiya */
+      font-size: 34px; 
       font-weight: 700; 
       letter-spacing: -0.5px; 
       margin-bottom: 8px;
@@ -87,32 +86,34 @@
       line-height: 1.4;
     }
 
-    /* --- OFFICIAL WHITE GOOGLE BUTTON (FIXED SIZE) --- */
+    /* --- ULTRA 3D GOOGLE BUTTON (Black Text) --- */
     .btn-google {
-      /* Width 100% rakhi par container chota hai, isliye bahar nahi jayega */
       width: 100%; 
-      padding: 14px 10px; /* Padding adjust ki */
+      padding: 14px 10px;
       background: #ffffff; 
-      color: #3c4043; 
+      
+      /* INK BLACK TEXT */
+      color: #000000; 
+      
       border: 1px solid #dadce0; 
       border-radius: 50px;
-      font-size: 14px; /* Font chota kiya taaki text fit ho jaye */
+      font-size: 14px; 
       font-family: 'Nunito', sans-serif; 
-      font-weight: 700;
+      font-weight: 800; /* Text ko aur bold kiya */
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px; /* Gap kam kiya */
+      gap: 8px;
       position: relative;
       overflow: hidden;
       
-      /* 3D Shadow */
-      box-shadow: 0 5px 0 #e2e8f0, 0 10px 15px rgba(0,0,0,0.05);
+      /* GEHRA 3D SHADOW */
+      box-shadow: 0 6px 0 #cbd5e1, 0 12px 20px rgba(0,0,0,0.15);
       transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
       transform: translateY(0);
       
-      /* Pulse Animation */
+      /* Pulse Animation (Hilta hua button) */
       animation: pulseBtn 2s infinite;
     }
 
@@ -133,16 +134,17 @@
       100% { left: 200%; }
     }
 
-    /* Pulse Animation Keyframes */
+    /* Pulse Animation */
     @keyframes pulseBtn {
-      0% { transform: scale(1); box-shadow: 0 5px 0 #e2e8f0, 0 10px 15px rgba(0,0,0,0.05); }
-      50% { transform: scale(1.02); box-shadow: 0 5px 0 #e2e8f0, 0 15px 25px rgba(139, 92, 246, 0.2); }
-      100% { transform: scale(1); box-shadow: 0 5px 0 #e2e8f0, 0 10px 15px rgba(0,0,0,0.05); }
+      0% { transform: scale(1); box-shadow: 0 6px 0 #cbd5e1, 0 12px 20px rgba(0,0,0,0.15); }
+      50% { transform: scale(1.02); box-shadow: 0 6px 0 #cbd5e1, 0 15px 25px rgba(139, 92, 246, 0.25); }
+      100% { transform: scale(1); box-shadow: 0 6px 0 #cbd5e1, 0 12px 20px rgba(0,0,0,0.15); }
     }
 
+    /* Click par 3D me dabega */
     .btn-google:active { 
-      transform: translateY(5px) scale(1); 
-      box-shadow: 0 0px 0 #e2e8f0, 0 4px 10px rgba(0,0,0,0.05); 
+      transform: translateY(6px) scale(1); 
+      box-shadow: 0 0px 0 #cbd5e1, 0 4px 10px rgba(0,0,0,0.1); 
       animation: none; 
     }
     
@@ -158,7 +160,7 @@
 
     /* Google Icon SVG Size */
     .google-icon-svg {
-      width: 18px; /* Icon chota kiya */
+      width: 18px;
       height: 18px;
       flex-shrink: 0;
     }
@@ -166,10 +168,10 @@
     /* --- READABLE & ELEGANT PRIVACY TEXT --- */
     .privacy-text {
       font-family: 'Nunito', sans-serif;
-      font-size: 10.5px; /* Text size chota kiya */
+      font-size: 10.5px;
       color: #3b0764; 
       font-weight: 700;
-      margin-top: 20px;
+      margin-top: 25px;
       line-height: 1.5;
       background: rgba(255, 255, 255, 0.4); 
       padding: 8px 12px;
@@ -210,7 +212,7 @@
     <h1 class="app-title">Parents Login</h1>
     <p class="app-subtitle">Guide your child's learning journey</p>
 
-    <!-- Official Google Button -->
+    <!-- 3D Google Button -->
     <button type="button" id="googleBtn" class="btn-google" onclick="handleGoogleLogin()">
       <svg class="google-icon-svg" viewBox="0 0 48 48">
         <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
