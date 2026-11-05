@@ -34,10 +34,10 @@
       overflow: hidden;
     }
 
-    /* --- MAIN CONTAINER (Frame ke andar center) --- */
+    /* --- MAIN CONTAINER --- */
     .login-container {
-      width: 72%; 
-      max-width: 310px;
+      width: 75%; 
+      max-width: 320px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -53,70 +53,62 @@
     /* 3D Icon Premium Look */
     .icon-3d {
       font-size: 45px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       filter: drop-shadow(0 8px 12px rgba(0,0,0,0.15));
     }
 
-    /* --- 3D BUBBLE FONT (Parents Login) - Size Chota Kiya --- */
+    /* --- PREMIUM DEEP PURPLE FONT (Parents Login) --- */
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
-      font-size: 30px; /* Font size 34px se 30px kiya */
+      font-size: 32px; 
       font-weight: 700; 
       letter-spacing: -0.5px; 
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       
-      color: #4c1d95; 
+      /* Deep Royal Purple Color */
+      color: #4a044e; 
       
+      /* Soft White Glow */
       text-shadow: 
-        -1px -1px 0 #fff,  
-         1px -1px 0 #fff,
-        -1px  1px 0 #fff,
-         1px  1px 0 #fff,
-         0px  4px 0px #c084fc, 
-         0px  6px 10px rgba(0,0,0,0.3);
+        0px 2px 4px rgba(255,255,255,0.9), 
+        0px 4px 10px rgba(255,255,255,0.6);
     }
 
     .app-subtitle {
       font-family: 'Nunito', sans-serif;
-      font-size: 12px;
+      font-size: 13px;
       color: #6b21a8; 
       font-weight: 700;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
       padding: 0 5px;
       line-height: 1.4;
     }
 
-    /* --- GOOGLE COLOR GRADIENT BUTTON --- */
+    /* --- ULTIMATE GOOGLE BUTTON (Solid White) --- */
     .btn-google {
       width: 100%; 
-      padding: 14px 10px;
+      padding: 15px 10px;
       
-      /* GOOGLE COLORS BACKGROUND (Subtle Pastel Mix) */
-      background: linear-gradient(135deg, 
-        rgba(66, 133, 244, 0.15) 0%,   /* Blue */
-        rgba(219, 68, 55, 0.15) 33%,   /* Red */
-        rgba(244, 180, 0, 0.15) 66%,   /* Yellow */
-        rgba(15, 157, 88, 0.15) 100%   /* Green */
-      );
-      background-color: #ffffff; /* Base white */
+      /* Solid White Background */
+      background: #ffffff; 
       
-      /* INK BLACK TEXT */
+      /* Ink Black Text */
       color: #000000; 
       
-      border: 2px solid #dadce0; 
+      border: 1px solid #dadce0; 
       border-radius: 50px;
-      font-size: 14px; 
+      font-size: 15px; 
       font-family: 'Nunito', sans-serif; 
       font-weight: 800; 
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
       position: relative;
       overflow: hidden;
       
-      /* 3D Shadow */
+      /* Strong 3D Shadow */
       box-shadow: 0 6px 0 #cbd5e1, 0 12px 20px rgba(0,0,0,0.15);
       transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
       transform: translateY(0);
@@ -131,7 +123,7 @@
       position: absolute;
       top: 0; left: -100%;
       width: 50%; height: 100%;
-      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
       transform: skewX(-25deg);
       animation: shine 3s infinite;
     }
@@ -166,24 +158,24 @@
 
     /* Google Icon SVG Size */
     .google-icon-svg {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       flex-shrink: 0;
     }
 
     /* --- READABLE & ELEGANT PRIVACY TEXT --- */
     .privacy-text {
       font-family: 'Nunito', sans-serif;
-      font-size: 10.5px;
+      font-size: 11px;
       color: #3b0764; 
       font-weight: 700;
-      margin-top: 20px;
+      margin-top: 25px;
       line-height: 1.5;
-      background: rgba(255, 255, 255, 0.4); 
-      padding: 8px 12px;
-      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.6); /* Thoda zyada solid white */
+      padding: 10px 15px;
+      border-radius: 15px;
       backdrop-filter: blur(5px);
-      border: 1px solid rgba(255,255,255,0.6);
+      border: 1px solid rgba(255,255,255,0.8);
     }
 
     .privacy-text a {
@@ -214,11 +206,11 @@
     
     <div class="icon-3d">🎓</div>
 
-    <!-- 3D BUBBLE TEXT (Chota kiya) -->
+    <!-- PREMIUM DEEP PURPLE TEXT -->
     <h1 class="app-title">Parents Login</h1>
     <p class="app-subtitle">Guide your child's learning journey</p>
 
-    <!-- Google Color Gradient Button -->
+    <!-- ULTIMATE GOOGLE BUTTON -->
     <button type="button" id="googleBtn" class="btn-google" onclick="handleGoogleLogin()">
       <svg class="google-icon-svg" viewBox="0 0 48 48">
         <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
@@ -284,8 +276,7 @@
       
       try { 
         await signInWithPopup(auth, provider); 
-      } 
-      catch (error) { 
+      } catch (error) { 
         googleBtn.innerHTML = originalHTML;
         googleBtn.disabled = false;
         if(error.code !== 'auth/popup-closed-by-user') { alert("Login failed. Please try again."); }
