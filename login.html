@@ -6,10 +6,12 @@
   <meta name="theme-color" content="#facc15">
   <title>Parents Login - Kids Teacher</title>
   
+  <!-- PWA Links -->
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/png" href="./icons/icon-192.png">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
   
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
   
   <style>
@@ -40,7 +42,9 @@
       justify-content: flex-end; 
       align-items: center;
       text-align: center;
-      padding-bottom: calc(20px + env(safe-area-inset-bottom)); 
+      
+      /* FIX: Button ko upar shift karne ke liye padding badhayi hai */
+      padding-bottom: calc(50px + env(safe-area-inset-bottom)); 
     }
 
     .text-content {
@@ -48,25 +52,25 @@
       z-index: 10;
     }
 
-    /* --- NEW PREMIUM FONT (Parents Login) --- */
+    /* --- PREMIUM FONT (Parents Login) --- */
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
       font-size: 34px; 
-      font-weight: 600; /* Thoda slim aur clean */
+      font-weight: 600; 
       letter-spacing: 0.5px; 
       margin-bottom: 8px;
       
-      /* Deep Chocolate Brown Color (Matches Yellow Background) */
+      /* Deep Chocolate Brown Color */
       color: #4a2c11; 
       
-      /* Simple soft shadow for depth, no weird outline */
+      /* Simple soft shadow for depth */
       text-shadow: 0px 2px 4px rgba(255, 255, 255, 0.5), 0px 4px 8px rgba(0,0,0,0.1);
     }
 
     .app-subtitle {
       font-family: 'Nunito', sans-serif;
       font-size: 15px;
-      color: #574132; /* Slightly lighter brown */
+      color: #574132; 
       font-weight: 700;
       padding: 0 20px;
       line-height: 1.4;
@@ -92,6 +96,7 @@
       position: relative;
       overflow: hidden;
       
+      /* 3D Shadow */
       box-shadow: 0 6px 0 #cbd5e1, 0 15px 25px rgba(0,0,0,0.15);
       transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
       transform: translateY(-5px); 
@@ -152,7 +157,7 @@
     }
     .spinner {
       width: 50px; height: 50px; border: 5px solid #e9d5ff;
-      border-top: 5px solid #FF5E3A; border-radius: 50%;
+      border-top: 5px solid #4a2c11; border-radius: 50%;
       animation: spin 1s linear infinite; margin-bottom: 20px;
     }
     @keyframes spin { 100% { transform: rotate(360deg); } }
@@ -164,7 +169,6 @@
   <div class="login-container">
     
     <div class="text-content">
-      <!-- Naya Premium Font -->
       <h1 class="app-title">Parents Login</h1>
       <p class="app-subtitle">Guide your child's learning journey</p>
     </div>
