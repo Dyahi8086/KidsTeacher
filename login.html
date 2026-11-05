@@ -6,12 +6,10 @@
   <meta name="theme-color" content="#facc15">
   <title>Parents Login - Kids Teacher</title>
   
-  <!-- PWA Links -->
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/png" href="./icons/icon-192.png">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
   
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
   
   <style>
@@ -24,51 +22,51 @@
       flex-direction: column; 
       font-family: 'Nunito', sans-serif; 
       
-      /* IMAGE PATH FIXED */
+      /* Background Image */
       background-image: url('login_bg.png'); 
-      
-      /* IMAGE CROP FIX: Ye line image ko crop hone se bachayegi */
       background-size: cover; 
-      background-position: center bottom; /* White area ko screen par fit karega */
+      background-position: center top; /* Upar ki photo ko set rakhega */
       background-repeat: no-repeat;
-      background-color: #facc15; 
+      background-color: #facc15; /* Yellow fallback */
       overflow: hidden;
     }
 
     /* --- MAIN CONTAINER --- */
     .login-container {
       width: 100%; 
+      flex: 1; /* Bachi hui jagah lega */
       display: flex;
       flex-direction: column;
       justify-content: flex-end; /* Content ko niche push karega */
       align-items: center;
       text-align: center;
-      height: 100%;
-      padding-bottom: 5vh; /* Niche se gap */
+      
+      /* Yahan padding bottom di hai taaki text screen ke kinare se bacha rahe */
+      padding-bottom: calc(20px + env(safe-area-inset-bottom)); 
     }
 
     /* Text Content Wrapper */
     .text-content {
-      margin-bottom: 20px;
+      margin-bottom: 25px;
       z-index: 10;
     }
 
-    /* --- PREMIUM 3D FONT (Parents Login) --- */
+    /* --- 3D BUBBLE FONT (Parents Login) --- */
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
-      font-size: 34px; 
+      font-size: 32px; 
       font-weight: 700; 
       letter-spacing: -0.5px; 
-      margin-bottom: 5px;
+      margin-bottom: 8px;
       
-      color: #4c1d95; 
+      color: #4c1d95; /* Deep Purple */
       
       /* 3D Text Shadow */
       text-shadow: 
-        -1px -1px 0 #fff,  
-         1px -1px 0 #fff,
-        -1px  1px 0 #fff,
-         1px  1px 0 #fff,
+        -1.5px -1.5px 0 #fff,  
+         1.5px -1.5px 0 #fff,
+        -1.5px  1.5px 0 #fff,
+         1.5px  1.5px 0 #fff,
          0px  4px 0px #c084fc, 
          0px  6px 10px rgba(0,0,0,0.2);
     }
@@ -78,12 +76,11 @@
       font-size: 14px;
       color: #475569; 
       font-weight: 700;
-      margin-bottom: 25px;
-      padding: 0 10px;
+      padding: 0 20px;
       line-height: 1.4;
     }
 
-    /* --- GOOGLE BUTTON (White) --- */
+    /* --- POP-OUT GOOGLE BUTTON --- */
     .btn-google {
       width: 85%; 
       max-width: 320px;
@@ -103,22 +100,24 @@
       position: relative;
       overflow: hidden;
       
-      /* 3D Shadow */
-      box-shadow: 0 6px 0 #cbd5e1, 0 10px 20px rgba(0,0,0,0.1);
+      /* Gehra 3D Shadow (Pop-out look) */
+      box-shadow: 0 6px 0 #cbd5e1, 0 15px 25px rgba(0,0,0,0.15);
       transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
-      transform: translateY(0);
+      transform: translateY(-5px); /* Upar utha hua */
+      
       animation: pulseBtn 2s infinite;
+      margin-bottom: 25px;
     }
 
     @keyframes pulseBtn {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.02); }
-      100% { transform: scale(1); }
+      0% { transform: scale(1) translateY(-5px); box-shadow: 0 6px 0 #cbd5e1, 0 15px 25px rgba(0,0,0,0.15); }
+      50% { transform: scale(1.02) translateY(-5px); box-shadow: 0 6px 0 #cbd5e1, 0 20px 30px rgba(0,0,0,0.2); }
+      100% { transform: scale(1) translateY(-5px); box-shadow: 0 6px 0 #cbd5e1, 0 15px 25px rgba(0,0,0,0.15); }
     }
 
     .btn-google:active { 
-      transform: translateY(6px) scale(1); 
-      box-shadow: 0 0px 0 #cbd5e1, 0 4px 10px rgba(0,0,0,0.1); 
+      transform: translateY(1px) scale(1); 
+      box-shadow: 0 0px 0 #cbd5e1, 0 5px 10px rgba(0,0,0,0.1); 
       animation: none; 
     }
     
@@ -128,29 +127,29 @@
       box-shadow: none;
       transform: none;
       cursor: not-allowed;
+      border-color: #e2e8f0;
       animation: none;
     }
 
-    /* Google Icon SVG Size */
     .google-icon-svg {
       width: 20px;
       height: 20px;
       flex-shrink: 0;
     }
 
-    /* --- PRIVACY TEXT --- */
+    /* --- PRIVACY TEXT (Properly Placed) --- */
     .privacy-text {
       font-family: 'Nunito', sans-serif;
       font-size: 11px;
-      color: #000000; 
+      color: #0f172a; /* Dark Slate for readability */
       font-weight: 800;
-      margin-top: 20px;
       line-height: 1.5;
       text-align: center;
+      padding: 0 10px;
     }
 
     .privacy-text a {
-      color: #000000;
+      color: #0f172a;
       text-decoration: underline;
     }
 
@@ -171,7 +170,6 @@
 </head>
 <body>
 
-  <!-- Login Container -->
   <div class="login-container">
     
     <div class="text-content">
