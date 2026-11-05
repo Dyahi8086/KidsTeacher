@@ -6,7 +6,10 @@
     <meta name="theme-color" content="#e0f2fe"> 
     <title>Kids Teacher - Welcome</title>
     
+    <!-- PWA Manifest -->
     <link rel="manifest" href="./manifest.json">
+    
+    <!-- PWA Favicon Links -->
     <link rel="icon" type="image/png" href="./icons/icon-192.png">
     <link rel="apple-touch-icon" href="./icons/icon-192.png">
     
@@ -16,12 +19,13 @@
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body, html {
-            height: 100%; width: 100%;
-            background-color: #e0f2fe; 
+            height: 100%; 
+            width: 100%;
+            background-color: #e0f2fe; /* Fallback color */
             overflow: hidden; 
         }
 
-        /* Loader */
+        /* Splash Screen (Loader) */
         #splash-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100vh;
@@ -40,26 +44,29 @@
         @keyframes spin { 100% { transform: rotate(360deg); } }
         .loading-text { font-family: 'Fredoka'; font-size: 20px; color: #8B3A00; font-weight: 600; }
 
-        /* Welcome Content */
+        /* --- FULL SCREEN BACKGROUND IMAGE --- */
         #welcome-content {
             display: none;
             position: relative;
             width: 100vw; 
             height: 100vh; 
-            height: 100dvh; 
+            height: 100dvh; /* PWA fix for mobile */
             display: flex; 
             flex-direction: column;
-            justify-content: flex-end; 
+            justify-content: flex-end; /* Content ko niche push karega */
             align-items: center;
-            padding-bottom: 40px;
+            padding-bottom: calc(40px + env(safe-area-inset-bottom)); 
             
-            background-image: url('./welcome_bg.png');
+            /* Aapki original PNG image */
+            background-image: url('welcome_bg.png');
+            /* Image full screen cover karegi, bina stretch hue */
             background-size: cover; 
-            background-position: center top;
+            background-position: center bottom; 
             background-repeat: no-repeat;
             background-color: #fce7f3; 
         }
 
+        /* --- TEXT & BUTTON CONTENT --- */
         .content-wrapper {
             position: relative; 
             z-index: 10;
@@ -70,7 +77,7 @@
             padding: 0 20px;
         }
 
-        .text-content { text-align: center; margin-bottom: 20px; }
+        .text-content { text-align: center; margin-bottom: 25px; }
 
         .text-content h1 {
             font-family: 'Fredoka', sans-serif; 
@@ -84,17 +91,17 @@
 
         .text-content p {
             font-family: 'Nunito', sans-serif; 
-            font-size: clamp(13px, 4vw, 16px); 
+            font-size: clamp(14px, 4vw, 16px); 
             color: #6B5B4D; 
             font-weight: 700;
         }
 
-        /* ORANGE START BUTTON */
+        /* --- ORANGE START BUTTON --- */
         .start-btn {
             position: relative; 
             width: 100%; 
             max-width: 350px; 
-            padding: 16px 20px;
+            padding: 18px 20px;
             font-size: 20px; 
             font-family: 'Fredoka', sans-serif; 
             font-weight: 700; 
@@ -116,35 +123,28 @@
 
         @keyframes pulseBtn {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.03); }
             100% { transform: scale(1); }
-        }
-        
-        .btn-link {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            text-decoration: none;
         }
     </style>
 </head>
 <body>
 
+    <!-- Loader -->
     <div id="splash-screen">
         <div class="spinner"></div>
         <div class="loading-text">Loading...</div>
     </div>
 
+    <!-- Welcome Page -->
     <div id="welcome-content">
         <div class="content-wrapper">
             <div class="text-content">
                 <h1>Learning Is an<br>Adventure!</h1>
                 <p>Explore, discover and grow every day.</p>
             </div>
-            
-            <a href="login.html" class="btn-link">
-                <button class="start-btn" type="button">Let's Start →</button>
-            </a>
+            <!-- Let's Start Button -->
+            <button class="start-btn" id="startBtn">Let's Start →</button>
         </div>
     </div>
 
@@ -167,24 +167,14 @@
         const splash = document.getElementById('splash-screen');
         const welcomeContent = document.getElementById('welcome-content');
 
-        // BUG FIX: Timeout to prevent infinite loading spinner
-        let isLoading = true;
-        setTimeout(() => {
-            if (isLoading) {
-                splash.style.opacity = '0';
-                setTimeout(() => {
-                    splash.style.display = 'none';
-                    welcomeContent.style.display = 'flex';
-                }, 300);
-            }
-        }, 3500); // 3.5 seconds max wait
-
+        // Firebase Check
         onAuthStateChanged(auth, (user) => {
-            isLoading = false; // Firebase responded, stop timeout
             if (user) {
+                // Agar user logged in hai, toh seedha home bhej do
                 const savedAge = localStorage.getItem('kidsAgeGroup');
                 window.location.replace(!savedAge ? "age-select.html" : "index-home.html");
             } else {
+                // Agar nahi hai, toh welcome page dikhao
                 splash.style.opacity = '0';
                 setTimeout(() => {
                     splash.style.display = 'none';
@@ -193,8 +183,14 @@
             }
         });
 
+        // Button Click
+        document.getElementById('startBtn').addEventListener('click', () => {
+            window.location.href = 'login.html';
+        });
+
+        // Register Service Worker
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => { navigator.serviceWorker.register('./service-worker.js'); });
+            window.addEventListener('load', () => { navigator.serviceWorker.register('service-worker.js'); });
         }
     </script>
 </body>
