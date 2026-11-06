@@ -1,184 +1,52 @@
+const CACHE_NAME = 'kids-teacher-v1';
 
-/* ==========================================
-   KIDS TEACHER PWA SERVICE WORKER
-   Optimized installation and caching
-========================================== */
-
-const CACHE_NAME = "kids-teacher-v33";
-
-const APP_SHELL = [
-  "./",
-  "./index.html",
-  "./manifest.json",
-  "./icons/icon-192.png",
-  "./icons/icon-512.png"
+// Important files jo offline save hongi
+const ASSETS_TO_CACHE = [
+  '/KidsTeacher/',
+  '/KidsTeacher/login.html',
+  '/KidsTeacher/index.html',
+  '/KidsTeacher/manifest.json',
+  '/KidsTeacher/login_bg.png',
+  '/KidsTeacher/icons/icon-192.png',
+  '/KidsTeacher/icons/icon-512.png'
 ];
 
-/* ==========================================
-   INSTALL
-   Cache only essential app files
-========================================== */
-
-self.addEventListener("install", (event) => {
+// Install Event
+self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
-    (async () => {
-      const cache = await caches.open(CACHE_NAME);
-
-      // Cache essential files individually.
-      // Missing files will not block the entire installation.
-      await Promise.all(
-        APP_SHELL.map(async (url) => {
-          try {
-            const response = await fetch(url);
-
-            if (response.ok && response.type !== "opaque") {
-              await cache.put(url, response);
-            }
-          } catch (error) {
-            console.warn("Cache skipped:", url);
-          }
+    caches.open(CACHE_NAME).then((cache) => {
+      // Safe caching: agar koi ek file miss ho toh error na aaye
+      return Promise.all(
+        ASSETS_TO_CACHE.map(url => {
+          return cache.add(url).catch(err => console.log('Failed to cache:', url, err));
         })
       );
-
-      // Activate the new worker without waiting for old pages.
-      await self.skipWaiting();
-    })()
+    })
   );
 });
 
-/* ==========================================
-   ACTIVATE
-   Remove old Kids Teacher caches
-========================================== */
-
-self.addEventListener("activate", (event) => {
+// Activate Event (Purana cache delete karega)
+self.addEventListener('activate', (event) => {
   event.waitUntil(
-    (async () => {
-      const cacheNames = await caches.keys();
-
-      await Promise.all(
-        cacheNames.map(async (name) => {
-          if (
-            name.startsWith("kids-teacher-") &&
-            name !== CACHE_NAME
-          ) {
-            await caches.delete(name);
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cache) => {
+          if (cache !== CACHE_NAME) {
+            return caches.delete(cache);
           }
         })
       );
-
-      await self.clients.claim();
-    })()
+    })
   );
+  self.clients.claim();
 });
 
-/* ==========================================
-   FETCH
-========================================== */
-
-self.addEventListener("fetch", (event) => {
-  const request = event.request;
-
-  // Only handle GET requests.
-  if (request.method !== "GET") return;
-
-  const url = new URL(request.url);
-
-  // Ignore external requests.
-  if (url.origin !== self.location.origin) return;
-
-  // Ignore Firebase authentication and API requests.
-  if (
-    url.pathname.includes("/__/auth/") ||
-    url.pathname.includes("/api/")
-  ) {
-    return;
-  }
-
-  /* ========================================
-     HTML NAVIGATION
-     Network first, cached fallback
-  ======================================== */
-
-  if (request.mode === "navigate") {
-    event.respondWith(
-      (async () => {
-        try {
-          const response = await fetch(request);
-
-          if (response.ok) {
-            const cache = await caches.open(CACHE_NAME);
-
-            // Store a copy of the successful page.
-            await cache.put(request, response.clone());
-
-            return response;
-          }
-
-          throw new Error("Network response failed");
-
-        } catch (error) {
-          const cached = await caches.match(request);
-
-          if (cached) return cached;
-
-          // Offline fallback to cached homepage.
-          const home = await caches.match("./index.html");
-
-          if (home) return home;
-
-          return new Response(
-            "Kids Teacher is offline. Please connect to the internet.",
-            {
-              status: 503,
-              headers: {
-                "Content-Type": "text/plain; charset=utf-8"
-              }
-            }
-          );
-        }
-      })()
-    );
-
-    return;
-  }
-
-  /* ========================================
-     IMAGES, CSS, JS AND OTHER STATIC FILES
-     Cache first, network fallback
-  ======================================== */
-
+// Fetch Event (Network first, offline hone par cache se dega)
+self.addEventListener('fetch', (event) => {
   event.respondWith(
-    (async () => {
-      const cached = await caches.match(request);
-
-      if (cached) {
-        return cached;
-      }
-
-      try {
-        const response = await fetch(request);
-
-        if (response.ok && response.type !== "opaque") {
-          const cache = await caches.open(CACHE_NAME);
-
-          // Cache only same-origin static assets.
-          await cache.put(request, response.clone());
-        }
-
-        return response;
-
-      } catch (error) {
-        return new Response(
-          "This resource is unavailable offline.",
-          {
-            status: 503,
-            headers: {
-              "Content-Type": "text/plain; charset=utf-8"
-            }
-          }
-        );
-      }
-    })()
+    fetch(event.request).catch(() => {
+      return caches.match(event.request);
+    })
   );
 });
