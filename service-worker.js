@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kids-teacher-v60'; // Version badal diya
+const CACHE_NAME = 'kids-teacher-v80'; // Version badal diya
 
 const ASSETS_TO_CACHE = [
   './',
