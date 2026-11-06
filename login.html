@@ -16,9 +16,8 @@
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
     body {
-      /* FIX: Fixed height ki jagah min-height use kiya taaki scroll ho sake */
-      min-height: 100vh; 
-      min-height: 100dvh; 
+      height: 100vh; 
+      height: 100dvh; 
       display: flex; 
       flex-direction: column; 
       font-family: 'Nunito', sans-serif; 
@@ -30,11 +29,10 @@
       background-repeat: no-repeat;
       background-color: #FF8C42; 
       
-      /* FIX: Scroll ko allow kiya taaki content cut na ho */
-      overflow-y: auto; 
-      overflow-x: hidden;
-      /* Background ko scroll par fix rakhne ke liye */
-      background-attachment: fixed; 
+      /* FIX: Page ko lock kiya taaki hilaye na */
+      overflow: hidden; 
+      position: fixed;
+      width: 100%;
     }
 
     /* --- MAIN CONTAINER --- */
@@ -46,8 +44,11 @@
       justify-content: flex-end; 
       align-items: center;
       z-index: 10;
-      /* FIX: min-height 0 taaki flex shrink properly kaam kare */
-      min-height: 0; 
+      
+      /* FIX: Sirf card wale hisse ko scroll karne diya */
+      overflow-y: auto; 
+      -webkit-overflow-scrolling: touch; 
+      padding-top: 30vh; /* Card ko neeche se shuru karne ke liye */
     }
 
     /* --- LIQUID GLASS CARD --- */
@@ -72,8 +73,7 @@
         inset 0 -1px 20px rgba(255, 255, 255, 0.3),
         0 -10px 40px rgba(0, 0, 0, 0.15);
       
-      /* FIX: Safe area inset bottom use kiya taaki PWA me button upar rahe */
-      padding: 30px 25px calc(40px + env(safe-area-inset-bottom)) 25px;
+      padding: 30px 25px calc(30px + env(safe-area-inset-bottom)) 25px;
       
       display: flex;
       flex-direction: column;
@@ -81,12 +81,8 @@
       text-align: center;
       position: relative;
       
-      animation: slideUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-      transform: translateY(100%);
-    }
-
-    @keyframes slideUp {
-      to { transform: translateY(0); }
+      /* Animation hata di taaki touch par hile na */
+      transform: translateY(0);
     }
 
     /* Pull bar */
@@ -102,8 +98,8 @@
 
     /* 3D Icon */
     .icon-3d {
-      font-size: 50px;
-      margin-top: 10px;
+      font-size: 45px;
+      margin-top: 5px;
       margin-bottom: 5px;
       filter: drop-shadow(0 8px 12px rgba(255, 107, 53, 0.3));
     }
@@ -111,7 +107,7 @@
     /* --- TEXT STYLING --- */
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
-      font-size: 32px; 
+      font-size: 30px; 
       font-weight: 700; 
       letter-spacing: -0.5px; 
       margin-bottom: 5px;
@@ -120,15 +116,15 @@
 
     .app-subtitle {
       font-family: 'Nunito', sans-serif;
-      font-size: 14px;
+      font-size: 13px;
       color: #475569; 
       font-weight: 700;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       padding: 0 10px;
       line-height: 1.4;
     }
 
-    /* --- LIQUID GLASS GOOGLE BUTTON --- */
+    /* --- GOOGLE BUTTON --- */
     .btn-google {
       width: 100%; 
       padding: 16px 15px;
@@ -195,7 +191,6 @@
       line-height: 1.5;
       text-align: center;
       padding: 0 10px;
-      /* FIX: Extra margin bottom taaki text screen ke end se bacha rahe */
       margin-bottom: 10px; 
     }
 
@@ -239,7 +234,7 @@
       <h1 class="app-title">Parents Login</h1>
       <p class="app-subtitle">Guide your child's learning journey</p>
 
-      <button type="button" id="googleBtn" class="btn-google" onclick="handleGoogleLogin()">
+      <button type="button" id="googleBtn" class="btn-google" onclick="handleGoogleLogin()" style="z-index: 100;">
         <svg class="google-icon-svg" viewBox="0 0 48 48">
           <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
           <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
