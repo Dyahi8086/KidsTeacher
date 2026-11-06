@@ -3,677 +3,532 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#FF6B35">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#ff6539">
 
 <title>Parents Login - Kids Teacher</title>
-
-<link rel="manifest" href="./manifest.json">
-<link rel="icon" type="image/png" href="./icons/icon-192.png">
-<link rel="apple-touch-icon" href="./icons/icon-192.png">
-
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
 
 <style>
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
 }
 
-html, body {
+html,
+body {
     width: 100%;
     height: 100%;
-    height: 100dvh;
     overflow: hidden;
 }
 
 body {
-    min-height: 100vh;
-    min-height: 100dvh;
-
-    display: flex;
-    flex-direction: column;
-
-    font-family: 'Nunito', sans-serif;
-
-    background:
-        radial-gradient(
-            ellipse at 12% 12%,
-            rgba(255, 202, 120, .95) 0%,
-            transparent 42%
-        ),
-        radial-gradient(
-            ellipse at 90% 82%,
-            rgba(210, 48, 20, .72) 0%,
-            transparent 48%
-        ),
-        linear-gradient(
-            135deg,
-            #FF9A45 0%,
-            #FF6B35 48%,
-            #D9381E 100%
-        );
-
-    overflow: hidden;
-    position: fixed;
-    inset: 0;
-    width: 100%;
+    font-family: "Arial", sans-serif;
+    background: #ff6539;
+    color: #202333;
 }
 
-/* Background Shapes */
+/* MAIN SCREEN */
 
-body::before,
-body::after {
-    content: '';
+.login-screen {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    background: linear-gradient(
+        180deg,
+        #ff713f 0%,
+        #ff6539 55%,
+        #f95132 100%
+    );
+}
 
+/* BACKGROUND CIRCLE */
+
+.background-circle {
     position: absolute;
+
+    width: 75vw;
+    height: 75vw;
+
+    max-width: 650px;
+    max-height: 650px;
+
+    top: -27%;
+    left: -30%;
 
     border-radius: 50%;
 
-    background: rgba(255, 255, 255, 0.10);
-
-    z-index: 0;
+    background: rgba(255, 190, 133, 0.24);
 
     pointer-events: none;
 }
 
-body::before {
-    width: 300px;
-    height: 300px;
+/* BOTTOM SHEET */
 
-    top: -100px;
-    left: -100px;
-}
+.login-sheet {
+    position: absolute;
 
-body::after {
-    width: 200px;
-    height: 200px;
+    left: 0;
+    bottom: 0;
 
-    bottom: -50px;
-    right: -50px;
-}
-
-/* Login Container */
-
-.login-container {
     width: 100%;
-    height: 100%;
+
+    height: 55%;
+    height: 55dvh;
+
+    min-height: 390px;
+    max-height: 650px;
+
+    background: #ffe8e2;
+
+    border-radius: 42px 42px 0 0;
 
     display: flex;
     flex-direction: column;
 
-    justify-content: flex-end;
     align-items: center;
 
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-
-    padding-top: 20px;
-
-    z-index: 10;
-}
-
-/* Liquid Glass Login Card */
-
-.login-card {
-    width: 100%;
-    max-width: 450px;
-
-    min-height: 48vh;
-
-    flex-shrink: 0;
-
-    background: rgba(255, 255, 255, 0.20);
-
-    backdrop-filter: blur(32px) saturate(180%);
-    -webkit-backdrop-filter: blur(32px) saturate(180%);
-
-    border-radius: 38px 38px 0 0;
-
-    border: 1px solid rgba(255, 255, 255, 0.48);
-    border-bottom: none;
-
-    padding: 34px 25px
-        calc(30px + env(safe-area-inset-bottom))
-        25px;
+    padding: 20px 24px 28px;
 
     box-shadow:
-        0 -15px 45px rgba(90, 30, 10, 0.20),
-        inset 0 1px 0 rgba(255, 255, 255, 0.75),
-        inset 0 0 25px rgba(255, 255, 255, 0.10);
+        0 -8px 30px rgba(130, 49, 30, 0.08);
+
+    z-index: 2;
+}
+
+/* SHEET HANDLE */
+
+.sheet-handle {
+    width: 80px;
+    height: 8px;
+
+    background: #cbd3df;
+
+    border-radius: 20px;
+
+    margin-bottom: 48px;
+
+    flex-shrink: 0;
+}
+
+/* GRADUATION CAP */
+
+.cap-container {
+    width: 100px;
+    height: 100px;
 
     display: flex;
-    flex-direction: column;
 
     align-items: center;
     justify-content: center;
 
-    text-align: center;
+    margin-bottom: 20px;
 
-    position: relative;
-
-    overflow: hidden;
-
-    transform: translateY(100%);
-
-    animation:
-        slideUp 0.85s cubic-bezier(0.22, 1, 0.36, 1)
-        forwards;
+    flex-shrink: 0;
 }
 
-/* Glass Reflection */
-
-.login-card::before {
-    content: '';
-
-    position: absolute;
-
-    top: 0;
-    left: 0;
-
+.cap-icon {
     width: 100%;
-    height: 48%;
+    height: 100%;
 
-    background: linear-gradient(
-        180deg,
-        rgba(255,255,255,.34),
-        rgba(255,255,255,.08),
-        transparent
-    );
-
-    pointer-events: none;
-    z-index: 1;
-}
-
-/* Glass Handle */
-
-.login-card::after {
-    content: '';
-
-    position: absolute;
-
-    top: 12px;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    width: 48px;
-    height: 5px;
-
-    border-radius: 10px;
-
-    background: rgba(255,255,255,.72);
-
-    box-shadow:
-        0 1px 5px rgba(0,0,0,.08);
-
-    z-index: 3;
-}
-
-/* Card Content */
-
-.login-card > * {
-    position: relative;
-    z-index: 2;
-}
-
-/* Slide Up Animation */
-
-@keyframes slideUp {
-    from {
-        transform: translateY(100%);
-    }
-
-    to {
-        transform: translateY(0);
-    }
-}
-
-/* 3D Icon */
-
-.icon-3d {
-    font-size: 50px;
-
-    margin-top: 10px;
-    margin-bottom: 5px;
+    object-fit: contain;
 
     filter: drop-shadow(
-        0 8px 12px rgba(255, 107, 53, 0.3)
+        0 8px 8px rgba(90, 40, 20, 0.12)
     );
 }
 
-/* App Title */
+/* TITLE */
 
-.app-title {
-    font-family: 'Fredoka', sans-serif;
+.login-title {
+    font-size: clamp(27px, 5vw, 43px);
 
-    font-size: 32px;
-    font-weight: 700;
+    font-weight: 900;
 
-    letter-spacing: -0.5px;
+    color: #963a1c;
 
-    margin-bottom: 5px;
+    text-align: center;
 
-    color: #9a3412;
+    line-height: 1.2;
+
+    margin-bottom: 12px;
+
+    letter-spacing: -1px;
 }
 
-/* Subtitle */
+/* SUBTITLE */
 
-.app-subtitle {
-    font-family: 'Nunito', sans-serif;
+.login-subtitle {
+    font-size: clamp(15px, 3.5vw, 21px);
 
-    font-size: 14px;
+    font-weight: 600;
 
-    color: #64748b;
+    color: #68758b;
 
-    font-weight: 700;
+    text-align: center;
 
-    margin-bottom: 25px;
-
-    padding: 0 10px;
+    margin-bottom: 38px;
 
     line-height: 1.4;
 }
 
-/* Google Login Button */
+/* GOOGLE BUTTON */
 
-.btn-google {
+.google-button {
     width: 100%;
+    max-width: 520px;
 
-    padding: 16px 15px;
+    height: 86px;
 
-    background: rgba(255, 255, 255, 0.82);
+    background: #ffffff;
 
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    border: 2px solid #e5eaf1;
 
-    color: #0f172a;
-
-    border: 1px solid rgba(255,255,255,.95);
-
-    border-radius: 50px;
-
-    font-size: 16px;
-
-    font-family: 'Fredoka', sans-serif;
-
-    font-weight: 700;
-
-    cursor: pointer;
+    border-radius: 60px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    gap: 10px;
+    gap: 16px;
 
-    position: relative;
+    cursor: pointer;
+
+    color: #151c2d;
+
+    font-size: clamp(16px, 3.8vw, 24px);
+
+    font-weight: 800;
 
     box-shadow:
-        0 5px 0 rgba(190, 190, 190, .7),
-        0 12px 24px rgba(0,0,0,.12),
-        inset 0 1px 0 rgba(255,255,255,1);
+        0 8px 0 #d8dfe8,
+        0 16px 28px rgba(85, 50, 35, 0.12);
 
     transition:
-        transform .18s ease,
-        box-shadow .18s ease;
-
-    margin-bottom: 20px;
-
-    animation: pulseBtn 2.4s infinite;
-}
-
-/* Button Animation */
-
-@keyframes pulseBtn {
-    0%, 100% {
-        transform: translateY(0) scale(1);
-    }
-
-    50% {
-        transform: translateY(-2px) scale(1.015);
-    }
-}
-
-/* Button Press */
-
-.btn-google:active {
-    transform: translateY(4px);
-
-    box-shadow:
-        0 1px 0 rgba(190,190,190,.7);
-
-    animation: none;
-}
-
-/* Disabled Button */
-
-.btn-google:disabled {
-    background: rgba(241,245,249,.8);
-
-    color: #94a3b8;
-
-    box-shadow: none;
-
-    transform: none;
-
-    cursor: not-allowed;
-
-    border-color: rgba(226,232,240,.8);
-
-    animation: none;
-}
-
-/* Google Icon */
-
-.google-icon-svg {
-    width: 20px;
-    height: 20px;
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 
     flex-shrink: 0;
 }
 
-/* Privacy Text */
+.google-button:active {
+    transform: translateY(5px);
 
-.privacy-text {
-    font-family: 'Nunito', sans-serif;
+    box-shadow:
+        0 3px 0 #d8dfe8,
+        0 8px 15px rgba(85, 50, 35, 0.1);
+}
 
-    font-size: 11px;
+/* GOOGLE LOGO */
 
-    color: #64748b;
+.google-logo {
+    width: 34px;
+    height: 34px;
 
-    font-weight: 800;
+    flex-shrink: 0;
+}
 
-    line-height: 1.5;
+/* FOOTER */
+
+.footer {
+    width: 100%;
+
+    margin-top: auto;
+
+    padding-top: 30px;
 
     text-align: center;
 
-    padding: 0 10px;
-}
+    color: #68758b;
 
-.privacy-text a {
-    color: #9a3412;
-    text-decoration: underline;
-}
-
-/* Small Screens */
-
-@media (max-height: 700px) {
-    .login-card {
-        min-height: 44vh;
-
-        padding-top: 28px;
-
-        padding-bottom:
-            calc(20px + env(safe-area-inset-bottom));
-    }
-
-    .icon-3d {
-        font-size: 42px;
-    }
-
-    .app-title {
-        font-size: 28px;
-    }
-
-    .app-subtitle {
-        margin-bottom: 18px;
-    }
-
-    .btn-google {
-        margin-bottom: 16px;
-    }
-}
-
-/* Loading Overlay */
-
-#loadingOverlay {
-    display: none;
-
-    position: fixed;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
-
-    background: rgba(255, 255, 255, 0.9);
-
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-
-    z-index: 9999;
-
-    flex-direction: column;
-
-    justify-content: center;
-    align-items: center;
-}
-
-/* Spinner */
-
-.spinner {
-    width: 50px;
-    height: 50px;
-
-    border: 5px solid #ffedd5;
-
-    border-top: 5px solid #FF5E3A;
-
-    border-radius: 50%;
-
-    animation: spin 1s linear infinite;
-
-    margin-bottom: 20px;
-}
-
-@keyframes spin {
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-.loading-text {
-    font-family: 'Fredoka', sans-serif;
-
-    font-size: 22px;
-
-    color: #9a3412;
+    font-size: 14px;
 
     font-weight: 600;
+
+    line-height: 1.8;
 }
 
+.footer a {
+    color: #8f3c24;
+
+    text-decoration: underline;
+
+    font-weight: 800;
+}
+
+/* SMALL MOBILE */
+
+@media (max-height: 700px) {
+
+    .login-sheet {
+        height: 57%;
+        height: 57dvh;
+
+        min-height: 350px;
+
+        padding-top: 15px;
+    }
+
+    .sheet-handle {
+        margin-bottom: 25px;
+    }
+
+    .cap-container {
+        width: 75px;
+        height: 75px;
+
+        margin-bottom: 12px;
+    }
+
+    .login-subtitle {
+        margin-bottom: 25px;
+    }
+
+    .google-button {
+        height: 68px;
+    }
+
+    .footer {
+        padding-top: 20px;
+    }
+}
+
+/* VERY SMALL SCREEN */
+
+@media (max-width: 360px) {
+
+    .login-sheet {
+        padding-left: 18px;
+        padding-right: 18px;
+
+        border-radius: 32px 32px 0 0;
+    }
+
+    .login-title {
+        font-size: 27px;
+    }
+
+    .login-subtitle {
+        font-size: 15px;
+    }
+
+    .google-button {
+        height: 68px;
+        font-size: 16px;
+        gap: 10px;
+    }
+
+    .google-logo {
+        width: 28px;
+        height: 28px;
+    }
+}
 </style>
 </head>
 
 <body>
 
-<div class="login-container">
+<div class="login-screen">
 
-    <div class="login-card">
+    <!-- ORANGE BACKGROUND CIRCLE -->
 
-        <div class="icon-3d">🎓</div>
+    <div class="background-circle"></div>
 
-        <h1 class="app-title">Parents Login</h1>
+    <!-- LOGIN BOTTOM SHEET -->
 
-        <p class="app-subtitle">
-            Guide your child's learning journey
-        </p>
+    <section class="login-sheet">
 
-        <button
-            type="button"
-            id="googleBtn"
-            class="btn-google"
-            onclick="handleGoogleLogin()"
-        >
+        <!-- HANDLE -->
 
-            <svg class="google-icon-svg" viewBox="0 0 48 48">
+        <div class="sheet-handle"></div>
 
-                <path fill="#EA4335"
-                d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+        <!-- GRADUATION CAP -->
 
-                <path fill="#4285F4"
-                d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+        <div class="cap-container">
 
-                <path fill="#FBBC05"
-                d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+            <svg
+                class="cap-icon"
+                viewBox="0 0 120 120"
+                xmlns="http://www.w3.org/2000/svg">
 
-                <path fill="#34A853"
-                d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                <!-- Cap top -->
+
+                <path
+                    d="M8 42 L60 13 L112 42 L60 72 Z"
+                    fill="#292929"/>
+
+                <!-- Cap lower part -->
+
+                <path
+                    d="M28 54 L28 73
+                       Q60 101 92 73
+                       L92 54
+                       L60 72 Z"
+                    fill="#363636"/>
+
+                <!-- Front edge -->
+
+                <path
+                    d="M28 67
+                       Q60 91 92 67
+                       L92 73
+                       Q60 101 28 73 Z"
+                    fill="#202020"/>
+
+                <!-- Yellow tassel -->
+
+                <path
+                    d="M60 39
+                       Q76 43 62 56
+                       Q51 62 54 76"
+                    fill="none"
+                    stroke="#ffca28"
+                    stroke-width="5"
+                    stroke-linecap="round"/>
+
+                <!-- Tassel -->
+
+                <path
+                    d="M54 73
+                       L48 99
+                       L53 97
+                       L56 102
+                       L60 77
+                       Z"
+                    fill="#ffb900"/>
+
+                <path
+                    d="M58 73
+                       L63 97
+                       L67 94
+                       L69 98
+                       L64 71
+                       Z"
+                    fill="#ffca28"/>
 
             </svg>
 
-            Continue with Google
+        </div>
+
+        <!-- TITLE -->
+
+        <h1 class="login-title">
+            Parents Login
+        </h1>
+
+        <!-- SUBTITLE -->
+
+        <p class="login-subtitle">
+            Guide your child's learning journey
+        </p>
+
+        <!-- GOOGLE LOGIN -->
+
+        <button
+            class="google-button"
+            id="googleLogin"
+            type="button">
+
+            <svg
+                class="google-logo"
+                viewBox="0 0 48 48"
+                xmlns="http://www.w3.org/2000/svg">
+
+                <path
+                    fill="#4285F4"
+                    d="M43.6 24.5
+                       c0-1.6-.1-3.2-.4-4.7H24v8.9h11
+                       c-.5 2.9-2.2 5.3-4.7 6.9v5.8h7.6
+                       c4.5-4.1 7.1-10.1 7.1-16.9z"/>
+
+                <path
+                    fill="#34A853"
+                    d="M24 44
+                       c6.5 0 12-2.2 16-6l-7.6-5.8
+                       c-2.1 1.4-4.8 2.3-8.4 2.3
+                       -6.4 0-11.8-4.3-13.7-10.1H2.5
+                       v6C6.5 38.3 14.6 44 24 44z"/>
+
+                <path
+                    fill="#FBBC05"
+                    d="M10.3 24.4
+                       c-.5-1.4-.8-2.9-.8-4.4
+                       s.3-3 .8-4.4v-6H2.5
+                       C.9 13 .0 16.4 0 20
+                       s.9 7 2.5 10.4l7.8-6z"/>
+
+                <path
+                    fill="#EA4335"
+                    d="M24 8.5
+                       c3.5 0 6.7 1.2 9.2 3.6
+                       l6.8-6.8C35.9 1.9 30.5 0 24 0
+                       14.6 0 6.5 5.7 2.5 13.6l7.8 6
+                       C12.2 13.8 17.6 8.5 24 8.5z"/>
+
+            </svg>
+
+            <span>
+                Continue with Google
+            </span>
 
         </button>
 
-        <p class="privacy-text">
-            By continuing, you agree to our<br>
-            <a href="#">Privacy Policy</a>
-            and
-            <a href="#">Terms of Service</a>
-        </p>
+        <!-- FOOTER -->
 
-    </div>
+        <footer class="footer">
+
+            <p>
+                By continuing, you agree to our
+            </p>
+
+            <p>
+
+                <a href="privacy.html">
+                    Privacy Policy
+                </a>
+
+                and
+
+                <a href="terms.html">
+                    Terms of Service
+                </a>
+
+            </p>
+
+        </footer>
+
+    </section>
 
 </div>
 
-<div id="loadingOverlay">
+<script>
 
-    <div class="spinner"></div>
+// GOOGLE LOGIN BUTTON
 
-    <p class="loading-text">
-        Logging you in...
-    </p>
+document.getElementById("googleLogin")
+    .addEventListener("click", function () {
 
-</div>
+        /*
+        Connect your existing Google authentication here.
 
-<script type="module">
+        If Firebase Google authentication is already
+        configured in your project, call that existing
+        login function from here.
 
-import {
-    initializeApp
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        Example:
 
-import {
-    getAuth,
-    GoogleAuthProvider,
-    signInWithPopup,
-    onAuthStateChanged,
-    setPersistence,
-    browserLocalPersistence
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        signInWithGoogle();
 
+        */
 
-const firebaseConfig = {
-    apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
-    authDomain: "kids-teacher-4387e.firebaseapp.com",
-    projectId: "kids-teacher-4387e",
-    storageBucket: "kids-teacher-4387e.firebasestorage.app",
-    messagingSenderId: "420221167346",
-    appId: "1:420221167346:web:da7ac80acdfd52339d526b"
-};
-
-
-const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
-
-setPersistence(auth, browserLocalPersistence)
-    .catch(console.error);
-
-
-const overlay = document.getElementById('loadingOverlay');
-
-const googleBtn = document.getElementById('googleBtn');
-
-
-/* Existing Login Flow */
-
-onAuthStateChanged(auth, (user) => {
-
-    if (user) {
-
-        overlay.style.display = 'flex';
-
-        const savedAge = localStorage.getItem('kidsAgeGroup');
-
-        setTimeout(() => {
-
-            window.location.replace(
-                !savedAge
-                    ? "age-select.html"
-                    : "index-home.html"
-            );
-
-        }, 800);
-
-    }
-
-});
-
-
-/* Google Login */
-
-window.handleGoogleLogin = async function() {
-
-    if (navigator.vibrate) {
-        navigator.vibrate(50);
-    }
-
-    const originalHTML = googleBtn.innerHTML;
-
-    googleBtn.innerHTML = "Connecting...";
-
-    googleBtn.disabled = true;
-
-
-    const provider = new GoogleAuthProvider();
-
-    provider.setCustomParameters({
-        prompt: 'select_account'
-    });
-
-
-    try {
-
-        await signInWithPopup(auth, provider);
-
-    }
-
-    catch (error) {
-
-        googleBtn.innerHTML = originalHTML;
-
-        googleBtn.disabled = false;
-
-        if (
-            error.code !== 'auth/popup-closed-by-user'
-        ) {
-
-            alert("Login failed. Please try again.");
-
-        }
-
-    }
-
-};
-
-
-/* Service Worker */
-
-if ('serviceWorker' in navigator) {
-
-    window.addEventListener('load', () => {
-
-        navigator.serviceWorker.register('./service-worker.js');
+        console.log("Google login button clicked");
 
     });
-
-}
 
 </script>
 
