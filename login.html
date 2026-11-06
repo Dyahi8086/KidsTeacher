@@ -28,16 +28,16 @@
       position: relative;
     }
 
-    /* Background Shapes */
+    /* Background Shapes (Taaki glass effect acha dikhe) */
     body::before, body::after {
       content: '';
       position: absolute;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.15);
       z-index: 0;
     }
     body::before { width: 300px; height: 300px; top: -100px; left: -100px; }
-    body::after { width: 200px; height: 200px; bottom: -50px; right: -50px; }
+    body::after { width: 250px; height: 250px; bottom: -50px; right: -50px; }
 
     /* --- MAIN CONTAINER --- */
     .login-container {
@@ -48,42 +48,35 @@
       justify-content: flex-end; 
       align-items: center;
       z-index: 10;
-      position: relative;
     }
 
-    /* --- WAVE HEADER (SVG) --- */
-    .wave-header {
-      position: absolute;
-      top: -70px; /* Card ke upar wave set karega */
-      left: 0;
-      width: 100%;
-      height: 80px;
-      z-index: 5;
-    }
-    
-    .wave-header svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    /* --- CURVED / WAVE WHITE CARD --- */
+    /* --- GLASSMORPHISM CARD --- */
     .login-card {
       width: 100%;
       max-width: 450px;
-      background: #ffffff; /* Solid White */
-      border-radius: 0 0 0 0; /* Wave ki wajah se border-radius ki zaroorat nahi */
-      padding: 30px 25px calc(30px + env(safe-area-inset-bottom)) 25px;
       
-      /* Card ke niche soft shadow */
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+      /* GLASS EFFECT: Transparent White + Blur */
+      background: rgba(255, 255, 255, 0.25); 
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      
+      border-radius: 40px 40px 0 0;
+      
+      /* White border for glass edge */
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+      border-left: 1px solid rgba(255, 255, 255, 0.2);
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      
+      /* Shadow for depth */
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.15);
+      
+      padding: 30px 25px calc(30px + env(safe-area-inset-bottom)) 25px;
       
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
       position: relative;
-      z-index: 10;
       
       /* SLOW SLIDE UP ANIMATION */
       animation: slideUpSlow 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
@@ -94,42 +87,57 @@
       to { transform: translateY(0); }
     }
 
+    /* Pull bar */
+    .login-card::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      width: 50px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 10px;
+    }
+
     /* 3D Icon */
     .icon-3d {
       font-size: 50px;
       margin-top: 10px;
       margin-bottom: 5px;
-      filter: drop-shadow(0 10px 15px rgba(255, 107, 53, 0.3));
+      filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
     }
 
-    /* --- TEXT STYLING --- */
+    /* --- TEXT STYLING (White for Glass) --- */
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
       font-size: 32px; 
       font-weight: 700; 
       letter-spacing: -0.5px; 
       margin-bottom: 5px;
-      color: #9a3412; 
-      text-shadow: 0 2px 4px rgba(255,255,255,0.8);
+      
+      /* White text to pop on glass */
+      color: #ffffff; 
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
 
     .app-subtitle {
       font-family: 'Nunito', sans-serif;
       font-size: 14px;
-      color: #64748b; 
+      color: rgba(255, 255, 255, 0.9); 
       font-weight: 700;
       margin-bottom: 25px;
       padding: 0 10px;
       line-height: 1.4;
     }
 
-    /* --- CLAY 3D GOOGLE BUTTON --- */
+    /* --- GLASS GOOGLE BUTTON --- */
     .btn-google {
       width: 100%; 
       padding: 18px 15px;
+      
+      /* White button to stand out on glass */
       background: #ffffff; 
       color: #0f172a; 
-      border: 2px solid #e2e8f0; 
+      border: none;
       border-radius: 50px;
       font-size: 16px; 
       font-family: 'Fredoka', sans-serif; 
@@ -141,40 +149,35 @@
       gap: 10px;
       position: relative;
       
-      /* 3D Clay Shadows */
-      box-shadow: 
-        0 8px 0 #cbd5e1, 
-        0 15px 25px rgba(0,0,0,0.1),
-        inset 0 2px 5px rgba(255,255,255,1),
-        inset 0 -3px 5px rgba(0,0,0,0.05);
+      /* Soft shadow for white button */
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
       
       transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
-      transform: translateY(-5px); 
+      transform: translateY(0); 
       
       animation: pulseBtn 2s infinite;
       margin-bottom: 20px;
     }
 
     @keyframes pulseBtn {
-      0% { transform: scale(1) translateY(-5px); box-shadow: 0 8px 0 #cbd5e1, 0 15px 25px rgba(0,0,0,0.1); }
-      50% { transform: scale(1.02) translateY(-5px); box-shadow: 0 8px 0 #cbd5e1, 0 20px 30px rgba(0,0,0,0.15); }
-      100% { transform: scale(1) translateY(-5px); box-shadow: 0 8px 0 #cbd5e1, 0 15px 25px rgba(0,0,0,0.1); }
+      0% { transform: scale(1); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+      50% { transform: scale(1.02); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+      100% { transform: scale(1); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
     }
 
     .btn-google:active { 
-      transform: translateY(3px) scale(1); 
-      box-shadow: 0 0px 0 #cbd5e1, 0 5px 10px rgba(0,0,0,0.1); 
+      transform: translateY(2px) scale(1); 
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
       animation: none; 
     }
     
     .btn-google:disabled {
-      background: #f1f5f9;
-      color: #94a3b8;
+      background: rgba(255, 255, 255, 0.5);
+      color: #64748b;
       box-shadow: none;
       transform: none;
       cursor: not-allowed;
       animation: none;
-      border-color: #e2e8f0;
     }
 
     .google-icon-svg {
@@ -183,11 +186,11 @@
       flex-shrink: 0;
     }
 
-    /* --- PRIVACY TEXT --- */
+    /* --- PRIVACY TEXT (White for Glass) --- */
     .privacy-text {
       font-family: 'Nunito', sans-serif;
       font-size: 11px;
-      color: #64748b; 
+      color: rgba(255, 255, 255, 0.9); 
       font-weight: 800;
       line-height: 1.5;
       text-align: center;
@@ -195,7 +198,7 @@
     }
 
     .privacy-text a {
-      color: #9a3412;
+      color: #ffffff;
       text-decoration: underline;
     }
 
@@ -218,14 +221,6 @@
 
   <div class="login-container">
     
-    <!-- WAVE HEADER SVG -->
-    <div class="wave-header">
-      <svg viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#ffffff" fill-opacity="1" d="M0,192L48,176C96,160,192,128,288,133.3C384,139,480,181,576,192C672,203,768,181,864,160C960,139,1056,117,1152,122.7C1248,128,1344,160,1392,176L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-      </svg>
-    </div>
-
-    <!-- WHITE WAVE CARD -->
     <div class="login-card">
       
       <div class="icon-3d">🎓</div>
