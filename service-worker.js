@@ -1,6 +1,5 @@
-const CACHE_NAME = 'kids-teacher-v40'; // Version update kiya hai taaki purana cache delete ho
+const CACHE_NAME = 'kids-teacher-v50'; // Version badal diya hai
 
-// Sirf HTML, CSS aur Icons cache kar rahe hain (PNG hata di hai)
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -12,7 +11,6 @@ const ASSETS_TO_CACHE = [
   './icons/icon-512.png'
 ];
 
-// Install Event
 self.addEventListener('install', (event) => {
   self.skipWaiting();
   event.waitUntil(
@@ -26,7 +24,6 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Activate Event (Purana cache delete karega)
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -42,7 +39,6 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Fetch Event
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     fetch(event.request).catch(() => {
