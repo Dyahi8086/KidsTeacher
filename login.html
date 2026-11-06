@@ -16,23 +16,25 @@
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
     body {
-      height: 100vh; 
-      height: 100dvh; 
+      /* FIX: Fixed height ki jagah min-height use kiya taaki scroll ho sake */
+      min-height: 100vh; 
+      min-height: 100dvh; 
       display: flex; 
       flex-direction: column; 
       font-family: 'Nunito', sans-serif; 
       
-      /* BACKGROUND IMAGE */
+      /* BUNNY PNG BACKGROUND */
       background-image: url('login_bg.png'); 
       background-size: cover; 
       background-position: center top; 
       background-repeat: no-repeat;
       background-color: #FF8C42; 
       
-      /* FIX: Scroll aur hilna band karne ke liye */
-      overflow: hidden; 
-      position: fixed; 
-      width: 100%;
+      /* FIX: Scroll ko allow kiya taaki content cut na ho */
+      overflow-y: auto; 
+      overflow-x: hidden;
+      /* Background ko scroll par fix rakhne ke liye */
+      background-attachment: fixed; 
     }
 
     /* --- MAIN CONTAINER --- */
@@ -44,12 +46,8 @@
       justify-content: flex-end; 
       align-items: center;
       z-index: 10;
-      
-      /* FIX: Agar screen choti ho toh sirf container scroll ho */
-      overflow-y: auto; 
-      overflow-x: hidden;
-      /* Top padding taaki card screen se bahar na jaye */
-      padding-top: 20px; 
+      /* FIX: min-height 0 taaki flex shrink properly kaam kare */
+      min-height: 0; 
     }
 
     /* --- LIQUID GLASS CARD --- */
@@ -74,8 +72,8 @@
         inset 0 -1px 20px rgba(255, 255, 255, 0.3),
         0 -10px 40px rgba(0, 0, 0, 0.15);
       
-      /* Padding me safe area */
-      padding: 30px 25px calc(30px + env(safe-area-inset-bottom)) 25px;
+      /* FIX: Safe area inset bottom use kiya taaki PWA me button upar rahe */
+      padding: 30px 25px calc(40px + env(safe-area-inset-bottom)) 25px;
       
       display: flex;
       flex-direction: column;
@@ -197,7 +195,8 @@
       line-height: 1.5;
       text-align: center;
       padding: 0 10px;
-      margin-bottom: 5px; 
+      /* FIX: Extra margin bottom taaki text screen ke end se bacha rahe */
+      margin-bottom: 10px; 
     }
 
     .privacy-text a {
@@ -206,11 +205,11 @@
     }
 
     /* --- RESPONSIVE FIX FOR SMALL SCREENS --- */
-    @media (max-height: 700px) {
-      .icon-3d { font-size: 40px; margin-top: 5px; }
+    @media (max-height: 750px) {
+      .login-card { padding-top: 25px; }
+      .icon-3d { font-size: 35px; }
       .app-title { font-size: 26px; }
       .app-subtitle { font-size: 12px; margin-bottom: 15px; }
-      .login-card { padding-top: 25px; }
       .btn-google { padding: 14px 15px; margin-bottom: 15px; }
     }
 
