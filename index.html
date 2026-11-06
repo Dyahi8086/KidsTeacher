@@ -21,7 +21,7 @@
             overflow: hidden; 
         }
 
-        /* Splash Screen (Loader) */
+        /* Loader */
         #splash-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100vh;
@@ -36,7 +36,6 @@
             border: 5px solid #ffffff; border-top: 5px solid #FF6B35;
             border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px;
         }
-
         @keyframes spin { 100% { transform: rotate(360deg); } }
         .loading-text { font-family: 'Fredoka'; font-size: 20px; color: #8B3A00; font-weight: 600; }
 
@@ -156,22 +155,25 @@
         const splash = document.getElementById('splash-screen');
         const welcomeContent = document.getElementById('welcome-content');
 
-        // Login check
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const savedAge = localStorage.getItem('kidsAgeGroup');
-                window.location.replace(!savedAge ? "age-select.html" : "index-home.html");
-            } else {
-                splash.style.opacity = '0';
-                setTimeout(() => {
-                    splash.style.display = 'none';
-                    welcomeContent.style.display = 'flex';
-                }, 300);
-            }
-        });
+        // FIX: Hamesha pehle Welcome Page dikhao
+        splash.style.opacity = '0';
+        setTimeout(() => {
+            splash.style.display = 'none';
+            welcomeContent.style.display = 'flex';
+        }, 300);
 
+        // Button click hone par hi Firebase check karo
         document.getElementById('startBtn').addEventListener('click', () => {
-            window.location.href = 'login.html';
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    // Agar logged in hai, toh Home bhejo
+                    const savedAge = localStorage.getItem('kidsAgeGroup');
+                    window.location.replace(!savedAge ? "age-select.html" : "index-home.html");
+                } else {
+                    // Agar logged in nahi hai, toh Login bhejo
+                    window.location.href = 'login.html';
+                }
+            });
         });
 
         if ('serviceWorker' in navigator) {
