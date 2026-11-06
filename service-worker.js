@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kids-teacher-v50'; // Version badal diya hai
+const CACHE_NAME = 'kids-teacher-v60'; // Version badal diya
 
 const ASSETS_TO_CACHE = [
   './',
@@ -7,6 +7,7 @@ const ASSETS_TO_CACHE = [
   './age-select.html',
   './index-home.html',
   './manifest.json',
+  './welcome_bg.png',
   './icons/icon-192.png',
   './icons/icon-512.png'
 ];
