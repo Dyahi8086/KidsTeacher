@@ -22,22 +22,15 @@
       flex-direction: column; 
       font-family: 'Nunito', sans-serif; 
       
-      /* ORANGE GRADIENT BACKGROUND (PNG Hata Di Hai) */
-      background: linear-gradient(135deg, #FF8C42 0%, #FF5E3A 50%, #D9381E 100%);
+      /* BUNNY PNG BACKGROUND */
+      background-image: url('login_bg.png'); 
+      background-size: cover; 
+      background-position: center top; 
+      background-repeat: no-repeat;
+      background-color: #FF8C42; 
       overflow: hidden;
       position: relative;
     }
-
-    /* Background Shapes */
-    body::before, body::after {
-      content: '';
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-      z-index: 0;
-    }
-    body::before { width: 300px; height: 300px; top: -100px; left: -100px; }
-    body::after { width: 200px; height: 200px; bottom: -50px; right: -50px; }
 
     /* --- MAIN CONTAINER --- */
     .login-container {
@@ -50,12 +43,12 @@
       z-index: 10;
     }
 
-    /* --- GLASSMORPHISM POP-OUT CARD --- */
+    /* --- GLASSMORPHISM CARD --- */
     .login-card {
       width: 100%;
       max-width: 450px;
       
-      /* GLASS EFFECT: Transparent White + Blur */
+      /* Glass Effect */
       background: rgba(255, 255, 255, 0.85); 
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -65,7 +58,6 @@
       
       padding: 30px 25px calc(30px + env(safe-area-inset-bottom)) 25px;
       
-      /* Shadow for Pop-out effect */
       box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.2);
       
       display: flex;
@@ -74,7 +66,7 @@
       text-align: center;
       position: relative;
       
-      /* SLIDE UP ANIMATION (Dhire dhire aayega) */
+      /* Slide Up Animation */
       animation: slideUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
       transform: translateY(100%);
     }
