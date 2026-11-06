@@ -22,22 +22,23 @@
       flex-direction: column; 
       font-family: 'Nunito', sans-serif; 
       
-      /* ORANGE BACKGROUND GRADIENT */
-      background: linear-gradient(135deg, #FF8C42 0%, #FF5E3A 50%, #D9381E 100%);
+      /* Darker Orange Background for better Glass effect */
+      background: linear-gradient(135deg, #E65C00 0%, #F9D423 100%);
       overflow: hidden;
       position: relative;
     }
 
-    /* Background Shapes (Taaki glass effect acha dikhe) */
+    /* Background Shapes (Inko bright kiya hai taaki glass ke andar dikhein) */
     body::before, body::after {
       content: '';
       position: absolute;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.3);
       z-index: 0;
+      filter: blur(40px); /* Blur taaki soft lage */
     }
-    body::before { width: 300px; height: 300px; top: -100px; left: -100px; }
-    body::after { width: 250px; height: 250px; bottom: -50px; right: -50px; }
+    body::before { width: 350px; height: 350px; top: -50px; left: -100px; }
+    body::after { width: 300px; height: 300px; bottom: 100px; right: -100px; background: rgba(255, 200, 0, 0.4); }
 
     /* --- MAIN CONTAINER --- */
     .login-container {
@@ -50,25 +51,25 @@
       z-index: 10;
     }
 
-    /* --- GLASSMORPHISM CARD --- */
+    /* --- TRUE GLASSMORPHISM CARD --- */
     .login-card {
       width: 100%;
       max-width: 450px;
       
-      /* GLASS EFFECT: Transparent White + Blur */
-      background: rgba(255, 255, 255, 0.25); 
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      /* TRUE GLASS EFFECT */
+      background: rgba(255, 255, 255, 0.15); /* Bohot transparent */
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
       
       border-radius: 40px 40px 0 0;
       
-      /* White border for glass edge */
-      border-top: 1px solid rgba(255, 255, 255, 0.5);
-      border-left: 1px solid rgba(255, 255, 255, 0.2);
-      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      /* White glowing border */
+      border-top: 1px solid rgba(255, 255, 255, 0.6);
+      border-left: 1px solid rgba(255, 255, 255, 0.3);
+      border-right: 1px solid rgba(255, 255, 255, 0.3);
       
-      /* Shadow for depth */
-      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.15);
+      /* Soft shadow */
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
       
       padding: 30px 25px calc(30px + env(safe-area-inset-bottom)) 25px;
       
@@ -78,7 +79,6 @@
       text-align: center;
       position: relative;
       
-      /* SLOW SLIDE UP ANIMATION */
       animation: slideUpSlow 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
       transform: translateY(100%);
     }
@@ -87,14 +87,14 @@
       to { transform: translateY(0); }
     }
 
-    /* Pull bar */
+    /* Pull bar (Glass handle) */
     .login-card::before {
       content: '';
       position: absolute;
       top: 12px;
       width: 50px;
       height: 5px;
-      background: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.6);
       border-radius: 10px;
     }
 
@@ -103,38 +103,37 @@
       font-size: 50px;
       margin-top: 10px;
       margin-bottom: 5px;
-      filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+      filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
     }
 
-    /* --- TEXT STYLING (White for Glass) --- */
+    /* --- TEXT STYLING (White text on Glass) --- */
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
-      font-size: 32px; 
+      font-size: 34px; 
       font-weight: 700; 
       letter-spacing: -0.5px; 
       margin-bottom: 5px;
       
-      /* White text to pop on glass */
+      /* White text */
       color: #ffffff; 
-      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
     }
 
     .app-subtitle {
       font-family: 'Nunito', sans-serif;
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.9); 
+      font-size: 15px;
+      color: #ffffff; 
       font-weight: 700;
       margin-bottom: 25px;
       padding: 0 10px;
       line-height: 1.4;
+      opacity: 0.9;
     }
 
-    /* --- GLASS GOOGLE BUTTON --- */
+    /* --- WHITE GOOGLE BUTTON --- */
     .btn-google {
       width: 100%; 
       padding: 18px 15px;
-      
-      /* White button to stand out on glass */
       background: #ffffff; 
       color: #0f172a; 
       border: none;
@@ -149,8 +148,8 @@
       gap: 10px;
       position: relative;
       
-      /* Soft shadow for white button */
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      /* Button shadow */
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
       
       transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
       transform: translateY(0); 
@@ -160,24 +159,15 @@
     }
 
     @keyframes pulseBtn {
-      0% { transform: scale(1); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-      50% { transform: scale(1.02); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
-      100% { transform: scale(1); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+      0% { transform: scale(1); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+      50% { transform: scale(1.02); box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
+      100% { transform: scale(1); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
     }
 
     .btn-google:active { 
       transform: translateY(2px) scale(1); 
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
       animation: none; 
-    }
-    
-    .btn-google:disabled {
-      background: rgba(255, 255, 255, 0.5);
-      color: #64748b;
-      box-shadow: none;
-      transform: none;
-      cursor: not-allowed;
-      animation: none;
     }
 
     .google-icon-svg {
@@ -186,15 +176,16 @@
       flex-shrink: 0;
     }
 
-    /* --- PRIVACY TEXT (White for Glass) --- */
+    /* --- PRIVACY TEXT (White) --- */
     .privacy-text {
       font-family: 'Nunito', sans-serif;
       font-size: 11px;
-      color: rgba(255, 255, 255, 0.9); 
+      color: #ffffff; 
       font-weight: 800;
       line-height: 1.5;
       text-align: center;
       padding: 0 10px;
+      opacity: 0.9;
     }
 
     .privacy-text a {
@@ -214,7 +205,7 @@
       animation: spin 1s linear infinite; margin-bottom: 20px;
     }
     @keyframes spin { 100% { transform: rotate(360deg); } }
-    .loading-text { font-family: 'Fredoka'; font-size: 22px; color: #9a3412; font-weight: 600; }
+    .loading-text { font-family: 'Fredoka'; font-size: 22px; color: #E65C00; font-weight: 600; }
   </style>
 </head>
 <body>
