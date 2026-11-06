@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kids-teacher-v31'; // Version badal diya hai
+const CACHE_NAME = 'kids-teacher-v32'; // Version update kiya
 
 const ASSETS_TO_CACHE = [
   './',
@@ -8,14 +8,14 @@ const ASSETS_TO_CACHE = [
   './index-home.html',
   './manifest.json',
   './welcome_bg.png', 
-  './login_bg.png', // Nayi image yahan cache hogi
+  './login_bg.png', // Bunny wali nayi image
   './icons/icon-192.png',
   './icons/icon-512.png'
 ];
 
-// Install Event (Nayi files download karega)
+// Install Event
 self.addEventListener('install', (event) => {
-  self.skipWaiting(); // Force update
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return Promise.all(
@@ -49,10 +49,9 @@ self.addEventListener('fetch', (event) => {
   const request = event.request;
   const url = new URL(request.url);
 
-  // External images (Firebase/Google) ko cache mat karo
   if (url.origin !== self.location.origin) return;
 
-  // Image ke liye Cache-First (Purani image na dikhe, iske liye Network-First use karenge)
+  // Images ke liye Network-First (Nayi image aayegi)
   if (request.destination === 'image') {
     event.respondWith(
       fetch(request).then((networkResponse) => {
@@ -62,7 +61,6 @@ self.addEventListener('fetch', (event) => {
           return networkResponse;
         });
       }).catch(() => {
-        // Agar net nahi hai, toh cache se do
         return caches.match(request);
       })
     );
