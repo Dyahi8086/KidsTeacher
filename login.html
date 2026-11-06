@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="theme-color" content="#FF6B35">
+  <meta name="theme-color" content="#6366f1">
   <title>Parents Login - Kids Teacher</title>
   
   <link rel="manifest" href="./manifest.json">
@@ -21,52 +21,22 @@
       display: flex; 
       flex-direction: column; 
       font-family: 'Nunito', sans-serif; 
-      
-      /* ART/PAINTING THEME BACKGROUND */
-      background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%);
       overflow: hidden;
       position: relative;
     }
 
-    /* --- ART / PAINT SPLASHES (CSS ART) --- */
-    .paint-splash {
+    /* --- NAYA RADIAL GRADIENT BACKGROUND --- */
+    .radial-bg {
       position: absolute;
-      border-radius: 50%;
-      filter: blur(20px);
+      top: 0; left: 0; right: 0; bottom: 0;
       z-index: 0;
-      opacity: 0.8;
-    }
-    
-    /* Pink Splash */
-    .splash-1 {
-      width: 300px; height: 300px;
-      background: #FF5E3A;
-      top: -100px; left: -100px;
-    }
-
-    /* Blue Splash */
-    .splash-2 {
-      width: 250px; height: 250px;
-      background: #4A90E2;
-      top: 20%; right: -80px;
-    }
-
-    /* Yellow Splash */
-    .splash-3 {
-      width: 200px; height: 200px;
-      background: #FFC107;
-      bottom: 10%; left: 10%;
-    }
-
-    /* Green Splash */
-    .splash-4 {
-      width: 180px; height: 180px;
-      background: #28A745;
-      bottom: -50px; right: 20%;
+      /* Yahan wahi Radial Gradient hai jo React code me tha */
+      background: radial-gradient(125% 125% at 50% 10%, #fff 40%, #6366f1 100%);
     }
 
     /* --- MAIN CONTAINER --- */
     .login-container {
+      position: relative;
       width: 100%; 
       flex: 1; 
       display: flex;
@@ -142,7 +112,7 @@
       font-weight: 700; 
       letter-spacing: -0.5px; 
       margin-bottom: 8px;
-      color: #333333; /* Dark text for readability on light glass */
+      color: #333333;
     }
 
     .app-subtitle {
@@ -248,20 +218,17 @@
     }
     .spinner {
       width: 50px; height: 50px; border: 5px solid #ffedd5;
-      border-top: 5px solid #FF5E3A; border-radius: 50%;
+      border-top: 5px solid #6366f1; border-radius: 50%;
       animation: spin 1s linear infinite; margin-bottom: 20px;
     }
     @keyframes spin { 100% { transform: rotate(360deg); } }
-    .loading-text { font-family: 'Fredoka'; font-size: 22px; color: #9a3412; font-weight: 600; }
+    .loading-text { font-family: 'Fredoka'; font-size: 22px; color: #6366f1; font-weight: 600; }
   </style>
 </head>
 <body>
 
-  <!-- Art Background Splashes -->
-  <div class="paint-splash splash-1"></div>
-  <div class="paint-splash splash-2"></div>
-  <div class="paint-splash splash-3"></div>
-  <div class="paint-splash splash-4"></div>
+  <!-- RADIAL GRADIENT BACKGROUND -->
+  <div class="radial-bg"></div>
 
   <div class="login-container">
     
