@@ -6,12 +6,10 @@
   <meta name="theme-color" content="#FF6B35">
   <title>Parents Login - Kids Teacher</title>
   
-  <!-- PWA Links -->
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/png" href="./icons/icon-192.png">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
   
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
   
   <style>
@@ -20,18 +18,17 @@
     body {
       height: 100vh; 
       height: 100dvh; 
-      min-height: 100vh;
       display: flex; 
       flex-direction: column; 
       font-family: 'Nunito', sans-serif; 
       
-      /* ORANGE (Pese/Coins) BACKGROUND GRADIENT */
+      /* ORANGE BACKGROUND GRADIENT */
       background: linear-gradient(135deg, #FF8C42 0%, #FF5E3A 50%, #D9381E 100%);
       overflow: hidden;
       position: relative;
     }
 
-    /* Background me halke gol (coins jaisa) shapes */
+    /* Background Shapes */
     body::before, body::after {
       content: '';
       position: absolute;
@@ -48,21 +45,28 @@
       flex: 1; 
       display: flex;
       flex-direction: column;
-      justify-content: flex-end; /* Card ko niche rakhega */
+      justify-content: flex-end; 
       align-items: center;
-      padding-bottom: 0; 
       z-index: 10;
     }
 
-    /* --- BOTTOM POP-OUT LOGIN CARD (Glassmorphism) --- */
+    /* --- GLASSMORPHISM POP-OUT CARD --- */
     .login-card {
       width: 100%;
       max-width: 450px;
-      background: rgba(255, 255, 255, 0.95); /* Almost solid white */
-      border-radius: 35px 35px 0 0; /* Sirf upar ke corners gol */
-      padding: 40px 25px calc(30px + env(safe-area-inset-bottom)) 25px;
       
-      /* Card ko bahar nikla hua (pop-out) dikhane ke liye shadow */
+      /* GLASS EFFECT: Transparent White + Blur */
+      background: rgba(255, 255, 255, 0.85); 
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      
+      border-radius: 35px 35px 0 0; 
+      border-top: 1px solid rgba(255, 255, 255, 0.9);
+      
+      /* Padding adjust ki taaki content poora aaye */
+      padding: 30px 25px calc(30px + env(safe-area-inset-bottom)) 25px;
+      
+      /* Shadow for Pop-out effect */
       box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.2);
       
       display: flex;
@@ -70,23 +74,32 @@
       align-items: center;
       text-align: center;
       position: relative;
+      
+      /* SLIDE UP ANIMATION (Dhire dhire aayega) */
+      animation: slideUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      transform: translateY(100%);
     }
 
-    /* Ek chota sa "pull bar" (handle) card ke upar */
+    @keyframes slideUp {
+      to { transform: translateY(0); }
+    }
+
+    /* Pull bar */
     .login-card::before {
       content: '';
       position: absolute;
-      top: 15px;
+      top: 12px;
       width: 50px;
       height: 5px;
-      background: #e2e8f0;
+      background: #cbd5e1;
       border-radius: 10px;
     }
 
-    /* 3D Icon Premium Look */
+    /* 3D Icon */
     .icon-3d {
       font-size: 50px;
-      margin-bottom: 10px;
+      margin-top: 10px;
+      margin-bottom: 5px;
       filter: drop-shadow(0 8px 12px rgba(255, 107, 53, 0.3));
     }
 
@@ -97,8 +110,6 @@
       font-weight: 700; 
       letter-spacing: -0.5px; 
       margin-bottom: 5px;
-      
-      /* Orange/Brown Color */
       color: #9a3412; 
     }
 
@@ -107,12 +118,12 @@
       font-size: 14px;
       color: #64748b; 
       font-weight: 700;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
       padding: 0 10px;
       line-height: 1.4;
     }
 
-    /* --- GOOGLE BUTTON (Pop-out 3D) --- */
+    /* --- GOOGLE BUTTON --- */
     .btn-google {
       width: 100%; 
       padding: 16px 15px;
@@ -130,13 +141,12 @@
       gap: 10px;
       position: relative;
       
-      /* 3D Shadow (Bahar nikla hua) */
       box-shadow: 0 6px 0 #cbd5e1, 0 15px 25px rgba(0,0,0,0.1);
       transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
       transform: translateY(-5px); 
       
       animation: pulseBtn 2s infinite;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
     }
 
     @keyframes pulseBtn {
@@ -202,7 +212,6 @@
 
   <div class="login-container">
     
-    <!-- POP-OUT WHITE LOGIN CARD -->
     <div class="login-card">
       
       <div class="icon-3d">🎓</div>
