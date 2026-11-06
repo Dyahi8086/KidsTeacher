@@ -29,7 +29,6 @@
     }
 
     /* --- MAXIMALISM BACKGROUND ELEMENTS --- */
-    /* Bade 3D Coins aur Shapes floating background me */
     .bg-element {
       position: absolute;
       z-index: 0;
@@ -39,7 +38,7 @@
 
     /* Bada Golden Coin */
     .coin-1 {
-      width: 200px; height: 200px;
+      width: 180px; height: 180px;
       background: radial-gradient(circle at 30% 30%, #FFF5C2, #FFC107, #FF9800);
       border-radius: 50%;
       top: -50px; left: -50px;
@@ -48,7 +47,7 @@
 
     /* Chota Golden Coin */
     .coin-2 {
-      width: 120px; height: 120px;
+      width: 100px; height: 100px;
       background: radial-gradient(circle at 30% 30%, #FFF5C2, #FFC107, #FF9800);
       border-radius: 50%;
       bottom: 40%; right: -30px;
@@ -57,16 +56,16 @@
 
     /* Pink Glass Sphere */
     .sphere-1 {
-      width: 150px; height: 150px;
+      width: 130px; height: 130px;
       background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255, 0, 127, 0.4));
       border-radius: 50%;
-      top: 20%; right: -50px;
+      top: 20%; right: -40px;
       backdrop-filter: blur(10px);
     }
 
     /* Blue Glass Sphere */
     .sphere-2 {
-      width: 100px; height: 100px;
+      width: 80px; height: 80px;
       background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(0, 198, 255, 0.4));
       border-radius: 50%;
       top: 45%; left: -20px;
@@ -74,10 +73,9 @@
     }
 
     /* Golden Stars */
-    .star-1 { font-size: 40px; color: #FFD700; top: 15%; left: 20%; transform: rotate(15deg); }
-    .star-2 { font-size: 30px; color: #FFD700; top: 35%; right: 25%; transform: rotate(-20deg); }
-    .star-3 { font-size: 50px; color: #FFD700; bottom: 20%; left: 15%; transform: rotate(45deg); }
-
+    .star-1 { font-size: 35px; color: #FFD700; top: 15%; left: 20%; transform: rotate(15deg); }
+    .star-2 { font-size: 25px; color: #FFD700; top: 35%; right: 25%; transform: rotate(-20deg); }
+    .star-3 { font-size: 40px; color: #FFD700; bottom: 20%; left: 15%; transform: rotate(45deg); }
 
     /* --- MAIN CONTAINER --- */
     .login-container {
@@ -96,7 +94,6 @@
       max-width: 450px;
       min-height: 60vh; 
       
-      /* GLASS EFFECT: Transparent White + Blur */
       background: rgba(255, 255, 255, 0.85); 
       backdrop-filter: blur(25px);
       -webkit-backdrop-filter: blur(25px);
@@ -249,7 +246,7 @@
 </head>
 <body>
 
-  <!-- Maximalism Background Elements (Pese, Glass Bubbles, Stars) -->
+  <!-- Maximalism Background Elements -->
   <div class="bg-element coin-1"></div>
   <div class="bg-element coin-2"></div>
   <div class="bg-element sphere-1"></div>
@@ -337,7 +334,7 @@
       catch (error) { 
         googleBtn.innerHTML = originalHTML;
         googleBtn.disabled = false;
-        if(error.code !== 'popup-closed-by-user') { alert("Login failed. Please try again."); }
+        if(error.code !== 'auth/popup-closed-by-user') { alert("Login failed. Please try again."); }
       }
     }
 
