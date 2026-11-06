@@ -16,24 +16,23 @@
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
     body {
-      /* FIX: Height aur min-height dono set kiye hain */
-      height: 100vh; 
-      height: 100dvh; 
-      min-height: 100vh;
+      /* Height ko fix nahi kiya, flexbox ko adjust karne diya */
+      min-height: 100vh; 
+      min-height: 100dvh; 
       display: flex; 
       flex-direction: column; 
       font-family: 'Nunito', sans-serif; 
       
-      /* BUNNY PNG BACKGROUND */
+      /* BACKGROUND IMAGE */
       background-image: url('login_bg.png'); 
       background-size: cover; 
       background-position: center top; 
       background-repeat: no-repeat;
       background-color: #FF8C42; 
       
-      /* FIX: overflow hidden hataya, auto kiya taaki choti screen par scroll ho sake */
+      /* Scroll allowed for safety */
       overflow-y: auto; 
-      position: relative;
+      overflow-x: hidden;
     }
 
     /* --- MAIN CONTAINER --- */
@@ -42,10 +41,9 @@
       flex: 1; 
       display: flex;
       flex-direction: column;
-      justify-content: flex-end; 
+      justify-content: flex-end; /* Card ko niche chipkayega */
       align-items: center;
-      z-index: 10;
-      /* FIX: min-height 0 taaki flex properly kaam kare */
+      /* min-height: 0 flex ko shrink hone deta hai */
       min-height: 0; 
     }
 
@@ -54,25 +52,18 @@
       width: 100%;
       max-width: 450px;
       
-      /* Liquid Glass Base */
-      background: rgba(255, 255, 255, 0.65); 
+      /* Glass Effect */
+      background: rgba(255, 255, 255, 0.75); 
       backdrop-filter: blur(30px) saturate(200%);
       -webkit-backdrop-filter: blur(30px) saturate(200%);
       
       border-radius: 40px 40px 0 0; 
-      
-      /* Glass Borders */
       border-top: 1px solid rgba(255, 255, 255, 0.9);
-      border-left: 1px solid rgba(255, 255, 255, 0.5);
-      border-right: 1px solid rgba(255, 255, 255, 0.5);
       
-      box-shadow: 
-        inset 0 1px 1px rgba(255, 255, 255, 1),
-        inset 0 -1px 20px rgba(255, 255, 255, 0.3),
-        0 -10px 40px rgba(0, 0, 0, 0.15);
+      /* Padding me safe-area add kiya taaki install hone par button cut na ho */
+      padding: 30px 25px calc(40px + env(safe-area-inset-bottom)) 25px;
       
-      /* FIX: Padding me safe-area-inset-bottom use kiya */
-      padding: 30px 25px calc(30px + env(safe-area-inset-bottom)) 25px;
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.15);
       
       display: flex;
       flex-direction: column;
@@ -80,13 +71,9 @@
       text-align: center;
       position: relative;
       
-      /* Slide Up Animation */
-      animation: slideUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-      transform: translateY(100%);
-    }
-
-    @keyframes slideUp {
-      to { transform: translateY(0); }
+      /* Card ab poora khulega */
+      animation: slideUp 0.8s ease-out forwards;
+      transform: translateY(0);
     }
 
     /* Pull bar */
@@ -102,8 +89,8 @@
 
     /* 3D Icon */
     .icon-3d {
-      font-size: 50px;
-      margin-top: 10px;
+      font-size: 45px;
+      margin-top: 5px;
       margin-bottom: 5px;
       filter: drop-shadow(0 8px 12px rgba(255, 107, 53, 0.3));
     }
@@ -111,7 +98,7 @@
     /* --- TEXT STYLING --- */
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
-      font-size: 32px; 
+      font-size: 30px; 
       font-weight: 700; 
       letter-spacing: -0.5px; 
       margin-bottom: 5px;
@@ -120,23 +107,21 @@
 
     .app-subtitle {
       font-family: 'Nunito', sans-serif;
-      font-size: 14px;
+      font-size: 13px;
       color: #475569; 
       font-weight: 700;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       padding: 0 10px;
       line-height: 1.4;
     }
 
-    /* --- LIQUID GLASS GOOGLE BUTTON --- */
+    /* --- GOOGLE BUTTON --- */
     .btn-google {
       width: 100%; 
       padding: 16px 15px;
-      
-      /* Button Glass effect */
-      background: rgba(255, 255, 255, 0.9); 
+      background: #ffffff; 
       color: #0f172a; 
-      border: 1px solid rgba(255, 255, 255, 1); 
+      border: 1px solid #e2e8f0; 
       border-radius: 50px;
       font-size: 16px; 
       font-family: 'Fredoka', sans-serif; 
@@ -148,28 +133,14 @@
       gap: 10px;
       position: relative;
       
-      /* Button Reflection */
-      box-shadow: 
-        0 8px 20px rgba(0,0,0,0.1),
-        inset 0 2px 2px rgba(255, 255, 255, 1);
-        
-      transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
-      transform: translateY(-3px); 
-      
-      animation: pulseBtn 2s infinite;
+      box-shadow: 0 4px 0 #cbd5e1, 0 10px 15px rgba(0,0,0,0.1);
+      transition: all 0.1s ease;
       margin-bottom: 20px;
     }
 
-    @keyframes pulseBtn {
-      0% { transform: scale(1) translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1), inset 0 2px 2px rgba(255, 255, 255, 1); }
-      50% { transform: scale(1.02) translateY(-3px); box-shadow: 0 12px 25px rgba(0,0,0,0.15), inset 0 2px 2px rgba(255, 255, 255, 1); }
-      100% { transform: scale(1) translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1), inset 0 2px 2px rgba(255, 255, 255, 1); }
-    }
-
     .btn-google:active { 
-      transform: translateY(1px) scale(1); 
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
-      animation: none; 
+      transform: translateY(4px); 
+      box-shadow: 0 0px 0 #cbd5e1; 
     }
     
     .btn-google:disabled {
@@ -179,7 +150,6 @@
       transform: none;
       cursor: not-allowed;
       border-color: #e2e8f0;
-      animation: none;
     }
 
     .google-icon-svg {
@@ -188,7 +158,7 @@
       flex-shrink: 0;
     }
 
-    /* --- PRIVACY TEXT --- */
+    /* --- PRIVACY TEXT (Niche ka hissa) --- */
     .privacy-text {
       font-family: 'Nunito', sans-serif;
       font-size: 11px;
@@ -197,8 +167,8 @@
       line-height: 1.5;
       text-align: center;
       padding: 0 10px;
-      /* FIX: Extra margin bottom taaki text cut na ho */
-      margin-bottom: 5px; 
+      /* Margin bottom taaki text screen ke edge se bacha rahe */
+      margin-bottom: 10px; 
     }
 
     .privacy-text a {
@@ -207,11 +177,11 @@
     }
 
     /* --- RESPONSIVE FIX FOR SMALL SCREENS --- */
-    @media (max-height: 700px) {
-      .icon-3d { font-size: 40px; margin-top: 5px; }
+    @media (max-height: 750px) {
+      .login-card { padding-top: 25px; }
+      .icon-3d { font-size: 35px; }
       .app-title { font-size: 26px; }
       .app-subtitle { font-size: 12px; margin-bottom: 15px; }
-      .login-card { padding-top: 25px; }
       .btn-google { padding: 14px 15px; margin-bottom: 15px; }
     }
 
