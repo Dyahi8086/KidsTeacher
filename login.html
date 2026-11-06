@@ -22,7 +22,7 @@
       flex-direction: column; 
       font-family: 'Nunito', sans-serif; 
       
-      /* BUNNY PNG BACKGROUND */
+      /* Background Image */
       background-image: url('login_bg.png'); 
       background-size: cover; 
       background-position: center top; 
@@ -43,22 +43,31 @@
       z-index: 10;
     }
 
-    /* --- GLASSMORPHISM CARD --- */
+    /* --- LIQUID GLASS CARD --- */
     .login-card {
       width: 100%;
       max-width: 450px;
       
-      /* Glass Effect */
-      background: rgba(255, 255, 255, 0.85); 
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      /* Liquid Glass Base: Transparent + Strong Blur */
+      background: rgba(255, 255, 255, 0.65); 
+      backdrop-filter: blur(30px) saturate(200%);
+      -webkit-backdrop-filter: blur(30px) saturate(200%);
       
-      border-radius: 35px 35px 0 0; 
+      border-radius: 40px 40px 0 0; 
+      
+      /* Glass Borders (Top & Sides) */
       border-top: 1px solid rgba(255, 255, 255, 0.9);
+      border-left: 1px solid rgba(255, 255, 255, 0.5);
+      border-right: 1px solid rgba(255, 255, 255, 0.5);
       
-      padding: 30px 25px calc(30px + env(safe-area-inset-bottom)) 25px;
+      /* Liquid Glass Reflection/Shadow */
+      box-shadow: 
+        inset 0 1px 1px rgba(255, 255, 255, 1),
+        inset 0 -1px 20px rgba(255, 255, 255, 0.3),
+        0 -10px 40px rgba(0, 0, 0, 0.15);
       
-      box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.2);
+      /* Padding fix: content ab poora fit hoga */
+      padding: 35px 25px calc(30px + env(safe-area-inset-bottom)) 25px;
       
       display: flex;
       flex-direction: column;
@@ -82,7 +91,7 @@
       top: 12px;
       width: 50px;
       height: 5px;
-      background: #cbd5e1;
+      background: rgba(0, 0, 0, 0.1);
       border-radius: 10px;
     }
 
@@ -107,20 +116,22 @@
     .app-subtitle {
       font-family: 'Nunito', sans-serif;
       font-size: 14px;
-      color: #64748b; 
+      color: #475569; 
       font-weight: 700;
       margin-bottom: 25px;
       padding: 0 10px;
       line-height: 1.4;
     }
 
-    /* --- GOOGLE BUTTON --- */
+    /* --- LIQUID GLASS GOOGLE BUTTON --- */
     .btn-google {
       width: 100%; 
       padding: 16px 15px;
-      background: #ffffff; 
+      
+      /* Button Glass effect */
+      background: rgba(255, 255, 255, 0.9); 
       color: #0f172a; 
-      border: 2px solid #e2e8f0; 
+      border: 1px solid rgba(255, 255, 255, 1); 
       border-radius: 50px;
       font-size: 16px; 
       font-family: 'Fredoka', sans-serif; 
@@ -132,23 +143,27 @@
       gap: 10px;
       position: relative;
       
-      box-shadow: 0 6px 0 #cbd5e1, 0 15px 25px rgba(0,0,0,0.1);
+      /* Button Reflection */
+      box-shadow: 
+        0 8px 20px rgba(0,0,0,0.1),
+        inset 0 2px 2px rgba(255, 255, 255, 1);
+        
       transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
-      transform: translateY(-5px); 
+      transform: translateY(-3px); 
       
       animation: pulseBtn 2s infinite;
       margin-bottom: 20px;
     }
 
     @keyframes pulseBtn {
-      0% { transform: scale(1) translateY(-5px); box-shadow: 0 6px 0 #cbd5e1, 0 15px 25px rgba(0,0,0,0.1); }
-      50% { transform: scale(1.02) translateY(-5px); box-shadow: 0 6px 0 #cbd5e1, 0 20px 30px rgba(0,0,0,0.15); }
-      100% { transform: scale(1) translateY(-5px); box-shadow: 0 6px 0 #cbd5e1, 0 15px 25px rgba(0,0,0,0.1); }
+      0% { transform: scale(1) translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1), inset 0 2px 2px rgba(255, 255, 255, 1); }
+      50% { transform: scale(1.02) translateY(-3px); box-shadow: 0 12px 25px rgba(0,0,0,0.15), inset 0 2px 2px rgba(255, 255, 255, 1); }
+      100% { transform: scale(1) translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1), inset 0 2px 2px rgba(255, 255, 255, 1); }
     }
 
     .btn-google:active { 
       transform: translateY(1px) scale(1); 
-      box-shadow: 0 0px 0 #cbd5e1, 0 5px 10px rgba(0,0,0,0.1); 
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
       animation: none; 
     }
     
@@ -172,7 +187,7 @@
     .privacy-text {
       font-family: 'Nunito', sans-serif;
       font-size: 11px;
-      color: #64748b; 
+      color: #475569; 
       font-weight: 800;
       line-height: 1.5;
       text-align: center;
