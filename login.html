@@ -55,6 +55,9 @@
       width: 100%;
       max-width: 450px;
       
+      /* BADA KAR DIYA HAI (Height badhayi hai) */
+      min-height: 60vh; 
+      
       /* GLASS EFFECT: Transparent White + Blur */
       background: rgba(255, 255, 255, 0.85); 
       backdrop-filter: blur(20px);
@@ -63,8 +66,8 @@
       border-radius: 35px 35px 0 0; 
       border-top: 1px solid rgba(255, 255, 255, 0.9);
       
-      /* Padding adjust ki taaki content poora aaye */
-      padding: 30px 25px calc(30px + env(safe-area-inset-bottom)) 25px;
+      /* Padding badhayi taaki content center me aaye */
+      padding: 40px 25px calc(40px + env(safe-area-inset-bottom)) 25px;
       
       /* Shadow for Pop-out effect */
       box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.2);
@@ -72,10 +75,11 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center; /* Content ko beech me layega */
       text-align: center;
       position: relative;
       
-      /* SLIDE UP ANIMATION (Dhire dhire aayega) */
+      /* SLIDE UP ANIMATION */
       animation: slideUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
       transform: translateY(100%);
     }
@@ -97,28 +101,28 @@
 
     /* 3D Icon */
     .icon-3d {
-      font-size: 50px;
+      font-size: 60px; /* Icon thoda bada kiya */
       margin-top: 10px;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
       filter: drop-shadow(0 8px 12px rgba(255, 107, 53, 0.3));
     }
 
     /* --- TEXT STYLING --- */
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
-      font-size: 32px; 
+      font-size: 34px; 
       font-weight: 700; 
       letter-spacing: -0.5px; 
-      margin-bottom: 5px;
+      margin-bottom: 8px;
       color: #9a3412; 
     }
 
     .app-subtitle {
       font-family: 'Nunito', sans-serif;
-      font-size: 14px;
+      font-size: 15px;
       color: #64748b; 
       font-weight: 700;
-      margin-bottom: 25px;
+      margin-bottom: 30px;
       padding: 0 10px;
       line-height: 1.4;
     }
@@ -126,12 +130,12 @@
     /* --- GOOGLE BUTTON --- */
     .btn-google {
       width: 100%; 
-      padding: 16px 15px;
+      padding: 18px 15px;
       background: #ffffff; 
       color: #0f172a; 
       border: 2px solid #e2e8f0; 
       border-radius: 50px;
-      font-size: 16px; 
+      font-size: 17px; 
       font-family: 'Fredoka', sans-serif; 
       font-weight: 700;
       cursor: pointer;
@@ -146,7 +150,7 @@
       transform: translateY(-5px); 
       
       animation: pulseBtn 2s infinite;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
 
     @keyframes pulseBtn {
@@ -172,15 +176,15 @@
     }
 
     .google-icon-svg {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       flex-shrink: 0;
     }
 
     /* --- PRIVACY TEXT --- */
     .privacy-text {
       font-family: 'Nunito', sans-serif;
-      font-size: 11px;
+      font-size: 12px;
       color: #64748b; 
       font-weight: 800;
       line-height: 1.5;
