@@ -1,524 +1,202 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
-<meta name="theme-color" content="#e0f2fe">
-
-<title>Kids Teacher - Welcome</title>
-
-<link rel="manifest" href="./manifest.json">
-
-<link rel="icon" type="image/png" href="./icons/icon-192.png">
-
-<link rel="apple-touch-icon" href="./icons/icon-192.png">
-
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800&display=swap"
-rel="stylesheet">
-
-<style>
-
-/* RESET */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-}
-
-/* PAGE */
-
-html,
-body {
-    width: 100%;
-    height: 100%;
-
-    margin: 0;
-    padding: 0;
-
-    overflow: hidden;
-
-    background: #fce7f3;
-
-    font-family: 'Fredoka', sans-serif;
-}
-
-/* SPLASH */
-
-#splash-screen {
-
-    position: fixed;
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-    height: 100dvh;
-
-    display: flex;
-    flex-direction: column;
-
-    justify-content: center;
-    align-items: center;
-
-    background: #e0f2fe;
-
-    z-index: 9999;
-
-    transition: opacity 0.3s ease;
-}
-
-.spinner {
-
-    width: 50px;
-    height: 50px;
-
-    border: 5px solid white;
-    border-top: 5px solid #FF6B35;
-
-    border-radius: 50%;
-
-    animation: spin 1s linear infinite;
-
-    margin-bottom: 15px;
-}
-
-@keyframes spin {
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-.loading-text {
-
-    font-family: 'Fredoka', sans-serif;
-
-    font-size: 20px;
-
-    color: #8B3A00;
-
-    font-weight: 600;
-}
-
-/* WELCOME SCREEN */
-
-#welcome-content {
-
-    display: none;
-
-    position: fixed;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-    height: 100dvh;
-
-    overflow: hidden;
-
-    background: #fce7f3;
-
-    flex-direction: column;
-
-    justify-content: flex-end;
-
-    align-items: center;
-
-    padding-top: env(safe-area-inset-top);
-
-    padding-left: env(safe-area-inset-left);
-
-    padding-right: env(safe-area-inset-right);
-
-    padding-bottom: calc(
-        25px + env(safe-area-inset-bottom)
-    );
-}
-
-/* FULL SCREEN ORIGINAL PNG */
-
-#welcome-background {
-
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    /*
-       Original image full screen.
-       No cropping.
-    */
-
-    object-fit: fill;
-
-    object-position: center;
-
-    display: block;
-
-    z-index: 0;
-
-    pointer-events: none;
-}
-
-/* CONTENT */
-
-.content-wrapper {
-
-    position: relative;
-
-    z-index: 2;
-
-    width: 100%;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    padding-left: 20px;
-
-    padding-right: 20px;
-
-    flex-shrink: 0;
-}
-
-/* TEXT */
-
-.text-content {
-
-    width: 100%;
-
-    text-align: center;
-
-    margin-bottom: 20px;
-}
-
-.text-content h1 {
-
-    font-family: 'Fredoka', sans-serif;
-
-    font-size: clamp(24px, 6vw, 32px);
-
-    color: #8B3A00;
-
-    font-weight: 700;
-
-    line-height: 1.2;
-
-    margin-bottom: 8px;
-
-    text-shadow:
-        1px 1px 0 rgba(255,255,255,0.8),
-        2px 2px 5px rgba(0,0,0,0.1);
-}
-
-.text-content p {
-
-    font-family: 'Nunito', sans-serif;
-
-    font-size: clamp(14px, 4vw, 16px);
-
-    color: #6B5B4D;
-
-    font-weight: 700;
-
-    line-height: 1.4;
-}
-
-/* BUTTON */
-
-.start-btn {
-
-    position: relative;
-
-    width: 100%;
-
-    max-width: 350px;
-
-    padding: 18px 20px;
-
-    font-size: 20px;
-
-    font-family: 'Fredoka', sans-serif;
-
-    font-weight: 700;
-
-    color: white;
-
-    background: #FF6B35;
-
-    border: none;
-
-    border-radius: 50px;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 6px 0 #cc4e20,
-        0 10px 20px rgba(255,107,53,0.4);
-
-    animation: pulseBtn 2s infinite;
-
-    flex-shrink: 0;
-
-    appearance: none;
-}
-
-.start-btn:active {
-
-    transform: translateY(6px);
-
-    box-shadow: 0 0 0 #cc4e20;
-
-    animation: none;
-}
-
-@keyframes pulseBtn {
-
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.03);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-/* SMALL SCREEN */
-
-@media (max-height: 650px) {
-
-    #welcome-content {
-
-        padding-bottom: calc(
-            15px + env(safe-area-inset-bottom)
-        );
-    }
-
-    .text-content {
-
-        margin-bottom: 12px;
-    }
-
-    .text-content h1 {
-
-        font-size: 24px;
-
-        margin-bottom: 5px;
-    }
-
-    .text-content p {
-
-        font-size: 14px;
-    }
-
-    .start-btn {
-
-        padding: 14px 18px;
-
-        font-size: 18px;
-    }
-}
-
-/* REDUCED MOTION */
-
-@media (prefers-reduced-motion: reduce) {
-
-    .start-btn {
-        animation: none;
-    }
-
-    .spinner {
-        animation-duration: 2s;
-    }
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#FF6B35">
+    <title>Kids Teacher - Welcome</title>
+    
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/png" href="./icons/icon-192.png">
+    <link rel="apple-touch-icon" href="./icons/icon-192.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body, html {
+            height: 100vh; 
+            height: 100dvh; 
+            font-family: 'Nunito', sans-serif; 
+            background: linear-gradient(135deg, #FF8C42 0%, #FF5E3A 50%, #D9381E 100%);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Liquid Glass shapes background */
+        body::before, body::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            filter: blur(40px);
+            z-index: 0;
+        }
+        body::before { width: 300px; height: 300px; top: -50px; left: -50px; }
+        body::after { width: 200px; height: 200px; bottom: -50px; right: -50px; }
+
+        /* Loader */
+        #splash-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100vh;
+            background: #FF5E3A;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            z-index: 9999; transition: opacity 0.3s ease;
+        }
+
+        .spinner {
+            width: 50px; height: 50px;
+            border: 5px solid #ffffff; border-top: 5px solid #9a3412;
+            border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .loading-text { font-family: 'Fredoka'; font-size: 20px; color: #ffffff; font-weight: 600; }
+
+        /* Welcome Content */
+        #welcome-content {
+            display: none;
+            position: relative;
+            width: 100vw; 
+            height: 100vh; 
+            height: 100dvh; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            padding: 20px;
+            
+            animation: slideUp 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            transform: translateY(100%);
+            opacity: 0;
+        }
+
+        @keyframes slideUp {
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Glass Card */
+        .glass-card {
+            width: 100%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.2); 
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .app-title { 
+            font-family: 'Fredoka', sans-serif; 
+            font-size: 36px; 
+            color: #ffffff; 
+            font-weight: 700; 
+            line-height: 1.2; 
+            margin-bottom: 10px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .app-subtitle {
+            font-family: 'Nunito', sans-serif; 
+            font-size: 16px; 
+            color: rgba(255, 255, 255, 0.9); 
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        .start-btn {
+            position: relative; 
+            width: 100%; 
+            max-width: 300px; 
+            padding: 18px 20px;
+            font-size: 20px; 
+            font-family: 'Fredoka', sans-serif; 
+            font-weight: 700; 
+            color: #9a3412;
+            background: #ffffff; 
+            border: none; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            box-shadow: 0 8px 0 #cbd5e1, 0 15px 25px rgba(0,0,0,0.2);
+            transition: transform 0.1s; 
+            animation: pulseBtn 2s infinite;
+        }
+
+        .start-btn:active { 
+            transform: translateY(6px); 
+            box-shadow: 0 0px 0 #cbd5e1; 
+            animation: none; 
+        }
+
+        @keyframes pulseBtn {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- LOADING -->
-
-<div id="splash-screen">
-
-    <div class="spinner"></div>
-
-    <div class="loading-text">
-        Loading...
+    <div id="splash-screen">
+        <div class="spinner"></div>
+        <div class="loading-text">Loading...</div>
     </div>
 
-</div>
-
-<!-- WELCOME -->
-
-<div id="welcome-content">
-
-    <!-- ORIGINAL PNG -->
-
-    <img
-        id="welcome-background"
-        src="./welcome_bg.png"
-        alt=""
-        aria-hidden="true"
-    >
-
-    <!-- CONTENT -->
-
-    <div class="content-wrapper">
-
-        <div class="text-content">
-
-            <h1>
-                Learning Is an<br>
-                Adventure!
-            </h1>
-
-            <p>
-                Explore, discover and grow every day.
-            </p>
-
+    <div id="welcome-content">
+        <div class="glass-card">
+            <h1 class="app-title">Learning Is an<br>Adventure!</h1>
+            <p class="app-subtitle">Explore, discover and grow every day.</p>
+            <button class="start-btn" id="startBtn">Let's Start →</button>
         </div>
-
-        <button
-            class="start-btn"
-            id="startBtn"
-            type="button">
-
-            Let's Start →
-
-        </button>
-
     </div>
 
-</div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-<!-- FIREBASE -->
+        const firebaseConfig = {
+          apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
+          authDomain: "kids-teacher-4387e.firebaseapp.com",
+          projectId: "kids-teacher-4387e",
+          storageBucket: "kids-teacher-4387e.firebasestorage.app",
+          messagingSenderId: "420221167346",
+          appId: "1:420221167346:web:da7ac80acdfd52339d526b"
+        };
 
-<script type="module">
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
 
-import {
-    initializeApp
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        const splash = document.getElementById('splash-screen');
+        const welcomeContent = document.getElementById('welcome-content');
 
-import {
-    getAuth,
-    onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-/* FIREBASE CONFIG */
-
-const firebaseConfig = {
-
-    apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
-
-    authDomain: "kids-teacher-4387e.firebaseapp.com",
-
-    projectId: "kids-teacher-4387e",
-
-    storageBucket: "kids-teacher-4387e.firebasestorage.app",
-
-    messagingSenderId: "420221167346",
-
-    appId: "1:420221167346:web:da7ac80acdfd52339d526b"
-
-};
-
-/* INITIALIZE */
-
-const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
-
-/* ELEMENTS */
-
-const splash = document.getElementById("splash-screen");
-
-const welcomeContent = document.getElementById("welcome-content");
-
-const startBtn = document.getElementById("startBtn");
-
-/* SHOW WELCOME */
-
-function showWelcome() {
-
-    splash.style.opacity = "0";
-
-    setTimeout(() => {
-
-        splash.style.display = "none";
-
-        welcomeContent.style.display = "flex";
-
-    }, 300);
-
-}
-
-/* AUTH */
-
-onAuthStateChanged(auth, (user) => {
-
-    if (user) {
-
-        const savedAge = localStorage.getItem(
-            "kidsAgeGroup"
-        );
-
-        window.location.replace(
-            !savedAge
-                ? "age-select.html"
-                : "index-home.html"
-        );
-
-    } else {
-
-        showWelcome();
-
-    }
-
-});
-
-/* START BUTTON */
-
-startBtn.addEventListener("click", () => {
-
-    window.location.href = "login.html";
-
-});
-
-/* SERVICE WORKER */
-
-if ("serviceWorker" in navigator) {
-
-    window.addEventListener("load", () => {
-
-        navigator.serviceWorker.register(
-            "./service-worker.js"
-        ).catch((error) => {
-
-            console.error(
-                "Service Worker registration failed:",
-                error
-            );
-
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const savedAge = localStorage.getItem('kidsAgeGroup');
+                window.location.replace(!savedAge ? "age-select.html" : "index-home.html");
+            } else {
+                splash.style.opacity = '0';
+                setTimeout(() => {
+                    splash.style.display = 'none';
+                    welcomeContent.style.display = 'flex';
+                }, 300);
+            }
         });
 
-    });
+        document.getElementById('startBtn').addEventListener('click', () => {
+            window.location.href = 'login.html';
+        });
 
-}
-
-</script>
-
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => { navigator.serviceWorker.register('service-worker.js'); });
+        }
+    </script>
 </body>
 </html>
