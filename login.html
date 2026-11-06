@@ -48,26 +48,24 @@
       justify-content: flex-end; 
       align-items: center;
       z-index: 10;
+      padding-bottom: 0;
     }
 
-    /* --- GLASSMORPHISM POP-OUT CARD --- */
+    /* --- CLAYMORPHISM CARD (Slow Slide Up) --- */
     .login-card {
       width: 100%;
       max-width: 450px;
       
-      /* GLASS EFFECT: Transparent White + Blur */
-      background: rgba(255, 255, 255, 0.85); 
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      
-      border-radius: 35px 35px 0 0; 
-      border-top: 1px solid rgba(255, 255, 255, 0.9);
-      
-      /* Padding adjust ki taaki content poora aaye */
+      /* Claymorphism Look */
+      background: #ffffff;
+      border-radius: 40px 40px 0 0;
       padding: 30px 25px calc(30px + env(safe-area-inset-bottom)) 25px;
       
-      /* Shadow for Pop-out effect */
-      box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.2);
+      /* Soft 3D Shadows for Clay effect */
+      box-shadow: 
+        inset 0 5px 10px rgba(255, 255, 255, 0.8),
+        inset 0 -5px 10px rgba(0, 0, 0, 0.05),
+        0 -15px 40px rgba(0, 0, 0, 0.2);
       
       display: flex;
       flex-direction: column;
@@ -75,12 +73,12 @@
       text-align: center;
       position: relative;
       
-      /* SLIDE UP ANIMATION (Dhire dhire aayega) */
-      animation: slideUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      /* SLOW SLIDE UP ANIMATION (1.2 Seconds) */
+      animation: slideUpSlow 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
       transform: translateY(100%);
     }
 
-    @keyframes slideUp {
+    @keyframes slideUpSlow {
       to { transform: translateY(0); }
     }
 
@@ -91,16 +89,16 @@
       top: 12px;
       width: 50px;
       height: 5px;
-      background: #cbd5e1;
+      background: #e2e8f0;
       border-radius: 10px;
     }
 
-    /* 3D Icon */
+    /* 3D Clay Icon */
     .icon-3d {
       font-size: 50px;
       margin-top: 10px;
       margin-bottom: 5px;
-      filter: drop-shadow(0 8px 12px rgba(255, 107, 53, 0.3));
+      filter: drop-shadow(0 10px 15px rgba(255, 107, 53, 0.3));
     }
 
     /* --- TEXT STYLING --- */
@@ -111,6 +109,7 @@
       letter-spacing: -0.5px; 
       margin-bottom: 5px;
       color: #9a3412; 
+      text-shadow: 0 2px 4px rgba(255,255,255,0.5);
     }
 
     .app-subtitle {
@@ -123,13 +122,13 @@
       line-height: 1.4;
     }
 
-    /* --- GOOGLE BUTTON --- */
+    /* --- CLAYMORPHISM GOOGLE BUTTON --- */
     .btn-google {
       width: 100%; 
-      padding: 16px 15px;
+      padding: 18px 15px;
       background: #ffffff; 
       color: #0f172a; 
-      border: 2px solid #e2e8f0; 
+      border: none;
       border-radius: 50px;
       font-size: 16px; 
       font-family: 'Fredoka', sans-serif; 
@@ -141,7 +140,13 @@
       gap: 10px;
       position: relative;
       
-      box-shadow: 0 6px 0 #cbd5e1, 0 15px 25px rgba(0,0,0,0.1);
+      /* Clay 3D Shadow */
+      box-shadow: 
+        0 8px 0 #e2e8f0, 
+        0 15px 25px rgba(0,0,0,0.1),
+        inset 0 2px 5px rgba(255,255,255,1),
+        inset 0 -3px 5px rgba(0,0,0,0.05);
+      
       transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
       transform: translateY(-5px); 
       
@@ -150,14 +155,14 @@
     }
 
     @keyframes pulseBtn {
-      0% { transform: scale(1) translateY(-5px); box-shadow: 0 6px 0 #cbd5e1, 0 15px 25px rgba(0,0,0,0.1); }
-      50% { transform: scale(1.02) translateY(-5px); box-shadow: 0 6px 0 #cbd5e1, 0 20px 30px rgba(0,0,0,0.15); }
-      100% { transform: scale(1) translateY(-5px); box-shadow: 0 6px 0 #cbd5e1, 0 15px 25px rgba(0,0,0,0.1); }
+      0% { transform: scale(1) translateY(-5px); box-shadow: 0 8px 0 #e2e8f0, 0 15px 25px rgba(0,0,0,0.1); }
+      50% { transform: scale(1.02) translateY(-5px); box-shadow: 0 8px 0 #e2e8f0, 0 20px 30px rgba(0,0,0,0.15); }
+      100% { transform: scale(1) translateY(-5px); box-shadow: 0 8px 0 #e2e8f0, 0 15px 25px rgba(0,0,0,0.1); }
     }
 
     .btn-google:active { 
-      transform: translateY(1px) scale(1); 
-      box-shadow: 0 0px 0 #cbd5e1, 0 5px 10px rgba(0,0,0,0.1); 
+      transform: translateY(3px) scale(1); 
+      box-shadow: 0 0px 0 #e2e8f0, 0 5px 10px rgba(0,0,0,0.1); 
       animation: none; 
     }
     
@@ -167,7 +172,6 @@
       box-shadow: none;
       transform: none;
       cursor: not-allowed;
-      border-color: #e2e8f0;
       animation: none;
     }
 
