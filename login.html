@@ -6,7 +6,10 @@
   <meta name="theme-color" content="#FF6B35">
   <title>Parents Login - Kids Teacher</title>
   
+  <!-- PWA Manifest -->
   <link rel="manifest" href="./manifest.json">
+  
+  <!-- Icons -->
   <link rel="icon" type="image/png" href="./icons/icon-192.png">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
   
@@ -22,20 +25,17 @@
       flex-direction: column; 
       font-family: 'Nunito', sans-serif; 
       
-      /* BACKGROUND IMAGE */
       background-image: url('login_bg.png'); 
       background-size: cover; 
       background-position: center top; 
       background-repeat: no-repeat;
       background-color: #FF8C42; 
       
-      /* PAGE KO LOCK KIYA (Na hilega na scroll hoga) */
       overflow: hidden; 
       position: fixed;
       width: 100%;
     }
 
-    /* --- MAIN CONTAINER (Yeh scroll hoga) --- */
     .login-container {
       width: 100%; 
       height: 100%;
@@ -44,19 +44,15 @@
       justify-content: flex-end; 
       align-items: center;
       
-      /* SIRF YAHAN SCROLL HOGA */
       overflow-y: auto; 
       -webkit-overflow-scrolling: touch; 
-      
-      /* Niche se thoda gap taaki card cut na ho */
       padding-bottom: 20px; 
     }
 
-    /* --- LOGIN CARD --- */
     .login-card {
       width: 100%;
       max-width: 450px;
-      min-height: 50vh; /* Card ki minimum height taaki wo aadha na dikhe */
+      min-height: 50vh; 
       
       background: rgba(255, 255, 255, 0.9); 
       backdrop-filter: blur(30px);
@@ -64,21 +60,18 @@
       
       border-radius: 40px 40px 0 0; 
       border-top: 1px solid rgba(255, 255, 255, 1);
-      
       box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.15);
-      
       padding: 30px 25px calc(30px + env(safe-area-inset-bottom)) 25px;
       
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center; /* Content ko center me layega */
+      justify-content: center;
       text-align: center;
       position: relative;
       flex-shrink: 0;
     }
 
-    /* Pull bar */
     .login-card::before {
       content: '';
       position: absolute;
@@ -113,7 +106,6 @@
       padding: 0 10px;
     }
 
-    /* --- GOOGLE BUTTON --- */
     .btn-google {
       width: 100%; 
       padding: 16px 15px;
@@ -157,7 +149,6 @@
       text-decoration: underline;
     }
 
-    /* --- LOADING OVERLAY --- */
     #loadingOverlay {
       display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
       background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px);
@@ -175,11 +166,8 @@
 <body>
 
   <div class="login-container">
-    
     <div class="login-card">
-      
       <div class="icon-3d">🎓</div>
-
       <h1 class="app-title">Parents Login</h1>
       <p class="app-subtitle">Guide your child's learning journey</p>
 
@@ -197,7 +185,6 @@
         By continuing, you agree to our<br>
         <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a>
       </p>
-      
     </div>
   </div>
 
@@ -221,7 +208,6 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    
     setPersistence(auth, browserLocalPersistence).catch(console.error);
 
     const overlay = document.getElementById('loadingOverlay');
@@ -239,7 +225,6 @@
 
     window.handleGoogleLogin = async function() {
       if (navigator.vibrate) navigator.vibrate(50);
-
       const originalHTML = googleBtn.innerHTML;
       googleBtn.innerHTML = "Connecting...";
       googleBtn.disabled = true;
@@ -249,16 +234,20 @@
       
       try { 
         await signInWithPopup(auth, provider); 
-      } 
-      catch (error) { 
+      } catch (error) { 
         googleBtn.innerHTML = originalHTML;
         googleBtn.disabled = false;
         if(error.code !== 'auth/popup-closed-by-user') { alert("Login failed. Please try again."); }
       }
     }
 
+    // Service Worker Registration (PWA ke liye zaroori)
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => { navigator.serviceWorker.register('./service-worker.js'); });
+      window.addEventListener('load', () => { 
+        navigator.serviceWorker.register('./service-worker.js')
+        .then(reg => console.log('SW Registered'))
+        .catch(err => console.log('SW Error: ', err));
+      });
     }
   </script>
 </body>
