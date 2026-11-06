@@ -1,19 +1,21 @@
-const CACHE_NAME = 'kids-teacher-v30'; // Version update kiya
+const CACHE_NAME = 'kids-teacher-v31'; // Version badal diya hai
 
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './login.html',
+  './age-select.html',
+  './index-home.html',
   './manifest.json',
   './welcome_bg.png', 
-  './login_bg.png', // Image yahan cache hogi
+  './login_bg.png', // Nayi image yahan cache hogi
   './icons/icon-192.png',
   './icons/icon-512.png'
 ];
 
-// Install Event
+// Install Event (Nayi files download karega)
 self.addEventListener('install', (event) => {
-  self.skipWaiting();
+  self.skipWaiting(); // Force update
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return Promise.all(
@@ -32,6 +34,7 @@ self.addEventListener('activate', (event) => {
       return Promise.all(
         cacheNames.map((cache) => {
           if (cache !== CACHE_NAME) {
+            console.log('Deleting old cache:', cache);
             return caches.delete(cache);
           }
         })
@@ -46,20 +49,21 @@ self.addEventListener('fetch', (event) => {
   const request = event.request;
   const url = new URL(request.url);
 
+  // External images (Firebase/Google) ko cache mat karo
   if (url.origin !== self.location.origin) return;
 
-  // Images ke liye Cache-First
+  // Image ke liye Cache-First (Purani image na dikhe, iske liye Network-First use karenge)
   if (request.destination === 'image') {
     event.respondWith(
-      caches.match(request).then((cachedResponse) => {
-        if (cachedResponse) return cachedResponse;
-        return fetch(request).then((networkResponse) => {
-          if (!networkResponse || networkResponse.status !== 200) return networkResponse;
-          return caches.open(CACHE_NAME).then((cache) => {
-            cache.put(request, networkResponse.clone());
-            return networkResponse;
-          });
-        }).catch(() => new Response('', { status: 404 }));
+      fetch(request).then((networkResponse) => {
+        if (!networkResponse || networkResponse.status !== 200) return networkResponse;
+        return caches.open(CACHE_NAME).then((cache) => {
+          cache.put(request, networkResponse.clone());
+          return networkResponse;
+        });
+      }).catch(() => {
+        // Agar net nahi hai, toh cache se do
+        return caches.match(request);
       })
     );
     return;
