@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="theme-color" content="#facc15">
+  <meta name="theme-color" content="#FF6B35">
   <title>Parents Login - Kids Teacher</title>
   
   <!-- PWA Links -->
@@ -25,16 +25,22 @@
       flex-direction: column; 
       font-family: 'Nunito', sans-serif; 
       
-      /* BACKGROUND IMAGE */
-      background-image: url('login_bg.png'); 
-      background-size: 100% 100%; 
-      background-position: center;
-      background-repeat: no-repeat;
-      background-color: #facc15; 
-      
-      /* Scroll allowed for small screens */
-      overflow-y: auto; 
+      /* ORANGE (Pese/Coins) BACKGROUND GRADIENT */
+      background: linear-gradient(135deg, #FF8C42 0%, #FF5E3A 50%, #D9381E 100%);
+      overflow: hidden;
+      position: relative;
     }
+
+    /* Background me halke gol (coins jaisa) shapes */
+    body::before, body::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      z-index: 0;
+    }
+    body::before { width: 300px; height: 300px; top: -100px; left: -100px; }
+    body::after { width: 200px; height: 200px; bottom: -50px; right: -50px; }
 
     /* --- MAIN CONTAINER --- */
     .login-container {
@@ -42,46 +48,73 @@
       flex: 1; 
       display: flex;
       flex-direction: column;
-      justify-content: flex-end; /* Content ko niche push karega */
+      justify-content: flex-end; /* Card ko niche rakhega */
       align-items: center;
-      text-align: center;
-      
-      /* Button ko upar shift karne ke liye padding */
-      padding-bottom: calc(50px + env(safe-area-inset-bottom)); 
-    }
-
-    .text-content {
-      margin-bottom: 20px;
+      padding-bottom: 0; 
       z-index: 10;
     }
 
-    /* --- COMPACT PREMIUM FONT (Parents Login) --- */
+    /* --- BOTTOM POP-OUT LOGIN CARD (Glassmorphism) --- */
+    .login-card {
+      width: 100%;
+      max-width: 450px;
+      background: rgba(255, 255, 255, 0.95); /* Almost solid white */
+      border-radius: 35px 35px 0 0; /* Sirf upar ke corners gol */
+      padding: 40px 25px calc(30px + env(safe-area-inset-bottom)) 25px;
+      
+      /* Card ko bahar nikla hua (pop-out) dikhane ke liye shadow */
+      box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.2);
+      
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    /* Ek chota sa "pull bar" (handle) card ke upar */
+    .login-card::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      width: 50px;
+      height: 5px;
+      background: #e2e8f0;
+      border-radius: 10px;
+    }
+
+    /* 3D Icon Premium Look */
+    .icon-3d {
+      font-size: 50px;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 8px 12px rgba(255, 107, 53, 0.3));
+    }
+
+    /* --- TEXT STYLING --- */
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
-      font-size: 28px; /* Size chota kiya */
-      font-weight: 600; 
-      letter-spacing: -0.5px; /* Aksharon ko paas laya */
+      font-size: 32px; 
+      font-weight: 700; 
+      letter-spacing: -0.5px; 
       margin-bottom: 5px;
       
-      /* Deep Chocolate Brown Color */
-      color: #4a2c11; 
-      
-      text-shadow: 0px 2px 4px rgba(255, 255, 255, 0.5);
+      /* Orange/Brown Color */
+      color: #9a3412; 
     }
 
     .app-subtitle {
       font-family: 'Nunito', sans-serif;
-      font-size: 13px; /* Size chota kiya */
-      color: #574132; 
+      font-size: 14px;
+      color: #64748b; 
       font-weight: 700;
-      padding: 0 20px;
-      line-height: 1.3;
+      margin-bottom: 30px;
+      padding: 0 10px;
+      line-height: 1.4;
     }
 
-    /* --- POP-OUT GOOGLE BUTTON --- */
+    /* --- GOOGLE BUTTON (Pop-out 3D) --- */
     .btn-google {
-      width: 85%; 
-      max-width: 320px;
+      width: 100%; 
       padding: 16px 15px;
       background: #ffffff; 
       color: #0f172a; 
@@ -96,25 +129,24 @@
       justify-content: center;
       gap: 10px;
       position: relative;
-      overflow: hidden;
       
-      /* Gehra 3D Shadow (Niche se bahar nikla hua) */
-      box-shadow: 0 8px 0 #cbd5e1, 0 20px 30px rgba(0,0,0,0.2);
+      /* 3D Shadow (Bahar nikla hua) */
+      box-shadow: 0 6px 0 #cbd5e1, 0 15px 25px rgba(0,0,0,0.1);
       transition: all 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
-      transform: translateY(-8px); /* Upar utha hua */
+      transform: translateY(-5px); 
       
       animation: pulseBtn 2s infinite;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
     @keyframes pulseBtn {
-      0% { transform: scale(1) translateY(-8px); box-shadow: 0 8px 0 #cbd5e1, 0 20px 30px rgba(0,0,0,0.2); }
-      50% { transform: scale(1.02) translateY(-8px); box-shadow: 0 8px 0 #cbd5e1, 0 25px 35px rgba(0,0,0,0.25); }
-      100% { transform: scale(1) translateY(-8px); box-shadow: 0 8px 0 #cbd5e1, 0 20px 30px rgba(0,0,0,0.2); }
+      0% { transform: scale(1) translateY(-5px); box-shadow: 0 6px 0 #cbd5e1, 0 15px 25px rgba(0,0,0,0.1); }
+      50% { transform: scale(1.02) translateY(-5px); box-shadow: 0 6px 0 #cbd5e1, 0 20px 30px rgba(0,0,0,0.15); }
+      100% { transform: scale(1) translateY(-5px); box-shadow: 0 6px 0 #cbd5e1, 0 15px 25px rgba(0,0,0,0.1); }
     }
 
     .btn-google:active { 
-      transform: translateY(2px) scale(1); 
+      transform: translateY(1px) scale(1); 
       box-shadow: 0 0px 0 #cbd5e1, 0 5px 10px rgba(0,0,0,0.1); 
       animation: none; 
     }
@@ -139,16 +171,15 @@
     .privacy-text {
       font-family: 'Nunito', sans-serif;
       font-size: 11px;
-      color: #4a2c11; 
+      color: #64748b; 
       font-weight: 800;
       line-height: 1.5;
       text-align: center;
       padding: 0 10px;
-      margin-bottom: 10px; 
     }
 
     .privacy-text a {
-      color: #4a2c11;
+      color: #9a3412;
       text-decoration: underline;
     }
 
@@ -159,37 +190,42 @@
       z-index: 9999; flex-direction: column; justify-content: center; align-items: center;
     }
     .spinner {
-      width: 50px; height: 50px; border: 5px solid #e9d5ff;
-      border-top: 5px solid #4a2c11; border-radius: 50%;
+      width: 50px; height: 50px; border: 5px solid #ffedd5;
+      border-top: 5px solid #FF5E3A; border-radius: 50%;
       animation: spin 1s linear infinite; margin-bottom: 20px;
     }
     @keyframes spin { 100% { transform: rotate(360deg); } }
-    .loading-text { font-family: 'Fredoka'; font-size: 22px; color: #4a2c11; font-weight: 600; }
+    .loading-text { font-family: 'Fredoka'; font-size: 22px; color: #9a3412; font-weight: 600; }
   </style>
 </head>
 <body>
 
   <div class="login-container">
     
-    <div class="text-content">
+    <!-- POP-OUT WHITE LOGIN CARD -->
+    <div class="login-card">
+      
+      <div class="icon-3d">🎓</div>
+
       <h1 class="app-title">Parents Login</h1>
       <p class="app-subtitle">Guide your child's learning journey</p>
+
+      <button type="button" id="googleBtn" class="btn-google" onclick="handleGoogleLogin()">
+        <svg class="google-icon-svg" viewBox="0 0 48 48">
+          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+          <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+        </svg>
+        Continue with Google
+      </button>
+
+      <p class="privacy-text">
+        By continuing, you agree to our<br>
+        <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a>
+      </p>
+      
     </div>
-
-    <button type="button" id="googleBtn" class="btn-google" onclick="handleGoogleLogin()">
-      <svg class="google-icon-svg" viewBox="0 0 48 48">
-        <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-        <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-        <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-        <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-      </svg>
-      Continue with Google
-    </button>
-
-    <p class="privacy-text">
-      By continuing, you agree to our<br>
-      <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a>
-    </p>
   </div>
 
   <div id="loadingOverlay">
