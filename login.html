@@ -3,10 +3,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#38BDF8">
 
 <title>Parents Login - Kids Teacher</title>
@@ -25,8 +22,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
   -webkit-tap-highlight-color: transparent;
 }
 
-html,
-body {
+html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -35,17 +31,9 @@ body {
 body {
   height: 100vh;
   height: 100dvh;
-
-  font-family: 'Nunito', sans-serif;
-
   position: relative;
-
-  background: linear-gradient(
-    180deg,
-    #42b9f5,
-    #8bdcff,
-    #e0f7ff
-  );
+  font-family: 'Nunito', sans-serif;
+  background: #48B9F5;
 }
 
 /* BACKGROUND */
@@ -53,268 +41,181 @@ body {
 #cloud-canvas {
   position: fixed;
   inset: 0;
-
   width: 100%;
   height: 100%;
-
   z-index: 0;
-
   pointer-events: none;
 }
 
-/* LOGIN CONTAINER */
+/* LOGIN */
 
 .login-container {
   position: relative;
-
+  z-index: 10;
   width: 100%;
   height: 100%;
   height: 100dvh;
 
   display: flex;
-
   flex-direction: column;
-
   justify-content: flex-end;
   align-items: center;
 
-  z-index: 10;
-
   overflow-y: auto;
-
   overscroll-behavior: contain;
-
-  -webkit-overflow-scrolling: touch;
 
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-/* LOGIN CARD */
+/* GLASS CARD */
 
 .login-card {
+  position: relative;
   width: 100%;
   max-width: 450px;
-
   min-height: 55vh;
 
-  background: rgba(255,255,255,0.34);
-
-  backdrop-filter: blur(22px) saturate(135%);
-  -webkit-backdrop-filter: blur(22px) saturate(135%);
-
-  border-radius: 40px 40px 0 0;
-
-  border-top: 1px solid rgba(255,255,255,0.85);
-
-  border-left: 1px solid rgba(255,255,255,0.4);
-
-  border-right: 1px solid rgba(255,255,255,0.4);
-
-  box-shadow:
-    inset 0 1px 2px rgba(255,255,255,0.8),
-    0 -10px 30px rgba(0,0,0,0.10);
-
-  padding: 40px 25px calc(35px + env(safe-area-inset-bottom));
-
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
   justify-content: center;
 
   text-align: center;
 
-  position: relative;
+  background: rgba(255,255,255,0.22);
 
-  animation: bounceUp 0.9s cubic-bezier(
-    0.175,
-    0.885,
-    0.32,
-    1.275
-  ) forwards;
+  backdrop-filter: blur(24px) saturate(145%);
+  -webkit-backdrop-filter: blur(24px) saturate(145%);
 
+  border-radius: 40px 40px 0 0;
+
+  border-top: 1px solid rgba(255,255,255,0.85);
+  border-left: 1px solid rgba(255,255,255,0.35);
+  border-right: 1px solid rgba(255,255,255,0.35);
+
+  box-shadow:
+    inset 0 1px 2px rgba(255,255,255,0.65),
+    0 -10px 30px rgba(0,0,0,0.08);
+
+  padding: 40px 25px calc(35px + env(safe-area-inset-bottom));
+
+  animation: bounceUp .8s cubic-bezier(.175,.885,.32,1.275) forwards;
   transform: translateY(100%);
 }
 
 @keyframes bounceUp {
-  0% {
-    transform: translateY(100%);
-  }
-
-  60% {
-    transform: translateY(-12px);
-  }
-
-  100% {
-    transform: translateY(0);
-  }
+  0% { transform: translateY(100%); }
+  65% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
 }
 
-/* PULL BAR */
+/* HANDLE */
 
 .login-card::before {
-  content: '';
-
+  content: "";
   position: absolute;
-
   top: 12px;
-
   width: 50px;
   height: 5px;
-
-  background: rgba(255,255,255,0.7);
-
   border-radius: 10px;
+  background: rgba(255,255,255,.75);
 }
 
 /* ICON */
 
 .icon-3d {
   font-size: 60px;
-
-  margin-top: 10px;
-  margin-bottom: 10px;
-
-  filter: drop-shadow(
-    0 8px 12px rgba(0,0,0,0.2)
-  );
+  margin: 10px 0;
+  filter: drop-shadow(0 8px 12px rgba(0,0,0,.18));
 }
 
 /* TITLE */
 
 .app-title {
   font-family: 'Fredoka', sans-serif;
-
   font-size: 34px;
-
   font-weight: 700;
-
-  letter-spacing: -0.5px;
-
+  letter-spacing: -.5px;
   margin-bottom: 8px;
-
-  color: #0f172a;
+  color: #0F172A;
 }
 
-/* SUBTITLE */
-
 .app-subtitle {
-  font-family: 'Nunito', sans-serif;
-
   font-size: 15px;
-
   color: #334155;
-
-  font-weight: 700;
-
-  margin-bottom: 30px;
-
-  padding: 0 10px;
-
+  font-weight: 800;
   line-height: 1.4;
+  padding: 0 10px;
+  margin-bottom: 30px;
 }
 
 /* GOOGLE BUTTON */
 
 .btn-google {
   width: 100%;
-
   padding: 18px 15px;
 
-  background: rgba(255,255,255,0.95);
-
-  color: #0f172a;
-
-  border: 1px solid #fff;
-
-  border-radius: 50px;
-
-  font-size: 17px;
-
-  font-family: 'Fredoka', sans-serif;
-
-  font-weight: 700;
-
-  cursor: pointer;
-
   display: flex;
-
   align-items: center;
   justify-content: center;
-
   gap: 10px;
 
   position: relative;
-
   overflow: hidden;
 
-  box-shadow:
-    0 8px 20px rgba(0,0,0,0.10),
-    inset 0 2px 2px rgba(255,255,255,1);
+  border: 1px solid #FFFFFF;
+  border-radius: 50px;
 
-  transition: transform 0.15s ease;
+  background: rgba(255,255,255,.96);
+  color: #0F172A;
 
+  font-family: 'Fredoka', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+
+  cursor: pointer;
   margin-bottom: 25px;
 
-  z-index: 100;
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.10),
+    inset 0 2px 2px #FFFFFF;
+
+  transition: transform .15s ease;
 }
 
 .btn-google span {
   display: inline-block;
-
   animation: textBounce 2s infinite ease-in-out;
 }
 
 @keyframes textBounce {
-  0%,100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-3px);
-  }
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
 }
 
-/* BUTTON SHINE */
-
 .btn-google::after {
-  content: '';
-
+  content: "";
   position: absolute;
-
   top: 0;
   left: -100%;
-
   width: 50%;
   height: 100%;
 
   background: linear-gradient(
-    to right,
+    90deg,
     transparent,
-    rgba(255,255,255,0.8),
+    rgba(255,255,255,.8),
     transparent
   );
 
   transform: skewX(-25deg);
-
   animation: shine 3s infinite;
-
   pointer-events: none;
 }
 
 @keyframes shine {
-  0% {
-    left: -100%;
-  }
-
-  20% {
-    left: 200%;
-  }
-
-  100% {
-    left: 200%;
-  }
+  0% { left: -100%; }
+  20%,100% { left: 200%; }
 }
 
 .btn-google:active {
@@ -322,38 +223,29 @@ body {
 }
 
 .btn-google:disabled {
-  opacity: 0.7;
+  opacity: .7;
   cursor: wait;
 }
 
 .google-icon-svg {
   width: 22px;
   height: 22px;
-
   flex-shrink: 0;
 }
 
 /* PRIVACY */
 
 .privacy-text {
-  font-family: 'Nunito', sans-serif;
-
   font-size: 12px;
-
   color: #334155;
-
   font-weight: 800;
-
   line-height: 1.5;
-
   text-align: center;
-
   padding: 0 10px;
 }
 
 .privacy-text a {
-  color: #0f172a;
-
+  color: #0F172A;
   text-decoration: underline;
 }
 
@@ -361,23 +253,14 @@ body {
 
 #loadingOverlay {
   display: none;
-
   position: fixed;
-
   inset: 0;
-
-  width: 100%;
-  height: 100vh;
   height: 100dvh;
-
-  background: rgba(255,255,255,0.92);
-
+  background: rgba(255,255,255,.92);
   backdrop-filter: blur(10px);
-
   z-index: 9999;
 
   flex-direction: column;
-
   justify-content: center;
   align-items: center;
 }
@@ -385,52 +268,36 @@ body {
 .spinner {
   width: 50px;
   height: 50px;
-
-  border: 5px solid #ffedd5;
-
+  border: 5px solid #FFEDD5;
   border-top: 5px solid #FF5E3A;
-
   border-radius: 50%;
-
   animation: spin 1s linear infinite;
-
   margin-bottom: 20px;
 }
 
 @keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
 
 .loading-text {
   font-family: 'Fredoka', sans-serif;
-
   font-size: 22px;
-
-  color: #9a3412;
-
+  color: #9A3412;
   font-weight: 600;
 }
 
-/* SMALL MOBILE */
+/* SMALL SCREEN */
 
-@media (max-height: 650px) {
+@media(max-height:650px) {
   .login-card {
     min-height: auto;
-
-    padding-top: 30px;
-
-    padding-bottom: calc(
-      25px + env(safe-area-inset-bottom)
-    );
+    padding-top: 28px;
+    padding-bottom: calc(25px + env(safe-area-inset-bottom));
   }
 
   .icon-3d {
     font-size: 48px;
-
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin: 5px 0;
   }
 
   .app-title {
@@ -443,19 +310,7 @@ body {
 
   .btn-google {
     padding: 15px;
-
     margin-bottom: 20px;
-  }
-}
-
-/* REDUCED MOTION */
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
   }
 }
 </style>
@@ -466,14 +321,11 @@ body {
 <canvas id="cloud-canvas"></canvas>
 
 <div class="login-container">
-
   <div class="login-card">
 
     <div class="icon-3d">🎓</div>
 
-    <h1 class="app-title">
-      Parents Login
-    </h1>
+    <h1 class="app-title">Parents Login</h1>
 
     <p class="app-subtitle">
       Guide your child's learning journey
@@ -485,64 +337,30 @@ body {
       class="btn-google"
       onclick="handleGoogleLogin()"
     >
-
-      <svg
-        class="google-icon-svg"
-        viewBox="0 0 48 48"
-        aria-hidden="true"
-      >
-
-        <path
-          fill="#EA4335"
-          d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
-        />
-
-        <path
-          fill="#4285F4"
-          d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"
-        />
-
-        <path
-          fill="#FBBC05"
-          d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"
-        />
-
-        <path
-          fill="#34A853"
-          d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
-        />
-
+      <svg class="google-icon-svg" viewBox="0 0 48 48" aria-hidden="true">
+        <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+        <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+        <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+        <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
       </svg>
 
       <span>Continue with Google</span>
-
     </button>
 
     <p class="privacy-text">
       By continuing, you agree to our<br>
-
-      <a href="#">Privacy Policy</a>
-      and
+      <a href="#">Privacy Policy</a> and
       <a href="#">Terms of Service</a>
     </p>
 
   </div>
-
 </div>
 
 <div id="loadingOverlay">
-
   <div class="spinner"></div>
-
-  <p class="loading-text">
-    Logging you in...
-  </p>
-
+  <p class="loading-text">Logging you in...</p>
 </div>
-
-<!-- PART 2 YAHAN PASTE KARNA -->
-
-<!-- KIDS TEACHER ANIMATED BACKGROUND -->
+<!-- KIDS TEACHER BACKGROUND -->
 
 <script>
 (() => {
@@ -551,166 +369,101 @@ body {
 
   if (!ctx) return;
 
-  let width = 0;
-  let height = 0;
-  let dpr = 1;
-  let animationId = 0;
+  let W, H, DPR;
+  let raf = 0;
+
+  const rand = (a,b) => a + Math.random() * (b-a);
 
   const clouds = [
-    {x:0.12,y:0.36,s:1.0,speed:0.006},
-    {x:0.78,y:0.43,s:1.25,speed:0.009},
-    {x:0.43,y:0.56,s:0.8,speed:0.004}
+    {x:.18,y:.35,s:.85,v:.012},
+    {x:.72,y:.42,s:1.1,v:.009},
+    {x:.42,y:.55,s:.7,v:.006}
   ];
 
   const butterflies = [
-    {x:0.18,y:0.25,s:1,color:"#FF75B5",phase:0},
-    {x:0.83,y:0.32,s:0.8,color:"#FFD447",phase:2},
-    {x:0.58,y:0.19,s:0.7,color:"#A78BFA",phase:4}
+    {x:.18,y:.27,c:"#FF72A7",p:0},
+    {x:.80,y:.34,c:"#FFD43B",p:2},
+    {x:.57,y:.20,c:"#A78BFA",p:4}
   ];
 
-  const flowers = [];
-
-  for(let i=0;i<35;i++){
-    flowers.push({
-      x:Math.random(),
-      y:0.89+Math.random()*0.08,
-      size:3+Math.random()*4,
-      color:[
-        "#FF6B9D",
-        "#FFD447",
-        "#FFFFFF",
-        "#C084FC",
-        "#FF9F43"
-      ][i%5]
-    });
-  }
+  const flowers = Array.from({length:45},()=>({
+    x:rand(.01,.99),
+    y:rand(.87,.98),
+    s:rand(2,4),
+    c:["#FF6B9D","#FFD447","#FFFFFF","#C084FC","#FF9F43"][Math.floor(Math.random()*5)]
+  }));
 
   function resize(){
-    dpr=Math.min(window.devicePixelRatio||1,2);
+    DPR=Math.min(devicePixelRatio||1,2);
+    W=innerWidth;
+    H=innerHeight;
 
-    width=window.innerWidth;
-    height=window.innerHeight;
+    canvas.width=W*DPR;
+    canvas.height=H*DPR;
 
-    canvas.width=Math.floor(width*dpr);
-    canvas.height=Math.floor(height*dpr);
+    canvas.style.width=W+"px";
+    canvas.style.height=H+"px";
 
-    canvas.style.width=width+"px";
-    canvas.style.height=height+"px";
-
-    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.setTransform(DPR,0,0,DPR,0,0);
   }
 
-  window.addEventListener("resize",resize);
+  addEventListener("resize",resize);
   resize();
 
-  function roundedRect(x,y,w,h,r){
+  function cloud(x,y,s){
+    ctx.save();
+    ctx.translate(x,y);
+
+    ctx.fillStyle="rgba(64,135,190,.12)";
+    ctx.beginPath();
+    ctx.ellipse(0,s*.12,s*.58,s*.22,0,0,Math.PI*2);
+    ctx.fill();
+
+    const g=ctx.createLinearGradient(0,-s*.35,0,s*.28);
+    g.addColorStop(0,"#FFFFFF");
+    g.addColorStop(.7,"#FFFFFF");
+    g.addColorStop(1,"#EAF8FF");
+
+    ctx.fillStyle=g;
     ctx.beginPath();
 
-    ctx.moveTo(x+r,y);
-    ctx.lineTo(x+w-r,y);
-    ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+    ctx.arc(-s*.32,0,s*.23,0,Math.PI*2);
+    ctx.arc(-s*.12,-s*.16,s*.28,0,Math.PI*2);
+    ctx.arc(s*.18,-s*.13,s*.25,0,Math.PI*2);
+    ctx.arc(s*.40,s*.02,s*.18,0,Math.PI*2);
 
-    ctx.lineTo(x+w,y+h-r);
-    ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+    ctx.ellipse(0,s*.08,s*.55,s*.21,0,0,Math.PI*2);
 
-    ctx.lineTo(x+r,y+h);
-    ctx.quadraticCurveTo(x,y+h,x,y+h-r);
-
-    ctx.lineTo(x,y+r);
-    ctx.quadraticCurveTo(x,y,x+r,y);
-
-    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
   }
 
-  function drawSky(){
-    const sky=ctx.createLinearGradient(
-      0,0,0,height
-    );
-
-    sky.addColorStop(0,"#1599F4");
-    sky.addColorStop(0.45,"#45C4FF");
-    sky.addColorStop(0.78,"#A5E8FF");
-    sky.addColorStop(1,"#E6FAFF");
-
-    ctx.fillStyle=sky;
-
-    ctx.fillRect(0,0,width,height);
-
-    // SUN
-
-    const sx=width*0.83;
-    const sy=height*0.16;
-    const sr=Math.min(width,height)*0.055;
-
-    const sunGlow=ctx.createRadialGradient(
-      sx,sy,0,
-      sx,sy,sr*2.5
-    );
-
-    sunGlow.addColorStop(0,"rgba(255,255,190,0.65)");
-    sunGlow.addColorStop(1,"rgba(255,255,190,0)");
-
-    ctx.fillStyle=sunGlow;
-
-    ctx.beginPath();
-    ctx.arc(sx,sy,sr*2.5,0,Math.PI*2);
-    ctx.fill();
-
-    ctx.fillStyle="#FFF5A8";
-
-    ctx.beginPath();
-    ctx.arc(sx,sy,sr,0,Math.PI*2);
-    ctx.fill();
-
-    // SUN FACE
-
-    ctx.fillStyle="#A65D22";
-
-    ctx.beginPath();
-    ctx.arc(sx-sr*0.28,sy-sr*0.05,2.2,0,Math.PI*2);
-    ctx.arc(sx+sr*0.28,sy-sr*0.05,2.2,0,Math.PI*2);
-    ctx.fill();
-
-    ctx.strokeStyle="#A65D22";
-    ctx.lineWidth=1.5;
-
-    ctx.beginPath();
-    ctx.arc(sx,sy+sr*0.05,sr*0.3,0.15,Math.PI-0.15);
-    ctx.stroke();
-  }
-
-  function drawRainbow(){
-    const x=width*0.15;
-    const y=height*0.25;
-
-    const r=Math.min(width*0.34,height*0.27);
+  function rainbow(){
+    const x=W*.18;
+    const y=H*.37;
+    const r=Math.min(W*.40,H*.32);
 
     const colors=[
-      "#FF595E",
-      "#FF924C",
-      "#FFD93D",
-      "#6BCB77",
-      "#4D96FF",
-      "#9B5DE5"
+      "#FF5B69",
+      "#FF9B45",
+      "#FFE04B",
+      "#55D78A",
+      "#42BDF5",
+      "#9B72F2"
     ];
 
     ctx.save();
-
-    ctx.globalAlpha=0.78;
-
     ctx.lineCap="round";
 
     colors.forEach((color,i)=>{
       ctx.beginPath();
-
       ctx.strokeStyle=color;
-
-      ctx.lineWidth=Math.max(5,r*0.075);
+      ctx.lineWidth=Math.max(5,r*.075);
 
       ctx.arc(
         x,
         y,
-        r-i*ctx.lineWidth*1.15,
+        r-i*r*.075,
         Math.PI,
         Math.PI*2
       );
@@ -721,381 +474,245 @@ body {
     ctx.restore();
   }
 
-  function drawCloud(x,y,size){
-    const s=size;
+  function sun(){
+    const x=W*.83;
+    const y=H*.18;
+    const r=Math.min(W,H)*.055;
 
-    ctx.save();
+    const glow=ctx.createRadialGradient(x,y,r*.2,x,y,r*2.6);
+    glow.addColorStop(0,"rgba(255,248,173,.75)");
+    glow.addColorStop(1,"rgba(255,248,173,0)");
 
-    ctx.translate(x,y);
-
-    // cloud shadow
-
-    ctx.fillStyle="rgba(72,154,210,0.12)";
-
+    ctx.fillStyle=glow;
     ctx.beginPath();
-
-    ctx.ellipse(
-      0,
-      s*0.10,
-      s*0.62,
-      s*0.20,
-      0,0,Math.PI*2
-    );
-
+    ctx.arc(x,y,r*2.6,0,Math.PI*2);
     ctx.fill();
 
-    // fluffy cloud
-
-    const cloudGradient=ctx.createLinearGradient(
-      0,-s*0.35,
-      0,s*0.3
-    );
-
-    cloudGradient.addColorStop(0,"#FFFFFF");
-    cloudGradient.addColorStop(0.65,"#FFFFFF");
-    cloudGradient.addColorStop(1,"#EAF8FF");
-
-    ctx.fillStyle=cloudGradient;
-
+    ctx.fillStyle="#FFF2A0";
     ctx.beginPath();
-
-    ctx.arc(-s*0.30,0,s*0.22,0,Math.PI*2);
-
-    ctx.arc(-s*0.08,-s*0.13,s*0.28,0,Math.PI*2);
-
-    ctx.arc(s*0.20,-s*0.12,s*0.24,0,Math.PI*2);
-
-    ctx.arc(s*0.40,s*0.02,s*0.18,0,Math.PI*2);
-
-    ctx.ellipse(
-      s*0.05,
-      s*0.06,
-      s*0.53,
-      s*0.20,
-      0,0,Math.PI*2
-    );
-
+    ctx.arc(x,y,r,0,Math.PI*2);
     ctx.fill();
 
-    ctx.restore();
+    ctx.fillStyle="#A65D22";
+
+    ctx.beginPath();
+    ctx.arc(x-r*.28,y-r*.05,2,0,Math.PI*2);
+    ctx.arc(x+r*.28,y-r*.05,2,0,Math.PI*2);
+    ctx.fill();
+
+    ctx.strokeStyle="#A65D22";
+    ctx.lineWidth=1.5;
+
+    ctx.beginPath();
+    ctx.arc(x,y+r*.05,r*.3,.15,Math.PI-.15);
+    ctx.stroke();
   }
 
-  function drawHills(){
-    // FAR HILL
+  function hills(){
+    // Distant hill
 
-    ctx.fillStyle="#8BE4A1";
-
+    ctx.fillStyle="#9AE7AD";
     ctx.beginPath();
 
-    ctx.moveTo(0,height*0.70);
+    ctx.moveTo(0,H*.69);
 
     ctx.bezierCurveTo(
-      width*0.25,height*0.58,
-      width*0.48,height*0.77,
-      width*0.65,height*0.68
+      W*.20,H*.57,
+      W*.42,H*.76,
+      W*.62,H*.68
     );
 
     ctx.bezierCurveTo(
-      width*0.82,height*0.58,
-      width*0.92,height*0.65,
-      width,height*0.62
+      W*.82,H*.57,
+      W*.92,H*.64,
+      W,H*.62
     );
 
-    ctx.lineTo(width,height);
-    ctx.lineTo(0,height);
-
+    ctx.lineTo(W,H);
+    ctx.lineTo(0,H);
     ctx.closePath();
     ctx.fill();
 
-    // NEAR HILL
+    // Main hill
 
-    const grass=ctx.createLinearGradient(
-      0,height*0.70,
-      0,height
-    );
+    const g=ctx.createLinearGradient(0,H*.68,0,H);
+    g.addColorStop(0,"#70DE83");
+    g.addColorStop(1,"#38B96A");
 
-    grass.addColorStop(0,"#67D66D");
-    grass.addColorStop(1,"#2FAE68");
-
-    ctx.fillStyle=grass;
-
+    ctx.fillStyle=g;
     ctx.beginPath();
 
-    ctx.moveTo(0,height*0.81);
+    ctx.moveTo(0,H*.82);
 
     ctx.bezierCurveTo(
-      width*0.22,height*0.70,
-      width*0.45,height*0.84,
-      width*0.60,height*0.78
+      W*.20,H*.70,
+      W*.43,H*.84,
+      W*.60,H*.78
     );
 
     ctx.bezierCurveTo(
-      width*0.78,height*0.69,
-      width*0.90,height*0.74,
-      width,height*0.70
+      W*.78,H*.68,
+      W*.91,H*.75,
+      W,H*.70
     );
 
-    ctx.lineTo(width,height);
-    ctx.lineTo(0,height);
-
+    ctx.lineTo(W,H);
+    ctx.lineTo(0,H);
     ctx.closePath();
     ctx.fill();
   }
 
-  function drawTree(x,y,size){
+  function tree(x,y,s){
     ctx.save();
-
     ctx.translate(x,y);
 
-    // trunk
-
-    ctx.fillStyle="#9A5B35";
-
-    roundedRect(
-      -size*0.10,
-      -size*0.45,
-      size*0.20,
-      size*0.55,
-      size*0.06
-    );
-
-    ctx.fill();
-
-    // leaves
+    ctx.fillStyle="#965C38";
+    ctx.fillRect(-s*.07,-s*.38,s*.14,s*.45);
 
     const leaves=[
-      [0,-size*0.70,size*0.36,"#37C96B"],
-      [-size*0.22,-size*0.54,size*0.29,"#4AD17D"],
-      [size*0.22,-size*0.54,size*0.29,"#29B965"],
-      [0,-size*0.40,size*0.30,"#60D987"]
+      [0,-s*.65,s*.34,"#36C96B"],
+      [-s*.20,-s*.49,s*.27,"#4AD17D"],
+      [s*.20,-s*.49,s*.27,"#29B965"],
+      [0,-s*.36,s*.25,"#60D987"]
     ];
 
-    leaves.forEach(item=>{
-      ctx.fillStyle=item[3];
-
+    leaves.forEach(a=>{
+      ctx.fillStyle=a[3];
       ctx.beginPath();
-
-      ctx.arc(
-        item[0],
-        item[1],
-        item[2],
-        0,
-        Math.PI*2
-      );
-
+      ctx.arc(a[0],a[1],a[2],0,Math.PI*2);
       ctx.fill();
     });
 
     ctx.restore();
   }
 
-  function drawFlower(x,y,size,color){
-    ctx.save();
-
-    ctx.translate(x,y);
-
-    // stem
+  function flower(f){
+    const x=f.x*W;
+    const y=f.y*H;
 
     ctx.strokeStyle="#278C4B";
     ctx.lineWidth=1.5;
 
     ctx.beginPath();
-
-    ctx.moveTo(0,0);
-    ctx.lineTo(0,size*3);
-
+    ctx.moveTo(x,y);
+    ctx.lineTo(x,y+f.s*3);
     ctx.stroke();
 
-    // petals
-
-    ctx.fillStyle=color;
+    ctx.fillStyle=f.c;
 
     for(let i=0;i<5;i++){
       const a=i*Math.PI*2/5;
 
       ctx.beginPath();
-
       ctx.ellipse(
-        Math.cos(a)*size*0.7,
-        Math.sin(a)*size*0.7,
-        size*0.55,
-        size*0.42,
+        x+Math.cos(a)*f.s*.7,
+        y+Math.sin(a)*f.s*.7,
+        f.s*.55,
+        f.s*.42,
         a,
         0,
         Math.PI*2
       );
-
       ctx.fill();
     }
 
-    // center
-
     ctx.fillStyle="#FFD84D";
-
     ctx.beginPath();
-
-    ctx.arc(0,0,size*0.35,0,Math.PI*2);
-
+    ctx.arc(x,y,f.s*.35,0,Math.PI*2);
     ctx.fill();
-
-    ctx.restore();
   }
 
-  function drawButterfly(b,t){
-    const x=b.x*width+
-      Math.sin(t*0.001+b.phase)*width*0.025;
-
-    const y=b.y*height+
-      Math.sin(t*0.002+b.phase)*height*0.018;
-
-    const flap=Math.abs(
-      Math.sin(t*0.012+b.phase)
-    );
+  function butterfly(b,t){
+    const x=b.x*W+Math.sin(t*.001+b.p)*W*.02;
+    const y=b.y*H+Math.sin(t*.002+b.p)*H*.015;
+    const flap=Math.abs(Math.sin(t*.012+b.p));
 
     ctx.save();
-
     ctx.translate(x,y);
+    ctx.rotate(Math.sin(t*.001+b.p)*.15);
 
-    ctx.rotate(
-      Math.sin(t*0.001+b.phase)*0.2
-    );
-
-    ctx.fillStyle=b.color;
-
-    // left wing
+    ctx.fillStyle=b.c;
 
     ctx.beginPath();
-
-    ctx.ellipse(
-      -5,-2,
-      5+flap*4,
-      7,
-      -0.3,
-      0,
-      Math.PI*2
-    );
-
+    ctx.ellipse(-5,-2,5+flap*3,7,-.3,0,Math.PI*2);
     ctx.fill();
-
-    // right wing
 
     ctx.beginPath();
-
-    ctx.ellipse(
-      5,-2,
-      5+flap*4,
-      7,
-      0.3,
-      0,
-      Math.PI*2
-    );
-
+    ctx.ellipse(5,-2,5+flap*3,7,.3,0,Math.PI*2);
     ctx.fill();
 
-    // body
-
-    ctx.fillStyle="#5B3B38";
-
-    ctx.beginPath();
-
-    ctx.ellipse(
-      0,0,
-      1.5,5,
-      0,0,Math.PI*2
-    );
-
-    ctx.fill();
+    ctx.fillStyle="#65423B";
+    ctx.fillRect(-1, -4, 2, 9);
 
     ctx.restore();
   }
 
-  function drawBackground(t){
-    drawSky();
-
-    drawRainbow();
-
-    // clouds move slowly
-
-    clouds.forEach(c=>{
-      c.x+=c.speed;
-
-      if(c.x>1.25){
-        c.x=-0.25;
-      }
-
-      drawCloud(
-        c.x*width,
-        c.y*height+
-          Math.sin(t*0.0005+c.x)*8,
-        Math.min(width,height)*0.16*c.s
-      );
-    });
-
-    drawHills();
-
-    drawTree(
-      width*0.08,
-      height*0.83,
-      Math.min(width,height)*0.18
-    );
-
-    drawTree(
-      width*0.92,
-      height*0.80,
-      Math.min(width,height)*0.16
-    );
-
-    // flowers
-
-    flowers.forEach(f=>{
-      drawFlower(
-        f.x*width,
-        f.y*height,
-        f.size,
-        f.color
-      );
-    });
-
-    // butterflies
-
-    butterflies.forEach(b=>{
-      drawButterfly(b,t);
-    });
-  }
-
-  function animate(t){
+  function draw(t){
     if(document.hidden){
-      animationId=0;
+      raf=0;
       return;
     }
 
-    ctx.clearRect(0,0,width,height);
+    ctx.clearRect(0,0,W,H);
 
-    drawBackground(t);
+    // Sky
 
-    animationId=requestAnimationFrame(animate);
+    const sky=ctx.createLinearGradient(0,0,0,H);
+    sky.addColorStop(0,"#169BF4");
+    sky.addColorStop(.45,"#43C2FF");
+    sky.addColorStop(.78,"#A8E9FF");
+    sky.addColorStop(1,"#E6FAFF");
+
+    ctx.fillStyle=sky;
+    ctx.fillRect(0,0,W,H);
+
+    sun();
+    rainbow();
+
+    // Moving clouds
+
+    clouds.forEach(c=>{
+      c.x+=c.v;
+
+      if(c.x>1.3)c.x=-.3;
+
+      cloud(
+        c.x*W,
+        c.y*H+Math.sin(t*.0005+c.x)*7,
+        Math.min(W,H)*.15*c.s
+      );
+    });
+
+    hills();
+
+    // Trees on the visible hills
+
+    tree(W*.08,H*.87,Math.min(W,H)*.17);
+    tree(W*.92,H*.84,Math.min(W,H)*.15);
+
+    flowers.forEach(f=>flower(f));
+
+    butterflies.forEach(b=>butterfly(b,t));
+
+    raf=requestAnimationFrame(draw);
   }
 
   function start(){
-    if(!animationId){
-      animationId=requestAnimationFrame(animate);
+    if(!raf){
+      raf=requestAnimationFrame(draw);
     }
   }
 
-  document.addEventListener(
-    "visibilitychange",
-    ()=>{
-      if(document.hidden){
-        cancelAnimationFrame(animationId);
-        animationId=0;
-      } else {
-        start();
-      }
+  document.addEventListener("visibilitychange",()=>{
+    if(document.hidden){
+      cancelAnimationFrame(raf);
+      raf=0;
+    }else{
+      start();
     }
-  );
+  });
 
   start();
-
 })();
 </script>
 
@@ -1116,8 +733,6 @@ import {
   browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-/* FIREBASE CONFIG */
-
 const firebaseConfig = {
   apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
   authDomain: "kids-teacher-4387e.firebaseapp.com",
@@ -1127,78 +742,48 @@ const firebaseConfig = {
   appId: "1:420221167346:web:da7ac80acdfd52339d526b"
 };
 
-/* INITIALIZE FIREBASE */
-
 const app = initializeApp(firebaseConfig);
-
 const auth = getAuth(app);
 
-const overlay = document.getElementById(
-  "loadingOverlay"
-);
+const overlay=document.getElementById("loadingOverlay");
+const googleBtn=document.getElementById("googleBtn");
 
-const googleBtn = document.getElementById(
-  "googleBtn"
-);
-
-/* LOGIN PERSISTENCE */
-
-setPersistence(
-  auth,
-  browserLocalPersistence
-).catch(error=>{
+setPersistence(auth,browserLocalPersistence)
+.catch(error=>{
   console.error("Persistence error:",error);
 });
 
-/* CHECK EXISTING LOGIN */
-
-onAuthStateChanged(
-  auth,
-
-  user=>{
-    if(!user){
-      overlay.style.display="none";
-      return;
-    }
-
-    overlay.style.display="flex";
-
-    const savedAge=localStorage.getItem(
-      "kidsAgeGroup"
-    );
-
-    setTimeout(()=>{
-      const destination=!savedAge
-        ? "age-select.html"
-        : "index-home.html";
-
-      window.location.replace(destination);
-    },800);
-  },
-
-  error=>{
-    console.error("Auth state error:",error);
-
+onAuthStateChanged(auth,user=>{
+  if(!user){
     overlay.style.display="none";
-  }
-);
-
-/* GOOGLE LOGIN */
-
-window.handleGoogleLogin=async function(){
-
-  if(googleBtn.disabled){
     return;
   }
+
+  overlay.style.display="flex";
+
+  const savedAge=localStorage.getItem("kidsAgeGroup");
+
+  setTimeout(()=>{
+    window.location.replace(
+      savedAge ? "index-home.html" : "age-select.html"
+    );
+  },800);
+
+},error=>{
+  console.error("Auth state error:",error);
+  overlay.style.display="none";
+});
+
+window.handleGoogleLogin=async function(){
+  if(googleBtn.disabled)return;
 
   if(navigator.vibrate){
     navigator.vibrate(50);
   }
 
-  const originalHTML=googleBtn.innerHTML;
+  const original=googleBtn.innerHTML;
 
   googleBtn.disabled=true;
-
   googleBtn.innerHTML="<span>Connecting...</span>";
 
   const provider=new GoogleAuthProvider();
@@ -1210,53 +795,32 @@ window.handleGoogleLogin=async function(){
   try{
     overlay.style.display="flex";
 
-    await signInWithPopup(
-      auth,
-      provider
-    );
+    await signInWithPopup(auth,provider);
 
   }catch(error){
-
     console.error("Google login error:",error);
 
     overlay.style.display="none";
 
-    googleBtn.innerHTML=originalHTML;
-
     googleBtn.disabled=false;
+    googleBtn.innerHTML=original;
 
-    if(
-      error.code!==
-      "auth/popup-closed-by-user"
-    ){
-      alert(
-        "Login failed. Please try again."
-      );
+    if(error.code!=="auth/popup-closed-by-user"){
+      alert("Login failed. Please try again.");
     }
   }
 };
 
-/* SERVICE WORKER */
-
 if("serviceWorker" in navigator){
-
   window.addEventListener("load",()=>{
-
-    navigator.serviceWorker.register(
-      "./service-worker.js"
-    ).catch(error=>{
-      console.error(
-        "Service worker error:",
-        error
-      );
+    navigator.serviceWorker.register("./service-worker.js")
+    .catch(error=>{
+      console.error("Service worker error:",error);
     });
-
   });
-
 }
 
 </script>
 
 </body>
 </html>
-
