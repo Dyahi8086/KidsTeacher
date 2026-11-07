@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
 <meta name="theme-color" content="#38BDF8">
 
 <title>Parents Login - Kids Teacher</title>
@@ -30,12 +31,16 @@ body {
 }
 
 body {
-  min-height: 100vh;
-  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
+
   display: flex;
   flex-direction: column;
+
   font-family: 'Nunito', sans-serif;
+
   position: relative;
+
   background: linear-gradient(
     180deg,
     #38BDF8 0%,
@@ -44,73 +49,77 @@ body {
   );
 }
 
-/* =========================
-   ANIMATED SKY BACKGROUND
-========================= */
+/* BACKGROUND */
 
 #cloud-canvas {
   position: fixed;
   inset: 0;
+
   width: 100%;
   height: 100%;
-  display: block;
+
   z-index: 0;
+
   pointer-events: none;
 }
 
-/* =========================
-   LOGIN CONTAINER
-========================= */
+/* LOGIN CONTAINER */
 
 .login-container {
   position: relative;
+
   width: 100%;
   height: 100%;
   height: 100dvh;
 
   display: flex;
   flex-direction: column;
+
   justify-content: flex-end;
   align-items: center;
 
   z-index: 10;
 
   overflow-y: auto;
+
   overscroll-behavior: contain;
+
   -webkit-overflow-scrolling: touch;
 
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-/* =========================
-   LOGIN CARD
-========================= */
+/* LOGIN CARD */
 
 .login-card {
   width: 100%;
   max-width: 450px;
+
   min-height: 55vh;
 
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.28);
 
-  backdrop-filter: blur(30px) saturate(200%);
-  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
 
   border-radius: 40px 40px 0 0;
 
-  border-top: 1px solid rgba(255, 255, 255, 0.8);
-  border-left: 1px solid rgba(255, 255, 255, 0.4);
-  border-right: 1px solid rgba(255, 255, 255, 0.4);
+  border-top: 1px solid rgba(255,255,255,0.8);
+
+  border-left: 1px solid rgba(255,255,255,0.4);
+
+  border-right: 1px solid rgba(255,255,255,0.4);
 
   box-shadow:
-    inset 0 1px 2px rgba(255, 255, 255, 1),
-    inset 0 -1px 20px rgba(255, 255, 255, 0.3),
-    0 -15px 40px rgba(0, 0, 0, 0.2);
+    inset 0 1px 2px rgba(255,255,255,0.8),
+    inset 0 -1px 20px rgba(255,255,255,0.2),
+    0 -10px 35px rgba(0,0,0,0.12);
 
   padding: 40px 25px calc(40px + env(safe-area-inset-bottom));
 
   display: flex;
   flex-direction: column;
+
   align-items: center;
   justify-content: center;
 
@@ -142,25 +151,24 @@ body {
   }
 }
 
-/* Pull bar */
+/* PULL BAR */
 
 .login-card::before {
   content: '';
 
   position: absolute;
+
   top: 12px;
 
   width: 50px;
   height: 5px;
 
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255,255,255,0.65);
 
   border-radius: 10px;
 }
 
-/* =========================
-   ICON
-========================= */
+/* ICON */
 
 .icon-3d {
   font-size: 60px;
@@ -169,18 +177,17 @@ body {
   margin-bottom: 10px;
 
   filter: drop-shadow(
-    0 8px 12px rgba(0, 0, 0, 0.2)
+    0 8px 12px rgba(0,0,0,0.2)
   );
 }
 
-/* =========================
-   TEXT
-========================= */
+/* TITLE */
 
 .app-title {
   font-family: 'Fredoka', sans-serif;
 
   font-size: 34px;
+
   font-weight: 700;
 
   letter-spacing: -0.5px;
@@ -189,6 +196,8 @@ body {
 
   color: #0f172a;
 }
+
+/* SUBTITLE */
 
 .app-subtitle {
   font-family: 'Nunito', sans-serif;
@@ -206,20 +215,18 @@ body {
   line-height: 1.4;
 }
 
-/* =========================
-   GOOGLE BUTTON
-========================= */
+/* GOOGLE BUTTON */
 
 .btn-google {
   width: 100%;
 
   padding: 18px 15px;
 
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255,255,255,0.92);
 
   color: #0f172a;
 
-  border: 1px solid rgba(255, 255, 255, 1);
+  border: 1px solid rgba(255,255,255,1);
 
   border-radius: 50px;
 
@@ -238,18 +245,21 @@ body {
   gap: 10px;
 
   position: relative;
+
   overflow: hidden;
 
   box-shadow:
-    0 8px 20px rgba(0, 0, 0, 0.1),
-    inset 0 2px 2px rgba(255, 255, 255, 1);
+    0 8px 20px rgba(0,0,0,0.1),
+    inset 0 2px 2px rgba(255,255,255,1);
 
-  transition: transform 0.15s ease;
+  transition: all 0.15s ease;
 
   margin-bottom: 25px;
 
   z-index: 100;
 }
+
+/* BUTTON TEXT */
 
 .btn-google span {
   display: inline-block;
@@ -258,8 +268,7 @@ body {
 }
 
 @keyframes textBounce {
-  0%,
-  100% {
+  0%, 100% {
     transform: translateY(0);
   }
 
@@ -268,7 +277,7 @@ body {
   }
 }
 
-/* Button shine */
+/* BUTTON SHINE */
 
 .btn-google::after {
   content: '';
@@ -325,9 +334,7 @@ body {
   flex-shrink: 0;
 }
 
-/* =========================
-   PRIVACY
-========================= */
+/* PRIVACY */
 
 .privacy-text {
   font-family: 'Nunito', sans-serif;
@@ -347,12 +354,11 @@ body {
 
 .privacy-text a {
   color: #0f172a;
+
   text-decoration: underline;
 }
 
-/* =========================
-   LOADING
-========================= */
+/* LOADING */
 
 #loadingOverlay {
   display: none;
@@ -362,10 +368,10 @@ body {
   inset: 0;
 
   width: 100%;
-  height: 100%;
+  height: 100vh;
   height: 100dvh;
 
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255,255,255,0.9);
 
   backdrop-filter: blur(10px);
 
@@ -408,20 +414,22 @@ body {
   font-weight: 600;
 }
 
-/* =========================
-   SMALL MOBILE
-========================= */
+/* SMALL MOBILE */
 
 @media (max-height: 650px) {
   .login-card {
     min-height: auto;
 
     padding-top: 30px;
-    padding-bottom: calc(25px + env(safe-area-inset-bottom));
+
+    padding-bottom: calc(
+      25px + env(safe-area-inset-bottom)
+    );
   }
 
   .icon-3d {
     font-size: 48px;
+
     margin-top: 5px;
     margin-bottom: 5px;
   }
@@ -436,19 +444,20 @@ body {
 
   .btn-google {
     padding: 15px;
+
     margin-bottom: 20px;
   }
 }
 
-/* Reduced animation preference */
+/* REDUCED MOTION */
 
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+
     animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
   }
 }
 </style>
@@ -456,7 +465,7 @@ body {
 
 <body>
 
-<!-- SKY CANVAS -->
+<!-- BACKGROUND CANVAS -->
 
 <canvas id="cloud-canvas"></canvas>
 
@@ -468,7 +477,9 @@ body {
 
     <div class="icon-3d">🎓</div>
 
-    <h1 class="app-title">Parents Login</h1>
+    <h1 class="app-title">
+      Parents Login
+    </h1>
 
     <p class="app-subtitle">
       Guide your child's learning journey
@@ -486,6 +497,7 @@ body {
         viewBox="0 0 48 48"
         aria-hidden="true"
       >
+
         <path
           fill="#EA4335"
           d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
@@ -505,6 +517,7 @@ body {
           fill="#34A853"
           d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
         />
+
       </svg>
 
       <span>Continue with Google</span>
@@ -520,9 +533,10 @@ body {
     </p>
 
   </div>
+
 </div>
 
-<!-- LOADING -->
+<!-- LOADING OVERLAY -->
 
 <div id="loadingOverlay">
 
@@ -534,9 +548,9 @@ body {
 
 </div>
 
-<!-- =========================
-     ANIMATED CLOUD SHADER
-========================= -->
+<!-- PART 2 YAHAN SE PASTE KARNA -->
+  
+<!-- KIDS CARTOON SKY BACKGROUND -->
 
 <script>
 (() => {
@@ -546,43 +560,36 @@ body {
 
   const gl = canvas.getContext("webgl", {
     alpha: false,
-    antialias: false,
-    premultipliedAlpha: false
+    antialias: false
   });
 
-  // Fallback background remains blue if WebGL is unavailable.
   if (!gl) {
-    console.warn("WebGL unavailable. Using CSS sky background.");
+    canvas.style.display = "none";
     return;
   }
 
-  const vertexShaderSource = `
-    attribute vec2 a_pos;
-    varying vec2 v_uv;
+  const vertex = `
+    attribute vec2 position;
+    varying vec2 uv;
 
     void main() {
-      v_uv = a_pos * 0.5 + 0.5;
-      gl_Position = vec4(a_pos, 0.0, 1.0);
+      uv = position * 0.5 + 0.5;
+      gl_Position = vec4(position, 0.0, 1.0);
     }
   `;
 
-  const fragmentShaderSource = `
-    precision highp float;
+  const fragment = `
+    precision mediump float;
 
-    varying vec2 v_uv;
+    varying vec2 uv;
 
-    uniform vec2 u_res;
-    uniform float u_time;
-
-    const mat2 ROT = mat2(
-      0.80, 0.60,
-      -0.60, 0.80
-    );
+    uniform vec2 resolution;
+    uniform float time;
 
     float hash(vec2 p) {
       return fract(
-        sin(dot(p, vec2(41.31, 289.17)))
-        * 26737.367
+        sin(dot(p, vec2(127.1, 311.7)))
+        * 43758.5
       );
     }
 
@@ -590,408 +597,142 @@ body {
       vec2 i = floor(p);
       vec2 f = fract(p);
 
-      f = f * f * (3.0 - 2.0 * f);
-
-      float a = hash(i);
-      float b = hash(i + vec2(1.0, 0.0));
-      float c = hash(i + vec2(0.0, 1.0));
-      float d = hash(i + vec2(1.0, 1.0));
+      f = f*f*(3.0-2.0*f);
 
       return mix(
-        mix(a, b, f.x),
-        mix(c, d, f.x),
+        mix(
+          hash(i),
+          hash(i+vec2(1.0,0.0)),
+          f.x
+        ),
+        mix(
+          hash(i+vec2(0.0,1.0)),
+          hash(i+vec2(1.0,1.0)),
+          f.x
+        ),
         f.y
       );
     }
 
     float fbm(vec2 p) {
       float value = 0.0;
-      float amplitude = 0.5;
+      float amp = 0.5;
 
-      for (int i = 0; i < 4; i++) {
-        value += amplitude * noise(p);
-
-        p = ROT * p * 2.03 + 19.19;
-
-        amplitude *= 0.5;
+      for(int i=0;i<4;i++) {
+        value += noise(p)*amp;
+        p = p*2.0+13.1;
+        amp *= 0.5;
       }
 
       return value;
-    }
-
-    float billow(vec2 p) {
-      float value = 0.0;
-      float amplitude = 0.5;
-
-      for (int i = 0; i < 5; i++) {
-        value += amplitude *
-          (1.0 - abs(2.0 * noise(p) - 1.0));
-
-        p = ROT * p * 2.11 + 13.37;
-
-        amplitude *= 0.5;
-      }
-
-      return value;
-    }
-
-    float cloudDensity(
-      vec2 p,
-      vec2 center,
-      vec2 radius,
-      float seed,
-      float time
-    ) {
-      vec2 q = p - center;
-
-      float ry = q.y > 0.0
-        ? radius.y
-        : radius.y * 0.42;
-
-      float envelope =
-        1.0 - length(
-          vec2(
-            q.x / radius.x,
-            q.y / ry
-          )
-        );
-
-      if (envelope < -0.35) {
-        return 0.0;
-      }
-
-      vec2 dp =
-        q * (2.4 / radius.x)
-        + vec2(seed);
-
-      dp += 0.6 * vec2(
-        fbm(dp * 1.4 + time * 0.04),
-        fbm(dp * 1.4 + 7.7 - time * 0.03)
-      );
-
-      float detail = billow(dp * 1.6);
-
-      return envelope + (detail - 0.62) * 0.62;
-    }
-
-    vec3 shadeCloud(
-      vec3 color,
-      vec2 p,
-      vec2 center,
-      vec2 radius,
-      float seed,
-      float time
-    ) {
-      float density = cloudDensity(
-        p,
-        center,
-        radius,
-        seed,
-        time
-      );
-
-      if (density < 0.02) {
-        return color;
-      }
-
-      float upperDensity = cloudDensity(
-        p + vec2(0.0, radius.y * 0.55),
-        center,
-        radius,
-        seed,
-        time
-      );
-
-      float occlusion = clamp(
-        (upperDensity - density) * 1.1
-        + density * 0.55,
-        0.0,
-        1.0
-      );
-
-      vec3 cloudLight = vec3(
-        1.0,
-        0.99,
-        0.97
-      );
-
-      vec3 cloudShadow = vec3(
-        0.72,
-        0.86,
-        0.96
-      );
-
-      vec3 cloudColor = mix(
-        cloudLight,
-        cloudShadow,
-        occlusion * 0.85
-      );
-
-      float alpha = smoothstep(
-        0.02,
-        0.38,
-        density
-      );
-
-      float rim =
-        smoothstep(0.02, 0.14, density)
-        * (1.0 - smoothstep(0.14, 0.40, density));
-
-      cloudColor += rim * 0.10;
-
-      return mix(
-        color,
-        cloudColor,
-        alpha
-      );
-    }
-
-    vec3 cloudPass(
-      vec3 color,
-      vec2 p,
-      float aspect,
-      float time,
-      float speed,
-      float phase,
-      float y,
-      vec2 radius,
-      float seed
-    ) {
-      float progress = fract(
-        time * speed + phase
-      );
-
-      float centerX = mix(
-        -radius.x - 0.25,
-        aspect + radius.x + 0.25,
-        progress
-      );
-
-      float centerY =
-        y + sin(time * 0.05 + phase * 6.2831)
-        * 0.012;
-
-      return shadeCloud(
-        color,
-        p,
-        vec2(centerX, centerY),
-        radius,
-        seed,
-        time
-      );
     }
 
     void main() {
-      float aspect = u_res.x / u_res.y;
+      vec2 p = uv;
 
-      vec2 p = vec2(
-        v_uv.x * aspect,
-        v_uv.y
-      );
-
-      float time = u_time;
+      float aspect = resolution.x/resolution.y;
 
       // BLUE SKY
-      vec3 skyTop = vec3(
-        0.10,
-        0.62,
-        0.98
+      vec3 sky = mix(
+        vec3(0.45,0.82,1.0),
+        vec3(0.05,0.55,0.96),
+        uv.y
       );
 
-      vec3 skyBottom = vec3(
-        0.48,
-        0.84,
-        1.00
+      // CLOUD TEXTURE
+      vec2 cloudP = vec2(
+        p.x*aspect*2.0 + time*0.025,
+        p.y*3.0
       );
 
-      vec3 color = mix(
-        skyBottom,
-        skyTop,
-        v_uv.y
-      );
+      float n = fbm(cloudP*2.0);
 
-      // Soft sunlight
-      vec2 sunPosition = vec2(
-        aspect * 0.78,
-        0.92
-      );
+      float cloudShape =
+        smoothstep(0.48,0.72,n) *
+        smoothstep(0.20,0.42,p.y);
 
-      float sunDistance = length(
-        p - sunPosition
-      );
-
-      color += vec3(
+      vec3 cloudColor = vec3(
         1.0,
-        0.96,
-        0.82
-      ) * exp(
-        -sunDistance * sunDistance * 5.0
-      ) * 0.18;
-
-      // High cirrus clouds
-      float cirrusBand =
-        smoothstep(0.55, 0.80, v_uv.y)
-        * (1.0 - smoothstep(0.90, 1.0, v_uv.y));
-
-      float streak = fbm(
-        vec2(
-          p.x * 1.6 - time * 0.006,
-          p.y * 12.0
-        )
+        0.98,
+        0.94
       );
 
-      float wisps =
-        smoothstep(0.52, 0.78, streak)
-        * cirrusBand;
-
-      color = mix(
-        color,
-        vec3(0.96, 0.98, 1.0),
-        wisps * 0.25
+      sky = mix(
+        sky,
+        cloudColor,
+        cloudShape*0.8
       );
 
-      // Distant clouds
-      color = cloudPass(
-        color, p, aspect, time,
-        0.006, 0.10, 0.84,
-        vec2(0.20, 0.10), 43.7
+      // SUN
+      float sun = length(
+        p-vec2(0.78,0.88)
       );
 
-      color = cloudPass(
-        color, p, aspect, time,
-        0.008, 0.62, 0.73,
-        vec2(0.24, 0.12), 71.3
-      );
+      sky += vec3(1.0,0.9,0.6) *
+        exp(-sun*sun*8.0)*0.15;
 
-      color = cloudPass(
-        color, p, aspect, time,
-        0.011, 0.33, 0.60,
-        vec2(0.34, 0.16), 17.3
-      );
-
-      color = cloudPass(
-        color, p, aspect, time,
-        0.013, 0.80, 0.47,
-        vec2(0.30, 0.15), 29.9
-      );
-
-      color = cloudPass(
-        color, p, aspect, time,
-        0.016, 0.05, 0.35,
-        vec2(0.46, 0.20), 91.1
-      );
-
-      // Foreground clouds
-      color = cloudPass(
-        color, p, aspect, time,
-        0.020, 0.48, 0.20,
-        vec2(0.56, 0.24), 57.2
-      );
-
-      gl_FragColor = vec4(color, 1.0);
+      gl_FragColor = vec4(sky,1.0);
     }
   `;
 
-  function compileShader(type, source) {
-    const shader = gl.createShader(type);
+  function createShader(type, source) {
+    const s = gl.createShader(type);
 
-    if (!shader) {
-      throw new Error("Unable to create shader");
+    gl.shaderSource(s, source);
+    gl.compileShader(s);
+
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+      console.error(gl.getShaderInfoLog(s));
+      throw new Error("Shader compile error");
     }
 
-    gl.shaderSource(shader, source);
-    gl.compileShader(shader);
-
-    if (!gl.getShaderParameter(
-      shader,
-      gl.COMPILE_STATUS
-    )) {
-      const error = gl.getShaderInfoLog(shader);
-
-      gl.deleteShader(shader);
-
-      throw new Error(
-        "Shader compile failed: " + error
-      );
-    }
-
-    return shader;
+    return s;
   }
 
-  let program;
-  let animationFrame = 0;
-
   try {
-    const vertexShader = compileShader(
-      gl.VERTEX_SHADER,
-      vertexShaderSource
+    const program = gl.createProgram();
+
+    gl.attachShader(
+      program,
+      createShader(gl.VERTEX_SHADER, vertex)
     );
 
-    const fragmentShader = compileShader(
-      gl.FRAGMENT_SHADER,
-      fragmentShaderSource
+    gl.attachShader(
+      program,
+      createShader(gl.FRAGMENT_SHADER, fragment)
     );
-
-    program = gl.createProgram();
-
-    if (!program) {
-      throw new Error("Unable to create WebGL program");
-    }
-
-    gl.attachShader(program, vertexShader);
-    gl.attachShader(program, fragmentShader);
 
     gl.linkProgram(program);
 
-    if (!gl.getProgramParameter(
-      program,
-      gl.LINK_STATUS
-    )) {
-      throw new Error(
-        "Program link failed: " +
-        gl.getProgramInfoLog(program)
-      );
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      throw new Error(gl.getProgramInfoLog(program));
     }
 
     gl.useProgram(program);
 
-    const positionLocation = gl.getAttribLocation(
-      program,
-      "a_pos"
-    );
-
-    const resolutionLocation = gl.getUniformLocation(
-      program,
-      "u_res"
-    );
-
-    const timeLocation = gl.getUniformLocation(
-      program,
-      "u_time"
-    );
-
     const buffer = gl.createBuffer();
-
-    if (!buffer) {
-      throw new Error("Unable to create buffer");
-    }
 
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
 
     gl.bufferData(
       gl.ARRAY_BUFFER,
       new Float32Array([
-        -1, -1,
-         3, -1,
-        -1,  3
+        -1,-1,
+         3,-1,
+        -1, 3
       ]),
       gl.STATIC_DRAW
     );
 
-    gl.enableVertexAttribArray(positionLocation);
+    const position = gl.getAttribLocation(
+      program,
+      "position"
+    );
+
+    gl.enableVertexAttribArray(position);
 
     gl.vertexAttribPointer(
-      positionLocation,
+      position,
       2,
       gl.FLOAT,
       false,
@@ -999,7 +740,17 @@ body {
       0
     );
 
-    function resizeCanvas() {
+    const resolution = gl.getUniformLocation(
+      program,
+      "resolution"
+    );
+
+    const time = gl.getUniformLocation(
+      program,
+      "time"
+    );
+
+    function resize() {
       const dpr = Math.min(
         window.devicePixelRatio || 1,
         1.5
@@ -1007,67 +758,47 @@ body {
 
       const width = Math.max(
         1,
-        Math.floor(canvas.clientWidth * dpr)
+        Math.floor(canvas.clientWidth*dpr)
       );
 
       const height = Math.max(
         1,
-        Math.floor(canvas.clientHeight * dpr)
+        Math.floor(canvas.clientHeight*dpr)
       );
 
-      if (
-        canvas.width !== width ||
-        canvas.height !== height
-      ) {
-        canvas.width = width;
-        canvas.height = height;
+      canvas.width = width;
+      canvas.height = height;
 
-        gl.viewport(
-          0,
-          0,
-          width,
-          height
-        );
-      }
-
-      gl.useProgram(program);
+      gl.viewport(
+        0,
+        0,
+        width,
+        height
+      );
 
       gl.uniform2f(
-        resolutionLocation,
-        canvas.width,
-        canvas.height
+        resolution,
+        width,
+        height
       );
     }
 
-    const resizeObserver = new ResizeObserver(
-      resizeCanvas
-    );
+    window.addEventListener("resize",resize);
 
-    resizeObserver.observe(canvas);
+    resize();
 
-    window.addEventListener(
-      "resize",
-      resizeCanvas
-    );
+    let frame = 0;
 
-    resizeCanvas();
-
-    const startTime = performance.now();
+    const start = performance.now();
 
     function draw(now) {
-      if (gl.isContextLost()) {
+      if (document.hidden) {
         return;
       }
 
-      const elapsed = (
-        now - startTime
-      ) / 1000;
-
-      gl.useProgram(program);
-
       gl.uniform1f(
-        timeLocation,
-        elapsed
+        time,
+        (now-start)/1000
       );
 
       gl.drawArrays(
@@ -1076,40 +807,34 @@ body {
         3
       );
 
-      animationFrame = requestAnimationFrame(draw);
+      frame = requestAnimationFrame(draw);
     }
 
-    animationFrame = requestAnimationFrame(draw);
+    frame = requestAnimationFrame(draw);
 
-    // Pause animation when app is in background
     document.addEventListener(
       "visibilitychange",
       () => {
-        if (document.hidden) {
-          cancelAnimationFrame(animationFrame);
-        } else {
-          animationFrame = requestAnimationFrame(draw);
+        cancelAnimationFrame(frame);
+
+        if (!document.hidden) {
+          frame = requestAnimationFrame(draw);
         }
       }
     );
 
-  } catch (error) {
-    console.error(
-      "Cloud background error:",
-      error
-    );
+  } catch(error) {
+    console.error("Background error:",error);
 
-    // CSS sky fallback
     canvas.style.display = "none";
   }
 })();
 </script>
 
-<!-- =========================
-     FIREBASE LOGIN
-========================= -->
+<!-- FIREBASE LOGIN -->
 
 <script type="module">
+
 import {
   initializeApp
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -1123,7 +848,7 @@ import {
   browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-/* Firebase config */
+/* FIREBASE CONFIG */
 
 const firebaseConfig = {
   apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
@@ -1134,7 +859,7 @@ const firebaseConfig = {
   appId: "1:420221167346:web:da7ac80acdfd52339d526b"
 };
 
-/* Initialize Firebase */
+/* INITIALIZE */
 
 const app = initializeApp(firebaseConfig);
 
@@ -1148,22 +873,20 @@ const googleBtn = document.getElementById(
   "googleBtn"
 );
 
-/* Login persistence */
+/* PERSISTENCE */
 
 setPersistence(
   auth,
   browserLocalPersistence
 ).catch(error => {
-  console.error(
-    "Persistence error:",
-    error
-  );
+  console.error("Persistence error:",error);
 });
 
-/* Existing user check */
+/* CHECK LOGIN */
 
 onAuthStateChanged(
   auth,
+
   user => {
     if (!user) {
       overlay.style.display = "none";
@@ -1171,7 +894,8 @@ onAuthStateChanged(
     }
 
     overlay.style.display = "flex";
-        const savedAge = localStorage.getItem(
+
+    const savedAge = localStorage.getItem(
       "kidsAgeGroup"
     );
 
@@ -1181,21 +905,20 @@ onAuthStateChanged(
         : "index-home.html";
 
       window.location.replace(destination);
-    }, 800);
+    },800);
   },
+
   error => {
-    console.error(
-      "Authentication state error:",
-      error
-    );
+    console.error("Auth state error:",error);
 
     overlay.style.display = "none";
   }
 );
 
-/* Google login */
+/* GOOGLE LOGIN */
 
 window.handleGoogleLogin = async function() {
+
   if (googleBtn.disabled) return;
 
   if (navigator.vibrate) {
@@ -1222,11 +945,9 @@ window.handleGoogleLogin = async function() {
       provider
     );
 
-  } catch (error) {
-    console.error(
-      "Google login error:",
-      error
-    );
+  } catch(error) {
+
+    console.error("Google login error:",error);
 
     overlay.style.display = "none";
 
@@ -1245,25 +966,26 @@ window.handleGoogleLogin = async function() {
   }
 };
 
-/* Service worker */
+/* SERVICE WORKER */
 
 if ("serviceWorker" in navigator) {
-  window.addEventListener(
-    "load",
-    () => {
-      navigator.serviceWorker.register(
-        "./service-worker.js"
-      ).catch(error => {
-        console.error(
-          "Service worker registration failed:",
-          error
-        );
-      });
-    }
-  );
+
+  window.addEventListener("load",() => {
+
+    navigator.serviceWorker.register(
+      "./service-worker.js"
+    ).catch(error => {
+      console.error(
+        "Service worker error:",
+        error
+      );
+    });
+
+  });
+
 }
+
 </script>
 
 </body>
 </html>
-    
