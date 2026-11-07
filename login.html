@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#38BDF8">
+<meta name="theme-color" content="#FFB6C1">
 
 <title>Parents Login - Kids Teacher</title>
 
@@ -35,12 +35,8 @@ body {
   flex-direction: column;
   font-family: 'Nunito', sans-serif;
   position: relative;
-  background: linear-gradient(
-    180deg,
-    #38BDF8 0%,
-    #7DD3FC 55%,
-    #BAE6FD 100%
-  );
+  /* Purana gradient hata kar bilkul clean aur naya base background set kiya hai */
+  background: #FFF5EE;
 }
 
 /* =========================
@@ -522,11 +518,10 @@ body {
   });
 
   if (!gl) {
-    console.warn("WebGL unavailable. Using CSS sky background.");
+    console.warn("WebGL unavailable. Using CSS background.");
     return;
   }
 
-  // WebGL Context Lost ko safely handle karne ke liye (Crash rokne ke liye)
   canvas.addEventListener("webglcontextlost", (event) => {
     event.preventDefault();
     cancelAnimationFrame(animationFrame);
