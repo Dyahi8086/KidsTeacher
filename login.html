@@ -1,49 +1,18 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0,
-          maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#e0f2fe">
-
     <title>Kids Teacher - Welcome</title>
 
-    <!-- Image preload -->
-    <link rel="preload"
-          as="image"
-          href="./welcome_bg.png"
-          fetchpriority="high">
-
-    <!-- Manifest -->
     <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/png" href="./icons/icon-192.png">
+    <link rel="apple-touch-icon" href="./icons/icon-192.png">
 
-    <!-- App icons -->
-    <link rel="icon"
-          type="image/png"
-          href="./icons/icon-192.png">
-
-    <link rel="apple-touch-icon"
-          href="./icons/icon-192.png">
-
-    <!-- Google Fonts -->
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
 
     <style>
-
-        /* RESET */
-
         * {
             margin: 0;
             padding: 0;
@@ -51,524 +20,226 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        html,
-        body {
-            width: 100%;
+        body, html {
             height: 100%;
-            height: 100dvh;
-
-            overflow: hidden;
-
+            width: 100%;
             background-color: #e0f2fe;
+            overflow: hidden;
         }
 
-        /* SPLASH SCREEN */
-
+        /* Loader */
         #splash-screen {
             position: fixed;
-            inset: 0;
-
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 100%;
+            height: 100vh;
             height: 100dvh;
-
             background: #e0f2fe;
-
             display: flex;
             flex-direction: column;
-
             justify-content: center;
             align-items: center;
-
             z-index: 9999;
-
-            opacity: 1;
-
-            transition: opacity 0.18s ease;
+            transition: opacity 0.4s ease;
         }
 
         .spinner {
-            width: 45px;
-            height: 45px;
-
-            border: 4px solid #ffffff;
-            border-top: 4px solid #FF6B35;
-
+            width: 50px;
+            height: 50px;
+            border: 5px solid #ffffff;
+            border-top: 5px solid #FF6B35;
             border-radius: 50%;
-
-            animation: spin 0.8s linear infinite;
-
+            animation: spin 1s linear infinite;
             margin-bottom: 15px;
         }
 
         @keyframes spin {
-            to {
+            100% {
                 transform: rotate(360deg);
             }
         }
 
         .loading-text {
             font-family: 'Fredoka', sans-serif;
-
             font-size: 20px;
-
             color: #8B3A00;
-
             font-weight: 600;
         }
 
-        /* WELCOME CONTENT */
-
+        /* Welcome Content */
         #welcome-content {
+            display: none;
             position: relative;
-
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             height: 100dvh;
-
-            display: flex;
             flex-direction: column;
-
             justify-content: flex-end;
             align-items: center;
-
             padding-bottom: 40px;
 
-            background-color: #fce7f3;
-
-            /* Original PNG */
-            background-image: url('./welcome_bg.png');
-
+            background-image: url('welcome_bg.png');
             background-size: cover;
-
             background-position: center top;
-
             background-repeat: no-repeat;
-
-            /* Hidden until image loads */
-            visibility: hidden;
-            opacity: 0;
-
-            transition: opacity 0.18s ease;
+            background-color: #fce7f3;
         }
-
-        /* Show after image loads */
-
-        #welcome-content.ready {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        /* CONTENT */
 
         .content-wrapper {
             position: relative;
-
             z-index: 10;
-
             display: flex;
             flex-direction: column;
-
             align-items: center;
-
             width: 100%;
-
             padding: 0 20px;
         }
 
-        /* TEXT */
-
         .text-content {
             text-align: center;
-
             margin-bottom: 20px;
         }
 
         .text-content h1 {
             font-family: 'Fredoka', sans-serif;
-
             font-size: clamp(24px, 6vw, 32px);
-
             color: #8B3A00;
-
             font-weight: 700;
-
             line-height: 1.2;
-
             margin-bottom: 8px;
-
-            text-shadow:
-                1px 1px 0px rgba(255,255,255,0.8),
-                2px 2px 5px rgba(0,0,0,0.1);
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.8),
+                         2px 2px 5px rgba(0,0,0,0.1);
         }
 
         .text-content p {
             font-family: 'Nunito', sans-serif;
-
             font-size: clamp(13px, 4vw, 16px);
-
             color: #6B5B4D;
-
             font-weight: 700;
         }
 
-        /* LET'S START BUTTON */
-
         .start-btn {
             position: relative;
-
             width: 100%;
             max-width: 350px;
-
             padding: 16px 20px;
-
             font-size: 20px;
-
             font-family: 'Fredoka', sans-serif;
-
             font-weight: 700;
-
             color: white;
-
             background: #FF6B35;
-
             border: none;
-
             border-radius: 50px;
-
             cursor: pointer;
-
-            box-shadow:
-                0 6px 0 #cc4e20,
-                0 10px 20px rgba(255, 107, 53, 0.4);
-
+            box-shadow: 0 6px 0 #cc4e20,
+                        0 10px 20px rgba(255, 107, 53, 0.4);
             transition: transform 0.1s;
-
             animation: pulseBtn 2s infinite;
         }
 
         .start-btn:active {
             transform: translateY(6px);
-
-            box-shadow: 0 0 0 #cc4e20;
-
+            box-shadow: 0 0px 0 #cc4e20;
             animation: none;
         }
 
         @keyframes pulseBtn {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.04);
-            }
-
-            100% {
-                transform: scale(1);
-            }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
-
-        /* SMALL MOBILE */
-
-        @media (max-height: 650px) {
-
-            #welcome-content {
-                padding-bottom: 20px;
-            }
-
-            .text-content {
-                margin-bottom: 12px;
-            }
-
-            .start-btn {
-                padding: 13px 18px;
-            }
-        }
-
-        /* REDUCE ANIMATION WHEN REQUESTED */
-
-        @media (prefers-reduced-motion: reduce) {
-
-            .spinner,
-            .start-btn {
-                animation: none;
-            }
-
-            #welcome-content,
-            #splash-screen {
-                transition: none;
-            }
-        }
-
     </style>
 </head>
 
 <body>
 
-    <!-- LOADING SCREEN -->
-
     <div id="splash-screen">
-
         <div class="spinner"></div>
-
-        <div class="loading-text">
-            Loading...
-        </div>
-
+        <div class="loading-text">Loading Adventure...</div>
     </div>
 
-    <!-- WELCOME PAGE -->
-
     <div id="welcome-content">
-
         <div class="content-wrapper">
-
             <div class="text-content">
-
-                <h1>
-                    Learning Is an<br>
-                    Adventure!
-                </h1>
-
-                <p>
-                    Explore, discover and grow every day.
-                </p>
-
+                <h1>Learning Is an<br>Adventure!</h1>
+                <p>Explore, discover and grow every day.</p>
             </div>
 
             <button class="start-btn" id="startBtn">
-
                 Let's Start →
-
             </button>
-
         </div>
-
     </div>
 
-    <!-- FIREBASE + IMAGE LOADING -->
-
     <script type="module">
-
-        import {
-            initializeApp
-        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import {
             getAuth,
             onAuthStateChanged
         } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-
-        /* FIREBASE CONFIG */
-
         const firebaseConfig = {
-
             apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
-
             authDomain: "kids-teacher-4387e.firebaseapp.com",
-
             projectId: "kids-teacher-4387e",
-
             storageBucket: "kids-teacher-4387e.firebasestorage.app",
-
             messagingSenderId: "420221167346",
-
             appId: "1:420221167346:web:da7ac80acdfd52339d526b"
-
         };
 
-
-        /* INITIALIZE FIREBASE */
-
         const app = initializeApp(firebaseConfig);
-
         const auth = getAuth(app);
 
+        const splash = document.getElementById('splash-screen');
+        const welcomeContent = document.getElementById('welcome-content');
 
-        /* ELEMENTS */
+        // BACKGROUND IMAGE PRELOADER FIX (Taaki PNG load hone mein time na le aur kharab na dikhe)
+        const bgImage = new Image();
+        bgImage.src = 'welcome_bg.png';
 
-        const splash = document.getElementById("splash-screen");
-
-        const welcomeContent = document.getElementById("welcome-content");
-
-
-        /* IMAGE PRELOAD */
-
-        const welcomeImage = new Image();
-
-        welcomeImage.fetchPriority = "high";
-
-        welcomeImage.decoding = "async";
-
-        welcomeImage.src = "./welcome_bg.png";
-
-
-        /* SHOW WELCOME AFTER IMAGE READY */
-
-        async function showWelcome() {
-
-            try {
-
-                /* Wait for image download */
-
-                if (!welcomeImage.complete) {
-
-                    await new Promise((resolve, reject) => {
-
-                        welcomeImage.onload = resolve;
-
-                        welcomeImage.onerror = reject;
-
-                    });
-
-                }
-
-                /* Decode image */
-
-                if (welcomeImage.decode) {
-
-                    await welcomeImage.decode();
-
-                }
-
-            } catch (error) {
-
-                console.warn(
-                    "Welcome image loading issue:",
-                    error
-                );
-
-            }
-
-            /* Show welcome page */
-
-            welcomeContent.classList.add("ready");
-
-            /* Hide loader */
-
-            splash.style.opacity = "0";
-
+        bgImage.onload = () => {
+            // Jaise hi image background mein poori load ho jaye, turant loader hata kar page dikhao
+            splash.style.opacity = '0';
             setTimeout(() => {
+                splash.style.display = 'none';
+                welcomeContent.style.display = 'flex';
+            }, 300);
+        };
 
-                splash.style.display = "none";
+        // Fallback: Agar image load hone mein zyada time le ya offline ho, toh 2 second baad automatically dikha do
+        setTimeout(() => {
+            if (splash.style.display !== 'none') {
+                splash.style.opacity = '0';
+                setTimeout(() => {
+                    splash.style.display = 'none';
+                    welcomeContent.style.display = 'flex';
+                }, 300);
+            }
+        }, 2000);
 
-            }, 180);
-
-        }
-
-
-        /* START LOADING */
-
-        showWelcome();
-
-
-        /* LET'S START BUTTON */
-
-        document.getElementById("startBtn")
-            .addEventListener("click", async () => {
-
-                const button = document.getElementById("startBtn");
-
-                button.disabled = true;
-
-                try {
-
-                    /* Check Firebase login */
-
-                    const user = await new Promise((resolve, reject) => {
-
-                        const unsubscribe = onAuthStateChanged(
-                            auth,
-
-                            (currentUser) => {
-
-                                unsubscribe();
-
-                                resolve(currentUser);
-
-                            },
-
-                            (error) => {
-
-                                unsubscribe();
-
-                                reject(error);
-
-                            }
-                        );
-
-                    });
-
-
-                    /* USER LOGGED IN */
-
-                    if (user) {
-
-                        const savedAge =
-                            localStorage.getItem("kidsAgeGroup");
-
-
-                        if (!savedAge) {
-
-                            window.location.replace(
-                                "age-select.html"
-                            );
-
-                        } else {
-
-                            window.location.replace(
-                                "index-home.html"
-                            );
-
-                        }
-
-                    }
-
-                    /* USER NOT LOGGED IN */
-
-                    else {
-
-                        window.location.href = "login.html";
-
-                    }
-
-                } catch (error) {
-
-                    console.error(
-                        "Firebase login check error:",
-                        error
+        // Let's Start button click handler
+        document.getElementById('startBtn').addEventListener('click', () => {
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    const savedAge = localStorage.getItem('kidsAgeGroup');
+                    window.location.replace(
+                        !savedAge ? "age-select.html" : "index-home.html"
                     );
-
-                    window.location.href = "login.html";
-
+                } else {
+                    window.location.href = 'login.html';
                 }
-
             });
+        });
 
-
-        /* SERVICE WORKER */
-
-        if ("serviceWorker" in navigator) {
-
-            window.addEventListener("load", () => {
-
-                navigator.serviceWorker.register(
-                    "./service-worker.js"
-                ).catch(error => {
-
-                    console.warn(
-                        "Service worker registration failed:",
-                        error
-                    );
-
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js').catch(err => {
+                    console.log("SW registration failed", err);
                 });
-
             });
-
         }
-
     </script>
 
 </body>
