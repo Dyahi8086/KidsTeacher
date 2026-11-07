@@ -1,496 +1,1269 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="theme-color" content="#FF6B35">
-  <title>Parents Login - Kids Teacher</title>
-  
-  <link rel="manifest" href="./manifest.json">
-  <link rel="icon" type="image/png" href="./icons/icon-192.png">
-  <link rel="apple-touch-icon" href="./icons/icon-192.png">
-  
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
-  
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#38BDF8">
 
-    body {
-      height: 100vh; 
-      height: 100dvh; 
-      display: flex; 
-      flex-direction: column; 
-      font-family: 'Nunito', sans-serif; 
-      overflow: hidden;
-      position: relative;
-      background: #FF8C42; /* Fallback */
-    }
+<title>Parents Login - Kids Teacher</title>
 
-    /* --- CLOUD SHADER CANVAS --- */
-    #cloud-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" type="image/png" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
 
-    /* --- MAIN CONTAINER (Overlay) --- */
-    .login-container {
-      position: relative;
-      width: 100%; 
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end; 
-      align-items: center;
-      z-index: 10;
-      overflow-y: auto; 
-      -webkit-overflow-scrolling: touch; 
-      padding-bottom: 20px; 
-    }
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
 
-    /* --- LIQUID GLASS CARD --- */
-    .login-card {
-      width: 100%;
-      max-width: 450px;
-      min-height: 55vh; 
-      
-      /* Liquid Glass Effect */
-      background: rgba(255, 255, 255, 0.25); 
-      backdrop-filter: blur(30px) saturate(200%);
-      -webkit-backdrop-filter: blur(30px) saturate(200%);
-      
-      border-radius: 40px 40px 0 0; 
-      
-      /* Glass Border */
-      border-top: 1px solid rgba(255, 255, 255, 0.8);
-      border-left: 1px solid rgba(255, 255, 255, 0.4);
-      border-right: 1px solid rgba(255, 255, 255, 0.4);
-      
-      box-shadow: 
-        inset 0 1px 2px rgba(255, 255, 255, 1),
-        inset 0 -1px 20px rgba(255, 255, 255, 0.3),
-        0 -15px 40px rgba(0, 0, 0, 0.2);
-      
-      padding: 40px 25px calc(40px + env(safe-area-inset-bottom)) 25px;
-      
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center; 
-      text-align: center;
-      position: relative;
-      
-      /* Bounce Animation */
-      animation: bounceUp 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-      transform: translateY(100%);
-    }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
 
-    @keyframes bounceUp {
-      0% { transform: translateY(100%); }
-      60% { transform: translateY(-15px); }
-      100% { transform: translateY(0); }
-    }
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 
-    /* Pull bar */
-    .login-card::before {
-      content: '';
-      position: absolute;
-      top: 12px;
-      width: 50px;
-      height: 5px;
-      background: rgba(255, 255, 255, 0.6);
-      border-radius: 10px;
-    }
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Nunito', sans-serif;
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    #38BDF8 0%,
+    #7DD3FC 55%,
+    #BAE6FD 100%
+  );
+}
 
-    /* 3D Icon */
-    .icon-3d {
-      font-size: 60px; 
-      margin-top: 10px;
-      margin-bottom: 10px;
-      filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.2));
-    }
+/* =========================
+   ANIMATED SKY BACKGROUND
+========================= */
 
-    /* --- TEXT STYLING --- */
-    .app-title { 
-      font-family: 'Fredoka', sans-serif; 
-      font-size: 34px; 
-      font-weight: 700; 
-      letter-spacing: -0.5px; 
-      margin-bottom: 8px;
-      color: #0f172a; /* Dark Navy */
-    }
+#cloud-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+  pointer-events: none;
+}
 
-    .app-subtitle {
-      font-family: 'Nunito', sans-serif;
-      font-size: 15px;
-      color: #334155; 
-      font-weight: 700;
-      margin-bottom: 30px;
-      padding: 0 10px;
-      line-height: 1.4;
-    }
+/* =========================
+   LOGIN CONTAINER
+========================= */
 
-    /* --- LIQUID GLASS BUTTON --- */
-    .btn-google {
-      width: 100%; 
-      padding: 18px 15px;
-      
-      background: rgba(255, 255, 255, 0.9); 
-      color: #0f172a; 
-      
-      border: 1px solid rgba(255, 255, 255, 1); 
-      border-radius: 50px;
-      font-size: 17px; 
-      font-family: 'Fredoka', sans-serif; 
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      position: relative;
-      overflow: hidden;
-      
-      box-shadow: 
-        0 8px 20px rgba(0,0,0,0.1),
-        inset 0 2px 2px rgba(255, 255, 255, 1);
-        
-      transition: all 0.1s ease;
-      margin-bottom: 25px;
-      z-index: 100;
-    }
+.login-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
 
-    /* ANIMATED TEXT */
-    .btn-google span {
-      display: inline-block;
-      animation: textBounce 2s infinite ease-in-out;
-    }
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
 
-    @keyframes textBounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-3px); }
-    }
+  z-index: 10;
 
-    /* Button Shine */
-    .btn-google::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 50%; height: 100%;
-      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
-      transform: skewX(-25deg);
-      animation: shine 3s infinite;
-    }
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 
-    @keyframes shine {
-      0% { left: -100%; }
-      20% { left: 200%; }
-      100% { left: 200%; }
-    }
+  padding-bottom: env(safe-area-inset-bottom);
+}
 
-    .btn-google:active { 
-      transform: translateY(3px) scale(1); 
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
-    }
+/* =========================
+   LOGIN CARD
+========================= */
 
-    .google-icon-svg {
-      width: 22px;
-      height: 22px;
-      flex-shrink: 0;
-    }
+.login-card {
+  width: 100%;
+  max-width: 450px;
+  min-height: 55vh;
 
-    /* --- PRIVACY TEXT --- */
-    .privacy-text {
-      font-family: 'Nunito', sans-serif;
-      font-size: 12px;
-      color: #334155; 
-      font-weight: 800;
-      line-height: 1.5;
-      text-align: center;
-      padding: 0 10px;
-    }
+  background: rgba(255, 255, 255, 0.25);
 
-    .privacy-text a {
-      color: #0f172a;
-      text-decoration: underline;
-    }
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
 
-    /* --- LOADING OVERLAY --- */
-    #loadingOverlay {
-      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-      background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px);
-      z-index: 9999; flex-direction: column; justify-content: center; align-items: center;
-    }
-    .spinner {
-      width: 50px; height: 50px; border: 5px solid #ffedd5;
-      border-top: 5px solid #FF5E3A; border-radius: 50%;
-      animation: spin 1s linear infinite; margin-bottom: 20px;
-    }
-    @keyframes spin { 100% { transform: rotate(360deg); } }
-    .loading-text { font-family: 'Fredoka'; font-size: 22px; color: #9a3412; font-weight: 600; }
-  </style>
+  border-radius: 40px 40px 0 0;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.8);
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
+  border-right: 1px solid rgba(255, 255, 255, 0.4);
+
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 1),
+    inset 0 -1px 20px rgba(255, 255, 255, 0.3),
+    0 -15px 40px rgba(0, 0, 0, 0.2);
+
+  padding: 40px 25px calc(40px + env(safe-area-inset-bottom));
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  position: relative;
+
+  animation: bounceUp 0.9s cubic-bezier(
+    0.175,
+    0.885,
+    0.32,
+    1.275
+  ) forwards;
+
+  transform: translateY(100%);
+}
+
+@keyframes bounceUp {
+  0% {
+    transform: translateY(100%);
+  }
+
+  60% {
+    transform: translateY(-15px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Pull bar */
+
+.login-card::before {
+  content: '';
+
+  position: absolute;
+  top: 12px;
+
+  width: 50px;
+  height: 5px;
+
+  background: rgba(255, 255, 255, 0.6);
+
+  border-radius: 10px;
+}
+
+/* =========================
+   ICON
+========================= */
+
+.icon-3d {
+  font-size: 60px;
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  filter: drop-shadow(
+    0 8px 12px rgba(0, 0, 0, 0.2)
+  );
+}
+
+/* =========================
+   TEXT
+========================= */
+
+.app-title {
+  font-family: 'Fredoka', sans-serif;
+
+  font-size: 34px;
+  font-weight: 700;
+
+  letter-spacing: -0.5px;
+
+  margin-bottom: 8px;
+
+  color: #0f172a;
+}
+
+.app-subtitle {
+  font-family: 'Nunito', sans-serif;
+
+  font-size: 15px;
+
+  color: #334155;
+
+  font-weight: 700;
+
+  margin-bottom: 30px;
+
+  padding: 0 10px;
+
+  line-height: 1.4;
+}
+
+/* =========================
+   GOOGLE BUTTON
+========================= */
+
+.btn-google {
+  width: 100%;
+
+  padding: 18px 15px;
+
+  background: rgba(255, 255, 255, 0.9);
+
+  color: #0f172a;
+
+  border: 1px solid rgba(255, 255, 255, 1);
+
+  border-radius: 50px;
+
+  font-size: 17px;
+
+  font-family: 'Fredoka', sans-serif;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  position: relative;
+  overflow: hidden;
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.1),
+    inset 0 2px 2px rgba(255, 255, 255, 1);
+
+  transition: transform 0.15s ease;
+
+  margin-bottom: 25px;
+
+  z-index: 100;
+}
+
+.btn-google span {
+  display: inline-block;
+
+  animation: textBounce 2s infinite ease-in-out;
+}
+
+@keyframes textBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* Button shine */
+
+.btn-google::after {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: -100%;
+
+  width: 50%;
+  height: 100%;
+
+  background: linear-gradient(
+    to right,
+    rgba(255,255,255,0),
+    rgba(255,255,255,0.8),
+    rgba(255,255,255,0)
+  );
+
+  transform: skewX(-25deg);
+
+  animation: shine 3s infinite;
+
+  pointer-events: none;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+
+  20% {
+    left: 200%;
+  }
+
+  100% {
+    left: 200%;
+  }
+}
+
+.btn-google:active {
+  transform: translateY(3px);
+}
+
+.btn-google:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.google-icon-svg {
+  width: 22px;
+  height: 22px;
+
+  flex-shrink: 0;
+}
+
+/* =========================
+   PRIVACY
+========================= */
+
+.privacy-text {
+  font-family: 'Nunito', sans-serif;
+
+  font-size: 12px;
+
+  color: #334155;
+
+  font-weight: 800;
+
+  line-height: 1.5;
+
+  text-align: center;
+
+  padding: 0 10px;
+}
+
+.privacy-text a {
+  color: #0f172a;
+  text-decoration: underline;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+#loadingOverlay {
+  display: none;
+
+  position: fixed;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+
+  background: rgba(255, 255, 255, 0.9);
+
+  backdrop-filter: blur(10px);
+
+  z-index: 9999;
+
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+
+  border: 5px solid #ffedd5;
+
+  border-top: 5px solid #FF5E3A;
+
+  border-radius: 50%;
+
+  animation: spin 1s linear infinite;
+
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  font-family: 'Fredoka', sans-serif;
+
+  font-size: 22px;
+
+  color: #9a3412;
+
+  font-weight: 600;
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-height: 650px) {
+  .login-card {
+    min-height: auto;
+
+    padding-top: 30px;
+    padding-bottom: calc(25px + env(safe-area-inset-bottom));
+  }
+
+  .icon-3d {
+    font-size: 48px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .app-title {
+    font-size: 29px;
+  }
+
+  .app-subtitle {
+    margin-bottom: 20px;
+  }
+
+  .btn-google {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+}
+
+/* Reduced animation preference */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
 </head>
+
 <body>
 
-  <!-- 3D Clouds Canvas -->
-  <canvas id="cloud-canvas"></canvas>
+<!-- SKY CANVAS -->
 
-  <div class="login-container">
-    
-    <div class="login-card">
-      
-      <div class="icon-3d">🎓</div>
+<canvas id="cloud-canvas"></canvas>
 
-      <h1 class="app-title">Parents Login</h1>
-      <p class="app-subtitle">Guide your child's learning journey</p>
+<!-- LOGIN -->
 
-      <button type="button" id="googleBtn" class="btn-google" onclick="handleGoogleLogin()">
-        <svg class="google-icon-svg" viewBox="0 0 48 48">
-          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-          <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-        </svg>
-        <span>Continue with Google</span>
-      </button>
+<div class="login-container">
 
-      <p class="privacy-text">
-        By continuing, you agree to our<br>
-        <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a>
-      </p>
-      
-    </div>
+  <div class="login-card">
+
+    <div class="icon-3d">🎓</div>
+
+    <h1 class="app-title">Parents Login</h1>
+
+    <p class="app-subtitle">
+      Guide your child's learning journey
+    </p>
+
+    <button
+      type="button"
+      id="googleBtn"
+      class="btn-google"
+      onclick="handleGoogleLogin()"
+    >
+
+      <svg
+        class="google-icon-svg"
+        viewBox="0 0 48 48"
+        aria-hidden="true"
+      >
+        <path
+          fill="#EA4335"
+          d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
+        />
+
+        <path
+          fill="#4285F4"
+          d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"
+        />
+
+        <path
+          fill="#FBBC05"
+          d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"
+        />
+
+        <path
+          fill="#34A853"
+          d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
+        />
+      </svg>
+
+      <span>Continue with Google</span>
+
+    </button>
+
+    <p class="privacy-text">
+      By continuing, you agree to our<br>
+
+      <a href="#">Privacy Policy</a>
+      and
+      <a href="#">Terms of Service</a>
+    </p>
+
   </div>
+</div>
 
-  <div id="loadingOverlay">
-    <div class="spinner"></div>
-    <p class="loading-text">Logging you in...</p>
-  </div>
+<!-- LOADING -->
 
-  <!-- CLOUD SHADER JAVASCRIPT -->
-  <script>
-    const VERT = `
+<div id="loadingOverlay">
+
+  <div class="spinner"></div>
+
+  <p class="loading-text">
+    Logging you in...
+  </p>
+
+</div>
+
+<!-- =========================
+     ANIMATED CLOUD SHADER
+========================= -->
+
+<script>
+(() => {
+  const canvas = document.getElementById("cloud-canvas");
+
+  if (!canvas) return;
+
+  const gl = canvas.getContext("webgl", {
+    alpha: false,
+    antialias: false,
+    premultipliedAlpha: false
+  });
+
+  // Fallback background remains blue if WebGL is unavailable.
+  if (!gl) {
+    console.warn("WebGL unavailable. Using CSS sky background.");
+    return;
+  }
+
+  const vertexShaderSource = `
     attribute vec2 a_pos;
     varying vec2 v_uv;
+
     void main() {
       v_uv = a_pos * 0.5 + 0.5;
       gl_Position = vec4(a_pos, 0.0, 1.0);
     }
-    `;
+  `;
 
-    const FRAG = `
+  const fragmentShaderSource = `
     precision highp float;
+
     varying vec2 v_uv;
+
     uniform vec2 u_res;
     uniform float u_time;
-    uniform float u_count;
-    uniform vec3 u_cloud;
-    uniform vec3 u_skyTop;
-    uniform vec3 u_skyBottom;
-    const mat2 R = mat2(0.80, 0.60, -0.60, 0.80);
-    float hash(vec2 p) { return fract(sin(dot(p, vec2(41.31, 289.17))) * 26737.367); }
-    float vnoise(vec2 p) {
-      vec2 i = floor(p); vec2 f = fract(p);
+
+    const mat2 ROT = mat2(
+      0.80, 0.60,
+      -0.60, 0.80
+    );
+
+    float hash(vec2 p) {
+      return fract(
+        sin(dot(p, vec2(41.31, 289.17)))
+        * 26737.367
+      );
+    }
+
+    float noise(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+
       f = f * f * (3.0 - 2.0 * f);
-      float a = hash(i); float b = hash(i + vec2(1.0, 0.0));
-      float c = hash(i + vec2(0.0, 1.0)); float d = hash(i + vec2(1.0, 1.0));
-      return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+
+      float a = hash(i);
+      float b = hash(i + vec2(1.0, 0.0));
+      float c = hash(i + vec2(0.0, 1.0));
+      float d = hash(i + vec2(1.0, 1.0));
+
+      return mix(
+        mix(a, b, f.x),
+        mix(c, d, f.x),
+        f.y
+      );
     }
+
     float fbm(vec2 p) {
-      float sum = 0.0; float amp = 0.5;
+      float value = 0.0;
+      float amplitude = 0.5;
+
       for (int i = 0; i < 4; i++) {
-        sum += amp * vnoise(p);
-        p = R * p * 2.03 + 19.19;
-        amp *= 0.5;
+        value += amplitude * noise(p);
+
+        p = ROT * p * 2.03 + 19.19;
+
+        amplitude *= 0.5;
       }
-      return sum;
+
+      return value;
     }
+
     float billow(vec2 p) {
-      float sum = 0.0; float amp = 0.5;
+      float value = 0.0;
+      float amplitude = 0.5;
+
       for (int i = 0; i < 5; i++) {
-        sum += amp * (1.0 - abs(2.0 * vnoise(p) - 1.0));
-        p = R * p * 2.11 + 13.37;
-        amp *= 0.5;
+        value += amplitude *
+          (1.0 - abs(2.0 * noise(p) - 1.0));
+
+        p = ROT * p * 2.11 + 13.37;
+
+        amplitude *= 0.5;
       }
-      return sum;
+
+      return value;
     }
-    float cloudDensity(vec2 p, vec2 c, vec2 r, float seed, float t) {
-      vec2 q = p - c;
-      float ry = q.y > 0.0 ? r.y : r.y * 0.42;
-      float env = 1.0 - length(vec2(q.x / r.x, q.y / ry));
-      if (env < -0.35) return 0.0;
-      vec2 dp = q * (2.4 / r.x) + seed;
-      dp += 0.6 * vec2(fbm(dp * 1.4 + t * 0.04), fbm(dp * 1.4 + 7.7 - t * 0.03));
+
+    float cloudDensity(
+      vec2 p,
+      vec2 center,
+      vec2 radius,
+      float seed,
+      float time
+    ) {
+      vec2 q = p - center;
+
+      float ry = q.y > 0.0
+        ? radius.y
+        : radius.y * 0.42;
+
+      float envelope =
+        1.0 - length(
+          vec2(
+            q.x / radius.x,
+            q.y / ry
+          )
+        );
+
+      if (envelope < -0.35) {
+        return 0.0;
+      }
+
+      vec2 dp =
+        q * (2.4 / radius.x)
+        + vec2(seed);
+
+      dp += 0.6 * vec2(
+        fbm(dp * 1.4 + time * 0.04),
+        fbm(dp * 1.4 + 7.7 - time * 0.03)
+      );
+
       float detail = billow(dp * 1.6);
-      return env + (detail - 0.62) * 0.62;
+
+      return envelope + (detail - 0.62) * 0.62;
     }
-    vec3 shadeCloud(vec3 color, vec3 sky, vec2 p, vec2 c, vec2 r, float seed, float t, float dist) {
-      float d = cloudDensity(p, c, r, seed, t);
-      if (d < 0.02) return color;
-      float dUp = cloudDensity(p + vec2(0.0, r.y * 0.55), c, r, seed, t);
-      float occl = clamp((dUp - d) * 1.1 + d * 0.55, 0.0, 1.0);
-      vec3 lit = u_cloud * 1.04;
-      vec3 shadow = mix(u_cloud * 0.60, sky, 0.38);
-      vec3 cloudCol = mix(lit, shadow, occl * 0.85);
-      float alpha = smoothstep(0.02, 0.38, d);
-      float rim = smoothstep(0.02, 0.14, d) * (1.0 - smoothstep(0.14, 0.40, d));
-      cloudCol += rim * 0.10;
-      cloudCol = mix(cloudCol, sky, dist * 0.35);
-      alpha *= mix(1.0, 0.8, dist);
-      return mix(color, cloudCol, alpha);
+
+    vec3 shadeCloud(
+      vec3 color,
+      vec2 p,
+      vec2 center,
+      vec2 radius,
+      float seed,
+      float time
+    ) {
+      float density = cloudDensity(
+        p,
+        center,
+        radius,
+        seed,
+        time
+      );
+
+      if (density < 0.02) {
+        return color;
+      }
+
+      float upperDensity = cloudDensity(
+        p + vec2(0.0, radius.y * 0.55),
+        center,
+        radius,
+        seed,
+        time
+      );
+
+      float occlusion = clamp(
+        (upperDensity - density) * 1.1
+        + density * 0.55,
+        0.0,
+        1.0
+      );
+
+      vec3 cloudLight = vec3(
+        1.0,
+        0.99,
+        0.97
+      );
+
+      vec3 cloudShadow = vec3(
+        0.72,
+        0.86,
+        0.96
+      );
+
+      vec3 cloudColor = mix(
+        cloudLight,
+        cloudShadow,
+        occlusion * 0.85
+      );
+
+      float alpha = smoothstep(
+        0.02,
+        0.38,
+        density
+      );
+
+      float rim =
+        smoothstep(0.02, 0.14, density)
+        * (1.0 - smoothstep(0.14, 0.40, density));
+
+      cloudColor += rim * 0.10;
+
+      return mix(
+        color,
+        cloudColor,
+        alpha
+      );
     }
-    vec3 cloudPass(vec3 color, vec3 sky, vec2 p, float aspect, float t, float spd, float phase, float y, vec2 r, float seed, float dist) {
-      float cx = mix(-r.x - 0.25, aspect + r.x + 0.25, fract(t * spd + phase));
-      float cy = y + sin(t * 0.05 + phase * 6.2831) * 0.012;
-      return shadeCloud(color, sky, p, vec2(cx, cy), r, seed, t, dist);
+
+    vec3 cloudPass(
+      vec3 color,
+      vec2 p,
+      float aspect,
+      float time,
+      float speed,
+      float phase,
+      float y,
+      vec2 radius,
+      float seed
+    ) {
+      float progress = fract(
+        time * speed + phase
+      );
+
+      float centerX = mix(
+        -radius.x - 0.25,
+        aspect + radius.x + 0.25,
+        progress
+      );
+
+      float centerY =
+        y + sin(time * 0.05 + phase * 6.2831)
+        * 0.012;
+
+      return shadeCloud(
+        color,
+        p,
+        vec2(centerX, centerY),
+        radius,
+        seed,
+        time
+      );
     }
+
     void main() {
       float aspect = u_res.x / u_res.y;
-      vec2 p = vec2(v_uv.x * aspect, v_uv.y);
-      float t = u_time;
-      vec3 sky = mix(u_skyBottom, u_skyTop, v_uv.y);
-      vec3 color = sky;
-      color = mix(color, u_skyBottom * 1.06, smoothstep(0.35, 0.0, v_uv.y) * 0.5);
-      vec2 sunPos = vec2(aspect * 0.78, 0.92);
-      float sunDist = length(p - sunPos);
-      color += vec3(1.0, 0.95, 0.82) * exp(-sunDist * sunDist * 5.0) * 0.28;
-      float cirrusBand = smoothstep(0.55, 0.8, v_uv.y) * (1.0 - smoothstep(0.9, 1.0, v_uv.y));
-      if (cirrusBand > 0.01) {
-        float streak = fbm(vec2(p.x * 1.6 - t * 0.006, p.y * 12.0));
-        float wisp = smoothstep(0.52, 0.78, streak) * cirrusBand;
-        color = mix(color, u_cloud * 0.98, wisp * 0.35);
-      }
-      if (u_count > 5.5) color = cloudPass(color, sky, p, aspect, t, 0.006, 0.10, 0.84, vec2(0.20, 0.10), 43.7, 1.0);
-      if (u_count > 4.5) color = cloudPass(color, sky, p, aspect, t, 0.008, 0.62, 0.73, vec2(0.24, 0.12), 71.3, 0.85);
-      if (u_count > 3.5) color = cloudPass(color, sky, p, aspect, t, 0.011, 0.33, 0.60, vec2(0.34, 0.16), 17.3, 0.55);
-      if (u_count > 2.5) color = cloudPass(color, sky, p, aspect, t, 0.013, 0.80, 0.47, vec2(0.30, 0.15), 29.9, 0.45);
-      if (u_count > 1.5) color = cloudPass(color, sky, p, aspect, t, 0.016, 0.05, 0.35, vec2(0.46, 0.20), 91.1, 0.15);
-      color = cloudPass(color, sky, p, aspect, t, 0.020, 0.48, 0.20, vec2(0.56, 0.24), 57.2, 0.0);
+
+      vec2 p = vec2(
+        v_uv.x * aspect,
+        v_uv.y
+      );
+
+      float time = u_time;
+
+      // BLUE SKY
+      vec3 skyTop = vec3(
+        0.10,
+        0.62,
+        0.98
+      );
+
+      vec3 skyBottom = vec3(
+        0.48,
+        0.84,
+        1.00
+      );
+
+      vec3 color = mix(
+        skyBottom,
+        skyTop,
+        v_uv.y
+      );
+
+      // Soft sunlight
+      vec2 sunPosition = vec2(
+        aspect * 0.78,
+        0.92
+      );
+
+      float sunDistance = length(
+        p - sunPosition
+      );
+
+      color += vec3(
+        1.0,
+        0.96,
+        0.82
+      ) * exp(
+        -sunDistance * sunDistance * 5.0
+      ) * 0.18;
+
+      // High cirrus clouds
+      float cirrusBand =
+        smoothstep(0.55, 0.80, v_uv.y)
+        * (1.0 - smoothstep(0.90, 1.0, v_uv.y));
+
+      float streak = fbm(
+        vec2(
+          p.x * 1.6 - time * 0.006,
+          p.y * 12.0
+        )
+      );
+
+      float wisps =
+        smoothstep(0.52, 0.78, streak)
+        * cirrusBand;
+
+      color = mix(
+        color,
+        vec3(0.96, 0.98, 1.0),
+        wisps * 0.25
+      );
+
+      // Distant clouds
+      color = cloudPass(
+        color, p, aspect, time,
+        0.006, 0.10, 0.84,
+        vec2(0.20, 0.10), 43.7
+      );
+
+      color = cloudPass(
+        color, p, aspect, time,
+        0.008, 0.62, 0.73,
+        vec2(0.24, 0.12), 71.3
+      );
+
+      color = cloudPass(
+        color, p, aspect, time,
+        0.011, 0.33, 0.60,
+        vec2(0.34, 0.16), 17.3
+      );
+
+      color = cloudPass(
+        color, p, aspect, time,
+        0.013, 0.80, 0.47,
+        vec2(0.30, 0.15), 29.9
+      );
+
+      color = cloudPass(
+        color, p, aspect, time,
+        0.016, 0.05, 0.35,
+        vec2(0.46, 0.20), 91.1
+      );
+
+      // Foreground clouds
+      color = cloudPass(
+        color, p, aspect, time,
+        0.020, 0.48, 0.20,
+        vec2(0.56, 0.24), 57.2
+      );
+
       gl_FragColor = vec4(color, 1.0);
     }
-    `;
+  `;
 
-    const canvas = document.getElementById('cloud-canvas');
-    const gl = canvas.getContext('webgl', { alpha: false, antialias: false, premultipliedAlpha: false });
-    if (gl) {
-      function compile(type, source) {
-        const shader = gl.createShader(type);
-        gl.shaderSource(shader, source);
-        gl.compileShader(shader);
-        return shader;
+  function compileShader(type, source) {
+    const shader = gl.createShader(type);
+
+    if (!shader) {
+      throw new Error("Unable to create shader");
+    }
+
+    gl.shaderSource(shader, source);
+    gl.compileShader(shader);
+
+    if (!gl.getShaderParameter(
+      shader,
+      gl.COMPILE_STATUS
+    )) {
+      const error = gl.getShaderInfoLog(shader);
+
+      gl.deleteShader(shader);
+
+      throw new Error(
+        "Shader compile failed: " + error
+      );
+    }
+
+    return shader;
+  }
+
+  let program;
+  let animationFrame = 0;
+
+  try {
+    const vertexShader = compileShader(
+      gl.VERTEX_SHADER,
+      vertexShaderSource
+    );
+
+    const fragmentShader = compileShader(
+      gl.FRAGMENT_SHADER,
+      fragmentShaderSource
+    );
+
+    program = gl.createProgram();
+
+    if (!program) {
+      throw new Error("Unable to create WebGL program");
+    }
+
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
+
+    gl.linkProgram(program);
+
+    if (!gl.getProgramParameter(
+      program,
+      gl.LINK_STATUS
+    )) {
+      throw new Error(
+        "Program link failed: " +
+        gl.getProgramInfoLog(program)
+      );
+    }
+
+    gl.useProgram(program);
+
+    const positionLocation = gl.getAttribLocation(
+      program,
+      "a_pos"
+    );
+
+    const resolutionLocation = gl.getUniformLocation(
+      program,
+      "u_res"
+    );
+
+    const timeLocation = gl.getUniformLocation(
+      program,
+      "u_time"
+    );
+
+    const buffer = gl.createBuffer();
+
+    if (!buffer) {
+      throw new Error("Unable to create buffer");
+    }
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array([
+        -1, -1,
+         3, -1,
+        -1,  3
+      ]),
+      gl.STATIC_DRAW
+    );
+
+    gl.enableVertexAttribArray(positionLocation);
+
+    gl.vertexAttribPointer(
+      positionLocation,
+      2,
+      gl.FLOAT,
+      false,
+      0,
+      0
+    );
+
+    function resizeCanvas() {
+      const dpr = Math.min(
+        window.devicePixelRatio || 1,
+        1.5
+      );
+
+      const width = Math.max(
+        1,
+        Math.floor(canvas.clientWidth * dpr)
+      );
+
+      const height = Math.max(
+        1,
+        Math.floor(canvas.clientHeight * dpr)
+      );
+
+      if (
+        canvas.width !== width ||
+        canvas.height !== height
+      ) {
+        canvas.width = width;
+        canvas.height = height;
+
+        gl.viewport(
+          0,
+          0,
+          width,
+          height
+        );
       }
-      const vert = compile(gl.VERTEX_SHADER, VERT);
-      const frag = compile(gl.FRAGMENT_SHADER, FRAG);
-      const program = gl.createProgram();
-      gl.attachShader(program, vert);
-      gl.attachShader(program, frag);
-      gl.linkProgram(program);
+
       gl.useProgram(program);
 
-      const buffer = gl.createBuffer();
-      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
-      gl.enableVertexAttribArray(0);
-      gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
-
-      const loc = {
-        res: gl.getUniformLocation(program, "u_res"),
-        time: gl.getUniformLocation(program, "u_time"),
-        count: gl.getUniformLocation(program, "u_count"),
-        cloud: gl.getUniformLocation(program, "u_cloud"),
-        skyTop: gl.getUniformLocation(program, "u_skyTop"),
-        skyBottom: gl.getUniformLocation(program, "u_skyBottom")
-      };
-
-      function resize() {
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        const w = canvas.clientWidth * dpr;
-        const h = canvas.clientHeight * dpr;
-        canvas.width = w;
-        canvas.height = h;
-        gl.viewport(0, 0, w, h);
-        gl.uniform2f(loc.res, w, h);
-      }
-      window.addEventListener('resize', resize);
-      resize();
-
-      const start = performance.now();
-      function draw(now) {
-        const elapsed = ((now - start) / 1000) * 1.0;
-        gl.uniform1f(loc.time, elapsed);
-        gl.uniform1f(loc.count, 6);
-        
-        // COLORS: Sunset Theme (Cloud, SkyTop, SkyBottom)
-        gl.uniform3f(loc.cloud, 0.98, 0.97, 0.94); // Off-white clouds
-        gl.uniform3f(loc.skyTop, 0.95, 0.45, 0.30); // Orange
-        gl.uniform3f(loc.skyBottom, 0.98, 0.75, 0.60); // Peach
-
-        gl.drawArrays(gl.TRIANGLES, 0, 3);
-        requestAnimationFrame(draw);
-      }
-      requestAnimationFrame(draw);
-    }
-  </script>
-
-  <!-- FIREBASE SCRIPT -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
-      authDomain: "kids-teacher-4387e.firebaseapp.com",
-      projectId: "kids-teacher-4387e",
-      storageBucket: "kids-teacher-4387e.firebasestorage.app",
-      messagingSenderId: "420221167346",
-      appId: "1:420221167346:web:da7ac80acdfd52339d526b"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    
-    setPersistence(auth, browserLocalPersistence).catch(console.error);
-
-    const overlay = document.getElementById('loadingOverlay');
-    const googleBtn = document.getElementById('googleBtn');
-
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        overlay.style.display = 'flex';
-        const savedAge = localStorage.getItem('kidsAgeGroup');
-        setTimeout(() => {
-            window.location.replace(!savedAge ? "age-select.html" : "index-home.html");
-        }, 800); 
-      }
-    });
-
-    window.handleGoogleLogin = async function() {
-      if (navigator.vibrate) navigator.vibrate(50);
-
-      const originalHTML = googleBtn.innerHTML;
-      googleBtn.innerHTML = "Connecting...";
-      googleBtn.disabled = true;
-      
-      const provider = new GoogleAuthProvider(); 
-      provider.setCustomParameters({ prompt: 'select_account' });
-      
-      try { 
-        await signInWithPopup(auth, provider); 
-      } 
-      catch (error) { 
-        googleBtn.innerHTML = originalHTML;
-        googleBtn.disabled = false;
-        if(error.code !== 'auth/popup-closed-by-user') { alert("Login failed. Please try again."); }
-      }
+      gl.uniform2f(
+        resolutionLocation,
+        canvas.width,
+        canvas.height
+      );
     }
 
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => { navigator.serviceWorker.register('./service-worker.js'); });
+    const resizeObserver = new ResizeObserver(
+      resizeCanvas
+    );
+
+    resizeObserver.observe(canvas);
+
+    window.addEventListener(
+      "resize",
+      resizeCanvas
+    );
+
+    resizeCanvas();
+
+    const startTime = performance.now();
+
+    function draw(now) {
+      if (gl.isContextLost()) {
+        return;
+      }
+
+      const elapsed = (
+        now - startTime
+      ) / 1000;
+
+      gl.useProgram(program);
+
+      gl.uniform1f(
+        timeLocation,
+        elapsed
+      );
+
+      gl.drawArrays(
+        gl.TRIANGLES,
+        0,
+        3
+      );
+
+      animationFrame = requestAnimationFrame(draw);
     }
-  </script>
+
+    animationFrame = requestAnimationFrame(draw);
+
+    // Pause animation when app is in background
+    document.addEventListener(
+      "visibilitychange",
+      () => {
+        if (document.hidden) {
+          cancelAnimationFrame(animationFrame);
+        } else {
+          animationFrame = requestAnimationFrame(draw);
+        }
+      }
+    );
+
+  } catch (error) {
+    console.error(
+      "Cloud background error:",
+      error
+    );
+
+    // CSS sky fallback
+    canvas.style.display = "none";
+  }
+})();
+</script>
+
+<!-- =========================
+     FIREBASE LOGIN
+========================= -->
+
+<script type="module">
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+/* Firebase config */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
+  authDomain: "kids-teacher-4387e.firebaseapp.com",
+  projectId: "kids-teacher-4387e",
+  storageBucket: "kids-teacher-4387e.firebasestorage.app",
+  messagingSenderId: "420221167346",
+  appId: "1:420221167346:web:da7ac80acdfd52339d526b"
+};
+
+/* Initialize Firebase */
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const overlay = document.getElementById(
+  "loadingOverlay"
+);
+
+const googleBtn = document.getElementById(
+  "googleBtn"
+);
+
+/* Login persistence */
+
+setPersistence(
+  auth,
+  browserLocalPersistence
+).catch(error => {
+  console.error(
+    "Persistence error:",
+    error
+  );
+});
+
+/* Existing user check */
+
+onAuthStateChanged(
+  auth,
+  user => {
+    if (!user) {
+      overlay.style.display = "none";
+      return;
+    }
+
+    overlay.style.display = "flex";
+        const savedAge = localStorage.getItem(
+      "kidsAgeGroup"
+    );
+
+    setTimeout(() => {
+      const destination = !savedAge
+        ? "age-select.html"
+        : "index-home.html";
+
+      window.location.replace(destination);
+    }, 800);
+  },
+  error => {
+    console.error(
+      "Authentication state error:",
+      error
+    );
+
+    overlay.style.display = "none";
+  }
+);
+
+/* Google login */
+
+window.handleGoogleLogin = async function() {
+  if (googleBtn.disabled) return;
+
+  if (navigator.vibrate) {
+    navigator.vibrate(50);
+  }
+
+  const originalHTML = googleBtn.innerHTML;
+
+  googleBtn.disabled = true;
+
+  googleBtn.innerHTML = "<span>Connecting...</span>";
+
+  const provider = new GoogleAuthProvider();
+
+  provider.setCustomParameters({
+    prompt: "select_account"
+  });
+
+  try {
+    overlay.style.display = "flex";
+
+    await signInWithPopup(
+      auth,
+      provider
+    );
+
+  } catch (error) {
+    console.error(
+      "Google login error:",
+      error
+    );
+
+    overlay.style.display = "none";
+
+    googleBtn.innerHTML = originalHTML;
+
+    googleBtn.disabled = false;
+
+    if (
+      error.code !==
+      "auth/popup-closed-by-user"
+    ) {
+      alert(
+        "Login failed. Please try again."
+      );
+    }
+  }
+};
+
+/* Service worker */
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener(
+    "load",
+    () => {
+      navigator.serviceWorker.register(
+        "./service-worker.js"
+      ).catch(error => {
+        console.error(
+          "Service worker registration failed:",
+          error
+        );
+      });
+    }
+  );
+}
+</script>
+
 </body>
 </html>
+    
