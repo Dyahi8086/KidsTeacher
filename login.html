@@ -6,7 +6,8 @@
     <meta name="theme-color" content="#e0f2fe">
     <title>Kids Teacher - Welcome</title>
 
-    <!-- 1. Sabse pehla fix: Browser ko bolne ke liye ki yeh image sabse pehle load kare -->
+    <!-- High priority preload -->
+    <link rel="preload" href="welcome_bg.png" as="image" fetchpriority="high">
     <link rel="preload" href="welcome_bg.png" as="image">
 
     <link rel="manifest" href="./manifest.json">
@@ -30,7 +31,6 @@
             overflow: hidden;
         }
 
-        /* Loading Spinner Screen */
         #splash-screen {
             position: fixed;
             top: 0;
@@ -44,7 +44,7 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.25s ease;
         }
 
         .spinner {
@@ -53,14 +53,12 @@
             border: 5px solid #ffffff;
             border-top: 5px solid #FF6B35;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            animation: spin 0.8s linear infinite;
             margin-bottom: 15px;
         }
 
         @keyframes spin {
-            100% {
-                transform: rotate(360deg);
-            }
+            100% { transform: rotate(360deg); }
         }
 
         .loading-text {
@@ -70,7 +68,6 @@
             font-weight: 600;
         }
 
-        /* Welcome Screen with PNG Background */
         #welcome-content {
             display: none;
             position: relative;
@@ -81,12 +78,11 @@
             justify-content: flex-end;
             align-items: center;
             padding-bottom: 40px;
-
+            background-color: #fce7f3;
             background-image: url('welcome_bg.png');
             background-size: cover;
             background-position: center top;
             background-repeat: no-repeat;
-            background-color: #fce7f3;
         }
 
         .content-wrapper {
@@ -197,30 +193,36 @@
         const splash = document.getElementById('splash-screen');
         const welcomeContent = document.getElementById('welcome-content');
 
-        // 2. Doosra fix: JavaScript ke zariye PNG ko background mein load karana
-        const bgImg = new Image();
-        bgImg.src = 'welcome_bg.png';
-
-        bgImg.onload = () => {
+        // Instant image load + show screen
+        function showWelcome() {
             splash.style.opacity = '0';
             setTimeout(() => {
                 splash.style.display = 'none';
                 welcomeContent.style.display = 'flex';
-            }, 300);
-        };
+            }, 220);
+        }
 
-        // Fallback: Agar kisi wajah se net slow ho toh maximum 1 second me screen khul jayegi
+        // Method 1: High priority Image object
+        const bgImg = new Image();
+        bgImg.fetchPriority = "high";
+        bgImg.src = 'welcome_bg.png';
+
+        // Agar image already cache me hai to turant show
+        if (bgImg.complete) {
+            showWelcome();
+        } else {
+            bgImg.onload = showWelcome;
+            bgImg.onerror = showWelcome; // error pe bhi mat atko
+        }
+
+        // Hard fallback - maximum 400ms
         setTimeout(() => {
             if (splash.style.display !== 'none') {
-                splash.style.opacity = '0';
-                setTimeout(() => {
-                    splash.style.display = 'none';
-                    welcomeContent.style.display = 'flex';
-                }, 300);
+                showWelcome();
             }
-        }, 1000);
+        }, 400);
 
-        // Let's Start button click handler
+        // Button click
         document.getElementById('startBtn').addEventListener('click', () => {
             onAuthStateChanged(auth, (user) => {
                 if (user) {
