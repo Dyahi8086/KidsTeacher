@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#14b8a6">
   <title>Parents Login - Kids Teacher</title>
   
   <link rel="manifest" href="./manifest.json">
@@ -26,17 +26,14 @@
       background: #ffffff;
     }
 
-    /* --- NAYA GRID & PURPLE GLOW BACKGROUND --- */
-    .grid-glow-bg {
+    /* --- NAYA TEAL GLOW BACKGROUND --- */
+    .teal-glow-bg {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       z-index: 0;
-      /* Yahan wahi Grid + Purple Radial Gradient hai */
-      background-image: 
-        linear-gradient(to right, #f0f0f0 1px, transparent 1px),
-        linear-gradient(to bottom, #f0f0f0 1px, transparent 1px),
-        radial-gradient(circle 800px at 100% 200px, #d5c5ff, transparent);
-      background-size: 96px 64px, 96px 64px, 100% 100%;
+      /* Yahan wahi Teal Radial Gradient hai */
+      background-image: radial-gradient(125% 125% at 50% 10%, #ffffff 40%, #14b8a6 100%);
+      background-size: 100% 100%;
     }
 
     /* --- MAIN CONTAINER --- */
@@ -51,27 +48,28 @@
       z-index: 10;
     }
 
-    /* --- CLEAN GLASS CARD (Light Theme) --- */
+    /* --- TRUE LIQUID GLASS CARD --- */
     .login-card {
       width: 100%;
       max-width: 450px;
       min-height: 55vh; 
       
-      /* White Glass Effect */
-      background: rgba(255, 255, 255, 0.7); 
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      /* Liquid Glass Effect */
+      background: rgba(255, 255, 255, 0.4); 
+      backdrop-filter: blur(30px) saturate(200%);
+      -webkit-backdrop-filter: blur(30px) saturate(200%);
       
       border-radius: 40px 40px 0 0; 
       
-      /* Subtle Gray Border */
-      border-top: 1px solid rgba(255, 255, 255, 1);
-      border-left: 1px solid rgba(0, 0, 0, 0.05);
-      border-right: 1px solid rgba(0, 0, 0, 0.05);
+      /* Glowing Glass Border */
+      border-top: 1px solid rgba(255, 255, 255, 0.9);
+      border-left: 1px solid rgba(255, 255, 255, 0.5);
+      border-right: 1px solid rgba(255, 255, 255, 0.5);
       
       box-shadow: 
-        0 -10px 40px rgba(0, 0, 0, 0.05),
-        inset 0 1px 1px rgba(255, 255, 255, 1);
+        inset 0 1px 2px rgba(255, 255, 255, 1),
+        inset 0 -1px 20px rgba(255, 255, 255, 0.3),
+        0 -15px 40px rgba(0, 0, 0, 0.1);
       
       padding: 40px 25px calc(40px + env(safe-area-inset-bottom)) 25px;
       
@@ -106,38 +104,38 @@
       font-size: 60px; 
       margin-top: 10px;
       margin-bottom: 10px;
-      filter: drop-shadow(0 8px 12px rgba(99, 102, 241, 0.2));
+      filter: drop-shadow(0 8px 12px rgba(20, 184, 166, 0.3));
     }
 
-    /* --- TEXT STYLING (Dark for Light Theme) --- */
+    /* --- TEXT STYLING (Dark Navy) --- */
     .app-title { 
       font-family: 'Fredoka', sans-serif; 
       font-size: 34px; 
       font-weight: 700; 
       letter-spacing: -0.5px; 
       margin-bottom: 8px;
-      color: #1e293b; /* Dark Slate */
+      color: #0f172a; /* Dark Navy */
     }
 
     .app-subtitle {
       font-family: 'Nunito', sans-serif;
       font-size: 15px;
-      color: #64748b; 
+      color: #334155; 
       font-weight: 700;
       margin-bottom: 30px;
       padding: 0 10px;
       line-height: 1.4;
     }
 
-    /* --- GOOGLE BUTTON --- */
+    /* --- LIQUID GLASS BUTTON --- */
     .btn-google {
       width: 100%; 
       padding: 18px 15px;
       
-      background: #ffffff; 
+      background: rgba(255, 255, 255, 0.9); 
       color: #0f172a; 
       
-      border: 2px solid #e2e8f0; 
+      border: 1px solid rgba(255, 255, 255, 1); 
       border-radius: 50px;
       font-size: 17px; 
       font-family: 'Fredoka', sans-serif; 
@@ -151,8 +149,8 @@
       overflow: hidden;
       
       box-shadow: 
-        0 4px 0 #cbd5e1,
-        0 10px 20px rgba(0,0,0,0.05);
+        0 8px 20px rgba(0,0,0,0.1),
+        inset 0 2px 2px rgba(255, 255, 255, 1);
         
       transition: all 0.1s ease;
       margin-bottom: 25px;
@@ -188,8 +186,8 @@
     }
 
     .btn-google:active { 
-      transform: translateY(4px) scale(1); 
-      box-shadow: 0 0px 0 #cbd5e1; 
+      transform: translateY(3px) scale(1); 
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
     }
 
     .google-icon-svg {
@@ -202,7 +200,7 @@
     .privacy-text {
       font-family: 'Nunito', sans-serif;
       font-size: 12px;
-      color: #64748b; 
+      color: #334155; 
       font-weight: 800;
       line-height: 1.5;
       text-align: center;
@@ -210,7 +208,7 @@
     }
 
     .privacy-text a {
-      color: #6366f1;
+      color: #0f172a;
       text-decoration: underline;
     }
 
@@ -221,18 +219,18 @@
       z-index: 9999; flex-direction: column; justify-content: center; align-items: center;
     }
     .spinner {
-      width: 50px; height: 50px; border: 5px solid #e2e8f0;
-      border-top: 5px solid #6366f1; border-radius: 50%;
+      width: 50px; height: 50px; border: 5px solid #ccfbf1;
+      border-top: 5px solid #14b8a6; border-radius: 50%;
       animation: spin 1s linear infinite; margin-bottom: 20px;
     }
     @keyframes spin { 100% { transform: rotate(360deg); } }
-    .loading-text { font-family: 'Fredoka'; font-size: 22px; color: #1e293b; font-weight: 600; }
+    .loading-text { font-family: 'Fredoka'; font-size: 22px; color: #0f172a; font-weight: 600; }
   </style>
 </head>
 <body>
 
-  <!-- GRID & PURPLE GLOW BACKGROUND -->
-  <div class="grid-glow-bg"></div>
+  <!-- TEAL GLOW BACKGROUND -->
+  <div class="teal-glow-bg"></div>
 
   <div class="login-container">
     
