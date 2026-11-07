@@ -9,235 +9,98 @@
     <link rel="manifest" href="./manifest.json">
     <link rel="icon" type="image/png" href="./icons/icon-192.png">
     <link rel="apple-touch-icon" href="./icons/icon-192.png">
-
-    <!-- PRELOAD IMAGE -->
     <link rel="preload" as="image" href="welcome_bg.png">
-
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body, html {
-            height: 100%;
-            width: 100%;
-            background-color: #fce7f3;
-            /* Scroll enable kiya test ke liye */
-            overflow-y: auto; 
-            overflow-x: hidden;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body, html { height: 100%; width: 100%; background-color: #fce7f3; overflow-y: auto; overflow-x: hidden; }
 
         /* Splash Screen */
         #splash-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: #e0f2fe;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.4s ease;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: #e0f2fe; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.4s ease;
         }
-
         .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #ffffff;
-            border-top: 5px solid #FF6B35;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 15px;
+            width: 50px; height: 50px; border: 5px solid #ffffff; border-top: 5px solid #FF6B35;
+            border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px;
         }
-
         @keyframes spin { 100% { transform: rotate(360deg); } }
+        .loading-text { font-family: 'Fredoka', sans-serif; font-size: 20px; color: #8B3A00; font-weight: 600; }
 
-        .loading-text {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 20px;
-            color: #8B3A00;
-            font-weight: 600;
-        }
-
-        /* Welcome Content (Full Screen Section) */
+        /* Welcome Content */
         #welcome-content {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            height: 100dvh;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-            padding-bottom: 40px;
-            background-color: #fce7f3;
-            opacity: 0;
-            transition: opacity 0.5s ease;
+            position: relative; width: 100vw; height: 100vh; height: 100dvh;
+            display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
+            padding-bottom: 40px; background-color: #fce7f3; opacity: 0; transition: opacity 0.5s ease;
         }
-
-        .bg-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center top;
-            z-index: 1;
-        }
-
-        .content-wrapper {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            padding: 0 20px;
-        }
-
+        .bg-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; z-index: 1; }
+        .content-wrapper { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; width: 100%; padding: 0 20px; }
+        
         .text-content { text-align: center; margin-bottom: 20px; }
-
         .text-content h1 {
-            font-family: 'Fredoka', sans-serif;
-            font-size: clamp(24px, 6vw, 32px);
-            color: #8B3A00;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 8px;
+            font-family: 'Fredoka', sans-serif; font-size: clamp(24px, 6vw, 32px); color: #8B3A00;
+            font-weight: 700; line-height: 1.2; margin-bottom: 8px;
             text-shadow: 1px 1px 0px rgba(255,255,255,0.8), 2px 2px 5px rgba(0,0,0,0.1);
         }
-
-        .text-content p {
-            font-family: 'Nunito', sans-serif;
-            font-size: clamp(13px, 4vw, 16px);
-            color: #6B5B4D;
-            font-weight: 700;
-        }
+        .text-content p { font-family: 'Nunito', sans-serif; font-size: clamp(13px, 4vw, 16px); color: #6B5B4D; font-weight: 700; }
 
         .start-btn {
-            position: relative;
-            width: 100%;
-            max-width: 350px;
-            padding: 16px 20px;
-            font-size: 20px;
-            font-family: 'Fredoka', sans-serif;
-            font-weight: 700;
-            color: white;
-            background: #FF6B35;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
+            position: relative; width: 100%; max-width: 350px; padding: 16px 20px;
+            font-size: 20px; font-family: 'Fredoka', sans-serif; font-weight: 700; color: white;
+            background: #FF6B35; border: none; border-radius: 50px; cursor: pointer;
             box-shadow: 0 6px 0 #cc4e20, 0 10px 20px rgba(255, 107, 53, 0.4);
-            transition: transform 0.1s;
-            animation: pulseBtn 2s infinite;
+            transition: transform 0.1s; animation: pulseBtn 2s infinite;
         }
-
-        .start-btn:active {
-            transform: translateY(6px);
-            box-shadow: 0 0px 0 #cc4e20;
-            animation: none;
-        }
-
-        @keyframes pulseBtn {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
+        .start-btn:active { transform: translateY(6px); box-shadow: 0 0px 0 #cc4e20; animation: none; }
+        @keyframes pulseBtn { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
         /* ========================================= */
-        /* PIXEL DISSOLVE CARD CSS (TEST SECTION)    */
+        /* PIXEL CARD SECTION (Scroll Test)          */
         /* ========================================= */
-        .test-section {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: #f0f0f0; /* Alag background test ke liye */
-            padding: 40px 20px;
+        .card-section {
+            min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+            align-items: center; background: #fce7f3; /* Welcome bg se match kiya */
+            padding: 60px 20px;
         }
-
-        .test-title {
-            font-family: 'Fredoka', sans-serif;
-            color: #333;
-            margin-bottom: 30px;
-            font-size: 24px;
+        .card-title {
+            font-family: 'Fredoka', sans-serif; color: #8B3A00; font-size: 24px; margin-bottom: 30px;
         }
 
         .card-container {
-            width: 300px;
-            height: 420px;
-            perspective: 1000px; /* 3D effect */
-            position: relative;
+            width: 320px; height: 450px; perspective: 1200px; position: relative;
         }
-
         .card {
-            width: 100%;
-            height: 100%;
-            background: #fff;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            position: relative;
-            transform-style: preserve-3d;
-            will-change: transform;
+            width: 100%; height: 100%; background: #fff; border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); padding: 12px;
+            display: flex; flex-direction: column; overflow: hidden;
+            position: relative; transform-style: preserve-3d; will-change: transform;
         }
 
         .image-wrapper {
-            width: 100%;
-            height: 320px;
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
+            width: 100%; height: 340px; border-radius: 20px; overflow: hidden;
+            position: relative; background: #f0f0f0;
         }
-
+        /* Yahan tumhari png lagegi */
         .card-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
+            width: 100%; height: 100%; object-fit: cover; display: block;
         }
 
-        .card-text {
-            padding: 15px;
-            text-align: center;
-            font-family: 'Nunito', sans-serif;
-        }
-        
-        .card-text h3 { font-size: 20px; color: #333; margin-bottom: 5px; }
-        .card-text p { font-size: 14px; color: #777; }
+        .card-text { padding: 15px; text-align: center; font-family: 'Nunito', sans-serif; }
+        .card-text h3 { font-size: 22px; color: #333; margin-bottom: 5px; font-family: 'Fredoka'; }
+        .card-text p { font-size: 15px; color: #777; font-weight: 700; }
 
-        /* Pixel Effect Grid */
+        /* Pixel Grid */
         .pixel-grid {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: grid;
-            grid-template-columns: repeat(10, 1fr); /* 10x10 grid */
-            pointer-events: none;
-            z-index: 10;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: grid; grid-template-columns: repeat(10, 1fr); /* 10x10 */
+            pointer-events: none; z-index: 10;
         }
-
         .pixel-box {
-            background-color: #f0f0f0; /* Matches test-section bg */
-            transform: scale(0); /* Invisible by default */
-            will-change: transform;
+            background-color: #fce7f3; /* Section bg se match kiya taaki magically gayab lage */
+            transform: scale(0); will-change: transform;
         }
-
     </style>
 </head>
 
@@ -252,39 +115,36 @@
     <!-- Welcome Section -->
     <div id="welcome-content">
         <img src="welcome_bg.png" alt="Welcome Background" class="bg-image" id="bgImage">
-        
         <div class="content-wrapper">
             <div class="text-content">
                 <h1>Learning Is an<br>Adventure!</h1>
                 <p>Explore, discover and grow every day.</p>
             </div>
-
-            <button class="start-btn" id="startBtn">
-                Let's Start →
-            </button>
+            <button class="start-btn" id="startBtn">Let's Start →</button>
         </div>
     </div>
 
     <!-- ========================================= -->
-    <!-- PIXEL DISSOLVE CARD SECTION (SCROLL TEST) -->
+    <!-- PIXEL CARD SECTION (SCROLL TEST)          -->
     <!-- ========================================= -->
-    <div class="test-section">
-        <h2 class="test-title">Scroll to Dissolve ↓</h2>
+    <div class="card-section">
+        <h2 class="card-title">Scroll to see magic ↓</h2>
         
         <div class="card-container" id="cardContainer">
             <div class="card" id="card">
                 
                 <div class="image-wrapper">
-                    <!-- Yahan apni image ka path daal sakte ho -->
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Profile" class="card-image">
+                    <!-- Yahan maine welcome_bg.png use kiya hai. 
+                         Baad me isko apni pasand ki image se badal sakte ho -->
+                    <img src="welcome_bg.png" alt="Profile" class="card-image">
                     
-                    <!-- Ye grid JS se generate hoga -->
+                    <!-- Dynamic Pixels -->
                     <div class="pixel-grid" id="pixelGrid"></div>
                 </div>
 
                 <div class="card-text">
-                    <h3>Juno Park</h3>
-                    <p>Motion Designer</p>
+                    <h3>Kids Teacher</h3>
+                    <p>Learn & Grow</p>
                 </div>
 
             </div>
@@ -320,14 +180,11 @@
         function hideSplash() {
             splash.style.opacity = '0';
             welcomeContent.style.opacity = '1';
-            setTimeout(() => {
-                splash.style.display = 'none';
-            }, 400);
+            setTimeout(() => { splash.style.display = 'none'; }, 400);
         }
 
-        if (bgImage.complete) {
-            hideSplash();
-        } else {
+        if (bgImage.complete) { hideSplash(); } 
+        else {
             bgImage.onload = hideSplash;
             bgImage.onerror = () => setTimeout(hideSplash, 3000);
         }
@@ -344,58 +201,53 @@
         });
 
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./service-worker.js');
-            });
+            window.addEventListener('load', () => { navigator.serviceWorker.register('./service-worker.js'); });
         }
 
-        // --- PIXEL CARD LOGIC ---
+        // --- PIXEL CARD ANIMATION LOGIC ---
         const pixelGrid = document.getElementById('pixelGrid');
-        const totalPixels = 100; // 10x10 grid
+        const totalPixels = 100; // 10x10 Grid
 
-        // Pixels create karo
         for (let i = 0; i < totalPixels; i++) {
             const pixel = document.createElement('div');
             pixel.classList.add('pixel-box');
             pixelGrid.appendChild(pixel);
         }
 
-        // GSAP Animations
         gsap.registerPlugin(ScrollTrigger);
 
-        // Card Rotate Animation
+        // 1. Card 3D Rotate Animation
         gsap.to('#card', {
             scrollTrigger: {
                 trigger: '#cardContainer',
                 start: 'top bottom',
                 end: 'center center',
-                scrub: 1,
+                scrub: 1.5, // Smooth lag ke liye
             },
-            rotationY: 360, // 3D spin
+            rotationY: 360, // Card ghumega
             rotationX: 10,
             scale: 1.05,
             duration: 1
         });
 
-        // Pixel Dissolve Animation
+        // 2. Pixel Dissolve Animation
         const pixels = document.querySelectorAll('.pixel-box');
         
         gsap.to(pixels, {
             scrollTrigger: {
                 trigger: '#cardContainer',
-                start: 'top 70%', // Jab card screen pe aaye
-                end: 'center center',
-                scrub: 1,
+                start: 'top 65%', 
+                end: 'bottom 40%',
+                scrub: 1.5,
             },
-            scale: 1, // Pixels ko visible karo (default scale 0 hai)
-            background: '#f0f0f0', // Background se match karo
+            scale: 1, // Pixels visible honge
+            background: '#fce7f3', // Section bg color (magic trick)
             stagger: {
-                amount: 0.5,
-                from: 'random'
+                amount: 0.8, // Kitna time lagega sabko bikhne me
+                from: 'random' // Random pixels udenge
             },
             duration: 0.5
         });
-
     </script>
 </body>
 </html>
