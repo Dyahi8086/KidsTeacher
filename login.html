@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="theme-color" content="#14b8a6">
+  <meta name="theme-color" content="#ec4899">
   <title>Parents Login - Kids Teacher</title>
   
   <link rel="manifest" href="./manifest.json">
@@ -26,13 +26,13 @@
       background: #ffffff;
     }
 
-    /* --- NAYA TEAL GLOW BACKGROUND --- */
-    .teal-glow-bg {
+    /* --- NAYA PINK GLOW BACKGROUND --- */
+    .pink-glow-bg {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       z-index: 0;
-      /* Yahan wahi Teal Radial Gradient hai */
-      background-image: radial-gradient(125% 125% at 50% 10%, #ffffff 40%, #14b8a6 100%);
+      /* Yahan wahi Pink Radial Gradient hai */
+      background-image: radial-gradient(125% 125% at 50% 90%, #ffffff 40%, #ec4899 100%);
       background-size: 100% 100%;
     }
 
@@ -48,14 +48,14 @@
       z-index: 10;
     }
 
-    /* --- TRUE LIQUID GLASS CARD --- */
+    /* --- TRUE LIQUID GLASS CARD (With Bounce Animation) --- */
     .login-card {
       width: 100%;
       max-width: 450px;
       min-height: 55vh; 
       
       /* Liquid Glass Effect */
-      background: rgba(255, 255, 255, 0.4); 
+      background: rgba(255, 255, 255, 0.45); 
       backdrop-filter: blur(30px) saturate(200%);
       -webkit-backdrop-filter: blur(30px) saturate(200%);
       
@@ -69,7 +69,7 @@
       box-shadow: 
         inset 0 1px 2px rgba(255, 255, 255, 1),
         inset 0 -1px 20px rgba(255, 255, 255, 0.3),
-        0 -15px 40px rgba(0, 0, 0, 0.1);
+        0 -15px 40px rgba(236, 72, 153, 0.2); /* Pinkish shadow */
       
       padding: 40px 25px calc(40px + env(safe-area-inset-bottom)) 25px;
       
@@ -80,12 +80,15 @@
       text-align: center;
       position: relative;
       
-      animation: slideUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      /* BOUNCE ANIMATION (Niche se uchhal kar aayega) */
+      animation: bounceUp 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
       transform: translateY(100%);
     }
 
-    @keyframes slideUp {
-      to { transform: translateY(0); }
+    @keyframes bounceUp {
+      0% { transform: translateY(100%); }
+      60% { transform: translateY(-15px); } /* Thoda upar nikal jayega */
+      100% { transform: translateY(0); }
     }
 
     /* Pull bar */
@@ -104,7 +107,7 @@
       font-size: 60px; 
       margin-top: 10px;
       margin-bottom: 10px;
-      filter: drop-shadow(0 8px 12px rgba(20, 184, 166, 0.3));
+      filter: drop-shadow(0 8px 12px rgba(236, 72, 153, 0.3));
     }
 
     /* --- TEXT STYLING (Dark Navy) --- */
@@ -219,8 +222,8 @@
       z-index: 9999; flex-direction: column; justify-content: center; align-items: center;
     }
     .spinner {
-      width: 50px; height: 50px; border: 5px solid #ccfbf1;
-      border-top: 5px solid #14b8a6; border-radius: 50%;
+      width: 50px; height: 50px; border: 5px solid #fce7f3;
+      border-top: 5px solid #ec4899; border-radius: 50%;
       animation: spin 1s linear infinite; margin-bottom: 20px;
     }
     @keyframes spin { 100% { transform: rotate(360deg); } }
@@ -229,8 +232,8 @@
 </head>
 <body>
 
-  <!-- TEAL GLOW BACKGROUND -->
-  <div class="teal-glow-bg"></div>
+  <!-- PINK GLOW BACKGROUND -->
+  <div class="pink-glow-bg"></div>
 
   <div class="login-container">
     
