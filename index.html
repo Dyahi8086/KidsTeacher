@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#e0f2fe">
     <title>Kids Teacher - Welcome</title>
 
-    <!-- PNG Image ko millisecond me load karne ke liye Preload Tag -->
+    <!-- Super-fast image preloading -->
     <link rel="preload" href="welcome_bg.png" as="image">
 
     <link rel="manifest" href="./manifest.json">
@@ -30,7 +30,7 @@
             overflow: hidden;
         }
 
-        /* Loader */
+        /* Loading Splash Screen */
         #splash-screen {
             position: fixed;
             top: 0;
@@ -70,7 +70,7 @@
             font-weight: 600;
         }
 
-        /* Welcome Content with PNG Background */
+        /* Welcome Screen with Optimized PNG Background */
         #welcome-content {
             display: none;
             position: relative;
@@ -159,7 +159,7 @@
 
     <div id="splash-screen">
         <div class="spinner"></div>
-        <div class="loading-text">Loading...</div>
+        <div class="loading-text">Loading Adventure...</div>
     </div>
 
     <div id="welcome-content">
@@ -197,11 +197,11 @@
         const splash = document.getElementById('splash-screen');
         const welcomeContent = document.getElementById('welcome-content');
 
-        // Image object se check karenge ki PNG poori load ho chuki hai ya nahi
-        const img = new Image();
-        img.src = 'welcome_bg.png';
-        
-        img.onload = () => {
+        // Image object check taaki bina load hue screen na khule
+        const bgImg = new Image();
+        bgImg.src = 'welcome_bg.png';
+
+        bgImg.onload = () => {
             splash.style.opacity = '0';
             setTimeout(() => {
                 splash.style.display = 'none';
@@ -209,7 +209,7 @@
             }, 300);
         };
 
-        // Safety timeout (agar network slow ho toh maximum 1.5 second me open ho jayega)
+        // Safety timeout (800ms max loading time)
         setTimeout(() => {
             if (splash.style.display !== 'none') {
                 splash.style.opacity = '0';
@@ -218,9 +218,9 @@
                     welcomeContent.style.display = 'flex';
                 }, 300);
             }
-        }, 1500);
+        }, 800);
 
-        // Let's Start button click handler
+        // Let's Start button click handler (Firebase Auth Check)
         document.getElementById('startBtn').addEventListener('click', () => {
             onAuthStateChanged(auth, (user) => {
                 if (user) {
