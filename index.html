@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +9,9 @@
     <link rel="manifest" href="./manifest.json">
     <link rel="icon" type="image/png" href="./icons/icon-192.png">
     <link rel="apple-touch-icon" href="./icons/icon-192.png">
+
+    <!-- PRELOAD IMAGE: Ye line image ko sabse pehle download karwana shuru karegi -->
+    <link rel="preload" as="image" href="welcome_bg.png">
 
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
 
@@ -24,11 +26,11 @@
         body, html {
             height: 100%;
             width: 100%;
-            background-color: #e0f2fe;
+            background-color: #fce7f3; /* Pink background fallback */
             overflow: hidden;
         }
 
-        /* Loader */
+        /* Splash Screen (Loading) */
         #splash-screen {
             position: fixed;
             top: 0;
@@ -41,7 +43,7 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s ease;
         }
 
         .spinner {
@@ -55,13 +57,11 @@
         }
 
         @keyframes spin {
-            100% {
-                transform: rotate(360deg);
-            }
+            100% { transform: rotate(360deg); }
         }
 
         .loading-text {
-            font-family: 'Fredoka';
+            font-family: 'Fredoka', sans-serif;
             font-size: 20px;
             color: #8B3A00;
             font-weight: 600;
@@ -69,7 +69,6 @@
 
         /* Welcome Content */
         #welcome-content {
-            display: none;
             position: relative;
             width: 100vw;
             height: 100vh;
@@ -79,12 +78,23 @@
             justify-content: flex-end;
             align-items: center;
             padding-bottom: 40px;
-
-            background-image: url('welcome_bg.png');
-            background-size: cover;
-            background-position: center top;
-            background-repeat: no-repeat;
             background-color: #fce7f3;
+            
+            /* Shuru me content thoda invisible rahega */
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Background Image (Absolute) */
+        .bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            z-index: 1;
         }
 
         .content-wrapper {
@@ -146,29 +156,26 @@
         }
 
         @keyframes pulseBtn {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.05);
-            }
-
-            100% {
-                transform: scale(1);
-            }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
 
 <body>
 
+    <!-- Splash Screen -->
     <div id="splash-screen">
         <div class="spinner"></div>
         <div class="loading-text">Loading...</div>
     </div>
 
+    <!-- Welcome Content -->
     <div id="welcome-content">
+        <!-- Background Image (ab img tag me hai taaki load track ho sake) -->
+        <img src="welcome_bg.png" alt="Welcome Background" class="bg-image" id="bgImage">
+        
         <div class="content-wrapper">
             <div class="text-content">
                 <h1>Learning Is an<br>Adventure!</h1>
@@ -183,10 +190,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import {
-            getAuth,
-            onAuthStateChanged
-        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
@@ -202,37 +206,45 @@
 
         const splash = document.getElementById('splash-screen');
         const welcomeContent = document.getElementById('welcome-content');
+        const bgImage = document.getElementById('bgImage');
 
-        // Hamesha pehle Welcome Page dikhao
-        splash.style.opacity = '0';
+        // --- IMAGE LOAD LOGIC ---
+        // Jab image poori tarah load ho jaye, tabhi splash screen hatao
+        function hideSplash() {
+            splash.style.opacity = '0';
+            welcomeContent.style.opacity = '1';
+            setTimeout(() => {
+                splash.style.display = 'none';
+            }, 400); // Fade out animation ke baad display none
+        }
 
-        setTimeout(() => {
-            splash.style.display = 'none';
-            welcomeContent.style.display = 'flex';
-        }, 300);
+        // Check karo image load hui ya nahi
+        if (bgImage.complete) {
+            // Agar cache se turant load ho gayi
+            hideSplash();
+        } else {
+            // Agar load ho rahi hai, toh load hone ka wait karo
+            bgImage.onload = hideSplash;
+            // Agar image load fail ho jaye (internet issue), toh bhi 3 second baad page dikha do
+            bgImage.onerror = () => {
+                setTimeout(hideSplash, 3000); 
+            };
+        }
 
-        // Let's Start button par Firebase check karo
+        // --- BUTTON LOGIC ---
         document.getElementById('startBtn').addEventListener('click', () => {
-
             onAuthStateChanged(auth, (user) => {
-
                 if (user) {
                     // Logged-in user
                     const savedAge = localStorage.getItem('kidsAgeGroup');
-
                     window.location.replace(
-                        !savedAge
-                            ? "age-select.html"
-                            : "index-home.html"
+                        !savedAge ? "age-select.html" : "index-home.html"
                     );
-
                 } else {
                     // Not logged-in user
                     window.location.href = 'login.html';
                 }
-
             });
-
         });
 
         // Service Worker
