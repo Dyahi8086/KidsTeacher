@@ -197,7 +197,7 @@
         const splash = document.getElementById('splash-screen');
         const welcomeContent = document.getElementById('welcome-content');
 
-        // Image object check taaki bina load hue screen na khule
+        // Image preloader check
         const bgImg = new Image();
         bgImg.src = 'welcome_bg.png';
 
@@ -209,7 +209,7 @@
             }, 300);
         };
 
-        // Safety timeout (800ms max loading time)
+        // Safety timeout (800ms max)
         setTimeout(() => {
             if (splash.style.display !== 'none') {
                 splash.style.opacity = '0';
@@ -220,7 +220,7 @@
             }
         }, 800);
 
-        // Let's Start button click handler (Firebase Auth Check)
+        // Let's Start button click handler: Check if user is logged in, otherwise go to login.html
         document.getElementById('startBtn').addEventListener('click', () => {
             onAuthStateChanged(auth, (user) => {
                 if (user) {
