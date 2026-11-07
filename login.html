@@ -526,6 +526,17 @@ body {
     return;
   }
 
+  // WebGL Context Lost ko safely handle karne ke liye (Crash rokne ke liye)
+  canvas.addEventListener("webglcontextlost", (event) => {
+    event.preventDefault();
+    cancelAnimationFrame(animationFrame);
+    canvas.style.display = "none";
+  }, false);
+
+  canvas.addEventListener("webglcontextrestored", () => {
+    location.reload();
+  }, false);
+
   const vertexShaderSource = `
     attribute vec2 a_pos;
     varying vec2 v_uv;
@@ -761,7 +772,6 @@ setPersistence(auth, browserLocalPersistence).catch(error => {
   console.error("Persistence error:", error);
 });
 
-/* Automatically check logged in state */
 onAuthStateChanged(auth, user => {
   if (!user) {
     overlay.style.display = "none";
@@ -780,7 +790,6 @@ onAuthStateChanged(auth, user => {
   overlay.style.display = "none";
 });
 
-/* Clean Event Listener for Google Login */
 googleBtn.addEventListener('click', async () => {
   if (googleBtn.disabled) return;
 
