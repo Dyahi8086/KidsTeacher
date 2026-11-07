@@ -14,7 +14,16 @@
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body, html { height: 100%; width: 100%; background-color: #fce7f3; overflow-y: auto; overflow-x: hidden; }
+        
+        /* Scroll enable kar diya */
+        html, body {
+            width: 100%;
+            min-height: 100%;
+            background-color: #fce7f3;
+            overflow-x: hidden;
+            overflow-y: auto; 
+            -webkit-overflow-scrolling: touch; /* Mobile smooth scroll */
+        }
 
         /* Splash Screen */
         #splash-screen {
@@ -29,14 +38,28 @@
         @keyframes spin { 100% { transform: rotate(360deg); } }
         .loading-text { font-family: 'Fredoka', sans-serif; font-size: 20px; color: #8B3A00; font-weight: 600; }
 
-        /* Welcome Content */
+        /* Welcome Content - Exactly full screen */
         #welcome-content {
-            position: relative; width: 100vw; height: 100vh; height: 100dvh;
-            display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
-            padding-bottom: 40px; background-color: #fce7f3; opacity: 0; transition: opacity 0.5s ease;
+            position: relative; 
+            width: 100vw; 
+            height: 100vh; 
+            height: 100dvh; /* Mobile address bar ke liye */
+            display: flex; 
+            flex-direction: column; 
+            justify-content: flex-end; 
+            align-items: center;
+            padding-bottom: 40px; 
+            background-color: #fce7f3; 
+            opacity: 0; 
+            transition: opacity 0.5s ease;
+            overflow: hidden;
         }
         .bg-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; z-index: 1; }
-        .content-wrapper { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; width: 100%; padding: 0 20px; }
+        
+        .content-wrapper { 
+            position: relative; z-index: 10; display: flex; flex-direction: column; 
+            align-items: center; width: 100%; padding: 0 20px; 
+        }
         
         .text-content { text-align: center; margin-bottom: 20px; }
         .text-content h1 {
@@ -52,24 +75,53 @@
             background: #FF6B35; border: none; border-radius: 50px; cursor: pointer;
             box-shadow: 0 6px 0 #cc4e20, 0 10px 20px rgba(255, 107, 53, 0.4);
             transition: transform 0.1s; animation: pulseBtn 2s infinite;
+            z-index: 20;
         }
         .start-btn:active { transform: translateY(6px); box-shadow: 0 0px 0 #cc4e20; animation: none; }
         @keyframes pulseBtn { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+        /* Scroll Indicator (Taaki user ko pata chale neeche kuch hai) */
+        .scroll-hint {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Nunito', sans-serif;
+            font-size: 13px;
+            color: #8B3A00;
+            font-weight: 800;
+            opacity: 0.6;
+            animation: bounce 2s infinite;
+            z-index: 20;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, -5px); }
+        }
 
         /* ========================================= */
         /* PIXEL CARD SECTION (Scroll Test)          */
         /* ========================================= */
         .card-section {
-            min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
-            align-items: center; background: #fce7f3; /* Welcome bg se match kiya */
+            position: relative;
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center;
+            align-items: center; 
+            background: #fce7f3; 
             padding: 60px 20px;
         }
         .card-title {
             font-family: 'Fredoka', sans-serif; color: #8B3A00; font-size: 24px; margin-bottom: 30px;
+            text-align: center;
         }
 
         .card-container {
             width: 320px; height: 450px; perspective: 1200px; position: relative;
+            /* Border taaki pata chale card kahan hai */
+            border: 2px dashed rgba(255, 107, 53, 0.3); 
+            border-radius: 25px;
         }
         .card {
             width: 100%; height: 100%; background: #fff; border-radius: 25px;
@@ -82,7 +134,6 @@
             width: 100%; height: 340px; border-radius: 20px; overflow: hidden;
             position: relative; background: #f0f0f0;
         }
-        /* Yahan tumhari png lagegi */
         .card-image {
             width: 100%; height: 100%; object-fit: cover; display: block;
         }
@@ -98,7 +149,7 @@
             pointer-events: none; z-index: 10;
         }
         .pixel-box {
-            background-color: #fce7f3; /* Section bg se match kiya taaki magically gayab lage */
+            background-color: #fce7f3; /* Section bg se match kiya */
             transform: scale(0); will-change: transform;
         }
     </style>
@@ -115,6 +166,7 @@
     <!-- Welcome Section -->
     <div id="welcome-content">
         <img src="welcome_bg.png" alt="Welcome Background" class="bg-image" id="bgImage">
+        
         <div class="content-wrapper">
             <div class="text-content">
                 <h1>Learning Is an<br>Adventure!</h1>
@@ -122,20 +174,22 @@
             </div>
             <button class="start-btn" id="startBtn">Let's Start →</button>
         </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-hint">↓ Scroll Down ↓</div>
     </div>
 
     <!-- ========================================= -->
     <!-- PIXEL CARD SECTION (SCROLL TEST)          -->
     <!-- ========================================= -->
     <div class="card-section">
-        <h2 class="card-title">Scroll to see magic ↓</h2>
+        <h2 class="card-title">Scroll Effect Test</h2>
         
         <div class="card-container" id="cardContainer">
             <div class="card" id="card">
                 
                 <div class="image-wrapper">
-                    <!-- Yahan maine welcome_bg.png use kiya hai. 
-                         Baad me isko apni pasand ki image se badal sakte ho -->
+                    <!-- Yahan tumhari 3D image lagao -->
                     <img src="welcome_bg.png" alt="Profile" class="card-image">
                     
                     <!-- Dynamic Pixels -->
@@ -220,11 +274,11 @@
         gsap.to('#card', {
             scrollTrigger: {
                 trigger: '#cardContainer',
-                start: 'top bottom',
-                end: 'center center',
-                scrub: 1.5, // Smooth lag ke liye
+                start: 'top 90%', // Jab card screen ke bottom pe aaye
+                end: 'center center', // Jab center me aaye
+                scrub: 1.5, 
             },
-            rotationY: 360, // Card ghumega
+            rotationY: 360, 
             rotationX: 10,
             scale: 1.05,
             duration: 1
@@ -236,15 +290,15 @@
         gsap.to(pixels, {
             scrollTrigger: {
                 trigger: '#cardContainer',
-                start: 'top 65%', 
-                end: 'bottom 40%',
+                start: 'top 70%', 
+                end: 'center center',
                 scrub: 1.5,
             },
-            scale: 1, // Pixels visible honge
-            background: '#fce7f3', // Section bg color (magic trick)
+            scale: 1, 
+            background: '#fce7f3',
             stagger: {
-                amount: 0.8, // Kitna time lagega sabko bikhne me
-                from: 'random' // Random pixels udenge
+                amount: 0.8, 
+                from: 'random' 
             },
             duration: 0.5
         });
