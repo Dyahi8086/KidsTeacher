@@ -5,312 +5,303 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#38BDF8">
-
 <title>Parents Login - Kids Teacher</title>
 
 <link rel="manifest" href="./manifest.json">
-<link rel="icon" type="image/png" href="./icons/icon-192.png">
+<link rel="icon" href="./icons/icon-192.png">
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
 
 <style>
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
 }
 
-html, body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+html,body {
+  width:100%;
+  height:100%;
+  overflow:hidden;
 }
 
 body {
-  height: 100vh;
-  height: 100dvh;
-  position: relative;
-  font-family: 'Nunito', sans-serif;
-  background: #48B9F5;
+  height:100dvh;
+  position:relative;
+  font-family:'Nunito',sans-serif;
+  background:#38BDF8;
 }
 
-/* BACKGROUND */
-
+/* FIXED FULL-SCREEN BACKGROUND */
 #cloud-canvas {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
+  position:fixed;
+  inset:0;
+  display:block;
+  width:100%;
+  height:100%;
+  z-index:0;
+  pointer-events:none;
 }
 
-/* LOGIN */
-
+/* LOGIN CONTAINER */
 .login-container {
-  position: relative;
-  z-index: 10;
-  width: 100%;
-  height: 100%;
-  height: 100dvh;
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  height:100dvh;
+  z-index:10;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  align-items:center;
 
-  overflow-y: auto;
-  overscroll-behavior: contain;
-
-  padding-bottom: env(safe-area-inset-bottom);
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding-bottom:env(safe-area-inset-bottom);
 }
 
 /* GLASS CARD */
-
 .login-card {
-  position: relative;
-  width: 100%;
-  max-width: 450px;
-  min-height: 55vh;
+  position:relative;
+  flex-shrink:0;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  width:100%;
+  max-width:450px;
+  min-height:55vh;
 
-  text-align: center;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
 
-  background: rgba(255,255,255,0.22);
+  text-align:center;
 
-  backdrop-filter: blur(24px) saturate(145%);
-  -webkit-backdrop-filter: blur(24px) saturate(145%);
+  background:
+    linear-gradient(
+      160deg,
+      rgba(255,255,255,.32),
+      rgba(255,255,255,.18)
+    );
 
-  border-radius: 40px 40px 0 0;
+  backdrop-filter:blur(26px) saturate(145%);
+  -webkit-backdrop-filter:blur(26px) saturate(145%);
 
-  border-top: 1px solid rgba(255,255,255,0.85);
-  border-left: 1px solid rgba(255,255,255,0.35);
-  border-right: 1px solid rgba(255,255,255,0.35);
+  border:1px solid rgba(255,255,255,.55);
+  border-bottom:0;
+  border-radius:40px 40px 0 0;
 
   box-shadow:
-    inset 0 1px 2px rgba(255,255,255,0.65),
-    0 -10px 30px rgba(0,0,0,0.08);
+    inset 0 1px 2px rgba(255,255,255,.7),
+    0 -12px 35px rgba(0,0,0,.08);
 
-  padding: 40px 25px calc(35px + env(safe-area-inset-bottom));
+  padding:40px 25px calc(35px + env(safe-area-inset-bottom));
 
-  animation: bounceUp .8s cubic-bezier(.175,.885,.32,1.275) forwards;
-  transform: translateY(100%);
+  animation:cardUp .75s cubic-bezier(.175,.885,.32,1.15);
 }
 
-@keyframes bounceUp {
-  0% { transform: translateY(100%); }
-  65% { transform: translateY(-10px); }
-  100% { transform: translateY(0); }
+@keyframes cardUp {
+  from { transform:translateY(100%); }
+  to { transform:translateY(0); }
 }
 
 /* HANDLE */
-
 .login-card::before {
-  content: "";
-  position: absolute;
-  top: 12px;
-  width: 50px;
-  height: 5px;
-  border-radius: 10px;
-  background: rgba(255,255,255,.75);
+  content:"";
+  position:absolute;
+  top:12px;
+  width:50px;
+  height:5px;
+  border-radius:10px;
+  background:rgba(255,255,255,.8);
 }
 
 /* ICON */
-
 .icon-3d {
-  font-size: 60px;
-  margin: 10px 0;
-  filter: drop-shadow(0 8px 12px rgba(0,0,0,.18));
+  font-size:60px;
+  margin:10px 0;
+  filter:drop-shadow(0 8px 12px rgba(0,0,0,.18));
 }
 
 /* TITLE */
-
 .app-title {
-  font-family: 'Fredoka', sans-serif;
-  font-size: 34px;
-  font-weight: 700;
-  letter-spacing: -.5px;
-  margin-bottom: 8px;
-  color: #0F172A;
+  font-family:'Fredoka',sans-serif;
+  font-size:34px;
+  font-weight:700;
+  letter-spacing:-.5px;
+  margin-bottom:8px;
+  color:#0F172A;
 }
 
 .app-subtitle {
-  font-size: 15px;
-  color: #334155;
-  font-weight: 800;
-  line-height: 1.4;
-  padding: 0 10px;
-  margin-bottom: 30px;
+  font-size:15px;
+  color:#334155;
+  font-weight:800;
+  line-height:1.4;
+  padding:0 10px;
+  margin-bottom:30px;
 }
 
 /* GOOGLE BUTTON */
-
 .btn-google {
-  width: 100%;
-  padding: 18px 15px;
+  position:relative;
+  overflow:hidden;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+  width:100%;
+  padding:18px 15px;
 
-  position: relative;
-  overflow: hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
 
-  border: 1px solid #FFFFFF;
-  border-radius: 50px;
+  border:1px solid #fff;
+  border-radius:50px;
 
-  background: rgba(255,255,255,.96);
-  color: #0F172A;
+  background:rgba(255,255,255,.96);
+  color:#0F172A;
 
-  font-family: 'Fredoka', sans-serif;
-  font-size: 17px;
-  font-weight: 700;
+  font-family:'Fredoka',sans-serif;
+  font-size:17px;
+  font-weight:700;
 
-  cursor: pointer;
-  margin-bottom: 25px;
+  cursor:pointer;
+  margin-bottom:25px;
 
   box-shadow:
-    0 8px 20px rgba(0,0,0,.10),
-    inset 0 2px 2px #FFFFFF;
+    0 8px 20px rgba(0,0,0,.1),
+    inset 0 2px 2px #fff;
 
-  transition: transform .15s ease;
+  transition:transform .15s;
 }
 
 .btn-google span {
-  display: inline-block;
-  animation: textBounce 2s infinite ease-in-out;
+  display:inline-block;
+  animation:textBounce 2s infinite ease-in-out;
 }
 
 @keyframes textBounce {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
+  0%,100% { transform:translateY(0); }
+  50% { transform:translateY(-3px); }
 }
 
 .btn-google::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-
-  background: linear-gradient(
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:50%;
+  height:100%;
+  background:linear-gradient(
     90deg,
     transparent,
     rgba(255,255,255,.8),
     transparent
   );
-
-  transform: skewX(-25deg);
-  animation: shine 3s infinite;
-  pointer-events: none;
+  transform:skewX(-25deg);
+  animation:shine 3s infinite;
+  pointer-events:none;
 }
 
 @keyframes shine {
-  0% { left: -100%; }
-  20%,100% { left: 200%; }
+  0% { left:-100%; }
+  20%,100% { left:200%; }
 }
 
 .btn-google:active {
-  transform: translateY(3px);
+  transform:translateY(3px);
 }
 
 .btn-google:disabled {
-  opacity: .7;
-  cursor: wait;
+  opacity:.7;
+  cursor:wait;
 }
 
 .google-icon-svg {
-  width: 22px;
-  height: 22px;
-  flex-shrink: 0;
+  width:22px;
+  height:22px;
+  flex-shrink:0;
 }
 
 /* PRIVACY */
-
 .privacy-text {
-  font-size: 12px;
-  color: #334155;
-  font-weight: 800;
-  line-height: 1.5;
-  text-align: center;
-  padding: 0 10px;
+  font-size:12px;
+  color:#334155;
+  font-weight:800;
+  line-height:1.5;
+  text-align:center;
+  padding:0 10px;
 }
 
 .privacy-text a {
-  color: #0F172A;
-  text-decoration: underline;
+  color:#0F172A;
+  text-decoration:underline;
 }
 
 /* LOADING */
-
 #loadingOverlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  height: 100dvh;
-  background: rgba(255,255,255,.92);
-  backdrop-filter: blur(10px);
-  z-index: 9999;
+  display:none;
+  position:fixed;
+  inset:0;
+  height:100dvh;
+  z-index:9999;
 
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(10px);
+
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
 }
 
 .spinner {
-  width: 50px;
-  height: 50px;
-  border: 5px solid #FFEDD5;
-  border-top: 5px solid #FF5E3A;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-bottom: 20px;
+  width:50px;
+  height:50px;
+  border:5px solid #FFEDD5;
+  border-top-color:#FF5E3A;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+  margin-bottom:20px;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to { transform:rotate(360deg); }
 }
 
 .loading-text {
-  font-family: 'Fredoka', sans-serif;
-  font-size: 22px;
-  color: #9A3412;
-  font-weight: 600;
+  font-family:'Fredoka',sans-serif;
+  font-size:22px;
+  color:#9A3412;
+  font-weight:600;
 }
 
-/* SMALL SCREEN */
-
+/* SHORT SCREEN */
 @media(max-height:650px) {
   .login-card {
-    min-height: auto;
-    padding-top: 28px;
-    padding-bottom: calc(25px + env(safe-area-inset-bottom));
+    min-height:auto;
+    padding-top:28px;
+    padding-bottom:calc(25px + env(safe-area-inset-bottom));
   }
 
   .icon-3d {
-    font-size: 48px;
-    margin: 5px 0;
+    font-size:48px;
+    margin:5px 0;
   }
 
   .app-title {
-    font-size: 29px;
+    font-size:29px;
   }
 
   .app-subtitle {
-    margin-bottom: 20px;
+    margin-bottom:20px;
   }
 
   .btn-google {
-    padding: 15px;
-    margin-bottom: 20px;
+    padding:15px;
+    margin-bottom:20px;
   }
 }
 </style>
@@ -343,7 +334,6 @@ body {
         <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
         <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
       </svg>
-
       <span>Continue with Google</span>
     </button>
 
@@ -360,8 +350,7 @@ body {
   <div class="spinner"></div>
   <p class="loading-text">Logging you in...</p>
 </div>
-<!-- KIDS TEACHER BACKGROUND -->
-
+<!-- BACKGROUND DRAWING -->
 <script>
 (() => {
   const canvas = document.getElementById("cloud-canvas");
@@ -369,101 +358,119 @@ body {
 
   if (!ctx) return;
 
-  let W, H, DPR;
-  let raf = 0;
+  let W = 0, H = 0, DPR = 1;
+  let animation = 0;
+  let lastTime = 0;
 
-  const rand = (a,b) => a + Math.random() * (b-a);
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const clouds = [
-    {x:.18,y:.35,s:.85,v:.012},
-    {x:.72,y:.42,s:1.1,v:.009},
-    {x:.42,y:.55,s:.7,v:.006}
-  ];
+  function resize() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
 
-  const butterflies = [
-    {x:.18,y:.27,c:"#FF72A7",p:0},
-    {x:.80,y:.34,c:"#FFD43B",p:2},
-    {x:.57,y:.20,c:"#A78BFA",p:4}
-  ];
+    canvas.width = Math.round(W * DPR);
+    canvas.height = Math.round(H * DPR);
 
-  const flowers = Array.from({length:45},()=>({
-    x:rand(.01,.99),
-    y:rand(.87,.98),
-    s:rand(2,4),
-    c:["#FF6B9D","#FFD447","#FFFFFF","#C084FC","#FF9F43"][Math.floor(Math.random()*5)]
-  }));
+    canvas.style.width = W + "px";
+    canvas.style.height = H + "px";
 
-  function resize(){
-    DPR=Math.min(devicePixelRatio||1,2);
-    W=innerWidth;
-    H=innerHeight;
+    // Reset transform every resize: prevents scaling bugs.
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
 
-    canvas.width=W*DPR;
-    canvas.height=H*DPR;
-
-    canvas.style.width=W+"px";
-    canvas.style.height=H+"px";
-
-    ctx.setTransform(DPR,0,0,DPR,0,0);
+    draw(performance.now());
   }
 
-  addEventListener("resize",resize);
-  resize();
-
-  function cloud(x,y,s){
+  function roundedCloud(x, y, s) {
     ctx.save();
-    ctx.translate(x,y);
+    ctx.translate(x, y);
 
-    ctx.fillStyle="rgba(64,135,190,.12)";
+    ctx.shadowColor = "rgba(45,125,175,.12)";
+    ctx.shadowBlur = s * .12;
+    ctx.shadowOffsetY = s * .08;
+
+    const grad = ctx.createLinearGradient(0, -s*.4, 0, s*.3);
+    grad.addColorStop(0, "#FFFFFF");
+    grad.addColorStop(.75, "#FFFFFF");
+    grad.addColorStop(1, "#EAF8FF");
+
+    ctx.fillStyle = grad;
     ctx.beginPath();
-    ctx.ellipse(0,s*.12,s*.58,s*.22,0,0,Math.PI*2);
-    ctx.fill();
 
-    const g=ctx.createLinearGradient(0,-s*.35,0,s*.28);
-    g.addColorStop(0,"#FFFFFF");
-    g.addColorStop(.7,"#FFFFFF");
-    g.addColorStop(1,"#EAF8FF");
-
-    ctx.fillStyle=g;
-    ctx.beginPath();
-
-    ctx.arc(-s*.32,0,s*.23,0,Math.PI*2);
-    ctx.arc(-s*.12,-s*.16,s*.28,0,Math.PI*2);
-    ctx.arc(s*.18,-s*.13,s*.25,0,Math.PI*2);
-    ctx.arc(s*.40,s*.02,s*.18,0,Math.PI*2);
-
-    ctx.ellipse(0,s*.08,s*.55,s*.21,0,0,Math.PI*2);
+    ctx.ellipse(-s*.30, s*.03, s*.25, s*.22, 0, 0, Math.PI*2);
+    ctx.ellipse(-s*.12, -s*.12, s*.28, s*.29, 0, 0, Math.PI*2);
+    ctx.ellipse(s*.15, -s*.10, s*.25, s*.27, 0, 0, Math.PI*2);
+    ctx.ellipse(s*.36, s*.04, s*.20, s*.20, 0, 0, Math.PI*2);
+    ctx.ellipse(0, s*.10, s*.52, s*.19, 0, 0, Math.PI*2);
 
     ctx.fill();
     ctx.restore();
   }
 
-  function rainbow(){
-    const x=W*.18;
-    const y=H*.37;
-    const r=Math.min(W*.40,H*.32);
+  function drawSun() {
+    const x = W * .82;
+    const y = H * .17;
+    const r = Math.min(W, H) * .045;
 
-    const colors=[
-      "#FF5B69",
-      "#FF9B45",
-      "#FFE04B",
-      "#55D78A",
-      "#42BDF5",
-      "#9B72F2"
+    const glow = ctx.createRadialGradient(x,y,r*.1,x,y,r*2.5);
+    glow.addColorStop(0,"rgba(255,246,165,.65)");
+    glow.addColorStop(1,"rgba(255,246,165,0)");
+
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(x,y,r*2.5,0,Math.PI*2);
+    ctx.fill();
+
+    ctx.fillStyle = "#FFF2A0";
+    ctx.beginPath();
+    ctx.arc(x,y,r,0,Math.PI*2);
+    ctx.fill();
+
+    ctx.strokeStyle = "#A65D22";
+    ctx.lineWidth = 1.5;
+
+    ctx.beginPath();
+    ctx.arc(x-r*.27,y-r*.02,2,0,Math.PI*2);
+    ctx.arc(x+r*.27,y-r*.02,2,0,Math.PI*2);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(x,y+r*.05,r*.30,.15,Math.PI-.15);
+    ctx.stroke();
+  }
+
+  function drawRainbow() {
+    // Responsive rainbow: stays inside the screen.
+    const radius = Math.min(W*.31, H*.23);
+    const centerX = W*.04;
+    const centerY = H*.39;
+
+    const colors = [
+      "#F65D72",
+      "#FF9A45",
+      "#FFDB4A",
+      "#55D58B",
+      "#43BDF3",
+      "#A477F5"
     ];
 
     ctx.save();
-    ctx.lineCap="round";
+    ctx.lineCap = "round";
 
-    colors.forEach((color,i)=>{
+    colors.forEach((color,i) => {
+      const inset = i * radius * .105;
+      const r = radius - inset;
+
+      if (r <= 0) return;
+
       ctx.beginPath();
-      ctx.strokeStyle=color;
-      ctx.lineWidth=Math.max(5,r*.075);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = Math.max(4, radius*.09);
 
       ctx.arc(
-        x,
-        y,
-        r-i*r*.075,
+        centerX,
+        centerY,
+        r,
         Math.PI,
         Math.PI*2
       );
@@ -474,57 +481,21 @@ body {
     ctx.restore();
   }
 
-  function sun(){
-    const x=W*.83;
-    const y=H*.18;
-    const r=Math.min(W,H)*.055;
-
-    const glow=ctx.createRadialGradient(x,y,r*.2,x,y,r*2.6);
-    glow.addColorStop(0,"rgba(255,248,173,.75)");
-    glow.addColorStop(1,"rgba(255,248,173,0)");
-
-    ctx.fillStyle=glow;
+  function drawHills() {
+    // Back hill
+    ctx.fillStyle = "#A1E8AE";
     ctx.beginPath();
-    ctx.arc(x,y,r*2.6,0,Math.PI*2);
-    ctx.fill();
-
-    ctx.fillStyle="#FFF2A0";
-    ctx.beginPath();
-    ctx.arc(x,y,r,0,Math.PI*2);
-    ctx.fill();
-
-    ctx.fillStyle="#A65D22";
-
-    ctx.beginPath();
-    ctx.arc(x-r*.28,y-r*.05,2,0,Math.PI*2);
-    ctx.arc(x+r*.28,y-r*.05,2,0,Math.PI*2);
-    ctx.fill();
-
-    ctx.strokeStyle="#A65D22";
-    ctx.lineWidth=1.5;
-
-    ctx.beginPath();
-    ctx.arc(x,y+r*.05,r*.3,.15,Math.PI-.15);
-    ctx.stroke();
-  }
-
-  function hills(){
-    // Distant hill
-
-    ctx.fillStyle="#9AE7AD";
-    ctx.beginPath();
-
-    ctx.moveTo(0,H*.69);
+    ctx.moveTo(0,H*.70);
 
     ctx.bezierCurveTo(
-      W*.20,H*.57,
-      W*.42,H*.76,
-      W*.62,H*.68
+      W*.18,H*.58,
+      W*.34,H*.76,
+      W*.53,H*.67
     );
 
     ctx.bezierCurveTo(
-      W*.82,H*.57,
-      W*.92,H*.64,
+      W*.72,H*.57,
+      W*.86,H*.68,
       W,H*.62
     );
 
@@ -533,27 +504,25 @@ body {
     ctx.closePath();
     ctx.fill();
 
-    // Main hill
+    // Front hill
+    const grad = ctx.createLinearGradient(0,H*.72,0,H);
+    grad.addColorStop(0,"#78DE8C");
+    grad.addColorStop(1,"#3FC574");
 
-    const g=ctx.createLinearGradient(0,H*.68,0,H);
-    g.addColorStop(0,"#70DE83");
-    g.addColorStop(1,"#38B96A");
-
-    ctx.fillStyle=g;
+    ctx.fillStyle = grad;
     ctx.beginPath();
-
-    ctx.moveTo(0,H*.82);
+    ctx.moveTo(0,H*.83);
 
     ctx.bezierCurveTo(
-      W*.20,H*.70,
-      W*.43,H*.84,
-      W*.60,H*.78
+      W*.19,H*.70,
+      W*.40,H*.86,
+      W*.61,H*.78
     );
 
     ctx.bezierCurveTo(
-      W*.78,H*.68,
-      W*.91,H*.75,
-      W,H*.70
+      W*.79,H*.68,
+      W*.91,H*.77,
+      W,H*.72
     );
 
     ctx.lineTo(W,H);
@@ -562,156 +531,170 @@ body {
     ctx.fill();
   }
 
-  function tree(x,y,s){
+  function drawTree(x,y,size) {
     ctx.save();
     ctx.translate(x,y);
 
-    ctx.fillStyle="#965C38";
-    ctx.fillRect(-s*.07,-s*.38,s*.14,s*.45);
+    ctx.fillStyle = "#98603D";
+    ctx.fillRect(-size*.07,-size*.35,size*.14,size*.42);
 
-    const leaves=[
-      [0,-s*.65,s*.34,"#36C96B"],
-      [-s*.20,-s*.49,s*.27,"#4AD17D"],
-      [s*.20,-s*.49,s*.27,"#29B965"],
-      [0,-s*.36,s*.25,"#60D987"]
+    const circles = [
+      [0,-size*.60,size*.31,"#39C96D"],
+      [-size*.20,-size*.45,size*.25,"#54D47D"],
+      [size*.20,-size*.45,size*.25,"#29B866"],
+      [0,-size*.33,size*.23,"#65DB8A"]
     ];
 
-    leaves.forEach(a=>{
-      ctx.fillStyle=a[3];
+    circles.forEach(c => {
+      ctx.fillStyle = c[3];
       ctx.beginPath();
-      ctx.arc(a[0],a[1],a[2],0,Math.PI*2);
+      ctx.arc(c[0],c[1],c[2],0,Math.PI*2);
       ctx.fill();
     });
 
     ctx.restore();
   }
 
-  function flower(f){
-    const x=f.x*W;
-    const y=f.y*H;
-
-    ctx.strokeStyle="#278C4B";
-    ctx.lineWidth=1.5;
-
-    ctx.beginPath();
-    ctx.moveTo(x,y);
-    ctx.lineTo(x,y+f.s*3);
-    ctx.stroke();
-
-    ctx.fillStyle=f.c;
-
-    for(let i=0;i<5;i++){
-      const a=i*Math.PI*2/5;
-
-      ctx.beginPath();
-      ctx.ellipse(
-        x+Math.cos(a)*f.s*.7,
-        y+Math.sin(a)*f.s*.7,
-        f.s*.55,
-        f.s*.42,
-        a,
-        0,
-        Math.PI*2
-      );
-      ctx.fill();
-    }
-
-    ctx.fillStyle="#FFD84D";
-    ctx.beginPath();
-    ctx.arc(x,y,f.s*.35,0,Math.PI*2);
-    ctx.fill();
-  }
-
-  function butterfly(b,t){
-    const x=b.x*W+Math.sin(t*.001+b.p)*W*.02;
-    const y=b.y*H+Math.sin(t*.002+b.p)*H*.015;
-    const flap=Math.abs(Math.sin(t*.012+b.p));
+  function drawButterfly(x,y,color,time,phase) {
+    const flap = reducedMotion ? .5 : Math.abs(Math.sin(time*.004+phase));
 
     ctx.save();
     ctx.translate(x,y);
-    ctx.rotate(Math.sin(t*.001+b.p)*.15);
 
-    ctx.fillStyle=b.c;
-
-    ctx.beginPath();
-    ctx.ellipse(-5,-2,5+flap*3,7,-.3,0,Math.PI*2);
-    ctx.fill();
+    ctx.fillStyle = color;
 
     ctx.beginPath();
-    ctx.ellipse(5,-2,5+flap*3,7,.3,0,Math.PI*2);
+    ctx.ellipse(-4,-2,3+flap*2,5,-.3,0,Math.PI*2);
+    ctx.ellipse(4,-2,3+flap*2,5,.3,0,Math.PI*2);
     ctx.fill();
 
-    ctx.fillStyle="#65423B";
-    ctx.fillRect(-1, -4, 2, 9);
+    ctx.fillStyle = "#68443A";
+    ctx.fillRect(-.7,-4,1.4,8);
 
     ctx.restore();
   }
 
-  function draw(t){
-    if(document.hidden){
-      raf=0;
-      return;
-    }
+  function draw(time) {
+    if (!W || !H) return;
 
     ctx.clearRect(0,0,W,H);
 
-    // Sky
-
-    const sky=ctx.createLinearGradient(0,0,0,H);
-    sky.addColorStop(0,"#169BF4");
-    sky.addColorStop(.45,"#43C2FF");
-    sky.addColorStop(.78,"#A8E9FF");
+    // Full-screen sky. Canvas dimensions match viewport.
+    const sky = ctx.createLinearGradient(0,0,0,H);
+    sky.addColorStop(0,"#159BF4");
+    sky.addColorStop(.48,"#42BFFF");
+    sky.addColorStop(.76,"#8DE0FF");
     sky.addColorStop(1,"#E6FAFF");
 
-    ctx.fillStyle=sky;
+    ctx.fillStyle = sky;
     ctx.fillRect(0,0,W,H);
 
-    sun();
-    rainbow();
+    drawSun();
+    drawRainbow();
 
-    // Moving clouds
+    const movement = reducedMotion ? 0 : time*.000015;
 
-    clouds.forEach(c=>{
-      c.x+=c.v;
+    // Clouds move slowly and stay within canvas.
+    roundedCloud(
+      W*(.25 + Math.sin(movement)*.025),
+      H*.48,
+      Math.min(W,H)*.17
+    );
 
-      if(c.x>1.3)c.x=-.3;
+    roundedCloud(
+      W*(.75 - Math.sin(movement*.7)*.025),
+      H*.56,
+      Math.min(W,H)*.20
+    );
 
-      cloud(
-        c.x*W,
-        c.y*H+Math.sin(t*.0005+c.x)*7,
-        Math.min(W,H)*.15*c.s
-      );
-    });
+    roundedCloud(
+      W*.50,
+      H*.64,
+      Math.min(W,H)*.12
+    );
 
-    hills();
+    drawHills();
 
-    // Trees on the visible hills
+    // Trees on hills
+    const treeSize = Math.min(W,H)*.16;
+    drawTree(W*.08,H*.88,treeSize);
+    drawTree(W*.92,H*.85,treeSize*.9);
+    drawTree(W*.72,H*.82,treeSize*.65);
 
-    tree(W*.08,H*.87,Math.min(W,H)*.17);
-    tree(W*.92,H*.84,Math.min(W,H)*.15);
+    // Small flowers
+    const flowerColors = [
+      "#FF6B9D","#FFD447","#FFFFFF","#C084FC"
+    ];
 
-    flowers.forEach(f=>flower(f));
+    for(let i=0;i<30;i++){
+      const x = (i/30)*W;
+      const y = H*(.91 + Math.sin(i*2.1)*.025);
+      const s = Math.min(W,H)*.004;
 
-    butterflies.forEach(b=>butterfly(b,t));
+      ctx.fillStyle = flowerColors[i%flowerColors.length];
+      ctx.beginPath();
+      ctx.arc(x,y,s*2.3,0,Math.PI*2);
+      ctx.fill();
 
-    raf=requestAnimationFrame(draw);
+      ctx.fillStyle = "#FFD84D";
+      ctx.beginPath();
+      ctx.arc(x,y,s*.8,0,Math.PI*2);
+      ctx.fill();
+    }
+
+    drawButterfly(
+      W*.20,H*.29,"#FF72A7",time,1
+    );
+
+    drawButterfly(
+      W*.57,H*.23,"#A477F5",time,3
+    );
+
+    drawButterfly(
+      W*.78,H*.40,"#FFD447",time,5
+    );
   }
 
-  function start(){
-    if(!raf){
-      raf=requestAnimationFrame(draw);
+  function animate(time) {
+    if (document.hidden) {
+      animation = 0;
+      return;
+    }
+
+    // Limit redraw rate on slower phones.
+    if (time-lastTime >= 33) {
+      draw(time);
+      lastTime = time;
+    }
+
+    animation = requestAnimationFrame(animate);
+  }
+
+  function start() {
+    if (!animation) {
+      animation = requestAnimationFrame(animate);
     }
   }
 
+  function stop() {
+    if (animation) {
+      cancelAnimationFrame(animation);
+      animation = 0;
+    }
+  }
+
+  window.addEventListener("resize",resize,{passive:true});
+
   document.addEventListener("visibilitychange",()=>{
-    if(document.hidden){
-      cancelAnimationFrame(raf);
-      raf=0;
-    }else{
+    if(document.hidden) {
+      stop();
+    } else {
+      draw(performance.now());
       start();
     }
   });
 
+  resize();
   start();
 })();
 </script>
@@ -719,7 +702,6 @@ body {
 <!-- FIREBASE LOGIN -->
 
 <script type="module">
-
 import {
   initializeApp
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -745,81 +727,81 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-const overlay=document.getElementById("loadingOverlay");
-const googleBtn=document.getElementById("googleBtn");
+const overlay = document.getElementById("loadingOverlay");
+const googleBtn = document.getElementById("googleBtn");
+
+let loginInProgress = false;
 
 setPersistence(auth,browserLocalPersistence)
 .catch(error=>{
-  console.error("Persistence error:",error);
+  console.error("Firebase persistence error:",error);
 });
 
 onAuthStateChanged(auth,user=>{
-  if(!user){
-    overlay.style.display="none";
-    return;
+  if(user && !loginInProgress) {
+    overlay.style.display = "flex";
+
+    const savedAge = localStorage.getItem("kidsAgeGroup");
+
+    setTimeout(()=>{
+      window.location.replace(
+        savedAge ? "index-home.html" : "age-select.html"
+      );
+    },500);
   }
-
-  overlay.style.display="flex";
-
-  const savedAge=localStorage.getItem("kidsAgeGroup");
-
-  setTimeout(()=>{
-    window.location.replace(
-      savedAge ? "index-home.html" : "age-select.html"
-    );
-  },800);
-
 },error=>{
-  console.error("Auth state error:",error);
-  overlay.style.display="none";
+  console.error("Firebase auth state error:",error);
+  overlay.style.display = "none";
 });
 
-window.handleGoogleLogin=async function(){
-  if(googleBtn.disabled)return;
+window.handleGoogleLogin = async function() {
+  if(loginInProgress) return;
 
-  if(navigator.vibrate){
-    navigator.vibrate(50);
+  loginInProgress = true;
+  googleBtn.disabled = true;
+
+  const originalHTML = googleBtn.innerHTML;
+  googleBtn.innerHTML = "<span>Connecting...</span>";
+
+  if(navigator.vibrate) {
+    navigator.vibrate(40);
   }
 
-  const original=googleBtn.innerHTML;
-
-  googleBtn.disabled=true;
-  googleBtn.innerHTML="<span>Connecting...</span>";
-
-  const provider=new GoogleAuthProvider();
-
+  const provider = new GoogleAuthProvider();
   provider.setCustomParameters({
     prompt:"select_account"
   });
 
-  try{
-    overlay.style.display="flex";
+  try {
+    overlay.style.display = "flex";
 
     await signInWithPopup(auth,provider);
 
-  }catch(error){
-    console.error("Google login error:",error);
+    // Auth listener will redirect authenticated users.
 
-    overlay.style.display="none";
+  } catch(error) {
+    console.error("Google sign-in error:",error);
 
-    googleBtn.disabled=false;
-    googleBtn.innerHTML=original;
+    overlay.style.display = "none";
 
-    if(error.code!=="auth/popup-closed-by-user"){
+    googleBtn.disabled = false;
+    googleBtn.innerHTML = originalHTML;
+    loginInProgress = false;
+
+    if(error.code !== "auth/popup-closed-by-user") {
       alert("Login failed. Please try again.");
     }
   }
 };
 
-if("serviceWorker" in navigator){
+if("serviceWorker" in navigator) {
   window.addEventListener("load",()=>{
     navigator.serviceWorker.register("./service-worker.js")
     .catch(error=>{
-      console.error("Service worker error:",error);
+      console.error("Service worker registration failed:",error);
     });
   });
 }
-
 </script>
 
 </body>
