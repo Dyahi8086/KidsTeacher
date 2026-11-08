@@ -8,7 +8,8 @@
 
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" type="image/png" href="./icons/icon-192.png">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<!-- Fonts: Fredoka for Title, Nunito for Body -->
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
 
 <style>
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -16,39 +17,28 @@
     body {
         height: 100vh; height: 100dvh; width: 100vw; overflow: hidden;
         font-family: 'Nunito', sans-serif;
-        background: #f8fafc; 
-        /* Background me colors taaki glass box me blur hokar dikhe */
+        background: #f4f6fb; 
         background-image: 
-            radial-gradient(circle at 10% 10%, rgba(255, 107, 53, 0.4) 0%, transparent 40%),
-            radial-gradient(circle at 90% 90%, rgba(56, 189, 248, 0.4) 0%, transparent 40%),
-            radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.2) 0%, transparent 50%);
+            radial-gradient(circle at 10% 10%, rgba(255, 107, 53, 0.25) 0%, transparent 40%),
+            radial-gradient(circle at 90% 90%, rgba(56, 189, 248, 0.25) 0%, transparent 40%),
+            radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.15) 0%, transparent 50%);
         display: flex; align-items: center; justify-content: center;
         position: relative;
     }
 
-    /* ========================================= */
-    /* LIQUID GLASS BOX (Login Card)             */
-    /* ========================================= */
+    /* LIQUID GLASS BOX */
     .login-card {
         position: relative; z-index: 10;
         width: 92%; max-width: 420px; 
-        
-        /* Glass Effect */
-        background: rgba(255, 255, 255, 0.4); 
+        background: rgba(255, 255, 255, 0.45); 
         backdrop-filter: blur(25px) saturate(200%);
         -webkit-backdrop-filter: blur(25px) saturate(200%);
-        
         border-radius: 40px;
-        padding: 55px 30px;
-        
-        /* 3D Glass Edge & Shadow */
-        border: 1px solid rgba(255, 255, 255, 0.8);
+        padding: 50px 30px;
+        border: 1px solid rgba(255, 255, 255, 0.9);
         box-shadow: 
-            0 30px 60px rgba(0, 0, 0, 0.1), 
-            0 10px 20px rgba(0,0,0,0.05),
-            inset 0 1px 2px rgba(255, 255, 255, 1), 
-            inset 0 -2px 10px rgba(255, 255, 255, 0.3);
-            
+            0 25px 50px rgba(0, 0, 0, 0.1), 
+            inset 0 1px 2px rgba(255, 255, 255, 1);
         text-align: center;
         animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
@@ -58,74 +48,99 @@
         100% { transform: scale(1); opacity: 1; }
     }
 
-    .icon-3d { font-size: 60px; margin-bottom: 15px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.15)); }
-    .app-title { font-family: 'Fredoka', sans-serif; font-size: 34px; font-weight: 700; color: #0f172a; margin-bottom: 10px; text-shadow: 0 1px 1px rgba(255,255,255,0.8); }
-    .app-subtitle { font-family: 'Nunito', sans-serif; font-size: 16px; color: #475569; font-weight: 800; margin-bottom: 45px; }
+    .icon-3d { font-size: 55px; margin-bottom: 15px; filter: drop-shadow(0 8px 12px rgba(0,0,0,0.15)); }
+    
+    .app-title { 
+        font-family: 'Fredoka', sans-serif; 
+        font-size: 36px; 
+        font-weight: 700; 
+        color: #0f172a; 
+        margin-bottom: 8px; 
+    }
+    
+    .app-subtitle { 
+        font-family: 'Nunito', sans-serif; 
+        font-size: 16px; 
+        color: #475569; 
+        font-weight: 800; 
+        margin-bottom: 40px; 
+    }
 
     /* ========================================= */
-    /* LIQUID GLASS BUTTON                       */
+    /* PERFECT LIQUID GLASS BUTTON               */
     /* ========================================= */
     
     .glass-btn-container {
         position: relative;
         width: 100%;
-        height: 64px;
-        border-radius: 40px;
+        height: 70px;
+        border-radius: 50px;
         display: flex;
         align-items: center;
         justify-content: center;
         margin-bottom: 25px;
         cursor: pointer;
         transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0,0,0,0.1);
     }
 
     .glass-btn-container:active {
-        transform: scale(0.96);
+        transform: scale(0.95);
     }
 
-    /* Ghumti hui colour border */
-    .glass-btn-container::before {
+    /* Animated Color Layers (Ye piche ghumenge) */
+    .glass-btn-container::before,
+    .glass-btn-container::after {
         content: '';
         position: absolute;
-        inset: 0;
-        border-radius: 40px;
-        padding: 3px; 
-        background: conic-gradient(from 0deg, #38BDF8, #FF6B35, #FFD700, #10B981, #38BDF8);
-        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        animation: spinBorder 6s linear infinite;
+        top: 0; left: 0; width: 100%; height: 100%;
+        border-radius: 50px;
         z-index: 1;
     }
 
-    @keyframes spinBorder {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+    /* Blue-Orange Layer */
+    .glass-btn-container::before {
+        background: linear-gradient(90deg, #38BDF8, #FF6B35, #38BDF8);
+        background-size: 200% 100%;
+        animation: rotateGradient 4s linear infinite;
     }
 
-    /* Button ka black glassy part */
+    /* Yellow-Pink Layer (Overlay for smoothness) */
+    .glass-btn-container::after {
+        background: linear-gradient(270deg, #FFD700, #E91E63, #FFD700);
+        background-size: 200% 100%;
+        animation: rotateGradient 5s linear infinite reverse;
+        opacity: 0.8;
+    }
+
+    @keyframes rotateGradient {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 200% 50%; }
+    }
+
+    /* Button ka Black Part */
     .glass-btn {
         position: relative;
-        width: 100%;
-        height: 100%;
-        border-radius: 38px;
-        background: linear-gradient(180deg, #2a2a2a 0%, #0f0f0f 100%);
+        z-index: 2; /* Colors ke upar */
+        width: calc(100% - 6px); /* 3px border chhoda */
+        height: calc(100% - 6px);
+        border-radius: 47px;
+        background: #111111; 
         color: #ffffff;
         border: none; 
-        font-size: 20px;
-        font-family: 'Nunito', sans-serif; 
-        font-weight: 900;
+        font-size: 22px;
+        font-family: 'Fredoka', sans-serif; /* Font change kiya */
+        font-weight: 600;
+        letter-spacing: 0.5px;
         display: flex; 
         align-items: center; 
         justify-content: center; 
         gap: 12px;
-        z-index: 2; 
         box-shadow: 
-            inset 0 1px 1px rgba(255,255,255,0.4), 
-            inset 0 -2px 4px rgba(0,0,0,0.6);
+            inset 0 2px 4px rgba(255,255,255,0.2),
+            inset 0 -2px 5px rgba(0,0,0,0.8);
     }
 
+    /* Shine Effect */
     .glass-btn::after {
         content: '';
         position: absolute;
@@ -133,8 +148,8 @@
         width: 50%; height: 100%;
         background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.15), rgba(255,255,255,0));
         transform: skewX(-25deg);
-        animation: shine 4s infinite;
-        border-radius: 38px;
+        animation: shine 5s infinite;
+        border-radius: 47px;
     }
 
     @keyframes shine {
@@ -143,9 +158,17 @@
         100% { left: 200%; }
     }
 
-    .google-icon-svg { width: 24px; height: 24px; flex-shrink: 0; }
-    .privacy-text { font-size: 13px; color: #334155; font-weight: 800; line-height: 1.6; margin-top: 20px; }
-    .privacy-text a { color: #0f172a; text-decoration: underline; }
+    .google-icon-svg { width: 26px; height: 26px; flex-shrink: 0; }
+    
+    .privacy-text { 
+        font-size: 13px; 
+        color: #475569; 
+        font-weight: 800; 
+        line-height: 1.6; 
+        margin-top: 20px; 
+        font-family: 'Nunito', sans-serif;
+    }
+    .privacy-text a { color: #0f172a; text-decoration: none; font-weight: 900; border-bottom: 2px solid #0f172a; padding-bottom: 2px;}
     
     /* Loading Overlay */
     #loadingOverlay {
@@ -162,7 +185,7 @@
 </head>
 <body>
 
-<!-- Liquid Glass Box -->
+<!-- Glass Box -->
 <div class="login-card">
     <div class="icon-3d">🎓</div>
     <h1 class="app-title">Parents Login</h1>
