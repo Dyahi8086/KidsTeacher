@@ -1,7 +1,5 @@
-// Version badal do taaki purana cache delete ho jaye
-const CACHE_NAME = 'kids-teacher-v3'; 
+const CACHE_NAME = 'kids-teacher-v4'; // Version change kiya
 
-// Kin files ko save karna hai (offline ke liye)
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
@@ -14,9 +12,8 @@ const ASSETS_TO_CACHE = [
     './icons/icon-512.png'
 ];
 
-// Install hone par files save karo
 self.addEventListener('install', (event) => {
-    self.skipWaiting(); // Turant activate karo
+    self.skipWaiting(); 
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
             return cache.addAll(ASSETS_TO_CACHE);
@@ -24,7 +21,6 @@ self.addEventListener('install', (event) => {
     );
 });
 
-// Purana cache delete karo
 self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys().then((keys) => {
@@ -33,15 +29,13 @@ self.addEventListener('activate', (event) => {
             );
         })
     );
-    self.clients.claim(); // Sabhi open tabs ko update karo
+    self.clients.claim(); 
 });
 
-// Internet na ho toh cache se dikhao, warna naya laao
 self.addEventListener('fetch', (event) => {
     event.respondWith(
         caches.match(event.request).then((cachedResponse) => {
             if (cachedResponse) {
-                // Agar cache mein hai, toh background mein naya download karo
                 fetch(event.request).then((networkResponse) => {
                     caches.open(CACHE_NAME).then((cache) => {
                         cache.put(event.request, networkResponse);
