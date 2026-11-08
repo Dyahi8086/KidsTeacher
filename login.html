@@ -1,291 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#ffffff">
-<title>Parents Login - Kids Teacher</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#e0f2fe">
+    <title>Kids Teacher - Welcome</title>
 
-<link rel="manifest" href="./manifest.json">
-<link rel="icon" type="image/png" href="./icons/icon-192.png">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+    <!-- High priority preload -->
+    <link rel="preload" href="welcome_bg.png" as="image" fetchpriority="high">
+    <link rel="preload" href="welcome_bg.png" as="image">
 
-<style>
-    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    
-    body {
-        height: 100vh; height: 100dvh; width: 100vw; overflow: hidden;
-        font-family: 'Nunito', sans-serif;
-        background: #ffffff; 
-        /* Premium vibrant colors blending in background */
-        background-image: 
-            radial-gradient(circle at 15% 15%, rgba(255, 107, 53, 0.4) 0%, transparent 40%),
-            radial-gradient(circle at 85% 85%, rgba(56, 189, 248, 0.4) 0%, transparent 40%),
-            radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.2) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(233, 30, 99, 0.2) 0%, transparent 40%);
-        display: flex; align-items: center; justify-content: center;
-        position: relative;
-    }
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/png" href="./icons/icon-192.png">
+    <link rel="apple-touch-icon" href="./icons/icon-192.png">
 
-    /* LIQUID GLASS BOX */
-    .login-card {
-        position: relative; z-index: 10;
-        width: 92%; max-width: 420px; 
-        background: rgba(255, 255, 255, 0.5); 
-        backdrop-filter: blur(30px) saturate(200%);
-        -webkit-backdrop-filter: blur(30px) saturate(200%);
-        border-radius: 45px;
-        padding: 55px 30px;
-        /* 3D Glass Edge */
-        border: 1px solid rgba(255, 255, 255, 0.9);
-        border-bottom: 2px solid rgba(255, 255, 255, 0.5);
-        box-shadow: 
-            0 30px 60px rgba(0, 0, 0, 0.08), 
-            inset 0 2px 5px rgba(255, 255, 255, 1),
-            inset 0 -2px 10px rgba(255, 255, 255, 0.4);
-        text-align: center;
-        animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    }
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
 
-    @keyframes popIn {
-        0% { transform: scale(0.9) translateY(20px); opacity: 0; }
-        100% { transform: scale(1) translateY(0); opacity: 1; }
-    }
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-    /* Floating Icon */
-    .icon-3d { 
-        font-size: 65px; 
-        margin-bottom: 15px; 
-        display: inline-block;
-        animation: float 3s ease-in-out infinite;
-        filter: drop-shadow(0 15px 15px rgba(0,0,0,0.2)); 
-    }
-    @keyframes float {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
-    }
+        body, html {
+            height: 100%;
+            width: 100%;
+            background-color: #e0f2fe;
+            overflow: hidden;
+        }
 
-    .app-title { 
-        font-family: 'Fredoka', sans-serif; 
-        font-size: 38px; 
-        font-weight: 700; 
-        color: #0f172a; 
-        margin-bottom: 8px; 
-        letter-spacing: -1px;
-    }
-    
-    .app-subtitle { 
-        font-family: 'Nunito', sans-serif; 
-        font-size: 16px; 
-        color: #475569; 
-        font-weight: 800; 
-        margin-bottom: 45px; 
-    }
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            background: #e0f2fe;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.25s ease;
+        }
 
-    /* ========================================= */
-    /* ULTRA PREMIUM LIQUID GLASS BUTTON         */
-    /* ========================================= */
-    
-    .glass-btn-container {
-        position: relative;
-        width: 100%;
-        height: 72px;
-        border-radius: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 25px;
-        cursor: pointer;
-        transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 5;
-    }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #ffffff;
+            border-top: 5px solid #FF6B35;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 15px;
+        }
 
-    .glass-btn-container:active {
-        transform: scale(0.95);
-    }
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
 
-    /* Glowing Rotating Border (The Magic) */
-    .glass-btn-container::before {
-        content: '';
-        position: absolute;
-        top: -3px; left: -3px; right: -3px; bottom: -3px;
-        border-radius: 53px;
-        background: linear-gradient(90deg, #ff007f, #00e5ff, #ffea00, #ff007f);
-        background-size: 300% 100%;
-        animation: borderGlow 3s linear infinite;
-        z-index: 0;
-        /* Glow effect bahar ki taraf */
-        box-shadow: 0 0 20px rgba(0, 229, 255, 0.4), 0 0 20px rgba(255, 0, 127, 0.4);
-    }
+        .loading-text {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 20px;
+            color: #8B3A00;
+            font-weight: 600;
+        }
 
-    /* Is gradient ko black button ke andar dikhne se rokne ke liye ek aur layer */
-    .glass-btn-container::after {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: #111; /* Black cover */
-        border-radius: 50px;
-        z-index: 1;
-    }
+        #welcome-content {
+            display: none;
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding-bottom: 40px;
+            background-color: #fce7f3;
+            background-image: url('welcome_bg.png');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+        }
 
-    @keyframes borderGlow {
-        0% { background-position: 0% 50%; }
-        100% { background-position: 100% 50%; }
-    }
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 0 20px;
+        }
 
-    /* Button Text & Content */
-    .glass-btn-content {
-        position: relative;
-        z-index: 2; /* Piche wale black cover aur gradient ke upar */
-        display: flex; 
-        align-items: center; 
-        justify-content: center; 
-        gap: 12px;
-        width: 100%;
-        height: 100%;
-    }
+        .text-content {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-    /* Shine Effect Inside Button */
-    .glass-btn-content::after {
-        content: '';
-        position: absolute;
-        top: 0; left: -100%;
-        width: 50%; height: 100%;
-        background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.1), rgba(255,255,255,0));
-        transform: skewX(-25deg);
-        animation: shine 4s infinite;
-        z-index: 3;
-    }
+        .text-content h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: clamp(24px, 6vw, 32px);
+            color: #8B3A00;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.8),
+                         2px 2px 5px rgba(0,0,0,0.1);
+        }
 
-    @keyframes shine {
-        0% { left: -100%; }
-        20% { left: 200%; }
-        100% { left: 200%; }
-    }
+        .text-content p {
+            font-family: 'Nunito', sans-serif;
+            font-size: clamp(13px, 4vw, 16px);
+            color: #6B5B4D;
+            font-weight: 700;
+        }
 
-    .glass-btn-text {
-        color: #ffffff;
-        font-size: 22px;
-        font-family: 'Fredoka', sans-serif; 
-        font-weight: 600;
-        letter-spacing: 0.5px;
-    }
+        .start-btn {
+            position: relative;
+            width: 100%;
+            max-width: 350px;
+            padding: 16px 20px;
+            font-size: 20px;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+            color: white;
+            background: #FF6B35;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #cc4e20,
+                        0 10px 20px rgba(255, 107, 53, 0.4);
+            transition: transform 0.1s;
+            animation: pulseBtn 2s infinite;
+        }
 
-    .google-icon-svg { width: 26px; height: 26px; flex-shrink: 0; z-index: 4; }
-    
-    .privacy-text { 
-        font-size: 13px; 
-        color: #475569; 
-        font-weight: 800; 
-        line-height: 1.6; 
-        margin-top: 25px; 
-    }
-    .privacy-text a { 
-        color: #0f172a; 
-        text-decoration: none; 
-        font-weight: 900; 
-        border-bottom: 2px solid #0f172a; 
-        padding-bottom: 2px;
-    }
-    
-    /* Loading Overlay */
-    #loadingOverlay {
-        display: none; position: fixed; inset: 0; background: rgba(255,255,255,0.7);
-        z-index: 9999; flex-direction: column; justify-content: center; align-items: center;
-        backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-    }
-    .spinner {
-        width: 45px; height: 45px; border: 4px solid rgba(255,255,255,0.5); border-top: 4px solid #FF5E3A;
-        border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px;
-    }
-    @keyframes spin { 100% { transform: rotate(360deg); } }
-</style>
+        .start-btn:active {
+            transform: translateY(6px);
+            box-shadow: 0 0px 0 #cc4e20;
+            animation: none;
+        }
+
+        @keyframes pulseBtn {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
 </head>
+
 <body>
 
-<!-- Glass Box -->
-<div class="login-card">
-    <div class="icon-3d">🎓</div>
-    <h1 class="app-title">Parents Login</h1>
-    <p class="app-subtitle">Guide your child's learning journey</p>
+    <div id="splash-screen">
+        <div class="spinner"></div>
+        <div class="loading-text">Loading Adventure...</div>
+    </div>
 
-    <!-- Premium Liquid Button -->
-    <div class="glass-btn-container" onclick="handleGoogleLogin()">
-        <div class="glass-btn-content">
-            <svg class="google-icon-svg" viewBox="0 0 48 48">
-                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-            </svg>
-            <span class="glass-btn-text" id="btnText">Continue with Google</span>
+    <div id="welcome-content">
+        <div class="content-wrapper">
+            <div class="text-content">
+                <h1>Learning Is an<br>Adventure!</h1>
+                <p>Explore, discover and grow every day.</p>
+            </div>
+
+            <button class="start-btn" id="startBtn">
+                Let's Start →
+            </button>
         </div>
     </div>
 
-    <p class="privacy-text">By continuing, you agree to our<br><a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a></p>
-</div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import {
+            getAuth,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-<div id="loadingOverlay">
-    <div class="spinner"></div>
-</div>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
+            authDomain: "kids-teacher-4387e.firebaseapp.com",
+            projectId: "kids-teacher-4387e",
+            storageBucket: "kids-teacher-4387e.firebasestorage.app",
+            messagingSenderId: "420221167346",
+            appId: "1:420221167346:web:da7ac80acdfd52339d526b"
+        };
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
-  authDomain: "kids-teacher-4387e.firebaseapp.com",
-  projectId: "kids-teacher-4387e",
-  storageBucket: "kids-teacher-4387e.firebasestorage.app",
-  messagingSenderId: "420221167346",
-  appId: "1:420221167346:web:da7ac80acdfd52339d526b"
-};
+        const splash = document.getElementById('splash-screen');
+        const welcomeContent = document.getElementById('welcome-content');
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const overlay = document.getElementById("loadingOverlay");
-const btnText = document.getElementById("btnText");
+        // Instant image load + show screen
+        function showWelcome() {
+            splash.style.opacity = '0';
+            setTimeout(() => {
+                splash.style.display = 'none';
+                welcomeContent.style.display = 'flex';
+            }, 220);
+        }
 
-setPersistence(auth, browserLocalPersistence).catch(err => console.error(err));
+        // Method 1: High priority Image object
+        const bgImg = new Image();
+        bgImg.fetchPriority = "high";
+        bgImg.src = 'welcome_bg.png';
 
-function handleLoginSuccess() {
-    const savedAge = localStorage.getItem('kidsAgeGroup');
-    if (!savedAge) {
-        window.location.replace("age-select.html");
-    } else {
-        window.location.replace("index-home.html");
-    }
-}
+        // Agar image already cache me hai to turant show
+        if (bgImg.complete) {
+            showWelcome();
+        } else {
+            bgImg.onload = showWelcome;
+            bgImg.onerror = showWelcome; // error pe bhi mat atko
+        }
 
-getRedirectResult(auth).then(result => {
-  if (result && result.user) {
-    overlay.style.display = "flex";
-    setTimeout(handleLoginSuccess, 500);
-  }
-}).catch(err => console.error(err));
+        // Hard fallback - maximum 400ms
+        setTimeout(() => {
+            if (splash.style.display !== 'none') {
+                showWelcome();
+            }
+        }, 400);
 
-onAuthStateChanged(auth, user => {
-  if (user) {
-    overlay.style.display = "flex";
-    setTimeout(handleLoginSuccess, 500);
-  }
-});
+        // Button click
+        document.getElementById('startBtn').addEventListener('click', () => {
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    const savedAge = localStorage.getItem('kidsAgeGroup');
+                    window.location.replace(
+                        !savedAge ? "age-select.html" : "index-home.html"
+                    );
+                } else {
+                    window.location.href = 'login.html';
+                }
+            });
+        });
 
-window.handleGoogleLogin = async function(){
-  btnText.innerText = "Connecting...";
-  
-  const provider = new GoogleAuthProvider();
-  provider.setCustomParameters({ prompt: "select_account" });
+        // Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js').catch(err => {
+                    console.log("SW registration failed", err);
+                });
+            });
+        }
+    </script>
 
-  try {
-    await signInWithRedirect(auth, provider);
-  } catch (error) {
-    overlay.style.display = "none";
-    btnText.innerText = "Continue with Google";
-    alert("Login failed: " + error.message);
-  }
-};
-</script>
 </body>
 </html>
