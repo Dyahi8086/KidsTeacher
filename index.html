@@ -15,7 +15,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body, html { height: 100%; width: 100%; background-color: #e0f2fe; overflow: hidden; }
 
-        /* Splash Screen */
         #splash-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             background: #e0f2fe; display: flex; flex-direction: column;
@@ -28,7 +27,6 @@
         @keyframes spin { 100% { transform: rotate(360deg); } }
         .loading-text { font-family: 'Fredoka', sans-serif; font-size: 20px; color: #8B3A00; font-weight: 600; }
 
-        /* Welcome Content */
         #welcome-content {
             display: none; position: relative; width: 100vw; height: 100vh; height: 100dvh;
             flex-direction: column; justify-content: flex-end; align-items: center;
@@ -36,20 +34,18 @@
             background-size: cover; background-position: center top; background-repeat: no-repeat;
         }
 
-        /* Niche se nikalne wala Glass Bar */
         .bottom-glass-bar {
             position: relative; width: 100%; max-width: 500px;
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(25px) saturate(200%); -webkit-backdrop-filter: blur(25px) saturate(200%);
             border-radius: 40px 40px 0 0;
             padding: 30px 20px 40px;
             display: flex; flex-direction: column; align-items: center; text-align: center;
             box-shadow: 0 -10px 40px rgba(0,0,0,0.1), inset 0 2px 2px rgba(255,255,255,0.8);
-            /* Animation */
+            border-top: 1px solid rgba(255,255,255,0.9);
             transform: translateY(100%);
             animation: slideUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            animation-delay: 0.2s;
-            border-top: 1px solid rgba(255,255,255,0.9);
+            animation-delay: 0.1s;
         }
 
         @keyframes slideUp {
@@ -84,7 +80,6 @@
     </div>
 
     <div id="welcome-content">
-        <!-- Glass Bar (Neeche se aayega) -->
         <div class="bottom-glass-bar">
             <div class="text-content">
                 <h1>Learning Is an<br>Adventure!</h1>
@@ -115,7 +110,7 @@
         setTimeout(() => { if (splash.style.display !== 'none') showWelcome(); }, 500);
 
         document.getElementById('startBtn').addEventListener('click', () => {
-            window.location.href = 'login.html'; // Seedha login page
+            window.location.href = 'login.html'; 
         });
 
         if ('serviceWorker' in navigator) {
