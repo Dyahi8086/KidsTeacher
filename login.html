@@ -16,32 +16,39 @@
     body {
         height: 100vh; height: 100dvh; width: 100vw; overflow: hidden;
         font-family: 'Nunito', sans-serif;
-        /* Peeche ka background: White with a soft blur gradient */
         background: #f8fafc; 
+        /* Background me colors taaki glass box me blur hokar dikhe */
         background-image: 
-            radial-gradient(circle at 10% 20%, rgba(255, 180, 180, 0.4) 0%, transparent 40%),
-            radial-gradient(circle at 90% 80%, rgba(180, 200, 255, 0.4) 0%, transparent 40%),
-            radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8) 0%, rgba(240, 245, 255, 0.8) 100%);
+            radial-gradient(circle at 10% 10%, rgba(255, 107, 53, 0.4) 0%, transparent 40%),
+            radial-gradient(circle at 90% 90%, rgba(56, 189, 248, 0.4) 0%, transparent 40%),
+            radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.2) 0%, transparent 50%);
         display: flex; align-items: center; justify-content: center;
         position: relative;
     }
 
-    /* Background blur effect wrapper */
-    body::before {
-        content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        background: inherit;
-        filter: blur(40px); /* Blur effect */
-        z-index: 1;
-    }
-
-    /* Login Card / Popup Box */
+    /* ========================================= */
+    /* LIQUID GLASS BOX (Login Card)             */
+    /* ========================================= */
     .login-card {
         position: relative; z-index: 10;
-        width: 92%; max-width: 420px; /* Box thoda bada kiya */
-        background: #ffffff;
+        width: 92%; max-width: 420px; 
+        
+        /* Glass Effect */
+        background: rgba(255, 255, 255, 0.4); 
+        backdrop-filter: blur(25px) saturate(200%);
+        -webkit-backdrop-filter: blur(25px) saturate(200%);
+        
         border-radius: 40px;
-        padding: 55px 30px; /* Padding badha di */
-        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.08), 0 10px 20px rgba(0,0,0,0.04), inset 0 2px 4px rgba(255,255,255,1);
+        padding: 55px 30px;
+        
+        /* 3D Glass Edge & Shadow */
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        box-shadow: 
+            0 30px 60px rgba(0, 0, 0, 0.1), 
+            0 10px 20px rgba(0,0,0,0.05),
+            inset 0 1px 2px rgba(255, 255, 255, 1), 
+            inset 0 -2px 10px rgba(255, 255, 255, 0.3);
+            
         text-align: center;
         animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
@@ -51,119 +58,103 @@
         100% { transform: scale(1); opacity: 1; }
     }
 
-    .icon-3d { font-size: 60px; margin-bottom: 15px; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15)); }
-    
-    .app-title { 
-        font-family: 'Fredoka', sans-serif; 
-        font-size: 34px; 
-        font-weight: 700; 
-        color: #0f172a; 
-        margin-bottom: 10px; 
-        letter-spacing: -0.5px;
-    }
-    
-    .app-subtitle { 
-        font-family: 'Nunito', sans-serif; 
-        font-size: 16px; 
-        color: #64748b; 
-        font-weight: 800;
-        margin-bottom: 45px; 
-    }
+    .icon-3d { font-size: 60px; margin-bottom: 15px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.15)); }
+    .app-title { font-family: 'Fredoka', sans-serif; font-size: 34px; font-weight: 700; color: #0f172a; margin-bottom: 10px; text-shadow: 0 1px 1px rgba(255,255,255,0.8); }
+    .app-subtitle { font-family: 'Nunito', sans-serif; font-size: 16px; color: #475569; font-weight: 800; margin-bottom: 45px; }
 
     /* ========================================= */
-    /* LIQUID GLASS BUTTON (ANIMATED BORDER)     */
+    /* LIQUID GLASS BUTTON                       */
     /* ========================================= */
-    .glass-btn-wrapper {
+    
+    .glass-btn-container {
         position: relative;
         width: 100%;
-        height: 65px; /* Button ki height badhayi */
-        border-radius: 50px;
-        overflow: hidden; /* Colors ko andar rakhne ke liye */
-        padding: 3px; /* Border thickness */
+        height: 64px;
+        border-radius: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         margin-bottom: 25px;
         cursor: pointer;
-        transition: transform 0.2s;
-        box-shadow: 0 15px 35px rgba(56, 189, 248, 0.25), 0 15px 35px rgba(255, 107, 53, 0.25);
+        transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0,0,0,0.1);
     }
 
-    /* Ye animated gradient hai jo ghumega */
-    .glass-btn-wrapper::before {
+    .glass-btn-container:active {
+        transform: scale(0.96);
+    }
+
+    /* Ghumti hui colour border */
+    .glass-btn-container::before {
         content: '';
         position: absolute;
-        top: -50%; left: -50%;
-        width: 200%; height: 200%;
-        background: conic-gradient(
-            #38BDF8, /* Blue */
-            #FF6B35, /* Orange */
-            #FFD700, /* Yellow */
-            #38BDF8  /* Blue repeats */
-        );
-        animation: rotateBorder 3s linear infinite;
-        z-index: 0;
+        inset: 0;
+        border-radius: 40px;
+        padding: 3px; 
+        background: conic-gradient(from 0deg, #38BDF8, #FF6B35, #FFD700, #10B981, #38BDF8);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        animation: spinBorder 6s linear infinite;
+        z-index: 1;
     }
 
-    @keyframes rotateBorder {
+    @keyframes spinBorder {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
     }
 
-    .btn-google {
+    /* Button ka black glassy part */
+    .glass-btn {
         position: relative;
-        z-index: 1; /* Gradient ke upar */
         width: 100%;
         height: 100%;
-        background: #1a1a1a; /* Black background */
+        border-radius: 38px;
+        background: linear-gradient(180deg, #2a2a2a 0%, #0f0f0f 100%);
         color: #ffffff;
         border: none; 
-        border-radius: 47px;
         font-size: 20px;
         font-family: 'Nunito', sans-serif; 
         font-weight: 900;
-        cursor: pointer;
         display: flex; 
         align-items: center; 
         justify-content: center; 
         gap: 12px;
-        box-shadow: inset 0 2px 10px rgba(255,255,255,0.1), inset 0 -4px 10px rgba(0,0,0,0.8);
+        z-index: 2; 
+        box-shadow: 
+            inset 0 1px 1px rgba(255,255,255,0.4), 
+            inset 0 -2px 4px rgba(0,0,0,0.6);
     }
 
-    /* Shine Animation */
-    .btn-google::after {
+    .glass-btn::after {
         content: '';
         position: absolute;
         top: 0; left: -100%;
         width: 50%; height: 100%;
-        background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.2), rgba(255,255,255,0));
+        background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.15), rgba(255,255,255,0));
         transform: skewX(-25deg);
-        animation: shine 3s infinite;
+        animation: shine 4s infinite;
+        border-radius: 38px;
     }
 
     @keyframes shine {
         0% { left: -100%; }
-        20% { left: 200%; }
+        25% { left: 200%; }
         100% { left: 200%; }
     }
 
-    /* Press Effect */
-    .glass-btn-wrapper:active {
-        transform: translateY(4px) scale(0.98);
-        box-shadow: 0 5px 15px rgba(56, 189, 248, 0.2), 0 5px 15px rgba(255, 107, 53, 0.2);
-    }
-    
-    .btn-google:disabled { opacity: 0.8; cursor: wait; }
-    .google-icon-svg { width: 26px; height: 26px; flex-shrink: 0; }
-
-    .privacy-text { font-size: 13px; color: #94a3b8; font-weight: 700; line-height: 1.6; margin-top: 20px; }
-    .privacy-text a { color: #475569; text-decoration: underline; }
+    .google-icon-svg { width: 24px; height: 24px; flex-shrink: 0; }
+    .privacy-text { font-size: 13px; color: #334155; font-weight: 800; line-height: 1.6; margin-top: 20px; }
+    .privacy-text a { color: #0f172a; text-decoration: underline; }
     
     /* Loading Overlay */
     #loadingOverlay {
-        display: none; position: fixed; inset: 0; background: rgba(255,255,255,0.9);
+        display: none; position: fixed; inset: 0; background: rgba(255,255,255,0.6);
         z-index: 9999; flex-direction: column; justify-content: center; align-items: center;
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
     }
     .spinner {
-        width: 45px; height: 45px; border: 4px solid #ffedd5; border-top: 4px solid #FF5E3A;
+        width: 45px; height: 45px; border: 4px solid rgba(255,255,255,0.5); border-top: 4px solid #FF5E3A;
         border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px;
     }
     @keyframes spin { 100% { transform: rotate(360deg); } }
@@ -171,14 +162,15 @@
 </head>
 <body>
 
+<!-- Liquid Glass Box -->
 <div class="login-card">
     <div class="icon-3d">🎓</div>
     <h1 class="app-title">Parents Login</h1>
     <p class="app-subtitle">Guide your child's learning journey</p>
 
-    <!-- Liquid Glass Button Wrapper -->
-    <div class="glass-btn-wrapper" onclick="handleGoogleLogin()">
-        <button type="button" id="googleBtn" class="btn-google" disabled>
+    <!-- Liquid Glass Button -->
+    <div class="glass-btn-container" onclick="handleGoogleLogin()">
+        <button type="button" id="googleBtn" class="glass-btn">
             <svg class="google-icon-svg" viewBox="0 0 48 48">
                 <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
                 <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
@@ -230,22 +222,18 @@ getRedirectResult(auth).then(result => {
     overlay.style.display = "flex";
     setTimeout(handleLoginSuccess, 500);
   }
-}).catch(err => {
-  console.error(err);
-  overlay.style.display = "none";
-});
+}).catch(err => console.error(err));
 
 onAuthStateChanged(auth, user => {
   if (user) {
     overlay.style.display = "flex";
     setTimeout(handleLoginSuccess, 500);
-  } else {
-    overlay.style.display = "none";
   }
 });
 
 window.handleGoogleLogin = async function(){
   if (googleBtn.disabled) return;
+  
   googleBtn.disabled = true;
   const originalHTML = googleBtn.innerHTML;
   googleBtn.innerHTML = "<span>Connecting...</span>";
@@ -263,7 +251,6 @@ window.handleGoogleLogin = async function(){
   }
 };
 
-// Button ko enable karo HTML load hote hi (taaki pehla click na roke)
 window.addEventListener('load', () => {
     googleBtn.disabled = false;
 });
