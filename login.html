@@ -17,7 +17,6 @@
         height: 100vh; height: 100dvh; width: 100vw; overflow: hidden;
         font-family: 'Nunito', sans-serif;
         background: #f8fafc; 
-        /* Peeche ka soft gradient background */
         background-image: 
             radial-gradient(circle at 10% 10%, rgba(255, 107, 53, 0.2) 0%, transparent 40%),
             radial-gradient(circle at 90% 90%, rgba(56, 189, 248, 0.2) 0%, transparent 40%),
@@ -27,17 +26,16 @@
     }
 
     /* ========================================= */
-    /* NICHE SE NIKALNE WALA GLASS BAR           */
+    /* NICHE SE NIKALNE WALA POPUP BOX           */
     /* ========================================= */
-    .login-glass-bar {
+    .login-popup-box {
         position: relative; z-index: 10;
         width: 100%; max-width: 500px; 
-        min-height: 65vh; /* Screen ka 65% hissa lega */
+        min-height: 65vh; /* Popup box ki height */
         
-        /* Glass Effect */
-        background: rgba(255, 255, 255, 0.75); 
-        backdrop-filter: blur(25px) saturate(200%);
-        -webkit-backdrop-filter: blur(25px) saturate(200%);
+        background: rgba(255, 255, 255, 0.85); 
+        backdrop-filter: blur(30px) saturate(200%);
+        -webkit-backdrop-filter: blur(30px) saturate(200%);
         
         border-radius: 40px 40px 0 0;
         padding: 40px 30px calc(20px + env(safe-area-inset-bottom));
@@ -45,7 +43,7 @@
         border-top: 1px solid rgba(255, 255, 255, 0.9);
         border-left: 1px solid rgba(255, 255, 255, 0.4);
         border-right: 1px solid rgba(255, 255, 255, 0.4);
-        box-shadow: 0 -10px 40px rgba(0,0,0,0.05), inset 0 2px 2px rgba(255,255,255,1);
+        box-shadow: 0 -10px 40px rgba(0,0,0,0.08), inset 0 2px 2px rgba(255,255,255,1);
         
         display: flex; flex-direction: column; align-items: center;
         text-align: center;
@@ -60,23 +58,23 @@
         100% { transform: translateY(0); }
     }
 
-    /* Upar ka pull bar (chhota sa white line) */
-    .login-glass-bar::before {
+    /* Upar ka pull bar */
+    .login-popup-box::before {
         content: ''; position: absolute; top: 15px; 
         width: 50px; height: 5px; background: rgba(0,0,0,0.1); border-radius: 10px;
     }
 
-    .icon-3d { font-size: 60px; margin-top: 15px; margin-bottom: 15px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.15)); animation: float 3s ease-in-out infinite; }
+    .icon-3d { font-size: 60px; margin-top: 10px; margin-bottom: 10px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.15)); animation: float 3s ease-in-out infinite; }
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
-    .app-title { font-family: 'Fredoka', sans-serif; font-size: 36px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
-    .app-subtitle { font-family: 'Nunito', sans-serif; font-size: 16px; color: #475569; font-weight: 800; margin-bottom: 35px; }
+    .app-title { font-family: 'Fredoka', sans-serif; font-size: 36px; font-weight: 700; color: #0f172a; margin-bottom: 5px; }
+    .app-subtitle { font-family: 'Nunito', sans-serif; font-size: 15px; color: #475569; font-weight: 800; margin-bottom: 25px; }
 
     /* ========================================= */
-    /* BUTTON (Clean & Premium)                  */
+    /* BUTTON (Simple & Bold)                    */
     /* ========================================= */
     .google-btn {
-        width: 100%; max-width: 350px; padding: 18px 20px;
+        width: 100%; max-width: 340px; padding: 18px 20px;
         background: #0f172a; color: #ffffff;
         border: none; border-radius: 50px; 
         font-size: 20px; font-family: 'Fredoka', sans-serif; font-weight: 600;
@@ -85,20 +83,17 @@
         transition: transform 0.15s, box-shadow 0.15s;
         margin-bottom: 20px;
     }
-    .google-btn:active {
-        transform: scale(0.96);
-        box-shadow: 0 5px 15px rgba(15, 23, 42, 0.2);
-    }
+    .google-btn:active { transform: scale(0.96); box-shadow: 0 5px 15px rgba(15, 23, 42, 0.2); }
     .google-btn:disabled { opacity: 0.7; }
     .google-icon-svg { width: 24px; height: 24px; flex-shrink: 0; }
 
     /* ========================================= */
-    /* PRIVACY TEXT (Sabse Neeche)               */
+    /* PRIVACY TEXT (Sabse Neeche Fixed)         */
     /* ========================================= */
     .privacy-text { 
         font-size: 12px; color: #64748b; font-weight: 800; line-height: 1.6; 
-        margin-top: auto; /* Isko sabse neeche push karega */
-        padding-top: 20px;
+        margin-top: auto; /* Is line se ye hamesha neeche rahega */
+        padding-top: 10px;
     }
     .privacy-text a { color: #0f172a; text-decoration: none; font-weight: 900; border-bottom: 2px solid #0f172a; padding-bottom: 2px; }
     
@@ -117,13 +112,12 @@
 </head>
 <body>
 
-<!-- Neeche se nikalne wala Glass Bar -->
-<div class="login-glass-bar">
+<!-- Neeche se aane wala Popup Box -->
+<div class="login-popup-box">
     <div class="icon-3d">🎓</div>
     <h1 class="app-title">Parents Login</h1>
     <p class="app-subtitle">Guide your child's learning journey</p>
 
-    <!-- Simple Premium Button -->
     <button type="button" id="googleBtn" class="google-btn" onclick="handleGoogleLogin()">
         <svg class="google-icon-svg" viewBox="0 0 48 48">
             <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
@@ -134,7 +128,6 @@
         <span id="btnText">Continue with Google</span>
     </button>
 
-    <!-- Privacy text ekdum neeche push ho jayega -->
     <p class="privacy-text">By continuing, you agree to our<br><a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a></p>
 </div>
 
@@ -162,7 +155,6 @@ const btnText = document.getElementById("btnText");
 
 setPersistence(auth, browserLocalPersistence).catch(err => console.error(err));
 
-// Login success hone par seedha Age Select page pe bhejo
 function handleLoginSuccess() {
     window.location.replace("age-select.html");
 }
