@@ -8,26 +8,35 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Nunito', sans-serif; -webkit-tap-highlight-color: transparent; }
         body { 
-            background: #fce7f3; display: flex; justify-content: center; align-items: center; 
+            background: #f8fafc; 
+            background-image: radial-gradient(circle at 10% 10%, rgba(255, 107, 53, 0.2) 0%, transparent 40%), radial-gradient(circle at 90% 90%, rgba(56, 189, 248, 0.2) 0%, transparent 40%);
+            display: flex; justify-content: center; align-items: center; 
             min-height: 100vh; padding: 20px; flex-direction: column; 
         }
-        h1 { font-family: 'Fredoka', sans-serif; color: #8B3A00; margin-bottom: 10px; text-align: center; font-size: 28px; }
-        p { color: #6B5B4D; margin-bottom: 30px; text-align: center; font-weight: 700; }
+        
+        .header { text-align: center; margin-bottom: 30px; }
+        h1 { font-family: 'Fredoka', sans-serif; color: #0f172a; margin-bottom: 8px; font-size: 32px; }
+        p { color: #475569; font-weight: 800; font-size: 16px; }
         
         .age-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; max-width: 400px; }
         
         .age-btn {
-            background: white; border: 2px solid transparent; border-radius: 20px; padding: 25px 15px;
-            font-size: 18px; font-weight: 800; color: #333; box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-            cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center;
+            background: #ffffff; border: 2px solid transparent; border-radius: 25px; padding: 25px 15px;
+            font-size: 18px; font-weight: 800; color: #333; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            cursor: pointer; transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            display: flex; flex-direction: column; align-items: center;
         }
-        .age-btn:active { transform: scale(0.95); border-color: #FF6B35; }
-        .age-btn span { display: block; font-size: 40px; margin-bottom: 10px; }
+        .age-btn:active { transform: scale(0.92); border-color: #FF6B35; box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3); }
+        .age-btn span { display: block; font-size: 45px; margin-bottom: 10px; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1)); }
     </style>
 </head>
 <body>
-    <h1>Select Age Group</h1>
-    <p>To give your child the best experience</p>
+
+    <div class="header">
+        <h1>Select Age Group</h1>
+        <p>To give your child the best experience</p>
+    </div>
     
     <div class="age-grid">
         <button class="age-btn" onclick="saveAge('3-5')"><span>👶</span>3-5 Years</button>
@@ -37,10 +46,29 @@
     </div>
 
     <script>
-        function saveAge(age) {
+        // Page load hote hi check karo agar user logged in nahi hai toh wapas login pe bhejo
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
+            authDomain: "kids-teacher-4387e.firebaseapp.com",
+            projectId: "kids-teacher-4387e",
+            storageBucket: "kids-teacher-4387e.firebasestorage.app",
+            messagingSenderId: "420221167346",
+            appId: "1:420221167346:web:da7ac80acdfd52339d526b"
+        };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        onAuthStateChanged(auth, user => {
+            if (!user) window.location.replace('login.html'); // Agar login nahi hai
+        });
+
+        window.saveAge = function(age) {
             localStorage.setItem('kidsAgeGroup', age);
             window.location.replace('index-home.html');
-        }
+        };
     </script>
 </body>
 </html>
