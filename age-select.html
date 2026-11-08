@@ -6,21 +6,29 @@
     <title>Select Age - Kids Teacher</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Nunito', sans-serif; }
-        body { background: #fce7f3; display: flex; justify-content: center; align-items: center; height: 100vh; padding: 20px; flex-direction: column; }
-        h1 { font-family: 'Fredoka', sans-serif; color: #8B3A00; margin-bottom: 20px; text-align: center; }
-        .age-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; max-width: 400px; }
-        .age-btn {
-            background: white; border: none; border-radius: 20px; padding: 20px;
-            font-size: 18px; font-weight: 800; color: #333; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            cursor: pointer; transition: transform 0.1s;
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Nunito', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { 
+            background: #fce7f3; display: flex; justify-content: center; align-items: center; 
+            min-height: 100vh; padding: 20px; flex-direction: column; 
         }
-        .age-btn:active { transform: scale(0.95); }
-        .age-btn span { display: block; font-size: 30px; margin-bottom: 10px; }
+        h1 { font-family: 'Fredoka', sans-serif; color: #8B3A00; margin-bottom: 10px; text-align: center; font-size: 28px; }
+        p { color: #6B5B4D; margin-bottom: 30px; text-align: center; font-weight: 700; }
+        
+        .age-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; max-width: 400px; }
+        
+        .age-btn {
+            background: white; border: 2px solid transparent; border-radius: 20px; padding: 25px 15px;
+            font-size: 18px; font-weight: 800; color: #333; box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center;
+        }
+        .age-btn:active { transform: scale(0.95); border-color: #FF6B35; }
+        .age-btn span { display: block; font-size: 40px; margin-bottom: 10px; }
     </style>
 </head>
 <body>
-    <h1>How old is your child?</h1>
+    <h1>Select Age Group</h1>
+    <p>To give your child the best experience</p>
+    
     <div class="age-grid">
         <button class="age-btn" onclick="saveAge('3-5')"><span>👶</span>3-5 Years</button>
         <button class="age-btn" onclick="saveAge('6-8')"><span>🧒</span>6-8 Years</button>
