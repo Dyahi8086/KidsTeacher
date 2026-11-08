@@ -3,215 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Kids Teacher - Welcome Test</title>
+    <meta name="theme-color" content="#e0f2fe">
+    <title>Kids Teacher - Welcome</title>
+
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/png" href="./icons/icon-192.png">
+    <link rel="apple-touch-icon" href="./icons/icon-192.png">
+    <link rel="preload" as="image" href="./welcome_bg.png">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
 
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        /* Body ko scroll karne do */
-        body {
-            background-color: #e0f2fe;
-            overflow-x: hidden;
-            overflow-y: auto; 
-            font-family: 'Nunito', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html, body { height: 100%; width: 100%; background-color: #fce7f3; overflow: hidden; }
 
-        /* --- PAGE 1: WELCOME (Full Screen) --- */
-        .welcome-page {
-            height: 100vh;
-            height: 100dvh;
-            width: 100vw;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: #fce7f3;
-            position: relative;
+        /* Splash Screen */
+        #splash-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: #e0f2fe; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.4s ease;
         }
+        .spinner {
+            width: 50px; height: 50px; border: 5px solid #ffffff; border-top: 5px solid #FF6B35;
+            border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .loading-text { font-family: 'Fredoka', sans-serif; font-size: 20px; color: #8B3A00; font-weight: 600; }
 
-        .welcome-page h1 {
-            font-family: 'Fredoka', sans-serif;
-            color: #8B3A00;
-            font-size: 32px;
-            text-align: center;
-            padding: 0 20px;
+        /* Welcome Content */
+        #welcome-content {
+            position: relative; width: 100vw; height: 100vh; height: 100dvh;
+            display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
+            padding-bottom: 40px; background-color: #fce7f3; opacity: 0; transition: opacity 0.5s ease;
         }
-        
-        /* Neeche scroll karne ka hint */
-        .scroll-down-btn {
-            position: absolute;
-            bottom: 30px;
-            background: #FF6B35;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 30px;
-            font-weight: bold;
-            text-decoration: none;
-            box-shadow: 0 4px 10px rgba(255, 107, 53, 0.4);
-            animation: bounce 1.5s infinite;
+        .bg-image {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; object-position: center top; z-index: 1;
         }
+        .content-wrapper {
+            position: relative; z-index: 10; display: flex; flex-direction: column;
+            align-items: center; width: 100%; padding: 0 20px;
+        }
+        .text-content { text-align: center; margin-bottom: 20px; }
+        .text-content h1 {
+            font-family: 'Fredoka', sans-serif; font-size: clamp(24px, 6vw, 32px); color: #8B3A00;
+            font-weight: 700; line-height: 1.2; margin-bottom: 8px;
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.8), 2px 2px 5px rgba(0,0,0,0.1);
+        }
+        .text-content p { font-family: 'Nunito', sans-serif; font-size: clamp(13px, 4vw, 16px); color: #6B5B4D; font-weight: 700; }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .start-btn {
+            position: relative; width: 100%; max-width: 350px; padding: 16px 20px;
+            font-size: 20px; font-family: 'Fredoka', sans-serif; font-weight: 700; color: white;
+            background: #FF6B35; border: none; border-radius: 50px; cursor: pointer;
+            box-shadow: 0 6px 0 #cc4e20, 0 10px 20px rgba(255, 107, 53, 0.4);
+            transition: transform 0.1s; animation: pulseBtn 2s infinite;
         }
-
-        /* --- PAGE 2: SCROLL TEST (Card Section) --- */
-        .test-page {
-            min-height: 100vh;
-            background: #fce7f3;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 50px 20px;
-        }
-
-        .test-page h2 {
-            font-family: 'Fredoka', sans-serif;
-            color: #8B3A00;
-            margin-bottom: 30px;
-            font-size: 24px;
-        }
-
-        /* Card Container */
-        .card-container {
-            width: 280px;
-            height: 400px;
-            perspective: 1200px; /* 3D ke liye */
-            position: relative;
-        }
-
-        .card {
-            width: 100%;
-            height: 100%;
-            background: #fff;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            transform-style: preserve-3d;
-            will-change: transform;
-        }
-
-        .image-wrapper {
-            width: 100%;
-            height: 300px;
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .card-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .card-text {
-            padding: 10px;
-            text-align: center;
-        }
-        .card-text h3 { font-family: 'Fredoka'; font-size: 20px; color: #333; }
-        .card-text p { font-size: 14px; color: #777; font-weight: bold; }
-
-        /* Pixel Effect */
-        .pixel-grid {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            display: grid;
-            grid-template-columns: repeat(10, 1fr);
-            pointer-events: none;
-            z-index: 10;
-        }
-
-        .pixel-box {
-            background-color: #fce7f3; /* Background color se match */
-            transform: scale(0); /* Chhupa hua */
-        }
+        .start-btn:active { transform: translateY(6px); box-shadow: 0 0px 0 #cc4e20; animation: none; }
+        @keyframes pulseBtn { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
     </style>
 </head>
 <body>
 
-    <!-- PAGE 1: Welcome -->
-    <div class="welcome-page">
-        <h1>Welcome to Kids Teacher</h1>
-        <a href="#card-section" class="scroll-down-btn">↓ Scroll Down ↓</a>
+    <div id="splash-screen">
+        <div class="spinner"></div>
+        <div class="loading-text">Loading...</div>
     </div>
 
-    <!-- PAGE 2: Card Test -->
-    <div class="test-page" id="card-section">
-        <h2>Scroll Effect Test</h2>
-        
-        <div class="card-container" id="cardContainer">
-            <div class="card" id="card">
-                
-                <div class="image-wrapper">
-                    <!-- Yahan tumhari jo bhi image hai uska naam daalo (e.g. welcome_bg.png) -->
-                    <img src="welcome_bg.png" alt="Image" class="card-image">
-                    <!-- Pixel Grid -->
-                    <div class="pixel-grid" id="pixelGrid"></div>
-                </div>
-
-                <div class="card-text">
-                    <h3>Kids Teacher</h3>
-                    <p>Learn & Grow</p>
-                </div>
-
+    <div id="welcome-content">
+        <img src="./welcome_bg.png" alt="Kids Teacher" class="bg-image" id="bgImage">
+        <div class="content-wrapper">
+            <div class="text-content">
+                <h1>Learning Is an<br>Adventure!</h1>
+                <p>Explore, discover and grow every day.</p>
             </div>
+            <!-- Button direct login.html par bhejega -->
+            <button class="start-btn" id="startBtn">Let's Start →</button>
         </div>
     </div>
 
-    <!-- GSAP Animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
     <script>
-        // Pixel Grid Banane ka code
-        const pixelGrid = document.getElementById('pixelGrid');
-        const totalPixels = 100; // 10x10 = 100
+        // Image load hone ka wait karo
+        const splash = document.getElementById('splash-screen');
+        const welcomeContent = document.getElementById('welcome-content');
+        const bgImage = document.getElementById('bgImage');
 
-        for (let i = 0; i < totalPixels; i++) {
-            const pixel = document.createElement('div');
-            pixel.classList.add('pixel-box');
-            pixelGrid.appendChild(pixel);
+        function hideSplash() {
+            splash.style.opacity = '0';
+            welcomeContent.style.opacity = '1';
+            setTimeout(() => { splash.style.display = 'none'; }, 400);
         }
 
-        // GSAP Setup
-        gsap.registerPlugin(ScrollTrigger);
+        if (bgImage.complete) { hideSplash(); } 
+        else {
+            bgImage.onload = hideSplash;
+            bgImage.onerror = () => setTimeout(hideSplash, 3000); // Agar image fail ho toh bhi aage badho
+        }
 
-        // 1. Card Rotate Animation (Scroll pe ghumega)
-        gsap.to('#card', {
-            scrollTrigger: {
-                trigger: '#cardContainer',
-                start: 'top bottom', // Jab card screen pe aaye
-                end: 'bottom top',   // Jab card screen se nikle
-                scrub: 1, // Scroll ke sath smoothly chalega
-            },
-            rotationY: 360,
-            rotationX: 10,
-            scale: 1.05
+        // Button click par seedha Login page kholo
+        document.getElementById('startBtn').addEventListener('click', () => {
+            window.location.href = 'login.html';
         });
 
-        // 2. Pixel Bikhrane ka Animation
-        const pixels = document.querySelectorAll('.pixel-box');
-        
-        gsap.to(pixels, {
-            scrollTrigger: {
-                trigger: '#cardContainer',
-                start: 'top 60%', // Jab card screen ke thoda upar aaye
-                end: 'bottom top',
-                scrub: 1,
-            },
-            scale: 1,
-            stagger: {
-                amount: 0.5,
-                from: 'random'
-            }
-        });
+        // Service worker register karo
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js');
+            });
+        }
     </script>
 </body>
 </html>
