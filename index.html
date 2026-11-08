@@ -76,13 +76,11 @@
                 <h1>Learning Is an<br>Adventure!</h1>
                 <p>Explore, discover and grow every day.</p>
             </div>
-            <!-- Button direct login.html par bhejega -->
             <button class="start-btn" id="startBtn">Let's Start →</button>
         </div>
     </div>
 
     <script>
-        // Image load hone ka wait karo
         const splash = document.getElementById('splash-screen');
         const welcomeContent = document.getElementById('welcome-content');
         const bgImage = document.getElementById('bgImage');
@@ -94,21 +92,15 @@
         }
 
         if (bgImage.complete) { hideSplash(); } 
-        else {
-            bgImage.onload = hideSplash;
-            bgImage.onerror = () => setTimeout(hideSplash, 3000); // Agar image fail ho toh bhi aage badho
-        }
+        else { bgImage.onload = hideSplash; bgImage.onerror = () => setTimeout(hideSplash, 3000); }
 
-        // Button click par seedha Login page kholo
+        // Button click par direct Popup wala login page kholo
         document.getElementById('startBtn').addEventListener('click', () => {
             window.location.href = 'login.html';
         });
 
-        // Service worker register karo
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./service-worker.js');
-            });
+            window.addEventListener('load', () => { navigator.serviceWorker.register('./service-worker.js'); });
         }
     </script>
 </body>
