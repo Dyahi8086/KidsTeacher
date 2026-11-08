@@ -8,8 +8,7 @@
 
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" type="image/png" href="./icons/icon-192.png">
-<!-- Fonts: Fredoka for Title, Nunito for Body -->
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
 
 <style>
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -17,11 +16,13 @@
     body {
         height: 100vh; height: 100dvh; width: 100vw; overflow: hidden;
         font-family: 'Nunito', sans-serif;
-        background: #f4f6fb; 
+        background: #ffffff; 
+        /* Premium vibrant colors blending in background */
         background-image: 
-            radial-gradient(circle at 10% 10%, rgba(255, 107, 53, 0.25) 0%, transparent 40%),
-            radial-gradient(circle at 90% 90%, rgba(56, 189, 248, 0.25) 0%, transparent 40%),
-            radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.15) 0%, transparent 50%);
+            radial-gradient(circle at 15% 15%, rgba(255, 107, 53, 0.4) 0%, transparent 40%),
+            radial-gradient(circle at 85% 85%, rgba(56, 189, 248, 0.4) 0%, transparent 40%),
+            radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.2) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(233, 30, 99, 0.2) 0%, transparent 40%);
         display: flex; align-items: center; justify-content: center;
         position: relative;
     }
@@ -30,32 +31,47 @@
     .login-card {
         position: relative; z-index: 10;
         width: 92%; max-width: 420px; 
-        background: rgba(255, 255, 255, 0.45); 
-        backdrop-filter: blur(25px) saturate(200%);
-        -webkit-backdrop-filter: blur(25px) saturate(200%);
-        border-radius: 40px;
-        padding: 50px 30px;
+        background: rgba(255, 255, 255, 0.5); 
+        backdrop-filter: blur(30px) saturate(200%);
+        -webkit-backdrop-filter: blur(30px) saturate(200%);
+        border-radius: 45px;
+        padding: 55px 30px;
+        /* 3D Glass Edge */
         border: 1px solid rgba(255, 255, 255, 0.9);
+        border-bottom: 2px solid rgba(255, 255, 255, 0.5);
         box-shadow: 
-            0 25px 50px rgba(0, 0, 0, 0.1), 
-            inset 0 1px 2px rgba(255, 255, 255, 1);
+            0 30px 60px rgba(0, 0, 0, 0.08), 
+            inset 0 2px 5px rgba(255, 255, 255, 1),
+            inset 0 -2px 10px rgba(255, 255, 255, 0.4);
         text-align: center;
-        animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
 
     @keyframes popIn {
-        0% { transform: scale(0.9); opacity: 0; }
-        100% { transform: scale(1); opacity: 1; }
+        0% { transform: scale(0.9) translateY(20px); opacity: 0; }
+        100% { transform: scale(1) translateY(0); opacity: 1; }
     }
 
-    .icon-3d { font-size: 55px; margin-bottom: 15px; filter: drop-shadow(0 8px 12px rgba(0,0,0,0.15)); }
-    
+    /* Floating Icon */
+    .icon-3d { 
+        font-size: 65px; 
+        margin-bottom: 15px; 
+        display: inline-block;
+        animation: float 3s ease-in-out infinite;
+        filter: drop-shadow(0 15px 15px rgba(0,0,0,0.2)); 
+    }
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
     .app-title { 
         font-family: 'Fredoka', sans-serif; 
-        font-size: 36px; 
+        font-size: 38px; 
         font-weight: 700; 
         color: #0f172a; 
         margin-bottom: 8px; 
+        letter-spacing: -1px;
     }
     
     .app-subtitle { 
@@ -63,17 +79,17 @@
         font-size: 16px; 
         color: #475569; 
         font-weight: 800; 
-        margin-bottom: 40px; 
+        margin-bottom: 45px; 
     }
 
     /* ========================================= */
-    /* PERFECT LIQUID GLASS BUTTON               */
+    /* ULTRA PREMIUM LIQUID GLASS BUTTON         */
     /* ========================================= */
     
     .glass-btn-container {
         position: relative;
         width: 100%;
-        height: 70px;
+        height: 72px;
         border-radius: 50px;
         display: flex;
         align-items: center;
@@ -81,98 +97,100 @@
         margin-bottom: 25px;
         cursor: pointer;
         transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 5;
     }
 
     .glass-btn-container:active {
         transform: scale(0.95);
     }
 
-    /* Animated Color Layers (Ye piche ghumenge) */
-    .glass-btn-container::before,
+    /* Glowing Rotating Border (The Magic) */
+    .glass-btn-container::before {
+        content: '';
+        position: absolute;
+        top: -3px; left: -3px; right: -3px; bottom: -3px;
+        border-radius: 53px;
+        background: linear-gradient(90deg, #ff007f, #00e5ff, #ffea00, #ff007f);
+        background-size: 300% 100%;
+        animation: borderGlow 3s linear infinite;
+        z-index: 0;
+        /* Glow effect bahar ki taraf */
+        box-shadow: 0 0 20px rgba(0, 229, 255, 0.4), 0 0 20px rgba(255, 0, 127, 0.4);
+    }
+
+    /* Is gradient ko black button ke andar dikhne se rokne ke liye ek aur layer */
     .glass-btn-container::after {
         content: '';
         position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: #111; /* Black cover */
         border-radius: 50px;
         z-index: 1;
     }
 
-    /* Blue-Orange Layer */
-    .glass-btn-container::before {
-        background: linear-gradient(90deg, #38BDF8, #FF6B35, #38BDF8);
-        background-size: 200% 100%;
-        animation: rotateGradient 4s linear infinite;
-    }
-
-    /* Yellow-Pink Layer (Overlay for smoothness) */
-    .glass-btn-container::after {
-        background: linear-gradient(270deg, #FFD700, #E91E63, #FFD700);
-        background-size: 200% 100%;
-        animation: rotateGradient 5s linear infinite reverse;
-        opacity: 0.8;
-    }
-
-    @keyframes rotateGradient {
+    @keyframes borderGlow {
         0% { background-position: 0% 50%; }
-        100% { background-position: 200% 50%; }
+        100% { background-position: 100% 50%; }
     }
 
-    /* Button ka Black Part */
-    .glass-btn {
+    /* Button Text & Content */
+    .glass-btn-content {
         position: relative;
-        z-index: 2; /* Colors ke upar */
-        width: calc(100% - 6px); /* 3px border chhoda */
-        height: calc(100% - 6px);
-        border-radius: 47px;
-        background: #111111; 
-        color: #ffffff;
-        border: none; 
-        font-size: 22px;
-        font-family: 'Fredoka', sans-serif; /* Font change kiya */
-        font-weight: 600;
-        letter-spacing: 0.5px;
+        z-index: 2; /* Piche wale black cover aur gradient ke upar */
         display: flex; 
         align-items: center; 
         justify-content: center; 
         gap: 12px;
-        box-shadow: 
-            inset 0 2px 4px rgba(255,255,255,0.2),
-            inset 0 -2px 5px rgba(0,0,0,0.8);
+        width: 100%;
+        height: 100%;
     }
 
-    /* Shine Effect */
-    .glass-btn::after {
+    /* Shine Effect Inside Button */
+    .glass-btn-content::after {
         content: '';
         position: absolute;
         top: 0; left: -100%;
         width: 50%; height: 100%;
-        background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.15), rgba(255,255,255,0));
+        background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.1), rgba(255,255,255,0));
         transform: skewX(-25deg);
-        animation: shine 5s infinite;
-        border-radius: 47px;
+        animation: shine 4s infinite;
+        z-index: 3;
     }
 
     @keyframes shine {
         0% { left: -100%; }
-        25% { left: 200%; }
+        20% { left: 200%; }
         100% { left: 200%; }
     }
 
-    .google-icon-svg { width: 26px; height: 26px; flex-shrink: 0; }
+    .glass-btn-text {
+        color: #ffffff;
+        font-size: 22px;
+        font-family: 'Fredoka', sans-serif; 
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    .google-icon-svg { width: 26px; height: 26px; flex-shrink: 0; z-index: 4; }
     
     .privacy-text { 
         font-size: 13px; 
         color: #475569; 
         font-weight: 800; 
         line-height: 1.6; 
-        margin-top: 20px; 
-        font-family: 'Nunito', sans-serif;
+        margin-top: 25px; 
     }
-    .privacy-text a { color: #0f172a; text-decoration: none; font-weight: 900; border-bottom: 2px solid #0f172a; padding-bottom: 2px;}
+    .privacy-text a { 
+        color: #0f172a; 
+        text-decoration: none; 
+        font-weight: 900; 
+        border-bottom: 2px solid #0f172a; 
+        padding-bottom: 2px;
+    }
     
     /* Loading Overlay */
     #loadingOverlay {
-        display: none; position: fixed; inset: 0; background: rgba(255,255,255,0.6);
+        display: none; position: fixed; inset: 0; background: rgba(255,255,255,0.7);
         z-index: 9999; flex-direction: column; justify-content: center; align-items: center;
         backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
     }
@@ -191,17 +209,17 @@
     <h1 class="app-title">Parents Login</h1>
     <p class="app-subtitle">Guide your child's learning journey</p>
 
-    <!-- Liquid Glass Button -->
+    <!-- Premium Liquid Button -->
     <div class="glass-btn-container" onclick="handleGoogleLogin()">
-        <button type="button" id="googleBtn" class="glass-btn">
+        <div class="glass-btn-content">
             <svg class="google-icon-svg" viewBox="0 0 48 48">
                 <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
                 <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
                 <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
                 <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
             </svg>
-            <span>Continue with Google</span>
-        </button>
+            <span class="glass-btn-text" id="btnText">Continue with Google</span>
+        </div>
     </div>
 
     <p class="privacy-text">By continuing, you agree to our<br><a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a></p>
@@ -227,7 +245,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const overlay = document.getElementById("loadingOverlay");
-const googleBtn = document.getElementById("googleBtn");
+const btnText = document.getElementById("btnText");
 
 setPersistence(auth, browserLocalPersistence).catch(err => console.error(err));
 
@@ -255,12 +273,8 @@ onAuthStateChanged(auth, user => {
 });
 
 window.handleGoogleLogin = async function(){
-  if (googleBtn.disabled) return;
+  btnText.innerText = "Connecting...";
   
-  googleBtn.disabled = true;
-  const originalHTML = googleBtn.innerHTML;
-  googleBtn.innerHTML = "<span>Connecting...</span>";
-
   const provider = new GoogleAuthProvider();
   provider.setCustomParameters({ prompt: "select_account" });
 
@@ -268,15 +282,10 @@ window.handleGoogleLogin = async function(){
     await signInWithRedirect(auth, provider);
   } catch (error) {
     overlay.style.display = "none";
-    googleBtn.disabled = false;
-    googleBtn.innerHTML = originalHTML;
+    btnText.innerText = "Continue with Google";
     alert("Login failed: " + error.message);
   }
 };
-
-window.addEventListener('load', () => {
-    googleBtn.disabled = false;
-});
 </script>
 </body>
 </html>
