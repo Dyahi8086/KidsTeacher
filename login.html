@@ -25,13 +25,10 @@
         position: relative;
     }
 
-    /* ========================================= */
-    /* NICHE SE NIKALNE WALA POPUP BOX           */
-    /* ========================================= */
     .login-popup-box {
         position: relative; z-index: 10;
         width: 100%; max-width: 500px; 
-        min-height: 65vh; /* Popup box ki height */
+        min-height: 65vh; 
         
         background: rgba(255, 255, 255, 0.85); 
         backdrop-filter: blur(30px) saturate(200%);
@@ -48,7 +45,7 @@
         display: flex; flex-direction: column; align-items: center;
         text-align: center;
         
-        /* Neeche se slide hone ki animation */
+        /* Ye line box ko neeche se upar laayegi */
         transform: translateY(100%);
         animation: slideUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
@@ -58,7 +55,6 @@
         100% { transform: translateY(0); }
     }
 
-    /* Upar ka pull bar */
     .login-popup-box::before {
         content: ''; position: absolute; top: 15px; 
         width: 50px; height: 5px; background: rgba(0,0,0,0.1); border-radius: 10px;
@@ -70,9 +66,6 @@
     .app-title { font-family: 'Fredoka', sans-serif; font-size: 36px; font-weight: 700; color: #0f172a; margin-bottom: 5px; }
     .app-subtitle { font-family: 'Nunito', sans-serif; font-size: 15px; color: #475569; font-weight: 800; margin-bottom: 25px; }
 
-    /* ========================================= */
-    /* BUTTON (Simple & Bold)                    */
-    /* ========================================= */
     .google-btn {
         width: 100%; max-width: 340px; padding: 18px 20px;
         background: #0f172a; color: #ffffff;
@@ -87,17 +80,13 @@
     .google-btn:disabled { opacity: 0.7; }
     .google-icon-svg { width: 24px; height: 24px; flex-shrink: 0; }
 
-    /* ========================================= */
-    /* PRIVACY TEXT (Sabse Neeche Fixed)         */
-    /* ========================================= */
     .privacy-text { 
         font-size: 12px; color: #64748b; font-weight: 800; line-height: 1.6; 
-        margin-top: auto; /* Is line se ye hamesha neeche rahega */
+        margin-top: auto; 
         padding-top: 10px;
     }
     .privacy-text a { color: #0f172a; text-decoration: none; font-weight: 900; border-bottom: 2px solid #0f172a; padding-bottom: 2px; }
     
-    /* Loading Overlay */
     #loadingOverlay {
         display: none; position: fixed; inset: 0; background: rgba(255,255,255,0.7);
         z-index: 9999; flex-direction: column; justify-content: center; align-items: center;
@@ -112,7 +101,6 @@
 </head>
 <body>
 
-<!-- Neeche se aane wala Popup Box -->
 <div class="login-popup-box">
     <div class="icon-3d">🎓</div>
     <h1 class="app-title">Parents Login</h1>
