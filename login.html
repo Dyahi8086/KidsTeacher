@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#CDEBFA">
+<meta name="theme-color" content="#ffffff">
 <title>Parents Login - Kids Teacher</title>
 
 <link rel="manifest" href="./manifest.json">
@@ -11,90 +11,90 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
 
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-html, body { width: 100%; height: 100%; overflow: hidden; }
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body {
+        height: 100vh; height: 100dvh; width: 100vw; overflow: hidden;
+        font-family: 'Nunito', sans-serif;
+        /* Background ko welcome page jaisa dikhaya aur blur kiya */
+        background: url('welcome_bg.png') center/cover no-repeat, #fce7f3;
+        display: flex; align-items: center; justify-content: center;
+        position: relative;
+    }
 
-body {
-  min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column;
-  font-family: 'Nunito', sans-serif; position: relative;
-  background:
-    radial-gradient(circle at 50% 50%, transparent 75%, rgba(255,244,190,0.5) 100%),
-    linear-gradient(180deg, rgba(205, 235, 250, 1) 0%, rgba(255, 244, 224, 1) 35%, rgba(255, 226, 194, 1) 70%, rgba(255, 198, 142, 1) 80%, rgba(245, 145, 115, 1) 90%, rgba(190, 91, 91, 1) 100%);
-  background-size: cover; background-attachment: fixed; background-position: center;
-}
+    /* White Blur Overlay jaisa screenshot me hai */
+    body::before {
+        content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(255, 255, 255, 0.45);
+        backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+        z-index: 1;
+    }
 
-/* Butterflies */
-.butterfly { position: fixed; z-index: 3; pointer-events: none; width: 40px; height: 40px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); will-change: transform; animation-timing-function: ease-in-out; animation-iteration-count: infinite; perspective: 100px; }
-.butterfly svg { width: 100%; height: 100%; animation: wingFlap 0.3s ease-in-out infinite alternate; transform-origin: center; }
-@keyframes wingFlap { 0% { transform: scaleX(1); } 100% { transform: scaleX(0.5); } }
+    /* Login Card / Popup */
+    .login-card {
+        position: relative; z-index: 10;
+        width: 90%; max-width: 400px;
+        background: #ffffff;
+        border-radius: 35px;
+        padding: 40px 25px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
 
-.butterfly.b1 { top: 15%; left: -10%; width: 45px; height: 45px; animation: fly1 25s infinite; }
-.butterfly.b2 { top: 35%; left: -10%; width: 35px; height: 35px; animation: fly2 32s infinite; animation-delay: -8s; }
-@keyframes fly1 { 0% { transform: translate(0, 0) rotate(6deg); } 50% { transform: translate(60vw, 6vh) rotate(12deg); } 100% { transform: translate(115vw, 10vh) rotate(8deg); } }
-@keyframes fly2 { 0% { transform: translate(0, 0) rotate(-8deg); } 50% { transform: translate(55vw, -6vh) rotate(-12deg); } 100% { transform: translate(118vw, 8vh) rotate(6deg); } }
+    @keyframes popIn {
+        0% { transform: scale(0.8); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
 
-/* Login Container */
-.login-container { position: relative; width: 100%; height: 100%; height: 100dvh; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; z-index: 10; overflow-y: auto; overscroll-behavior: contain; padding-bottom: env(safe-area-inset-bottom); }
+    .icon-3d { font-size: 50px; margin-bottom: 10px; }
+    .app-title { font-family: 'Fredoka', sans-serif; font-size: 28px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
+    .app-subtitle { font-family: 'Nunito', sans-serif; font-size: 14px; color: #64748b; font-weight: 700; margin-bottom: 25px; }
 
-.login-card {
-  width: 100%; max-width: 450px; min-height: 55vh; background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border-radius: 40px 40px 0 0; border-top: 1px solid rgba(255, 255, 255, 0.85); border-left: 1px solid rgba(255, 255, 255, 0.45); border-right: 1px solid rgba(255, 255, 255, 0.45);
-  box-shadow: inset 0 1px 2px rgba(255,255,255,1), inset 0 -1px 20px rgba(255,255,255,0.35), 0 -15px 40px rgba(0,0,0,0.18);
-  padding: 40px 25px calc(40px + env(safe-area-inset-bottom)); display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; position: relative; animation: bounceUp 0.9s cubic-bezier(0.175,0.885,0.32,1.275) forwards; transform: translateY(100%);
-}
-@keyframes bounceUp { 0% { transform: translateY(100%); } 60% { transform: translateY(-15px); } 100% { transform: translateY(0); } }
-.login-card::before { content: ''; position: absolute; top: 12px; width: 50px; height: 5px; background: rgba(255,255,255,0.7); border-radius: 10px; }
+    /* Google Button */
+    .btn-google {
+        width: 100%; padding: 15px; 
+        background: #ffffff; color: #1e293b;
+        border: 1.5px solid #e2e8f0; border-radius: 50px; 
+        font-size: 16px; font-family: 'Nunito', sans-serif; font-weight: 800;
+        cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+        transition: background 0.2s, transform 0.1s;
+        margin-bottom: 20px;
+    }
+    .btn-google:active { transform: scale(0.98); background: #f8fafc; }
+    .btn-google:disabled { opacity: 0.6; cursor: wait; }
+    .google-icon-svg { width: 20px; height: 20px; }
 
-.icon-3d { font-size: 60px; margin-bottom: 10px; filter: drop-shadow(0 8px 12px rgba(0,0,0,0.25)); }
-.app-title { font-family: 'Fredoka', sans-serif; font-size: 34px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
-.app-subtitle { font-family: 'Nunito', sans-serif; font-size: 15px; color: #334155; font-weight: 700; margin-bottom: 30px; }
-
-.btn-google {
-  width: 100%; padding: 18px 15px; background: rgba(255,255,255,0.95); color: #0f172a;
-  border: 1px solid rgba(255,255,255,1); border-radius: 50px; font-size: 17px; font-family: 'Fredoka', sans-serif; font-weight: 700;
-  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12), inset 0 2px 2px rgba(255,255,255,1); margin-bottom: 25px; z-index: 100;
-}
-.btn-google:active { transform: translateY(3px); }
-.btn-google:disabled { opacity: 0.7; cursor: wait; }
-.google-icon-svg { width: 22px; height: 22px; }
-
-.privacy-text { font-family: 'Nunito', sans-serif; font-size: 12px; color: #334155; font-weight: 800; line-height: 1.5; }
-.privacy-text a { color: #0f172a; text-decoration: underline; }
-
-/* Loading */
-#loadingOverlay { display: none; position: fixed; inset: 0; width: 100%; height: 100dvh; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); z-index: 9999; flex-direction: column; justify-content: center; align-items: center; }
-.spinner { width: 50px; height: 50px; border: 5px solid #ffedd5; border-top: 5px solid #FF5E3A; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
-@keyframes spin { 100% { transform: rotate(360deg); } }
-.loading-text { font-family: 'Fredoka', sans-serif; font-size: 22px; color: #9a3412; font-weight: 600; }
+    .privacy-text { font-size: 11px; color: #94a3b8; font-weight: 600; line-height: 1.5; margin-top: 20px; }
+    
+    /* Loading Overlay */
+    #loadingOverlay {
+        display: none; position: fixed; inset: 0; background: rgba(255,255,255,0.9);
+        z-index: 9999; flex-direction: column; justify-content: center; align-items: center;
+    }
+    .spinner {
+        width: 45px; height: 45px; border: 4px solid #ffedd5; border-top: 4px solid #FF5E3A;
+        border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px;
+    }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
 
-<!-- 2 Butterflies -->
-<div class="butterfly b1"><svg viewBox="0 0 100 100"><path d="M50,50 Q10,10 20,50 Q10,90 50,50" fill="#FF7B00"/><path d="M50,50 Q90,10 80,50 Q90,90 50,50" fill="#FF7B00"/><ellipse cx="50" cy="50" rx="3" ry="15" fill="#3E2723"/></svg></div>
-<div class="butterfly b2"><svg viewBox="0 0 100 100"><path d="M50,50 Q10,10 20,50 Q10,90 50,50" fill="#E91E63"/><path d="M50,50 Q90,10 80,50 Q90,90 50,50" fill="#E91E63"/><ellipse cx="50" cy="50" rx="3" ry="15" fill="#3E2723"/></svg></div>
-
-<div class="login-container">
-  <div class="login-card">
+<div class="login-card">
     <div class="icon-3d">🎓</div>
     <h1 class="app-title">Parents Login</h1>
     <p class="app-subtitle">Guide your child's learning journey</p>
 
     <button type="button" id="googleBtn" class="btn-google" onclick="handleGoogleLogin()">
-      <svg class="google-icon-svg" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-      <span>Continue with Google</span>
+        <svg class="google-icon-svg" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+        <span>Continue with Google</span>
     </button>
 
     <p class="privacy-text">By continuing, you agree to our<br><a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a></p>
-  </div>
 </div>
 
 <div id="loadingOverlay">
-  <div class="spinner"></div>
-  <p class="loading-text">Logging you in...</p>
+    <div class="spinner"></div>
 </div>
 
 <script type="module">
@@ -117,9 +117,11 @@ const googleBtn = document.getElementById("googleBtn");
 
 setPersistence(auth, browserLocalPersistence).catch(err => console.error(err));
 
-// Login hone ke baad check karo age save hai ya nahi
-function redirectUser() {
+// Login successful hone par yaha aayega
+function handleLoginSuccess() {
     const savedAge = localStorage.getItem('kidsAgeGroup');
+    
+    // Agar age save nahi hai, toh Age Select pe bhejo. Warna Home page.
     if (!savedAge) {
         window.location.replace("age-select.html");
     } else {
@@ -127,31 +129,30 @@ function redirectUser() {
     }
 }
 
-// Agar Google redirect se wapas aaye hain
+// Redirect wapas aane par
 getRedirectResult(auth).then(result => {
   if (result && result.user) {
     overlay.style.display = "flex";
-    setTimeout(redirectUser, 600);
+    setTimeout(handleLoginSuccess, 500);
   }
 }).catch(err => {
   console.error(err);
   overlay.style.display = "none";
 });
 
-// Agar pehle se logged in hain
+// Check karo pehle se login hai kya
 onAuthStateChanged(auth, user => {
   if (user) {
     overlay.style.display = "flex";
-    setTimeout(redirectUser, 800);
+    setTimeout(handleLoginSuccess, 500);
   } else {
     overlay.style.display = "none";
   }
 });
 
+// Google Login Button Click
 window.handleGoogleLogin = async function(){
   if (googleBtn.disabled) return;
-  if (navigator.vibrate) navigator.vibrate(50);
-
   googleBtn.disabled = true;
   googleBtn.innerHTML = "<span>Connecting...</span>";
 
