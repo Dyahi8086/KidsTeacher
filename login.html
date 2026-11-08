@@ -8,24 +8,25 @@
 
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" type="image/png" href="./icons/icon-192.png">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
 
 <style>
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    
     body {
         height: 100vh; height: 100dvh; width: 100vw; overflow: hidden;
         font-family: 'Nunito', sans-serif;
-        /* Background ko welcome page jaisa dikhaya aur blur kiya */
+        /* Peeche ka background image + white blur */
         background: url('welcome_bg.png') center/cover no-repeat, #fce7f3;
         display: flex; align-items: center; justify-content: center;
         position: relative;
     }
 
-    /* White Blur Overlay jaisa screenshot me hai */
+    /* White Blur Overlay */
     body::before {
         content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(255, 255, 255, 0.45);
-        backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+        background: rgba(255, 255, 255, 0.55); /* Thoda aur safed kiya */
+        backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
         z-index: 1;
     }
 
@@ -35,41 +36,110 @@
         width: 90%; max-width: 400px;
         background: #ffffff;
         border-radius: 35px;
-        padding: 40px 25px;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        padding: 45px 30px;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255,255,255,1);
         text-align: center;
-        animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
 
     @keyframes popIn {
-        0% { transform: scale(0.8); opacity: 0; }
+        0% { transform: scale(0.85); opacity: 0; }
         100% { transform: scale(1); opacity: 1; }
     }
 
-    .icon-3d { font-size: 50px; margin-bottom: 10px; }
-    .app-title { font-family: 'Fredoka', sans-serif; font-size: 28px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
-    .app-subtitle { font-family: 'Nunito', sans-serif; font-size: 14px; color: #64748b; font-weight: 700; margin-bottom: 25px; }
-
-    /* Google Button */
-    .btn-google {
-        width: 100%; padding: 15px; 
-        background: #ffffff; color: #1e293b;
-        border: 1.5px solid #e2e8f0; border-radius: 50px; 
-        font-size: 16px; font-family: 'Nunito', sans-serif; font-weight: 800;
-        cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
-        transition: background 0.2s, transform 0.1s;
-        margin-bottom: 20px;
+    .icon-3d { font-size: 55px; margin-bottom: 15px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
+    
+    .app-title { 
+        font-family: 'Fredoka', sans-serif; 
+        font-size: 32px; 
+        font-weight: 700; 
+        color: #0f172a; 
+        margin-bottom: 8px; 
+        letter-spacing: -0.5px;
     }
-    .btn-google:active { transform: scale(0.98); background: #f8fafc; }
-    .btn-google:disabled { opacity: 0.6; cursor: wait; }
-    .google-icon-svg { width: 20px; height: 20px; }
+    
+    .app-subtitle { 
+        font-family: 'Nunito', sans-serif; 
+        font-size: 16px; 
+        color: #64748b; 
+        font-weight: 800; /* Font thoda bold kiya */
+        margin-bottom: 35px; 
+    }
 
-    .privacy-text { font-size: 11px; color: #94a3b8; font-weight: 600; line-height: 1.5; margin-top: 20px; }
+    /* ========================================= */
+    /* LIQUID GLASS 3D BUTTON                    */
+    /* ========================================= */
+    .glass-btn-wrapper {
+        position: relative;
+        width: 100%;
+        padding: 3px; /* Border thickness */
+        border-radius: 50px;
+        background: linear-gradient(135deg, rgba(56,189,248,1) 0%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0.1) 60%, rgba(255,107,53,1) 100%);
+        box-shadow: 0 15px 35px rgba(56, 189, 248, 0.2), 0 15px 35px rgba(255, 107, 53, 0.2);
+        margin-bottom: 25px;
+        transition: transform 0.1s, box-shadow 0.1s;
+        cursor: pointer;
+    }
+
+    .btn-google {
+        width: 100%;
+        padding: 20px 20px; /* Button ko bada kiya */
+        background: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
+        color: #ffffff;
+        border: none; 
+        border-radius: 47px; /* Thoda kam taaki border fit ho */
+        font-size: 19px; /* Font size bada kiya */
+        font-family: 'Nunito', sans-serif; 
+        font-weight: 900;
+        cursor: pointer;
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        gap: 12px;
+        /* Glass shine effect */
+        box-shadow: inset 0 2px 10px rgba(255,255,255,0.3), inset 0 -2px 5px rgba(0,0,0,0.5);
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Shine Animation */
+    .btn-google::after {
+        content: '';
+        position: absolute;
+        top: 0; left: -100%;
+        width: 50%; height: 100%;
+        background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.3), rgba(255,255,255,0));
+        transform: skewX(-25deg);
+        animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+        0% { left: -100%; }
+        20% { left: 200%; }
+        100% { left: 200%; }
+    }
+
+    /* Press Effect */
+    .glass-btn-wrapper:active {
+        transform: translateY(4px) scale(0.98);
+        box-shadow: 0 5px 15px rgba(56, 189, 248, 0.2), 0 5px 15px rgba(255, 107, 53, 0.2);
+    }
+    
+    .glass-btn-wrapper:active .btn-google {
+        box-shadow: inset 0 4px 15px rgba(0,0,0,0.7);
+    }
+
+    .btn-google:disabled { opacity: 0.7; cursor: wait; }
+    .google-icon-svg { width: 24px; height: 24px; flex-shrink: 0; }
+
+    .privacy-text { font-size: 12px; color: #94a3b8; font-weight: 700; line-height: 1.6; margin-top: 15px; }
+    .privacy-text a { color: #475569; text-decoration: underline; }
     
     /* Loading Overlay */
     #loadingOverlay {
         display: none; position: fixed; inset: 0; background: rgba(255,255,255,0.9);
         z-index: 9999; flex-direction: column; justify-content: center; align-items: center;
+        backdrop-filter: blur(10px);
     }
     .spinner {
         width: 45px; height: 45px; border: 4px solid #ffedd5; border-top: 4px solid #FF5E3A;
@@ -85,10 +155,18 @@
     <h1 class="app-title">Parents Login</h1>
     <p class="app-subtitle">Guide your child's learning journey</p>
 
-    <button type="button" id="googleBtn" class="btn-google" onclick="handleGoogleLogin()">
-        <svg class="google-icon-svg" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-        <span>Continue with Google</span>
-    </button>
+    <!-- Liquid Glass Button -->
+    <div class="glass-btn-wrapper">
+        <button type="button" id="googleBtn" class="btn-google" onclick="handleGoogleLogin()">
+            <svg class="google-icon-svg" viewBox="0 0 48 48">
+                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+            </svg>
+            <span>Continue with Google</span>
+        </button>
+    </div>
 
     <p class="privacy-text">By continuing, you agree to our<br><a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a></p>
 </div>
