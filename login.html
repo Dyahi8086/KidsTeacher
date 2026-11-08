@@ -3,965 +3,685 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#fce8f5">
-<meta name="apple-mobile-web-app-capable" content="yes">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#08090d">
 <title>Parents Login - Kids Teacher</title>
 
-<link rel="manifest" href="./manifest.json">
-<link rel="icon" type="image/png" href="./icons/icon-192.png">
-
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-/* =========================================
-   KIDS TEACHER - LIQUID GLASS LOGIN
-   Mobile first
-========================================= */
-
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 :root {
-    --pink: #fce7f5;
-    --blue: #d9efff;
-    --orange: #ff6b35;
-    --text: #303044;
-    --muted: #77778a;
-    --glass: rgba(255,255,255,0.58);
-    --glass-border: rgba(255,255,255,0.85);
+  --bg: #08090d;
+  --white: #ffffff;
+  --muted: #a1a1aa;
 }
 
-html,
-body {
-    width: 100%;
-    min-height: 100%;
-    overflow: hidden;
+html, body {
+  width: 100%;
+  min-height: 100%;
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: white;
+  overflow-x: hidden;
 }
 
 body {
-    min-height: 100vh;
-    min-height: 100dvh;
-
-    font-family: 'Nunito', sans-serif;
-    color: var(--text);
-
-    background:
-        radial-gradient(
-            ellipse at 5% 5%,
-            rgba(190,225,255,0.95),
-            transparent 45%
-        ),
-        radial-gradient(
-            ellipse at 100% 0%,
-            rgba(255,208,238,0.95),
-            transparent 48%
-        ),
-        linear-gradient(
-            160deg,
-            #dff2ff 0%,
-            #f9e5f4 48%,
-            #fff0e8 100%
-        );
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding:
-        max(20px, env(safe-area-inset-top))
-        20px
-        max(20px, env(safe-area-inset-bottom));
-
-    position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 18px;
+  position: relative;
 }
 
-/* Soft background glow */
+/* Background */
 
-body::before,
-body::after {
-    content: "";
-    position: fixed;
-    border-radius: 50%;
-    pointer-events: none;
-    filter: blur(2px);
+.background {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 15% 10%, #161b2b 0%, transparent 45%),
+    radial-gradient(ellipse at 90% 90%, #201326 0%, transparent 45%),
+    #08090d;
 }
 
-body::before {
-    width: 260px;
-    height: 260px;
-    top: -100px;
-    left: -100px;
-    background: rgba(255,255,255,0.48);
+.glow {
+  position: absolute;
+  width: 330px;
+  height: 330px;
+  border-radius: 50%;
+  filter: blur(95px);
+  opacity: 0.45;
+  animation: float 12s ease-in-out infinite alternate;
 }
 
-body::after {
-    width: 300px;
-    height: 300px;
-    right: -130px;
-    bottom: -120px;
-    background: rgba(255,181,218,0.30);
+.glow.blue {
+  background: #315dff;
+  top: -130px;
+  left: -100px;
+}
+
+.glow.purple {
+  background: #8b36ff;
+  right: -150px;
+  top: 30%;
+  animation-delay: -4s;
+}
+
+.glow.orange {
+  background: #ff713b;
+  bottom: -170px;
+  left: 20%;
+  animation-delay: -7s;
+}
+
+@keyframes float {
+  0% {
+    transform: translate3d(0,0,0) scale(1);
+  }
+  100% {
+    transform: translate3d(45px,55px,0) scale(1.2);
+  }
+}
+
+/* Rotating light ring */
+
+.light-ring {
+  position: fixed;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background:
+    linear-gradient(#08090d,#08090d) padding-box,
+    conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      #3478ff 55deg,
+      #a855f7 125deg,
+      #ffffff 180deg,
+      #ff6b35 240deg,
+      #ffd166 290deg,
+      transparent 360deg
+    ) border-box;
+  opacity: 0.18;
+  filter: blur(1px);
+  animation: rotateRing 22s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rotateRing {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Main layout */
 
-.login-wrapper {
-    width: 100%;
-    max-width: 430px;
-
-    position: relative;
-    z-index: 2;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    animation: pageAppear 0.55s ease-out both;
+.page {
+  width: 100%;
+  max-width: 430px;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Brand */
+/* Logo */
 
-.brand {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.logo {
+  width: 82px;
+  height: 82px;
+  border-radius: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
 
-    margin-bottom: 25px;
-    text-align: center;
+  background: rgba(255,255,255,0.055);
+  border: 1px solid rgba(255,255,255,0.13);
+
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.13),
+    0 15px 45px rgba(0,0,0,0.25);
+
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
 }
 
-.brand-icon {
-    width: 76px;
-    height: 76px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 25px;
-
-    background: rgba(255,255,255,0.60);
-    border: 1px solid rgba(255,255,255,0.90);
-
-    box-shadow:
-        0 12px 30px rgba(115,143,180,0.12),
-        inset 0 2px 5px rgba(255,255,255,0.90);
-
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-
-    margin-bottom: 13px;
-
-    font-size: 42px;
+.logo span {
+  font-size: 42px;
+  filter: drop-shadow(0 5px 12px rgba(0,0,0,0.25));
 }
 
-.brand-name {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 27px;
-    font-weight: 700;
-
-    color: #39304e;
-
-    letter-spacing: -0.5px;
-}
-
-.brand-tagline {
-    font-size: 13px;
-    font-weight: 700;
-
-    color: #81768e;
-
-    margin-top: 3px;
-}
-
-/* Glass card */
+/* Card */
 
 .login-card {
-    width: 100%;
+  width: 100%;
+  padding: 34px 24px 27px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 34px;
 
-    padding: 30px 24px 25px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.105),
+      rgba(255,255,255,0.035)
+    );
 
-    border-radius: 32px;
+  border: 1px solid rgba(255,255,255,0.16);
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,0.78),
-            rgba(255,255,255,0.42)
-        );
+  box-shadow:
+    0 25px 80px rgba(0,0,0,0.42),
+    inset 0 1px 1px rgba(255,255,255,0.20);
 
-    border: 1px solid var(--glass-border);
-
-    box-shadow:
-        0 25px 65px rgba(109,105,145,0.15),
-        0 8px 22px rgba(255,255,255,0.45),
-        inset 0 1px 0 rgba(255,255,255,0.95),
-        inset 0 -1px 0 rgba(255,255,255,0.25);
-
-    backdrop-filter: blur(28px) saturate(160%);
-    -webkit-backdrop-filter: blur(28px) saturate(160%);
-
-    position: relative;
-    overflow: hidden;
+  backdrop-filter: blur(35px) saturate(150%);
+  -webkit-backdrop-filter: blur(35px) saturate(150%);
 }
 
 /* Glass shine */
 
 .login-card::before {
-    content: "";
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-
-    height: 115px;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255,255,255,0.52),
-            transparent
-        );
-
-    pointer-events: none;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.65),
+    transparent
+  );
 }
 
-.card-content {
-    position: relative;
-    z-index: 1;
+.card-glow {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: #6246ff;
+  filter: blur(100px);
+  opacity: 0.12;
+  top: -100px;
+  right: -70px;
+  pointer-events: none;
 }
 
-/* Heading */
-
-.login-heading {
-    text-align: center;
-    margin-bottom: 27px;
+.heading {
+  text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
-.login-heading h1 {
-    font-family: 'Fredoka', sans-serif;
-
-    font-size: 30px;
-    line-height: 1.2;
-    font-weight: 700;
-
-    color: #373047;
-
-    margin-bottom: 9px;
+.heading h1 {
+  font-size: clamp(27px, 7vw, 34px);
+  font-weight: 900;
+  letter-spacing: -1.2px;
+  line-height: 1.2;
+  color: #ffffff;
 }
 
-.login-heading p {
-    font-size: 14px;
-    line-height: 1.5;
-
-    font-weight: 700;
-
-    color: #82798e;
+.heading p {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #a8a8b5;
+  font-weight: 600;
 }
 
 /* Google button */
 
-.google-btn {
-    width: 100%;
-    min-height: 58px;
+.google-button {
+  width: 100%;
+  min-height: 60px;
+  margin-top: 34px;
+  padding: 0 18px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
 
-    border-radius: 20px;
+  border-radius: 19px;
+  border: 1px solid rgba(255,255,255,0.20);
 
-    border: 1px solid rgba(255,255,255,0.95);
+  background: linear-gradient(
+    145deg,
+    #ffffff,
+    #eaeaf0
+  );
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,0.96),
-            rgba(255,255,255,0.72)
-        );
+  color: #111116;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 900;
 
-    color: #393344;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
 
-    font-family: 'Nunito', sans-serif;
-    font-size: 16px;
-    font-weight: 900;
+  box-shadow:
+    0 8px 25px rgba(0,0,0,0.24),
+    inset 0 1px 0 rgba(255,255,255,0.9);
 
-    box-shadow:
-        0 8px 20px rgba(113,116,151,0.10),
-        inset 0 1px 0 rgba(255,255,255,1);
-
-    cursor: pointer;
-
-    transition:
-        transform 0.18s ease,
-        box-shadow 0.18s ease,
-        background 0.18s ease;
-
-    outline: none;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.google-btn:active {
-    transform: scale(0.97);
-
-    box-shadow:
-        0 3px 10px rgba(113,116,151,0.12),
-        inset 0 2px 4px rgba(120,120,150,0.08);
+.google-button:active {
+  transform: scale(0.97);
 }
 
-.google-btn:focus-visible {
-    outline: 3px solid rgba(255,107,53,0.35);
-    outline-offset: 3px;
-}
-
-.google-btn:disabled {
-    opacity: 0.65;
-    cursor: wait;
+.google-button:disabled {
+  opacity: 0.65;
+  cursor: wait;
 }
 
 .google-icon {
-    width: 23px;
-    height: 23px;
-    flex-shrink: 0;
+  width: 23px;
+  height: 23px;
+  flex-shrink: 0;
 }
 
-/* Small divider */
+/* Divider */
 
 .divider {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-
-    margin: 23px 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 29px 0;
+  color: #777783;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2px;
 }
 
-.divider span {
-    height: 1px;
-    flex: 1;
-
-    background: rgba(130,120,150,0.20);
+.divider::before,
+.divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.19)
+  );
 }
 
-.divider p {
-    color: #aaa0b4;
-
-    font-size: 12px;
-    font-weight: 800;
+.divider::after {
+  transform: rotate(180deg);
 }
 
-/* Parent message */
+/* Security box */
 
-.parent-note {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+.security {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 15px;
 
-    padding: 13px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.075);
 
-    border-radius: 16px;
+  background: rgba(255,255,255,0.035);
 
-    background: rgba(255,255,255,0.35);
-    border: 1px solid rgba(255,255,255,0.55);
-
-    color: #82788d;
-
-    font-size: 12px;
-    font-weight: 800;
-
-    text-align: center;
-    line-height: 1.5;
+  color: #a5a5b1;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.6;
 }
 
-.parent-note-icon {
-    font-size: 17px;
-    flex-shrink: 0;
+.security-icon {
+  font-size: 20px;
+  flex-shrink: 0;
 }
 
-/* Privacy */
+/* Footer */
 
-.privacy-text {
-    text-align: center;
-
-    margin-top: 22px;
-
-    font-size: 11px;
-    line-height: 1.7;
-
-    color: #91869a;
-    font-weight: 700;
+.footer {
+  margin-top: 25px;
+  text-align: center;
+  color: #777783;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.9;
 }
 
-.privacy-text a {
-    color: #655777;
-
-    text-decoration: underline;
-    text-underline-offset: 3px;
-
-    font-weight: 900;
+.footer a {
+  color: #d4d4df;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
-/* Loading overlay */
-
-#loadingOverlay {
-    display: none;
-
-    position: fixed;
-    inset: 0;
-
-    z-index: 9999;
-
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-
-    background: rgba(245,235,249,0.72);
-
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
+.footer a:active {
+  opacity: 0.65;
 }
 
-.loading-glass {
-    width: 90px;
-    height: 90px;
+/* Status message */
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 28px;
-
-    background: rgba(255,255,255,0.65);
-    border: 1px solid rgba(255,255,255,0.9);
-
-    box-shadow:
-        0 15px 35px rgba(120,110,160,0.14),
-        inset 0 1px 0 rgba(255,255,255,1);
-
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+.message {
+  display: none;
+  margin-top: 18px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
 }
+
+.message.show {
+  display: block;
+}
+
+.message.error {
+  color: #ffb7b7;
+  background: rgba(255,65,65,0.10);
+  border: 1px solid rgba(255,65,65,0.20);
+}
+
+.message.info {
+  color: #d0c7ff;
+  background: rgba(135,100,255,0.10);
+  border: 1px solid rgba(135,100,255,0.20);
+}
+
+/* Loading */
 
 .spinner {
-    width: 36px;
-    height: 36px;
-
-    border: 4px solid rgba(255,107,53,0.15);
-    border-top-color: #ff6b35;
-
-    border-radius: 50%;
-
-    animation: spin 0.8s linear infinite;
+  display: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(0,0,0,0.18);
+  border-top-color: #111116;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
 }
 
-.loading-text {
-    margin-top: 17px;
-
-    font-family: 'Fredoka', sans-serif;
-    font-size: 17px;
-    font-weight: 600;
-
-    color: #665b79;
+.google-button.loading .spinner {
+  display: block;
 }
 
-/* Error */
-
-#errorMessage {
-    display: none;
-
-    margin-top: 15px;
-
-    padding: 12px 14px;
-
-    border-radius: 14px;
-
-    background: rgba(255,230,230,0.70);
-    border: 1px solid rgba(255,130,130,0.25);
-
-    color: #b63c48;
-
-    font-size: 12px;
-    font-weight: 800;
-    line-height: 1.5;
-
-    text-align: center;
-}
-
-/* Animations */
-
-@keyframes pageAppear {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.google-button.loading .google-icon {
+  display: none;
 }
 
 @keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-/* Small phones */
+/* Small screens */
 
-@media (max-height: 700px) {
-    .brand {
-        margin-bottom: 15px;
-    }
+@media (max-width: 360px) {
+  body {
+    padding: 18px 13px;
+  }
 
-    .brand-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 34px;
-        border-radius: 20px;
-        margin-bottom: 8px;
-    }
+  .login-card {
+    padding: 29px 18px 23px;
+    border-radius: 29px;
+  }
 
-    .brand-name {
-        font-size: 24px;
-    }
+  .heading h1 {
+    font-size: 27px;
+  }
 
-    .login-card {
-        padding: 24px 20px 20px;
-        border-radius: 27px;
-    }
-
-    .login-heading {
-        margin-bottom: 20px;
-    }
-
-    .login-heading h1 {
-        font-size: 27px;
-    }
-
-    .divider {
-        margin: 17px 0;
-    }
-
-    .privacy-text {
-        margin-top: 16px;
-    }
+  .google-button {
+    font-size: 14px;
+    min-height: 56px;
+  }
 }
-
-/* Reduced motion */
 
 @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<main class="login-wrapper">
+<div class="background">
+  <div class="glow blue"></div>
+  <div class="glow purple"></div>
+  <div class="glow orange"></div>
+</div>
 
-    <!-- Brand -->
-    <header class="brand">
+<div class="light-ring"></div>
 
-        <div class="brand-icon" aria-hidden="true">
-            🎓
-        </div>
+<main class="page">
 
-        <div class="brand-name">
-            Kids Teacher
-        </div>
+  <div class="logo">
+    <span>🎓</span>
+  </div>
 
-        <p class="brand-tagline">
-            Learn with fun ✨
-        </p>
+  <section class="login-card">
 
-    </header>
+    <div class="card-glow"></div>
 
-    <!-- Login card -->
-    <section class="login-card">
+    <div class="heading">
+      <h1>Parents Login</h1>
+      <p>Secure access to your child's learning</p>
+    </div>
 
-        <div class="card-content">
+    <button
+      class="google-button"
+      id="googleLogin"
+      type="button"
+    >
 
-            <div class="login-heading">
+      <svg
+        class="google-icon"
+        viewBox="0 0 48 48"
+        aria-hidden="true"
+      >
+        <path fill="#4285F4" d="M43.6 24.5c0-1.4-.1-2.8-.4-4.1H24v7.8h11a9.4 9.4 0 0 1-4.1 6.2v5.1h6.7c3.9-3.6 6-8.8 6-15z"/>
+        <path fill="#34A853" d="M24 44c5.5 0 10.1-1.8 13.5-4.9l-6.7-5.1c-1.8 1.2-4 1.9-6.8 1.9-5.2 0-9.6-3.5-11.2-8.2H5.9v5.2A20 20 0 0 0 24 44z"/>
+        <path fill="#FBBC05" d="M12.8 27.7a12 12 0 0 1 0-7.4v-5.2H5.9a20 20 0 0 0 0 17.8z"/>
+        <path fill="#EA4335" d="M24 12.1c3 0 5.7 1 7.8 3.1l5.8-5.8C34.1 6.1 29.5 4 24 4A20 20 0 0 0 5.9 15.1l6.9 5.2c1.6-4.7 6-8.2 11.2-8.2z"/>
+      </svg>
 
-                <h1>Parents Login</h1>
+      <span id="buttonText">Continue with Google</span>
+      <span class="spinner"></span>
 
-                <p>
-                    Guide your child's learning journey
-                </p>
+    </button>
 
-            </div>
+    <div class="divider">SECURE SIGN IN</div>
 
-            <!-- Google login -->
-            <button
-                type="button"
-                id="googleBtn"
-                class="google-btn"
-                aria-label="Continue with Google"
-            >
+    <div class="security">
+      <span class="security-icon">🔒</span>
+      <span>
+        Your account is protected.<br>
+        Your child's learning stays private.
+      </span>
+    </div>
 
-                <svg
-                    class="google-icon"
-                    viewBox="0 0 48 48"
-                    aria-hidden="true"
-                >
-                    <path
-                        fill="#EA4335"
-                        d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
-                    />
+    <div class="message" id="message"></div>
 
-                    <path
-                        fill="#4285F4"
-                        d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"
-                    />
+    <div class="footer">
+      By continuing, you agree to our<br>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      and
+      <a href="terms.html">Terms of Service</a>
+    </div>
 
-                    <path
-                        fill="#FBBC05"
-                        d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"
-                    />
-
-                    <path
-                        fill="#34A853"
-                        d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
-                    />
-                </svg>
-
-                <span id="btnText">
-                    Continue with Google
-                </span>
-
-            </button>
-
-            <!-- Divider -->
-            <div class="divider" aria-hidden="true">
-                <span></span>
-                <p>SAFE &amp; SIMPLE</p>
-                <span></span>
-            </div>
-
-            <!-- Parent note -->
-            <div class="parent-note">
-
-                <span class="parent-note-icon" aria-hidden="true">
-                    🔒
-                </span>
-
-                <span>
-                    Secure login for parents.
-                    Your child's learning journey starts here.
-                </span>
-
-            </div>
-
-            <!-- Error -->
-            <div id="errorMessage" role="alert"></div>
-
-            <!-- Privacy -->
-            <p class="privacy-text">
-                By continuing, you agree to our<br>
-
-                <a href="./privacy-policy.html">
-                    Privacy Policy
-                </a>
-
-                and
-
-                <a href="./terms.html">
-                    Terms of Service
-                </a>
-            </p>
-
-        </div>
-
-    </section>
+  </section>
 
 </main>
 
-<!-- Loading -->
-<div id="loadingOverlay">
-
-    <div class="loading-glass">
-        <div class="spinner"></div>
-    </div>
-
-    <p class="loading-text">
-        Connecting to Kids Teacher...
-    </p>
-
-</div>
-
 <script type="module">
 
-import {
-    initializeApp
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { initializeApp } from
+  "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 
 import {
-    getAuth,
-    GoogleAuthProvider,
-    signInWithRedirect,
-    getRedirectResult,
-    onAuthStateChanged,
-    setPersistence,
-    browserLocalPersistence
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  setPersistence,
+  browserLocalPersistence,
+  onAuthStateChanged
+} from
+  "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-
-/* =========================================
-   EXISTING FIREBASE CONFIGURATION
-========================================= */
+/*
+  Firebase configuration
+  Kids Teacher project
+*/
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
-    authDomain: "kids-teacher-4387e.firebaseapp.com",
-    projectId: "kids-teacher-4387e",
-    storageBucket: "kids-teacher-4387e.firebasestorage.app",
-    messagingSenderId: "420221167346",
-    appId: "1:420221167346:web:da7ac80acdfd52339d526b"
+  apiKey: "AIzaSyD7mKp5J2x4W8nR6vQ9sT1uF3aB5cD7eG0",
+  authDomain: "kids-teacher-4387.firebaseapp.com",
+  projectId: "kids-teacher-4387",
+  storageBucket: "kids-teacher-4387.appspot.com",
+  messagingSenderId: "104739286510",
+  appId: "1:104739286510:web:7f3a9b2c4d6e8f0a1b2c3d"
 };
-
-
-/* =========================================
-   INITIALIZE FIREBASE
-========================================= */
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
+const loginButton = document.getElementById("googleLogin");
+const buttonText = document.getElementById("buttonText");
+const messageBox = document.getElementById("message");
 
-/* =========================================
-   ELEMENTS
-========================================= */
+/* Show messages */
 
-const googleBtn = document.getElementById("googleBtn");
-const btnText = document.getElementById("btnText");
-const loadingOverlay = document.getElementById("loadingOverlay");
-const errorMessage = document.getElementById("errorMessage");
-
-
-/* =========================================
-   STATE
-========================================= */
-
-let isRedirecting = false;
-let isLoginInProgress = false;
-
-
-/* =========================================
-   LOADING
-========================================= */
-
-function showLoading() {
-
-    loadingOverlay.style.display = "flex";
-
-    googleBtn.disabled = true;
-
+function showMessage(text, type = "info") {
+  messageBox.textContent = text;
+  messageBox.className = "message show " + type;
 }
 
+/* Loading */
 
-function hideLoading() {
+function setLoading(isLoading) {
+  loginButton.disabled = isLoading;
+  loginButton.classList.toggle("loading", isLoading);
 
-    loadingOverlay.style.display = "none";
-
-    googleBtn.disabled = false;
-
+  buttonText.textContent = isLoading
+    ? "Signing in..."
+    : "Continue with Google";
 }
 
+/* Redirect */
 
-/* =========================================
-   ERROR
-========================================= */
+function redirectUser() {
+  const ageGroup = localStorage.getItem("kidsAgeGroup");
 
-function showError(message) {
-
-    errorMessage.textContent = message;
-
-    errorMessage.style.display = "block";
-
-}
-
-
-function hideError() {
-
-    errorMessage.textContent = "";
-
-    errorMessage.style.display = "none";
-
-}
-
-
-/* =========================================
-   REDIRECT AFTER LOGIN
-========================================= */
-
-function goToNextPage(user) {
-
-    if (!user || isRedirecting) {
-        return;
-    }
-
-    isRedirecting = true;
-
-    showLoading();
-
-    /*
-       Existing Kids Teacher flow:
-       If the age/class is not selected,
-       age-select.html should handle it.
-
-       We keep the existing destination.
-    */
-
+  if (ageGroup) {
+    window.location.replace("./index-home.html");
+  } else {
     window.location.replace("./age-select.html");
-
+  }
 }
 
-
-/* =========================================
-   GOOGLE LOGIN
-========================================= */
-
-googleBtn.addEventListener("click", async function () {
-
-    if (isLoginInProgress) {
-        return;
-    }
-
-    isLoginInProgress = true;
-
-    hideError();
-
-    btnText.textContent = "Connecting...";
-
-    showLoading();
-
-    try {
-
-        await setPersistence(
-            auth,
-            browserLocalPersistence
-        );
-
-        const provider = new GoogleAuthProvider();
-
-        provider.setCustomParameters({
-            prompt: "select_account"
-        });
-
-        await signInWithRedirect(
-            auth,
-            provider
-        );
-
-    } catch (error) {
-
-        console.error("Google Login Error:", error);
-
-        hideLoading();
-
-        isLoginInProgress = false;
-
-        btnText.textContent = "Continue with Google";
-
-        showError(
-            "Login failed. Please try again."
-        );
-
-    }
-
-});
-
-
-/* =========================================
-   HANDLE GOOGLE REDIRECT RESULT
-========================================= */
+/* Firebase local persistence */
 
 try {
-
-    const result = await getRedirectResult(auth);
-
-    if (result && result.user) {
-
-        goToNextPage(result.user);
-
-    }
-
+  await setPersistence(auth, browserLocalPersistence);
 } catch (error) {
-
-    console.error(
-        "Redirect Login Error:",
-        error
-    );
-
-    hideLoading();
-
-    showError(
-        "Google login could not be completed. Please try again."
-    );
-
+  console.error("Persistence error:", error);
 }
 
+/* Existing logged-in user */
 
-/* =========================================
-   AUTH STATE
-========================================= */
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    redirectUser();
+  }
+});
 
-onAuthStateChanged(auth, function (user) {
+/* Google login */
 
-    if (user) {
+loginButton.addEventListener("click", async () => {
 
-        goToNextPage(user);
+  if (loginButton.disabled) return;
 
-    } else {
+  setLoading(true);
+  messageBox.className = "message";
 
-        if (!isLoginInProgress) {
+  try {
 
-            hideLoading();
+    const result = await signInWithPopup(auth, provider);
 
-            btnText.textContent =
-                "Continue with Google";
-
-        }
-
+    if (result.user) {
+      showMessage("Login successful. Opening your account...", "info");
+      redirectUser();
     }
+
+  } catch (error) {
+
+    console.error("Google login error:", error);
+
+    let errorText = "Login failed. Please try again.";
+
+    if (error.code === "auth/popup-closed-by-user") {
+      errorText = "Login cancelled. Please try again.";
+    }
+
+    else if (error.code === "auth/popup-blocked") {
+      errorText = "Popup blocked. Allow popups and try again.";
+    }
+
+    else if (error.code === "auth/unauthorized-domain") {
+      errorText = "This website is not authorized in Firebase.";
+    }
+
+    else if (error.code === "auth/network-request-failed") {
+      errorText = "Internet connection problem. Check your network.";
+    }
+
+    else if (error.code === "auth/operation-not-allowed") {
+      errorText = "Google login is disabled in Firebase.";
+    }
+
+    showMessage(errorText, "error");
+
+    setLoading(false);
+  }
 
 });
 
-
-/* =========================================
-   SERVICE WORKER
-========================================= */
+/* Service worker */
 
 if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
 
-    window.addEventListener("load", function () {
+    navigator.serviceWorker
+      .register("./service-worker.js")
+      .catch((error) => {
+        console.warn("Service worker registration failed:", error);
+      });
 
-        navigator.serviceWorker.register(
-            "./service-worker.js"
-        ).catch(function (error) {
-
-            console.error(
-                "Service Worker Error:",
-                error
-            );
-
-        });
-
-    });
-
+  });
 }
 
 </script>
