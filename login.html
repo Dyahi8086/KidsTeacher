@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#7DD3FC">
 <title>Parents Login - Kids Teacher</title>
 
 <link rel="manifest" href="./manifest.json">
@@ -16,12 +16,13 @@
     body {
         height: 100vh; height: 100dvh; width: 100vw; overflow: hidden;
         font-family: 'Nunito', sans-serif;
-        /* Premium Light Background */
-        background: #f0f4f8; 
-        background-image: 
-            radial-gradient(circle at 10% 20%, rgba(255, 180, 180, 0.4) 0%, transparent 40%),
-            radial-gradient(circle at 90% 80%, rgba(180, 200, 255, 0.4) 0%, transparent 40%),
-            radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8) 0%, rgba(240, 245, 255, 1) 100%);
+        
+        /* Sky wala background */
+        background: linear-gradient(180deg, #38BDF8 0%, #7DD3FC 50%, #BAE6FD 100%);
+        background-image: url('https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?q=80&w=1000&auto=format&fit=crop');
+        background-size: cover;
+        background-position: center top;
+        
         display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
         position: relative;
     }
@@ -31,21 +32,21 @@
     /* ========================================= */
     .login-popup-box {
         position: relative; z-index: 10;
-        width: 100%; max-width: 450px; 
-        min-height: 62vh; 
+        width: 100%; max-width: 500px; 
+        min-height: 65vh; 
         
-        /* Liquid Glass Effect */
-        background: rgba(255, 255, 255, 0.7); 
-        backdrop-filter: blur(35px) saturate(200%);
-        -webkit-backdrop-filter: blur(35px) saturate(200%);
+        /* Glass Effect (Aasman ke baadal isme blur hokar dikhenge) */
+        background: rgba(255, 255, 255, 0.4); 
+        backdrop-filter: blur(25px) saturate(200%);
+        -webkit-backdrop-filter: blur(25px) saturate(200%);
         
         border-radius: 45px 45px 0 0;
         padding: 40px 30px calc(20px + env(safe-area-inset-bottom));
         
-        border-top: 1.5px solid rgba(255, 255, 255, 0.95);
-        border-left: 1px solid rgba(255, 255, 255, 0.5);
-        border-right: 1px solid rgba(255, 255, 255, 0.5);
-        box-shadow: 0 -20px 60px rgba(0,0,0,0.05), inset 0 3px 5px rgba(255,255,255,1);
+        border-top: 2px solid rgba(255, 255, 255, 0.9);
+        border-left: 1px solid rgba(255, 255, 255, 0.4);
+        border-right: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 -10px 40px rgba(0,0,0,0.1), inset 0 2px 5px rgba(255,255,255,0.8);
         
         display: flex; flex-direction: column; align-items: center;
         text-align: center;
@@ -63,92 +64,63 @@
     /* Pull Bar */
     .login-popup-box::before {
         content: ''; position: absolute; top: 15px; 
-        width: 50px; height: 6px; background: rgba(0,0,0,0.08); border-radius: 10px;
+        width: 50px; height: 5px; background: rgba(255,255,255,0.8); border-radius: 10px;
     }
 
     .icon-3d { 
-        font-size: 65px; margin-top: 10px; margin-bottom: 10px; 
-        filter: drop-shadow(0 15px 20px rgba(0,0,0,0.15)); 
+        font-size: 60px; margin-top: 15px; margin-bottom: 15px; 
+        filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); 
         animation: float 3s ease-in-out infinite; 
     }
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
-    .app-title { font-family: 'Fredoka', sans-serif; font-size: 38px; font-weight: 700; color: #0f172a; margin-bottom: 5px; letter-spacing: -0.5px; }
-    .app-subtitle { font-family: 'Nunito', sans-serif; font-size: 16px; color: #64748b; font-weight: 800; margin-bottom: 35px; }
+    .app-title { font-family: 'Fredoka', sans-serif; font-size: 36px; font-weight: 700; color: #0f172a; margin-bottom: 8px; text-shadow: 0 2px 10px rgba(255,255,255,0.5); }
+    .app-subtitle { font-family: 'Nunito', sans-serif; font-size: 16px; color: #1e293b; font-weight: 800; margin-bottom: 40px; }
 
     /* ========================================= */
-    /* ULTRA PREMIUM GLASS BUTTON                */
+    /* WHITE CLEAN BUTTON (Like Screenshot)      */
     /* ========================================= */
-    .glass-btn-container {
-        position: relative; width: 100%; max-width: 340px; height: 68px; border-radius: 50px;
-        display: flex; align-items: center; justify-content: center;
-        margin-bottom: 30px; cursor: pointer; 
-        transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 5;
-        /* 3D shadow bahar ki taraf */
-        box-shadow: 0 15px 30px rgba(0,0,0,0.15), 0 5px 10px rgba(0,0,0,0.05);
-    }
-    
-    .glass-btn-container:active { transform: scale(0.96); }
-
-    /* Button ka Black Part (Jo click hota hai) */
-    .glass-btn {
-        width: 100%; height: 100%;
-        border-radius: 50px;
-        background: linear-gradient(180deg, #2a2a2a 0%, #0f0f0f 100%);
-        color: #ffffff;
+    .google-btn {
+        width: 100%; max-width: 350px; height: 65px;
+        background: #ffffff;
+        color: #1e293b;
         border: none;
-        font-size: 21px; font-family: 'Fredoka', sans-serif; font-weight: 600;
+        border-radius: 50px;
+        font-size: 20px;
+        font-family: 'Fredoka', sans-serif;
+        font-weight: 600;
         display: flex; align-items: center; justify-content: center; gap: 12px;
-        position: relative;
-        overflow: hidden; /* Shine ke liye */
-        /* Andar ka 3D reflection */
-        box-shadow: 
-            inset 0 2px 4px rgba(255,255,255,0.3), 
-            inset 0 -3px 8px rgba(0,0,0,0.8),
-            inset 0 0 20px rgba(255,255,255,0.05);
+        cursor: pointer;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08), inset 0 -3px 0 rgba(0,0,0,0.05);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+        margin-bottom: 30px;
     }
 
-    /* Shine Animation (White roshni daudegi) */
-    .glass-btn::after {
-        content: '';
-        position: absolute;
-        top: 0; left: -100%;
-        width: 50%; height: 100%;
-        background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.2), rgba(255,255,255,0));
-        transform: skewX(-25deg);
-        animation: shine 4s infinite;
+    .google-btn:active {
+        transform: scale(0.96);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
     }
 
-    @keyframes shine {
-        0% { left: -100%; }
-        20% { left: 200%; }
-        100% { left: 200%; }
-    }
-
-    .google-icon-svg { width: 26px; height: 26px; flex-shrink: 0; z-index: 2; }
+    .google-btn:disabled { opacity: 0.7; cursor: wait; }
+    .google-icon-svg { width: 26px; height: 26px; flex-shrink: 0; }
 
     /* Privacy Text */
     .privacy-text { 
-        font-size: 13px; color: #64748b; font-weight: 800; line-height: 1.6; 
+        font-size: 13px; color: #334155; font-weight: 800; line-height: 1.6; 
         margin-top: auto; /* Niche push karne ke liye */
-        padding-top: 10px;
     }
-    .privacy-text a { 
-        color: #0f172a; text-decoration: none; font-weight: 900; 
-        border-bottom: 2px solid #0f172a; padding-bottom: 2px; 
-    }
+    .privacy-text a { color: #0f172a; text-decoration: none; font-weight: 900; border-bottom: 2px solid #0f172a; padding-bottom: 2px; }
     
     /* Loading Overlay */
     #loadingOverlay { 
         display: none; position: fixed; inset: 0; 
-        background: rgba(255,255,255,0.8); z-index: 9999; 
+        background: rgba(255,255,255,0.7); z-index: 9999; 
         flex-direction: column; justify-content: center; align-items: center; 
         backdrop-filter: blur(15px); 
     }
     .spinner { 
         width: 45px; height: 45px; 
-        border: 4px solid rgba(0,0,0,0.1); border-top: 4px solid #FF5E3A; 
+        border: 4px solid rgba(255,255,255,0.5); border-top: 4px solid #FF5E3A; 
         border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px; 
     }
     @keyframes spin { 100% { transform: rotate(360deg); } }
@@ -162,18 +134,16 @@
     <h1 class="app-title">Parents Login</h1>
     <p class="app-subtitle">Guide your child's learning journey</p>
 
-    <!-- Premium Glass Button -->
-    <div class="glass-btn-container" onclick="handleGoogleLogin()">
-        <button class="glass-btn">
-            <svg class="google-icon-svg" viewBox="0 0 48 48">
-                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-            </svg>
-            <span id="btnText">Continue with Google</span>
-        </button>
-    </div>
+    <!-- White Clean Button -->
+    <button type="button" id="googleBtn" class="google-btn" onclick="handleGoogleLogin()">
+        <svg class="google-icon-svg" viewBox="0 0 48 48">
+            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+        </svg>
+        <span id="btnText">Continue with Google</span>
+    </button>
 
     <p class="privacy-text">By continuing, you agree to our<br><a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a></p>
 </div>
@@ -204,6 +174,7 @@ const btnText = document.getElementById("btnText");
 
 setPersistence(auth, browserLocalPersistence).catch(err => console.error(err));
 
+// Login successful hone par yaha aayega
 function handleLoginSuccess() {
     window.location.replace("age-select.html");
 }
