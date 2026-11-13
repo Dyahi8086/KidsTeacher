@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -441,10 +440,6 @@ let isBusy = false;
 let redirectHandled = false;
 
 
-/* CHANGE THIS IF YOUR ACTUAL HOME FILE HAS A DIFFERENT NAME */
-const HOME_PAGE = "./index-home.html";
-
-
 /* ERROR DISPLAY */
 function showError(message) {
     errorBox.textContent = message;
@@ -459,33 +454,24 @@ function hideError() {
 function friendlyError(error) {
     const code = error?.code || "";
 
-    if (
-        code === "auth/api-key-not-valid" ||
-        code === "auth/invalid-api-key"
-    ) {
+    if (code === "auth/api-key-not-valid" || code === "auth/invalid-api-key") {
         return "Firebase API key invalid hai. Firebase Project Settings se Web App ki API key verify karo.";
     }
-
     if (code === "auth/unauthorized-domain") {
         return "GitHub Pages domain Firebase Authorized Domains mein add karo.";
     }
-
     if (code === "auth/operation-not-allowed") {
         return "Firebase Console mein Google Sign-In enable karo.";
     }
-
     if (code === "auth/network-request-failed") {
         return "Internet connection check karo aur dobara try karo.";
     }
-
     if (code === "auth/popup-blocked") {
         return "Browser ne login window block kar di. Dobara try karo.";
     }
-
     if (code === "auth/too-many-requests") {
         return "Too many attempts. Thodi der baad try karo.";
     }
-
     return "Login failed: " + (code || error.message || "Unknown error");
 }
 
@@ -494,31 +480,32 @@ function friendlyError(error) {
 function setLoading(active) {
     isBusy = active;
     googleBtn.disabled = active;
-
     overlay.style.display = active ? "flex" : "none";
-
-    btnText.textContent = active
-        ? "Connecting..."
-        : "Continue with Google";
+    btnText.textContent = active ? "Connecting..." : "Continue with Google";
 }
 
 
-/* LOGIN SUCCESS */
-function goToHome() {
+/* LOGIN SUCCESS LOGIC - YAHAN FIX KIYA GAYA HAI */
+function goToNextPage() {
     if (redirectHandled) return;
-
     redirectHandled = true;
     setLoading(true);
 
-    window.location.replace(
-        new URL(HOME_PAGE, window.location.href).href
-    );
+    // Check karo ki age select hui hai ya nahi
+    const savedAge = localStorage.getItem('kidsAgeGroup');
+
+    if (!savedAge) {
+        // Agar age nahi hai, toh age select page par bhejo
+        window.location.replace("age-select.html");
+    } else {
+        // Agar age hai, toh home page par bhejo
+        window.location.replace("index-home.html");
+    }
 }
 
 
 /* GOOGLE LOGIN */
 googleBtn.addEventListener("click", async () => {
-
     if (isBusy) return;
 
     hideError();
@@ -529,18 +516,10 @@ googleBtn.addEventListener("click", async () => {
 
     try {
         setLoading(true);
-
-        await setPersistence(
-            auth,
-            browserLocalPersistence
-        );
-
+        await setPersistence(auth, browserLocalPersistence);
         await signInWithRedirect(auth, provider);
-
     } catch (error) {
-
         console.error("Google Login Error:", error);
-
         setLoading(false);
         showError(friendlyError(error));
     }
@@ -553,12 +532,10 @@ async function checkRedirectResult() {
         const result = await getRedirectResult(auth);
 
         if (result && result.user) {
-            goToHome();
+            goToNextPage(); // Sahi jagah bhejega
         }
-
     } catch (error) {
         console.error("Redirect Login Error:", error);
-
         setLoading(false);
         showError(friendlyError(error));
     }
@@ -568,7 +545,7 @@ async function checkRedirectResult() {
 /* RESTORE EXISTING LOGIN SESSION */
 onAuthStateChanged(auth, user => {
     if (user) {
-        goToHome();
+        goToNextPage(); // Sahi jagah bhejega
     }
 });
 
@@ -576,16 +553,10 @@ onAuthStateChanged(auth, user => {
 /* INITIALIZE AUTH */
 async function initializeLogin() {
     try {
-        await setPersistence(
-            auth,
-            browserLocalPersistence
-        );
-
+        await setPersistence(auth, browserLocalPersistence);
         await checkRedirectResult();
-
     } catch (error) {
         console.error("Firebase Initialization Error:", error);
-
         setLoading(false);
         showError(friendlyError(error));
     }
