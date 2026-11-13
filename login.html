@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#0284c7">
+<meta name="theme-color" content="#7DD3FC">
 <title>Parents Login - Kids Teacher</title>
 
 <link rel="manifest" href="./manifest.json">
@@ -17,38 +17,39 @@
         height: 100vh; height: 100dvh; width: 100vw; overflow: hidden;
         font-family: 'Nunito', sans-serif;
         
-        /* Dark Blue Sky Background */
-        background-color: #0284c7;
+        /* EXACT SAME LIGHT BLUE SKY */
+        background: linear-gradient(180deg, #7DD3FC 0%, #BAE6FD 100%);
         background-image: url('https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?q=80&w=1000&auto=format&fit=crop');
         background-size: cover;
-        background-position: center bottom; /* Image ko neeche align kiya taaki upar dark aaye */
+        background-position: center top; /* Photo jaisa top center */
         background-repeat: no-repeat;
         
         display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
         position: relative;
     }
 
-    /* Glass Box */
+    /* EXACT SAME GLASS BOX */
     .login-popup-box {
         position: relative; z-index: 10;
         width: 100%; max-width: 500px; 
-        min-height: 62vh; 
+        height: 60vh; /* Height exact photo jaisi */
         
-        background: rgba(255, 255, 255, 0.3); /* Thoda aur transparent kiya */
-        backdrop-filter: blur(30px) saturate(200%);
-        -webkit-backdrop-filter: blur(30px) saturate(200%);
+        background: rgba(255, 255, 255, 0.35); /* Light glass */
+        backdrop-filter: blur(25px) saturate(200%);
+        -webkit-backdrop-filter: blur(25px) saturate(200%);
         
         border-radius: 45px 45px 0 0;
-        padding: 40px 30px calc(25px + env(safe-area-inset-bottom)); 
+        padding: 40px 30px 30px; /* Padding fix */
         
         border-top: 2px solid rgba(255, 255, 255, 0.9);
         border-left: 1px solid rgba(255, 255, 255, 0.4);
         border-right: 1px solid rgba(255, 255, 255, 0.4);
-        box-shadow: 0 -10px 40px rgba(0,0,0,0.1), inset 0 2px 5px rgba(255,255,255,0.8);
+        box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
         
         display: flex; flex-direction: column; align-items: center;
         text-align: center;
         
+        /* Slide Up Animation */
         transform: translateY(100%);
         animation: slideUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
@@ -58,23 +59,23 @@
         100% { transform: translateY(0); }
     }
 
-    /* Pull Bar */
+    /* Pull Bar (Top White Line) */
     .login-popup-box::before {
         content: ''; position: absolute; top: 15px; 
-        width: 50px; height: 5px; background: rgba(255,255,255,0.8); border-radius: 10px;
+        width: 50px; height: 5px; background: #ffffff; border-radius: 10px;
     }
 
     .icon-3d { 
         font-size: 60px; margin-top: 15px; margin-bottom: 10px; 
-        filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); 
+        filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1)); 
         animation: float 3s ease-in-out infinite; 
     }
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
     .app-title { font-family: 'Fredoka', sans-serif; font-size: 36px; font-weight: 700; color: #0f172a; margin-bottom: 5px; }
-    .app-subtitle { font-family: 'Nunito', sans-serif; font-size: 16px; color: #1e293b; font-weight: 800; margin-bottom: 35px; }
+    .app-subtitle { font-family: 'Nunito', sans-serif; font-size: 16px; color: #1e293b; font-weight: 800; margin-bottom: 30px; }
 
-    /* White Button */
+    /* EXACT SAME WHITE BUTTON */
     .google-btn {
         width: 100%; max-width: 340px; height: 65px;
         background: #ffffff;
@@ -86,26 +87,26 @@
         font-weight: 600;
         display: flex; align-items: center; justify-content: center; gap: 12px;
         cursor: pointer;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.1), inset 0 -3px 0 rgba(0,0,0,0.05);
-        transition: transform 0.15s ease, box-shadow 0.15s ease;
-        margin-bottom: 25px; 
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        transition: transform 0.15s ease;
+        margin-bottom: auto; /* Button ko thoda upar rakhega text se */
     }
 
     .google-btn:active {
         transform: scale(0.96);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
     .google-btn:disabled { opacity: 0.7; cursor: wait; }
     .google-icon-svg { width: 26px; height: 26px; flex-shrink: 0; }
 
-    /* Privacy Text - Jaisa tumne manga */
+    /* EXACT SAME PRIVACY TEXT POSITION */
     .privacy-text { 
-        font-size: 14px; 
-        color: #0f172a; /* Dark color */
+        font-size: 13px; 
+        color: #0f172a; /* Dark blue */
         font-weight: 800; 
         line-height: 1.6; 
         margin-top: auto; 
+        padding-bottom: 10px;
     }
     
     .privacy-text a { 
