@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#7DD3FC">
+<meta name="theme-color" content="#0284c7">
 <title>Parents Login - Kids Teacher</title>
 
 <link rel="manifest" href="./manifest.json">
@@ -17,39 +17,38 @@
         height: 100vh; height: 100dvh; width: 100vw; overflow: hidden;
         font-family: 'Nunito', sans-serif;
         
-        /* EXACT SAME LIGHT BLUE SKY */
-        background: linear-gradient(180deg, #7DD3FC 0%, #BAE6FD 100%);
+        /* Dark Sky Background (Jaisa pehli photo me tha) */
+        background-color: #0284c7;
         background-image: url('https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?q=80&w=1000&auto=format&fit=crop');
         background-size: cover;
-        background-position: center top; /* Photo jaisa top center */
+        background-position: center bottom;
         background-repeat: no-repeat;
         
         display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
         position: relative;
     }
 
-    /* EXACT SAME GLASS BOX */
+    /* Glass Box */
     .login-popup-box {
         position: relative; z-index: 10;
         width: 100%; max-width: 500px; 
-        height: 60vh; /* Height exact photo jaisi */
+        min-height: 58vh; /* Height kam ki taaki sab upar aaye */
         
-        background: rgba(255, 255, 255, 0.35); /* Light glass */
+        background: rgba(255, 255, 255, 0.35); /* Transparent glass */
         backdrop-filter: blur(25px) saturate(200%);
         -webkit-backdrop-filter: blur(25px) saturate(200%);
         
         border-radius: 45px 45px 0 0;
-        padding: 40px 30px 30px; /* Padding fix */
+        padding: 40px 30px 25px; /* Padding adjust ki */
         
         border-top: 2px solid rgba(255, 255, 255, 0.9);
         border-left: 1px solid rgba(255, 255, 255, 0.4);
         border-right: 1px solid rgba(255, 255, 255, 0.4);
-        box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+        box-shadow: 0 -10px 40px rgba(0,0,0,0.1), inset 0 2px 5px rgba(255,255,255,0.8);
         
         display: flex; flex-direction: column; align-items: center;
         text-align: center;
         
-        /* Slide Up Animation */
         transform: translateY(100%);
         animation: slideUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
@@ -59,37 +58,37 @@
         100% { transform: translateY(0); }
     }
 
-    /* Pull Bar (Top White Line) */
+    /* Pull Bar */
     .login-popup-box::before {
         content: ''; position: absolute; top: 15px; 
-        width: 50px; height: 5px; background: #ffffff; border-radius: 10px;
+        width: 50px; height: 5px; background: rgba(255,255,255,0.8); border-radius: 10px;
     }
 
     .icon-3d { 
-        font-size: 60px; margin-top: 15px; margin-bottom: 10px; 
-        filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1)); 
+        font-size: 55px; margin-top: 10px; margin-bottom: 10px; 
+        filter: drop-shadow(0 8px 12px rgba(0,0,0,0.15)); 
         animation: float 3s ease-in-out infinite; 
     }
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
-    .app-title { font-family: 'Fredoka', sans-serif; font-size: 36px; font-weight: 700; color: #0f172a; margin-bottom: 5px; }
-    .app-subtitle { font-family: 'Nunito', sans-serif; font-size: 16px; color: #1e293b; font-weight: 800; margin-bottom: 30px; }
+    .app-title { font-family: 'Fredoka', sans-serif; font-size: 34px; font-weight: 700; color: #0f172a; margin-bottom: 5px; }
+    .app-subtitle { font-family: 'Nunito', sans-serif; font-size: 15px; color: #1e293b; font-weight: 800; margin-bottom: 30px; }
 
-    /* EXACT SAME WHITE BUTTON */
+    /* Button (Chhota aur patla kiya) */
     .google-btn {
-        width: 100%; max-width: 340px; height: 65px;
+        width: 85%; max-width: 300px; height: 55px; /* Size kam kiya */
         background: #ffffff;
         color: #1e293b;
         border: none;
         border-radius: 50px;
-        font-size: 20px;
+        font-size: 18px; /* Font chhota kiya */
         font-family: 'Fredoka', sans-serif;
         font-weight: 600;
-        display: flex; align-items: center; justify-content: center; gap: 12px;
+        display: flex; align-items: center; justify-content: center; gap: 10px;
         cursor: pointer;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.08);
         transition: transform 0.15s ease;
-        margin-bottom: auto; /* Button ko thoda upar rakhega text se */
+        margin-bottom: 20px; /* Button ke niche gap */
     }
 
     .google-btn:active {
@@ -97,16 +96,16 @@
     }
 
     .google-btn:disabled { opacity: 0.7; cursor: wait; }
-    .google-icon-svg { width: 26px; height: 26px; flex-shrink: 0; }
+    .google-icon-svg { width: 22px; height: 22px; flex-shrink: 0; }
 
-    /* EXACT SAME PRIVACY TEXT POSITION */
+    /* Privacy Text (Ekdum perfect position pe) */
     .privacy-text { 
         font-size: 13px; 
-        color: #0f172a; /* Dark blue */
+        color: #0f172a; 
         font-weight: 800; 
         line-height: 1.6; 
-        margin-top: auto; 
-        padding-bottom: 10px;
+        margin-top: auto; /* Auto lagaya taaki text box ke bilkul niche aaye */
+        padding-top: 10px;
     }
     
     .privacy-text a { 
