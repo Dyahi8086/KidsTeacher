@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#E5DDD5">
+<meta name="theme-color" content="#E6ECF2">
 <title>Parents Login - Kids Teacher</title>
 
 <link rel="manifest" href="./manifest.json">
@@ -39,10 +39,8 @@ body {
     position: relative;
     font-family: 'Nunito', sans-serif;
 
-    /* Skeuomorphic Textured Cream Background */
-    background: #EFECE6;
-    background-image: radial-gradient(#D6CFC7 0.75px, transparent 0.75px);
-    background-size: 16px 16px;
+    /* Neumorphic Soft Base Background */
+    background-color: #E6ECF2;
 }
 
 /* OFFLINE BANNER */
@@ -52,8 +50,8 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background: #1A1A1A;
-    color: #FDFBF7;
+    background: #1E293B;
+    color: #F8FAFC;
     text-align: center;
     padding: 10px;
     font-family: 'Fredoka', sans-serif;
@@ -62,7 +60,7 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* SKEUOMORPHIC PANEL (Real physical card feel with deep shadows & highlights) */
+/* NEUMORPHIC PANEL (Soft extruded 3D surface) */
 .login-popup-box {
     position: relative;
     z-index: 10;
@@ -86,18 +84,13 @@ body {
         24px
         max(35px, env(safe-area-inset-bottom));
 
-    background: #FDFBF7;
+    background: #E6ECF2;
     border-radius: 45px 45px 0 0;
     
-    /* Skeuomorphic physical layering */
-    border-top: 3px solid #FFFFFF;
-    border-left: 2px solid #FFFFFF;
-    border-right: 2px solid #E0DCD4;
-
+    /* Neumorphic soft shadows & highlights */
     box-shadow:
-        0 -20px 50px rgba(0, 0, 0, 0.12),
-        inset 0 4px 6px rgba(255, 255, 255, 0.9),
-        inset 0 -6px 12px rgba(200, 190, 180, 0.4);
+        -12px -12px 30px rgba(255, 255, 255, 0.9),
+        12px 12px 30px rgba(163, 177, 198, 0.6);
 
     animation: slideUp 0.8s cubic-bezier(.2,.8,.2,1) both;
 }
@@ -107,7 +100,7 @@ body {
     to { transform: translateY(0); }
 }
 
-/* PHYSICAL GRAB HANDLE (Indented groove) */
+/* NEUMORPHIC GRAB BAR (Inset shadow) */
 .login-popup-box::before {
     content: "";
     position: absolute;
@@ -117,31 +110,29 @@ body {
     width: 65px;
     height: 6px;
     border-radius: 20px;
-    background: #E0DCD4;
-    box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.2), 
-                0 1px 1px rgba(255, 255, 255, 0.9);
+    background: #E6ECF2;
+    box-shadow: inset 2px 2px 5px rgba(163, 177, 198, 0.8),
+                inset -2px -2px 5px rgba(255, 255, 255, 0.9);
 }
 
-/* EMBOSSED 3D ICON BADGE */
+/* DEPRESSED / CONCAVE ICON CONTAINER */
 .icon-container {
     width: 88px;
     height: 88px;
-    background: linear-gradient(145deg, #FFFFFF, #E6E2DA);
+    background: #E6ECF2;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 18px;
     box-shadow: 
-        8px 8px 16px rgba(180, 170, 160, 0.4),
-        -8px -8px 16px rgba(255, 255, 255, 0.9),
-        inset 0 2px 3px rgba(255, 255, 255, 0.8);
+        inset 6px 6px 12px rgba(163, 177, 198, 0.7),
+        inset -6px -6px 12px rgba(255, 255, 255, 0.9);
 }
 
 .icon-3d {
-    font-size: 44px;
+    font-size: 40px;
     line-height: 1;
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
     animation: floating 3s ease-in-out infinite;
 }
 
@@ -155,22 +146,21 @@ body {
     font-family: 'Fredoka', sans-serif;
     font-size: clamp(28px, 6.5vw, 38px);
     font-weight: 700;
-    color: #1A1A1A;
+    color: #1E293B;
     line-height: 1.15;
     margin-bottom: 6px;
-    text-shadow: 0 1px 1px rgba(255,255,255,0.8);
 }
 
 .app-subtitle {
     font-family: 'Nunito', sans-serif;
     font-size: clamp(13px, 3.5vw, 16px);
-    color: #5C554E;
+    color: #64748B;
     font-weight: 800;
     line-height: 1.4;
     margin-bottom: 28px;
 }
 
-/* SKEUOMORPHIC BUTTON (Tactile Pressable Button with Glossy Highlight & Glow) */
+/* NEUMORPHIC BUTTON WRAPPER */
 .google-btn-wrapper {
     position: relative;
     width: 100%;
@@ -179,8 +169,8 @@ body {
     padding: 3px;
     overflow: hidden;
     box-shadow: 
-        0 10px 25px rgba(0, 0, 0, 0.15),
-        0 4px 10px rgba(0, 0, 0, 0.1);
+        -6px -6px 16px rgba(255, 255, 255, 0.8),
+        6px 6px 16px rgba(163, 177, 198, 0.5);
 }
 
 .google-btn-wrapper::before {
@@ -211,28 +201,23 @@ body {
     justify-content: center;
     gap: 12px;
 
-    /* Ink Black with glossy gradient */
-    background: linear-gradient(180deg, #2A2A2A 0%, #111111 100%);
-    color: #FDFBF7;
+    /* Ink Black */
+    background: #1E293B;
+    color: #F8FAFC;
 
     border: none;
     border-radius: 38px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
 
     font-family: 'Fredoka', sans-serif;
     font-size: clamp(15px, 4vw, 19px);
     font-weight: 700;
 
-    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.25),
-                inset 0 -3px 6px rgba(0, 0, 0, 0.5);
-
     cursor: pointer;
-    transition: transform .1s ease, box-shadow .1s ease;
+    transition: transform .1s ease;
 }
 
 .google-btn:active {
     transform: scale(0.98);
-    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.6);
 }
 
 .google-btn:disabled {
@@ -243,7 +228,6 @@ body {
 .btn-text {
     display: inline-block;
     animation: textWiggle 2.5s ease-in-out infinite;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
 @keyframes textWiggle {
@@ -255,14 +239,13 @@ body {
     width: 26px;
     height: 26px;
     flex-shrink: 0;
-    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
 }
 
 /* PRIVACY */
 .privacy-text {
     font-family: 'Nunito', sans-serif;
     font-size: 12.5px;
-    color: #5C554E;
+    color: #64748B;
     font-weight: 800;
     line-height: 1.5;
     margin-top: 18px;
@@ -270,9 +253,9 @@ body {
 }
 
 .privacy-text a {
-    color: #1A1A1A;
+    color: #1E293B;
     text-decoration: none;
-    border-bottom: 1.5px solid #1A1A1A;
+    border-bottom: 1.5px solid #1E293B;
 }
 
 /* ERROR MESSAGE */
@@ -283,9 +266,10 @@ body {
     padding: 10px 14px;
     margin-top: 12px;
     border-radius: 14px;
-    background: #FFF5F5;
-    border: 1px solid #FEB2B2;
-    color: #C53030;
+    background: #E6ECF2;
+    box-shadow: inset 3px 3px 6px rgba(163, 177, 198, 0.6),
+                inset -3px -3px 6px rgba(255, 255, 255, 0.8);
+    color: #DC2626;
     font-size: 12px;
     font-weight: 800;
     overflow-wrap: anywhere;
@@ -298,7 +282,7 @@ body {
     inset: 0;
     z-index: 9999;
 
-    background: rgba(239, 236, 230, 0.88);
+    background: rgba(230, 236, 242, 0.88);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 
@@ -310,8 +294,8 @@ body {
 .spinner {
     width: 48px;
     height: 48px;
-    border: 4px solid #D6CFC7;
-    border-top: 4px solid #1A1A1A;
+    border: 4px solid #CBD5E1;
+    border-top: 4px solid #1E293B;
     border-radius: 50%;
     animation: spin .8s linear infinite;
     margin-bottom: 15px;
@@ -323,7 +307,7 @@ body {
 
 .loading-text {
     font-family: 'Fredoka', sans-serif;
-    color: #1A1A1A;
+    color: #1E293B;
     font-size: 18px;
     font-weight: 600;
 }
@@ -349,7 +333,7 @@ body {
         padding-top: 35px;
     }
     .icon-container { width: 72px; height: 72px; margin-bottom: 12px; }
-    .icon-3d { font-size: 36px; }
+    .icon-3d { font-size: 32px; }
     .app-subtitle { margin-bottom: 18px; }
     .google-btn-wrapper { max-width: 340px; }
     .google-btn { min-height: 52px; }
