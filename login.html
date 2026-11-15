@@ -39,58 +39,57 @@ body {
     position: relative;
     font-family: 'Nunito', sans-serif;
 
-    /* Clean Blur White Base Background */
-    background-color: #f8fafc;
+    /* Pure White / Light Neutral Base */
+    background-color: #f1f5f9;
 }
 
-/* AMBIENT FLOATING BLUR ORBS (White Blur Effect ke peeche halka sa color) */
-.bg-blur-layer {
+/* LIQUID GLASS AMBIENT BACKGROUND */
+.liquid-bg-layer {
     position: fixed;
     inset: 0;
     z-index: 1;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.65);
-    backdrop-filter: blur(45px);
-    -webkit-backdrop-filter: blur(45px);
+    background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(240,244,248,0.9));
 }
 
-.orb {
+/* Floating Liquid Orbs jo peeche blur hokar liquid effect denge */
+.liquid-orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(60px);
-    opacity: 0.45;
-    animation: floatOrb 10s ease-in-out infinite alternate;
+    filter: blur(50px);
+    opacity: 0.5;
+    animation: floatLiquid 12s ease-in-out infinite alternate;
 }
 
 .orb-1 {
-    width: 260px;
-    height: 260px;
-    background: #ffd1dc;
-    top: 5%;
+    width: 300px;
+    height: 300px;
+    background: rgba(59, 130, 246, 0.15); /* Soft Blue */
+    top: -10%;
     left: -10%;
 }
 
 .orb-2 {
-    width: 300px;
-    height: 300px;
-    background: #bae6fd;
-    top: 25%;
-    right: -15%;
-    animation-delay: -3s;
+    width: 350px;
+    height: 350px;
+    background: rgba(236, 72, 153, 0.12); /* Soft Pink */
+    bottom: -15%;
+    right: -10%;
+    animation-delay: -4s;
 }
 
 .orb-3 {
-    width: 240px;
-    height: 240px;
-    background: #fed7aa;
-    bottom: 40%;
-    left: 20%;
-    animation-delay: -6s;
+    width: 250px;
+    height: 250px;
+    background: rgba(245, 158, 11, 0.12); /* Soft Amber */
+    top: 35%;
+    left: 40%;
+    animation-delay: -8s;
 }
 
-@keyframes floatOrb {
+@keyframes floatLiquid {
     0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(25px, -30px) scale(1.1); }
+    100% { transform: translate(30px, -40px) scale(1.15); }
 }
 
 /* OFFLINE NETWORK BANNER */
@@ -110,7 +109,7 @@ body {
     box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
 
-/* FROSTED WHITE GLASS LOGIN PANEL */
+/* PURE WHITE LIQUID GLASS LOGIN PANEL */
 .login-popup-box {
     position: relative;
     z-index: 10;
@@ -134,20 +133,21 @@ body {
         24px
         max(35px, env(safe-area-inset-bottom));
 
-    /* Pure Frosted White Glass */
-    background: rgba(255, 255, 255, 0.78);
-    backdrop-filter: blur(35px) saturate(180%);
-    -webkit-backdrop-filter: blur(35px) saturate(180%);
+    /* Liquid Glass White Style */
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(40px) saturate(200%);
+    -webkit-backdrop-filter: blur(40px) saturate(200%);
 
     border-radius: 45px 45px 0 0;
 
-    border-top: 2px solid #ffffff;
-    border-left: 1px solid rgba(255, 255, 255, 0.8);
-    border-right: 1px solid rgba(255, 255, 255, 0.8);
+    border-top: 2.5px solid rgba(255, 255, 255, 1);
+    border-left: 1px solid rgba(255, 255, 255, 0.9);
+    border-right: 1px solid rgba(255, 255, 255, 0.9);
 
     box-shadow:
-        0 -20px 50px rgba(15, 23, 42, 0.06),
-        inset 0 2px 10px rgba(255, 255, 255, 1);
+        0 -25px 60px rgba(15, 23, 42, 0.08),
+        inset 0 2px 12px rgba(255, 255, 255, 1),
+        inset 0 -15px 30px rgba(255, 255, 255, 0.4);
 
     animation: slideUp 0.8s cubic-bezier(.2,.8,.2,1) both;
 }
@@ -175,14 +175,14 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: #f1f5f9;
-    color: #475569;
+    background: rgba(241, 245, 249, 0.8);
+    color: #334155;
     padding: 6px 14px;
     border-radius: 20px;
     font-size: 12px;
     font-weight: 800;
     margin-bottom: 14px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid rgba(226, 232, 240, 0.8);
 }
 
 /* ICON */
@@ -296,7 +296,7 @@ body {
     flex-shrink: 0;
 }
 
-/* PRIVACY & SECURITY NOTE */
+/* SECURITY & PRIVACY */
 .security-badge {
     display: flex;
     align-items: center;
@@ -410,14 +410,14 @@ body {
 <!-- OFFLINE ALERT -->
 <div id="offlineBanner">⚠️ No Internet Connection! Please check your network.</div>
 
-<!-- BLUR WHITE AMBIENT BACKGROUND -->
-<div class="bg-blur-layer">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
+<!-- LIQUID GLASS BACKGROUND LAYER -->
+<div class="liquid-bg-layer">
+    <div class="liquid-orb orb-1"></div>
+    <div class="liquid-orb orb-2"></div>
+    <div class="liquid-orb orb-3"></div>
 </div>
 
-<!-- FROSTED WHITE GLASS PANEL -->
+<!-- PURE WHITE LIQUID GLASS PANEL -->
 <main class="login-popup-box">
     <div class="greeting-badge" id="greetingBadge">👋 Welcome, Parent!</div>
     <div class="icon-3d" aria-hidden="true">🎓</div>
@@ -465,14 +465,14 @@ import {
     browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
-// 1. Smart Time-based Greeting
+// Smart Time-based Greeting
 const hour = new Date().getHours();
 const greetingBadge = document.getElementById("greetingBadge");
 if (hour < 12) greetingBadge.textContent = "☀️ Good Morning, Parent!";
 else if (hour < 17) greetingBadge.textContent = "🌤️ Good Afternoon, Parent!";
 else greetingBadge.textContent = "🌙 Good Evening, Parent!";
 
-// 2. Interactive Touch Sparkles
+// Interactive Touch Sparkles
 const emojis = ["✨", "⭐", "🎈", "🎨", "🌟"];
 document.addEventListener("pointerdown", (e) => {
     const sparkle = document.createElement("div");
@@ -484,7 +484,7 @@ document.addEventListener("pointerdown", (e) => {
     setTimeout(() => sparkle.remove(), 800);
 });
 
-// 3. Offline Network Monitor
+// Offline Network Monitor
 const offlineBanner = document.getElementById("offlineBanner");
 window.addEventListener("online", () => offlineBanner.style.display = "none");
 window.addEventListener("offline", () => offlineBanner.style.display = "block");
@@ -564,7 +564,7 @@ googleBtn.addEventListener("click", async () => {
         await setPersistence(auth, browserLocalPersistence);
         await signInWithRedirect(auth, provider);
     } catch (error) {
-        console.error("Google Login Error:", error);
+        console.log("Google Login Error:", error);
         setLoading(false);
         showError(friendlyError(error));
     }
@@ -577,7 +577,7 @@ async function checkRedirectResult() {
             goToNextPage();
         }
     } catch (error) {
-        console.error("Redirect Login Error:", error);
+        console.log("Redirect Login Error:", error);
         setLoading(false);
         showError(friendlyError(error));
     }
@@ -594,7 +594,7 @@ async function initializeLogin() {
         await setPersistence(auth, browserLocalPersistence);
         await checkRedirectResult();
     } catch (error) {
-        console.error("Firebase Initialization Error:", error);
+        console.log("Firebase Initialization Error:", error);
         setLoading(false);
         showError(friendlyError(error));
     }
@@ -605,7 +605,7 @@ initializeLogin();
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
         navigator.serviceWorker.register("./service-worker.js").catch(error => {
-            console.error("Service Worker Error:", error);
+            console.log("Service Worker Error:", error);
         });
     });
 }
