@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#F5EBE6">
+<meta name="theme-color" content="#E5DDD5">
 <title>Parents Login - Kids Teacher</title>
 
 <link rel="manifest" href="./manifest.json">
@@ -39,40 +39,10 @@ body {
     position: relative;
     font-family: 'Nunito', sans-serif;
 
-    /* Soft Cream Clay Background */
-    background-color: #F5EBE6;
-}
-
-/* CLAYMORPHIC AMBIENT BLOBS */
-.clay-bg-layer {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    overflow: hidden;
-    background: #FDFBF7;
-}
-
-.clay-blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(40px);
-    opacity: 0.5;
-}
-
-.blob-1 {
-    width: 320px;
-    height: 320px;
-    background: #E3D5CA;
-    top: -10%;
-    left: -10%;
-}
-
-.blob-2 {
-    width: 350px;
-    height: 350px;
-    background: #D5BDAF;
-    bottom: -15%;
-    right: -10%;
+    /* Skeuomorphic Textured Cream Background */
+    background: #EFECE6;
+    background-image: radial-gradient(#D6CFC7 0.75px, transparent 0.75px);
+    background-size: 16px 16px;
 }
 
 /* OFFLINE BANNER */
@@ -82,7 +52,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background: #111111;
+    background: #1A1A1A;
     color: #FDFBF7;
     text-align: center;
     padding: 10px;
@@ -92,7 +62,7 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* CLAYMORPHIC LOGIN PANEL */
+/* SKEUOMORPHIC PANEL (Real physical card feel with deep shadows & highlights) */
 .login-popup-box {
     position: relative;
     z-index: 10;
@@ -116,15 +86,18 @@ body {
         24px
         max(35px, env(safe-area-inset-bottom));
 
-    /* Claymorphism Box Shadow & Rounded Corners */
-    background: #FFFFFF;
+    background: #FDFBF7;
     border-radius: 45px 45px 0 0;
-    border-top: 6px solid rgba(255, 255, 255, 0.9);
+    
+    /* Skeuomorphic physical layering */
+    border-top: 3px solid #FFFFFF;
+    border-left: 2px solid #FFFFFF;
+    border-right: 2px solid #E0DCD4;
 
     box-shadow:
-        0 -20px 40px rgba(163, 147, 133, 0.2),
-        inset 0 10px 20px rgba(255, 255, 255, 0.8),
-        inset 0 -10px 20px rgba(230, 220, 210, 0.3);
+        0 -20px 50px rgba(0, 0, 0, 0.12),
+        inset 0 4px 6px rgba(255, 255, 255, 0.9),
+        inset 0 -6px 12px rgba(200, 190, 180, 0.4);
 
     animation: slideUp 0.8s cubic-bezier(.2,.8,.2,1) both;
 }
@@ -134,32 +107,47 @@ body {
     to { transform: translateY(0); }
 }
 
-/* TOP PULL BAR */
+/* PHYSICAL GRAB HANDLE (Indented groove) */
 .login-popup-box::before {
     content: "";
     position: absolute;
-    top: 16px;
+    top: 18px;
     left: 50%;
     transform: translateX(-50%);
     width: 65px;
     height: 6px;
     border-radius: 20px;
-    background: #E3D5CA;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    background: #E0DCD4;
+    box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.2), 
+                0 1px 1px rgba(255, 255, 255, 0.9);
 }
 
-/* CLAY 3D ICON */
+/* EMBOSSED 3D ICON BADGE */
+.icon-container {
+    width: 88px;
+    height: 88px;
+    background: linear-gradient(145deg, #FFFFFF, #E6E2DA);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    box-shadow: 
+        8px 8px 16px rgba(180, 170, 160, 0.4),
+        -8px -8px 16px rgba(255, 255, 255, 0.9),
+        inset 0 2px 3px rgba(255, 255, 255, 0.8);
+}
+
 .icon-3d {
-    font-size: 64px;
+    font-size: 44px;
     line-height: 1;
-    margin-bottom: 16px;
-    filter: drop-shadow(0 10px 15px rgba(17,17,17,0.15));
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
     animation: floating 3s ease-in-out infinite;
 }
 
 @keyframes floating {
     0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-7px); }
+    50% { transform: translateY(-5px); }
 }
 
 /* HEADING - INK BLACK */
@@ -167,21 +155,22 @@ body {
     font-family: 'Fredoka', sans-serif;
     font-size: clamp(28px, 6.5vw, 38px);
     font-weight: 700;
-    color: #111111;
+    color: #1A1A1A;
     line-height: 1.15;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.8);
 }
 
 .app-subtitle {
     font-family: 'Nunito', sans-serif;
     font-size: clamp(13px, 3.5vw, 16px);
-    color: #4A403A;
+    color: #5C554E;
     font-weight: 800;
     line-height: 1.4;
-    margin-bottom: 30px;
+    margin-bottom: 28px;
 }
 
-/* CLAY BUTTON WITH INK BLACK & GLOW */
+/* SKEUOMORPHIC BUTTON (Tactile Pressable Button with Glossy Highlight & Glow) */
 .google-btn-wrapper {
     position: relative;
     width: 100%;
@@ -189,9 +178,9 @@ body {
     border-radius: 40px;
     padding: 3px;
     overflow: hidden;
-    box-shadow:
-        0 12px 25px rgba(17, 17, 17, 0.18),
-        inset 0 4px 6px rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 10px 25px rgba(0, 0, 0, 0.15),
+        0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .google-btn-wrapper::before {
@@ -222,23 +211,28 @@ body {
     justify-content: center;
     gap: 12px;
 
-    /* Ink Black */
-    background: #111111;
+    /* Ink Black with glossy gradient */
+    background: linear-gradient(180deg, #2A2A2A 0%, #111111 100%);
     color: #FDFBF7;
 
     border: none;
     border-radius: 38px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 
     font-family: 'Fredoka', sans-serif;
     font-size: clamp(15px, 4vw, 19px);
     font-weight: 700;
 
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.25),
+                inset 0 -3px 6px rgba(0, 0, 0, 0.5);
+
     cursor: pointer;
-    transition: transform .2s ease;
+    transition: transform .1s ease, box-shadow .1s ease;
 }
 
 .google-btn:active {
-    transform: scale(.97);
+    transform: scale(0.98);
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.6);
 }
 
 .google-btn:disabled {
@@ -249,6 +243,7 @@ body {
 .btn-text {
     display: inline-block;
     animation: textWiggle 2.5s ease-in-out infinite;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
 @keyframes textWiggle {
@@ -260,13 +255,14 @@ body {
     width: 26px;
     height: 26px;
     flex-shrink: 0;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
 }
 
 /* PRIVACY */
 .privacy-text {
     font-family: 'Nunito', sans-serif;
     font-size: 12.5px;
-    color: #4A403A;
+    color: #5C554E;
     font-weight: 800;
     line-height: 1.5;
     margin-top: 18px;
@@ -274,9 +270,9 @@ body {
 }
 
 .privacy-text a {
-    color: #111111;
+    color: #1A1A1A;
     text-decoration: none;
-    border-bottom: 1.5px solid #111111;
+    border-bottom: 1.5px solid #1A1A1A;
 }
 
 /* ERROR MESSAGE */
@@ -286,10 +282,10 @@ body {
     max-width: 380px;
     padding: 10px 14px;
     margin-top: 12px;
-    border-radius: 16px;
+    border-radius: 14px;
     background: #FFF5F5;
-    border: 2px solid #FED7D7;
-    color: #9B2C2C;
+    border: 1px solid #FEB2B2;
+    color: #C53030;
     font-size: 12px;
     font-weight: 800;
     overflow-wrap: anywhere;
@@ -302,9 +298,9 @@ body {
     inset: 0;
     z-index: 9999;
 
-    background: rgba(245, 235, 230, 0.9);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(239, 236, 230, 0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 
     flex-direction: column;
     justify-content: center;
@@ -314,8 +310,8 @@ body {
 .spinner {
     width: 48px;
     height: 48px;
-    border: 4px solid #E3D5CA;
-    border-top: 4px solid #111111;
+    border: 4px solid #D6CFC7;
+    border-top: 4px solid #1A1A1A;
     border-radius: 50%;
     animation: spin .8s linear infinite;
     margin-bottom: 15px;
@@ -327,7 +323,7 @@ body {
 
 .loading-text {
     font-family: 'Fredoka', sans-serif;
-    color: #111111;
+    color: #1A1A1A;
     font-size: 18px;
     font-weight: 600;
 }
@@ -350,10 +346,11 @@ body {
     .login-popup-box {
         height: 62dvh;
         min-height: 410px;
-        padding-top: 40px;
+        padding-top: 35px;
     }
-    .icon-3d { font-size: 52px; margin-bottom: 12px; }
-    .app-subtitle { margin-bottom: 20px; }
+    .icon-container { width: 72px; height: 72px; margin-bottom: 12px; }
+    .icon-3d { font-size: 36px; }
+    .app-subtitle { margin-bottom: 18px; }
     .google-btn-wrapper { max-width: 340px; }
     .google-btn { min-height: 52px; }
 }
@@ -364,13 +361,10 @@ body {
 
 <div id="offlineBanner">⚠️ No Internet Connection! Please check your network.</div>
 
-<div class="clay-bg-layer">
-    <div class="clay-blob blob-1"></div>
-    <div class="clay-blob blob-2"></div>
-</div>
-
 <main class="login-popup-box">
-    <div class="icon-3d" aria-hidden="true">🎓</div>
+    <div class="icon-container">
+        <div class="icon-3d" aria-hidden="true">🎓</div>
+    </div>
     <h1 class="app-title">Parents Login</h1>
     <p class="app-subtitle">Guide your child's learning journey</p>
 
