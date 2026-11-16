@@ -238,7 +238,7 @@ body {
     margin-bottom: 30px;
 }
 
-/* GOOGLE BUTTON OUTER */
+/* GOOGLE BUTTON OUTER - ORIGINAL DESIGN */
 
 .google-btn-wrapper {
     position: relative;
@@ -286,7 +286,7 @@ body {
     to { transform: rotate(360deg); }
 }
 
-/* BUTTON */
+/* GOOGLE BUTTON - UNCHANGED */
 
 .google-btn {
     position: relative;
@@ -551,6 +551,190 @@ body {
         scroll-behavior: auto !important;
     }
 }
+
+/* ==========================================
+   LIQUID GLASS VISUAL UPDATE
+   Original HTML, Google button and Firebase
+   flow are intentionally preserved.
+   ========================================== */
+
+:root {
+    --bg: #f6eefa;
+    --card: rgba(255,255,255,.34);
+    --muted: #5f5870;
+    --border: rgba(255,255,255,.72);
+}
+
+body {
+    background:
+        radial-gradient(ellipse at 12% 12%, rgba(255,255,255,.98) 0%, transparent 34%),
+        radial-gradient(ellipse at 88% 25%, rgba(202,177,255,.48) 0%, transparent 38%),
+        radial-gradient(ellipse at 18% 88%, rgba(255,190,218,.48) 0%, transparent 38%),
+        linear-gradient(145deg, #f9eefa 0%, #e9e9ff 48%, #e5f5ff 100%);
+}
+
+.background-glow {
+    position: fixed;
+    inset: 0;
+}
+
+.glow {
+    opacity: .72;
+    filter: blur(68px);
+}
+
+.glow-one {
+    background: radial-gradient(circle, #ffb9df 0%, #f4c9ff 55%, transparent 75%);
+}
+
+.glow-two {
+    background: radial-gradient(circle, #b8c9ff 0%, #d9c7ff 55%, transparent 75%);
+}
+
+.glow-three {
+    background: radial-gradient(circle, #ffe2ba 0%, #ffcce5 55%, transparent 75%);
+    filter: blur(65px);
+}
+
+.login-popup-box {
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.68),
+        rgba(255,255,255,.38) 48%,
+        rgba(239,231,255,.42)
+    );
+
+    border: 1px solid rgba(255,255,255,.82);
+    border-top: 2px solid rgba(255,255,255,.95);
+    border-left: 1px solid rgba(255,255,255,.8);
+    border-right: 1px solid rgba(255,255,255,.55);
+    border-radius: 45px 45px 0 0;
+
+    box-shadow:
+        0 -24px 65px rgba(91,74,139,.16),
+        inset 0 2px 2px rgba(255,255,255,.95),
+        inset 0 -1px 16px rgba(255,255,255,.28);
+
+    backdrop-filter: blur(32px) saturate(175%);
+    -webkit-backdrop-filter: blur(32px) saturate(175%);
+}
+
+.login-popup-box::before {
+    width: 68px;
+    height: 6px;
+    background: rgba(255,255,255,.72);
+    border: 1px solid rgba(255,255,255,.8);
+    box-shadow:
+        inset 0 1px 3px rgba(91,74,139,.12),
+        0 2px 8px rgba(91,74,139,.08);
+}
+
+.icon-container {
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.86),
+        rgba(255,255,255,.32)
+    );
+
+    border: 1px solid rgba(255,255,255,.9);
+
+    box-shadow:
+        12px 12px 28px rgba(119,91,157,.13),
+        -8px -8px 24px rgba(255,255,255,.8),
+        inset 0 2px 4px rgba(255,255,255,.95),
+        inset 0 -2px 8px rgba(190,170,230,.12);
+
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+}
+
+.app-title {
+    color: #282139;
+    text-shadow: 0 2px 14px rgba(255,255,255,.55);
+}
+
+.app-subtitle {
+    color: #625a73;
+}
+
+/* GOOGLE BUTTON, RAINBOW BORDER, SVG AND LETTER ANIMATION
+   ARE KEPT AS IN THE ORIGINAL CODE. */
+
+.privacy-text {
+    color: #625a73;
+    text-shadow: 0 1px 8px rgba(255,255,255,.55);
+}
+
+.privacy-text a {
+    color: #35294e;
+    border-bottom-color: rgba(73,54,111,.65);
+}
+
+#offlineBanner {
+    background: rgba(35,29,49,.72);
+    border: 1px solid rgba(255,255,255,.35);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+#errorBox, #successBox {
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    box-shadow:
+        0 8px 24px rgba(70,55,100,.08),
+        inset 0 1px 1px rgba(255,255,255,.75);
+}
+
+#errorBox {
+    background: rgba(255,235,240,.58);
+    border: 1px solid rgba(255,255,255,.8);
+}
+
+#successBox {
+    background: rgba(225,255,239,.58);
+    border: 1px solid rgba(255,255,255,.8);
+}
+
+#loadingOverlay {
+    background: rgba(235,229,249,.48);
+    backdrop-filter: blur(28px) saturate(165%);
+    -webkit-backdrop-filter: blur(28px) saturate(165%);
+}
+
+.spinner {
+    border-color: rgba(255,255,255,.72);
+    border-top-color: #6d55a4;
+    box-shadow: 0 8px 25px rgba(94,73,145,.12);
+}
+
+.loading-text {
+    color: #34294b;
+}
+
+@media (max-height: 720px) {
+    .login-popup-box {
+        background: linear-gradient(
+            145deg,
+            rgba(255,255,255,.72),
+            rgba(255,255,255,.42) 52%,
+            rgba(239,231,255,.46)
+        );
+    }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .login-popup-box {
+        background: rgba(248,244,255,.94);
+    }
+
+    .icon-container {
+        background: rgba(255,255,255,.92);
+    }
+
+    #loadingOverlay {
+        background: rgba(239,234,248,.96);
+    }
+}
 </style>
 </head>
 
@@ -737,8 +921,7 @@ function showSuccess(message) {
 
 function hideMessages() {
 
-    errorBox.style.display = "none";
-    successBox.style.display = "none";
+        successBox.style.display = "none";
 
 }
 
@@ -965,17 +1148,14 @@ document.addEventListener("pointerdown", event => {
     sparkle.className = "sparkle";
 
     sparkle.textContent =
-        sparkleEmojis[ Math.floor(Math.random() * ];
+        sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
 
-sparkleEmojis.length)
+    sparkle.style.left = event.clientX + "px";
+    sparkle.style.top = event.clientY + "px";
 
-sparkle.style.left = event.clientX + "px";
+    document.body.appendChild(sparkle);
 
-sparkle.style.top = event.clientY + "px";
-
-document.body.appendChild(sparkle);
-
-setTimeout(() => sparkle.remove(), 800);
+    setTimeout(() => sparkle.remove(), 800);
 
 });
 
@@ -983,22 +1163,19 @@ setTimeout(() => sparkle.remove(), 800);
 
 if ("serviceWorker" in navigator) {
 
-window.addEventListener("load", () => {
+    window.addEventListener("load", () => {
 
-navigator.serviceWorker
+        navigator.serviceWorker
+            .register("./service-worker.js")
+            .catch(error => {
+                console.error("Service Worker Error:", error);
+            });
 
-.register("./service-worker.js")
-
-.catch(error => {
-
-console.error("Service Worker
-
-Error:", error);
-
-});
-
-});
+    });
 
 }
 
 </script>
+</body>
+</html>
+  
