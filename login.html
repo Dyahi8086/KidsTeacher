@@ -123,13 +123,13 @@ body {
     backdrop-filter: blur(10px);
 }
 
-/* LOGIN PANEL (Liquid Glass Soft Pink) */
+/* LOGIN PANEL */
 
 .login-popup-box {
     position: relative;
     z-index: 10;
     width: 100%;
-    max-width: 500px;
+    max-width: 460px;
     height: 56vh;
     height: 56dvh;
     min-height: 450px;
@@ -247,16 +247,16 @@ body {
     font-weight: 700;
     color: #65545D;
     line-height: 1.5;
-    margin-bottom: 30px;
+    margin-bottom: 26px;
 }
 
-/* GOOGLE BUTTON OUTER - ORIGINAL DESIGN */
+/* GOOGLE BUTTON WRAPPER (Optimized Width) */
 
 .google-btn-wrapper {
     position: relative;
     isolation: isolate;
     width: 100%;
-    max-width: 380px;
+    max-width: 330px;
     padding: 2px;
     border-radius: 42px;
     overflow: hidden;
@@ -298,19 +298,19 @@ body {
     to { transform: rotate(360deg); }
 }
 
-/* GOOGLE BUTTON - UNCHANGED */
+/* GOOGLE BUTTON */
 
 .google-btn {
     position: relative;
     z-index: 2;
     width: 100%;
-    min-height: 62px;
-    padding: 13px 18px;
+    min-height: 56px;
+    padding: 12px 16px;
 
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
 
     background: linear-gradient(
         180deg,
@@ -325,7 +325,7 @@ body {
     border-top: 1px solid rgba(255,255,255,.22);
 
     font-family: 'Outfit', sans-serif;
-    font-size: clamp(17px,4.5vw,21px);
+    font-size: clamp(16px, 4.2vw, 19px);
     font-weight: 700;
 
     box-shadow:
@@ -349,12 +349,12 @@ body {
 /* GOOGLE ICON */
 
 .google-icon-svg {
-    width: 27px;
-    height: 27px;
+    width: 24px;
+    height: 24px;
     flex-shrink: 0;
 }
 
-/* ANIMATED ALPHABETS */
+/* ANIMATED ALPHABETS (WAVE EFFECT FIX) */
 
 .btn-text {
     display: inline-flex;
@@ -384,7 +384,7 @@ body {
 }
 
 .btn-letter.space {
-    width: .28em;
+    width: .25em;
     animation: none;
 }
 
@@ -407,8 +407,8 @@ body {
     font-size: 12px;
     color: #65545D;
     font-weight: 600;
-    line-height: 1.7;
-    margin-top: 24px;
+    line-height: 1.6;
+    margin-top: 20px;
     padding: 0 8px;
     text-shadow: 0 1px 6px rgba(255,255,255,.5);
 }
@@ -425,10 +425,10 @@ body {
 #errorBox {
     display: none;
     width: 100%;
-    max-width: 380px;
-    padding: 11px 14px;
-    margin-top: 13px;
-    border-radius: 14px;
+    max-width: 350px;
+    padding: 10px 12px;
+    margin-top: 10px;
+    border-radius: 12px;
     background: rgba(255,235,240,.75);
     border: 1px solid rgba(254,178,178,.8);
     color: #B42318;
@@ -443,10 +443,10 @@ body {
 #successBox {
     display: none;
     width: 100%;
-    max-width: 380px;
+    max-width: 350px;
     padding: 10px 12px;
-    margin-top: 12px;
-    border-radius: 14px;
+    margin-top: 10px;
+    border-radius: 12px;
     background: rgba(236,253,243,.75);
     border: 1px solid rgba(166,244,197,.8);
     color: #067647;
@@ -510,61 +510,6 @@ body {
     100% {
         transform: scale(1.4) translateY(-35px);
         opacity: 0;
-    }
-}
-
-/* RESPONSIVE */
-
-@media (max-height: 720px) {
-    .login-popup-box {
-        height: 65dvh;
-        min-height: 410px;
-        padding-top: 35px;
-    }
-
-    .icon-container {
-        width: 68px;
-        height: 68px;
-        margin-bottom: 10px;
-    }
-
-    .icon-3d {
-        font-size: 34px;
-    }
-
-    .app-subtitle {
-        margin-bottom: 18px;
-    }
-
-    .google-btn {
-        min-height: 55px;
-    }
-
-    .privacy-text {
-        margin-top: 17px;
-    }
-}
-
-@media (max-width: 360px) {
-    .login-popup-box {
-        padding-left: 18px;
-        padding-right: 18px;
-    }
-
-    .app-title {
-        font-size: 31px;
-    }
-
-    .privacy-text {
-        font-size: 11px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
     }
 }
 </style>
@@ -1005,4 +950,6 @@ if ("serviceWorker" in navigator) {
     });
 
 }
-    
+    </script>
+</body>
+</html>
