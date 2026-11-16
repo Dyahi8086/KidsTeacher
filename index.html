@@ -1,108 +1,583 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="theme-color" content="#e0f2fe">
+    <meta name="theme-color" content="#ff3b00">
     <title>Kids Teacher - Welcome</title>
 
     <link rel="preload" href="welcome_bg.png" as="image" fetchpriority="high">
     <link rel="manifest" href="./manifest.json">
     <link rel="icon" type="image/png" href="./icons/icon-192.png">
+
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
 
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body, html { height: 100%; width: 100%; background-color: #fce7f3; overflow: hidden; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #fce7f3;
+        }
+
+        /* RED ORANGE SPLASH SCREEN */
 
         #splash-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background: #e0f2fe; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.3s ease;
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            overflow: hidden;
+
+            background: linear-gradient(
+                145deg,
+                #ff3b00 0%,
+                #ff4b00 48%,
+                #ff2600 100%
+            );
+
+            opacity: 1;
+            visibility: visible;
+
+            transition:
+                opacity .65s ease,
+                visibility .65s ease;
         }
-        .spinner {
-            width: 50px; height: 50px; border: 5px solid #ffffff; border-top: 5px solid #FF6B35;
-            border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 15px;
+
+        #splash-screen::before,
+        #splash-screen::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            background: rgba(255,255,255,.055);
         }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        .loading-text { font-family: 'Fredoka', sans-serif; font-size: 20px; color: #8B3A00; font-weight: 600; }
+
+        #splash-screen::before {
+            width: 320px;
+            height: 320px;
+            top: -170px;
+            right: -130px;
+        }
+
+        #splash-screen::after {
+            width: 260px;
+            height: 260px;
+            bottom: -145px;
+            left: -110px;
+        }
+
+        #splash-screen.hide {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .splash-brand {
+            position: relative;
+            z-index: 1;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            transform: translateY(8px);
+        }
+
+        /* BUNNY K LOGO - NO PNG REQUIRED */
+
+        .kt-mark {
+            position: relative;
+
+            width: 150px;
+            height: 142px;
+
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+
+            color: #fff;
+            font-family: Arial, sans-serif;
+            font-size: 132px;
+            font-weight: 900;
+            line-height: .88;
+            letter-spacing: -12px;
+            padding-right: 10px;
+
+            opacity: 0;
+            transform: scale(.55) translateY(18px);
+
+            animation:
+                markReveal .85s cubic-bezier(.2,1.45,.45,1) .25s forwards;
+        }
+
+        .kt-ears {
+            position: absolute;
+
+            width: 76px;
+            height: 58px;
+
+            top: 0;
+            left: 39px;
+
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            z-index: 2;
+        }
+
+        .kt-ear {
+            width: 29px;
+            height: 59px;
+
+            border: 10px solid #fff;
+            border-radius: 50% 50% 45% 45%;
+
+            background: transparent;
+        }
+
+        .kt-ear:first-child {
+            transform: rotate(-12deg);
+        }
+
+        .kt-ear:last-child {
+            transform: rotate(13deg);
+        }
+
+        .kt-face {
+            position: absolute;
+            z-index: 3;
+
+            top: 75px;
+            left: 57px;
+
+            width: 38px;
+            height: 28px;
+
+            pointer-events: none;
+        }
+
+        .kt-eyes {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 4px;
+        }
+
+        .kt-eyes span {
+            width: 6px;
+            height: 9px;
+
+            border-radius: 50%;
+            background: #ff3b00;
+        }
+
+        .kt-smile {
+            width: 17px;
+            height: 9px;
+
+            margin: 1px auto 0;
+
+            border-bottom: 3px solid #ff3b00;
+            border-radius: 0 0 15px 15px;
+        }
+
+        /* APP NAME */
+
+        .kt-title {
+            margin-top: 25px;
+
+            color: #fff;
+
+            font-family: 'Nunito', Arial, sans-serif;
+            font-size: clamp(25px, 7.2vw, 35px);
+            font-weight: 900;
+
+            letter-spacing: 1.2px;
+            text-align: center;
+            white-space: nowrap;
+
+            opacity: 0;
+            transform: translateY(18px);
+
+            animation: titleReveal .7s ease 1s forwards;
+        }
+
+        /* LOADING DOTS */
+
+        .kt-loader {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 9px;
+            margin-top: 34px;
+
+            opacity: 0;
+            animation: loaderReveal .4s ease 1.65s forwards;
+        }
+
+        .kt-loader span {
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+            background: #fff;
+
+            animation: dotBounce .65s ease-in-out infinite alternate;
+        }
+
+        .kt-loader span:nth-child(2) {
+            animation-delay: .18s;
+        }
+
+        .kt-loader span:nth-child(3) {
+            animation-delay: .36s;
+        }
+
+        /* ANIMATIONS */
+
+        @keyframes markReveal {
+            0% {
+                opacity: 0;
+                transform: scale(.55) translateY(18px);
+            }
+
+            70% {
+                opacity: 1;
+                transform: scale(1.08) translateY(-3px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes titleReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes loaderReveal {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes dotBounce {
+            from {
+                transform: translateY(0);
+                opacity: .65;
+            }
+
+            to {
+                transform: translateY(-8px);
+                opacity: 1;
+            }
+        }
+
+        /* ORIGINAL WELCOME PAGE - PRESERVED */
 
         #welcome-content {
-            display: none; position: relative; width: 100vw; height: 100vh; height: 100dvh;
-            flex-direction: column; justify-content: flex-end; align-items: center;
-            padding-bottom: 40px; background-color: #fce7f3; 
+            display: none;
+
+            position: relative;
+
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+
+            padding-bottom: 40px;
+
+            background-color: #fce7f3;
             background-image: url('welcome_bg.png');
-            background-size: cover; background-position: center top; background-repeat: no-repeat;
+
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
         }
 
         .content-wrapper {
-            position: relative; z-index: 10; display: flex; flex-direction: column;
-            align-items: center; width: 100%; padding: 0 20px; text-align: center;
+            position: relative;
+            z-index: 10;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            width: 100%;
+            padding: 0 20px;
+
+            text-align: center;
         }
 
-        .text-content { margin-bottom: 20px; }
-        .text-content h1 {
-            font-family: 'Fredoka', sans-serif; font-size: clamp(24px, 6vw, 32px);
-            color: #8B3A00; font-weight: 700; line-height: 1.2; margin-bottom: 8px;
-            text-shadow: 1px 1px 0px rgba(255,255,255,0.8);
+        .text-content {
+            margin-bottom: 20px;
         }
-        .text-content p { font-family: 'Nunito', sans-serif; font-size: clamp(13px, 4vw, 16px); color: #6B5B4D; font-weight: 700; }
+
+        .text-content h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: clamp(24px, 6vw, 32px);
+
+            color: #8B3A00;
+            font-weight: 700;
+
+            line-height: 1.2;
+            margin-bottom: 8px;
+
+            text-shadow: 1px 1px 0 rgba(255,255,255,.8);
+        }
+
+        .text-content p {
+            font-family: 'Nunito', sans-serif;
+            font-size: clamp(13px, 4vw, 16px);
+
+            color: #6B5B4D;
+            font-weight: 700;
+        }
 
         .start-btn {
-            position: relative; width: 100%; max-width: 350px; padding: 18px 20px;
-            font-size: 20px; font-family: 'Fredoka', sans-serif; font-weight: 700; color: white;
-            background: #FF6B35; border: none; border-radius: 50px; cursor: pointer;
-            box-shadow: 0 6px 0 #cc4e20, 0 10px 20px rgba(255, 107, 53, 0.4);
-            transition: transform 0.1s; animation: pulseBtn 2s infinite;
+            position: relative;
+
+            width: 100%;
+            max-width: 350px;
+
+            padding: 18px 20px;
+
+            font-size: 20px;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+
+            color: white;
+            background: #FF6B35;
+
+            border: none;
+            border-radius: 50px;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 6px 0 #cc4e20,
+                0 10px 20px rgba(255,107,53,.4);
+
+            transition: transform .1s;
+            animation: pulseBtn 2s infinite;
         }
-        .start-btn:active { transform: translateY(6px); box-shadow: 0 0px 0 #cc4e20; animation: none; }
-        @keyframes pulseBtn { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
+
+        .start-btn:active {
+            transform: translateY(6px);
+            box-shadow: 0 0 0 #cc4e20;
+            animation: none;
+        }
+
+        @keyframes pulseBtn {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.03);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #splash-screen *,
+            #splash-screen *::before,
+            #splash-screen *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+        }
+
     </style>
 </head>
+
 <body>
 
-    <div id="splash-screen">
-        <div class="spinner"></div>
-        <div class="loading-text">Loading Adventure...</div>
+    <!-- KIDS TEACHER SPLASH SCREEN -->
+
+    <div id="splash-screen" aria-label="Kids Teacher loading screen">
+
+        <div class="splash-brand">
+
+            <div class="kt-mark" aria-hidden="true">
+
+                K
+
+                <div class="kt-ears">
+                    <span class="kt-ear"></span>
+                    <span class="kt-ear"></span>
+                </div>
+
+                <div class="kt-face">
+
+                    <div class="kt-eyes">
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <div class="kt-smile"></div>
+
+                </div>
+
+            </div>
+
+            <div class="kt-title">
+                KIDS TEACHER
+            </div>
+
+            <div class="kt-loader">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </div>
+
     </div>
+
+
+    <!-- ORIGINAL WELCOME PAGE -->
 
     <div id="welcome-content">
+
         <div class="content-wrapper">
+
             <div class="text-content">
-                <h1>Learning Is an<br>Adventure!</h1>
-                <p>Explore, discover and grow every day.</p>
+
+                <h1>
+                    Learning Is an<br>Adventure!
+                </h1>
+
+                <p>
+                    Explore, discover and grow every day.
+                </p>
+
             </div>
-            <button class="start-btn" id="startBtn">Let's Start →</button>
+
+            <button class="start-btn" id="startBtn">
+                Let's Start →
+            </button>
+
         </div>
+
     </div>
 
+
+    <!-- JAVASCRIPT -->
+
     <script>
+
         const splash = document.getElementById('splash-screen');
-        const welcomeContent = document.getElementById('welcome-content');
+
+        const welcomeContent =
+            document.getElementById('welcome-content');
+
+        const startBtn =
+            document.getElementById('startBtn');
+
+        let splashFinished = false;
+
 
         function showWelcome() {
-            splash.style.opacity = '0';
+
+            if (splashFinished) return;
+
+            splashFinished = true;
+
+            // Show existing Welcome Page
+            welcomeContent.style.display = 'flex';
+
+            // Fade out Splash Screen
+            requestAnimationFrame(() => {
+                splash.classList.add('hide');
+            });
+
             setTimeout(() => {
-                splash.style.display = 'none';
-                welcomeContent.style.display = 'flex';
-            }, 220);
+                splash.remove();
+            }, 700);
+
         }
+
+
+        // Preload welcome background image
 
         const bgImg = new Image();
-        bgImg.fetchPriority = "high";
+
+        bgImg.fetchPriority = 'high';
+
         bgImg.src = 'welcome_bg.png';
 
-        if (bgImg.complete) { showWelcome(); } 
-        else { bgImg.onload = showWelcome; bgImg.onerror = showWelcome; }
-        setTimeout(() => { if (splash.style.display !== 'none') showWelcome(); }, 500);
 
-        document.getElementById('startBtn').addEventListener('click', () => {
-            window.location.href = 'login.html'; 
+        // Show Welcome Page after 3.5 seconds
+
+        window.addEventListener('load', () => {
+
+            setTimeout(showWelcome, 3500);
+
         });
 
+
+        // Fallback for slow loading
+
+        setTimeout(showWelcome, 5000);
+
+
+        // Start button navigation
+
+        startBtn.addEventListener('click', () => {
+
+            window.location.href = 'login.html';
+
+        });
+
+
+        // Service Worker Registration
+
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => { navigator.serviceWorker.register('./service-worker.js').catch(console.log); });
+
+            window.addEventListener('load', () => {
+
+                navigator.serviceWorker
+                    .register('./service-worker.js')
+                    .catch(error => {
+                        console.log(
+                            'Service Worker registration failed:',
+                            error
+                        );
+                    });
+
+            });
+
         }
+
     </script>
+
 </body>
 </html>
