@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kids-teacher-v4'; // Version change kiya
+const CACHE_NAME = 'kids-teacher-v5'; // Version change kiya
 
 const ASSETS_TO_CACHE = [
     './',
