@@ -1,346 +1,1054 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="theme-color" id="themeColorMeta" content="#ff3b00">
-    <title>Kids Teacher</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#FFF0F5">
+<meta name="description" content="Kids Teacher - A fun learning journey for children.">
+<title>Parents Login - Kids Teacher</title>
 
-    <link rel="manifest" href="./manifest.json">
-    <link rel="icon" type="image/png" href="./icons/icon-192.png">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" type="image/png" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+<style>
+:root {
+    --bg: #F7EBEF;
+    --card: #FFF5F7;
+    --dark: #111111;
+    --muted: #65545D;
+    --border: #E8D5DD;
+}
 
-        html, body {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background: #ff3b00;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
 
-        /* =========================================
-           STAGE 1-3: RED ORANGE SPLASH SCREEN
-           ========================================= */
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
 
-        #splash-screen {
-            position: fixed;
-            inset: 0;
-            width: 100%;
-            height: 100vh;
-            height: 100dvh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 99990;
-            overflow: hidden;
+body {
+    height: 100vh;
+    height: 100dvh;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    isolation: isolate;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background:
+        radial-gradient(circle at 15% 15%, #FFFFFF 0%, transparent 30%),
+        radial-gradient(circle at 85% 30%, #EBD9E3 0%, transparent 35%),
+        #F7EBEF;
+}
 
-            background: linear-gradient(
-                145deg,
-                #ff3b00 0%,
-                #ff4b00 48%,
-                #ff2600 100%
-            );
-        }
+/* BACKGROUND */
 
-        /* STEP 1: BUNNY K LOGO */
-        .kt-mark {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 150px;
-            height: 142px;
+.background-glow {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
 
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
+.glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(55px);
+    opacity: .55;
+}
 
-            color: #fff;
-            font-family: Arial, sans-serif;
-            font-size: 132px;
-            font-weight: 900;
-            line-height: .88;
-            letter-spacing: -12px;
-            padding-right: 10px;
+.glow-one {
+    width: 230px;
+    height: 230px;
+    background: #FFD6E4;
+    top: 8%;
+    left: -80px;
+    animation: glowFloat 8s ease-in-out infinite alternate;
+}
 
-            opacity: 0;
-            transform: translate(-50%, -50%) scale(0.5);
+.glow-two {
+    width: 260px;
+    height: 260px;
+    background: #E4D5FF;
+    top: 25%;
+    right: -100px;
+    animation: glowFloat 10s ease-in-out infinite alternate-reverse;
+}
 
-            animation: logoSequence 0.95s cubic-bezier(.22, 1, .36, 1) 0.1s forwards;
-        }
+.glow-three {
+    width: 180px;
+    height: 180px;
+    background: #F9D6C8;
+    bottom: 5%;
+    left: 20%;
+}
 
-        .kt-ears {
-            position: absolute;
-            width: 76px;
-            height: 58px;
-            top: 0;
-            left: 39px;
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            z-index: 2;
-        }
+@keyframes glowFloat {
+    from { transform: translate(0,0) scale(1); }
+    to { transform: translate(20px,30px) scale(1.15); }
+}
 
-        .kt-ear {
-            width: 29px;
-            height: 59px;
-            border: 10px solid #fff;
-            border-radius: 50% 50% 45% 45%;
-            background: transparent;
-        }
+/* OFFLINE */
 
-        .kt-ear:first-child {
-            transform: rotate(-12deg);
-        }
+#offlineBanner {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 11px 12px;
+    background: #191919;
+    color: #fff;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    z-index: 10001;
+}
 
-        .kt-ear:last-child {
-            transform: rotate(13deg);
-        }
+/* LOGIN PANEL */
 
-        .kt-face {
-            position: absolute;
-            z-index: 3;
-            top: 75px;
-            left: 57px;
-            width: 38px;
-            height: 28px;
-            pointer-events: none;
-        }
+.login-popup-box {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 500px;
+    height: 56vh;
+    height: 56dvh;
+    min-height: 450px;
+    max-height: 700px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding:
+        clamp(48px, 8vh, 90px)
+        24px
+        max(28px, env(safe-area-inset-bottom));
 
-        .kt-eyes {
-            display: flex;
-            justify-content: space-between;
-            padding: 0 4px;
-        }
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.96),
+        rgba(255,245,248,.98) 55%,
+        rgba(245,231,239,.98)
+    );
 
-        .kt-eyes span {
-            width: 6px;
-            height: 9px;
-            border-radius: 50%;
-            background: #ff3b00;
-        }
+    border-radius: 45px 45px 0 0;
+    border-top: 3px solid #FFFFFF;
+    border-left: 1.5px solid #FFFFFF;
+    border-right: 1.5px solid #E8D5DD;
 
-        .kt-smile {
-            width: 17px;
-            height: 9px;
-            margin: 1px auto 0;
-            border-bottom: 3px solid #ff3b00;
-            border-radius: 0 0 15px 15px;
-        }
+    box-shadow:
+        0 -20px 55px rgba(130,80,100,.14),
+        inset 0 3px 7px rgba(255,255,255,.95),
+        inset 0 -5px 15px rgba(220,180,195,.22);
 
-        @keyframes logoSequence {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.55);
-            }
-            25% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1.04);
-            }
-            38%, 75% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.25);
-            }
-        }
+    animation: slideUp .8s cubic-bezier(.2,.8,.2,1) both;
+}
 
-        /* STEP 2: APP NAME EXPANDS IN CENTER, THEN COLLAPSES INTO DOT */
-        .kt-title {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+@keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
 
-            color: #fff;
-            font-family: 'Nunito', Arial, sans-serif;
-            font-size: clamp(24px, 6.8vw, 34px);
-            font-weight: 900;
-            letter-spacing: 1.5px;
-            text-align: center;
-            white-space: nowrap;
+/* HANDLE */
 
-            opacity: 0;
-            clip-path: inset(0 50% 0 50%);
+.login-popup-box::before {
+    content: "";
+    position: absolute;
+    top: 17px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 65px;
+    height: 6px;
+    border-radius: 20px;
+    background: #E8D5DD;
+    box-shadow:
+        inset 0 2px 3px rgba(0,0,0,.12),
+        0 1px 1px rgba(255,255,255,.9);
+}
 
-            animation: titleSequence 1.05s cubic-bezier(.4, 0, .2, 1) 0.9s forwards;
-        }
+/* ICON */
 
-        @keyframes titleSequence {
-            0% {
-                opacity: 0;
-                clip-path: inset(0 50% 0 50%);
-                transform: translate(-50%, -50%) scale(0.92);
-            }
-            28% {
-                opacity: 1;
-                clip-path: inset(0 0% 0 0%);
-                transform: translate(-50%, -50%) scale(1);
-            }
-            72% {
-                opacity: 1;
-                clip-path: inset(0 0% 0 0%);
-                transform: translate(-50%, -50%) scale(1);
-            }
-            96% {
-                opacity: 1;
-                clip-path: inset(0 49% 0 49%);
-                transform: translate(-50%, -50%) scale(0.35);
-            }
-            100% {
-                opacity: 0;
-                clip-path: inset(0 50% 0 50%);
-                transform: translate(-50%, -50%) scale(0.1);
-            }
-        }
+.icon-container {
+    width: 86px;
+    height: 86px;
+    flex-shrink: 0;
+    background: linear-gradient(145deg,#fff,#F0E1E7);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
 
-        /* STEP 3: WHITE DOT APPEARS, DIPS DOWN, AND LAUNCHES TO TOP */
-        .kt-dot {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: #ffffff;
-            opacity: 0;
-            transform: translate(-50%, -50%) scale(0.5);
+    box-shadow:
+        8px 8px 16px rgba(200,150,170,.30),
+        -8px -8px 16px rgba(255,255,255,.95),
+        inset 0 2px 3px rgba(255,255,255,.9);
+}
 
-            animation: dotJumpSequence 0.85s cubic-bezier(.45, .05, .55, .95) 1.88s forwards;
-        }
+.icon-3d {
+    font-size: 43px;
+    line-height: 1;
+    filter: drop-shadow(0 5px 6px rgba(0,0,0,.15));
+    animation: iconFloat 3s ease-in-out infinite;
+}
 
-        @keyframes dotJumpSequence {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.5);
-            }
-            15% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
-            }
-            48% {
-                opacity: 1;
-                transform: translate(-50%, 110px) scale(1.05);
-            }
-            100% {
-                opacity: 1;
-                transform: translate(-50%, -36vh) scale(2.8);
-            }
-        }
+@keyframes iconFloat {
+    0%,100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-6px) rotate(3deg); }
+}
 
-        /* =========================================
-           STAGE 4: SOFT PINK PORTAL EXPAND TO LOGIN
-           ========================================= */
+/* HEADING */
 
-        #transition-portal {
-            position: fixed;
-            inset: 0;
-            z-index: 99995;
-            width: 100vw;
-            height: 100vh;
-            height: 100dvh;
+.app-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(32px,8vw,43px);
+    font-weight: 800;
+    color: #15121A;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+}
 
-            /* Matches login.html Soft Pink theme */
-            background: #F7EBEF;
+.app-subtitle {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(13px,3.5vw,15px);
+    font-weight: 700;
+    color: #65545D;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
 
-            clip-path: circle(0% at 50% 14%);
-            pointer-events: none;
-        }
+/* GOOGLE BUTTON */
 
-        #transition-portal.reveal {
-            animation: portalExpand 0.65s cubic-bezier(.35, 0, .15, 1) forwards;
-        }
+.google-btn-wrapper {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    max-width: 380px;
+    padding: 2px;
+    border-radius: 42px;
+    overflow: hidden;
+    background: #151515;
+    box-shadow:
+        0 12px 28px rgba(130,80,100,.16),
+        0 4px 10px rgba(0,0,0,.08);
+}
 
-        @keyframes portalExpand {
-            0% {
-                clip-path: circle(20px at 50% 14%);
-            }
-            100% {
-                clip-path: circle(150% at 50% 14%);
-            }
-        }
-    </style>
+.google-btn-wrapper::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 220%;
+    height: 600%;
+    left: -60%;
+    top: -250%;
+
+    background: conic-gradient(
+        from 0deg,
+        #00D4FF,
+        #3867FF,
+        #A855F7,
+        #FF36A5,
+        #FF8A24,
+        #FFE44D,
+        #00E5A8,
+        #00D4FF
+    );
+
+    animation: rainbowRotate 7s linear infinite;
+}
+
+@keyframes rainbowRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.google-btn {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: 62px;
+    padding: 13px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    background: linear-gradient(
+        180deg,
+        #292929,
+        #101010 55%,
+        #191919
+    );
+
+    color: #FDFBF7;
+    border: none;
+    border-radius: 40px;
+    border-top: 1px solid rgba(255,255,255,.22);
+
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(17px,4.5vw,21px);
+    font-weight: 700;
+
+    box-shadow:
+        inset 0 2px 4px rgba(255,255,255,.20),
+        inset 0 -4px 7px rgba(0,0,0,.5);
+
+    cursor: pointer;
+    transition: transform .18s ease, filter .18s ease;
+}
+
+.google-btn:active {
+    transform: scale(.975);
+    filter: brightness(1.2);
+}
+
+.google-btn:disabled {
+    opacity: .65;
+    cursor: wait;
+}
+
+/* GOOGLE ICON */
+
+.google-icon-svg {
+    width: 27px;
+    height: 27px;
+    flex-shrink: 0;
+}
+
+/* ANIMATED ALPHABETS */
+
+.btn-text {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: pre;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    letter-spacing: -.25px;
+}
+
+.btn-letter {
+    display: inline-block;
+    transform: translateY(0);
+    animation: letterWave 1.8s ease-in-out infinite;
+    animation-delay: calc(var(--letter-index) * 0.075s);
+    will-change: transform;
+}
+
+@keyframes letterWave {
+    0%, 70%, 100% { transform: translateY(0); }
+    35% { transform: translateY(-4px); }
+}
+
+.btn-letter.space {
+    width: .28em;
+    animation: none;
+}
+
+.btn-loading {
+    display: inline-block;
+    animation: loadingPulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes loadingPulse {
+    from { opacity: .55; }
+    to { opacity: 1; }
+}
+
+/* PRIVACY */
+
+.privacy-text {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    color: #65545D;
+    font-weight: 600;
+    line-height: 1.7;
+    margin-top: 24px;
+    padding: 0 8px;
+}
+
+.privacy-text a {
+    color: #171217;
+    text-decoration: none;
+    font-weight: 800;
+    border-bottom: 1.5px solid #171217;
+}
+
+/* ERROR */
+
+#errorBox {
+    display: none;
+    width: 100%;
+    max-width: 380px;
+    padding: 11px 14px;
+    margin-top: 13px;
+    border-radius: 14px;
+    background: #FFF1F1;
+    border: 1px solid #FEB2B2;
+    color: #B42318;
+    font-size: 12px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+/* SUCCESS */
+
+#successBox {
+    display: none;
+    width: 100%;
+    max-width: 380px;
+    padding: 10px 12px;
+    margin-top: 12px;
+    border-radius: 14px;
+    background: #ECFDF3;
+    border: 1px solid #A6F4C5;
+    color: #067647;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* LOADING OVERLAY */
+
+#loadingOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(247,235,239,.91);
+    backdrop-filter: blur(13px);
+    -webkit-backdrop-filter: blur(13px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner {
+    width: 52px;
+    height: 52px;
+    border: 4px solid #E8D5DD;
+    border-top: 4px solid #151515;
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+    margin-bottom: 17px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading-text {
+    font-family: 'Outfit', sans-serif;
+    color: #171217;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+/* SPARKLES */
+
+.sparkle {
+    position: fixed;
+    z-index: 9998;
+    pointer-events: none;
+    font-size: 17px;
+    animation: sparkleFade .8s ease-out forwards;
+}
+
+@keyframes sparkleFade {
+    0% {
+        transform: scale(.5) translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.4) translateY(-35px);
+        opacity: 0;
+    }
+}
+
+/* RESPONSIVE */
+
+@media (max-height: 720px) {
+    .login-popup-box {
+        height: 65dvh;
+        min-height: 410px;
+        padding-top: 35px;
+    }
+
+    .icon-container {
+        width: 68px;
+        height: 68px;
+        margin-bottom: 10px;
+    }
+
+    .icon-3d { font-size: 34px; }
+    .app-subtitle { margin-bottom: 18px; }
+    .google-btn { min-height: 55px; }
+    .privacy-text { margin-top: 17px; }
+}
+
+@media (max-width: 360px) {
+    .login-popup-box {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .app-title { font-size: 31px; }
+    .privacy-text { font-size: 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* LIQUID GLASS VISUAL UPDATE */
+
+:root {
+    --bg: #fff0f5;
+    --card: rgba(255,255,255,.34);
+    --muted: #5f5870;
+    --border: rgba(255,255,255,.72);
+}
+
+body {
+    background:
+        radial-gradient(ellipse at 12% 12%, #FFFFFF 0%, transparent 34%),
+        radial-gradient(ellipse at 88% 25%, rgba(255,190,215,.55) 0%, transparent 38%),
+        radial-gradient(ellipse at 18% 88%, rgba(255,215,225,.65) 0%, transparent 38%),
+        linear-gradient(145deg, #FFF0F5 0%, #FCE4EC 48%, #F8DDEB 100%);
+}
+
+.background-glow {
+    position: fixed;
+    inset: 0;
+}
+
+.glow {
+    opacity: .72;
+    filter: blur(68px);
+}
+
+.glow-one {
+    background: radial-gradient(circle, #FFB9D5 0%, #FFD6E7 55%, transparent 75%);
+}
+
+.glow-two {
+    background: radial-gradient(circle, #F5C4DA 0%, #FAD9E9 55%, transparent 75%);
+}
+
+.glow-three {
+    background: radial-gradient(circle, #FFE0E8 0%, #FFC6DA 55%, transparent 75%);
+    filter: blur(65px);
+}
+
+.login-popup-box {
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.68),
+        rgba(255,255,255,.38) 48%,
+        rgba(255,231,241,.42)
+    );
+
+    border: 1px solid rgba(255,255,255,.82);
+    border-top: 2px solid rgba(255,255,255,.95);
+    border-left: 1px solid rgba(255,255,255,.8);
+    border-right: 1px solid rgba(255,255,255,.55);
+    border-radius: 45px 45px 0 0;
+
+    box-shadow:
+        0 -24px 65px rgba(91,74,139,.16),
+        inset 0 2px 2px rgba(255,255,255,.95),
+        inset 0 -1px 16px rgba(255,255,255,.28);
+
+    backdrop-filter: blur(32px) saturate(175%);
+    -webkit-backdrop-filter: blur(32px) saturate(175%);
+}
+
+.login-popup-box::before {
+    width: 68px;
+    height: 6px;
+    background: rgba(255,255,255,.72);
+    border: 1px solid rgba(255,255,255,.8);
+    box-shadow:
+        inset 0 1px 3px rgba(91,74,139,.12),
+        0 2px 8px rgba(91,74,139,.08);
+}
+
+.icon-container {
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.86),
+        rgba(255,255,255,.32)
+    );
+
+    border: 1px solid rgba(255,255,255,.9);
+
+    box-shadow:
+        12px 12px 28px rgba(119,91,157,.13),
+        -8px -8px 24px rgba(255,255,255,.8),
+        inset 0 2px 4px rgba(255,255,255,.95),
+        inset 0 -2px 8px rgba(190,170,230,.12);
+
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+}
+
+.app-title {
+    color: #282139;
+    text-shadow: 0 2px 14px rgba(255,255,255,.55);
+}
+
+.app-subtitle { color: #625a73; }
+
+.privacy-text {
+    color: #625a73;
+    text-shadow: 0 1px 8px rgba(255,255,255,.55);
+}
+
+.privacy-text a {
+    color: #35294e;
+    border-bottom-color: rgba(73,54,111,.65);
+}
+
+#offlineBanner {
+    background: rgba(35,29,49,.72);
+    border: 1px solid rgba(255,255,255,.35);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+#errorBox, #successBox {
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    box-shadow:
+        0 8px 24px rgba(70,55,100,.08),
+        inset 0 1px 1px rgba(255,255,255,.75);
+}
+
+#errorBox {
+    background: rgba(255,235,240,.58);
+    border: 1px solid rgba(255,255,255,.8);
+}
+
+#successBox {
+    background: rgba(225,255,239,.58);
+    border: 1px solid rgba(255,255,255,.8);
+}
+
+#loadingOverlay {
+    background: rgba(255,225,237,.48);
+    backdrop-filter: blur(28px) saturate(165%);
+    -webkit-backdrop-filter: blur(28px) saturate(165%);
+}
+
+.spinner {
+    border-color: rgba(255,255,255,.72);
+    border-top-color: #d65b91;
+    box-shadow: 0 8px 25px rgba(94,73,145,.12);
+}
+
+.loading-text { color: #34294b; }
+
+@media (max-height: 720px) {
+    .login-popup-box {
+        background: linear-gradient(
+            145deg,
+            rgba(255,255,255,.72),
+            rgba(255,255,255,.42) 52%,
+            rgba(255,231,241,.46)
+        );
+    }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .login-popup-box { background: rgba(255,240,246,.94); }
+    .icon-container { background: rgba(255,255,255,.92); }
+    #loadingOverlay { background: rgba(255,232,240,.96); }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- KIDS TEACHER SPLASH SCREEN -->
-    <div id="splash-screen" aria-label="Kids Teacher loading screen">
+<div class="background-glow">
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+    <div class="glow glow-three"></div>
+</div>
 
-        <!-- 1. Bunny K Logo -->
-        <div class="kt-mark" aria-hidden="true">
-            K
-            <div class="kt-ears">
-                <span class="kt-ear"></span>
-                <span class="kt-ear"></span>
-            </div>
-            <div class="kt-face">
-                <div class="kt-eyes">
-                    <span></span>
-                    <span></span>
-                </div>
-                <div class="kt-smile"></div>
-            </div>
-        </div>
+<div id="offlineBanner">
+    ⚠️ No Internet Connection! Please check your network.
+</div>
 
-        <!-- 2. Brand Title -->
-        <div class="kt-title">KIDS TEACHER</div>
+<main class="login-popup-box">
 
-        <!-- 3. Bouncing White Dot -->
-        <div class="kt-dot" aria-hidden="true"></div>
-
+    <div class="icon-container">
+        <div class="icon-3d" aria-hidden="true">🎓</div>
     </div>
 
-    <!-- SOFT PINK TRANSITION PORTAL -->
-    <div id="transition-portal" aria-hidden="true"></div>
+    <h1 class="app-title">Parents Login</h1>
 
-    <!-- JAVASCRIPT -->
-    <script>
-        const portal = document.getElementById('transition-portal');
-        const themeColorMeta = document.getElementById('themeColorMeta');
+    <p class="app-subtitle">
+        Guide your child's learning journey
+    </p>
 
-        function goToLogin() {
-            window.location.replace('login.html');
+    <div class="google-btn-wrapper">
+        <button
+            type="button"
+            id="googleBtn"
+            class="google-btn"
+            aria-label="Continue with Google"
+        >
+            <svg class="google-icon-svg" viewBox="0 0 48 48" aria-hidden="true">
+                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+            </svg>
+
+            <span class="btn-text" id="btnText">Continue with Google</span>
+        </button>
+    </div>
+
+    <div id="errorBox" role="alert" aria-live="polite"></div>
+    <div id="successBox" role="status"></div>
+
+    <p class="privacy-text">
+        By continuing, you agree to our<br>
+        <a href="./privacy-policy.html">Privacy Policy</a>
+        and
+        <a href="./terms.html">Terms of Service</a>
+    </p>
+
+</main>
+
+<div id="loadingOverlay">
+    <div class="spinner"></div>
+    <p class="loading-text" id="loadingText">
+        Connecting to Google...
+    </p>
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+
+import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithRedirect,
+    getRedirectResult,
+    onAuthStateChanged,
+    setPersistence,
+    browserLocalPersistence
+}
+from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+/* FIREBASE CONFIG */
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
+    authDomain: "kids-teacher-4387e.firebaseapp.com",
+    projectId: "kids-teacher-4387e",
+    storageBucket: "kids-teacher-4387e.firebasestorage.app",
+    messagingSenderId: "420221167346",
+    appId: "1:420221167346:web:da7ac80acdfd52339d526b",
+    measurementId: "G-VJVS2ZMNLY"
+};
+
+/* INITIALIZE FIREBASE */
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+provider.setCustomParameters({
+    prompt: "select_account"
+});
+
+/* ELEMENTS */
+
+const googleBtn = document.getElementById("googleBtn");
+const btnText = document.getElementById("btnText");
+const overlay = document.getElementById("loadingOverlay");
+const loadingText = document.getElementById("loadingText");
+const errorBox = document.getElementById("errorBox");
+const successBox = document.getElementById("successBox");
+const offlineBanner = document.getElementById("offlineBanner");
+
+/* STATE */
+
+let isBusy = false;
+let redirectHandled = false;
+
+/* ANIMATED BUTTON TEXT */
+
+function renderAnimatedText(text) {
+    btnText.replaceChildren();
+
+    [...text].forEach((character, index) => {
+        const letter = document.createElement("span");
+
+        letter.className = character === " "
+            ? "btn-letter space"
+            : "btn-letter";
+
+        letter.style.setProperty("--letter-index", index);
+
+        letter.textContent = character === " "
+            ? "\u00A0"
+            : character;
+
+        btnText.appendChild(letter);
+    });
+}
+
+function renderLoadingText() {
+    btnText.replaceChildren();
+
+    const loading = document.createElement("span");
+    loading.className = "btn-loading";
+    loading.textContent = "Connecting...";
+
+    btnText.appendChild(loading);
+}
+
+/* INITIAL BUTTON TEXT */
+
+renderAnimatedText("Continue with Google");
+
+/* MESSAGES */
+
+function showError(message) {
+    errorBox.textContent = message;
+    errorBox.style.display = "block";
+    successBox.style.display = "none";
+}
+
+function hideMessages() {
+    errorBox.style.display = "none";
+    successBox.style.display = "none";
+}
+
+/* FRIENDLY ERRORS */
+
+function friendlyError(error) {
+    const code = error?.code || "";
+
+    switch (code) {
+        case "auth/api-key-not-valid":
+        case "auth/invalid-api-key":
+        case "auth/api-key-not-valid.-please-pass-a-valid-api-key.":
+            return "Firebase API key invalid hai. Firebase Web App configuration check karo.";
+
+        case "auth/unauthorized-domain":
+            return "GitHub Pages domain Firebase Authorized Domains mein add karo.";
+
+        case "auth/operation-not-allowed":
+            return "Firebase Console mein Google Sign-In enable karo.";
+
+        case "auth/network-request-failed":
+            return "Internet connection check karo aur dobara try karo.";
+            
+        case "auth/popup-blocked":
+            return "Browser ne Google Login block kar diya. Dobara try karo.";
+
+        case "auth/too-many-requests":
+            return "Bahut saare attempts ho gaye. Thodi der baad try karo.";
+
+        case "auth/web-storage-unsupported":
+            return "Browser storage support nahi kar raha. Chrome mein try karo.";
+
+        default:
+            return "Login failed: " + (code || error.message || "Unknown error");
+    }
+}
+
+/* LOADING CONTROL */
+
+function setLoading(active, message = "Connecting to Google...") {
+    isBusy = active;
+
+    googleBtn.disabled = active;
+    overlay.style.display = active ? "flex" : "none";
+    loadingText.textContent = message;
+
+    if (active) {
+        renderLoadingText();
+    } else {
+        renderAnimatedText("Continue with Google");
+    }
+}
+
+/* SUCCESS REDIRECT - NO AGE SELECTION */
+
+function goToNextPage(user) {
+    if (redirectHandled) return;
+
+    redirectHandled = true;
+
+    setLoading(true, "Login Successful! 🎉");
+
+    try {
+        localStorage.setItem("kidsTeacherUser", user.uid);
+    } catch (error) {
+        console.warn("Local storage unavailable:", error);
+    }
+
+    setTimeout(() => {
+        window.location.replace("./index-home.html");
+    }, 700);
+}
+
+/* GOOGLE LOGIN */
+
+googleBtn.addEventListener("click", async () => {
+    if (isBusy) return;
+
+    hideMessages();
+
+    if (!navigator.onLine) {
+        showError("Please check your internet connection.");
+        return;
+    }
+
+    if (navigator.vibrate) {
+        navigator.vibrate(40);
+    }
+
+    try {
+        setLoading(true);
+
+        await setPersistence(
+            auth,
+            browserLocalPersistence
+        );
+
+        await signInWithRedirect(auth, provider);
+
+    } catch (error) {
+        console.error("Google Login Error:", error);
+
+        setLoading(false);
+        showError(friendlyError(error));
+    }
+});
+
+/* REDIRECT RESULT */
+
+async function handleRedirectResult() {
+    try {
+        const result = await getRedirectResult(auth);
+
+        if (result && result.user) {
+            goToNextPage(result.user);
         }
 
-        // If user prefers reduced motion, redirect quickly
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            setTimeout(goToLogin, 500);
-        } else {
-            // Trigger Soft Pink circular reveal when dot reaches top (~2.68s)
-            setTimeout(() => {
-                portal.classList.add('reveal');
-                if (themeColorMeta) {
-                    themeColorMeta.setAttribute('content', '#F7EBEF');
-                }
-            }, 2680);
+    } catch (error) {
+        console.error("Redirect Result Error:", error);
 
-            // Redirect directly to login.html once reveal fills the screen
-            setTimeout(goToLogin, 3300);
-        }
+        setLoading(false);
+        showError(friendlyError(error));
+    }
+}
 
-        // Service Worker Registration
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker
-                    .register('./service-worker.js')
-                    .catch(error => {
-                        console.log('Service Worker registration failed:', error);
-                    });
+/* AUTH STATE */
+
+onAuthStateChanged(auth, user => {
+    if (user) {
+        goToNextPage(user);
+    }
+});
+
+/* INITIALIZATION */
+
+async function initializeLogin() {
+    try {
+        await setPersistence(
+            auth,
+            browserLocalPersistence
+        );
+
+        await handleRedirectResult();
+
+    } catch (error) {
+        console.error("Firebase Initialization Error:", error);
+
+        setLoading(false);
+        showError(friendlyError(error));
+    }
+}
+
+initializeLogin();
+
+/* INTERNET STATUS */
+
+function updateNetworkStatus() {
+    offlineBanner.style.display =
+        navigator.onLine ? "none" : "block";
+}
+
+window.addEventListener("online", updateNetworkStatus);
+window.addEventListener("offline", updateNetworkStatus);
+
+updateNetworkStatus();
+
+/* TOUCH SPARKLES */
+
+const sparkleEmojis = ["✨", "⭐", "🌟", "💫"];
+
+document.addEventListener("pointerdown", event => {
+    if (event.target.closest("#googleBtn")) return;
+
+    const sparkle = document.createElement("span");
+    sparkle.className = "sparkle";
+
+    sparkle.textContent =
+        sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
+
+    sparkle.style.left = event.clientX + "px";
+    sparkle.style.top = event.clientY + "px";
+
+    document.body.appendChild(sparkle);
+
+    setTimeout(() => sparkle.remove(), 800);
+});
+
+/* SERVICE WORKER */
+
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker
+            .register("./service-worker.js")
+            .catch(error => {
+                console.error("Service Worker Error:", error);
             });
-        }
-    </script>
+    });
+}
 
+</script>
 </body>
 </html>
+
+    
