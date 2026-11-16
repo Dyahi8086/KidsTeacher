@@ -1,21 +1,32 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#F7EBEF">
+<meta name="description" content="Kids Teacher - A fun learning journey for children.">
 <title>Parents Login - Kids Teacher</title>
 
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" type="image/png" href="./icons/icon-192.png">
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
 
-<!-- NAYA PREMIUM FONTS (Outfit & Poppins) -->
+<!-- PREMIUM FONTS -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
+:root {
+    --bg: #F7EBEF;
+    --card: #FFF5F7;
+    --dark: #111111;
+    --muted: #65545D;
+    --border: #E8D5DD;
+    --shadow: rgba(130,80,100,.15);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -25,7 +36,7 @@
 
 html, body {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     overflow: hidden;
 }
 
@@ -33,16 +44,70 @@ body {
     height: 100vh;
     height: 100dvh;
     width: 100%;
+
     display: flex;
-    flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    position: relative;
-    font-family: 'Poppins', sans-serif; /* Naya Font */
+    flex-direction: column;
 
-    background: #F7EBEF;
-    background-image: radial-gradient(#E8D5DD 0.75px, transparent 0.75px);
-    background-size: 16px 16px;
+    position: relative;
+    isolation: isolate;
+
+    font-family: 'Plus Jakarta Sans', sans-serif;
+
+    background:
+        radial-gradient(circle at 15% 15%, #FFFFFF 0%, transparent 30%),
+        radial-gradient(circle at 85% 30%, #EBD9E3 0%, transparent 35%),
+        #F7EBEF;
+
+    background-size: 100% 100%;
+}
+
+/* BACKGROUND DECORATION */
+.background-glow {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(55px);
+    opacity: .55;
+}
+
+.glow-one {
+    width: 230px;
+    height: 230px;
+    background: #FFD6E4;
+    top: 8%;
+    left: -80px;
+    animation: glowFloat 8s ease-in-out infinite alternate;
+}
+
+.glow-two {
+    width: 260px;
+    height: 260px;
+    background: #E4D5FF;
+    top: 25%;
+    right: -100px;
+    animation: glowFloat 10s ease-in-out infinite alternate-reverse;
+}
+
+.glow-three {
+    width: 180px;
+    height: 180px;
+    background: #F9D6C8;
+    bottom: 5%;
+    left: 20%;
+}
+
+@keyframes glowFloat {
+    from { transform: translate(0,0) scale(1); }
+    to { transform: translate(20px,30px) scale(1.15); }
 }
 
 /* OFFLINE BANNER */
@@ -52,25 +117,30 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background: #111111;
-    color: #FDFBF7;
+    padding: 11px 12px;
+
+    background: #191919;
+    color: #fff;
+
     text-align: center;
-    padding: 10px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 13px;
+    font-size: 12px;
+    font-weight: 700;
+
     z-index: 10001;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(0,0,0,.2);
 }
 
-/* SKEUOMORPHIC PANEL */
+/* LOGIN PANEL */
 .login-popup-box {
     position: relative;
     z-index: 10;
 
     width: 100%;
     max-width: 500px;
+
     height: 56vh;
     height: 56dvh;
+
     min-height: 450px;
     max-height: 700px;
 
@@ -81,21 +151,31 @@ body {
     align-items: center;
     text-align: center;
 
-    padding: clamp(50px, 8vh, 100px) 24px max(35px, env(safe-area-inset-bottom));
+    padding:
+        clamp(48px, 8vh, 90px)
+        24px
+        max(28px, env(safe-area-inset-bottom));
 
-    background: #FFF5F7;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.96),
+            rgba(255,245,248,.98) 55%,
+            rgba(245,231,239,.98)
+        );
+
     border-radius: 45px 45px 0 0;
-    
+
     border-top: 3px solid #FFFFFF;
-    border-left: 2px solid #FFFFFF;
-    border-right: 2px solid #E8D5DD;
+    border-left: 1.5px solid #FFFFFF;
+    border-right: 1.5px solid #E8D5DD;
 
     box-shadow:
-        0 -20px 50px rgba(130, 80, 100, 0.12),
-        inset 0 4px 6px rgba(255, 255, 255, 0.9),
-        inset 0 -6px 12px rgba(220, 180, 195, 0.4);
+        0 -20px 55px rgba(130,80,100,.14),
+        inset 0 3px 7px rgba(255,255,255,.95),
+        inset 0 -5px 15px rgba(220,180,195,.22);
 
-    animation: slideUp 0.8s cubic-bezier(.2,.8,.2,1) both;
+    animation: slideUp .8s cubic-bezier(.2,.8,.2,1) both;
 }
 
 @keyframes slideUp {
@@ -103,195 +183,282 @@ body {
     to { transform: translateY(0); }
 }
 
-/* PHYSICAL GRAB HANDLE */
+/* HANDLE */
 .login-popup-box::before {
     content: "";
     position: absolute;
-    top: 18px;
+    top: 17px;
     left: 50%;
     transform: translateX(-50%);
+
     width: 65px;
     height: 6px;
     border-radius: 20px;
+
     background: #E8D5DD;
-    box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.15), 0 1px 1px rgba(255, 255, 255, 0.9);
+
+    box-shadow:
+        inset 0 2px 3px rgba(0,0,0,.12),
+        0 1px 1px rgba(255,255,255,.9);
 }
 
-/* EMBOSSED 3D ICON BADGE */
+/* ICON */
 .icon-container {
-    width: 88px;
-    height: 88px;
-    background: linear-gradient(145deg, #FFFFFF, #F0E1E7);
+    width: 86px;
+    height: 86px;
+
+    flex-shrink: 0;
+
+    background: linear-gradient(145deg,#fff,#F0E1E7);
     border-radius: 50%;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     margin-bottom: 18px;
-    box-shadow: 
-        8px 8px 16px rgba(200, 150, 170, 0.35),
-        -8px -8px 16px rgba(255, 255, 255, 0.9),
-        inset 0 2px 3px rgba(255, 255, 255, 0.8);
+
+    box-shadow:
+        8px 8px 16px rgba(200,150,170,.30),
+        -8px -8px 16px rgba(255,255,255,.95),
+        inset 0 2px 3px rgba(255,255,255,.9);
 }
 
 .icon-3d {
-    font-size: 44px;
+    font-size: 43px;
     line-height: 1;
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
-    animation: floating 3s ease-in-out infinite;
+
+    filter: drop-shadow(0 5px 6px rgba(0,0,0,.15));
+
+    animation: iconFloat 3s ease-in-out infinite;
 }
 
-@keyframes floating {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
+@keyframes iconFloat {
+    0%,100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-6px) rotate(3deg); }
 }
 
-/* HEADING - OUTFIT FONT */
+/* HEADING */
 .app-title {
     font-family: 'Outfit', sans-serif;
-    font-size: clamp(32px, 8vw, 42px);
-    font-weight: 700;
-    color: #111111;
+    font-size: clamp(32px,8vw,43px);
+    font-weight: 800;
+
+    color: #15121A;
+
     line-height: 1.15;
-    margin-bottom: 6px;
-    text-shadow: 0 1px 1px rgba(255,255,255,0.8);
-    letter-spacing: -0.5px;
+    letter-spacing: -1px;
+
+    margin-bottom: 8px;
 }
 
 .app-subtitle {
-    font-family: 'Poppins', sans-serif;
-    font-size: clamp(13px, 3.5vw, 15px);
-    color: #5C4A52;
-    font-weight: 600;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+
+    font-size: clamp(13px,3.5vw,15px);
+    font-weight: 700;
+
+    color: #65545D;
+
     line-height: 1.5;
-    margin-bottom: 28px;
+    margin-bottom: 30px;
 }
 
-/* SKEUOMORPHIC BUTTON */
+/* GOOGLE BUTTON OUTER */
 .google-btn-wrapper {
     position: relative;
+    isolation: isolate;
+
     width: 100%;
     max-width: 380px;
-    border-radius: 40px;
+
     padding: 3px;
+    border-radius: 42px;
+
     overflow: hidden;
-    box-shadow: 
-        0 10px 25px rgba(130, 80, 100, 0.15),
-        0 4px 10px rgba(0, 0, 0, 0.1);
+
+    background: #151515;
+
+    box-shadow:
+        0 12px 28px rgba(130,80,100,.18),
+        0 4px 10px rgba(0,0,0,.10);
 }
 
+/* ROTATING RAINBOW */
 .google-btn-wrapper::before {
-    content: '';
+    content: "";
+
     position: absolute;
-    width: 200%;
-    height: 200%;
-    top: -50%;
-    left: -50%;
-    background: conic-gradient(transparent, transparent, transparent, #ff3366, #3b82f6, #10b981, #f59e0b, transparent);
-    animation: rotateGlow 3.5s linear infinite;
+    z-index: -1;
+
+    width: 220%;
+    height: 600%;
+
+    left: -60%;
+    top: -250%;
+
+    background: conic-gradient(
+        from 0deg,
+        #00D4FF,
+        #3867FF,
+        #A855F7,
+        #FF36A5,
+        #FF8A24,
+        #FFE44D,
+        #00E5A8,
+        #00D4FF
+    );
+
+    animation: rainbowRotate 4s linear infinite;
 }
 
-@keyframes rotateGlow {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+@keyframes rainbowRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
+/* BUTTON */
 .google-btn {
     position: relative;
     z-index: 2;
+
     width: 100%;
-    min-height: 58px;
-    padding: 12px 18px;
+    min-height: 62px;
+
+    padding: 13px 18px;
 
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
 
-    background: linear-gradient(180deg, #2A2A2A 0%, #111111 100%);
+    background: linear-gradient(
+        180deg,
+        #292929,
+        #101010 55%,
+        #191919
+    );
+
     color: #FDFBF7;
 
     border: none;
-    border-radius: 38px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 40px;
+
+    border-top: 1px solid rgba(255,255,255,.22);
 
     font-family: 'Outfit', sans-serif;
-    font-size: clamp(18px, 4.5vw, 21px);
-    font-weight: 600;
+    font-size: clamp(17px,4.5vw,21px);
+    font-weight: 700;
 
-    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.25),
-                inset 0 -3px 6px rgba(0, 0, 0, 0.5);
+    box-shadow:
+        inset 0 2px 4px rgba(255,255,255,.20),
+        inset 0 -4px 7px rgba(0,0,0,.5);
 
     cursor: pointer;
-    transition: transform .1s ease, box-shadow .1s ease;
+
+    transition:
+        transform .18s ease,
+        filter .18s ease;
 }
 
 .google-btn:active {
-    transform: scale(0.98);
-    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.6);
+    transform: scale(.97);
+    filter: brightness(1.2);
 }
 
 .google-btn:disabled {
-    opacity: .7;
+    opacity: .65;
     cursor: wait;
 }
 
-.btn-text {
-    display: inline-block;
-    font-family: 'Outfit', sans-serif;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-}
-
 .google-icon-svg {
-    width: 26px;
-    height: 26px;
+    width: 27px;
+    height: 27px;
     flex-shrink: 0;
-    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
 }
 
-/* PRIVACY - POPPINS FONT */
+.btn-text {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+}
+
+/* PRIVACY */
 .privacy-text {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+
     font-size: 12px;
-    color: #5C4A52;
-    font-weight: 500;
-    line-height: 1.6;
-    margin-top: 22px;
+    color: #65545D;
+
+    font-weight: 600;
+    line-height: 1.7;
+
+    margin-top: 24px;
     padding: 0 8px;
 }
 
 .privacy-text a {
-    color: #111111;
+    color: #171217;
     text-decoration: none;
-    font-weight: 600;
-    border-bottom: 1.5px solid #111111;
+    font-weight: 800;
+
+    border-bottom: 1.5px solid #171217;
 }
 
-/* ERROR MESSAGE */
+/* ERROR */
 #errorBox {
     display: none;
+
     width: 100%;
     max-width: 380px;
-    padding: 10px 14px;
-    margin-top: 12px;
+
+    padding: 11px 14px;
+    margin-top: 13px;
+
     border-radius: 14px;
-    background: #FFF5F5;
+
+    background: #FFF1F1;
     border: 1px solid #FEB2B2;
-    color: #C53030;
+
+    color: #B42318;
+
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
+
     overflow-wrap: anywhere;
 }
 
-/* LOADING OVERLAY */
+/* SUCCESS */
+#successBox {
+    display: none;
+
+    width: 100%;
+    max-width: 380px;
+
+    padding: 10px 12px;
+    margin-top: 12px;
+
+    border-radius: 14px;
+
+    background: #ECFDF3;
+    border: 1px solid #A6F4C5;
+
+    color: #067647;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* LOADING */
 #loadingOverlay {
     display: none;
+
     position: fixed;
     inset: 0;
     z-index: 9999;
 
-    background: rgba(247, 235, 239, 0.88);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(247,235,239,.91);
+
+    backdrop-filter: blur(13px);
+    -webkit-backdrop-filter: blur(13px);
 
     flex-direction: column;
     justify-content: center;
@@ -299,13 +466,16 @@ body {
 }
 
 .spinner {
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
+
     border: 4px solid #E8D5DD;
-    border-top: 4px solid #111111;
+    border-top: 4px solid #151515;
+
     border-radius: 50%;
+
     animation: spin .8s linear infinite;
-    margin-bottom: 15px;
+    margin-bottom: 17px;
 }
 
 @keyframes spin {
@@ -314,78 +484,177 @@ body {
 
 .loading-text {
     font-family: 'Outfit', sans-serif;
-    color: #111111;
-    font-size: 18px;
-    font-weight: 600;
+    color: #171217;
+    font-size: 19px;
+    font-weight: 700;
 }
 
-/* TOUCH SPARKLES */
+/* SPARKLES */
 .sparkle {
     position: fixed;
-    pointer-events: none;
     z-index: 9998;
-    font-size: 16px;
-    animation: sparkleFade 0.8s ease-out forwards;
+
+    pointer-events: none;
+    font-size: 17px;
+
+    animation: sparkleFade .8s ease-out forwards;
 }
 
 @keyframes sparkleFade {
-    0% { transform: scale(0.5) translateY(0); opacity: 1; }
-    100% { transform: scale(1.4) translateY(-35px); opacity: 0; }
+    0% {
+        transform: scale(.5) translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.4) translateY(-35px);
+        opacity: 0;
+    }
 }
 
+/* RESPONSIVE */
 @media (max-height: 720px) {
     .login-popup-box {
-        height: 62dvh;
+        height: 65dvh;
         min-height: 410px;
         padding-top: 35px;
     }
-    .icon-container { width: 72px; height: 72px; margin-bottom: 12px; }
-    .icon-3d { font-size: 36px; }
-    .app-subtitle { margin-bottom: 18px; }
-    .google-btn-wrapper { max-width: 340px; }
-    .google-btn { min-height: 52px; }
+
+    .icon-container {
+        width: 68px;
+        height: 68px;
+        margin-bottom: 10px;
+    }
+
+    .icon-3d {
+        font-size: 34px;
+    }
+
+    .app-subtitle {
+        margin-bottom: 18px;
+    }
+
+    .google-btn {
+        min-height: 55px;
+    }
+
+    .privacy-text {
+        margin-top: 17px;
+    }
+}
+
+@media (max-width: 360px) {
+    .login-popup-box {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .app-title {
+        font-size: 31px;
+    }
+
+    .privacy-text {
+        font-size: 11px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div id="offlineBanner">⚠️ No Internet Connection! Please check your network.</div>
+<div class="background-glow">
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+    <div class="glow glow-three"></div>
+</div>
 
+<div id="offlineBanner">
+    ⚠️ No Internet Connection! Please check your network.
+</div>
+
+<!-- LOGIN PANEL -->
 <main class="login-popup-box">
+
     <div class="icon-container">
         <div class="icon-3d" aria-hidden="true">🎓</div>
     </div>
-    <h1 class="app-title">Parents Login</h1>
-    <p class="app-subtitle">Guide your child's learning journey</p>
 
+    <h1 class="app-title">Parents Login</h1>
+
+    <p class="app-subtitle">
+        Guide your child's learning journey
+    </p>
+
+    <!-- GOOGLE BUTTON -->
     <div class="google-btn-wrapper">
-        <button type="button" id="googleBtn" class="google-btn" aria-label="Continue with Google">
-            <svg class="google-icon-svg" viewBox="0 0 48 48" aria-hidden="true">
+
+        <button
+            type="button"
+            id="googleBtn"
+            class="google-btn"
+            aria-label="Continue with Google"
+        >
+
+            <svg
+                class="google-icon-svg"
+                viewBox="0 0 48 48"
+                aria-hidden="true"
+            >
                 <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+
                 <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+
                 <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+
                 <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
             </svg>
-            <span class="btn-text" id="btnText">Continue with Google</span>
+
+            <span class="btn-text" id="btnText">
+                Continue with Google
+            </span>
+
         </button>
+
     </div>
 
     <div id="errorBox" role="alert" aria-live="polite"></div>
+    <div id="successBox" role="status"></div>
 
     <p class="privacy-text">
         By continuing, you agree to our<br>
-        <a href="./privacy-policy.html">Privacy Policy</a> and <a href="./terms.html">Terms of Service</a>
+        <a href="./privacy-policy.html">Privacy Policy</a>
+        and
+        <a href="./terms.html">Terms of Service</a>
     </p>
+
 </main>
 
+<!-- LOADING -->
 <div id="loadingOverlay">
+
     <div class="spinner"></div>
-    <p class="loading-text" id="loadingText">Logging you in...</p>
+
+    <p class="loading-text" id="loadingText">
+        Connecting to Google...
+    </p>
+
 </div>
 
+<!-- FIREBASE -->
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+
 import {
     getAuth,
     GoogleAuthProvider,
@@ -394,26 +663,11 @@ import {
     onAuthStateChanged,
     setPersistence,
     browserLocalPersistence
-} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+}
+from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
-// Touch Sparkles
-const emojis = ["✨", "⭐", "🎈", "🎨", "🌟"];
-document.addEventListener("pointerdown", (e) => {
-    const sparkle = document.createElement("div");
-    sparkle.className = "sparkle";
-    sparkle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-    sparkle.style.left = (e.clientX - 10) + "px";
-    sparkle.style.top = (e.clientY - 10) + "px";
-    document.body.appendChild(sparkle);
-    setTimeout(() => sparkle.remove(), 800);
-});
 
-// Offline Monitor
-const offlineBanner = document.getElementById("offlineBanner");
-window.addEventListener("online", () => offlineBanner.style.display = "none");
-window.addEventListener("offline", () => offlineBanner.style.display = "block");
-if (!navigator.onLine) offlineBanner.style.display = "block";
-
+/* FIREBASE CONFIG */
 const firebaseConfig = {
     apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
     authDomain: "kids-teacher-4387e.firebaseapp.com",
@@ -424,114 +678,303 @@ const firebaseConfig = {
     measurementId: "G-VJVS2ZMNLY"
 };
 
+
+/* FIREBASE INITIALIZATION */
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({ prompt: "select_account" });
 
+const provider = new GoogleAuthProvider();
+
+provider.setCustomParameters({
+    prompt: "select_account"
+});
+
+
+/* ELEMENTS */
 const googleBtn = document.getElementById("googleBtn");
 const btnText = document.getElementById("btnText");
 const overlay = document.getElementById("loadingOverlay");
 const loadingText = document.getElementById("loadingText");
 const errorBox = document.getElementById("errorBox");
+const successBox = document.getElementById("successBox");
+const offlineBanner = document.getElementById("offlineBanner");
 
+
+/* STATE */
 let isBusy = false;
 let redirectHandled = false;
+let authInitialized = false;
 
+
+/* MESSAGES */
 function showError(message) {
     errorBox.textContent = message;
     errorBox.style.display = "block";
+    successBox.style.display = "none";
 }
 
-function hideError() {
-    errorBox.textContent = "";
+function showSuccess(message) {
+    successBox.textContent = message;
+    successBox.style.display = "block";
     errorBox.style.display = "none";
 }
 
+function hideMessages() {
+    errorBox.style.display = "none";
+    successBox.style.display = "none";
+}
+
+
+/* FRIENDLY ERRORS */
 function friendlyError(error) {
+
     const code = error?.code || "";
-    if (code === "auth/unauthorized-domain") return "GitHub Pages domain Firebase Authorized Domains mein add karo.";
-    if (code === "auth/operation-not-allowed") return "Firebase Console mein Google Sign-In enable karo.";
-    return "Login failed: " + (code || error.message || "Unknown error");
+
+    switch (code) {
+
+        case "auth/api-key-not-valid":
+        case "auth/invalid-api-key":
+            return "Firebase API key invalid hai. Firebase Project Settings mein Web App config check karo.";
+
+        case "auth/unauthorized-domain":
+            return "GitHub Pages domain Firebase Authorized Domains mein add karo.";
+
+        case "auth/operation-not-allowed":
+            return "Firebase Console mein Google Sign-In enable karo.";
+
+        case "auth/network-request-failed":
+            return "Internet connection check karo aur dobara try karo.";
+
+        case "auth/popup-blocked":
+            return "Browser ne Google Login block kar diya. Dobara try karo.";
+
+        case "auth/too-many-requests":
+            return "Bahut saare attempts ho gaye. Thodi der baad try karo.";
+
+        case "auth/web-storage-unsupported":
+            return "Browser storage support nahi kar raha. Chrome browser mein try karo.";
+
+        case "auth/invalid-credential":
+            return "Google login credential verify nahi ho paya. Dobara try karo.";
+
+        default:
+            return "Login failed: " + (code || error.message || "Unknown error");
+    }
 }
 
-function setLoading(active) {
+
+/* LOADING CONTROL */
+function setLoading(active, message = "Connecting to Google...") {
+
     isBusy = active;
+
     googleBtn.disabled = active;
+
     overlay.style.display = active ? "flex" : "none";
-    btnText.textContent = active ? "Connecting..." : "Continue with Google";
+
+    loadingText.textContent = message;
+
+    btnText.textContent = active
+        ? "Connecting..."
+        : "Continue with Google";
 }
 
-function goToNextPage() {
+
+/* SUCCESS REDIRECT */
+function goToNextPage(user) {
+
     if (redirectHandled) return;
+
     redirectHandled = true;
-    loadingText.textContent = "Login Successful! 🎉";
-    overlay.style.display = "flex";
+
+    setLoading(true, "Login Successful! 🎉");
+
+    try {
+        localStorage.setItem("kidsTeacherUser", user.uid);
+    } catch (error) {
+        console.warn("Local storage unavailable:", error);
+    }
 
     setTimeout(() => {
-        const savedAge = localStorage.getItem('kidsAgeGroup');
+
+        let savedAge = null;
+
+        try {
+            savedAge = localStorage.getItem("kidsAgeGroup");
+        } catch (error) {
+            console.warn("Could not read saved age:", error);
+        }
+
         if (!savedAge) {
-            window.location.replace("age-select.html");
+            window.location.replace("./age-select.html");
         } else {
-            window.location.replace("index-home.html");
+            window.location.replace("./index-home.html");
         }
-    }, 800);
+
+    }, 700);
 }
 
+
+/* GOOGLE LOGIN */
 googleBtn.addEventListener("click", async () => {
+
     if (isBusy) return;
-    hideError();
-    if (navigator.vibrate) navigator.vibrate(40);
+
+    hideMessages();
+
+    if (!navigator.onLine) {
+        showError("Please check your internet connection.");
+        return;
+    }
+
+    if (navigator.vibrate) {
+        navigator.vibrate(40);
+    }
+
     try {
+
         setLoading(true);
-        await setPersistence(auth, browserLocalPersistence);
-        await signInWithRedirect(auth, provider);
+
+        await setPersistence(
+            auth,
+            browserLocalPersistence
+        );
+
+        await signInWithRedirect(
+            auth,
+            provider
+        );
+
     } catch (error) {
-        console.log("Google Login Error:", error);
+
+        console.error("Google Login Error:", error);
+
         setLoading(false);
+
         showError(friendlyError(error));
     }
+
 });
 
-async function checkRedirectResult() {
+
+/* GOOGLE REDIRECT RESULT */
+async function handleRedirectResult() {
+
     try {
+
         const result = await getRedirectResult(auth);
+
         if (result && result.user) {
-            goToNextPage();
+            goToNextPage(result.user);
         }
+
     } catch (error) {
-        console.log("Redirect Login Error:", error);
+
+        console.error("Redirect Result Error:", error);
+
         setLoading(false);
+
         showError(friendlyError(error));
     }
 }
 
+
+/* AUTH STATE */
 onAuthStateChanged(auth, user => {
+
+    authInitialized = true;
+
     if (user) {
-        goToNextPage();
+        goToNextPage(user);
     }
+
 });
 
+
+/* INITIALIZE LOGIN */
 async function initializeLogin() {
+
     try {
-        await setPersistence(auth, browserLocalPersistence);
-        await checkRedirectResult();
+
+        await setPersistence(
+            auth,
+            browserLocalPersistence
+        );
+
+        await handleRedirectResult();
+
     } catch (error) {
-        console.log("Firebase Initialization Error:", error);
+
+        console.error("Firebase Initialization Error:", error);
+
         setLoading(false);
+
         showError(friendlyError(error));
     }
+
 }
 
 initializeLogin();
 
-if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./service-worker.js").catch(error => {
-            console.log("Service Worker Error:", error);
-        });
-    });
+
+/* ONLINE / OFFLINE */
+function updateNetworkStatus() {
+
+    if (navigator.onLine) {
+        offlineBanner.style.display = "none";
+    } else {
+        offlineBanner.style.display = "block";
+    }
+
 }
+
+window.addEventListener("online", updateNetworkStatus);
+window.addEventListener("offline", updateNetworkStatus);
+
+updateNetworkStatus();
+
+
+/* TOUCH SPARKLES */
+const sparkleEmojis = ["✨", "⭐", "🌟", "💫"];
+
+document.addEventListener("pointerdown", event => {
+
+    if (event.target.closest("#googleBtn")) return;
+
+    const sparkle = document.createElement("span");
+
+    sparkle.className = "sparkle";
+
+    sparkle.textContent =
+        sparkleEmojis[
+            Math.floor(Math.random() * sparkleEmojis.length)
+        ];
+
+    sparkle.style.left = event.clientX + "px";
+    sparkle.style.top = event.clientY + "px";
+
+    document.body.appendChild(sparkle);
+
+    setTimeout(() => sparkle.remove(), 800);
+
+});
+
+
+/* SERVICE WORKER */
+if ("serviceWorker" in navigator) {
+
+    window.addEventListener("load", () => {
+
+        navigator.serviceWorker
+            .register("./service-worker.js")
+            .catch(error => {
+                console.error("Service Worker Error:", error);
+            });
+
+    });
+
+}
+
 </script>
 
 </body>
