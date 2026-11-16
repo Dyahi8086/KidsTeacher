@@ -1,22 +1,14 @@
-{
-  "name": "Kids Teacher",
-  "short_name": "Kids Teacher",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#ff3b00",
-  "theme_color": "#ff3b00",
   "icons": [
-    {
-      "src": "./icons/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
     {
       "src": "./icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icons/splash-blank.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
-}
