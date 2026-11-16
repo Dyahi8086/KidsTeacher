@@ -1,49 +1,45 @@
-const CACHE_NAME = 'kids-teacher-v5'; // Version change kiya
+const CACHE_NAME = 'kids-teacher-v6';
 
 const ASSETS_TO_CACHE = [
-    './',
-    './index.html',
-    './login.html',
-    './age-select.html',
-    './index-home.html',
-    './welcome_bg.png',
-    './manifest.json',
-    './icons/icon-192.png',
-    './icons/icon-512.png'
+  './',
+  './index.html',
+  './login.html',
+  './age-select.html',
+  './index-home.html',
+  './manifest.json',
+  './icons/icon-192.png',
+  './icons/icon-512.png'
 ];
 
 self.addEventListener('install', (event) => {
-    self.skipWaiting(); 
-    event.waitUntil(
-        caches.open(CACHE_NAME).then((cache) => {
-            return cache.addAll(ASSETS_TO_CACHE);
-        })
-    );
+  self.skipWaiting();
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS_TO_CACHE))
+  );
 });
 
 self.addEventListener('activate', (event) => {
-    event.waitUntil(
-        caches.keys().then((keys) => {
-            return Promise.all(
-                keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
-            );
-        })
-    );
-    self.clients.claim(); 
+  event.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(
+        keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
+      )
+    )
+  );
+  self.clients.claim();
 });
 
+// Network-First: Hamesha pehle latest page layega
 self.addEventListener('fetch', (event) => {
-    event.respondWith(
-        caches.match(event.request).then((cachedResponse) => {
-            if (cachedResponse) {
-                fetch(event.request).then((networkResponse) => {
-                    caches.open(CACHE_NAME).then((cache) => {
-                        cache.put(event.request, networkResponse);
-                    });
-                }).catch(() => {});
-                return cachedResponse;
-            }
-            return fetch(event.request);
-        })
-    );
+  event.respondWith(
+    fetch(event.request)
+      .then((networkResponse) => {
+        const responseClone = networkResponse.clone();
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, responseClone);
+        });
+        return networkResponse;
+      })
+      .catch(() => caches.match(event.request))
+  );
 });
