@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#F7EBEF">
+<meta name="theme-color" content="#FFF0F5">
 <meta name="description" content="Kids Teacher - A fun learning journey for children.">
 <title>Parents Login - Kids Teacher</title>
 
@@ -49,11 +50,9 @@ body {
     isolation: isolate;
     font-family: 'Plus Jakarta Sans', sans-serif;
 
-    /* Soft Pink Liquid Glass Background */
     background:
-        radial-gradient(circle at 15% 15%, rgba(255,255,255,.95) 0%, transparent 35%),
-        radial-gradient(circle at 85% 30%, rgba(235,217,227,.6) 0%, transparent 40%),
-        radial-gradient(circle at 50% 85%, rgba(255,214,228,.5) 0%, transparent 45%),
+        radial-gradient(circle at 15% 15%, #FFFFFF 0%, transparent 30%),
+        radial-gradient(circle at 85% 30%, #EBD9E3 0%, transparent 35%),
         #F7EBEF;
 }
 
@@ -70,32 +69,32 @@ body {
 .glow {
     position: absolute;
     border-radius: 50%;
-    filter: blur(65px);
-    opacity: .65;
+    filter: blur(55px);
+    opacity: .55;
 }
 
 .glow-one {
-    width: 250px;
-    height: 250px;
+    width: 230px;
+    height: 230px;
     background: #FFD6E4;
     top: 8%;
-    left: -60px;
+    left: -80px;
     animation: glowFloat 8s ease-in-out infinite alternate;
 }
 
 .glow-two {
-    width: 280px;
-    height: 280px;
-    background: #F3D1E0;
+    width: 260px;
+    height: 260px;
+    background: #E4D5FF;
     top: 25%;
-    right: -80px;
+    right: -100px;
     animation: glowFloat 10s ease-in-out infinite alternate-reverse;
 }
 
 .glow-three {
-    width: 200px;
-    height: 200px;
-    background: #FFE4EC;
+    width: 180px;
+    height: 180px;
+    background: #F9D6C8;
     bottom: 5%;
     left: 20%;
 }
@@ -114,13 +113,12 @@ body {
     left: 0;
     width: 100%;
     padding: 11px 12px;
-    background: rgba(25,25,25,.85);
+    background: #191919;
     color: #fff;
     text-align: center;
     font-size: 12px;
     font-weight: 700;
     z-index: 10001;
-    backdrop-filter: blur(10px);
 }
 
 /* LOGIN PANEL */
@@ -129,7 +127,7 @@ body {
     position: relative;
     z-index: 10;
     width: 100%;
-    max-width: 460px;
+    max-width: 500px;
     height: 56vh;
     height: 56dvh;
     min-height: 450px;
@@ -148,23 +146,20 @@ body {
 
     background: linear-gradient(
         145deg,
-        rgba(255,255,255,.75),
-        rgba(255,245,248,.55) 55%,
-        rgba(247,235,239,.65)
+        rgba(255,255,255,.96),
+        rgba(255,245,248,.98) 55%,
+        rgba(245,231,239,.98)
     );
 
     border-radius: 45px 45px 0 0;
-    border-top: 2.5px solid rgba(255,255,255,.95);
-    border-left: 1.5px solid rgba(255,255,255,.8);
-    border-right: 1.5px solid rgba(232,213,221,.6);
+    border-top: 3px solid #FFFFFF;
+    border-left: 1.5px solid #FFFFFF;
+    border-right: 1.5px solid #E8D5DD;
 
     box-shadow:
-        0 -24px 65px rgba(130,80,100,.16),
-        inset 0 3px 8px rgba(255,255,255,.95),
-        inset 0 -5px 15px rgba(220,180,195,.25);
-
-    backdrop-filter: blur(32px) saturate(175%);
-    -webkit-backdrop-filter: blur(32px) saturate(175%);
+        0 -20px 55px rgba(130,80,100,.14),
+        inset 0 3px 7px rgba(255,255,255,.95),
+        inset 0 -5px 15px rgba(220,180,195,.22);
 
     animation: slideUp .8s cubic-bezier(.2,.8,.2,1) both;
 }
@@ -185,10 +180,10 @@ body {
     width: 65px;
     height: 6px;
     border-radius: 20px;
-    background: rgba(255,255,255,.8);
+    background: #E8D5DD;
     box-shadow:
-        inset 0 2px 3px rgba(130,80,100,.12),
-        0 1px 2px rgba(255,255,255,.9);
+        inset 0 2px 3px rgba(0,0,0,.12),
+        0 1px 1px rgba(255,255,255,.9);
 }
 
 /* ICON */
@@ -197,23 +192,17 @@ body {
     width: 86px;
     height: 86px;
     flex-shrink: 0;
-    background: linear-gradient(145deg, rgba(255,255,255,.9), rgba(240,225,231,.6));
+    background: linear-gradient(145deg,#fff,#F0E1E7);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 18px;
 
-    border: 1px solid rgba(255,255,255,.9);
-
     box-shadow:
-        12px 12px 28px rgba(180,130,150,.2),
-        -8px -8px 24px rgba(255,255,255,.9),
-        inset 0 2px 4px rgba(255,255,255,.95),
-        inset 0 -2px 8px rgba(200,150,170,.15);
-
-    backdrop-filter: blur(22px) saturate(160%);
-    -webkit-backdrop-filter: blur(22px) saturate(160%);
+        8px 8px 16px rgba(200,150,170,.30),
+        -8px -8px 16px rgba(255,255,255,.95),
+        inset 0 2px 3px rgba(255,255,255,.9);
 }
 
 .icon-3d {
@@ -234,11 +223,10 @@ body {
     font-family: 'Outfit', sans-serif;
     font-size: clamp(32px,8vw,43px);
     font-weight: 800;
-    color: #1A151C;
+    color: #15121A;
     line-height: 1.15;
     letter-spacing: -1px;
     margin-bottom: 8px;
-    text-shadow: 0 2px 12px rgba(255,255,255,.6);
 }
 
 .app-subtitle {
@@ -247,16 +235,16 @@ body {
     font-weight: 700;
     color: #65545D;
     line-height: 1.5;
-    margin-bottom: 26px;
+    margin-bottom: 30px;
 }
 
-/* GOOGLE BUTTON WRAPPER (Optimized Width) */
+/* GOOGLE BUTTON OUTER - ORIGINAL DESIGN */
 
 .google-btn-wrapper {
     position: relative;
     isolation: isolate;
     width: 100%;
-    max-width: 330px;
+    max-width: 380px;
     padding: 2px;
     border-radius: 42px;
     overflow: hidden;
@@ -298,19 +286,19 @@ body {
     to { transform: rotate(360deg); }
 }
 
-/* GOOGLE BUTTON */
+/* GOOGLE BUTTON - UNCHANGED */
 
 .google-btn {
     position: relative;
     z-index: 2;
     width: 100%;
-    min-height: 56px;
-    padding: 12px 16px;
+    min-height: 62px;
+    padding: 13px 18px;
 
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
 
     background: linear-gradient(
         180deg,
@@ -325,7 +313,7 @@ body {
     border-top: 1px solid rgba(255,255,255,.22);
 
     font-family: 'Outfit', sans-serif;
-    font-size: clamp(16px, 4.2vw, 19px);
+    font-size: clamp(17px,4.5vw,21px);
     font-weight: 700;
 
     box-shadow:
@@ -349,12 +337,12 @@ body {
 /* GOOGLE ICON */
 
 .google-icon-svg {
-    width: 24px;
-    height: 24px;
+    width: 27px;
+    height: 27px;
     flex-shrink: 0;
 }
 
-/* ANIMATED ALPHABETS (WAVE EFFECT FIX) */
+/* ANIMATED ALPHABETS */
 
 .btn-text {
     display: inline-flex;
@@ -384,7 +372,7 @@ body {
 }
 
 .btn-letter.space {
-    width: .25em;
+    width: .28em;
     animation: none;
 }
 
@@ -407,17 +395,16 @@ body {
     font-size: 12px;
     color: #65545D;
     font-weight: 600;
-    line-height: 1.6;
-    margin-top: 20px;
+    line-height: 1.7;
+    margin-top: 24px;
     padding: 0 8px;
-    text-shadow: 0 1px 6px rgba(255,255,255,.5);
 }
 
 .privacy-text a {
-    color: #1A151C;
+    color: #171217;
     text-decoration: none;
     font-weight: 800;
-    border-bottom: 1.5px solid #1A151C;
+    border-bottom: 1.5px solid #171217;
 }
 
 /* ERROR */
@@ -425,17 +412,16 @@ body {
 #errorBox {
     display: none;
     width: 100%;
-    max-width: 350px;
-    padding: 10px 12px;
-    margin-top: 10px;
-    border-radius: 12px;
-    background: rgba(255,235,240,.75);
-    border: 1px solid rgba(254,178,178,.8);
+    max-width: 380px;
+    padding: 11px 14px;
+    margin-top: 13px;
+    border-radius: 14px;
+    background: #FFF1F1;
+    border: 1px solid #FEB2B2;
     color: #B42318;
     font-size: 12px;
     font-weight: 700;
     overflow-wrap: anywhere;
-    backdrop-filter: blur(15px);
 }
 
 /* SUCCESS */
@@ -443,16 +429,15 @@ body {
 #successBox {
     display: none;
     width: 100%;
-    max-width: 350px;
+    max-width: 380px;
     padding: 10px 12px;
-    margin-top: 10px;
-    border-radius: 12px;
-    background: rgba(236,253,243,.75);
-    border: 1px solid rgba(166,244,197,.8);
+    margin-top: 12px;
+    border-radius: 14px;
+    background: #ECFDF3;
+    border: 1px solid #A6F4C5;
     color: #067647;
     font-size: 12px;
     font-weight: 700;
-    backdrop-filter: blur(15px);
 }
 
 /* LOADING OVERLAY */
@@ -462,9 +447,9 @@ body {
     position: fixed;
     inset: 0;
     z-index: 9999;
-    background: rgba(247,235,239,.65);
-    backdrop-filter: blur(25px) saturate(160%);
-    -webkit-backdrop-filter: blur(25px) saturate(160%);
+    background: rgba(247,235,239,.91);
+    backdrop-filter: blur(13px);
+    -webkit-backdrop-filter: blur(13px);
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -473,12 +458,11 @@ body {
 .spinner {
     width: 52px;
     height: 52px;
-    border: 4px solid rgba(255,255,255,.8);
+    border: 4px solid #E8D5DD;
     border-top: 4px solid #151515;
     border-radius: 50%;
     animation: spin .8s linear infinite;
     margin-bottom: 17px;
-    box-shadow: 0 8px 25px rgba(130,80,100,.15);
 }
 
 @keyframes spin {
@@ -487,7 +471,7 @@ body {
 
 .loading-text {
     font-family: 'Outfit', sans-serif;
-    color: #1A151C;
+    color: #171217;
     font-size: 19px;
     font-weight: 700;
 }
@@ -510,6 +494,290 @@ body {
     100% {
         transform: scale(1.4) translateY(-35px);
         opacity: 0;
+    }
+}
+
+/* RESPONSIVE */
+
+@media (max-height: 720px) {
+    .login-popup-box {
+        height: 65dvh;
+        min-height: 410px;
+        padding-top: 35px;
+    }
+
+    .icon-container {
+        width: 68px;
+        height: 68px;
+        margin-bottom: 10px;
+    }
+
+    .icon-3d {
+        font-size: 34px;
+    }
+
+    .app-subtitle {
+        margin-bottom: 18px;
+    }
+
+    .google-btn {
+        min-height: 55px;
+    }
+
+    .privacy-text {
+        margin-top: 17px;
+    }
+}
+
+@media (max-width: 360px) {
+    .login-popup-box {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .app-title {
+        font-size: 31px;
+    }
+
+    .privacy-text {
+        font-size: 11px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ==========================================
+   LIQUID GLASS VISUAL UPDATE
+   ========================================== */
+
+:root {
+    --bg: #fff0f5;
+    --card: rgba(255,255,255,.34);
+    --muted: #5f5870;
+    --border: rgba(255,255,255,.72);
+}
+
+/* SOFT PINK BACKGROUND */
+
+body {
+    background:
+        radial-gradient(
+            ellipse at 12% 12%,
+            #FFFFFF 0%,
+            transparent 34%
+        ),
+        radial-gradient(
+            ellipse at 88% 25%,
+            rgba(255,190,215,.55) 0%,
+            transparent 38%
+        ),
+        radial-gradient(
+            ellipse at 18% 88%,
+            rgba(255,215,225,.65) 0%,
+            transparent 38%
+        ),
+        linear-gradient(
+            145deg,
+            #FFF0F5 0%,
+            #FCE4EC 48%,
+            #F8DDEB 100%
+        );
+}
+
+.background-glow {
+    position: fixed;
+    inset: 0;
+}
+
+.glow {
+    opacity: .72;
+    filter: blur(68px);
+}
+
+.glow-one {
+    background:
+        radial-gradient(
+            circle,
+            #FFB9D5 0%,
+            #FFD6E7 55%,
+            transparent 75%
+        );
+}
+
+.glow-two {
+    background:
+        radial-gradient(
+            circle,
+            #F5C4DA 0%,
+            #FAD9E9 55%,
+            transparent 75%
+        );
+}
+
+.glow-three {
+    background:
+        radial-gradient(
+            circle,
+            #FFE0E8 0%,
+            #FFC6DA 55%,
+            transparent 75%
+        );
+    filter: blur(65px);
+}
+
+/* LIQUID GLASS LOGIN PANEL */
+
+.login-popup-box {
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.68),
+        rgba(255,255,255,.38) 48%,
+        rgba(255,231,241,.42)
+    );
+
+    border: 1px solid rgba(255,255,255,.82);
+    border-top: 2px solid rgba(255,255,255,.95);
+    border-left: 1px solid rgba(255,255,255,.8);
+    border-right: 1px solid rgba(255,255,255,.55);
+    border-radius: 45px 45px 0 0;
+
+    box-shadow:
+        0 -24px 65px rgba(91,74,139,.16),
+        inset 0 2px 2px rgba(255,255,255,.95),
+        inset 0 -1px 16px rgba(255,255,255,.28);
+
+    backdrop-filter: blur(32px) saturate(175%);
+    -webkit-backdrop-filter: blur(32px) saturate(175%);
+}
+
+.login-popup-box::before {
+    width: 68px;
+    height: 6px;
+    background: rgba(255,255,255,.72);
+    border: 1px solid rgba(255,255,255,.8);
+    box-shadow:
+        inset 0 1px 3px rgba(91,74,139,.12),
+        0 2px 8px rgba(91,74,139,.08);
+}
+
+/* LIQUID GLASS ICON */
+
+.icon-container {
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.86),
+        rgba(255,255,255,.32)
+    );
+
+    border: 1px solid rgba(255,255,255,.9);
+
+    box-shadow:
+        12px 12px 28px rgba(119,91,157,.13),
+        -8px -8px 24px rgba(255,255,255,.8),
+        inset 0 2px 4px rgba(255,255,255,.95),
+        inset 0 -2px 8px rgba(190,170,230,.12);
+
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+}
+
+.app-title {
+    color: #282139;
+    text-shadow: 0 2px 14px rgba(255,255,255,.55);
+}
+
+.app-subtitle {
+    color: #625a73;
+}
+
+/* GOOGLE BUTTON, RAINBOW BORDER, SVG AND LETTER ANIMATION
+   ARE KEPT AS IN THE ORIGINAL CODE. */
+
+.privacy-text {
+    color: #625a73;
+    text-shadow: 0 1px 8px rgba(255,255,255,.55);
+}
+
+.privacy-text a {
+    color: #35294e;
+    border-bottom-color: rgba(73,54,111,.65);
+}
+
+/* OFFLINE BANNER */
+
+#offlineBanner {
+    background: rgba(35,29,49,.72);
+    border: 1px solid rgba(255,255,255,.35);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+/* GLASS ERROR AND SUCCESS */
+
+#errorBox, #successBox {
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    box-shadow:
+        0 8px 24px rgba(70,55,100,.08),
+        inset 0 1px 1px rgba(255,255,255,.75);
+}
+
+#errorBox {
+    background: rgba(255,235,240,.58);
+    border: 1px solid rgba(255,255,255,.8);
+}
+
+#successBox {
+    background: rgba(225,255,239,.58);
+    border: 1px solid rgba(255,255,255,.8);
+}
+
+/* GLASS LOADING OVERLAY */
+
+#loadingOverlay {
+    background: rgba(255,225,237,.48);
+    backdrop-filter: blur(28px) saturate(165%);
+    -webkit-backdrop-filter: blur(28px) saturate(165%);
+}
+
+.spinner {
+    border-color: rgba(255,255,255,.72);
+    border-top-color: #d65b91;
+    box-shadow: 0 8px 25px rgba(94,73,145,.12);
+}
+
+.loading-text {
+    color: #34294b;
+}
+
+@media (max-height: 720px) {
+    .login-popup-box {
+        background: linear-gradient(
+            145deg,
+            rgba(255,255,255,.72),
+            rgba(255,255,255,.42) 52%,
+            rgba(255,231,241,.46)
+        );
+    }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .login-popup-box {
+        background: rgba(255,240,246,.94);
+    }
+
+    .icon-container {
+        background: rgba(255,255,255,.92);
+    }
+
+    #loadingOverlay {
+        background: rgba(255,232,240,.96);
     }
 }
 </style>
@@ -669,6 +937,7 @@ function renderLoadingText() {
     loading.textContent = "Connecting...";
 
     btnText.appendChild(loading);
+    
 
 }
 
@@ -697,8 +966,10 @@ function showSuccess(message) {
 }
 
 function hideMessages() {
-    successBox.style.display = "none";
+
     errorBox.style.display = "none";
+    successBox.style.display = "none";
+
 }
 
 /* FRIENDLY ERRORS */
@@ -950,6 +1221,7 @@ if ("serviceWorker" in navigator) {
     });
 
 }
-    </script>
+
+</script>
 </body>
 </html>
