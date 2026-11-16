@@ -12,10 +12,9 @@
 <link rel="icon" type="image/png" href="./icons/icon-192.png">
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
 
-<!-- PREMIUM FONTS -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root {
@@ -24,7 +23,6 @@
     --dark: #111111;
     --muted: #65545D;
     --border: #E8D5DD;
-    --shadow: rgba(130,80,100,.15);
 }
 
 * {
@@ -36,7 +34,7 @@
 
 html, body {
     width: 100%;
-    min-height: 100%;
+    height: 100%;
     overflow: hidden;
 }
 
@@ -44,26 +42,22 @@ body {
     height: 100vh;
     height: 100dvh;
     width: 100%;
-
     display: flex;
     justify-content: flex-end;
     align-items: center;
     flex-direction: column;
-
     position: relative;
     isolation: isolate;
-
     font-family: 'Plus Jakarta Sans', sans-serif;
 
     background:
         radial-gradient(circle at 15% 15%, #FFFFFF 0%, transparent 30%),
         radial-gradient(circle at 85% 30%, #EBD9E3 0%, transparent 35%),
         #F7EBEF;
-
-    background-size: 100% 100%;
 }
 
-/* BACKGROUND DECORATION */
+/* BACKGROUND */
+
 .background-glow {
     position: absolute;
     inset: 0;
@@ -110,7 +104,8 @@ body {
     to { transform: translate(20px,30px) scale(1.15); }
 }
 
-/* OFFLINE BANNER */
+/* OFFLINE */
+
 #offlineBanner {
     display: none;
     position: fixed;
@@ -118,32 +113,25 @@ body {
     left: 0;
     width: 100%;
     padding: 11px 12px;
-
     background: #191919;
     color: #fff;
-
     text-align: center;
     font-size: 12px;
     font-weight: 700;
-
     z-index: 10001;
-    box-shadow: 0 4px 15px rgba(0,0,0,.2);
 }
 
 /* LOGIN PANEL */
+
 .login-popup-box {
     position: relative;
     z-index: 10;
-
     width: 100%;
     max-width: 500px;
-
     height: 56vh;
     height: 56dvh;
-
     min-height: 450px;
     max-height: 700px;
-
     flex-shrink: 0;
 
     display: flex;
@@ -156,16 +144,14 @@ body {
         24px
         max(28px, env(safe-area-inset-bottom));
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.96),
-            rgba(255,245,248,.98) 55%,
-            rgba(245,231,239,.98)
-        );
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.96),
+        rgba(255,245,248,.98) 55%,
+        rgba(245,231,239,.98)
+    );
 
     border-radius: 45px 45px 0 0;
-
     border-top: 3px solid #FFFFFF;
     border-left: 1.5px solid #FFFFFF;
     border-right: 1.5px solid #E8D5DD;
@@ -184,38 +170,33 @@ body {
 }
 
 /* HANDLE */
+
 .login-popup-box::before {
     content: "";
     position: absolute;
     top: 17px;
     left: 50%;
     transform: translateX(-50%);
-
     width: 65px;
     height: 6px;
     border-radius: 20px;
-
     background: #E8D5DD;
-
     box-shadow:
         inset 0 2px 3px rgba(0,0,0,.12),
         0 1px 1px rgba(255,255,255,.9);
 }
 
 /* ICON */
+
 .icon-container {
     width: 86px;
     height: 86px;
-
     flex-shrink: 0;
-
     background: linear-gradient(145deg,#fff,#F0E1E7);
     border-radius: 50%;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     margin-bottom: 18px;
 
     box-shadow:
@@ -227,9 +208,7 @@ body {
 .icon-3d {
     font-size: 43px;
     line-height: 1;
-
     filter: drop-shadow(0 5px 6px rgba(0,0,0,.15));
-
     animation: iconFloat 3s ease-in-out infinite;
 }
 
@@ -239,61 +218,51 @@ body {
 }
 
 /* HEADING */
+
 .app-title {
     font-family: 'Outfit', sans-serif;
     font-size: clamp(32px,8vw,43px);
     font-weight: 800;
-
     color: #15121A;
-
     line-height: 1.15;
     letter-spacing: -1px;
-
     margin-bottom: 8px;
 }
 
 .app-subtitle {
     font-family: 'Plus Jakarta Sans', sans-serif;
-
     font-size: clamp(13px,3.5vw,15px);
     font-weight: 700;
-
     color: #65545D;
-
     line-height: 1.5;
     margin-bottom: 30px;
 }
 
 /* GOOGLE BUTTON OUTER */
+
 .google-btn-wrapper {
     position: relative;
     isolation: isolate;
-
     width: 100%;
     max-width: 380px;
-
-    padding: 3px;
+    padding: 2px;
     border-radius: 42px;
-
     overflow: hidden;
-
     background: #151515;
 
     box-shadow:
-        0 12px 28px rgba(130,80,100,.18),
-        0 4px 10px rgba(0,0,0,.10);
+        0 12px 28px rgba(130,80,100,.16),
+        0 4px 10px rgba(0,0,0,.08);
 }
 
-/* ROTATING RAINBOW */
+/* SOFT RAINBOW */
+
 .google-btn-wrapper::before {
     content: "";
-
     position: absolute;
     z-index: -1;
-
     width: 220%;
     height: 600%;
-
     left: -60%;
     top: -250%;
 
@@ -309,7 +278,7 @@ body {
         #00D4FF
     );
 
-    animation: rainbowRotate 4s linear infinite;
+    animation: rainbowRotate 7s linear infinite;
 }
 
 @keyframes rainbowRotate {
@@ -318,13 +287,12 @@ body {
 }
 
 /* BUTTON */
+
 .google-btn {
     position: relative;
     z-index: 2;
-
     width: 100%;
     min-height: 62px;
-
     padding: 13px 18px;
 
     display: flex;
@@ -340,10 +308,8 @@ body {
     );
 
     color: #FDFBF7;
-
     border: none;
     border-radius: 40px;
-
     border-top: 1px solid rgba(255,255,255,.22);
 
     font-family: 'Outfit', sans-serif;
@@ -355,14 +321,11 @@ body {
         inset 0 -4px 7px rgba(0,0,0,.5);
 
     cursor: pointer;
-
-    transition:
-        transform .18s ease,
-        filter .18s ease;
+    transition: transform .18s ease, filter .18s ease;
 }
 
 .google-btn:active {
-    transform: scale(.97);
+    transform: scale(.975);
     filter: brightness(1.2);
 }
 
@@ -371,27 +334,68 @@ body {
     cursor: wait;
 }
 
+/* GOOGLE ICON */
+
 .google-icon-svg {
     width: 27px;
     height: 27px;
     flex-shrink: 0;
 }
 
+/* ANIMATED ALPHABETS */
+
 .btn-text {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: pre;
     font-family: 'Outfit', sans-serif;
     font-weight: 700;
+    letter-spacing: -.25px;
+}
+
+.btn-letter {
+    display: inline-block;
+    transform: translateY(0);
+    animation: letterWave 1.8s ease-in-out infinite;
+    animation-delay: calc(var(--letter-index) * 0.075s);
+    will-change: transform;
+}
+
+@keyframes letterWave {
+    0%, 70%, 100% {
+        transform: translateY(0);
+    }
+    35% {
+        transform: translateY(-4px);
+    }
+}
+
+.btn-letter.space {
+    width: .28em;
+    animation: none;
+}
+
+/* LOADING TEXT */
+
+.btn-loading {
+    display: inline-block;
+    animation: loadingPulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes loadingPulse {
+    from { opacity: .55; }
+    to { opacity: 1; }
 }
 
 /* PRIVACY */
+
 .privacy-text {
     font-family: 'Plus Jakarta Sans', sans-serif;
-
     font-size: 12px;
     color: #65545D;
-
     font-weight: 600;
     line-height: 1.7;
-
     margin-top: 24px;
     padding: 0 8px;
 }
@@ -400,66 +404,52 @@ body {
     color: #171217;
     text-decoration: none;
     font-weight: 800;
-
     border-bottom: 1.5px solid #171217;
 }
 
 /* ERROR */
+
 #errorBox {
     display: none;
-
     width: 100%;
     max-width: 380px;
-
     padding: 11px 14px;
     margin-top: 13px;
-
     border-radius: 14px;
-
     background: #FFF1F1;
     border: 1px solid #FEB2B2;
-
     color: #B42318;
-
     font-size: 12px;
     font-weight: 700;
-
     overflow-wrap: anywhere;
 }
 
 /* SUCCESS */
+
 #successBox {
     display: none;
-
     width: 100%;
     max-width: 380px;
-
     padding: 10px 12px;
     margin-top: 12px;
-
     border-radius: 14px;
-
     background: #ECFDF3;
     border: 1px solid #A6F4C5;
-
     color: #067647;
     font-size: 12px;
     font-weight: 700;
 }
 
-/* LOADING */
+/* LOADING OVERLAY */
+
 #loadingOverlay {
     display: none;
-
     position: fixed;
     inset: 0;
     z-index: 9999;
-
     background: rgba(247,235,239,.91);
-
     backdrop-filter: blur(13px);
     -webkit-backdrop-filter: blur(13px);
-
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -468,12 +458,9 @@ body {
 .spinner {
     width: 52px;
     height: 52px;
-
     border: 4px solid #E8D5DD;
     border-top: 4px solid #151515;
-
     border-radius: 50%;
-
     animation: spin .8s linear infinite;
     margin-bottom: 17px;
 }
@@ -490,13 +477,12 @@ body {
 }
 
 /* SPARKLES */
+
 .sparkle {
     position: fixed;
     z-index: 9998;
-
     pointer-events: none;
     font-size: 17px;
-
     animation: sparkleFade .8s ease-out forwards;
 }
 
@@ -512,6 +498,7 @@ body {
 }
 
 /* RESPONSIVE */
+
 @media (max-height: 720px) {
     .login-popup-box {
         height: 65dvh;
@@ -558,9 +545,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
+    *, *::before, *::after {
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
         scroll-behavior: auto !important;
@@ -581,7 +566,6 @@ body {
     ⚠️ No Internet Connection! Please check your network.
 </div>
 
-<!-- LOGIN PANEL -->
 <main class="login-popup-box">
 
     <div class="icon-container">
@@ -594,36 +578,24 @@ body {
         Guide your child's learning journey
     </p>
 
-    <!-- GOOGLE BUTTON -->
     <div class="google-btn-wrapper">
-
         <button
             type="button"
             id="googleBtn"
             class="google-btn"
             aria-label="Continue with Google"
         >
-
-            <svg
-                class="google-icon-svg"
-                viewBox="0 0 48 48"
-                aria-hidden="true"
-            >
+            <svg class="google-icon-svg" viewBox="0 0 48 48" aria-hidden="true">
                 <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-
                 <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-
                 <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-
                 <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
             </svg>
 
             <span class="btn-text" id="btnText">
                 Continue with Google
             </span>
-
         </button>
-
     </div>
 
     <div id="errorBox" role="alert" aria-live="polite"></div>
@@ -638,18 +610,13 @@ body {
 
 </main>
 
-<!-- LOADING -->
 <div id="loadingOverlay">
-
     <div class="spinner"></div>
-
     <p class="loading-text" id="loadingText">
         Connecting to Google...
     </p>
-
 </div>
 
-<!-- FIREBASE -->
 <script type="module">
 
 import { initializeApp }
@@ -666,8 +633,8 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
-
 /* FIREBASE CONFIG */
+
 const firebaseConfig = {
     apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
     authDomain: "kids-teacher-4387e.firebaseapp.com",
@@ -678,8 +645,8 @@ const firebaseConfig = {
     measurementId: "G-VJVS2ZMNLY"
 };
 
+/* INITIALIZE FIREBASE */
 
-/* FIREBASE INITIALIZATION */
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
@@ -689,8 +656,8 @@ provider.setCustomParameters({
     prompt: "select_account"
 });
 
-
 /* ELEMENTS */
+
 const googleBtn = document.getElementById("googleBtn");
 const btnText = document.getElementById("btnText");
 const overlay = document.getElementById("loadingOverlay");
@@ -699,33 +666,84 @@ const errorBox = document.getElementById("errorBox");
 const successBox = document.getElementById("successBox");
 const offlineBanner = document.getElementById("offlineBanner");
 
-
 /* STATE */
+
 let isBusy = false;
 let redirectHandled = false;
-let authInitialized = false;
+let authReady = false;
 
+/* ANIMATED BUTTON TEXT */
+
+function renderAnimatedText(text) {
+
+    btnText.replaceChildren();
+
+    [...text].forEach((character, index) => {
+
+        const letter = document.createElement("span");
+
+        letter.className = character === " "
+            ? "btn-letter space"
+            : "btn-letter";
+
+        letter.style.setProperty("--letter-index", index);
+
+        letter.textContent = character === " "
+            ? "\u00A0"
+            : character;
+
+        btnText.appendChild(letter);
+
+    });
+
+}
+
+function renderLoadingText() {
+
+    btnText.replaceChildren();
+
+    const loading = document.createElement("span");
+
+    loading.className = "btn-loading";
+    loading.textContent = "Connecting...";
+
+    btnText.appendChild(loading);
+
+}
+
+/* INITIAL BUTTON TEXT */
+
+renderAnimatedText("Continue with Google");
 
 /* MESSAGES */
+
 function showError(message) {
+
     errorBox.textContent = message;
     errorBox.style.display = "block";
+
     successBox.style.display = "none";
+
 }
 
 function showSuccess(message) {
+
     successBox.textContent = message;
     successBox.style.display = "block";
+
     errorBox.style.display = "none";
+
 }
 
 function hideMessages() {
+
     errorBox.style.display = "none";
     successBox.style.display = "none";
+
 }
 
-
 /* FRIENDLY ERRORS */
+
 function friendlyError(error) {
 
     const code = error?.code || "";
@@ -734,7 +752,8 @@ function friendlyError(error) {
 
         case "auth/api-key-not-valid":
         case "auth/invalid-api-key":
-            return "Firebase API key invalid hai. Firebase Project Settings mein Web App config check karo.";
+        case "auth/api-key-not-valid.-please-pass-a-valid-api-key.":
+            return "Firebase API key invalid hai. Firebase Web App configuration check karo.";
 
         case "auth/unauthorized-domain":
             return "GitHub Pages domain Firebase Authorized Domains mein add karo.";
@@ -752,18 +771,16 @@ function friendlyError(error) {
             return "Bahut saare attempts ho gaye. Thodi der baad try karo.";
 
         case "auth/web-storage-unsupported":
-            return "Browser storage support nahi kar raha. Chrome browser mein try karo.";
-
-        case "auth/invalid-credential":
-            return "Google login credential verify nahi ho paya. Dobara try karo.";
+            return "Browser storage support nahi kar raha. Chrome mein try karo.";
 
         default:
             return "Login failed: " + (code || error.message || "Unknown error");
     }
+
 }
 
-
 /* LOADING CONTROL */
+
 function setLoading(active, message = "Connecting to Google...") {
 
     isBusy = active;
@@ -774,13 +791,16 @@ function setLoading(active, message = "Connecting to Google...") {
 
     loadingText.textContent = message;
 
-    btnText.textContent = active
-        ? "Connecting..."
-        : "Continue with Google";
+    if (active) {
+        renderLoadingText();
+    } else {
+        renderAnimatedText("Continue with Google");
+    }
+
 }
 
-
 /* SUCCESS REDIRECT */
+
 function goToNextPage(user) {
 
     if (redirectHandled) return;
@@ -812,10 +832,11 @@ function goToNextPage(user) {
         }
 
     }, 700);
+
 }
 
-
 /* GOOGLE LOGIN */
+
 googleBtn.addEventListener("click", async () => {
 
     if (isBusy) return;
@@ -840,10 +861,7 @@ googleBtn.addEventListener("click", async () => {
             browserLocalPersistence
         );
 
-        await signInWithRedirect(
-            auth,
-            provider
-        );
+        await signInWithRedirect(auth, provider);
 
     } catch (error) {
 
@@ -852,12 +870,13 @@ googleBtn.addEventListener("click", async () => {
         setLoading(false);
 
         showError(friendlyError(error));
+
     }
 
 });
 
+/* REDIRECT RESULT */
 
-/* GOOGLE REDIRECT RESULT */
 async function handleRedirectResult() {
 
     try {
@@ -875,14 +894,16 @@ async function handleRedirectResult() {
         setLoading(false);
 
         showError(friendlyError(error));
+
     }
+
 }
 
-
 /* AUTH STATE */
+
 onAuthStateChanged(auth, user => {
 
-    authInitialized = true;
+    authReady = true;
 
     if (user) {
         goToNextPage(user);
@@ -890,8 +911,8 @@ onAuthStateChanged(auth, user => {
 
 });
 
+/* INITIALIZATION */
 
-/* INITIALIZE LOGIN */
 async function initializeLogin() {
 
     try {
@@ -910,21 +931,19 @@ async function initializeLogin() {
         setLoading(false);
 
         showError(friendlyError(error));
+
     }
 
 }
 
 initializeLogin();
 
+/* INTERNET STATUS */
 
-/* ONLINE / OFFLINE */
 function updateNetworkStatus() {
 
-    if (navigator.onLine) {
-        offlineBanner.style.display = "none";
-    } else {
-        offlineBanner.style.display = "block";
-    }
+    offlineBanner.style.display =
+        navigator.onLine ? "none" : "block";
 
 }
 
@@ -933,8 +952,8 @@ window.addEventListener("offline", updateNetworkStatus);
 
 updateNetworkStatus();
 
-
 /* TOUCH SPARKLES */
+
 const sparkleEmojis = ["✨", "⭐", "🌟", "💫"];
 
 document.addEventListener("pointerdown", event => {
@@ -946,36 +965,40 @@ document.addEventListener("pointerdown", event => {
     sparkle.className = "sparkle";
 
     sparkle.textContent =
-        sparkleEmojis[
-            Math.floor(Math.random() * sparkleEmojis.length)
-        ];
+        sparkleEmojis[ Math.floor(Math.random() * ];
 
-    sparkle.style.left = event.clientX + "px";
-    sparkle.style.top = event.clientY + "px";
+sparkleEmojis.length)
 
-    document.body.appendChild(sparkle);
+sparkle.style.left = event.clientX + "px";
 
-    setTimeout(() => sparkle.remove(), 800);
+sparkle.style.top = event.clientY + "px";
+
+document.body.appendChild(sparkle);
+
+setTimeout(() => sparkle.remove(), 800);
 
 });
 
-
 /* SERVICE WORKER */
+
 if ("serviceWorker" in navigator) {
 
-    window.addEventListener("load", () => {
+window.addEventListener("load", () => {
 
-        navigator.serviceWorker
-            .register("./service-worker.js")
-            .catch(error => {
-                console.error("Service Worker Error:", error);
-            });
+navigator.serviceWorker
 
-    });
+.register("./service-worker.js")
+
+.catch(error => {
+
+console.error("Service Worker
+
+Error:", error);
+
+});
+
+});
 
 }
 
 </script>
-
-</body>
-</html>
