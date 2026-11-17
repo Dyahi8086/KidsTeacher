@@ -66,17 +66,7 @@
             animation: logoSequence 0.72s cubic-bezier(.22, 1, .36, 1) 0.05s forwards;
         }
 
-        .kt-ears { display: none;\n
-            position: absolute;
-            width: 76px;
-            height: 58px;
-            top: 0;
-            left: 39px;
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            z-index: 2;
-        }
+        .kt-ears { display: none; }
 
         .kt-ear {
             width: 29px;
@@ -220,27 +210,15 @@
         <div class="kt-dot" aria-hidden="true"></div>
     </div>
 
-    <div id="transition-portal" aria-hidden="true"></div>
-
-    <script>
-        const portal = document.getElementById('transition-portal');
-        const themeColorMeta = document.getElementById('themeColorMeta');
-
-        function goToLogin() {
+<script>
+function goToLogin() {
             window.location.replace('login.html');
         }
 
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             setTimeout(goToLogin, 500);
         } else {
-            setTimeout(() => {
-                portal.classList.add('reveal');
-                if (themeColorMeta) {
-                    themeColorMeta.setAttribute('content', '#F7EBEF');
-                }
-            }, 2800);
-
-            setTimeout(goToLogin, 3450);
+            setTimeout(goToLogin, 3300);
         }
     </script>
 
