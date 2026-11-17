@@ -65,20 +65,36 @@ onAuthStateChanged(auth,async u=>{
  }catch(err){console.warn("Profile check:",err)}
  document.body.style.visibility="visible";
 });
-form.addEventListener("submit",e=>{
+form.addEventListener("submit",async e=>{
  e.preventDefault();
  if(submitting)return;
  const name=input.value.trim().replace(/\\s+/g," ");
  if(!name){status.textContent="Please enter your child's name.";return}
  if(!user){status.textContent="Please wait a moment and try again.";return}
- submitting=true;button.disabled=true;button.textContent="Continue →";status.textContent="";
- localStorage.setItem("kt_child_name",name);
- // Continue immediately; buddy-selection will save the complete profile.
- if(existingBuddy?.id){
-  setDoc(doc(db,"users",user.uid),{childName:name,buddy:{...existingBuddy,name},updatedAt:serverTimestamp()},{merge:true}).catch(err=>console.warn("Profile sync will retry later:",err));
-  location.replace("./index-home.html");
- }else{
-  location.replace("./buddy-selection.html");
+ submitting=true;button.disabled=true;button.textContent="Saving…";status.textContent="";
+ try{
+  // Save the name to this Gmail's own Firebase UID BEFORE opening Buddy Selection.
+  await setDoc(doc(db,"users",user.uid),{
+   childName:name,
+   displayName:user.displayName||"",
+   email:user.email||"",
+   updatedAt:serverTimestamp()
+  },{merge:true});
+  button.textContent="Continue →";
+  if(existingBuddy?.id){
+   await setDoc(doc(db,"users",user.uid),{
+    childName:name,
+    buddy:{...existingBuddy,name},
+    updatedAt:serverTimestamp()
+   },{merge:true});
+   location.replace("./index-home.html");
+  }else{
+   location.replace("./buddy-selection.html");
+  }
+ }catch(err){
+  console.error("Child name save failed:",err);
+  submitting=false;button.disabled=false;button.textContent="Continue →";
+  status.textContent="Name save nahi hua. Internet check karke dobara try karo.";
  }
 });
 </script>
