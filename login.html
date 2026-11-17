@@ -1509,25 +1509,13 @@ async function goToNextPage(user) {
             new Promise((_, reject) => setTimeout(() => reject(new Error("Profile check timed out")), 7000))
         ]);
         const data = snap.exists() ? snap.data() : {};
-        const localName = localStorage.getItem("kt_child_name") || "";
         let destination;
-        if (data.childName && data.buddy?.id) {
-            destination = "./index-home.html";
-        } else if (data.childName || localName) {
-            destination = data.buddy?.id ? "./index-home.html" : "./buddy-selection.html";
-        } else {
-            destination = "./child-name.html";
-        }
+        if (data.childName && data.buddy?.id) destination = "./index-home.html";
+        else if (data.childName) destination = "./buddy-selection.html";
+        else destination = "./child-name.html";
         window.location.replace(destination);
     } catch (error) {
         console.error("Profile routing error:", error);
-        const localName = localStorage.getItem("kt_child_name") || "";
-        let localBuddy = {};
-        try { localBuddy = JSON.parse(localStorage.getItem("kt_selected_buddy") || "{}"); } catch {}
-        if (localName && localBuddy.id) {
-            window.location.replace("./index-home.html");
-            return;
-        }
         setLoading(false);
         redirectHandled = false;
         showError("Profile load nahi ho paya. Internet check karke dobara try karo.");
