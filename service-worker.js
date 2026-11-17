@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kids-teacher-v46';
+const CACHE_NAME = 'kids-teacher-v47';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -12,7 +12,11 @@ const ASSETS_TO_CACHE = [
   './icons/icon-512.png'
 ];
 
-self.addEventListener('message', (event) => {\n  if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting();\n});\n\nself.addEventListener('install', (event) => {
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting();
+});
+
+self.addEventListener('install', (event) => {
   self.skipWaiting();
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
