@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#fff8f2">
+<title>Choose Your Buddy • Kids Teacher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#292321;--muted:#877b75;--orange:#ff6a3d;--cream:#fff8f2;--line:#f0e6df}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;font-family:Nunito,system-ui,sans-serif;color:var(--ink)}
+body{min-height:100dvh;background:radial-gradient(circle at 8% 4%,#ffe8d9 0,transparent 30%),radial-gradient(circle at 95% 28%,#ffeede 0,transparent 28%),var(--cream);padding:calc(18px + env(safe-area-inset-top)) 18px calc(24px + env(safe-area-inset-bottom))}
+.wrap{max-width:540px;margin:0 auto}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.brand{font-weight:900;font-size:15px;letter-spacing:1.6px}
+.step{font-size:12px;font-weight:900;color:#b36b50;background:#ffeadf;padding:8px 12px;border-radius:30px}
+h1{font-size:clamp(30px,8vw,42px);line-height:1.05;margin:12px 0 8px;font-weight:900;letter-spacing:-1.4px}
+.sub{margin:0;color:var(--muted);font-size:15px;line-height:1.5;font-weight:700}
+.hero{display:flex;align-items:center;gap:14px;margin:22px 0 18px;padding:15px 17px;background:#fff;border:1px solid #f3e7df;border-radius:22px;box-shadow:0 8px 24px #8c5a3510}
+.hero-face{font-size:43px;line-height:1}
+.hero strong{display:block;font-size:14px}
+.hero small{color:var(--muted);font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.buddy{border:1.5px solid var(--line);border-radius:22px;background:#fff;padding:14px 6px 12px;min-height:122px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;cursor:pointer;box-shadow:0 5px 14px #8c5a3508;transition:transform .16s,border-color .16s,background .16s}
+.buddy:active{transform:scale(.96)}
+.buddy.selected{border:2px solid var(--orange);background:#fff1e9;box-shadow:0 0 0 3px #ff6a3d18}
+.face{font-size:42px;line-height:1.1;filter:drop-shadow(0 4px 2px #6d4b2418)}
+.name{font-size:13px;font-weight:900}
+.check{font-size:10px;color:var(--orange);font-weight:900;min-height:12px}
+.footer{position:sticky;bottom:0;padding:18px 0 calc(8px + env(safe-area-inset-bottom));background:linear-gradient(transparent,var(--cream) 22%)}
+button#continue{width:100%;border:0;border-radius:18px;background:linear-gradient(135deg,#ff8158,#f45124);color:white;padding:17px;font:900 16px Nunito,sans-serif;box-shadow:0 7px 0 #d9421b,0 12px 22px #f4512430;cursor:pointer}
+button#continue:disabled{opacity:.45;box-shadow:none;cursor:not-allowed}
+.status{text-align:center;min-height:20px;margin:12px 0 0;color:#a34d32;font-size:12px;font-weight:800}
+@media(min-width:480px){.grid{gap:14px}.buddy{min-height:136px}.face{font-size:48px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="top"><div class="brand">KIDS TEACHER</div><div class="step">STEP 1 OF 1</div></div>
+  <h1>Choose your Buddy!</h1>
+  <p class="sub">Pick a cute friend to join your learning adventure.</p>
+  <div class="hero"><div class="hero-face" id="preview">🐰</div><div><strong id="previewTitle">Your buddy is waiting!</strong><small id="previewText">Tap any character below to choose</small></div></div>
+  <section class="grid" id="buddyGrid" aria-label="Choose a buddy"></section>
+  <div class="footer"><button id="continue" disabled>Choose this Buddy →</button><p class="status" id="status" role="status"></p></div>
+</main>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+const firebaseConfig={apiKey:"AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",authDomain:"kids-teacher-4387e.firebaseapp.com",projectId:"kids-teacher-4387e",storageBucket:"kids-teacher-4387e.firebasestorage.app",messagingSenderId:"420221167346",appId:"1:420221167346:web:da7ac80acdfd52339d526b",measurementId:"G-VJVS2ZMNLY"};
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
+const buddies=[["bunny","Bunny","🐰"],["bear","Bear","🐻"],["fox","Fox","🦊"],["cat","Kitty","🐱"],["panda","Panda","🐼"],["frog","Frog","🐸"],["lion","Lion","🦁"],["tiger","Tiger","🐯"],["koala","Koala","🐨"],["monkey","Monkey","🐵"],["chick","Chick","🐥"],["unicorn","Unicorn","🦄"]];
+let currentUser=null,selected=null;
+const grid=document.getElementById("buddyGrid"),button=document.getElementById("continue"),status=document.getElementById("status");
+function render(){grid.innerHTML="";buddies.forEach(([id,name,emoji])=>{const el=document.createElement("button");el.type="button";el.className="buddy"+(selected?.id===id?" selected":"");el.setAttribute("aria-pressed",String(selected?.id===id));el.innerHTML='<span class="face"></span><span class="name"></span><span class="check"></span>';el.querySelector(".face").textContent=emoji;el.querySelector(".name").textContent=name;el.querySelector(".check").textContent=selected?.id===id?"✓ SELECTED":"";el.addEventListener("click",()=>{selected={id,name,emoji};document.getElementById("preview").textContent=emoji;document.getElementById("previewTitle").textContent=name+" is your buddy!";document.getElementById("previewText").textContent="Great choice. Let's start learning!";button.disabled=false;render()});grid.appendChild(el)})}
+onAuthStateChanged(auth,async user=>{if(!user){location.replace("./login.html");return}currentUser=user;try{const snap=await getDoc(doc(db,"users",user.uid));if(snap.exists()&&snap.data().buddy?.id){location.replace("./index-home.html");return}}catch(e){console.error(e);status.textContent="Couldn't load your saved buddy. Please try again."}render()});
+button.addEventListener("click",async()=>{if(!currentUser||!selected)return;button.disabled=true;button.textContent="Saving your Buddy…";status.textContent="";try{await setDoc(doc(db,"users",currentUser.uid),{buddy:selected,displayName:currentUser.displayName||"",email:currentUser.email||"",updatedAt:serverTimestamp()},{merge:true});location.replace("./index-home.html")}catch(e){console.error(e);status.textContent=e.code==="permission-denied"?"Firestore permission denied. Database rules need to allow signed-in users to save their own profile.":"Couldn't save your Buddy. Check internet and try again.";button.disabled=false;button.textContent="Choose this Buddy →"}});
+</script>
+</body>
+</html>
