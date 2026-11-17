@@ -44,29 +44,29 @@
             background: #ff321e;
         }
 
-        /* 1. BUNNY K LOGO */
+        /* 1. SIMPLE WHITE BRAND MARK */
         .kt-mark {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 150px;
-            height: 142px;
+            width: 76px;
+            height: 76px;
             display: flex;
             align-items: flex-end;
             justify-content: center;
             color: #fff;
             font-family: Arial, sans-serif;
-            font-size: 132px;
+            font-size: 76px;
             font-weight: 900;
             line-height: .88;
-            letter-spacing: -12px;
-            padding-right: 10px;
+            letter-spacing: -7px;
+            padding-right: 6px;
             opacity: 0;
             transform: translate(-50%, -50%) scale(0.5);
             animation: logoSequence 0.72s cubic-bezier(.22, 1, .36, 1) 0.05s forwards;
         }
 
-        .kt-ears {
+        .kt-ears { display: none;\n
             position: absolute;
             width: 76px;
             height: 58px;
@@ -89,7 +89,7 @@
         .kt-ear:first-child { transform: rotate(-12deg); }
         .kt-ear:last-child { transform: rotate(13deg); }
 
-        .kt-face {
+        .kt-face { display: none;\n
             position: absolute;
             z-index: 3;
             top: 75px;
@@ -137,7 +137,7 @@
             font-family: 'Nunito', Arial, sans-serif;
             font-size: clamp(10px, 2.8vw, 13px);
             font-weight: 900;
-            letter-spacing: .45px;
+            letter-spacing: .15px;
             text-align: center;
             white-space: nowrap;
             opacity: 0;
