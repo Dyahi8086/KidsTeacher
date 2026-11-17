@@ -742,64 +742,64 @@ body {
 }
 
 
-/* FROSTED WHITE GLASS THEME */
+/* SOFT ORIGINAL RED-ORANGE THEME — layout and functionality unchanged */
 body {
     background:
         radial-gradient(ellipse at 12% 12%, #FFFFFF 0%, transparent 38%),
-        radial-gradient(ellipse at 88% 25%, rgba(255,255,255,.82) 0%, transparent 42%),
-        radial-gradient(ellipse at 18% 88%, rgba(244,244,248,.82) 0%, transparent 42%),
-        linear-gradient(145deg, #FAFAFC 0%, #F1F1F5 52%, #E9E9EF 100%);
+        radial-gradient(ellipse at 88% 25%, rgba(255,205,184,.52) 0%, transparent 42%),
+        radial-gradient(ellipse at 18% 88%, rgba(255,222,207,.68) 0%, transparent 42%),
+        linear-gradient(145deg, #FFF8F5 0%, #FFF0EA 52%, #FFE5DA 100%);
 }
 .glow-one {
-    background: radial-gradient(circle, #FFFFFF 0%, #F5F5F8 58%, transparent 76%);
+    background: radial-gradient(circle, #FFD5C5 0%, #FFE8DF 58%, transparent 76%);
 }
 .glow-two {
-    background: radial-gradient(circle, #FFFFFF 0%, #ECECF2 58%, transparent 76%);
+    background: radial-gradient(circle, #FFCDBB 0%, #FFE9E1 58%, transparent 76%);
 }
 .glow-three {
-    background: radial-gradient(circle, #FFFFFF 0%, #F0F0F4 58%, transparent 76%);
+    background: radial-gradient(circle, #FFE4D9 0%, #FFD5C7 58%, transparent 76%);
 }
 .login-popup-box {
     background: linear-gradient(145deg,
-        rgba(255,255,255,.78),
-        rgba(255,255,255,.48) 50%,
-        rgba(248,248,251,.56));
+        rgba(255,255,255,.82),
+        rgba(255,250,247,.58) 50%,
+        rgba(255,238,230,.62));
     border-color: rgba(255,255,255,.96);
     box-shadow:
-        0 -24px 65px rgba(55,55,75,.10),
+        0 -24px 65px rgba(177,91,62,.11),
         inset 0 2px 2px rgba(255,255,255,.98),
-        inset 0 -1px 16px rgba(220,220,230,.25);
+        inset 0 -1px 16px rgba(245,190,170,.22);
     backdrop-filter: blur(38px) saturate(155%);
     -webkit-backdrop-filter: blur(38px) saturate(155%);
 }
 .login-popup-box::before {
-    background: rgba(255,255,255,.88);
+    background: rgba(255,255,255,.9);
     border-color: rgba(255,255,255,.98);
-    box-shadow: inset 0 1px 3px rgba(70,70,90,.08),
-                0 2px 8px rgba(70,70,90,.06);
+    box-shadow: inset 0 1px 3px rgba(140,75,55,.07),
+                0 2px 8px rgba(140,75,55,.05);
 }
 .icon-container {
-    background: linear-gradient(145deg, rgba(255,255,255,.96), rgba(245,245,249,.66));
+    background: linear-gradient(145deg, rgba(255,255,255,.98), rgba(255,239,231,.72));
     border-color: rgba(255,255,255,.98);
     box-shadow:
-        12px 12px 28px rgba(75,75,95,.10),
+        12px 12px 28px rgba(170,103,78,.10),
         -8px -8px 24px rgba(255,255,255,.96),
         inset 0 2px 4px rgba(255,255,255,1),
-        inset 0 -2px 8px rgba(190,190,205,.10);
+        inset 0 -2px 8px rgba(220,160,135,.10);
 }
-.app-title { color: #211F2A; }
-.app-subtitle, .privacy-text { color: #686675; }
-.privacy-text a { color: #302E3A; border-bottom-color: rgba(70,68,85,.6); }
-#loadingOverlay { background: rgba(255,255,255,.55); }
+.app-title { color: #29201D; }
+.app-subtitle, .privacy-text { color: #74615B; }
+.privacy-text a { color: #4A2B22; border-bottom-color: rgba(150,75,50,.42); }
+#loadingOverlay { background: rgba(255,241,235,.58); }
 .spinner {
     border-color: rgba(255,255,255,.9);
-    border-top-color: #77758A;
+    border-top-color: #F07850;
 }
-.loading-text { color: #302E3A; }
+.loading-text { color: #4A2B22; }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    .login-popup-box { background: rgba(250,250,252,.96); }
+    .login-popup-box { background: rgba(255,248,244,.97); }
     .icon-container { background: rgba(255,255,255,.98); }
-    #loadingOverlay { background: rgba(250,250,252,.97); }
+    #loadingOverlay { background: rgba(255,243,237,.97); }
 }
 
 </style>
