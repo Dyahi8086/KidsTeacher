@@ -50,36 +50,34 @@ import {getFirestore,doc,getDoc,setDoc,serverTimestamp} from "https://www.gstati
 const config={apiKey:"AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",authDomain:"kids-teacher-4387e.firebaseapp.com",projectId:"kids-teacher-4387e",storageBucket:"kids-teacher-4387e.firebasestorage.app",messagingSenderId:"420221167346",appId:"1:420221167346:web:da7ac80acdfd52339d526b",measurementId:"G-VJVS2ZMNLY"};
 const app=initializeApp(config),auth=getAuth(app),db=getFirestore(app);
 const form=document.getElementById("nameForm"),input=document.getElementById("childName"),button=document.getElementById("saveBtn"),status=document.getElementById("status");
-let user=null,existingBuddy=null,authReady=false,submitting=false;
-const authReadyPromise=new Promise(resolve=>{
- onAuthStateChanged(auth,async u=>{
-  if(!u){location.replace("./login.html");return}
-  user=u;authReady=true;resolve();
-  try{
-   const snap=await Promise.race([getDoc(doc(db,"users",u.uid)),new Promise((_,reject)=>setTimeout(()=>reject(new Error("Profile load timeout")),7000))]);
-   if(snap.exists()){const data=snap.data();if(data.childName)input.value=data.childName;existingBuddy=data.buddy||null;}
-  }catch(err){console.warn("Profile read delayed:",err)}
- });
+let user=null,existingBuddy=null,submitting=false;
+onAuthStateChanged(auth,u=>{
+ if(!u){location.replace("./login.html");return}
+ user=u;
+ getDoc(doc(db,"users",u.uid)).then(snap=>{
+  if(snap.exists()){
+   const data=snap.data();
+   if(data.childName&&!input.value)input.value=data.childName;
+   existingBuddy=data.buddy||null;
+  }
+ }).catch(err=>console.warn("Profile lookup skipped:",err));
 });
-form.addEventListener("submit",async e=>{
+form.addEventListener("submit",e=>{
  e.preventDefault();
  if(submitting)return;
- const name=input.value.trim().replace(/\s+/g," ");
- if(name.length<1){status.textContent="Please enter your child's name.";return}
- submitting=true;button.disabled=true;button.textContent="Saving…";status.textContent="";
- try{
-  if(!authReady)await Promise.race([authReadyPromise,new Promise((_,reject)=>setTimeout(()=>reject(new Error("Login check timed out")),8000))]);
-  if(!user)throw new Error("Please sign in again.");
-  const update={childName:name,updatedAt:serverTimestamp()};
-  if(existingBuddy?.id)update.buddy={...existingBuddy,name};
-  await Promise.race([setDoc(doc(db,"users",user.uid),update,{merge:true}),new Promise((_,reject)=>setTimeout(()=>reject(new Error("Save timed out. Check your internet connection.")),10000))]);
-  localStorage.setItem("kt_child_name",name);
-  location.replace(existingBuddy?.id?"./index-home.html":"./buddy-selection.html");
- }catch(err){
-  console.error(err);status.textContent=err.message==="Save timed out. Check your internet connection."?"Internet slow hai. Connection check karke Continue dobara dabao.":"Save nahi hua. Internet check karke dobara try karo.";
-  button.disabled=false;button.textContent="Continue";submitting=false;
+ const name=input.value.trim().replace(/\\s+/g," ");
+ if(!name){status.textContent="Please enter your child's name.";return}
+ if(!user){status.textContent="Please wait a moment and try again.";return}
+ submitting=true;button.disabled=true;button.textContent="Continue →";status.textContent="";
+ localStorage.setItem("kt_child_name",name);
+ // Continue immediately; buddy-selection will save the complete profile.
+ if(existingBuddy?.id){
+  setDoc(doc(db,"users",user.uid),{childName:name,buddy:{...existingBuddy,name},updatedAt:serverTimestamp()},{merge:true}).catch(err=>console.warn("Profile sync will retry later:",err));
+  location.replace("./index-home.html");
+ }else{
+  location.replace("./buddy-selection.html");
  }
-}); 
+});
 </script>
 </body>
 </html>
