@@ -1573,6 +1573,8 @@ googleBtn.addEventListener("click", async () => {
 onAuthStateChanged(auth, user => {
     if (user) {
         goToNextPage(user);
+    } else {
+        document.body.style.visibility = "visible";
     }
 });
 
