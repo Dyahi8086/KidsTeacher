@@ -881,6 +881,7 @@ import {
     browserLocalPersistence
 }
 from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
 /* FIREBASE CONFIG */
 
@@ -898,6 +899,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
 
 provider.setCustomParameters({
@@ -1033,9 +1035,16 @@ function goToNextPage(user) {
         console.warn("Local storage unavailable:", error);
     }
 
-    setTimeout(() => {
-        window.location.replace("./index-home.html");
-    }, 700);
+    setTimeout(async () => {
+        try {
+            const profile = await getDoc(doc(db, "users", user.uid));
+            const hasBuddy = profile.exists() && !!profile.data().buddy?.id;
+            window.location.replace(hasBuddy ? "./index-home.html" : "./buddy-selection.html");
+        } catch (error) {
+            console.error("Profile check:", error);
+            window.location.replace("./buddy-selection.html");
+        }
+    }, 350);
 }
 
 /* GOOGLE LOGIN */
