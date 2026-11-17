@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" id="themeColorMeta" content="#ff3b00">
-    <title>Kids Teacher - Welcome</title>
+    <title>Kids Teacher</title>
 
-    <link rel="preload" href="welcome_bg.png" as="image" fetchpriority="high">
     <link rel="manifest" href="./manifest.json">
     <link rel="icon" type="image/png" href="./icons/icon-192.png">
 
@@ -242,135 +241,6 @@
             }
         }
 
-        /* =========================================
-           STAGE 4: CIRCULAR REVEAL OF WELCOME PAGE
-           ========================================= */
-
-        #welcome-content {
-            position: fixed;
-            inset: 0;
-            z-index: 99995;
-
-            width: 100vw;
-            height: 100vh;
-            height: 100dvh;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            padding-top: 0;
-            padding-bottom: 0;
-
-            background-color: #fce7f3;
-            background-image: url('welcome_bg.png');
-            background-size: cover;
-            background-position: center top;
-            background-repeat: no-repeat;
-
-            /* Starts hidden as a tiny circle at top where dot lands */
-            clip-path: circle(0% at 50% 14%);
-            pointer-events: none;
-        }
-
-        #welcome-content.reveal {
-            pointer-events: auto;
-            animation: portalExpand 0.68s cubic-bezier(.35, 0, .15, 1) forwards;
-        }
-
-        #welcome-content.done {
-            clip-path: none;
-            pointer-events: auto;
-        }
-
-        @keyframes portalExpand {
-            0% {
-                clip-path: circle(20px at 50% 14%);
-            }
-            100% {
-                clip-path: circle(150% at 50% 14%);
-            }
-        }
-
-        .content-wrapper {
-            position: relative;
-            z-index: 10;
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            width: 100%;
-            padding: 0 20px;
-            text-align: center;
-        }
-
-        .text-content {
-            margin-bottom: 20px;
-        }
-
-        .text-content h1 {
-            font-family: 'Fredoka', sans-serif;
-            font-size: clamp(24px, 6vw, 32px);
-            color: #8B3A00;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 8px;
-            text-shadow: 1px 1px 0 rgba(255,255,255,.8);
-        }
-
-        .text-content p {
-            font-family: 'Nunito', sans-serif;
-            font-size: clamp(13px, 4vw, 16px);
-            color: #6B5B4D;
-            font-weight: 700;
-        }
-
-        .start-btn {
-            position: relative;
-            width: 100%;
-            max-width: 350px;
-            padding: 18px 20px;
-
-            font-size: 20px;
-            font-family: 'Fredoka', sans-serif;
-            font-weight: 700;
-
-            color: white;
-            background: #FF6B35;
-
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-
-            box-shadow:
-                0 6px 0 #cc4e20,
-                0 10px 20px rgba(255,107,53,.4);
-
-            transition: transform .1s;
-            animation: pulseBtn 2s infinite;
-        }
-
-        .start-btn:active {
-            transform: translateY(6px);
-            box-shadow: 0 0 0 #cc4e20;
-            animation: none;
-        }
-
-        @keyframes pulseBtn {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-            100% { transform: scale(1); }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            #splash-screen { display: none; }
-            #welcome-content {
-                clip-path: none;
-                pointer-events: auto;
-            }
-        }
     </style>
 </head>
 
@@ -403,52 +273,13 @@
 
     </div>
 
-    <!-- ORIGINAL WELCOME PAGE -->
-    <div id="welcome-content">
-        <div class="content-wrapper">
-            <div class="text-content">
-                <h1>Learning Is an<br>Adventure!</h1>
-                <p>Explore, discover and grow every day.</p>
-            </div>
-            <button class="start-btn" id="startBtn">
-                Let's Start →
-            </button>
-        </div>
-    </div>
-
     <!-- JAVASCRIPT -->
     <script>
-        const splash = document.getElementById('splash-screen');
-        const welcomeContent = document.getElementById('welcome-content');
-        const startBtn = document.getElementById('startBtn');
-        const themeColorMeta = document.getElementById('themeColorMeta');
-
-        // Preload welcome background image immediately
-        const bgImg = new Image();
-        bgImg.fetchPriority = 'high';
-        bgImg.src = 'welcome_bg.png';
-
-        // Trigger circular reveal right when the dot reaches the top (~2.68s)
+        // Keep the original splash animation, then open Google Login directly.
+        // The welcome screen is intentionally skipped.
         setTimeout(() => {
-            welcomeContent.classList.add('reveal');
-            if (themeColorMeta) {
-                themeColorMeta.setAttribute('content', '#fce7f3');
-            }
-        }, 2680);
-
-        // Clean up splash screen after circular reveal completes
-        setTimeout(() => {
-            welcomeContent.classList.remove('reveal');
-            welcomeContent.classList.add('done');
-            if (splash) {
-                splash.remove();
-            }
-        }, 3400);
-
-        // Start button navigation
-        startBtn.addEventListener('click', () => {
-            window.location.href = 'login.html';
-        });
+            window.location.replace('./login.html');
+        }, 2750);
 
         // Service Worker Registration
         if ('serviceWorker' in navigator) {
@@ -460,7 +291,7 @@
                     });
             });
         }
-    </script>
+    </script>ipt>
 
 </body>
 </html>
