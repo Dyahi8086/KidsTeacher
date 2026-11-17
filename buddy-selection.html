@@ -100,19 +100,20 @@ onAuthStateChanged(auth,async u=>{
  }
  document.body.style.visibility="visible";
 });
-button.addEventListener("click",()=>{
+button.addEventListener("click",async()=>{
  if(!selected)return;
  const label=(childName||localStorage.getItem("kt_child_name")||"").trim();
  if(!label){status.textContent="Please enter your child's name first.";return}
  const buddy={id:selected,name:label,character:selected,emoji:"",directions:base+selected+"-directions.webp",reactions:base+selected+"-reactions.webp"};
- // Save locally first so slow/offline Firestore cannot trap the child on this screen.
  localStorage.setItem("kt_child_name",label);
  localStorage.setItem("kt_selected_buddy",JSON.stringify(buddy));
- button.disabled=true;button.textContent="Let's Go! ✨";status.textContent="";
- if(user){
-  setDoc(doc(db,"users",user.uid),{buddy,childName:label,displayName:user.displayName||"",email:user.email||"",updatedAt:serverTimestamp()},{merge:true})
-   .catch(e=>console.warn("Buddy cloud sync pending:",e));
- }
+ button.disabled=true;button.textContent="Getting your Home ready…";status.textContent="";
+ try{
+  if(user) await Promise.race([
+   setDoc(doc(db,"users",user.uid),{buddy,childName:label,displayName:user.displayName||"",email:user.email||"",updatedAt:serverTimestamp()},{merge:true}),
+   new Promise((_,reject)=>setTimeout(()=>reject(new Error("cloud sync timeout")),3500))
+  ]);
+ }catch(e){console.warn("Using saved local buddy; cloud sync can retry:",e)}
  location.replace("./index-home.html");
 });
 </script></body></html>
