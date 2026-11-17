@@ -322,9 +322,13 @@
                         const data = profile.exists() ? profile.data() : {};
                         if (data.childName) localStorage.setItem("kt_child_name", data.childName);
                         if (data.buddy?.id) localStorage.setItem("kt_selected_buddy", JSON.stringify(data.buddy));
-                        window.__ktDestination = !data.childName
+                        let cachedBuddy = {};
+                        try { cachedBuddy = JSON.parse(localStorage.getItem("kt_selected_buddy") || "{}"); } catch {}
+                        const hasName = !!(data.childName || localStorage.getItem("kt_child_name"));
+                        const hasBuddy = !!(data.buddy?.id || cachedBuddy.id);
+                        window.__ktDestination = !hasName
                             ? "./child-name.html"
-                            : (data.buddy?.id ? "./index-home.html" : "./buddy-selection.html");
+                            : (hasBuddy ? "./index-home.html" : "./buddy-selection.html");
                     } catch (error) {
                         console.error("Profile routing check failed:", error);
                         let localBuddy = {};
