@@ -104,16 +104,19 @@ button.addEventListener("click",async()=>{
  if(!selected)return;
  const label=(childName||localStorage.getItem("kt_child_name")||"").trim();
  if(!label){status.textContent="Please enter your child's name first.";return}
+ if(!user){status.textContent="Login session not ready. Please wait and try again.";return}
  const buddy={id:selected,name:label,character:selected,emoji:"",directions:base+selected+"-directions.webp",reactions:base+selected+"-reactions.webp"};
- localStorage.setItem("kt_child_name",label);
- localStorage.setItem("kt_selected_buddy",JSON.stringify(buddy));
- button.disabled=true;button.textContent="Getting your Home ready…";status.textContent="";
+ button.disabled=true;button.textContent="Saving your Buddy…";status.textContent="";
  try{
-  if(user) await Promise.race([
-   setDoc(doc(db,"users",user.uid),{buddy,childName:label,displayName:user.displayName||"",email:user.email||"",updatedAt:serverTimestamp()},{merge:true}),
-   new Promise((_,reject)=>setTimeout(()=>reject(new Error("cloud sync timeout")),3500))
-  ]);
- }catch(e){console.warn("Using saved local buddy; cloud sync can retry:",e)}
- location.replace("./index-home.html");
+  await setDoc(doc(db,"users",user.uid),{buddy,childName:label,displayName:user.displayName||"",email:user.email||"",updatedAt:serverTimestamp()},{merge:true});
+  localStorage.setItem("kt_child_name",label);
+  localStorage.setItem("kt_selected_buddy",JSON.stringify(buddy));
+  button.textContent="Let's Go! ✨";
+  location.replace("./index-home.html");
+ }catch(e){
+  console.error("Buddy profile save failed:",e);
+  button.disabled=false;button.textContent="Continue →";
+  status.textContent="Buddy save nahi hua. Internet/Firebase connection check karke dobara try karo.";
+ }
 });
 </script></body></html>
