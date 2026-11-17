@@ -89,5 +89,19 @@ onAuthStateChanged(auth,async u=>{if(!u){location.replace("./login.html");return
           location.replace("./index-home.html");return;
         }
       }}catch(e){console.error(e);status.textContent=""}});
-button.addEventListener("click",async()=>{if(!user||!selected)return;button.disabled=true;button.textContent="Saving your Buddy…";status.textContent="";try{const label=childName||localStorage.getItem("kt_child_name")||selected.replace(/-/g," ");await setDoc(doc(db,"users",user.uid),{buddy:{id:selected,name:label,character:selected,emoji:"",directions:base+selected+"-directions.webp",reactions:base+selected+"-reactions.webp"},childName:label,displayName:user.displayName||"",email:user.email||"",updatedAt:serverTimestamp()},{merge:true});location.replace("./index-home.html")}catch(e){console.error(e);status.textContent=e.code==="permission-denied"?"Firestore permission denied. Publish firestore.rules in Firebase Console.":"Could not save Buddy: "+(e.code||e.message);button.disabled=false;button.textContent="Choose this Buddy →"}});
+button.addEventListener("click",()=>{
+ if(!selected)return;
+ const label=(childName||localStorage.getItem("kt_child_name")||"").trim();
+ if(!label){status.textContent="Please enter your child's name first.";return}
+ const buddy={id:selected,name:label,character:selected,emoji:"",directions:base+selected+"-directions.webp",reactions:base+selected+"-reactions.webp"};
+ // Save locally first so slow/offline Firestore cannot trap the child on this screen.
+ localStorage.setItem("kt_child_name",label);
+ localStorage.setItem("kt_selected_buddy",JSON.stringify(buddy));
+ button.disabled=true;button.textContent="Let's Go! ✨";status.textContent="";
+ if(user){
+  setDoc(doc(db,"users",user.uid),{buddy,childName:label,displayName:user.displayName||"",email:user.email||"",updatedAt:serverTimestamp()},{merge:true})
+   .catch(e=>console.warn("Buddy cloud sync pending:",e));
+ }
+ location.replace("./index-home.html");
+});
 </script></body></html>
