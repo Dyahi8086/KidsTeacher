@@ -9,7 +9,7 @@
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;width:100%;min-height:100%;font-family:'Nunito',sans-serif}
-body{min-height:100dvh;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;padding:18px;background:#fffdf7;color:#29233b}
+body{visibility:hidden;min-height:100dvh;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;padding:18px;background:#fffdf7;color:#29233b}
 .doodles{position:absolute;inset:0;overflow:hidden;pointer-events:none}
 .doodle{position:absolute;font-size:clamp(25px,7vw,54px);filter:drop-shadow(0 3px 1px rgba(0,0,0,.08));animation:bob 4s ease-in-out infinite}
 .d1{top:3%;left:4%;transform:rotate(-15deg)}.d2{top:4%;right:5%;animation-delay:-1s}.d3{top:23%;left:-3%;font-size:48px;animation-delay:-2s}.d4{top:24%;right:2%;font-size:42px;animation-delay:-.5s}.d5{bottom:18%;left:3%;font-size:42px;animation-delay:-1.5s}.d6{bottom:17%;right:3%;font-size:46px;animation-delay:-2.5s}.d7{bottom:2%;left:15%;font-size:34px}.d8{bottom:3%;right:15%;font-size:35px}
@@ -51,16 +51,19 @@ const config={apiKey:"AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",authDomain:"kids-
 const app=initializeApp(config),auth=getAuth(app),db=getFirestore(app);
 const form=document.getElementById("nameForm"),input=document.getElementById("childName"),button=document.getElementById("saveBtn"),status=document.getElementById("status");
 let user=null,existingBuddy=null,submitting=false;
-onAuthStateChanged(auth,u=>{
+onAuthStateChanged(auth,async u=>{
  if(!u){location.replace("./login.html");return}
  user=u;
- getDoc(doc(db,"users",u.uid)).then(snap=>{
+ try{
+  const snap=await Promise.race([getDoc(doc(db,"users",u.uid)),new Promise((_,reject)=>setTimeout(()=>reject(new Error("timeout")),6000))]);
   if(snap.exists()){
    const data=snap.data();
-   if(data.childName&&!input.value)input.value=data.childName;
    existingBuddy=data.buddy||null;
+   if(data.childName&&existingBuddy?.id){location.replace("./index-home.html");return}
+   if(data.childName&&!input.value)input.value=data.childName;
   }
- }).catch(err=>console.warn("Profile lookup skipped:",err));
+ }catch(err){console.warn("Profile check:",err)}
+ document.body.style.visibility="visible";
 });
 form.addEventListener("submit",e=>{
  e.preventDefault();
