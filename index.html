@@ -378,10 +378,20 @@
         }, 5500);
 
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./service-worker.js').catch(error => {
+            window.addEventListener('load', async () => {
+                try {
+                    const registration = await navigator.serviceWorker.register('./service-worker.js', { updateViaCache: 'none' });
+                    registration.update().catch(() => {});
+                    if (registration.waiting) registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+                    navigator.serviceWorker.addEventListener('controllerchange', () => {
+                        if (!sessionStorage.getItem('kt_sw_reloaded')) {
+                            sessionStorage.setItem('kt_sw_reloaded', '1');
+                            window.location.reload();
+                        }
+                    });
+                } catch (error) {
                     console.log('Service Worker registration failed:', error);
-                });
+                }
             });
         }
     </script>
