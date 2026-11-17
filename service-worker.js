@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kids-teacher-v19';
+const CACHE_NAME = 'kids-teacher-v20';
 
 const ASSETS_TO_CACHE = [
   './',
