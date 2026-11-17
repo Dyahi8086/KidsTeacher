@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="theme-color" content="#55c900">
+<meta name="theme-color" content="#fff4ed">
 <title>Choose Your Buddy • Kids Teacher</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -32,6 +32,19 @@ h1{font-size:clamp(29px,8vw,39px);line-height:1.04;margin:8px 0 5px;font-weight:
 #continue{width:100%;border:0;border-radius:17px;background:linear-gradient(135deg,#ff8158,#f45124);color:#fff;padding:15px;font:900 16px Nunito,sans-serif;box-shadow:0 6px 0 #d9421b,0 12px 22px #f4512430;cursor:pointer}
 #continue:disabled{opacity:.48;box-shadow:none;cursor:not-allowed}.status{text-align:center;min-height:18px;margin:8px 0 0;color:#a34d32;font-size:12px;font-weight:800}
 @media(min-width:480px){.grid{gap:11px}.buddy{min-height:185px}.mascot{width:156px;height:150px}}
+
+/* PREMIUM LIQUID GLASS LAYER */
+:root{--glass-line:rgba(255,255,255,.78);--glass-shadow:0 14px 34px rgba(112,75,52,.10)}
+body{background:radial-gradient(ellipse at 8% 5%,rgba(255,213,193,.58),transparent 34%),radial-gradient(ellipse at 92% 24%,rgba(255,231,215,.72),transparent 32%),linear-gradient(145deg,#fff9f5 0%,#fff1e9 48%,#fffaf7 100%)}
+.preview{background:linear-gradient(135deg,rgba(255,255,255,.78),rgba(255,255,255,.43));border:1px solid var(--glass-line);box-shadow:inset 0 1px 0 rgba(255,255,255,.95),var(--glass-shadow);backdrop-filter:blur(22px) saturate(155%);-webkit-backdrop-filter:blur(22px) saturate(155%);border-radius:26px}
+.buddy{position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(255,255,255,.78),rgba(255,255,255,.42));border:1px solid rgba(255,255,255,.88);box-shadow:inset 0 1px 0 rgba(255,255,255,.96),inset 0 -1px 0 rgba(220,193,176,.18),0 12px 28px rgba(112,75,52,.09);backdrop-filter:blur(20px) saturate(155%);-webkit-backdrop-filter:blur(20px) saturate(155%);border-radius:25px}
+.buddy:before,.preview:before{content:"";position:absolute;pointer-events:none;inset:0;border-radius:inherit;background:linear-gradient(125deg,rgba(255,255,255,.48),transparent 38%,rgba(255,255,255,.10) 72%,transparent);opacity:.8}
+.buddy.selected{background:linear-gradient(145deg,rgba(255,244,237,.92),rgba(255,226,211,.58));border:1.5px solid rgba(255,112,70,.72);box-shadow:inset 0 1px 0 rgba(255,255,255,.96),0 0 0 3px rgba(255,106,61,.10),0 14px 30px rgba(181,91,56,.13)}
+#continue{background:linear-gradient(135deg,rgba(255,255,255,.78),rgba(255,126,83,.86) 38%,rgba(244,81,36,.96));border:1px solid rgba(255,255,255,.72);box-shadow:inset 0 1px 0 rgba(255,255,255,.72),0 9px 24px rgba(226,91,52,.22);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+#continue:disabled{opacity:.42;box-shadow:none}
+h1{color:#171717;text-shadow:none}
+.sub{color:#796d67}
+@media(prefers-reduced-transparency:reduce){.preview,.buddy,#continue{backdrop-filter:none;-webkit-backdrop-filter:none}}
 </style>
 </head>
 <body><main class="wrap">
