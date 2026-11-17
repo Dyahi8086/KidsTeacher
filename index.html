@@ -1,18 +1,18 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" id="themeColorMeta" content="#ff3b00">
-    <title>Kids Teacher</title>
+    <title>Kids Teacher - Welcome</title>
 
+    <link rel="preload" href="welcome_bg.png" as="image" fetchpriority="high">
     <link rel="manifest" href="./manifest.json">
     <link rel="icon" type="image/png" href="./icons/icon-192.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -26,10 +26,13 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background: #ff321e;
+            background: #ff3b00;
         }
 
-        /* RED ORANGE SPLASH SCREEN */
+        /* =========================================
+           STAGE 1-3: RED ORANGE SPLASH SCREEN
+           ========================================= */
+
         #splash-screen {
             position: fixed;
             inset: 0;
@@ -41,32 +44,52 @@
             align-items: center;
             z-index: 99990;
             overflow: hidden;
-            background: #ff321e;
+
+            background: linear-gradient(
+                145deg,
+                #ff3b00 0%,
+                #ff4b00 48%,
+                #ff2600 100%
+            );
         }
 
-        /* 1. SIMPLE WHITE BRAND MARK */
+        /* STEP 1: BUNNY K LOGO (Appears, holds, then shrinks out) */
         .kt-mark {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 76px;
-            height: 76px;
+            width: 150px;
+            height: 142px;
+
             display: flex;
             align-items: flex-end;
             justify-content: center;
+
             color: #fff;
             font-family: Arial, sans-serif;
-            font-size: 76px;
+            font-size: 132px;
             font-weight: 900;
             line-height: .88;
-            letter-spacing: -7px;
-            padding-right: 6px;
+            letter-spacing: -12px;
+            padding-right: 10px;
+
             opacity: 0;
             transform: translate(-50%, -50%) scale(0.5);
-            animation: logoSequence 0.72s cubic-bezier(.22, 1, .36, 1) 0.05s forwards;
+
+            animation: logoSequence 0.95s cubic-bezier(.22, 1, .36, 1) 0.1s forwards;
         }
 
-        .kt-ears { display: none; }
+        .kt-ears {
+            position: absolute;
+            width: 76px;
+            height: 58px;
+            top: 0;
+            left: 39px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            z-index: 2;
+        }
 
         .kt-ear {
             width: 29px;
@@ -76,10 +99,15 @@
             background: transparent;
         }
 
-        .kt-ear:first-child { transform: rotate(-12deg); }
-        .kt-ear:last-child { transform: rotate(13deg); }
+        .kt-ear:first-child {
+            transform: rotate(-12deg);
+        }
 
-        .kt-face { display: none;\n
+        .kt-ear:last-child {
+            transform: rotate(13deg);
+        }
+
+        .kt-face {
             position: absolute;
             z-index: 3;
             top: 75px;
@@ -99,7 +127,7 @@
             width: 6px;
             height: 9px;
             border-radius: 50%;
-            background: #ff321e;
+            background: #ff3b00;
         }
 
         .kt-smile {
@@ -111,39 +139,74 @@
         }
 
         @keyframes logoSequence {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.12); }
-            25% { opacity: 1; transform: translate(-50%, -50%) scale(0.27); }
-            48%, 72% { opacity: 1; transform: translate(-50%, -50%) scale(0.25); }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.06); }
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.55);
+            }
+            25% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.04);
+            }
+            38%, 75% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.25);
+            }
         }
 
-        /* 2. BRAND TITLE */
+        /* STEP 2: APP NAME EXPANDS IN CENTER, THEN COLLAPSES INTO DOT */
         .kt-title {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+
             color: #fff;
             font-family: 'Nunito', Arial, sans-serif;
-            font-size: clamp(10px, 2.8vw, 13px);
+            font-size: clamp(24px, 6.8vw, 34px);
             font-weight: 900;
-            letter-spacing: .15px;
+            letter-spacing: 1.5px;
             text-align: center;
             white-space: nowrap;
+
             opacity: 0;
             clip-path: inset(0 50% 0 50%);
-            animation: titleSequence 0.72s cubic-bezier(.4, 0, .2, 1) 0.78s forwards;
+
+            animation: titleSequence 1.05s cubic-bezier(.4, 0, .2, 1) 0.9s forwards;
         }
 
         @keyframes titleSequence {
-            0% { opacity: 0; clip-path: inset(0 50% 0 50%); transform: translate(-50%, -50%) scale(0.92); }
-            28% { opacity: 1; clip-path: inset(0 0% 0 0%); transform: translate(-50%, -50%) scale(1); }
-            72% { opacity: 1; clip-path: inset(0 0% 0 0%); transform: translate(-50%, -50%) scale(1); }
-            96% { opacity: 1; clip-path: inset(0 49% 0 49%); transform: translate(-50%, -50%) scale(0.35); }
-            100% { opacity: 0; clip-path: inset(0 50% 0 50%); transform: translate(-50%, -50%) scale(0.1); }
+            0% {
+                opacity: 0;
+                clip-path: inset(0 50% 0 50%);
+                transform: translate(-50%, -50%) scale(0.92);
+            }
+            28% {
+                opacity: 1;
+                clip-path: inset(0 0% 0 0%);
+                transform: translate(-50%, -50%) scale(1);
+            }
+            72% {
+                opacity: 1;
+                clip-path: inset(0 0% 0 0%);
+                transform: translate(-50%, -50%) scale(1);
+            }
+            96% {
+                opacity: 1;
+                clip-path: inset(0 49% 0 49%);
+                transform: translate(-50%, -50%) scale(0.35);
+            }
+            100% {
+                opacity: 0;
+                clip-path: inset(0 50% 0 50%);
+                transform: translate(-50%, -50%) scale(0.1);
+            }
         }
 
-        /* 3. WHITE DOT JUMP */
+        /* STEP 3: WHITE DOT APPEARS, DIPS DOWN, AND LAUNCHES TO TOP */
         .kt-dot {
             position: absolute;
             top: 50%;
@@ -154,43 +217,168 @@
             background: #ffffff;
             opacity: 0;
             transform: translate(-50%, -50%) scale(0.5);
-            animation: dotJumpSequence 1.08s cubic-bezier(.45, .05, .55, .95) 1.72s forwards;
+
+            animation: dotJumpSequence 0.85s cubic-bezier(.45, .05, .55, .95) 1.88s forwards;
         }
 
         @keyframes dotJumpSequence {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.35); }
-            18% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-            58% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-            100% { opacity: 1; transform: translate(-50%, -36vh) scale(1.15); }
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+            15% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            /* Dip downward (anticipation bounce like video) */
+            48% {
+                opacity: 1;
+                transform: translate(-50%, 110px) scale(1.05);
+            }
+            /* Launch upward to top-center */
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -36vh) scale(2.8);
+            }
         }
 
-        /* 4. SOFT PINK PORTAL TO LOGIN */
-        #transition-portal {
+        /* =========================================
+           STAGE 4: CIRCULAR REVEAL OF WELCOME PAGE
+           ========================================= */
+
+        #welcome-content {
             position: fixed;
             inset: 0;
             z-index: 99995;
+
             width: 100vw;
             height: 100vh;
             height: 100dvh;
-            background: #F7EBEF;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+
+            padding-bottom: max(40px, env(safe-area-inset-bottom));
+
+            background-color: #fce7f3;
+            background-image: url('welcome_bg.png');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+
+            /* Starts hidden as a tiny circle at top where dot lands */
             clip-path: circle(0% at 50% 14%);
             pointer-events: none;
         }
 
-        #transition-portal.reveal {
-            animation: portalExpand 0.65s cubic-bezier(.35, 0, .15, 1) forwards;
+        #welcome-content.reveal {
+            pointer-events: auto;
+            animation: portalExpand 0.68s cubic-bezier(.35, 0, .15, 1) forwards;
+        }
+
+        #welcome-content.done {
+            clip-path: none;
+            pointer-events: auto;
         }
 
         @keyframes portalExpand {
-            0% { clip-path: circle(20px at 50% 14%); }
-            100% { clip-path: circle(150% at 50% 14%); }
+            0% {
+                clip-path: circle(20px at 50% 14%);
+            }
+            100% {
+                clip-path: circle(150% at 50% 14%);
+            }
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            width: 100%;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .text-content {
+            margin-bottom: 20px;
+        }
+
+        .text-content h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: clamp(24px, 6vw, 32px);
+            color: #8B3A00;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 0 rgba(255,255,255,.8);
+        }
+
+        .text-content p {
+            font-family: 'Nunito', sans-serif;
+            font-size: clamp(13px, 4vw, 16px);
+            color: #6B5B4D;
+            font-weight: 700;
+        }
+
+        .start-btn {
+            position: relative;
+            width: 100%;
+            max-width: 350px;
+            padding: 18px 20px;
+
+            font-size: 20px;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+
+            color: white;
+            background: #FF6B35;
+
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+
+            box-shadow:
+                0 6px 0 #cc4e20,
+                0 10px 20px rgba(255,107,53,.4);
+
+            transition: transform .1s;
+            animation: pulseBtn 2s infinite;
+        }
+
+        .start-btn:active {
+            transform: translateY(6px);
+            box-shadow: 0 0 0 #cc4e20;
+            animation: none;
+        }
+
+        @keyframes pulseBtn {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #splash-screen { display: none; }
+            #welcome-content {
+                clip-path: none;
+                pointer-events: auto;
+            }
         }
     </style>
 </head>
 
 <body>
 
+    <!-- KIDS TEACHER SPLASH SCREEN -->
     <div id="splash-screen" aria-label="Kids Teacher loading screen">
+
+        <!-- 1. Bunny K Logo -->
         <div class="kt-mark" aria-hidden="true">
             K
             <div class="kt-ears">
@@ -206,20 +394,70 @@
             </div>
         </div>
 
+        <!-- 2. Brand Title -->
         <div class="kt-title">KIDS TEACHER</div>
+
+        <!-- 3. Bouncing White Dot -->
         <div class="kt-dot" aria-hidden="true"></div>
+
     </div>
 
-<script>
-function goToLogin() {
-            window.location.replace('login.html');
-        }
+    <!-- ORIGINAL WELCOME PAGE -->
+    <div id="welcome-content">
+        <div class="content-wrapper">
+            <div class="text-content">
+                <h1>Learning Is an<br>Adventure!</h1>
+                <p>Explore, discover and grow every day.</p>
+            </div>
+            <button class="start-btn" id="startBtn">
+                Let's Start →
+            </button>
+        </div>
+    </div>
 
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            setTimeout(goToLogin, 500);
-        } else {
-            setTimeout(goToLogin, 3300);
-        }
+    <!-- JAVASCRIPT -->
+    <script>
+        const splash = document.getElementById('splash-screen');
+        const welcomeContent = document.getElementById('welcome-content');
+        const startBtn = document.getElementById('startBtn');
+        const themeColorMeta = document.getElementById('themeColorMeta');
+
+        // Preload welcome background image immediately
+        const bgImg = new Image();
+        bgImg.fetchPriority = 'high';
+        bgImg.src = 'welcome_bg.png';
+
+        // Trigger circular reveal right when the dot reaches the top (~2.68s)
+        setTimeout(() => {
+            welcomeContent.classList.add('reveal');
+            if (themeColorMeta) {
+                themeColorMeta.setAttribute('content', '#fce7f3');
+            }
+        }, 2680);
+
+        // Clean up splash screen after circular reveal completes
+        setTimeout(() => {
+            welcomeContent.classList.remove('reveal');
+            welcomeContent.classList.add('done');
+            if (splash) {
+                splash.remove();
+            }
+        }, 3400);
+
+        // Start button navigation
+        startBtn.addEventListener('click', () => {
+            window.location.href = 'login.html';
+        });
+
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker
+                    .register('./service-worker.js')
+                    .catch(error => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+        });
     </script>
 
 </body>
