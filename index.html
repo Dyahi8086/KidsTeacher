@@ -311,23 +311,35 @@
         try {
             const app = initializeApp(firebaseConfig);
             const auth = getAuth(app);
-            onAuthStateChanged(auth, (user) => {
+            const { getFirestore, doc, getDoc } = await import("https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js");
+            const db = getFirestore(app);
+            onAuthStateChanged(auth, async (user) => {
                 window.__ktAuthResolved = true;
-                window.__ktSignedIn = !!user;
-                if (window.__ktSplashFinished) {
-                    window.location.replace(user ? './buddy-selection.html' : './login.html');
+                window.__ktDestination = "./login.html";
+                if (user) {
+                    try {
+                        const profile = await getDoc(doc(db, "users", user.uid));
+                        const data = profile.exists() ? profile.data() : {};
+                        window.__ktDestination = !data.childName
+                            ? "./child-name.html"
+                            : (data.buddy?.id ? "./index-home.html" : "./buddy-selection.html");
+                    } catch (error) {
+                        console.error("Profile routing check failed:", error);
+                        window.__ktDestination = "./child-name.html";
+                    }
                 }
+                if (window.__ktSplashFinished) window.location.replace(window.__ktDestination);
             }, (error) => {
                 console.error("Splash auth check failed:", error);
                 window.__ktAuthResolved = true;
-                window.__ktSignedIn = false;
-                if (window.__ktSplashFinished) window.location.replace('./login.html');
+                window.__ktDestination = "./login.html";
+                if (window.__ktSplashFinished) window.location.replace(window.__ktDestination);
             });
         } catch (error) {
             console.error("Firebase splash initialization failed:", error);
             window.__ktAuthResolved = true;
-            window.__ktSignedIn = false;
-            if (window.__ktSplashFinished) window.location.replace('./login.html');
+            window.__ktDestination = "./login.html";
+            if (window.__ktSplashFinished) window.location.replace(window.__ktDestination);
         }
     </script>
 
@@ -343,7 +355,7 @@
             if (window.__ktAuthResolved) {
                 routeStarted = true;
                 window.location.replace(
-                    window.__ktSignedIn ? './buddy-selection.html' : './login.html'
+                    window.__ktDestination || './login.html'
                 );
             }
         }
@@ -361,7 +373,7 @@
         window.setTimeout(() => {
             if (!routeStarted && window.__ktSplashFinished && !window.__ktAuthResolved) {
                 routeStarted = true;
-                window.location.replace('./login.html');
+                window.location.replace(window.__ktDestination || './login.html');
             }
         }, 5500);
 
