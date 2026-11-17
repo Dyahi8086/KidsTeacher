@@ -874,8 +874,7 @@ from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import {
     getAuth,
     GoogleAuthProvider,
-    signInWithRedirect,
-    getRedirectResult,
+    signInWithPopup,
     onAuthStateChanged,
     setPersistence,
     browserLocalPersistence
@@ -1071,7 +1070,8 @@ googleBtn.addEventListener("click", async () => {
             browserLocalPersistence
         );
 
-        await signInWithRedirect(auth, provider);
+        const result = await signInWithPopup(auth, provider);
+        if (result && result.user) goToNextPage(result.user);
 
     } catch (error) {
         console.error("Google Login Error:", error);
@@ -1080,24 +1080,6 @@ googleBtn.addEventListener("click", async () => {
         showError(friendlyError(error));
     }
 });
-
-/* REDIRECT RESULT */
-
-async function handleRedirectResult() {
-    try {
-        const result = await getRedirectResult(auth);
-
-        if (result && result.user) {
-            goToNextPage(result.user);
-        }
-
-    } catch (error) {
-        console.error("Redirect Result Error:", error);
-
-        setLoading(false);
-        showError(friendlyError(error));
-    }
-}
 
 /* AUTH STATE */
 
@@ -1108,27 +1090,13 @@ onAuthStateChanged(auth, user => {
 });
 
 /* INITIALIZATION */
-
-async function initializeLogin() {
-    try {
-        await setPersistence(
-            auth,
-            browserLocalPersistence
-        );
-
-        await handleRedirectResult();
-
-    } catch (error) {
-        console.error("Firebase Initialization Error:", error);
-
-        setLoading(false);
-        showError(friendlyError(error));
-    }
-}
-
-initializeLogin();
+setPersistence(auth, browserLocalPersistence).catch(error => {
+    console.error("Firebase Persistence Error:", error);
+    showError(friendlyError(error));
+});
 
 /* INTERNET STATUS */
+
 
 function updateNetworkStatus() {
     offlineBanner.style.display =
