@@ -1518,7 +1518,8 @@ async function goToNextPage(user) {
         console.error("Profile routing error:", error);
         setLoading(false);
         redirectHandled = false;
-        showError("Profile check nahi ho paya. Internet slow hai ya Firebase access mein problem hai. Dobara try karo.");
+        const detail = error?.code || error?.message || "unknown-error";
+        showError("Firebase profile error: " + detail + ". Screenshot bhejo, main exact fix karunga.");
     }
 }
 
