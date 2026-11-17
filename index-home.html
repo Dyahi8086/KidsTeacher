@@ -1,241 +1,153 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Kids Teacher - Dashboard</title>
-  <link rel="manifest" href="manifest.json">
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Fredoka:wght@600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Quicksand', sans-serif;
-    }
-
-    body {
-      min-height: 100dvh;
-      background: linear-gradient(135deg, #fef08a, #fed7aa, #fbcfe8);
-      background-size: cover;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .dashboard-container {
-      width: 100%;
-      max-width: 480px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      padding-bottom: 24px;
-    }
-
-    /* Top Header */
-    .header-card {
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(16px);
-      border-radius: 28px;
-      padding: 16px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border: 2px solid rgba(255, 255, 255, 0.8);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    }
-
-    .header-buddy{width:72px;height:72px;flex:0 0 72px;background-size:300% 300%;background-position:50% 50%;background-repeat:no-repeat;cursor:pointer}
-    .welcome-text h2 {
-      font-family: 'Baloo 2', cursive;
-      font-size: 22px;
-      color: #9a3412;
-      line-height: 1.1;
-    }
-
-    .welcome-text p {
-      font-size: 13px;
-      color: #475569;
-      font-weight: 700;
-    }
-
-    .logout-btn {
-      background: #fee2e2;
-      color: #dc2626;
-      border: none;
-      padding: 8px 14px;
-      border-radius: 14px;
-      font-weight: 700;
-      font-size: 13px;
-      cursor: pointer;
-      box-shadow: 0 4px 0 #fca5a5;
-    }
-    .logout-btn:active {
-      transform: translateY(2px);
-      box-shadow: 0 2px 0 #fca5a5;
-    }
-
-    /* Banner Card */
-    .banner-card {
-      background: linear-gradient(135deg, #ff7e5f, #f97316);
-      border-radius: 28px;
-      padding: 20px;
-      color: white;
-      text-align: center;
-      box-shadow: 0 10px 25px rgba(249, 115, 22, 0.3);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .banner-card h1 {
-      font-family: 'Baloo 2', cursive;
-      font-size: 26px;
-      margin-bottom: 4px;
-    }
-
-    .banner-card p {
-      font-size: 14px;
-      font-weight: 600;
-      opacity: 0.95;
-    }
-
-    /* Grid Categories */
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-
-    .menu-card {
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(12px);
-      border-radius: 24px;
-      padding: 20px 14px;
-      text-align: center;
-      border: 2px solid rgba(255, 255, 255, 0.9);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-      cursor: pointer;
-      text-decoration: none;
-      transition: transform 0.1s ease;
-    }
-
-    .menu-card:active {
-      transform: scale(0.96);
-    }
-
-    .menu-icon {
-      font-size: 38px;
-      margin-bottom: 8px;
-    }
-
-    .menu-title {
-      font-family: 'Baloo 2', cursive;
-      font-size: 18px;
-      color: #1e293b;
-      margin-bottom: 2px;
-    }
-
-    .menu-desc {
-      font-size: 12px;
-      color: #64748b;
-      font-weight: 700;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#f8f7ff">
+<title>Kids Teacher • Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#29263d;--muted:#8b879c;--purple:#7565e8;--pink:#ff8eb4;--blue:#75c9f5;--yellow:#ffd66e;--green:#78d7b0;--bg:#f8f7ff}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;min-height:100dvh;background:radial-gradient(circle at 4% 0%,#eeeaff 0,transparent 30%),radial-gradient(circle at 100% 30%,#ffeaf2 0,transparent 27%),var(--bg);font-family:Nunito,sans-serif;color:var(--ink)}
+.app{width:min(100%,560px);min-height:100dvh;margin:auto;padding:calc(14px + env(safe-area-inset-top)) 17px calc(100px + env(safe-area-inset-bottom))}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.brand{font:700 18px Fredoka,sans-serif;letter-spacing:.1px}.brand span{color:var(--purple)}
+.avatar{width:43px;height:43px;border-radius:15px;background:#fff;box-shadow:0 5px 16px #6353aa1c;border:1px solid #fff;display:grid;place-items:center;font-size:22px}
+.page{display:none;animation:fade .22s ease}.page.active{display:block}
+@keyframes fade{from{opacity:.5;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.welcome{margin:8px 0 16px}.eyebrow{font-size:12px;color:var(--muted);font-weight:900;letter-spacing:1px;text-transform:uppercase}
+h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.welcome p,.muted{margin:0;color:var(--muted);font-size:14px;font-weight:700}
+.hero{position:relative;overflow:hidden;border-radius:28px;padding:21px 20px;min-height:166px;background:linear-gradient(120deg,#7e71ee,#9d8df6 62%,#b5a9ff);color:white;box-shadow:0 13px 28px #7668db33}
+.hero:after{content:"✦";position:absolute;right:18px;top:4px;font-size:92px;color:#ffffff25;transform:rotate(15deg)}
+.hero .tag{font-size:11px;font-weight:900;letter-spacing:1px;color:#f0edff}
+.hero h2{font:700 26px/1.08 Fredoka,sans-serif;margin:8px 0 7px;max-width:245px}
+.hero p{font-size:12px;font-weight:700;color:#f2efff;margin:0;max-width:220px}
+.hero button{margin-top:13px;border:0;border-radius:13px;padding:10px 16px;background:white;color:#6759d0;font:900 13px Nunito;box-shadow:0 4px 0 #d8d1ff}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:22px 2px 11px}.section-head h3{font:700 19px Fredoka;margin:0}.section-head span{font-size:11px;color:var(--muted);font-weight:900}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.tile{border:1px solid #fff;border-radius:22px;padding:15px 14px;min-height:116px;background:linear-gradient(145deg,#ffffffed,#ffffffa8);box-shadow:0 7px 18px #4b44710d;cursor:pointer;text-align:left;color:var(--ink);font-family:Nunito}
+.tile:active{transform:scale(.98)}.tile .emoji{font-size:30px;display:block;margin-bottom:7px}.tile b{display:block;font-size:14px;font-weight:900}.tile small{display:block;color:var(--muted);font-size:11px;font-weight:700;margin-top:2px}
+.tile.lilac{background:linear-gradient(145deg,#eeeaff,#fff)}.tile.peach{background:linear-gradient(145deg,#fff0e7,#fff)}.tile.mint{background:linear-gradient(145deg,#e5fbf2,#fff)}.tile.blue{background:linear-gradient(145deg,#e6f6ff,#fff)}
+.buddy-strip{display:flex;align-items:center;gap:13px;padding:13px 15px;margin-top:17px;background:#ffffffbd;border:1px solid white;border-radius:20px;box-shadow:0 7px 18px #4b44710d}
+.buddy-face{width:58px;height:58px;flex:0 0 58px;background-size:300% 300%;background-position:50% 50%;background-repeat:no-repeat}
+.buddy-strip b{font:700 16px Fredoka}.buddy-strip p{font-size:11px;color:var(--muted);font-weight:700;margin:3px 0 0}
+.page-title{margin:10px 0 5px;font:700 29px Fredoka}.subline{font-size:13px;color:var(--muted);font-weight:700;margin:0 0 18px}
+.lesson{display:flex;align-items:center;gap:13px;padding:15px;margin-bottom:10px;background:#ffffffd9;border:1px solid white;border-radius:20px;box-shadow:0 6px 18px #4b44710a}
+.lesson-icon{width:52px;height:52px;display:grid;place-items:center;border-radius:17px;font-size:27px;background:#eeeaff}.lesson:nth-of-type(3) .lesson-icon{background:#fff0e6}.lesson:nth-of-type(4) .lesson-icon{background:#e5fbf2}
+.lesson b{font:700 16px Fredoka}.lesson small{display:block;color:var(--muted);font-size:11px;font-weight:700;margin-top:2px}
+.drawing-card{padding:13px;border:1px solid white;border-radius:25px;background:#ffffffd9;box-shadow:0 8px 22px #4b44710d}
+#drawingCanvas{display:block;width:100%;height:330px;background:#fffdf8;border-radius:17px;touch-action:none;border:1px dashed #ddd8f4}
+.tools{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding-top:13px}.color{width:28px;height:28px;border-radius:50%;border:3px solid white;box-shadow:0 0 0 1px #ddd;cursor:pointer}.color.active{box-shadow:0 0 0 2px var(--purple)}.tool-btn{border:0;background:#f0edff;color:#5f52bd;padding:8px 13px;border-radius:12px;font:900 12px Nunito}
+.rank-card{padding:17px;border-radius:23px;background:linear-gradient(135deg,#fff3d4,#fff);border:1px solid white;box-shadow:0 8px 20px #4b44710d;margin-bottom:12px}
+.rank-top{display:flex;align-items:center;justify-content:space-between}.rank-top b{font:700 18px Fredoka}.rank-number{font:700 28px Fredoka;color:#e6a52b}
+.player{display:flex;align-items:center;gap:12px;padding:13px 14px;background:#fff;border:1px solid #f0eef8;border-radius:17px;margin-top:10px}
+.player .medal{font-size:24px}.player .player-name{font-weight:900;font-size:14px}.player small{display:block;color:var(--muted);font-size:11px;font-weight:700}
+.profile-card{padding:20px;border-radius:25px;background:linear-gradient(140deg,#eeeaff,#fff 70%);border:1px solid white;box-shadow:0 9px 22px #4b44710d;text-align:center}
+.profile-avatar{width:86px;height:86px;margin:0 auto 10px;border-radius:28px;background:#fff;display:grid;place-items:center;font-size:42px;box-shadow:0 8px 18px #7565e822}
+.profile-card h2{font:700 23px Fredoka;margin:0}.profile-card p{font-size:12px;color:var(--muted);font-weight:800;margin:4px 0 0}
+.profile-row{display:flex;justify-content:space-between;padding:14px 4px;border-bottom:1px solid #eeeaf6;font-size:13px;font-weight:800}.profile-row:last-child{border:0}
+.logout{width:100%;margin-top:14px;padding:13px;border:0;border-radius:15px;background:#fff0f1;color:#d95b72;font:900 14px Nunito}
+.nav-wrap{position:fixed;z-index:10;bottom:0;left:0;right:0;padding:9px 12px calc(9px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent,#f8f7ff 23%);pointer-events:none}
+.nav{pointer-events:auto;width:min(100%,520px);margin:auto;display:grid;grid-template-columns:repeat(5,1fr);gap:3px;padding:7px 6px;background:rgba(255,255,255,.9);border:1px solid white;border-radius:23px;box-shadow:0 8px 30px #4b447122;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.nav button{min-width:0;border:0;background:transparent;border-radius:15px;padding:7px 2px 6px;color:#8b879c;font:800 10px Nunito;display:flex;flex-direction:column;align-items:center;gap:3px}
+.nav button .ico{font-size:20px;line-height:1.1}.nav button.active{background:#eeecff;color:#6256d2}
+@media(max-height:700px){.app{padding-bottom:94px}.hero{min-height:145px}.hero h2{font-size:23px}#drawingCanvas{height:260px}}
+</style>
 </head>
 <body>
-
-  <div class="dashboard-container">
-    
-    <!-- Top Bar -->
-    <div class="header-card">
-      <div class="header-buddy" id="headerBuddy" aria-label="Your selected buddy"></div>
-      <div class="welcome-text">
-        <h2>Hello, Bachha! 👋</h2>
-        <p id="buddyGreeting">Let's learn & play today</p>
-      </div>
-      <button class="logout-btn" onclick="handleLogout()">Log Out</button>
-    </div>
-
-    <!-- Banner -->
-    <div class="banner-card">
-      <h1>EduSpark Hub 🌟</h1>
-      <p>Choose an activity to start your magic journey!</p>
-    </div>
-
-    <!-- Menu Grid -->
-    <div class="menu-grid">
-      <a href="#" class="menu-card" onclick="alert('Alphabets section coming up!')">
-        <div class="menu-icon">🔤</div>
-        <div class="menu-title">Alphabets</div>
-        <div class="menu-desc">Learn A to Z</div>
-      </a>
-
-      <a href="#" class="menu-card" onclick="alert('Numbers section coming up!')">
-        <div class="menu-icon">🔢</div>
-        <div class="menu-title">Numbers</div>
-        <div class="menu-desc">Count 1 to 100</div>
-      </a>
-
-      <a href="#" class="menu-card" onclick="alert('Rhymes section coming up!')">
-        <div class="menu-icon">🎵</div>
-        <div class="menu-title">Rhymes</div>
-        <div class="menu-desc">Sing & Enjoy</div>
-      </a>
-
-      <a href="#" class="menu-card" onclick="alert('Quiz section coming up!')">
-        <div class="menu-icon">🎯</div>
-        <div class="menu-title">Mini Quiz</div>
-        <div class="menu-desc">Test your skills</div>
-      </a>
-    </div>
-
-  </div>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-    import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
-      authDomain: "kids-teacher-4387e.firebaseapp.com",
-      projectId: "kids-teacher-4387e",
-      storageBucket: "kids-teacher-4387e.firebasestorage.app",
-      messagingSenderId: "420221167346",
-      appId: "1:420221167346:web:da7ac80acdfd52339d526b",
-      measurementId: "G-VJVS2ZMNLY"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    // Agar user logged-in nahi hai toh wapas login page par bhej do
-    onAuthStateChanged(auth, async (user) => {
-      if (!user) { window.location.replace("login.html"); return; }
-      try {
-        const profile = await getDoc(doc(db, "users", user.uid));
-        const buddy = profile.exists() ? profile.data().buddy : null;
-        if (!buddy || !buddy.id) { window.location.replace("buddy-selection.html"); return; }
-        const childName = (profile.data().childName || buddy.name || "Bachha").trim();
-        document.querySelector(".welcome-text h2").textContent = "Hello, " + childName + "! 👋";
-        document.getElementById("buddyGreeting").textContent = childName + "’s Buddy: " + buddy.id + " • Let us learn & play!";
-        const buddyEl = document.getElementById("headerBuddy");
-        const buddyUrl = buddy.directions || ("https://raw.githubusercontent.com/nilbuild/page-mascot/main/public/mascots/" + buddy.id + "-directions.webp");
-        buddyEl.style.backgroundImage = "url(" + JSON.stringify(buddyUrl) + ")";
-      } catch (error) { console.error("Profile load error:", error); window.location.replace("buddy-selection.html"); }
-    });
-
-    window.handleLogout = async function() {
-      try {
-        await signOut(auth);
-        localStorage.removeItem('kidsAgeGroup');
-        window.location.replace("login.html");
-      } catch (error) {
-        console.error("Logout error:", error);
-      }
-    }
-  </script>
+<div class="app">
+<header class="top"><div class="brand">Kids <span>Teacher</span> ✦</div><div class="avatar" id="topAvatar">🌟</div></header>
+<section id="homePage" class="page active">
+<div class="welcome"><div class="eyebrow">READY TO PLAY & LEARN?</div><h1 id="helloName">Hello, Friend! 👋</h1><p>Your little learning adventure starts here.</p></div>
+<div class="hero"><div class="tag">TODAY'S ADVENTURE</div><h2>Let's make learning magical!</h2><p>Explore, create and discover something new today.</p><button onclick="showTab('learn')">Start Learning →</button></div>
+<div class="section-head"><h3>What shall we do?</h3><span>CHOOSE ONE</span></div>
+<div class="tiles">
+<button class="tile lilac" onclick="showTab('learn')"><span class="emoji">📚</span><b>Learn</b><small>Letters, numbers & more</small></button>
+<button class="tile peach" onclick="showTab('drawing')"><span class="emoji">🎨</span><b>Drawing</b><small>Make colourful art</small></button>
+<button class="tile mint" onclick="showTab('leaderboard')"><span class="emoji">🏆</span><b>Leaderboard</b><small>See your learning place</small></button>
+<button class="tile blue" onclick="showTab('profile')"><span class="emoji">⭐</span><b>My Profile</b><small>Your name & buddy</small></button>
+</div>
+<div class="buddy-strip"><div class="buddy-face" id="homeBuddy"></div><div><b id="buddyLine">Your buddy is ready!</b><p>Let's learn and play together.</p></div></div>
+</section>
+<section id="learnPage" class="page">
+<h1 class="page-title">Let's Learn! 📚</h1><p class="subline">Pick a fun activity to begin.</p>
+<div class="lesson" onclick="alert('Alphabets activity is coming soon!')"><div class="lesson-icon">🔤</div><div><b>Alphabets</b><small>Discover letters A to Z</small></div></div>
+<div class="lesson" onclick="alert('Numbers activity is coming soon!')"><div class="lesson-icon">🔢</div><div><b>Numbers</b><small>Count, match and play</small></div></div>
+<div class="lesson" onclick="alert('Rhymes activity is coming soon!')"><div class="lesson-icon">🎵</div><div><b>Rhymes & Songs</b><small>Sing along and have fun</small></div></div>
+<div class="lesson" onclick="alert('Mini Quiz is coming soon!')"><div class="lesson-icon">🧩</div><div><b>Mini Quiz</b><small>Try a little brain challenge</small></div></div>
+</section>
+<section id="drawingPage" class="page">
+<h1 class="page-title">Little Artist 🎨</h1><p class="subline">Draw anything you imagine!</p>
+<div class="drawing-card"><canvas id="drawingCanvas"></canvas><div class="tools">
+<button class="color active" data-color="#ff647c" style="background:#ff647c" aria-label="Pink"></button><button class="color" data-color="#7565e8" style="background:#7565e8" aria-label="Purple"></button><button class="color" data-color="#39b9e8" style="background:#39b9e8" aria-label="Blue"></button><button class="color" data-color="#45c78b" style="background:#45c78b" aria-label="Green"></button><button class="color" data-color="#ffb938" style="background:#ffb938" aria-label="Yellow"></button><button class="tool-btn" id="eraseBtn">Eraser</button><button class="tool-btn" id="clearBtn">Clear</button>
+</div></div>
+</section>
+<section id="leaderboardPage" class="page">
+<h1 class="page-title">Leaderboard 🏆</h1><p class="subline">Your name is ready for the learning race!</p>
+<div class="rank-card"><div class="rank-top"><b>🌟 Your Learning Profile</b><span class="rank-number">★</span></div><div class="player"><span class="medal">🥇</span><div><span class="player-name" id="leaderName">Your Name</span><small>You're on your learning journey!</small></div></div></div>
+<p class="muted">Scores and class rankings will appear here when learning activities are connected.</p>
+</section>
+<section id="profilePage" class="page">
+<h1 class="page-title">My Profile ⭐</h1><p class="subline">This is your special learning space.</p>
+<div class="profile-card"><div class="profile-avatar" id="profileBuddy">🐰</div><h2 id="profileName">Your Name</h2><p>Little Learner</p><div style="margin-top:17px;text-align:left"><div class="profile-row"><span>My name</span><b id="profileNameRow">—</b></div><div class="profile-row"><span>My Buddy</span><b id="profileBuddyRow">—</b></div></div></div>
+<button class="logout" onclick="handleLogout()">Log Out</button>
+</section>
+</div>
+<div class="nav-wrap"><nav class="nav" aria-label="Main navigation">
+<button class="active" data-tab="home"><span class="ico">🏠</span>Home</button>
+<button data-tab="learn"><span class="ico">📚</span>Learn</button>
+<button data-tab="drawing"><span class="ico">🎨</span>Drawing</button>
+<button data-tab="leaderboard"><span class="ico">🏆</span>Leaderboard</button>
+<button data-tab="profile"><span class="ico">👤</span>Profile</button>
+</nav></div>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {getAuth,onAuthStateChanged,signOut} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import {getFirestore,doc,getDoc} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+const firebaseConfig={apiKey:"AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",authDomain:"kids-teacher-4387e.firebaseapp.com",projectId:"kids-teacher-4387e",storageBucket:"kids-teacher-4387e.firebasestorage.app",messagingSenderId:"420221167346",appId:"1:420221167346:web:da7ac80acdfd52339d526b",measurementId:"G-VJVS2ZMNLY"};
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
+const base="https://raw.githubusercontent.com/nilbuild/page-mascot/main/public/mascots/";
+window.showTab=function(tab){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.getElementById(tab+"Page").classList.add("active");
+ document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
+ window.scrollTo({top:0,behavior:"smooth"});
+};
+document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
+window.handleLogout=async()=>{try{await signOut(auth);localStorage.removeItem("kidsAgeGroup");window.location.replace("./login.html")}catch(e){console.error(e)}};
+onAuthStateChanged(auth,async user=>{
+ if(!user){window.location.replace("./login.html");return}
+ try{
+  const snap=await getDoc(doc(db,"users",user.uid));
+  if(!snap.exists()){window.location.replace("./child-name.html");return}
+  const data=snap.data(),name=(data.childName||data.buddy?.name||"Friend").trim(),buddy=data.buddy||{},buddyId=buddy.id||"bunny";
+  if(!data.childName){window.location.replace("./child-name.html");return}
+  if(!buddy.id){window.location.replace("./buddy-selection.html");return}
+  document.getElementById("helloName").textContent="Hello, "+name+"! 👋";
+  document.getElementById("leaderName").textContent=name;
+  document.getElementById("profileName").textContent=name;
+  document.getElementById("profileNameRow").textContent=name;
+  document.getElementById("profileBuddyRow").textContent=buddyId.charAt(0).toUpperCase()+buddyId.slice(1);
+  document.getElementById("buddyLine").textContent=name+"'s Buddy is here!";
+  const spriteUrl=buddy.directions||base+buddyId+"-directions.webp";
+  document.getElementById("homeBuddy").style.backgroundImage='url("'+spriteUrl+'")';
+  document.getElementById("topAvatar").textContent="🌟";
+  document.getElementById("profileBuddy").textContent="🐾";
+  document.getElementById("profileBuddy").style.backgroundImage='url("'+spriteUrl+'")';
+  document.getElementById("profileBuddy").style.backgroundSize="300% 300%";
+  document.getElementById("profileBuddy").style.backgroundPosition="50% 50%";
+  document.getElementById("profileBuddy").style.backgroundRepeat="no-repeat";
+ }catch(e){console.error("Dashboard profile load:",e)}
+});
+const canvas=document.getElementById("drawingCanvas"),ctx=canvas.getContext("2d");let drawing=false,color="#ff647c",eraser=false;
+function sizeCanvas(){const ratio=window.devicePixelRatio||1,rect=canvas.getBoundingClientRect();const old=document.createElement("canvas");old.width=canvas.width;old.height=canvas.height;old.getContext("2d").drawImage(canvas,0,0);canvas.width=rect.width*ratio;canvas.height=rect.height*ratio;ctx.setTransform(ratio,0,0,ratio,0,0);if(old.width&&old.height)ctx.drawImage(old,0,0,old.width,old.height,0,0,rect.width,rect.height);ctx.lineCap="round";ctx.lineJoin="round"}new ResizeObserver(sizeCanvas).observe(canvas);
+canvas.addEventListener("pointerdown",e=>{drawing=true;canvas.setPointerCapture(e.pointerId);const r=canvas.getBoundingClientRect();ctx.beginPath();ctx.moveTo(e.clientX-r.left,e.clientY-r.top)});
+canvas.addEventListener("pointermove",e=>{if(!drawing)return;const r=canvas.getBoundingClientRect();ctx.strokeStyle=eraser?"#fffdf8":color;ctx.lineWidth=eraser?24:5;ctx.lineTo(e.clientX-r.left,e.clientY-r.top);ctx.stroke()});
+["pointerup","pointercancel"].forEach(ev=>canvas.addEventListener(ev,()=>drawing=false));
+document.querySelectorAll(".color").forEach(b=>b.addEventListener("click",()=>{color=b.dataset.color;eraser=false;document.querySelectorAll(".color").forEach(x=>x.classList.toggle("active",x===b))}));
+document.getElementById("eraseBtn").addEventListener("click",()=>{eraser=true;document.querySelectorAll(".color").forEach(x=>x.classList.remove("active"))});
+document.getElementById("clearBtn").addEventListener("click",()=>ctx.clearRect(0,0,canvas.width,canvas.height));
+</script>
 </body>
 </html>
