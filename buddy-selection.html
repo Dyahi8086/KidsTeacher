@@ -102,7 +102,7 @@ onAuthStateChanged(auth,async u=>{
 });
 button.addEventListener("click",async()=>{
  if(!selected)return;
- const label=(childName||localStorage.getItem("kt_child_name")||"").trim();
+ const label=(childName||"").trim();
  if(!label){status.textContent="Please enter your child's name first.";return}
  if(!user){status.textContent="Login session not ready. Please wait and try again.";return}
  const buddy={id:selected,name:label,character:selected,emoji:"",directions:base+selected+"-directions.webp",reactions:base+selected+"-reactions.webp"};
