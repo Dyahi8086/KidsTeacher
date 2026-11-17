@@ -63,7 +63,7 @@
             padding-right: 10px;
             opacity: 0;
             transform: translate(-50%, -50%) scale(0.5);
-            animation: logoSequence 0.95s cubic-bezier(.22, 1, .36, 1) 0.1s forwards;
+            animation: logoSequence 0.72s cubic-bezier(.22, 1, .36, 1) 0.05s forwards;
         }
 
         .kt-ears {
@@ -121,10 +121,10 @@
         }
 
         @keyframes logoSequence {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.55); }
-            25% { opacity: 1; transform: translate(-50%, -50%) scale(1.04); }
-            38%, 75% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.25); }
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.12); }
+            25% { opacity: 1; transform: translate(-50%, -50%) scale(0.27); }
+            48%, 72% { opacity: 1; transform: translate(-50%, -50%) scale(0.25); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.06); }
         }
 
         /* 2. BRAND TITLE */
@@ -135,14 +135,14 @@
             transform: translate(-50%, -50%);
             color: #fff;
             font-family: 'Nunito', Arial, sans-serif;
-            font-size: clamp(13px, 3.6vw, 17px);
+            font-size: clamp(10px, 2.8vw, 13px);
             font-weight: 900;
             letter-spacing: .45px;
             text-align: center;
             white-space: nowrap;
             opacity: 0;
             clip-path: inset(0 50% 0 50%);
-            animation: titleSequence 1.05s cubic-bezier(.4, 0, .2, 1) 0.9s forwards;
+            animation: titleSequence 0.72s cubic-bezier(.4, 0, .2, 1) 0.78s forwards;
         }
 
         @keyframes titleSequence {
@@ -164,14 +164,14 @@
             background: #ffffff;
             opacity: 0;
             transform: translate(-50%, -50%) scale(0.5);
-            animation: dotJumpSequence 0.85s cubic-bezier(.45, .05, .55, .95) 1.88s forwards;
+            animation: dotJumpSequence 1.08s cubic-bezier(.45, .05, .55, .95) 1.72s forwards;
         }
 
         @keyframes dotJumpSequence {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-            15% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-            48% { opacity: 1; transform: translate(-50%, 110px) scale(1.05); }
-            100% { opacity: 0; transform: translate(-50%, -36vh) scale(2.8); }
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.35); }
+            18% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            58% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 1; transform: translate(-50%, -36vh) scale(1.15); }
         }
 
         /* 4. SOFT PINK PORTAL TO LOGIN */
@@ -238,9 +238,9 @@
                 if (themeColorMeta) {
                     themeColorMeta.setAttribute('content', '#F7EBEF');
                 }
-            }, 3200);
+            }, 2800);
 
-            setTimeout(goToLogin, 4000);
+            setTimeout(goToLogin, 3450);
         }
     </script>
 
