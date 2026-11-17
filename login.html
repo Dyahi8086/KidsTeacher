@@ -1204,6 +1204,80 @@ body {
     #loadingOverlay { background: rgba(8,8,11,.98); }
 }
 
+
+/* SOFT PINK LIQUID GLASS LOGIN THEME */
+body {
+    background:
+        radial-gradient(ellipse at 12% 10%, rgba(255,255,255,.96) 0%, transparent 30%),
+        radial-gradient(ellipse at 88% 22%, rgba(255,205,222,.78) 0%, transparent 38%),
+        radial-gradient(ellipse at 14% 88%, rgba(255,185,211,.58) 0%, transparent 40%),
+        linear-gradient(145deg, #FFF5F8 0%, #F9DCE7 48%, #F4C9D9 100%);
+}
+.glow-one {
+    background: radial-gradient(circle, #FFE1EB 0%, #FFC5D9 58%, transparent 76%);
+}
+.glow-two {
+    background: radial-gradient(circle, #F8D5E7 0%, #EBCBEA 58%, transparent 76%);
+}
+.glow-three {
+    background: radial-gradient(circle, #FFF0F5 0%, #FFC8DA 58%, transparent 76%);
+}
+.login-popup-box {
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.82),
+        rgba(255,247,250,.68) 48%,
+        rgba(255,230,239,.62)
+    );
+    border-color: rgba(255,255,255,.92);
+    border-top-color: rgba(255,255,255,.99);
+    box-shadow:
+        0 -24px 65px rgba(157,91,119,.18),
+        inset 0 2px 2px rgba(255,255,255,.98),
+        inset 0 -5px 18px rgba(210,145,170,.12);
+    backdrop-filter: blur(42px) saturate(160%);
+    -webkit-backdrop-filter: blur(42px) saturate(160%);
+}
+.login-popup-box::before {
+    background: rgba(255,255,255,.88);
+    border-color: rgba(255,255,255,.98);
+}
+.icon-container {
+    background:
+        radial-gradient(circle at 28% 20%, #fff 0%, rgba(255,255,255,.78) 58%),
+        linear-gradient(145deg, #FFF9FC, #F6DCE7);
+    border-color: rgba(255,255,255,.98);
+    box-shadow:
+        12px 14px 30px rgba(178,119,146,.16),
+        -8px -8px 24px rgba(255,255,255,.98),
+        inset 0 2px 5px rgba(255,255,255,1),
+        inset 0 -3px 10px rgba(206,150,174,.14);
+}
+.app-title { color: #30232B; text-shadow: 0 2px 14px rgba(255,255,255,.9); }
+.app-subtitle, .privacy-text { color: #78616E; }
+.privacy-text a {
+    color: #A0446D;
+    border-bottom-color: rgba(160,68,109,.42);
+}
+#offlineBanner {
+    background: rgba(69,43,57,.76);
+    border-color: rgba(255,255,255,.40);
+}
+#loadingOverlay {
+    background: rgba(255,242,247,.72);
+}
+.spinner {
+    border-color: rgba(255,255,255,.96);
+    border-top-color: #D96F9A;
+    box-shadow: 0 8px 25px rgba(151,83,116,.14);
+}
+.loading-text { color: #58394A; }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .login-popup-box { background: rgba(255,248,251,.98); }
+    .icon-container { background: rgba(255,255,255,.98); }
+    #loadingOverlay { background: rgba(255,242,247,.98); }
+}
+
 </style>
 </head>
 
