@@ -8,30 +8,30 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#17351b;--muted:#527451;--green:#65d900;--lime:#a8f000;--deep:#145b23;--line:#d4f3b8}
+:root{--ink:#292321;--muted:#877b75;--orange:#ff6a3d;--cream:#fff8f2;--line:#f0e6df}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;min-height:100%;font-family:Nunito,system-ui,sans-serif;color:var(--ink)}
-body{min-height:100dvh;background:radial-gradient(ellipse at 50% 0%,#d8ff8a 0,#85e91d 40%,#40b900 100%);padding:calc(14px + env(safe-area-inset-top)) 14px calc(18px + env(safe-area-inset-bottom))}
+body{min-height:100dvh;background:radial-gradient(circle at 8% 4%,#ffe8d9 0,transparent 30%),radial-gradient(circle at 95% 28%,#ffeede 0,transparent 28%),var(--cream);padding:calc(14px + env(safe-area-inset-top)) 14px calc(18px + env(safe-area-inset-bottom))}
 .wrap{max-width:560px;margin:auto;min-height:calc(100dvh - 32px);display:flex;flex-direction:column}
 .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;color:#fff}
 .brand{font-weight:900;font-size:14px;letter-spacing:1.5px;text-shadow:0 1px 3px #225d26}.step{font-size:11px;font-weight:900;color:#39731c;background:#e9ffb8;padding:8px 12px;border-radius:30px}
 h1{font-size:clamp(29px,8vw,39px);line-height:1.04;margin:8px 0 5px;font-weight:900;letter-spacing:-1px;color:#fff;text-align:center;text-shadow:0 2px 3px #2d8b19}
-.sub{margin:0;color:#f5ffe8;font-size:14px;line-height:1.4;font-weight:800;text-align:center}
-.preview{display:flex;align-items:center;justify-content:center;gap:12px;margin:12px 0 12px;padding:7px 15px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:20px;min-height:92px}
-#bigMascot{width:82px;height:82px;flex:0 0 82px}.preview strong{display:block;font-size:14px;color:#fff}.preview small{color:#f0ffe1;font-weight:700;font-size:12px}
-.grid-title{display:flex;justify-content:space-between;align-items:center;margin:4px 2px 8px;font-weight:900;font-size:14px;color:#fff}.grid-title span:last-child{font-size:11px;color:#edffd7}
+.sub{margin:0;color:var(--muted);font-size:14px;line-height:1.4;font-weight:800;text-align:center}
+.preview{display:flex;align-items:center;justify-content:center;gap:12px;margin:12px 0 12px;padding:7px 15px;background:#fff;border:1px solid #f3e7df;border-radius:20px;min-height:92px}
+#bigMascot{width:82px;height:82px;flex:0 0 82px}.preview strong{display:block;font-size:14px;color:var(--ink)}.preview small{color:var(--muted);font-weight:700;font-size:12px}
+.grid-title{display:flex;justify-content:space-between;align-items:center;margin:4px 2px 8px;font-weight:900;font-size:14px;color:var(--ink)}.grid-title span:last-child{font-size:11px;color:var(--muted)}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.buddy{border:2px solid rgba(255,255,255,.65);border-radius:18px;background:rgba(239,255,225,.82);padding:5px 5px 7px;min-height:142px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;box-shadow:0 4px 0 rgba(27,113,13,.16);transition:transform .16s,border-color .16s,background .16s}
-.buddy:active{transform:scale(.97)}.buddy.selected{border:3px solid #ffdf00;background:#f4ffbc;box-shadow:0 0 0 3px #fff5a655,0 4px 0 rgba(27,113,13,.18)}
-.mascot{position:relative;display:block;width:116px;height:112px;flex-shrink:0;border:0;padding:0;background:transparent;appearance:none;cursor:pointer;user-select:none}
+.buddy{border:1.5px solid var(--line);border-radius:20px;background:#fff;padding:5px 5px 7px;min-height:170px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;box-shadow:0 4px 0 rgba(27,113,13,.16);transition:transform .16s,border-color .16s,background .16s}
+.buddy:active{transform:scale(.97)}.buddy.selected{border:2px solid var(--orange);background:#fff1e9;box-shadow:0 0 0 3px #ff6a3d18}
+.mascot{position:relative;display:block;width:142px;height:136px;flex-shrink:0;border:0;padding:0;background:transparent;appearance:none;cursor:pointer;user-select:none}
 .mascot-inner{position:relative;display:block;width:100%;height:100%;transform-origin:50% 78%}
 .sheet{position:absolute;inset:0;background-size:300% 300%;background-repeat:no-repeat;pointer-events:none}
-.mascot-name{font-size:13px;font-weight:900;text-transform:capitalize;color:#244d1e}.selected-label{min-height:12px;font-size:9px;font-weight:900;color:#448c00}
+.mascot-name{font-size:13px;font-weight:900;text-transform:capitalize;color:var(--ink)}.selected-label{min-height:12px;font-size:9px;font-weight:900;color:var(--orange)}
 .buddy .mascot{pointer-events:none}
-.footer{position:sticky;bottom:0;padding:12px 0 calc(8px + env(safe-area-inset-bottom));margin-top:auto;background:linear-gradient(transparent,#53c900 24%)}
-#continue{width:100%;border:0;border-radius:17px;background:linear-gradient(180deg,#ffe900,#ffc900);color:#244800;padding:15px;font:900 16px Nunito,sans-serif;box-shadow:0 5px 0 #d59b00,0 10px 18px #267b1530;cursor:pointer}
-#continue:disabled{opacity:.48;box-shadow:none;cursor:not-allowed}.status{text-align:center;min-height:18px;margin:8px 0 0;color:#fff;font-size:12px;font-weight:800}
-@media(min-width:480px){.grid{gap:11px}.buddy{min-height:158px}.mascot{width:130px;height:124px}}
+.footer{position:sticky;bottom:0;padding:12px 0 calc(8px + env(safe-area-inset-bottom));margin-top:auto;background:linear-gradient(transparent,var(--cream) 24%)}
+#continue{width:100%;border:0;border-radius:17px;background:linear-gradient(135deg,#ff8158,#f45124);color:#fff;padding:15px;font:900 16px Nunito,sans-serif;box-shadow:0 6px 0 #d9421b,0 12px 22px #f4512430;cursor:pointer}
+#continue:disabled{opacity:.48;box-shadow:none;cursor:not-allowed}.status{text-align:center;min-height:18px;margin:8px 0 0;color:#a34d32;font-size:12px;font-weight:800}
+@media(min-width:480px){.grid{gap:11px}.buddy{min-height:185px}.mascot{width:156px;height:150px}}
 </style>
 </head>
 <body><main class="wrap">
