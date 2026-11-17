@@ -944,6 +944,118 @@ body {
     }
 }
 
+
+/* SOFT WHITE / MILKY LIQUID GLASS THEME
+   Keep the existing layout, Google button, and Firebase behavior unchanged. */
+html, body {
+    background: #f7f8fb;
+}
+
+body {
+    background:
+        radial-gradient(ellipse at 12% 10%, rgba(255,255,255,.98) 0%, transparent 38%),
+        radial-gradient(ellipse at 88% 18%, rgba(231,237,247,.72) 0%, transparent 40%),
+        radial-gradient(ellipse at 15% 88%, rgba(255,255,255,.88) 0%, transparent 42%),
+        radial-gradient(ellipse at 92% 90%, rgba(222,230,242,.62) 0%, transparent 38%),
+        linear-gradient(145deg, #ffffff 0%, #f6f7fa 52%, #edf0f5 100%);
+}
+
+.glow-one {
+    background: radial-gradient(circle, #ffffff 0%, #f2f4f8 58%, transparent 78%);
+}
+.glow-two {
+    background: radial-gradient(circle, #e8edf5 0%, #f8f9fc 58%, transparent 78%);
+}
+.glow-three {
+    background: radial-gradient(circle, #ffffff 0%, #e9edf4 60%, transparent 78%);
+}
+
+.login-popup-box {
+    background:
+        linear-gradient(135deg,
+            rgba(255,255,255,.84) 0%,
+            rgba(255,255,255,.55) 48%,
+            rgba(245,247,251,.62) 100%);
+    border: 1px solid rgba(255,255,255,.96);
+    border-top: 2px solid rgba(255,255,255,1);
+    border-left: 1px solid rgba(255,255,255,.94);
+    border-right: 1px solid rgba(220,226,236,.72);
+    box-shadow:
+        0 -24px 68px rgba(76,88,112,.10),
+        0 -4px 22px rgba(255,255,255,.72),
+        inset 0 2px 3px rgba(255,255,255,1),
+        inset 0 -1px 18px rgba(210,218,232,.22);
+    backdrop-filter: blur(42px) saturate(155%);
+    -webkit-backdrop-filter: blur(42px) saturate(155%);
+}
+
+.login-popup-box::before {
+    background: rgba(255,255,255,.82);
+    border: 1px solid rgba(255,255,255,.98);
+    box-shadow:
+        inset 0 1px 3px rgba(88,101,125,.10),
+        0 2px 9px rgba(88,101,125,.07);
+}
+
+.icon-container {
+    background:
+        radial-gradient(circle at 28% 20%, rgba(255,255,255,1), rgba(255,255,255,.55) 58%),
+        linear-gradient(145deg, rgba(255,255,255,.92), rgba(232,237,246,.60));
+    border: 1px solid rgba(255,255,255,.98);
+    box-shadow:
+        12px 14px 30px rgba(82,96,122,.10),
+        -8px -8px 24px rgba(255,255,255,.96),
+        inset 0 2px 5px rgba(255,255,255,1),
+        inset 0 -3px 10px rgba(190,201,220,.14);
+    backdrop-filter: blur(26px) saturate(165%);
+    -webkit-backdrop-filter: blur(26px) saturate(165%);
+}
+
+.app-title {
+    color: #242936;
+    text-shadow: 0 2px 14px rgba(255,255,255,.9);
+}
+.app-subtitle, .privacy-text {
+    color: #687184;
+}
+.privacy-text a {
+    color: #30394b;
+    border-bottom-color: rgba(77,91,116,.42);
+}
+
+#offlineBanner {
+    background: rgba(43,51,66,.72);
+    border: 1px solid rgba(255,255,255,.42);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+}
+
+#errorBox, #successBox {
+    backdrop-filter: blur(20px) saturate(155%);
+    -webkit-backdrop-filter: blur(20px) saturate(155%);
+    box-shadow:
+        0 8px 24px rgba(67,79,101,.08),
+        inset 0 1px 1px rgba(255,255,255,.88);
+}
+
+#loadingOverlay {
+    background: rgba(248,250,253,.62);
+    backdrop-filter: blur(34px) saturate(165%);
+    -webkit-backdrop-filter: blur(34px) saturate(165%);
+}
+.spinner {
+    border-color: rgba(255,255,255,.94);
+    border-top-color: #7185a8;
+    box-shadow: 0 8px 25px rgba(76,91,119,.12);
+}
+.loading-text { color: #30394b; }
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .login-popup-box { background: rgba(250,251,253,.97); }
+    .icon-container { background: rgba(255,255,255,.98); }
+    #loadingOverlay { background: rgba(248,250,253,.98); }
+}
+
 </style>
 </head>
 
