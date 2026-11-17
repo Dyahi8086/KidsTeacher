@@ -1522,10 +1522,10 @@ async function goToNextPage(user, isNewUser = false) {
         window.location.replace(destination);
     } catch (error) {
         console.error("Profile routing error:", error);
+        // If the profile lookup is unavailable, continue onboarding instead of trapping the parent.
         setLoading(false);
         redirectHandled = false;
-        const detail = error?.code || error?.message || "unknown-error";
-        showError("Firebase profile error: " + detail + ". Screenshot bhejo, main exact fix karunga.");
+        window.location.replace("./child-name.html");
     }
 }
 
@@ -1572,12 +1572,9 @@ googleBtn.addEventListener("click", async () => {
 /* AUTH STATE */
 
 onAuthStateChanged(auth, user => {
-    if (popupLoginInProgress) return;
-    if (user) {
-        goToNextPage(user);
-    } else {
-        document.body.style.visibility = "visible";
-    }
+    // Do not auto-route an old signed-in Gmail account here.
+    // Let the parent explicitly choose the Google account from the login button.
+    document.body.style.visibility = "visible";
 });
 
 /* INITIALIZATION */
