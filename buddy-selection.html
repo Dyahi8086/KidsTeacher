@@ -70,7 +70,7 @@ const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
 const names=["nurse","cap","panda","wizard","skater","bunny","cat","knight","tiger","sheep"];
 const base="https://raw.githubusercontent.com/nilbuild/page-mascot/main/public/mascots/";
 const grid=document.getElementById("buddyGrid");let big=document.getElementById("bigMascot"),button=document.getElementById("continue"),status=document.getElementById("status");
-let user=null,selected=null,childName="";
+let user=null,selected=null,childName=localStorage.getItem("kt_child_name")||"";
 const directions=["up-left","up","up-right","left","center","right","down-left","down","down-right"];
 const clockwise=["right","down-right","down","down-left","left","up-left","up","up-right"];
 const reactions=["blink","heart","sparkle","surprised","wink","bashful","sleepy","dizzy","delighted"];
@@ -82,12 +82,12 @@ function render(){grid.innerHTML="";names.forEach(name=>{const card=document.cre
 render();
 onAuthStateChanged(auth,async u=>{if(!u){location.replace("./login.html");return}user=u;try{const snap=await getDoc(doc(db,"users",u.uid));if(snap.exists()){
         const profile=snap.data();
-        childName=(profile.childName||"").trim();
+        childName=(localStorage.getItem("kt_child_name")||profile.childName||"").trim();
         if(!childName){location.replace("./child-name.html");return}
         if(profile.buddy?.id){
           await setDoc(doc(db,"users",u.uid),{buddy:{...profile.buddy,name:childName},updatedAt:serverTimestamp()},{merge:true});
           location.replace("./index-home.html");return;
         }
       }}catch(e){console.error(e);status.textContent=""}});
-button.addEventListener("click",async()=>{if(!user||!selected)return;button.disabled=true;button.textContent="Saving your Buddy…";status.textContent="";try{const label=childName||selected.replace(/-/g," ");await setDoc(doc(db,"users",user.uid),{buddy:{id:selected,name:label,character:selected,emoji:"",directions:base+selected+"-directions.webp",reactions:base+selected+"-reactions.webp"},childName:label,displayName:user.displayName||"",email:user.email||"",updatedAt:serverTimestamp()},{merge:true});location.replace("./index-home.html")}catch(e){console.error(e);status.textContent=e.code==="permission-denied"?"Firestore permission denied. Publish firestore.rules in Firebase Console.":"Could not save Buddy: "+(e.code||e.message);button.disabled=false;button.textContent="Choose this Buddy →"}});
+button.addEventListener("click",async()=>{if(!user||!selected)return;button.disabled=true;button.textContent="Saving your Buddy…";status.textContent="";try{const label=childName||localStorage.getItem("kt_child_name")||selected.replace(/-/g," ");await setDoc(doc(db,"users",user.uid),{buddy:{id:selected,name:label,character:selected,emoji:"",directions:base+selected+"-directions.webp",reactions:base+selected+"-reactions.webp"},childName:label,displayName:user.displayName||"",email:user.email||"",updatedAt:serverTimestamp()},{merge:true});location.replace("./index-home.html")}catch(e){console.error(e);status.textContent=e.code==="permission-denied"?"Firestore permission denied. Publish firestore.rules in Firebase Console.":"Could not save Buddy: "+(e.code||e.message);button.disabled=false;button.textContent="Choose this Buddy →"}});
 </script></body></html>
