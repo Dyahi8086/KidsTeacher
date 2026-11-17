@@ -9,20 +9,28 @@
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{width:100%;min-height:100%;margin:0}
-body{min-height:100dvh;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;padding:0;background:radial-gradient(ellipse at 12% 10%,#fff 0%,transparent 32%),radial-gradient(ellipse at 88% 22%,rgba(255,205,222,.78) 0%,transparent 38%),radial-gradient(ellipse at 14% 88%,rgba(255,185,211,.58) 0%,transparent 40%),linear-gradient(145deg,#fff5f8 0%,#f9dce7 48%,#f4c9d9 100%);font-family:'Plus Jakarta Sans',sans-serif;color:#30232b}
-.panel{position:relative;width:100%;max-width:500px;min-height:390px;padding:76px 27px max(34px,env(safe-area-inset-bottom));display:flex;flex-direction:column;justify-content:center;text-align:center;background:linear-gradient(145deg,rgba(255,255,255,.84),rgba(255,247,250,.68) 48%,rgba(255,230,239,.62));border:1px solid rgba(255,255,255,.92);border-bottom:0;border-radius:42px 42px 0 0;box-shadow:0 -24px 65px rgba(157,91,119,.18),inset 0 2px 2px rgba(255,255,255,.98),inset 0 -5px 18px rgba(210,145,170,.12);backdrop-filter:blur(42px) saturate(160%);-webkit-backdrop-filter:blur(42px) saturate(160%);animation:rise .65s cubic-bezier(.2,.8,.2,1) both}
-.panel:before{content:"";position:absolute;top:18px;left:50%;transform:translateX(-50%);width:66px;height:6px;border-radius:20px;background:rgba(255,255,255,.9);box-shadow:0 2px 8px rgba(157,91,119,.12)}
-@keyframes rise{from{transform:translateY(35px);opacity:0}to{transform:translateY(0);opacity:1}}
-h1{font-family:Outfit,sans-serif;font-size:clamp(31px,8vw,40px);line-height:1.12;letter-spacing:-1.2px;font-weight:800;color:#30232b;margin:0 0 34px}
-input{width:100%;height:62px;border:1.5px solid rgba(190,120,150,.28);border-radius:18px;padding:0 20px;background:rgba(255,255,255,.88);font:700 17px 'Plus Jakarta Sans',sans-serif;color:#30232b;outline:none;box-shadow:inset 0 2px 5px rgba(120,70,95,.035);transition:.2s}
-input::placeholder{color:#9a8791;font-weight:600}
-input:focus{border-color:#dc83a7;box-shadow:0 0 0 4px rgba(220,131,167,.13),inset 0 2px 5px rgba(120,70,95,.035)}
-button{width:100%;height:62px;margin-top:17px;border:1px solid rgba(255,255,255,.55);border-radius:19px;background:linear-gradient(135deg,#e98fb3,#d96f9a);color:#fff;font:800 18px Outfit,sans-serif;letter-spacing:.1px;box-shadow:0 12px 26px rgba(200,100,145,.23),inset 0 1px 1px rgba(255,255,255,.42);transition:transform .16s,filter .16s}
-button:active{transform:scale(.98);filter:brightness(1.04)}
-button:disabled{opacity:.55}
+body{min-height:100dvh;display:grid;place-items:center;overflow:hidden;padding:24px 18px;font-family:'Plus Jakarta Sans',sans-serif;color:#30232b;background:radial-gradient(circle at 14% 18%,#fff 0,transparent 28%),radial-gradient(circle at 88% 18%,rgba(255,161,201,.68) 0,transparent 30%),radial-gradient(circle at 12% 88%,rgba(207,178,255,.52) 0,transparent 34%),radial-gradient(circle at 92% 90%,rgba(255,190,216,.7) 0,transparent 32%),linear-gradient(135deg,#fff7fb 0%,#f8ddea 48%,#edc9e2 100%)}
+body:before,body:after{content:"";position:fixed;pointer-events:none;border-radius:50%;filter:blur(1px)}
+body:before{width:230px;height:230px;top:-90px;right:-75px;border:1px solid rgba(255,255,255,.55);box-shadow:0 0 0 22px rgba(255,255,255,.08),0 0 0 48px rgba(255,255,255,.05);animation:floatA 10s ease-in-out infinite alternate}
+body:after{width:190px;height:190px;bottom:-85px;left:-65px;border:1px solid rgba(255,255,255,.55);box-shadow:0 0 0 20px rgba(255,255,255,.08),0 0 0 44px rgba(255,255,255,.05);animation:floatA 12s ease-in-out infinite alternate-reverse}
+@keyframes floatA{to{transform:translate(18px,-16px) rotate(18deg)}}
+.panel{position:relative;isolation:isolate;width:min(100%,430px);padding:62px 27px 34px;border-radius:36px;text-align:center;background:linear-gradient(145deg,rgba(255,255,255,.76),rgba(255,255,255,.42) 48%,rgba(255,235,246,.55));border:1px solid rgba(255,255,255,.88);box-shadow:0 30px 80px rgba(135,76,117,.19),0 8px 24px rgba(255,255,255,.48) inset,0 -10px 30px rgba(214,153,190,.12) inset;backdrop-filter:blur(36px) saturate(175%);-webkit-backdrop-filter:blur(36px) saturate(175%);animation:cardIn .7s cubic-bezier(.18,.8,.25,1) both}
+.panel:before{content:"";position:absolute;z-index:-1;inset:-2px;border-radius:38px;padding:1.5px;background:linear-gradient(135deg,rgba(255,255,255,.95),rgba(255,255,255,.12),rgba(225,130,181,.45),rgba(255,255,255,.85));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.panel:after{content:"";position:absolute;top:0;left:12%;width:76%;height:1px;background:linear-gradient(90deg,transparent,#fff,transparent);opacity:.95}
+@keyframes cardIn{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+h1{font-family:Outfit,sans-serif;font-size:clamp(31px,8vw,39px);line-height:1.12;letter-spacing:-1.25px;font-weight:800;color:#302333;margin:0 0 34px;text-shadow:0 2px 16px rgba(255,255,255,.7)}
+form{width:100%}
+input{display:block;width:100%;height:64px;border:1.5px solid rgba(255,255,255,.96);border-radius:19px;padding:0 19px;background:linear-gradient(145deg,rgba(255,255,255,.92),rgba(255,255,255,.64));font:700 17px 'Plus Jakarta Sans',sans-serif;color:#30232b;outline:none;box-shadow:0 9px 22px rgba(130,75,110,.07),inset 0 2px 5px rgba(255,255,255,.95),inset 0 -2px 5px rgba(196,145,174,.08);transition:.22s}
+input::placeholder{color:#a08c99;font-weight:600}
+input:focus{border-color:#df8db4;box-shadow:0 0 0 4px rgba(220,131,167,.14),0 12px 25px rgba(130,75,110,.09),inset 0 2px 5px rgba(255,255,255,.95)}
+button{position:relative;overflow:hidden;width:100%;height:63px;margin-top:18px;border:1px solid rgba(255,255,255,.58);border-radius:19px;background:linear-gradient(110deg,#ee9bc1 0%,#dc78a8 48%,#c967a0 100%);color:#fff;font:800 18px Outfit,sans-serif;letter-spacing:.15px;text-shadow:0 1px 2px rgba(120,45,85,.14);box-shadow:0 13px 28px rgba(193,89,143,.27),inset 0 1px 1px rgba(255,255,255,.55),inset 0 -3px 7px rgba(145,52,104,.12);transition:transform .16s,filter .16s}
+button:before{content:"";position:absolute;top:-80%;left:-35%;width:32%;height:260%;transform:rotate(25deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.32),transparent);animation:buttonShine 4.5s ease-in-out infinite}
+@keyframes buttonShine{0%,55%{left:-40%}85%,100%{left:125%}}
+button:active{transform:scale(.98);filter:brightness(1.05)}
+button:disabled{opacity:.58}
 #status{min-height:17px;margin:12px 0 0;color:#a0446d;font-size:12px;font-weight:700}
-@media(min-height:850px){.panel{min-height:440px;padding-top:86px}}
-@media(max-height:650px){.panel{min-height:340px;padding-top:65px}h1{margin-bottom:24px}input,button{height:56px}}
+@media(max-width:360px){.panel{padding:52px 21px 28px;border-radius:30px}h1{font-size:30px;margin-bottom:27px}input,button{height:58px}}
+@media(max-height:650px){.panel{padding-top:40px;padding-bottom:24px}h1{margin-bottom:22px}input,button{height:56px}}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.panel{background:rgba(255,248,251,.97)}}
 </style>
 </head>
