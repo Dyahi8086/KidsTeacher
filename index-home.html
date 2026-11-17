@@ -139,14 +139,19 @@ onAuthStateChanged(auth,async user=>{
  if(localName&&localBuddy.id)paintProfile({childName:localName,buddy:localBuddy});
  try{
   const snap=await Promise.race([getDoc(doc(db,"users",user.uid)),new Promise((_,reject)=>setTimeout(()=>reject(new Error("Profile read timeout")),6500))]);
-  if(!snap.exists()){if(!localName)window.location.replace("./child-name.html");return}
+  if(!snap.exists()){
+   window.location.replace(localName&&localBuddy.id?"./index-home.html":(localName?"./buddy-selection.html":"./child-name.html"));
+   return;
+  }
   const data=snap.data();
   if(!data.childName&&!localName){window.location.replace("./child-name.html");return}
   if(!data.buddy?.id&&!localBuddy.id){window.location.replace("./buddy-selection.html");return}
   paintProfile({...data,childName:data.childName||localName,buddy:data.buddy?.id?data.buddy:localBuddy});
  }catch(e){
   console.warn("Using local profile while cloud sync is unavailable:",e);
-  if(!localName||!localBuddy.id)document.getElementById("helloName").textContent="Welcome back! 👋";
+  if(!localName||!localBuddy.id){
+   window.location.replace(localName?"./buddy-selection.html":"./child-name.html");
+  }
  }
 });
 const canvas=document.getElementById("drawingCanvas"),ctx=canvas.getContext("2d");let drawing=false,color="#ff647c",eraser=false;
