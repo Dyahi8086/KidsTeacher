@@ -1023,7 +1023,6 @@ function setLoading(active, message = "Connecting to Google...") {
 
 function goToNextPage(user) {
     if (redirectHandled) return;
-
     redirectHandled = true;
 
     setLoading(true, "Login Successful! 🎉");
@@ -1034,16 +1033,8 @@ function goToNextPage(user) {
         console.warn("Local storage unavailable:", error);
     }
 
-    setTimeout(async () => {
-        try {
-            const profile = await getDoc(doc(db, "users", user.uid));
-            const hasBuddy = profile.exists() && !!profile.data().buddy?.id;
-            window.location.replace(hasBuddy ? "./index-home.html" : "./buddy-selection.html");
-        } catch (error) {
-            console.error("Profile check:", error);
-            window.location.replace("./buddy-selection.html");
-        }
-    }, 350);
+    // Do not wait for Firestore here; continue immediately.
+    window.location.replace("./buddy-selection.html");
 }
 
 /* GOOGLE LOGIN */
