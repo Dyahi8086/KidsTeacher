@@ -46,7 +46,7 @@
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
     }
 
-    .welcome-text h2 {
+    .header-buddy{width:72px;height:72px;flex:0 0 72px;background-size:300% 300%;background-position:50% 50%;background-repeat:no-repeat;cursor:pointer}\n    .welcome-text h2 {
       font-family: 'Baloo 2', cursive;
       font-size: 22px;
       color: #9a3412;
@@ -148,7 +148,7 @@
     
     <!-- Top Bar -->
     <div class="header-card">
-      <div class="welcome-text">
+      <div class="header-buddy" id="headerBuddy" aria-label="Your selected buddy"></div>\n      <div class="welcome-text">
         <h2>Hello, Bachha! 👋</h2>
         <p id="buddyGreeting">Let's learn & play today</p>
       </div>
@@ -216,7 +216,7 @@
         const profile = await getDoc(doc(db, "users", user.uid));
         const buddy = profile.exists() ? profile.data().buddy : null;
         if (!buddy || !buddy.id) { window.location.replace("buddy-selection.html"); return; }
-        document.getElementById("buddyGreeting").textContent = buddy.emoji + " Your Buddy: " + buddy.name + " • Let us learn & play!";
+        document.getElementById("buddyGreeting").textContent = "Your Buddy: " + buddy.name + " • Let us learn & play!";\n        const buddyEl = document.getElementById("headerBuddy");\n        const buddyUrl = buddy.directions || ("https://raw.githubusercontent.com/nilbuild/page-mascot/main/public/mascots/" + buddy.id + "-directions.webp");\n        buddyEl.style.backgroundImage = "url(" + JSON.stringify(buddyUrl) + ")";
       } catch (error) { console.error("Profile load error:", error); window.location.replace("buddy-selection.html"); }
     });
 
