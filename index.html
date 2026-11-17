@@ -213,6 +213,7 @@
             width: 34px;
             height: 34px;
             opacity: 0;
+            z-index: 5;
             background: #fff;
             clip-path: polygon(
                 50% 0%, 61% 36%, 100% 50%, 61% 64%,
@@ -222,8 +223,9 @@
                 drop-shadow(0 0 7px #fff)
                 drop-shadow(0 0 18px #ffe7a3)
                 drop-shadow(0 0 34px #fff);
-            transform: translate(-50%, -50%) scale(.15) rotate(0deg);
-            animation: starBurstLaunch 0.9s cubic-bezier(.2,.8,.2,1) 1.88s both;
+            transform: translate(-50%, -50%) scale(.12) rotate(0deg);
+            box-shadow: 0 0 0 0 #fff;
+            animation: starBurstLaunch 1.25s cubic-bezier(.2,.8,.2,1) 1.88s forwards;
         }
 
         .kt-dot::before,
@@ -242,22 +244,27 @@
             0% {
                 opacity: 0;
                 transform: translate(-50%, -50%) scale(.12) rotate(0deg);
+                box-shadow: 0 0 0 0 #fff;
             }
-            18% {
+            16% {
                 opacity: 1;
-                transform: translate(-50%, -50%) scale(1.25) rotate(35deg);
+                transform: translate(-50%, -50%) scale(1.5) rotate(35deg);
+                box-shadow: 0 0 0 0 #fff;
             }
-            42% {
+            45% {
                 opacity: 1;
-                transform: translate(-50%, -50%) scale(1.4) rotate(95deg);
+                transform: translate(-50%, -50%) scale(3) rotate(110deg);
+                box-shadow: 0 0 0 12vmax #fff;
             }
-            72% {
+            75% {
                 opacity: 1;
-                transform: translate(-50%, -50%) scale(4) rotate(190deg);
+                transform: translate(-50%, -50%) scale(5) rotate(210deg);
+                box-shadow: 0 0 0 65vmax #fff;
             }
             100% {
                 opacity: 1;
-                transform: translate(-50%, -50%) scale(90) rotate(280deg);
+                transform: translate(-50%, -50%) scale(7) rotate(300deg);
+                box-shadow: 0 0 0 120vmax #fff;
             }
         }
 
@@ -310,12 +317,12 @@
         // The star expands to cover the screen; Login opens as the star fills the display.
         if (dot) {
             dot.addEventListener('animationend', (event) => {
-                if (event.animationName === 'starBurstLaunch') openLogin();
+                if (event.animationName === 'starBurstLaunch') window.setTimeout(openLogin, 320);
             }, { once: true });
         }
 
         // Safety fallback in case the browser skips animationend.
-        window.setTimeout(openLogin, 3300);
+        window.setTimeout(openLogin, 3800);
 
         // Service Worker Registration
         if ('serviceWorker' in navigator) {
