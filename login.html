@@ -802,6 +802,148 @@ body {
     #loadingOverlay { background: rgba(255,243,237,.97); }
 }
 
+
+/* PREMIUM SOFT-ORANGE LIQUID GLASS FINISH
+   Google button and all login functionality intentionally unchanged. */
+:root {
+    --bg: #fff4e9;
+    --card: rgba(255,255,255,.42);
+    --dark: #3b2419;
+    --muted: #80695c;
+    --border: rgba(255,255,255,.78);
+}
+
+html, body {
+    background: #fff3e8;
+}
+
+body {
+    background:
+        radial-gradient(ellipse at 8% 12%, rgba(255,255,255,.98) 0%, transparent 34%),
+        radial-gradient(ellipse at 94% 18%, rgba(255,204,158,.58) 0%, transparent 36%),
+        radial-gradient(ellipse at 12% 82%, rgba(255,224,194,.72) 0%, transparent 40%),
+        radial-gradient(ellipse at 88% 88%, rgba(255,190,143,.42) 0%, transparent 34%),
+        linear-gradient(145deg, #fffaf4 0%, #fff0df 48%, #ffe7d1 100%);
+}
+
+.background-glow .glow {
+    opacity: .58;
+    filter: blur(72px);
+}
+
+.glow-one {
+    background: radial-gradient(circle, #ffd2aa 0%, #ffe6ce 56%, transparent 76%);
+}
+
+.glow-two {
+    background: radial-gradient(circle, #ffc99e 0%, #ffe4ca 58%, transparent 78%);
+}
+
+.glow-three {
+    background: radial-gradient(circle, #ffe0bd 0%, #fff0df 62%, transparent 78%);
+}
+
+.login-popup-box {
+    background:
+        linear-gradient(135deg, rgba(255,255,255,.76), rgba(255,250,244,.42) 48%, rgba(255,231,208,.50)),
+        rgba(255,255,255,.34);
+    border: 1px solid rgba(255,255,255,.88);
+    border-top: 2px solid rgba(255,255,255,.98);
+    border-left: 1px solid rgba(255,255,255,.86);
+    border-right: 1px solid rgba(255,255,255,.64);
+    border-radius: 42px 42px 0 0;
+    box-shadow:
+        0 -26px 70px rgba(174,111,65,.13),
+        0 -5px 22px rgba(255,255,255,.45),
+        inset 0 2px 2px rgba(255,255,255,.96),
+        inset 0 -1px 18px rgba(255,220,187,.28);
+    backdrop-filter: blur(34px) saturate(165%);
+    -webkit-backdrop-filter: blur(34px) saturate(165%);
+}
+
+.login-popup-box::before {
+    background: rgba(255,255,255,.72);
+    border: 1px solid rgba(255,255,255,.92);
+    box-shadow:
+        inset 0 1px 3px rgba(145,91,54,.10),
+        0 2px 9px rgba(145,91,54,.08);
+}
+
+.icon-container {
+    background:
+        radial-gradient(circle at 30% 22%, rgba(255,255,255,.98), rgba(255,255,255,.40) 55%),
+        linear-gradient(145deg, rgba(255,244,229,.82), rgba(255,213,177,.42));
+    border: 1px solid rgba(255,255,255,.94);
+    box-shadow:
+        12px 14px 30px rgba(174,111,65,.12),
+        -8px -8px 24px rgba(255,255,255,.78),
+        inset 0 2px 5px rgba(255,255,255,.98),
+        inset 0 -3px 10px rgba(221,160,112,.12);
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+}
+
+.app-title {
+    color: #3b2419;
+    text-shadow: 0 2px 14px rgba(255,255,255,.72);
+}
+
+.app-subtitle,
+.privacy-text {
+    color: #80695c;
+}
+
+.privacy-text a {
+    color: #633d29;
+    border-bottom-color: rgba(139,83,48,.48);
+}
+
+#offlineBanner {
+    background: rgba(75,48,32,.76);
+    border: 1px solid rgba(255,255,255,.36);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+#errorBox, #successBox {
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    box-shadow:
+        0 8px 24px rgba(120,77,47,.08),
+        inset 0 1px 1px rgba(255,255,255,.78);
+}
+
+#loadingOverlay {
+    background: rgba(255,239,222,.58);
+    backdrop-filter: blur(30px) saturate(165%);
+    -webkit-backdrop-filter: blur(30px) saturate(165%);
+}
+
+.spinner {
+    border-color: rgba(255,255,255,.84);
+    border-top-color: #e99a5d;
+    box-shadow: 0 8px 25px rgba(174,111,65,.12);
+}
+
+.loading-text {
+    color: #633d29;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .login-popup-box { background: rgba(255,247,237,.96); }
+    .icon-container { background: rgba(255,255,255,.94); }
+    #loadingOverlay { background: rgba(255,241,226,.97); }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+    .login-popup-box,
+    .icon-container,
+    #loadingOverlay {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+}
+
 </style>
 </head>
 
