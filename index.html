@@ -1,44 +1,248 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#F4511E">
-<title>Kids Teacher</title>
-<link rel="manifest" href="./manifest.json">
-<link rel="icon" type="image/png" href="./icons/icon-192.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{width:100%;height:100%;overflow:hidden;background:#F4511E}
-#splash-screen{position:fixed;inset:0;width:100%;height:100vh;height:100dvh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(145deg,#FF7043 0%,#F4511E 48%,#E64A19 100%);isolation:isolate}
-#splash-screen:before{content:"";position:absolute;width:85vw;height:85vw;max-width:520px;max-height:520px;border-radius:50%;background:rgba(255,255,255,.09);top:-28%;right:-22%}
-#splash-screen:after{content:"";position:absolute;width:110vw;height:110vw;max-width:680px;max-height:680px;border-radius:50%;background:rgba(255,190,120,.12);bottom:-62%;left:-25%}
-.brand{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;color:#fff;animation:brandReveal 3.8s cubic-bezier(.2,.7,.25,1) both}
-.logo-mark{width:clamp(104px,30vw,142px);height:clamp(104px,30vw,142px);border:4px solid rgba(255,255,255,.95);border-radius:36px;display:grid;place-items:center;background:rgba(255,255,255,.13);box-shadow:0 16px 40px rgba(130,35,10,.18),inset 0 2px 14px rgba(255,255,255,.22);font:900 clamp(65px,19vw,88px)/1 Nunito,sans-serif;letter-spacing:-5px}
-.brand-name{font:900 clamp(37px,11vw,54px)/.98 Nunito,sans-serif;letter-spacing:1px;margin-top:24px;color:#fff;text-shadow:0 4px 14px rgba(120,35,10,.18)}
-.brand-name span{display:block}
-.loading{display:flex;gap:8px;margin-top:34px}
-.loading i{display:block;width:9px;height:9px;border-radius:50%;background:#fff;animation:pulse .9s ease-in-out infinite}
-.loading i:nth-child(2){animation-delay:.15s}.loading i:nth-child(3){animation-delay:.3s}
-@keyframes pulse{0%,80%,100%{opacity:.55;transform:scale(.7)}40%{opacity:1;transform:scale(1.2)}}
-@keyframes brandReveal{0%{opacity:0;transform:scale(.78)}18%{opacity:1;transform:scale(1.04)}30%,78%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.13)}}
-@media(prefers-reduced-motion:reduce){.brand{animation:none;opacity:1}.loading i{animation:none}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" id="themeColorMeta" content="#ff3b00">
+    <title>Kids Teacher</title>
+
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/png" href="./icons/icon-192.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #ff3b00;
+        }
+
+        /* RED ORANGE SPLASH SCREEN */
+        #splash-screen {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99990;
+            overflow: hidden;
+            background: linear-gradient(145deg, #ff3b00 0%, #ff4b00 48%, #ff2600 100%);
+        }
+
+        /* 1. BUNNY K LOGO */
+        .kt-mark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150px;
+            height: 142px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            font-size: 132px;
+            font-weight: 900;
+            line-height: .88;
+            letter-spacing: -12px;
+            padding-right: 10px;
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.5);
+            animation: logoSequence 0.95s cubic-bezier(.22, 1, .36, 1) 0.1s forwards;
+        }
+
+        .kt-ears {
+            position: absolute;
+            width: 76px;
+            height: 58px;
+            top: 0;
+            left: 39px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            z-index: 2;
+        }
+
+        .kt-ear {
+            width: 29px;
+            height: 59px;
+            border: 10px solid #fff;
+            border-radius: 50% 50% 45% 45%;
+            background: transparent;
+        }
+
+        .kt-ear:first-child { transform: rotate(-12deg); }
+        .kt-ear:last-child { transform: rotate(13deg); }
+
+        .kt-face {
+            position: absolute;
+            z-index: 3;
+            top: 75px;
+            left: 57px;
+            width: 38px;
+            height: 28px;
+            pointer-events: none;
+        }
+
+        .kt-eyes {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 4px;
+        }
+
+        .kt-eyes span {
+            width: 6px;
+            height: 9px;
+            border-radius: 50%;
+            background: #ff3b00;
+        }
+
+        .kt-smile {
+            width: 17px;
+            height: 9px;
+            margin: 1px auto 0;
+            border-bottom: 3px solid #ff3b00;
+            border-radius: 0 0 15px 15px;
+        }
+
+        @keyframes logoSequence {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.55); }
+            25% { opacity: 1; transform: translate(-50%, -50%) scale(1.04); }
+            38%, 75% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.25); }
+        }
+
+        /* 2. BRAND TITLE */
+        .kt-title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-family: 'Nunito', Arial, sans-serif;
+            font-size: clamp(24px, 6.8vw, 34px);
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            text-align: center;
+            white-space: nowrap;
+            opacity: 0;
+            clip-path: inset(0 50% 0 50%);
+            animation: titleSequence 1.05s cubic-bezier(.4, 0, .2, 1) 0.9s forwards;
+        }
+
+        @keyframes titleSequence {
+            0% { opacity: 0; clip-path: inset(0 50% 0 50%); transform: translate(-50%, -50%) scale(0.92); }
+            28% { opacity: 1; clip-path: inset(0 0% 0 0%); transform: translate(-50%, -50%) scale(1); }
+            72% { opacity: 1; clip-path: inset(0 0% 0 0%); transform: translate(-50%, -50%) scale(1); }
+            96% { opacity: 1; clip-path: inset(0 49% 0 49%); transform: translate(-50%, -50%) scale(0.35); }
+            100% { opacity: 0; clip-path: inset(0 50% 0 50%); transform: translate(-50%, -50%) scale(0.1); }
+        }
+
+        /* 3. WHITE DOT JUMP */
+        .kt-dot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #ffffff;
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.5);
+            animation: dotJumpSequence 0.85s cubic-bezier(.45, .05, .55, .95) 1.88s forwards;
+        }
+
+        @keyframes dotJumpSequence {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            15% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            48% { opacity: 1; transform: translate(-50%, 110px) scale(1.05); }
+            100% { opacity: 1; transform: translate(-50%, -36vh) scale(2.8); }
+        }
+
+        /* 4. SOFT PINK PORTAL TO LOGIN */
+        #transition-portal {
+            position: fixed;
+            inset: 0;
+            z-index: 99995;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            background: #F7EBEF;
+            clip-path: circle(0% at 50% 14%);
+            pointer-events: none;
+        }
+
+        #transition-portal.reveal {
+            animation: portalExpand 0.65s cubic-bezier(.35, 0, .15, 1) forwards;
+        }
+
+        @keyframes portalExpand {
+            0% { clip-path: circle(20px at 50% 14%); }
+            100% { clip-path: circle(150% at 50% 14%); }
+        }
+    </style>
 </head>
+
 <body>
-<div id="splash-screen" aria-label="Kids Teacher">
- <div class="brand">
-  <div class="logo-mark" aria-hidden="true">K</div>
-  <div class="brand-name"><span>KIDS</span><span>TEACHER</span></div>
-  <div class="loading" aria-label="Loading"><i></i><i></i><i></i></div>
- </div>
-</div>
-<script>
-const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-setTimeout(()=>window.location.replace('index-home.html'),reduced?700:3800);
-</script>
+
+    <div id="splash-screen" aria-label="Kids Teacher loading screen">
+        <div class="kt-mark" aria-hidden="true">
+            K
+            <div class="kt-ears">
+                <span class="kt-ear"></span>
+                <span class="kt-ear"></span>
+            </div>
+            <div class="kt-face">
+                <div class="kt-eyes">
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="kt-smile"></div>
+            </div>
+        </div>
+
+        <div class="kt-title">KIDS TEACHER</div>
+        <div class="kt-dot" aria-hidden="true"></div>
+    </div>
+
+    <div id="transition-portal" aria-hidden="true"></div>
+
+    <script>
+        const portal = document.getElementById('transition-portal');
+        const themeColorMeta = document.getElementById('themeColorMeta');
+
+        function goToLogin() {
+            window.location.replace('login.html');
+        }
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            setTimeout(goToLogin, 500);
+        } else {
+            setTimeout(() => {
+                portal.classList.add('reveal');
+                if (themeColorMeta) {
+                    themeColorMeta.setAttribute('content', '#F7EBEF');
+                }
+            }, 2680);
+
+            setTimeout(goToLogin, 3300);
+        }
+    </script>
+
 </body>
 </html>
