@@ -277,9 +277,25 @@
     <script>
         // Keep the original splash animation, then open Google Login directly.
         // The welcome screen is intentionally skipped.
-        setTimeout(() => {
+        const splash = document.getElementById('splash-screen');
+        const dot = document.querySelector('.kt-dot');
+        let loginOpened = false;
+
+        function openLogin() {
+            if (loginOpened) return;
+            loginOpened = true;
             window.location.replace('./login.html');
-        }, 2750);
+        }
+
+        // Open Login immediately after the white dot finishes its upward animation.
+        if (dot) {
+            dot.addEventListener('animationend', (event) => {
+                if (event.animationName === 'dotJumpSequence') openLogin();
+            }, { once: true });
+        }
+
+        // Safety fallback in case the browser skips animationend.
+        window.setTimeout(openLogin, 3200);
 
         // Service Worker Registration
         if ('serviceWorker' in navigator) {
@@ -291,7 +307,7 @@
                     });
             });
         }
-    </script>ipt>
+    </script>
 
 </body>
 </html>
