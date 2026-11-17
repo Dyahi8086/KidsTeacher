@@ -293,7 +293,7 @@
 
     </div>
 
-    <!-- AUTH CHECK: returning users skip Login and go straight to Buddy Selection -->
+    <!-- AUTH CHECK: returning users with a complete profile go straight to Home -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
@@ -320,12 +320,18 @@
                     try {
                         const profile = await getDoc(doc(db, "users", user.uid));
                         const data = profile.exists() ? profile.data() : {};
+                        if (data.childName) localStorage.setItem("kt_child_name", data.childName);
+                        if (data.buddy?.id) localStorage.setItem("kt_selected_buddy", JSON.stringify(data.buddy));
                         window.__ktDestination = !data.childName
                             ? "./child-name.html"
                             : (data.buddy?.id ? "./index-home.html" : "./buddy-selection.html");
                     } catch (error) {
                         console.error("Profile routing check failed:", error);
-                        window.__ktDestination = "./child-name.html";
+                        let localBuddy = {};
+                        try { localBuddy = JSON.parse(localStorage.getItem("kt_selected_buddy") || "{}"); } catch {}
+                        window.__ktDestination = (localStorage.getItem("kt_child_name") && localBuddy.id)
+                            ? "./index-home.html"
+                            : (localStorage.getItem("kt_child_name") ? "./buddy-selection.html" : "./child-name.html");
                     }
                 }
                 if (window.__ktSplashFinished) window.location.replace(window.__ktDestination);
