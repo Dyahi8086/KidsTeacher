@@ -70,7 +70,7 @@ const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
 const names=["nurse","cap","panda","wizard","skater","bunny","cat","knight","tiger","sheep"];
 const base="https://raw.githubusercontent.com/nilbuild/page-mascot/main/public/mascots/";
 const grid=document.getElementById("buddyGrid");let big=document.getElementById("bigMascot"),button=document.getElementById("continue"),status=document.getElementById("status");
-let user=null,selected=null;
+let user=null,selected=null,childName="";
 const directions=["up-left","up","up-right","left","center","right","down-left","down","down-right"];
 const clockwise=["right","down-right","down","down-left","left","up-left","up","up-right"];
 const reactions=["blink","heart","sparkle","surprised","wink","bashful","sleepy","dizzy","delighted"];
@@ -80,6 +80,14 @@ const initialBig=sprite("bunny",100,"preview");initialBig.id="bigMascot";big.rep
 function choose(name){selected=name;const label=name==="sheep"?"Sheep":name.charAt(0).toUpperCase()+name.slice(1);const next=sprite(name,100,label);next.id="bigMascot";big.replaceWith(next);big=next;document.getElementById("previewTitle").textContent=label.charAt(0).toUpperCase()+label.slice(1)+" is your Buddy!";document.getElementById("previewText").textContent="Tap your Buddy to see its reaction.";button.disabled=false;button.style.display="block";render()}
 function render(){grid.innerHTML="";names.forEach(name=>{const card=document.createElement("button");card.type="button";card.className="buddy"+(selected===name?" selected":"");const m=sprite(name,82,name);m.tabIndex=-1;card.append(m);const n=document.createElement("span");n.className="mascot-name";n.textContent=name.replace(/-/g," ");const s=document.createElement("span");s.className="selected-label";s.textContent=selected===name?"✓ SELECTED":"";card.append(n,s);card.addEventListener("click",()=>choose(name));grid.append(card)})}
 render();
-onAuthStateChanged(auth,async u=>{if(!u){location.replace("./login.html");return}user=u;try{const snap=await getDoc(doc(db,"users",u.uid));if(snap.exists()&&snap.data().buddy?.id){location.replace("./index-home.html");return}}catch(e){console.error(e);status.textContent=""}});
-button.addEventListener("click",async()=>{if(!user||!selected)return;button.disabled=true;button.textContent="Saving your Buddy…";status.textContent="";try{const label=selected.replace(/-/g," ");await setDoc(doc(db,"users",user.uid),{buddy:{id:selected,name:label,emoji:"",directions:base+selected+"-directions.webp",reactions:base+selected+"-reactions.webp"},displayName:user.displayName||"",email:user.email||"",updatedAt:serverTimestamp()},{merge:true});location.replace("./index-home.html")}catch(e){console.error(e);status.textContent=e.code==="permission-denied"?"Firestore permission denied. Publish firestore.rules in Firebase Console.":"Could not save Buddy: "+(e.code||e.message);button.disabled=false;button.textContent="Choose this Buddy →"}});
+onAuthStateChanged(auth,async u=>{if(!u){location.replace("./login.html");return}user=u;try{const snap=await getDoc(doc(db,"users",u.uid));if(snap.exists()){
+        const profile=snap.data();
+        childName=(profile.childName||"").trim();
+        if(!childName){location.replace("./child-name.html");return}
+        if(profile.buddy?.id){
+          await setDoc(doc(db,"users",u.uid),{buddy:{...profile.buddy,name:childName},updatedAt:serverTimestamp()},{merge:true});
+          location.replace("./index-home.html");return;
+        }
+      }}catch(e){console.error(e);status.textContent=""}});
+button.addEventListener("click",async()=>{if(!user||!selected)return;button.disabled=true;button.textContent="Saving your Buddy…";status.textContent="";try{const label=childName||selected.replace(/-/g," ");await setDoc(doc(db,"users",user.uid),{buddy:{id:selected,name:label,character:selected,emoji:"",directions:base+selected+"-directions.webp",reactions:base+selected+"-reactions.webp"},childName:label,displayName:user.displayName||"",email:user.email||"",updatedAt:serverTimestamp()},{merge:true});location.replace("./index-home.html")}catch(e){console.error(e);status.textContent=e.code==="permission-denied"?"Firestore permission denied. Publish firestore.rules in Firebase Console.":"Could not save Buddy: "+(e.code||e.message);button.disabled=false;button.textContent="Choose this Buddy →"}});
 </script></body></html>
