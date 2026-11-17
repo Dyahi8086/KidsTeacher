@@ -116,29 +116,38 @@ window.showTab=function(tab){
 };
 document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
 window.handleLogout=async()=>{try{await signOut(auth);localStorage.removeItem("kidsAgeGroup");window.location.replace("./login.html")}catch(e){console.error(e)}};
+function paintProfile(data){
+ const name=(data.childName||data.buddy?.name||"Friend").trim(),buddy=data.buddy||{},buddyId=buddy.id||"bunny";
+ document.getElementById("helloName").textContent="Hello, "+name+"! 👋";
+ document.getElementById("leaderName").textContent=name;
+ document.getElementById("profileName").textContent=name;
+ document.getElementById("profileNameRow").textContent=name;
+ document.getElementById("profileBuddyRow").textContent=buddyId.charAt(0).toUpperCase()+buddyId.slice(1);
+ document.getElementById("buddyLine").textContent=name+"'s Buddy is here!";
+ const spriteUrl=buddy.directions||base+buddyId+"-directions.webp";
+ document.getElementById("homeBuddy").style.backgroundImage='url("'+spriteUrl+'")';
+ document.getElementById("profileBuddy").textContent="";
+ document.getElementById("profileBuddy").style.backgroundImage='url("'+spriteUrl+'")';
+ document.getElementById("profileBuddy").style.backgroundSize="300% 300%";
+ document.getElementById("profileBuddy").style.backgroundPosition="50% 50%";
+ document.getElementById("profileBuddy").style.backgroundRepeat="no-repeat";
+}
 onAuthStateChanged(auth,async user=>{
  if(!user){window.location.replace("./login.html");return}
+ const localName=localStorage.getItem("kt_child_name")||"";
+ let localBuddy={};try{localBuddy=JSON.parse(localStorage.getItem("kt_selected_buddy")||"{}")}catch{}
+ if(localName&&localBuddy.id)paintProfile({childName:localName,buddy:localBuddy});
  try{
-  const snap=await getDoc(doc(db,"users",user.uid));
-  if(!snap.exists()){window.location.replace("./child-name.html");return}
-  const data=snap.data(),name=(data.childName||data.buddy?.name||"Friend").trim(),buddy=data.buddy||{},buddyId=buddy.id||"bunny";
-  if(!data.childName){window.location.replace("./child-name.html");return}
-  if(!buddy.id){window.location.replace("./buddy-selection.html");return}
-  document.getElementById("helloName").textContent="Hello, "+name+"! 👋";
-  document.getElementById("leaderName").textContent=name;
-  document.getElementById("profileName").textContent=name;
-  document.getElementById("profileNameRow").textContent=name;
-  document.getElementById("profileBuddyRow").textContent=buddyId.charAt(0).toUpperCase()+buddyId.slice(1);
-  document.getElementById("buddyLine").textContent=name+"'s Buddy is here!";
-  const spriteUrl=buddy.directions||base+buddyId+"-directions.webp";
-  document.getElementById("homeBuddy").style.backgroundImage='url("'+spriteUrl+'")';
-  document.getElementById("topAvatar").textContent="🌟";
-  document.getElementById("profileBuddy").textContent="";
-  document.getElementById("profileBuddy").style.backgroundImage='url("'+spriteUrl+'")';
-  document.getElementById("profileBuddy").style.backgroundSize="300% 300%";
-  document.getElementById("profileBuddy").style.backgroundPosition="50% 50%";
-  document.getElementById("profileBuddy").style.backgroundRepeat="no-repeat";
- }catch(e){console.error("Dashboard profile load:",e)}
+  const snap=await Promise.race([getDoc(doc(db,"users",user.uid)),new Promise((_,reject)=>setTimeout(()=>reject(new Error("Profile read timeout")),6500))]);
+  if(!snap.exists()){if(!localName)window.location.replace("./child-name.html");return}
+  const data=snap.data();
+  if(!data.childName&&!localName){window.location.replace("./child-name.html");return}
+  if(!data.buddy?.id&&!localBuddy.id){window.location.replace("./buddy-selection.html");return}
+  paintProfile({...data,childName:data.childName||localName,buddy:data.buddy?.id?data.buddy:localBuddy});
+ }catch(e){
+  console.warn("Using local profile while cloud sync is unavailable:",e);
+  if(!localName||!localBuddy.id)document.getElementById("helloName").textContent="Welcome back! 👋";
+ }
 });
 const canvas=document.getElementById("drawingCanvas"),ctx=canvas.getContext("2d");let drawing=false,color="#ff647c",eraser=false;
 function sizeCanvas(){const ratio=window.devicePixelRatio||1,rect=canvas.getBoundingClientRect();const old=document.createElement("canvas");old.width=canvas.width;old.height=canvas.height;old.getContext("2d").drawImage(canvas,0,0);canvas.width=rect.width*ratio;canvas.height=rect.height*ratio;ctx.setTransform(ratio,0,0,ratio,0,0);if(old.width&&old.height)ctx.drawImage(old,0,0,old.width,old.height,0,0,rect.width,rect.height);ctx.lineCap="round";ctx.lineJoin="round"}new ResizeObserver(sizeCanvas).observe(canvas);
