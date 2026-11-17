@@ -1057,6 +1057,79 @@ body {
 }
 
 
+
+/* WARM ORANGE LIQUID GLASS LOGIN THEME */
+body {
+    background:
+        radial-gradient(ellipse at 12% 10%, rgba(255,255,255,.96) 0%, transparent 28%),
+        radial-gradient(ellipse at 88% 22%, rgba(255,190,125,.72) 0%, transparent 36%),
+        radial-gradient(ellipse at 14% 88%, rgba(255,112,55,.42) 0%, transparent 38%),
+        linear-gradient(145deg, #FF6A00 0%, #FF8A24 48%, #FFB15A 100%);
+}
+.glow-one {
+    background: radial-gradient(circle, #FFD1A3 0%, #FF9B50 58%, transparent 76%);
+}
+.glow-two {
+    background: radial-gradient(circle, #FFE0BD 0%, #FFB36B 58%, transparent 76%);
+}
+.glow-three {
+    background: radial-gradient(circle, #FFF0D9 0%, #FF9A55 58%, transparent 76%);
+}
+.login-popup-box {
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.82),
+        rgba(255,248,239,.64) 48%,
+        rgba(255,231,207,.60)
+    );
+    border-color: rgba(255,255,255,.88);
+    border-top-color: rgba(255,255,255,.98);
+    box-shadow:
+        0 -24px 65px rgba(119,55,13,.22),
+        inset 0 2px 2px rgba(255,255,255,.98),
+        inset 0 -5px 18px rgba(212,111,44,.12);
+    backdrop-filter: blur(42px) saturate(160%);
+    -webkit-backdrop-filter: blur(42px) saturate(160%);
+}
+.login-popup-box::before {
+    background: rgba(255,255,255,.86);
+    border-color: rgba(255,255,255,.98);
+}
+.icon-container {
+    background:
+        radial-gradient(circle at 28% 20%, #fff 0%, rgba(255,255,255,.76) 58%),
+        linear-gradient(145deg, #FFF8EF, #FFD7B0);
+    border-color: rgba(255,255,255,.98);
+    box-shadow:
+        12px 14px 30px rgba(168,79,22,.15),
+        -8px -8px 24px rgba(255,255,255,.96),
+        inset 0 2px 5px rgba(255,255,255,1),
+        inset 0 -3px 10px rgba(226,142,78,.15);
+}
+.app-title { color: #3A2114; }
+.app-subtitle, .privacy-text { color: #79533D; }
+.privacy-text a {
+    color: #A9430B;
+    border-bottom-color: rgba(169,67,11,.45);
+}
+#offlineBanner {
+    background: rgba(92,42,12,.78);
+}
+#loadingOverlay {
+    background: rgba(255,239,222,.70);
+}
+.spinner {
+    border-color: rgba(255,255,255,.95);
+    border-top-color: #F06A16;
+    box-shadow: 0 8px 25px rgba(156,73,19,.14);
+}
+.loading-text { color: #633315; }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .login-popup-box { background: rgba(255,248,239,.97); }
+    .icon-container { background: rgba(255,255,255,.98); }
+    #loadingOverlay { background: rgba(255,239,222,.98); }
+}
+
 </style>
 </head>
 
