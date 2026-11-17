@@ -70,7 +70,7 @@ const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
 const names=["nurse","cap","panda","wizard","skater","bunny","cat","knight","tiger","sheep"];
 const base="https://raw.githubusercontent.com/nilbuild/page-mascot/main/public/mascots/";
 const grid=document.getElementById("buddyGrid");let big=document.getElementById("bigMascot"),button=document.getElementById("continue"),status=document.getElementById("status");
-let user=null,selected=null,childName=localStorage.getItem("kt_child_name")||"";
+let user=null,selected=null,childName="";
 const directions=["up-left","up","up-right","left","center","right","down-left","down","down-right"];
 const clockwise=["right","down-right","down","down-left","left","up-left","up","up-right"];
 const reactions=["blink","heart","sparkle","surprised","wink","bashful","sleepy","dizzy","delighted"];
@@ -87,7 +87,7 @@ onAuthStateChanged(auth,async u=>{
  try{
   const snap=await Promise.race([getDoc(doc(db,"users",u.uid)),new Promise((_,reject)=>setTimeout(()=>reject(new Error("timeout")),6000))]);
   if(snap.exists())profile=snap.data();
-  childName=(localStorage.getItem("kt_child_name")||profile.childName||"").trim();
+  childName=(profile.childName||"").trim();
   if(!childName){location.replace("./child-name.html");return}
   if(profile.buddy?.id){
    localStorage.setItem("kt_selected_buddy",JSON.stringify(profile.buddy));
@@ -95,7 +95,7 @@ onAuthStateChanged(auth,async u=>{
   }
  }catch(e){
   console.warn("Buddy profile check:",e);
-  childName=(localStorage.getItem("kt_child_name")||"").trim();
+  childName="";
   if(!childName){location.replace("./child-name.html");return}
  }
  document.body.style.visibility="visible";
