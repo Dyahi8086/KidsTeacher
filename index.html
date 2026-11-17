@@ -205,39 +205,59 @@
             }
         }
 
-        /* STEP 3: WHITE DOT APPEARS, DIPS DOWN, AND LAUNCHES TO TOP */
+        /* STEP 3: GLOWING STAR-BURST — replaces the plain white dot */
         .kt-dot {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: #ffffff;
+            width: 34px;
+            height: 34px;
             opacity: 0;
-            transform: translate(-50%, -50%) scale(0.5);
-
-            animation: dotJumpSequence 0.85s cubic-bezier(.45, .05, .55, .95) 1.88s forwards;
+            background: #fff;
+            clip-path: polygon(
+                50% 0%, 61% 36%, 100% 50%, 61% 64%,
+                50% 100%, 39% 64%, 0% 50%, 39% 36%
+            );
+            filter:
+                drop-shadow(0 0 7px #fff)
+                drop-shadow(0 0 18px #ffe7a3)
+                drop-shadow(0 0 34px #fff);
+            transform: translate(-50%, -50%) scale(.15) rotate(0deg);
+            animation: starBurstLaunch 0.9s cubic-bezier(.2,.8,.2,1) 1.88s both;
         }
 
-        @keyframes dotJumpSequence {
+        .kt-dot::before,
+        .kt-dot::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, #fff, transparent);
+            opacity: .9;
+        }
+
+        .kt-dot::before { transform: rotate(45deg) scale(.45, 1.5); }
+        .kt-dot::after  { transform: rotate(-45deg) scale(.45, 1.5); }
+
+        @keyframes starBurstLaunch {
             0% {
                 opacity: 0;
-                transform: translate(-50%, -50%) scale(0.5);
+                transform: translate(-50%, -50%) scale(.12) rotate(0deg);
             }
-            15% {
+            18% {
                 opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
+                transform: translate(-50%, -50%) scale(1.25) rotate(35deg);
             }
-            /* Dip downward (anticipation bounce like video) */
-            48% {
+            42% {
                 opacity: 1;
-                transform: translate(-50%, 110px) scale(1.05);
+                transform: translate(-50%, 105px) scale(.85) rotate(95deg);
             }
-            /* Launch upward to top-center */
+            72% {
+                opacity: 1;
+                transform: translate(-50%, -18vh) scale(1.8) rotate(190deg);
+            }
             100% {
-                opacity: 1;
-                transform: translate(-50%, -36vh) scale(2.8);
+                opacity: 0;
+                transform: translate(-50%, -42vh) scale(3.2) rotate(280deg);
             }
         }
 
@@ -268,7 +288,7 @@
         <!-- 2. Brand Title -->
         <div class="kt-title">KIDS TEACHER</div>
 
-        <!-- 3. Bouncing White Dot -->
+        <!-- 3. Glowing Star-Burst Effect -->
         <div class="kt-dot" aria-hidden="true"></div>
 
     </div>
@@ -290,12 +310,12 @@
         // Open Login immediately after the white dot finishes its upward animation.
         if (dot) {
             dot.addEventListener('animationend', (event) => {
-                if (event.animationName === 'dotJumpSequence') openLogin();
+                if (event.animationName === 'starBurstLaunch') openLogin();
             }, { once: true });
         }
 
         // Safety fallback in case the browser skips animationend.
-        window.setTimeout(openLogin, 3200);
+        window.setTimeout(openLogin, 3000);
 
         // Service Worker Registration
         if ('serviceWorker' in navigator) {
