@@ -1495,22 +1495,42 @@ function setLoading(active, message = "Connecting to Google...") {
     }
 }
 
-/* SUCCESS REDIRECT - NO AGE SELECTION */
-
-function goToNextPage(user) {
+/* ROUTE USERS WITHOUT SHOWING THE WRONG STEP */
+async function goToNextPage(user) {
     if (redirectHandled) return;
     redirectHandled = true;
-
-    setLoading(true, "Login Successful! 🎉");
-
+    setLoading(true, "Getting your learning space ready...");
     try {
         localStorage.setItem("kidsTeacherUser", user.uid);
+        const profileRef = doc(db, "users", user.uid);
+        const snap = await Promise.race([
+            getDoc(profileRef),
+            new Promise((_, reject) => setTimeout(() => reject(new Error("Profile check timed out")), 7000))
+        ]);
+        const data = snap.exists() ? snap.data() : {};
+        const localName = localStorage.getItem("kt_child_name") || "";
+        let destination;
+        if (data.childName && data.buddy?.id) {
+            destination = "./index-home.html";
+        } else if (data.childName || localName) {
+            destination = data.buddy?.id ? "./index-home.html" : "./buddy-selection.html";
+        } else {
+            destination = "./child-name.html";
+        }
+        window.location.replace(destination);
     } catch (error) {
-        console.warn("Local storage unavailable:", error);
+        console.error("Profile routing error:", error);
+        const localName = localStorage.getItem("kt_child_name") || "";
+        let localBuddy = {};
+        try { localBuddy = JSON.parse(localStorage.getItem("kt_selected_buddy") || "{}"); } catch {}
+        if (localName && localBuddy.id) {
+            window.location.replace("./index-home.html");
+            return;
+        }
+        setLoading(false);
+        redirectHandled = false;
+        showError("Profile load nahi ho paya. Internet check karke dobara try karo.");
     }
-
-    // Do not wait for Firestore here; continue immediately.
-    window.location.replace("./child-name.html");
 }
 
 /* GOOGLE LOGIN */
@@ -1538,7 +1558,7 @@ googleBtn.addEventListener("click", async () => {
         );
 
         const result = await signInWithPopup(auth, provider);
-        if (result && result.user) goToNextPage(result.user);
+        if (result && result.user) await goToNextPage(result.user);
 
     } catch (error) {
         console.error("Google Login Error:", error);
