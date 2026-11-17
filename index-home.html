@@ -218,7 +218,9 @@
         const profile = await getDoc(doc(db, "users", user.uid));
         const buddy = profile.exists() ? profile.data().buddy : null;
         if (!buddy || !buddy.id) { window.location.replace("buddy-selection.html"); return; }
-        document.getElementById("buddyGreeting").textContent = "Your Buddy: " + buddy.name + " • Let us learn & play!";
+        const childName = (profile.data().childName || buddy.name || "Bachha").trim();
+        document.querySelector(".welcome-text h2").textContent = "Hello, " + childName + "! 👋";
+        document.getElementById("buddyGreeting").textContent = childName + "’s Buddy: " + buddy.id + " • Let us learn & play!";
         const buddyEl = document.getElementById("headerBuddy");
         const buddyUrl = buddy.directions || ("https://raw.githubusercontent.com/nilbuild/page-mascot/main/public/mascots/" + buddy.id + "-directions.webp");
         buddyEl.style.backgroundImage = "url(" + JSON.stringify(buddyUrl) + ")";
