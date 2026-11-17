@@ -11,7 +11,7 @@
 :root{--ink:#292321;--muted:#877b75;--orange:#ff6a3d;--cream:#fff8f2;--line:#f0e6df}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;min-height:100%;font-family:Nunito,system-ui,sans-serif;color:var(--ink)}
-body{min-height:100dvh;background:radial-gradient(circle at 8% 4%,#ffe8d9 0,transparent 30%),radial-gradient(circle at 95% 28%,#ffeede 0,transparent 28%),var(--cream);padding:calc(14px + env(safe-area-inset-top)) 14px calc(18px + env(safe-area-inset-bottom))}
+body{visibility:hidden;min-height:100dvh;background:radial-gradient(circle at 8% 4%,#ffe8d9 0,transparent 30%),radial-gradient(circle at 95% 28%,#ffeede 0,transparent 28%),var(--cream);padding:calc(14px + env(safe-area-inset-top)) 14px calc(18px + env(safe-area-inset-bottom))}
 .wrap{max-width:560px;margin:auto;min-height:calc(100dvh - 32px);display:flex;flex-direction:column}
 .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;color:#fff}
 .brand{font-weight:900;font-size:14px;letter-spacing:1.5px;text-shadow:0 1px 3px #225d26}.step{font-size:11px;font-weight:900;color:#39731c;background:#e9ffb8;padding:8px 12px;border-radius:30px}
@@ -80,15 +80,26 @@ const initialBig=sprite("bunny",100,"preview");initialBig.id="bigMascot";big.rep
 function choose(name){selected=name;const label=name==="sheep"?"Sheep":name.charAt(0).toUpperCase()+name.slice(1);const next=sprite(name,100,label);next.id="bigMascot";big.replaceWith(next);big=next;document.getElementById("previewTitle").textContent=label.charAt(0).toUpperCase()+label.slice(1)+" is your Buddy!";document.getElementById("previewText").textContent="Tap your Buddy to see its reaction.";button.disabled=false;button.style.display="block";render()}
 function render(){grid.innerHTML="";names.forEach(name=>{const card=document.createElement("button");card.type="button";card.className="buddy"+(selected===name?" selected":"");const m=sprite(name,82,name);m.tabIndex=-1;card.append(m);const n=document.createElement("span");n.className="mascot-name";n.textContent=name.replace(/-/g," ");const s=document.createElement("span");s.className="selected-label";s.textContent=selected===name?"✓ SELECTED":"";card.append(n,s);card.addEventListener("click",()=>choose(name));grid.append(card)})}
 render();
-onAuthStateChanged(auth,async u=>{if(!u){location.replace("./login.html");return}user=u;try{const snap=await getDoc(doc(db,"users",u.uid));if(snap.exists()){
-        const profile=snap.data();
-        childName=(localStorage.getItem("kt_child_name")||profile.childName||"").trim();
-        if(!childName){location.replace("./child-name.html");return}
-        if(profile.buddy?.id){
-          await setDoc(doc(db,"users",u.uid),{buddy:{...profile.buddy,name:childName},updatedAt:serverTimestamp()},{merge:true});
-          location.replace("./index-home.html");return;
-        }
-      }}catch(e){console.error(e);status.textContent=""}});
+onAuthStateChanged(auth,async u=>{
+ if(!u){location.replace("./login.html");return}
+ user=u;
+ let profile={};
+ try{
+  const snap=await Promise.race([getDoc(doc(db,"users",u.uid)),new Promise((_,reject)=>setTimeout(()=>reject(new Error("timeout")),6000))]);
+  if(snap.exists())profile=snap.data();
+  childName=(localStorage.getItem("kt_child_name")||profile.childName||"").trim();
+  if(!childName){location.replace("./child-name.html");return}
+  if(profile.buddy?.id){
+   localStorage.setItem("kt_selected_buddy",JSON.stringify(profile.buddy));
+   location.replace("./index-home.html");return;
+  }
+ }catch(e){
+  console.warn("Buddy profile check:",e);
+  childName=(localStorage.getItem("kt_child_name")||"").trim();
+  if(!childName){location.replace("./child-name.html");return}
+ }
+ document.body.style.visibility="visible";
+});
 button.addEventListener("click",()=>{
  if(!selected)return;
  const label=(childName||localStorage.getItem("kt_child_name")||"").trim();
