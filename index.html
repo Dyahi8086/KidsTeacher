@@ -293,38 +293,83 @@
 
     </div>
 
-    <!-- JAVASCRIPT -->
-    <script>
-        // Keep the original splash animation, then open Google Login directly.
-        // The welcome screen is intentionally skipped.
-        const splash = document.getElementById('splash-screen');
-        const dot = document.querySelector('.kt-dot');
-        let loginOpened = false;
+    <!-- AUTH CHECK: returning users skip Login and go straight to Buddy Selection -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
-        function openLogin() {
-            if (loginOpened) return;
-            loginOpened = true;
-            window.location.replace('./login.html');
+        const firebaseConfig = {
+            apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
+            authDomain: "kids-teacher-4387e.firebaseapp.com",
+            projectId: "kids-teacher-4387e",
+            storageBucket: "kids-teacher-4387e.firebasestorage.app",
+            messagingSenderId: "420221167346",
+            appId: "1:420221167346:web:da7ac80acdfd52339d526b",
+            measurementId: "G-VJVS2ZMNLY"
+        };
+
+        try {
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+            onAuthStateChanged(auth, (user) => {
+                window.__ktAuthResolved = true;
+                window.__ktSignedIn = !!user;
+                if (window.__ktSplashFinished) {
+                    window.location.replace(user ? './buddy-selection.html' : './login.html');
+                }
+            }, (error) => {
+                console.error("Splash auth check failed:", error);
+                window.__ktAuthResolved = true;
+                window.__ktSignedIn = false;
+                if (window.__ktSplashFinished) window.location.replace('./login.html');
+            });
+        } catch (error) {
+            console.error("Firebase splash initialization failed:", error);
+            window.__ktAuthResolved = true;
+            window.__ktSignedIn = false;
+            if (window.__ktSplashFinished) window.location.replace('./login.html');
+        }
+    </script>
+
+    <script>
+        // Preserve the original splash animation. Route only after Firebase
+        // confirms whether this visitor already has a saved login session.
+        const dot = document.querySelector('.kt-dot');
+        let routeStarted = false;
+
+        function finishSplash() {
+            window.__ktSplashFinished = true;
+            if (routeStarted) return;
+            if (window.__ktAuthResolved) {
+                routeStarted = true;
+                window.location.replace(
+                    window.__ktSignedIn ? './buddy-selection.html' : './login.html'
+                );
+            }
         }
 
-        // Open Login after the original simple splash star animation finishes.
         if (dot) {
             dot.addEventListener('animationend', (event) => {
-                if (event.animationName === 'starBurstLaunch') openLogin();
+                if (event.animationName === 'starBurstLaunch') finishSplash();
             }, { once: true });
         }
 
-        // Safety fallback in case the browser skips animationend.
-        window.setTimeout(openLogin, 3000);
+        // Safety fallback if the browser skips the animation event.
+        window.setTimeout(finishSplash, 3000);
 
-        // Service Worker Registration
+        // If Firebase takes unusually long, do not leave the splash stuck.
+        window.setTimeout(() => {
+            if (!routeStarted && window.__ktSplashFinished && !window.__ktAuthResolved) {
+                routeStarted = true;
+                window.location.replace('./login.html');
+            }
+        }, 5500);
+
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker
-                    .register('./service-worker.js')
-                    .catch(error => {
-                        console.log('Service Worker registration failed:', error);
-                    });
+                navigator.serviceWorker.register('./service-worker.js').catch(error => {
+                    console.log('Service Worker registration failed:', error);
+                });
             });
         }
     </script>
