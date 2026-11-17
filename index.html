@@ -249,15 +249,15 @@
             }
             42% {
                 opacity: 1;
-                transform: translate(-50%, 105px) scale(.85) rotate(95deg);
+                transform: translate(-50%, -50%) scale(1.4) rotate(95deg);
             }
             72% {
                 opacity: 1;
-                transform: translate(-50%, -18vh) scale(1.8) rotate(190deg);
+                transform: translate(-50%, -50%) scale(4) rotate(190deg);
             }
             100% {
-                opacity: 0;
-                transform: translate(-50%, -42vh) scale(3.2) rotate(280deg);
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(90) rotate(280deg);
             }
         }
 
@@ -307,7 +307,7 @@
             window.location.replace('./login.html');
         }
 
-        // Open Login immediately after the white dot finishes its upward animation.
+        // The star expands to cover the screen; Login opens as the star fills the display.
         if (dot) {
             dot.addEventListener('animationend', (event) => {
                 if (event.animationName === 'starBurstLaunch') openLogin();
@@ -315,7 +315,7 @@
         }
 
         // Safety fallback in case the browser skips animationend.
-        window.setTimeout(openLogin, 3000);
+        window.setTimeout(openLogin, 3300);
 
         // Service Worker Registration
         if ('serviceWorker' in navigator) {
