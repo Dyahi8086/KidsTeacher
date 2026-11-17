@@ -1352,6 +1352,7 @@ import {
     getAuth,
     GoogleAuthProvider,
     signInWithPopup,
+    getAdditionalUserInfo,
     onAuthStateChanged,
     setPersistence,
     browserLocalPersistence
@@ -1396,6 +1397,7 @@ const offlineBanner = document.getElementById("offlineBanner");
 
 let isBusy = false;
 let redirectHandled = false;
+let popupLoginInProgress = false;
 
 /* ANIMATED BUTTON TEXT */
 
@@ -1497,12 +1499,16 @@ function setLoading(active, message = "Connecting to Google...") {
 }
 
 /* ROUTE USERS WITHOUT SHOWING THE WRONG STEP */
-async function goToNextPage(user) {
+async function goToNextPage(user, isNewUser = false) {
     if (redirectHandled) return;
     redirectHandled = true;
     setLoading(true, "Getting your learning space ready...");
     try {
         localStorage.setItem("kidsTeacherUser", user.uid);
+        if (isNewUser) {
+            window.location.replace("./child-name.html");
+            return;
+        }
         const profileRef = doc(db, "users", user.uid);
         const snap = await Promise.race([
             getDoc(profileRef),
@@ -1547,10 +1553,15 @@ googleBtn.addEventListener("click", async () => {
             browserLocalPersistence
         );
 
+        popupLoginInProgress = true;
         const result = await signInWithPopup(auth, provider);
-        if (result && result.user) await goToNextPage(result.user);
+        if (result && result.user) {
+            const details = getAdditionalUserInfo(result);
+            await goToNextPage(result.user, !!details?.isNewUser);
+        }
 
     } catch (error) {
+        popupLoginInProgress = false;
         console.error("Google Login Error:", error);
 
         setLoading(false);
@@ -1561,6 +1572,7 @@ googleBtn.addEventListener("click", async () => {
 /* AUTH STATE */
 
 onAuthStateChanged(auth, user => {
+    if (popupLoginInProgress) return;
     if (user) {
         goToNextPage(user);
     } else {
