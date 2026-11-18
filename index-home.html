@@ -60,19 +60,20 @@ h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.
 .logout{width:100%;margin-top:14px;padding:13px;border:0;border-radius:15px;background:#fff0f1;color:#d95b72;font:900 14px Nunito}
 .delete-account{width:100%;margin-top:10px;padding:13px;border:1px solid #f2b8b8;border-radius:15px;background:#fff;color:#c43f50;font:900 13px Nunito}
 .delete-note{margin:8px 8px 0;text-align:center;color:#9b8790;font-size:11px;font-weight:700;line-height:1.5}
-.nav-wrap{position:fixed;z-index:10;bottom:0;left:0;right:0;padding:19px 14px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent 0%,rgba(234,240,241,.82) 30%,#eaf0f1 100%);pointer-events:none}
-.nav{pointer-events:auto;position:relative;width:min(100%,520px);margin:auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:center;gap:2px;padding:7px 8px;background:linear-gradient(145deg,#ffffff,#eaf1f3);border:1px solid #fff;border-radius:25px;box-shadow:9px 10px 20px #bdcbd0,-8px -8px 18px #fff,inset 3px 3px 7px #fff,inset -3px -3px 7px #d8e3e6}
-.nav button{position:relative;min-width:0;min-height:49px;border:0;background:transparent;border-radius:14px;padding:4px 0;color:#896d31;font:800 9px Nunito;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;white-space:nowrap;transition:transform .2s,color .2s,background .2s}
-.nav button .ico{width:23px;height:23px;display:grid;place-items:center;transition:transform .22s cubic-bezier(.2,.8,.2,1),color .2s}
-.nav button .ico svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-.nav button.active:not(.nav-draw){color:#7154ca;background:linear-gradient(145deg,#fff9d9,#f5df87);box-shadow:inset 4px 4px 8px #d7bd5d77,inset -4px -4px 8px #fffde8}
-.nav button.active:not(.nav-draw) .ico{transform:translateY(-2px) scale(1.08)}
-.nav:before{content:"";position:absolute;z-index:0;left:50%;top:-27px;transform:translateX(-50%);width:88px;height:88px;border-radius:50%;background:linear-gradient(145deg,#f4fafb,#e6eef0);box-shadow:8px 8px 16px #c4d0d3,-7px -7px 16px #fff,inset 2px 2px 5px #fff}.nav button.nav-video{z-index:1;min-height:68px;width:68px;height:68px;justify-self:center;margin-top:-34px;padding:8px 3px 6px;border-radius:50%;background:linear-gradient(145deg,#8f82ff 0%,#6252e6 100%);color:#fff;box-shadow:0 7px 0 #493bb8,0 13px 24px rgba(90,72,205,.36),inset 3px 3px 7px #ffffff77;border:3px solid #fff;transform:translateY(-3px);font-size:9px}
-.nav button.nav-video .ico{width:30px;height:30px}
-.nav button.nav-video .ico svg{width:27px;height:27px;stroke-width:2.2}
-.nav button.nav-video.active{background:linear-gradient(145deg,#a092ff,#705fe9);box-shadow:0 7px 0 #493bb8,0 15px 27px rgba(90,72,205,.42),inset 3px 3px 7px #ffffff77}
-.nav button:active{transform:scale(.94)}
-.nav button.nav-video:active{transform:translateY(0) scale(.96);box-shadow:0 3px 0 #493bb8,0 7px 14px rgba(90,72,205,.25)}
+.nav-wrap{position:fixed;z-index:10;bottom:0;left:0;right:0;padding:10px 14px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent 0%,rgba(234,240,241,.78) 30%,#eaf0f1 100%);pointer-events:none}
+.nav{pointer-events:auto;position:relative;width:min(100%,520px);margin:auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:center;gap:3px;padding:8px 8px;background:linear-gradient(145deg,#fff19a 0%,#ffdf58 48%,#f5c936 100%);border:2px solid #fff8c9;border-radius:25px;box-shadow:8px 9px 0 #d6b33b,10px 13px 20px #a9b7b988,inset 3px 3px 7px #fffbdc,inset -4px -4px 8px #d5ad2f}
+.nav button{position:relative;min-width:0;min-height:55px;border:0;background:transparent;border-radius:16px;padding:5px 0;color:#755b29;font:900 9px Nunito;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;white-space:nowrap;transition:transform .2s,color .2s,background .2s,box-shadow .2s}
+.nav button .ico{width:24px;height:24px;display:grid;place-items:center;transition:transform .22s cubic-bezier(.2,.8,.2,1),color .2s;filter:drop-shadow(0 2px 1px #8a6d2922)}
+.nav button .ico svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nav button:nth-child(1) .ico{color:#7654df}
+.nav button:nth-child(2) .ico{color:#168eae}
+.nav button:nth-child(3) .ico{color:#e36b35}
+.nav button:nth-child(4) .ico{color:#dc4f91}
+.nav button:nth-child(5) .ico{color:#b27a12}
+.nav button.active{color:#5d45b7;background:linear-gradient(145deg,#fff8d4,#ffe77b);box-shadow:inset 4px 4px 8px #d7b94d88,inset -4px -4px 8px #fffbdc,0 2px 5px #b48d2b22}
+.nav button.active .ico{transform:translateY(-2px) scale(1.1)}
+.nav button:active{transform:scale(.93);box-shadow:inset 3px 3px 7px #c49e3d66}
+@media(max-width:380px){.nav button{font-size:8px}.nav{gap:1px;padding-left:4px;padding-right:4px}.nav button .ico svg{width:20px;height:20px}}
 @media(max-width:380px){.nav button{font-size:8px}.nav{gap:0;padding-left:4px;padding-right:4px}.nav button .ico svg{width:19px;height:19px}}
 
 @media(max-height:700px){.app{padding-bottom:94px}.hero{min-height:145px}.hero h2{font-size:23px}#drawingCanvas{height:260px}}
@@ -122,7 +123,7 @@ h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.
 <div class="nav-wrap"><nav class="nav" aria-label="Main navigation">
 <button class="active" data-tab="home"><span class="ico"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg></span>Home</button>
 <button data-tab="learn"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21z"/><path d="M4 5.5v13A2.5 2.5 0 0 1 6.5 16H20M8 7h8M8 10h7"/></svg></span>Learn</button>
-<button data-tab="video" class="nav-video"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3z"/></svg></span>Video</button><button data-tab="drawing"><span class="ico"><svg viewBox="0 0 24 24"><path d="m4 16.5 10.9-10.9a2.1 2.1 0 0 1 3 3L7 19.5 3 21z"/><path d="m13.5 7.5 3 3M3 21l4-1.5"/></svg></span>Drawing</button>
+<button data-tab="video"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3z"/></svg></span>Video</button><button data-tab="drawing"><span class="ico"><svg viewBox="0 0 24 24"><path d="m4 16.5 10.9-10.9a2.1 2.1 0 0 1 3 3L7 19.5 3 21z"/><path d="m13.5 7.5 3 3M3 21l4-1.5"/></svg></span>Drawing</button>
 <button data-tab="leaderboard"><span class="ico"><svg viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H4v2a4 4 0 0 0 4 4M16 6h4v2a4 4 0 0 1-4 4M12 13v5M8 21h8M9 18h6"/></svg></span>Leaderboard</button>
 
 </nav></div>
