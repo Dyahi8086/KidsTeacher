@@ -9,7 +9,7 @@
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;width:100%;min-height:100%;font-family:'Nunito',sans-serif}
-body{visibility:hidden;min-height:100dvh;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;padding:18px;background:#fffdf7;color:#29233b}
+body{visibility:visible;min-height:100dvh;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;padding:18px;background:#fffdf7;color:#29233b}
 .doodles{position:absolute;inset:0;overflow:hidden;pointer-events:none}
 .doodle{position:absolute;font-size:clamp(25px,7vw,54px);filter:drop-shadow(0 3px 1px rgba(0,0,0,.08));animation:bob 4s ease-in-out infinite}
 .d1{top:3%;left:4%;transform:rotate(-15deg)}.d2{top:4%;right:5%;animation-delay:-1s}.d3{top:23%;left:-3%;font-size:48px;animation-delay:-2s}.d4{top:24%;right:2%;font-size:42px;animation-delay:-.5s}.d5{bottom:18%;left:3%;font-size:42px;animation-delay:-1.5s}.d6{bottom:17%;right:3%;font-size:46px;animation-delay:-2.5s}.d7{bottom:2%;left:15%;font-size:34px}.d8{bottom:3%;right:15%;font-size:35px}
@@ -67,30 +67,27 @@ onAuthStateChanged(auth,u=>{
  }).catch(err=>console.warn("Background profile lookup:",err));
 });
 
-form.addEventListener("submit",async e=>{
+form.addEventListener("submit",e=>{
  e.preventDefault();
  if(submitting)return;
  const name=input.value.trim().replace(/\s+/g," ");
  if(!name){status.textContent="Please enter your child's name.";return}
- if(!user){status.textContent="Please wait a moment and try again.";return}
- submitting=true;button.disabled=true;button.textContent="Continue →";status.textContent="";
+ if(!user){status.textContent="Login is still loading. Please try again in a moment.";return}
+ submitting=true;
+ button.disabled=true;
+ button.textContent="Continue →";
+ status.textContent="";
+ // Save immediately on this device, scoped to the signed-in Gmail.
  localStorage.setItem("kt_child_name_"+user.uid,name);
  localStorage.setItem("kt_pending_child_name",name);
- // Keep the screen responsive even if Firestore acknowledgement is slow.
- try{
-  await Promise.race([
-   setDoc(doc(db,"users",user.uid),{childName:name,displayName:user.displayName||"",email:user.email||"",updatedAt:serverTimestamp()},{merge:true}),
-   new Promise((_,reject)=>setTimeout(()=>reject(new Error("cloud-write-timeout")),4500))
-  ]);
- }catch(err){console.warn("Name cloud sync pending:",err)}
- if(existingBuddy?.id){
-  const buddy={...existingBuddy,name};
-  localStorage.setItem("kt_buddy_"+user.uid,JSON.stringify(buddy));
-  try{await Promise.race([setDoc(doc(db,"users",user.uid),{childName:name,buddy,updatedAt:serverTimestamp()},{merge:true}),new Promise((_,reject)=>setTimeout(()=>reject(new Error("cloud-write-timeout")),3500))])}catch(err){console.warn(err)}
-  location.replace("./index-home.html");
- }else{
-  location.replace("./buddy-selection.html");
- }
+ // Start cloud sync without blocking the child's next screen.
+ setDoc(doc(db,"users",user.uid),{
+  childName:name,
+  displayName:user.displayName||"",
+  email:user.email||"",
+  updatedAt:serverTimestamp()
+ },{merge:true}).catch(err=>console.warn("Name cloud sync failed:",err));
+ location.replace("./buddy-selection.html");
 });
 </script>
 </body>
