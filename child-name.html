@@ -44,57 +44,74 @@ button:disabled{opacity:.6}
 <p id="status" role="status"></p>
 </main>
 <script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-import {getFirestore,doc,getDoc,setDoc,serverTimestamp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-const config={apiKey:"AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",authDomain:"kids-teacher-4387e.firebaseapp.com",projectId:"kids-teacher-4387e",storageBucket:"kids-teacher-4387e.firebasestorage.app",messagingSenderId:"420221167346",appId:"1:420221167346:web:da7ac80acdfd52339d526b",measurementId:"G-VJVS2ZMNLY"};
-const app=initializeApp(config),auth=getAuth(app),db=getFirestore(app);
-const form=document.getElementById("nameForm"),input=document.getElementById("childName"),button=document.getElementById("saveBtn"),status=document.getElementById("status");
-let user=null,existingBuddy=null,submitting=false;
-onAuthStateChanged(auth,u=>{
- if(!u){location.replace("./login.html");return}
- user=u;
- document.body.style.visibility="visible";
- const key="kt_child_name_"+u.uid, stampKey="kt_child_saved_at_"+u.uid;
- // Never prefill from browser cache: Firestore is the source of truth.
- // This prevents a deleted profile from showing an old child's name.
- input.value="";
- localStorage.removeItem(key);
- localStorage.removeItem(stampKey);
- getDoc(doc(db,"users",u.uid)).then(snap=>{
-  if(!snap.exists()){
-   existingBuddy=null;
-   return;
-  }
-  const data=snap.data();
-  existingBuddy=data.buddy||null;
-  if(data.childName){
-   input.value=data.childName;
-   localStorage.setItem(key,data.childName);
-   localStorage.setItem(stampKey,String(Date.now()));
-  }else{
-   input.value="";
-   localStorage.removeItem(key);
-   localStorage.removeItem(stampKey);
-  }
-  if(data.childName&&data.buddy?.id)location.replace("./index-home.html");
- }).catch(err=>console.warn("Profile lookup failed; keeping name field empty until cloud data is available:",err));
-});
+import { supabase } from "./supabase-client.js";
 
-form.addEventListener("submit",async e=>{
- e.preventDefault();
- if(submitting)return;
- const name=input.value.trim().replace(/\s+/g," ");
- if(!name){status.textContent="Please enter your child's name.";return}
- if(!user){status.textContent="Login is still loading. Please try again.";return}
- submitting=true;button.disabled=true;button.textContent="Continue →";status.textContent="";
- const key="kt_child_name_"+user.uid;
- localStorage.setItem(key,name);
- localStorage.setItem("kt_child_saved_at_"+user.uid,String(Date.now()));
- const save=setDoc(doc(db,"users",user.uid),{childName:name,displayName:user.displayName||"",email:user.email||"",updatedAt:serverTimestamp()},{merge:true});
- try{await Promise.race([save,new Promise((_,reject)=>setTimeout(()=>reject(new Error("save-timeout")),2500))])}
- catch(err){console.warn("Name cloud sync pending:",err)}
- location.replace("./buddy-selection.html");
+const form=document.getElementById("nameForm");
+const input=document.getElementById("childName");
+const button=document.getElementById("saveBtn");
+const status=document.getElementById("status");
+
+let user=null;
+let submitting=false;
+
+const {data:sessionData,error:sessionError}=await supabase.auth.getSession();
+if(sessionError) console.error("Supabase session check:",sessionError);
+user=sessionData.session?.user||null;
+
+if(!user){
+  location.replace("./login.html");
+}else{
+  document.body.style.visibility="visible";
+  const {data:profile,error}=await supabase
+    .from("profiles")
+    .select("child_name,buddy")
+    .eq("id",user.id)
+    .maybeSingle();
+
+  if(error){
+    console.error("Supabase profile lookup failed:",error);
+    status.textContent="Profile load nahi hua. Internet check karke refresh karo.";
+  }else if(profile?.child_name){
+    input.value=profile.child_name;
+    if(profile.buddy){
+      location.replace("./index-home.html");
+    }
+  }
+}
+
+form.addEventListener("submit",async event=>{
+  event.preventDefault();
+  if(submitting)return;
+
+  const name=input.value.trim().replace(/\s+/g," ");
+  if(!name){status.textContent="Please enter your child's name.";return;}
+  if(!user){status.textContent="Login is still loading. Please try again.";return;}
+
+  submitting=true;
+  button.disabled=true;
+  button.textContent="Saving...";
+  status.textContent="";
+
+  const {error}=await supabase
+    .from("profiles")
+    .update({
+      child_name:name,
+      display_name:user.user_metadata?.full_name||user.user_metadata?.name||"",
+      email:user.email||"",
+      updated_at:new Date().toISOString()
+    })
+    .eq("id",user.id);
+
+  if(error){
+    console.error("Supabase child name save failed:",error);
+    status.textContent="Name save nahi hua. Dobara try karo.";
+    submitting=false;
+    button.disabled=false;
+    button.textContent="CONTINUE";
+    return;
+  }
+
+  location.replace("./buddy-selection.html");
 });
 </script>
 </body>
