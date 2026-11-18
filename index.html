@@ -11,7 +11,35 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;overflow:hidden;background:#f3f5ef}
+#splash-screen{position:fixed;inset:0;width:100%;height:100vh;height:100dvh;display:flex;align-items:center;justify-content:center;z-index:99990;overflow:hidden;background:linear-gradient(145deg,#f8f8f2 0%,#eaf1e8 52%,#dce9df 100%)}
+.kt-mark,.kt-dot{display:none!important}
+.kt-title{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;gap:0;width:100%;padding:0 12px;color:#244b3b;font-family:'Outfit','Nunito',sans-serif;font-size:clamp(32px,9.2vw,48px);font-weight:800;line-height:1.15;letter-spacing:-1.2px;text-align:center;white-space:nowrap;text-shadow:0 2px 0 rgba(255,255,255,.75),0 10px 28px rgba(40,75,58,.12)}
+.kt-title .brand-letter{display:inline-block;opacity:0;transform:translateY(18px) scale(.88);filter:blur(5px);animation:brandLetterReveal .48s cubic-bezier(.2,.8,.2,1) forwards}
+.kt-title .brand-letter.space{width:.28em}
+@keyframes brandLetterReveal{0%{opacity:0;transform:translateY(18px) scale(.88);filter:blur(5px)}70%{opacity:1;transform:translateY(-2px) scale(1.04);filter:blur(0)}100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+.kt-title::after{content:"";position:absolute;left:50%;bottom:-15px;width:0;height:3px;border-radius:9px;background:linear-gradient(90deg,#a8c6ad,#4f8768,#a8c6ad);transform:translateX(-50%);animation:brandUnderline .55s ease 1.75s forwards}
+@keyframes brandUnderline{to{width:min(42vw,170px)}}
+@media(max-width:360px){.kt-title{font-size:clamp(28px,8.5vw,34px);letter-spacing:-1.4px}}
+@media(prefers-reduced-motion:reduce){.kt-title .brand-letter{animation:none;opacity:1;transform:none;filter:none}.kt-title::after{animation:none;width:min(42vw,170px)}}
+    </style>tml>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" id="themeColorMeta" content="#eaf2e9">
+    <title>Kids Teacher</title>
+
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/png" href="./icons/icon-192.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -278,32 +306,9 @@ html,body{background:#eaf2e9}
 </head>
 
 <body>
-
-    <!-- KIDS TEACHER SPLASH SCREEN -->
-    <div id="splash-screen" aria-label="Kids Teacher loading screen">
-
-        <!-- 1. Bunny K Logo -->
-        <div class="kt-mark" aria-hidden="true">
-            K
-            <div class="kt-ears">
-                <span class="kt-ear"></span>
-                <span class="kt-ear"></span>
-            </div>
-            <div class="kt-face">
-                <div class="kt-eyes">
-                    <span></span>
-                    <span></span>
-                </div>
-                <div class="kt-smile"></div>
-            </div>
-        </div>
-
-        <!-- 2. Brand Title -->
-        <div class="kt-title">KIDS TEACHER</div>
-
-        <!-- 3. Glowing Star-Burst Effect -->
-        <div class="kt-dot" aria-hidden="true"></div>
-
+    <!-- Text-only Kids Teacher splash -->
+    <div id="splash-screen" aria-label="Kids Teacher">
+        <div class="kt-title" id="brandTitle">KIDS TEACHER</div>
     </div>
 
     <!-- SUPABASE AUTH CHECK: route returning users using their Supabase profile -->
@@ -348,7 +353,18 @@ html,body{background:#eaf2e9}
     <script>
         // Preserve the original splash animation. Route after Supabase resolves
         // the current session and saved profile.
-        const dot = document.querySelector('.kt-dot');
+        const title = document.querySelector('.kt-title');
+        const brandName = 'KIDS TEACHER';
+        if (title && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            title.textContent = '';
+            [...brandName].forEach((character, index) => {
+                const letter = document.createElement('span');
+                letter.className = character === ' ' ? 'brand-letter space' : 'brand-letter';
+                letter.style.animationDelay = (index * 0.105) + 's';
+                letter.textContent = character === ' ' ? '\\u00A0' : character;
+                title.appendChild(letter);
+            });
+        }
         let routeStarted = false;
 
         function finishSplash() {
@@ -362,22 +378,23 @@ html,body{background:#eaf2e9}
             }
         }
 
-        if (dot) {
-            dot.addEventListener('animationend', (event) => {
-                if (event.animationName === 'starBurstLaunch') finishSplash();
-            }, { once: true });
+        if (title) {
+            const lastLetter = title.lastElementChild;
+            if (lastLetter) {
+                lastLetter.addEventListener('animationend', finishSplash, { once: true });
+            }
         }
 
         // Safety fallback if the browser skips the animation event.
-        window.setTimeout(finishSplash, 5100);
+        window.setTimeout(finishSplash, 3600);
 
-        // If Firebase takes unusually long, do not leave the splash stuck.
+        // If Supabase takes unusually long, do not leave the splash stuck.
         window.setTimeout(() => {
             if (!routeStarted && window.__ktSplashFinished && !window.__ktAuthResolved) {
                 routeStarted = true;
                 window.location.replace(window.__ktDestination || './login.html');
             }
-        }, 6800);
+        }, 5600);
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', async () => {
