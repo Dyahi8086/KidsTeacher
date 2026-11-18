@@ -48,6 +48,8 @@ h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.
 .profile-card h2{font:700 23px Fredoka;margin:0}.profile-card p{font-size:12px;color:var(--muted);font-weight:800;margin:4px 0 0}
 .profile-row{display:flex;justify-content:space-between;padding:14px 4px;border-bottom:1px solid #eeeaf6;font-size:13px;font-weight:800}.profile-row:last-child{border:0}
 .logout{width:100%;margin-top:14px;padding:13px;border:0;border-radius:15px;background:#fff0f1;color:#d95b72;font:900 14px Nunito}
+.delete-account{width:100%;margin-top:10px;padding:13px;border:1px solid #f2b8b8;border-radius:15px;background:#fff;color:#c43f50;font:900 13px Nunito}
+.delete-note{margin:8px 8px 0;text-align:center;color:#9b8790;font-size:11px;font-weight:700;line-height:1.5}
 .nav-wrap{position:fixed;z-index:10;bottom:0;left:0;right:0;padding:9px 12px calc(9px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent,#f8f7ff 23%);pointer-events:none}
 .nav{pointer-events:auto;width:min(100%,520px);margin:auto;display:grid;grid-template-columns:repeat(5,1fr);gap:3px;padding:7px 6px;background:rgba(255,255,255,.9);border:1px solid white;border-radius:23px;box-shadow:0 8px 30px #4b447122;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
 .nav button{min-width:0;border:0;background:transparent;border-radius:15px;padding:7px 2px 6px;color:#8b879c;font:800 10px Nunito;display:flex;flex-direction:column;align-items:center;gap:3px}
@@ -92,6 +94,8 @@ h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.
 <h1 class="page-title">My Profile ⭐</h1><p class="subline">This is your special learning space.</p>
 <div class="profile-card"><div class="profile-avatar" id="profileBuddy" aria-label="Your selected buddy"></div><h2 id="profileName">Your Name</h2><p>Your Buddy</p></div>
 <button class="logout" onclick="handleLogout()">Log Out</button>
+<button class="delete-account" onclick="handleDeleteAccount()">Delete Account &amp; All Data</button>
+<p class="delete-note">Permanently deletes your Kids Teacher profile and learning data. Logout keeps your data safe.</p>
 </section>
 </div>
 <div class="nav-wrap"><nav class="nav" aria-label="Main navigation">
@@ -116,6 +120,27 @@ window.handleLogout=async()=>{
   await supabase.auth.signOut();
   window.location.replace("./login.html");
  }catch(e){console.error(e)}
+};
+window.handleDeleteAccount=async()=>{
+ const first=window.confirm("Permanently delete your Kids Teacher account and all learning data? This cannot be undone. Logout will NOT delete your data.");
+ if(!first)return;
+ const second=window.confirm("Final confirmation: delete this signed-in account permanently?");
+ if(!second)return;
+ try{
+  const {data,error}=await supabase.functions.invoke("delete-account",{body:{}});
+  if(error)throw error;
+  if(!data?.success)throw new Error(data?.error||"Account deletion was not confirmed.");
+  const {data:{user}}=await supabase.auth.getUser();
+  if(user?.id){
+   localStorage.removeItem("kt_child_name_"+user.id);
+   localStorage.removeItem("kt_buddy_"+user.id);
+  }
+  await supabase.auth.signOut();
+  window.location.replace("./login.html?account_deleted=1");
+ }catch(error){
+  console.error("Account deletion failed:",error);
+  alert("Account delete nahi hua. Internet check karke dobara try karo. Details console mein hain.");
+ }
 };
 function paintProfile(data){
  const name=(data.childName||data.buddy?.name||"Friend").trim(),buddy=data.buddy||{},buddyId=buddy.id||"bunny";
