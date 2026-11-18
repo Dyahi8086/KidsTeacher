@@ -747,6 +747,64 @@ body{
 }
 @media(max-width:380px){.top .brand{font-size:29px!important;gap:5px!important}}
 
+
+/* Bright, crisp Kids Teacher finish — remove milky haze and strengthen colours */
+body{
+ background:linear-gradient(135deg,#f6c7df 0%,#e4c9f5 48%,#bfe4fa 100%)!important;
+ background-attachment:fixed!important;
+}
+.nav-wrap{
+ background:transparent!important;
+ -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+ padding:8px 14px calc(13px + env(safe-area-inset-bottom))!important;
+}
+.nav{
+ background:linear-gradient(115deg,#ffcf55 0%,#ff9c55 28%,#f27bb3 62%,#8b82f5 100%)!important;
+ border:2px solid #fff0b5!important;border-radius:27px!important;
+ box-shadow:0 9px 22px rgba(105,69,145,.30),inset 0 2px 0 rgba(255,255,255,.55),inset 0 -4px 8px rgba(105,55,135,.16)!important;
+ -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+}
+.nav button{
+ min-height:66px!important;
+ padding:9px 5px 8px!important;
+ border-radius:18px!important;
+ gap:5px!important;
+ color:#30244f!important;
+ font-size:12px!important;font-weight:900!important;
+ text-shadow:0 1px 0 rgba(255,255,255,.35)!important;
+ transition:transform .16s ease,background .18s ease,box-shadow .18s ease!important;
+}
+.nav button .ico{width:27px!important;height:27px!important;color:inherit!important}
+.nav button .ico svg{width:25px!important;height:25px!important;stroke-width:2.5!important}
+.nav button:nth-child(1){background:linear-gradient(145deg,#ffe78a,#ffbd45)!important;color:#62400b!important}
+.nav button:nth-child(2){background:linear-gradient(145deg,#a6f0c0,#39c985)!important;color:#075c43!important}
+.nav button:nth-child(3){background:linear-gradient(145deg,#ffb0c7,#f35d87)!important;color:#7d1742!important}
+.nav button:nth-child(4){background:linear-gradient(145deg,#b8a6ff,#8061e8)!important;color:#30206f!important}
+.nav button:nth-child(5){background:linear-gradient(145deg,#8ee3ff,#32a9e6)!important;color:#064e78!important}
+.nav button.active{
+ outline:2px solid rgba(255,255,255,.95)!important;
+ box-shadow:0 4px 10px rgba(57,36,95,.25),inset 0 2px 4px rgba(255,255,255,.55)!important;
+ transform:translateY(-3px)!important;
+}
+.nav button:active{transform:scale(.94)!important}
+.buddy-strip{
+ background:linear-gradient(120deg,#ffd4e6 0%,#ffc6b7 100%)!important;
+ border:1px solid #fff0f3!important;
+ box-shadow:7px 8px 16px rgba(178,93,132,.22),inset 2px 2px 5px rgba(255,255,255,.65),inset -2px -2px 5px rgba(196,83,121,.10)!important;
+}
+.hero{
+ border:1px solid #ffd6a0!important;
+ box-shadow:8px 10px 18px rgba(190,86,75,.28),inset 2px 2px 5px rgba(255,255,255,.38),inset -3px -4px 8px rgba(160,48,64,.16)!important;
+}
+.tile{
+ border:1px solid rgba(255,255,255,.9)!important;
+}
+.tile.lilac{filter:saturate(1.18)!important}
+@media(max-width:380px){
+ .nav button{min-height:62px!important;padding:8px 2px 7px!important;font-size:11px!important}
+ .nav button .ico{width:25px!important;height:25px!important}
+}
+
 </style>
 </head>
 <body>
