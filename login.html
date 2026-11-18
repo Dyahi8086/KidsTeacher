@@ -1440,17 +1440,20 @@ async function goToNextPage(user) {
 renderAnimatedText("Continue with Google");
 document.body.style.visibility = "visible";
 
-// Only route automatically after an OAuth callback, not merely because a
-// previously signed-in account exists when the parent opens the login screen.
+// Route as soon as Supabase has completed the OAuth callback.
+// The SDK may consume/remove the ?code parameter before this page checks it,
+// so listen for the authenticated session instead of relying on the URL.
+supabase.auth.onAuthStateChange((event, session) => {
+  if (session?.user && ["SIGNED_IN", "INITIAL_SESSION", "TOKEN_REFRESHED"].includes(event)) {
+    queueMicrotask(() => goToNextPage(session.user));
+  }
+});
+
 const { data: initialSession, error: sessionError } = await supabase.auth.getSession();
 if (sessionError) console.error("Supabase session check:", sessionError);
-const returnedFromOAuth = new URLSearchParams(window.location.search).has("code");
-if (returnedFromOAuth && initialSession.session?.user) {
+if (initialSession.session?.user) {
   await goToNextPage(initialSession.session.user);
-} else if (returnedFromOAuth && !initialSession.session) {
-  showError("Google login complete nahi hua. Dobara try karo.");
 }
-
 googleBtn.addEventListener("click", async () => {
   if (isBusy) return;
   hideMessages();
