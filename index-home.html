@@ -153,7 +153,23 @@ else{
 }
 
 const canvas=document.getElementById("drawingCanvas"),ctx=canvas.getContext("2d");let drawing=false,color="#ff647c",eraser=false;
-function sizeCanvas(){const ratio=window.devicePixelRatio||1,rect=canvas.getBoundingClientRect();const old=document.createElement("canvas");old.width=canvas.width;old.height=canvas.height;old.getContext("2d").drawImage(canvas,0,0);canvas.width=rect.width*ratio;canvas.height=rect.height*ratio;ctx.setTransform(ratio,0,0,ratio,0,0);if(old.width&&old.height)ctx.drawImage(old,0,0,old.width,old.height,0,0,rect.width,rect.height);ctx.lineCap="round";ctx.lineJoin="round"}new ResizeObserver(sizeCanvas).observe(canvas);
+let canvasResizeFrame=0;
+function sizeCanvas(){
+ cancelAnimationFrame(canvasResizeFrame);
+ canvasResizeFrame=requestAnimationFrame(()=>{
+  const ratio=Math.min(window.devicePixelRatio||1,2),rect=canvas.getBoundingClientRect();
+  if(!rect.width||!rect.height)return;
+  const width=Math.round(rect.width*ratio),height=Math.round(rect.height*ratio);
+  if(canvas.width===width&&canvas.height===height)return;
+  const old=document.createElement("canvas");old.width=canvas.width;old.height=canvas.height;
+  if(old.width&&old.height)old.getContext("2d").drawImage(canvas,0,0);
+  canvas.width=width;canvas.height=height;ctx.setTransform(ratio,0,0,ratio,0,0);
+  if(old.width&&old.height)ctx.drawImage(old,0,0,old.width,old.height,0,0,rect.width,rect.height);
+  ctx.lineCap="round";ctx.lineJoin="round";
+ });
+}
+const canvasObserver=new ResizeObserver(sizeCanvas);canvasObserver.observe(canvas);
+window.addEventListener("orientationchange",sizeCanvas,{passive:true});
 canvas.addEventListener("pointerdown",e=>{drawing=true;canvas.setPointerCapture(e.pointerId);const r=canvas.getBoundingClientRect();ctx.beginPath();ctx.moveTo(e.clientX-r.left,e.clientY-r.top)});
 canvas.addEventListener("pointermove",e=>{if(!drawing)return;const r=canvas.getBoundingClientRect();ctx.strokeStyle=eraser?"#fffdf8":color;ctx.lineWidth=eraser?24:5;ctx.lineTo(e.clientX-r.left,e.clientY-r.top);ctx.stroke()});
 ["pointerup","pointercancel"].forEach(ev=>canvas.addEventListener(ev,()=>drawing=false));
