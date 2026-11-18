@@ -131,22 +131,30 @@ function paintProfile(data){
  document.getElementById("profileBuddy").style.backgroundColor="#ffffff";
  document.getElementById("profileBuddy").style.backgroundRepeat="no-repeat";
 }
-onAuthStateChanged(auth,async user=>{
+onAuthStateChanged(auth,user=>{
  if(!user){window.location.replace("./login.html");return}
- const localName="";
- const localBuddy={};
- try{
-  const snap=await Promise.race([getDoc(doc(db,"users",user.uid)),new Promise((_,reject)=>setTimeout(()=>reject(new Error("Profile read timeout")),6500))]);
-  if(!snap.exists()){window.location.replace("./child-name.html");return;}
+ let cachedBuddy={};
+ try{cachedBuddy=JSON.parse(localStorage.getItem("kt_buddy_"+user.uid)||"{}")}catch{}
+ const cachedName=localStorage.getItem("kt_child_name_"+user.uid)||"";
+ if(cachedName&&cachedBuddy.id)paintProfile({childName:cachedName,buddy:cachedBuddy});
+ getDoc(doc(db,"users",user.uid)).then(snap=>{
+  if(!snap.exists()){
+   if(!cachedName)window.location.replace("./child-name.html");
+   else if(!cachedBuddy.id)window.location.replace("./buddy-selection.html");
+   return;
+  }
   const data=snap.data();
+  if(data.childName)localStorage.setItem("kt_child_name_"+user.uid,data.childName);
+  if(data.buddy?.id)localStorage.setItem("kt_buddy_"+user.uid,JSON.stringify(data.buddy));
   if(!data.childName){window.location.replace("./child-name.html");return}
   if(!data.buddy?.id){window.location.replace("./buddy-selection.html");return}
   paintProfile(data);
- }catch(e){
-  console.warn("Using local profile while cloud sync is unavailable:",e);
-  document.getElementById("helloName").textContent="Profile load nahi hua. Internet check karo.";
- }
+ }).catch(err=>{
+  console.warn("Cloud profile unavailable; using this account's local profile:",err);
+  if(!cachedName||!cachedBuddy.id)document.getElementById("helloName").textContent="Profile sync pending. Internet check karo.";
+ });
 });
+
 const canvas=document.getElementById("drawingCanvas"),ctx=canvas.getContext("2d");let drawing=false,color="#ff647c",eraser=false;
 function sizeCanvas(){const ratio=window.devicePixelRatio||1,rect=canvas.getBoundingClientRect();const old=document.createElement("canvas");old.width=canvas.width;old.height=canvas.height;old.getContext("2d").drawImage(canvas,0,0);canvas.width=rect.width*ratio;canvas.height=rect.height*ratio;ctx.setTransform(ratio,0,0,ratio,0,0);if(old.width&&old.height)ctx.drawImage(old,0,0,old.width,old.height,0,0,rect.width,rect.height);ctx.lineCap="round";ctx.lineJoin="round"}new ResizeObserver(sizeCanvas).observe(canvas);
 canvas.addEventListener("pointerdown",e=>{drawing=true;canvas.setPointerCapture(e.pointerId);const r=canvas.getBoundingClientRect();ctx.beginPath();ctx.moveTo(e.clientX-r.left,e.clientY-r.top)});
