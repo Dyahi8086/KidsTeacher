@@ -292,6 +292,85 @@ body{background:radial-gradient(ellipse at 8% 5%,#fff4df 0,transparent 38%),radi
 .brand .brand-dot{animation:logoDotIn .45s .1s cubic-bezier(.2,.85,.25,1.3) forwards!important}
 @media(max-width:380px){.learning-letters{gap:6px!important}.learning-letters span{width:39px!important;height:47px!important;font-size:25px!important}}
 
+
+/* Final visual fixes: richer page backdrop, reliable animations and balanced navigation */
+:root{--bg:#dcecf5}
+body{
+ background:
+  radial-gradient(ellipse at 8% 5%,rgba(255,218,164,.72) 0%,transparent 36%),
+  radial-gradient(ellipse at 94% 18%,rgba(202,190,255,.62) 0%,transparent 38%),
+  radial-gradient(ellipse at 82% 88%,rgba(155,232,220,.62) 0%,transparent 42%),
+  linear-gradient(145deg,#d9eff8 0%,#e7e2ff 48%,#d9f2eb 100%)!important;
+ background-attachment:fixed!important;
+}
+.app{background:transparent!important}
+.top .brand{left:calc(50% + 5px)!important}
+.brand .brand-letter{
+ opacity:0!important;
+ transform:translateY(10px) scale(.86)!important;
+ animation:brandOneByOne 6s cubic-bezier(.2,.8,.2,1) infinite!important;
+}
+.brand .brand-word:first-child .brand-letter:nth-child(1){animation-delay:0s!important}
+.brand .brand-word:first-child .brand-letter:nth-child(2){animation-delay:.12s!important}
+.brand .brand-word:first-child .brand-letter:nth-child(3){animation-delay:.24s!important}
+.brand .brand-word:first-child .brand-letter:nth-child(4){animation-delay:.36s!important}
+.brand .teacher-word .brand-letter:nth-child(1){animation-delay:.48s!important}
+.brand .teacher-word .brand-letter:nth-child(2){animation-delay:.60s!important}
+.brand .teacher-word .brand-letter:nth-child(3){animation-delay:.72s!important}
+.brand .teacher-word .brand-letter:nth-child(4){animation-delay:.84s!important}
+.brand .teacher-word .brand-letter:nth-child(5){animation-delay:.96s!important}
+.brand .teacher-word .brand-letter:nth-child(6){animation-delay:1.08s!important}
+.brand .teacher-word .brand-letter:nth-child(7){animation-delay:1.20s!important}
+@keyframes brandOneByOne{
+  0%,3%{opacity:0;transform:translateY(10px) scale(.86)}
+  7%,68%{opacity:1;transform:translateY(0) scale(1)}
+  74%,100%{opacity:0;transform:translateY(-8px) scale(.92)}
+}
+.brand .brand-dot{animation:brandDotCycle 6s ease-in-out infinite!important;animation-delay:1.32s!important}
+@keyframes brandDotCycle{0%,8%{opacity:0;transform:scale(.5)}14%,68%{opacity:1;transform:scale(1)}75%,100%{opacity:0;transform:scale(.5)}}
+#homePage .learning-letters span{
+ animation:abcBounce 2.25s ease-in-out infinite!important;
+ box-shadow:7px 8px 13px #34547755,-4px -4px 9px #ffffffcc,inset 3px 3px 7px #fff!important;
+}
+#homePage .learning-letters span:nth-child(1){animation-delay:0s!important}
+#homePage .learning-letters span:nth-child(2){animation-delay:.16s!important}
+#homePage .learning-letters span:nth-child(3){animation-delay:.32s!important}
+#homePage .learning-letters span:nth-child(4){animation-delay:.48s!important}
+#homePage .learning-letters span:nth-child(5){animation-delay:.64s!important}
+#homePage .learning-letters span:nth-child(6){animation-delay:.80s!important}
+@keyframes abcBounce{
+  0%,100%{transform:translateY(0) rotate(var(--tilt,0deg)) scale(1)}
+  50%{transform:translateY(-9px) rotate(0deg) scale(1.055)}
+}
+.nav-wrap{
+ bottom:calc(8px + env(safe-area-inset-bottom))!important;
+ left:0!important;right:0!important;
+ padding:0 16px!important;
+ background:transparent!important;
+}
+.nav{
+ background:linear-gradient(135deg,#ffe98a 0%,#ffd65e 48%,#f3c64d 100%)!important;
+ border:1px solid #fff4b5!important;
+ box-shadow:9px 11px 22px #a58c4c66,-7px -7px 16px #ffffffaa,inset 3px 3px 7px #fff8d8,inset -3px -3px 7px #d6ad3d!important;
+}
+.nav button[data-tab="video"],.nav button[data-tab="video"] .ico{
+ color:#896d31!important;
+}
+.nav button[data-tab="video"].active{
+ background:linear-gradient(145deg,#fff9d9,#f5df87)!important;
+ color:#7154ca!important;
+ box-shadow:inset 4px 4px 8px #d7bd5d77,inset -4px -4px 8px #fffde8!important;
+}
+.nav button[data-tab="video"].active .ico{color:inherit!important}
+.tile .video-tile-icon svg{display:block;width:29px;height:29px;filter:drop-shadow(0 2px 2px #6d263655)}
+@media(max-width:380px){
+ .top .brand{left:calc(50% + 3px)!important}
+ .nav-wrap{padding-left:12px!important;padding-right:12px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .brand .brand-letter,.brand .brand-dot,#homePage .learning-letters span{animation:none!important;opacity:1!important;transform:none!important}
+}
+
 </style>
 </head>
 <body>
