@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#fff5f8">
 <title>Child's Name • Kids Teacher</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900;1000&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900;1000&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;width:100%;min-height:100%;font-family:'Nunito',sans-serif}
@@ -22,14 +22,8 @@ h1 .name{color:#53cba0;text-shadow:0 4px 0 #34765f,0 7px 0 rgba(0,0,0,.08)}
 .paper{position:relative;margin:0 auto 24px;width:91%;min-height:155px;padding:35px 18px 24px;background:#fffced;border:3px solid #443b48;border-radius:18px 8px 18px 8px;box-shadow:7px 8px 0 rgba(68,59,72,.14);transform:rotate(-.7deg)}
 .paper:before{content:"";position:absolute;top:-3px;right:28px;width:44px;height:16px;background:#fffced;border-left:3px solid #443b48;border-bottom:3px solid #443b48;border-radius:0 0 0 14px;transform:skewX(25deg)}
 .paper:after{content:"";position:absolute;bottom:13px;left:18px;right:18px;border-bottom:3px dotted #766b78;opacity:.5}
-.writing-area{position:relative;width:100%;height:62px;display:flex;align-items:center;justify-content:center}
-input{position:absolute;inset:0;z-index:2;width:100%;height:100%;border:0;outline:0;background:transparent;text-align:center;font:700 34px Caveat,cursive;color:transparent;caret-color:transparent}
-input::placeholder{color:transparent}
-.writing-preview{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;max-width:100%;pointer-events:none;white-space:pre;min-height:58px}
-.writing-text{font:700 48px/1 Caveat,cursive;color:#1674ee;white-space:pre;clip-path:inset(0 100% 0 0);transition:clip-path .18s ease-out;text-shadow:0 1px 0 rgba(22,116,238,.08)}
-.pen-tip{display:none;font-size:32px;line-height:1;filter:drop-shadow(0 3px 2px rgba(0,0,0,.18));transform:rotate(-22deg);margin-left:-5px;animation:penWrite .28s ease-in-out infinite alternate}
-@keyframes penWrite{from{transform:translateY(1px) rotate(-25deg)}to{transform:translateY(-2px) rotate(-18deg)}}
-.paper:focus-within{box-shadow:7px 8px 0 rgba(68,59,72,.14),0 0 0 4px rgba(50,133,255,.12)}
+input{position:relative;z-index:1;width:100%;height:62px;border:0;outline:0;background:transparent;text-align:center;font:800 27px Nunito,sans-serif;color:#1674ee}
+input::placeholder{color:#827987;font-weight:700;font-size:24px}
 button{position:relative;width:88%;height:76px;border:4px solid #45364d;border-radius:19px;background:linear-gradient(90deg,#ff6268 0 20%,#ffb43f 20% 40%,#58c98e 40% 60%,#40b9e9 60% 80%,#a477e8 80%);color:#fff;font:1000 27px Nunito,sans-serif;letter-spacing:1px;text-shadow:0 3px 0 #53415d,1px 4px 0 #53415d;-webkit-text-stroke:.5px #493b51;box-shadow:0 8px 0 #45364d,0 13px 18px rgba(55,45,68,.16);transition:transform .12s,box-shadow .12s}
 button:active{transform:translateY(6px);box-shadow:0 2px 0 #45364d,0 5px 10px rgba(55,45,68,.14)}
 button:disabled{opacity:.6}
@@ -44,7 +38,7 @@ button:disabled{opacity:.6}
 <main class="scene">
 <h1><span>What's</span><span class="your">your child's</span><span class="name">name?</span></h1>
 <form id="nameForm">
-<div class="paper"><div class="writing-area"><div class="writing-preview" aria-hidden="true"><span class="writing-text" id="writingText"></span><span class="pen-tip" id="penTip">🖊️</span></div><input id="childName" type="text" maxlength="24" autocomplete="given-name" aria-label="Child name" placeholder="Type here..." required></div></div>
+<div class="paper"><input id="childName" type="text" maxlength="24" autocomplete="given-name" placeholder="Type here..." required></div>
 <button id="saveBtn" type="submit">CONTINUE</button>
 </form>
 <p id="status" role="status"></p>
@@ -56,20 +50,6 @@ const form=document.getElementById("nameForm");
 const input=document.getElementById("childName");
 const button=document.getElementById("saveBtn");
 const status=document.getElementById("status");
-const writingText=document.getElementById("writingText");
-const penTip=document.getElementById("penTip");
-
-function updateHandwriting(){
-  const value=input.value;
-  writingText.textContent=value;
-  writingText.style.clipPath="inset(0 100% 0 0)";
-  penTip.style.display=value?"inline-block":"none";
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{
-    writingText.style.clipPath="inset(0 0 0 0)";
-  }));
-}
-input.addEventListener("input",updateHandwriting);
-
 let user=null;
 let submitting=false;
 
@@ -92,7 +72,6 @@ if(!user){
     status.textContent="Profile load nahi hua. Internet check karke refresh karo.";
   }else if(profile?.child_name){
     input.value=profile.child_name;
-    updateHandwriting();
     location.replace(profile.buddy?.id ? "./index-home.html" : "./buddy-selection.html");
   }
 }
