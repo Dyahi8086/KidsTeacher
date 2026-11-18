@@ -664,6 +664,47 @@ button:not(.nav button):not(.tile){
  .nav button,.tile{transition:none!important}
 }
 
+
+/* Clear, crisp page backdrop — remove hazy radial overlays */
+body{
+ background:linear-gradient(135deg,#f6dce9 0%,#eadcf2 48%,#d9e8f5 100%)!important;
+ background-attachment:fixed!important;
+}
+/* Keep the complete Kids Teacher wordmark visible even if animations are delayed/disabled */
+.top{position:relative;display:flex;align-items:center;justify-content:center!important}
+.brand{
+ position:absolute!important;left:50%!important;top:50%!important;
+ transform:translate(-50%,-50%)!important;
+ width:max-content!important;max-width:calc(100% - 112px)!important;
+ padding:0!important;margin:0!important;flex:none!important;
+ display:flex!important;flex-direction:row!important;align-items:center!important;
+ justify-content:center!important;gap:7px!important;
+ font:700 34px/1 Fredoka,sans-serif!important;letter-spacing:-1px!important;
+ white-space:nowrap!important;z-index:2!important;
+}
+.brand .brand-word{display:inline-flex!important;align-items:center!important;justify-content:center!important}
+.brand .brand-gap{display:none!important}
+.brand .brand-dot{display:inline-block!important;flex:0 0 8px;width:8px;height:8px;border-radius:50%;background:#3289ed;margin-left:1px;box-shadow:0 0 0 5px #3289ed22}
+.brand .brand-letter{
+ display:inline-block!important;opacity:1!important;transform:none!important;
+ animation:logoLetterIn .55s cubic-bezier(.2,.85,.25,1.25) both!important;
+}
+.brand .brand-word:first-child{color:#39a9e0!important;text-shadow:0 2px 0 #c5efff,0 4px 0 #2583ba,0 7px 10px #548eb655!important}
+.brand .teacher-word{color:#efbd28!important;text-shadow:0 2px 0 #fff0a0,0 4px 0 #c79518,0 7px 10px #9c7d3e55!important}
+.brand .brand-letter:nth-child(1){animation-delay:.04s!important}
+.brand .brand-letter:nth-child(2){animation-delay:.08s!important}
+.brand .brand-letter:nth-child(3){animation-delay:.12s!important}
+.brand .brand-letter:nth-child(4){animation-delay:.16s!important}
+.brand .teacher-word .brand-letter:nth-child(1){animation-delay:.22s!important}
+.brand .teacher-word .brand-letter:nth-child(2){animation-delay:.26s!important}
+.brand .teacher-word .brand-letter:nth-child(3){animation-delay:.30s!important}
+.brand .teacher-word .brand-letter:nth-child(4){animation-delay:.34s!important}
+.brand .teacher-word .brand-letter:nth-child(5){animation-delay:.38s!important}
+.brand .teacher-word .brand-letter:nth-child(6){animation-delay:.42s!important}
+.brand .teacher-word .brand-letter:nth-child(7){animation-delay:.46s!important}
+@keyframes logoLetterIn{from{opacity:.25;transform:translateY(8px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:380px){.brand{font-size:29px!important;gap:5px!important}}
+
 </style>
 </head>
 <body>
