@@ -1364,93 +1364,114 @@ body {
 }
 
 
-/* COMPACT CENTER MODAL — match reference proportions; keep all login content */
+
+/* VIDEO MATCH: dimmed, blurred page behind a clean centered popup */
 body {
     justify-content: center;
     align-items: center;
-    padding: 18px 0;
-    overflow: hidden;
+    padding: 20px 0;
     background:
-        radial-gradient(ellipse at 12% 14%, rgba(255,255,255,.96) 0%, transparent 34%),
-        radial-gradient(ellipse at 88% 18%, rgba(195,222,255,.62) 0%, transparent 40%),
-        radial-gradient(ellipse at 14% 90%, rgba(255,210,183,.56) 0%, transparent 42%),
-        linear-gradient(145deg, #E6F3FF 0%, #F7F5EF 52%, #FFE5D4 100%);
+        radial-gradient(ellipse at 12% 14%, #fff 0%, transparent 34%),
+        radial-gradient(ellipse at 88% 18%, #e7dff0 0%, transparent 40%),
+        linear-gradient(145deg, #f4e9ee 0%, #eee7ef 52%, #f5e6dc 100%);
 }
 .background-glow {
     position: fixed;
-    inset: -12%;
-    filter: blur(42px);
-    transform: scale(1.12);
+    inset: -10%;
+    filter: blur(24px);
 }
-.glow { opacity: .82; filter: blur(100px); }
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background: rgba(12, 12, 16, .42);
+    backdrop-filter: blur(11px);
+    -webkit-backdrop-filter: blur(11px);
+    pointer-events: none;
+}
 .login-popup-box {
-    width: min(86vw, 420px);
-    max-width: 420px;
+    position: relative;
+    z-index: 2;
+    width: min(86vw, 390px);
+    max-width: 390px;
     height: auto;
     min-height: 0;
     max-height: calc(100dvh - 48px);
     flex: 0 1 auto;
     margin: auto;
-    padding: clamp(24px, 4.2vh, 38px) clamp(18px, 5vw, 26px);
+    padding: clamp(27px, 4vh, 36px) 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 0;
-    border-radius: 27px;
-    border: 1px solid rgba(255,255,255,.94);
-    background: linear-gradient(145deg, rgba(255,255,255,.70), rgba(255,249,244,.48));
-    box-shadow:
-        0 18px 55px rgba(57,83,115,.20),
-        0 3px 14px rgba(255,255,255,.38),
-        inset 0 1px 2px rgba(255,255,255,.98);
-    backdrop-filter: blur(30px) saturate(155%);
-    -webkit-backdrop-filter: blur(30px) saturate(155%);
-    animation: modalAppear .45s cubic-bezier(.2,.8,.2,1) both;
+    border-radius: 22px;
+    border: 1px solid rgba(255,255,255,.96);
+    background: linear-gradient(160deg, #fff 0%, #fffdfd 72%, #fff8f6 100%);
+    box-shadow: 0 18px 48px rgba(0,0,0,.22);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    animation: modalAppear .35s ease-out both;
 }
-@keyframes modalAppear {
-    from { opacity: 0; transform: translateY(12px) scale(.97); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-}
-.login-popup-box::before { display: none !important; }
+.login-popup-box::before { display: none !important; content: none !important; }
 .icon-container {
-    width: 72px;
-    height: 72px;
+    width: 66px;
+    height: 66px;
     margin-bottom: 15px;
+    background: #fff;
+    border: 1px solid #f0edf0;
+    box-shadow: 0 5px 18px rgba(30,20,40,.08);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 }
-.icon-3d { font-size: 36px; }
+.icon-3d { font-size: 34px; }
 .app-title {
-    font-size: clamp(27px, 7vw, 34px);
-    line-height: 1.12;
-    margin-bottom: 7px;
+    font-size: clamp(26px, 7vw, 32px);
+    line-height: 1.15;
+    margin-bottom: 6px;
+    color: #171717;
+    text-shadow: none;
 }
 .app-subtitle {
-    font-size: 13px;
-    margin-bottom: 22px;
+    font-size: clamp(12px, 3.5vw, 14px);
+    margin-bottom: 20px;
+    color: #666;
 }
-.google-btn-wrapper { max-width: 100%; }
+.google-btn-wrapper {
+    width: 100%;
+    max-width: 100%;
+}
 .google-btn {
-    min-height: 51px;
-    padding: 10px 13px;
-    gap: 9px;
-    font-size: clamp(15px, 4vw, 18px);
+    min-height: 48px;
+    font-size: clamp(14px, 4vw, 17px);
 }
-.google-icon-svg { width: 23px; height: 23px; }
 .privacy-text {
-    margin-top: 18px;
+    margin-top: 17px;
     font-size: 10px;
-    line-height: 1.65;
+    color: #777;
+    text-shadow: none;
 }
+.privacy-text a {
+    color: #555;
+    border-bottom-color: #aaa;
+}
+#offlineBanner { z-index: 10001; }
+#loadingOverlay { z-index: 10002; }
 @media (max-height: 720px) {
     .login-popup-box {
-        width: min(86vw, 400px);
-        padding-top: 20px;
-        padding-bottom: 20px;
+        width: min(86vw, 370px);
+        padding-top: 22px;
+        padding-bottom: 22px;
     }
-    .icon-container { width: 60px; height: 60px; margin-bottom: 10px; }
-    .icon-3d { font-size: 31px; }
-    .app-subtitle { margin-bottom: 15px; }
-    .google-btn { min-height: 47px; }
-    .privacy-text { margin-top: 13px; }
+    .icon-container { width: 56px; height: 56px; margin-bottom: 10px; }
+    .icon-3d { font-size: 29px; }
+    .app-subtitle { margin-bottom: 14px; }
+    .google-btn { min-height: 44px; }
+    .privacy-text { margin-top: 12px; }
 }
 @media (max-width: 360px) {
-    .login-popup-box { width: 90vw; padding-left: 16px; padding-right: 16px; }
+    .login-popup-box { width: 88vw; padding-left: 16px; padding-right: 16px; }
 }
 
 </style>
