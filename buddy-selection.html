@@ -62,14 +62,14 @@ body{padding:calc(12px + env(safe-area-inset-top)) 16px calc(12px + env(safe-are
 .step-pill{margin-left:auto;padding:7px 10px;border:1px solid #fff;background:#ffffffa8;border-radius:30px;color:#b37b68;letter-spacing:.7px}
 h1{font-size:clamp(32px,8vw,43px);letter-spacing:-1.5px;margin:8px 0 6px;color:#302329;text-shadow:0 2px 0 #fff}
 .sub{max-width:360px;margin:0 auto 16px;color:#8d7771;font-size:14px;font-weight:800;line-height:1.45}
-.preview{position:relative;overflow:hidden;min-height:112px;margin:0 0 17px;padding:10px 16px;gap:14px;border:1px solid #fff;border-radius:27px;background:linear-gradient(135deg,#ffffffed,#fff8f1c9);box-shadow:inset 0 2px 0 #fff,0 12px 28px #8f65501a;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.preview{position:relative;overflow:hidden;min-height:142px;margin:0 0 17px;padding:12px 16px;gap:14px;border:1px solid #fff;border-radius:27px;background:linear-gradient(135deg,#ffffffed,#fff8f1c9);box-shadow:inset 0 2px 0 #fff,0 12px 28px #8f65501a;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 .preview:after{content:"";position:absolute;width:140px;height:140px;right:-48px;top:-65px;border-radius:50%;background:radial-gradient(circle,#ffd8c8a8,transparent 70%);pointer-events:none}
-.preview-avatar{position:relative;z-index:1;display:grid;place-items:center;width:112px;height:96px;flex:0 0 112px;border-radius:24px;background:radial-gradient(circle at 50% 38%,#fff 0,#fff4e9 62%,#ffe6d7 100%)}
-#bigMascot{width:106px!important;height:100px!important}
+.preview-avatar{position:relative;z-index:1;display:grid;place-items:center;width:142px;height:126px;flex:0 0 142px;border-radius:24px;background:radial-gradient(circle at 50% 38%,#fff 0,#fff4e9 62%,#ffe6d7 100%)}
+#bigMascot{width:136px!important;height:124px!important}
 .preview-copy{position:relative;z-index:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
 .preview-kicker{font-size:9px;letter-spacing:1.6px;font-weight:1000;color:#e58a6d}
-.preview strong{font-size:16px;font-weight:1000;color:#3b2c30}
-.preview small{font-size:11px;line-height:1.35;color:#907e79;font-weight:800}
+.preview strong{font-size:17px;font-weight:1000;color:#3b2c30}
+.preview small{font-size:12px;line-height:1.35;color:#907e79;font-weight:800}
 .preview-sparkle{position:absolute;right:15px;bottom:12px;color:#ffb66f;font-size:20px}
 .grid-title{margin:1px 3px 10px;font-size:13px;color:#6f5c58}
 .grid-title:after{content:"";height:1px;flex:1;margin-left:10px;background:linear-gradient(90deg,#e8d7ce,transparent)}
@@ -90,13 +90,12 @@ h1{font-size:clamp(32px,8vw,43px);letter-spacing:-1.5px;margin:8px 0 6px;color:#
 #continue:disabled{opacity:.45}
 .status{color:#a36b5d}
 @media(min-width:480px){.buddy{min-height:190px}.buddy .mascot{width:122px!important;height:122px!important}}
-@media(max-height:760px){.sub{margin-bottom:11px}.preview{min-height:94px;margin-bottom:12px}.preview-avatar{height:80px}.buddy{min-height:148px}.buddy .mascot{width:94px!important;height:94px!important}.footer{padding-top:10px}}
+@media(max-height:760px){.sub{margin-bottom:11px}.preview{min-height:94px;margin-bottom:12px}.preview-avatar{height:96px}.buddy{min-height:148px}.buddy .mascot{width:94px!important;height:94px!important}.footer{padding-top:10px}}
 @media(prefers-reduced-motion:reduce){.buddy,.mascot-inner,#continue{transition:none}}
 
 </style>
 </head>
 <body><main class="wrap">
-<div class="page-kicker"><span class="kicker-dot"></span><span>YOUR LEARNING SIDEKICK</span><span class="step-pill">STEP 2 OF 3</span></div>
 <h1>Pick Your Buddy!</h1><p class="sub">This little friend will guide you on your learning adventure ✨</p>
 <div class="preview"><div class="preview-avatar"><button id="bigMascot" class="mascot" type="button" aria-label="Boop your selected buddy"></button></div><div class="preview-copy"><span class="preview-kicker">YOUR BUDDY</span><strong id="previewTitle">Choose your favourite character</strong><small id="previewText">Tap a character to meet your new friend!</small></div><span class="preview-sparkle" aria-hidden="true">✦</span></div>
 <div class="grid-title"><span>Choose your favourite Buddy</span></div>
@@ -112,10 +111,18 @@ let user=null,selected=null,childName="";
 const directions=["up-left","up","up-right","left","center","right","down-left","down","down-right"];
 const clockwise=["right","down-right","down","down-left","left","up-left","up","up-right"];
 const reactions=["blink","heart","sparkle","surprised","wink","bashful","sleepy","dizzy","delighted"];
-function sprite(name,size,label){const b=document.createElement("div");b.className="mascot";b.style.width=size+"px";b.style.height=size+"px";b.setAttribute("aria-label","Boop "+label);const inner=document.createElement("span");inner.className="mascot-inner";const d=document.createElement("span"),r=document.createElement("span");d.className="sheet direction";r.className="sheet reaction";d.style.backgroundImage='url("'+base+name+'-directions.webp")';r.style.backgroundImage='url("'+base+name+'-reactions.webp")';r.style.opacity="0";inner.append(d,r);b.append(inner);let timer=[],boops=0,last=0,sector=-1;function cell(i){return ((i%3)*50)+"% "+(Math.floor(i/3)*50)+"%"}d.style.backgroundPosition=cell(4);r.style.backgroundPosition=cell(0);function boop(){timer.forEach(clearTimeout);timer=[];const now=Date.now();boops=now-last<1600?boops+1:1;last=now;const idx=boops>=4?7:[1,2,8][(boops-1)%3];if(boops>=4)boops=0;r.style.backgroundPosition=cell(idx);r.style.opacity="1";d.style.opacity="0";timer.push(setTimeout(()=>{r.style.opacity="0";d.style.opacity="1"},idx===7?1100:560));if(!matchMedia("(prefers-reduced-motion: reduce)").matches){inner.animate([{transform:"scale(1,1)"},{transform:"scale(1.1,.86)",offset:.18},{transform:"scale(.95,1.08)",offset:.45},{transform:"scale(1.03,.97)",offset:.72},{transform:"scale(1,1)"}],{duration:420})}}
+function sprite(name,size,label,isPreview=false){const b=document.createElement("div");b.className="mascot";b.style.width=size+"px";b.style.height=size+"px";b.setAttribute("aria-label","Boop "+label);const inner=document.createElement("span");inner.className="mascot-inner";const d=document.createElement("span"),r=document.createElement("span");d.className="sheet direction";r.className="sheet reaction";d.style.backgroundImage='url("'+base+name+'-directions.webp")';r.style.backgroundImage='url("'+base+name+'-reactions.webp")';r.style.opacity="0";inner.append(d,r);b.append(inner);let timer=[],boops=0,last=0,sector=-1;function cell(i){return ((i%3)*50)+"% "+(Math.floor(i/3)*50)+"%"}d.style.backgroundPosition=cell(4);r.style.backgroundPosition=cell(0);function boop(){timer.forEach(clearTimeout);timer=[];const now=Date.now();boops=now-last<1600?boops+1:1;last=now;const idx=boops>=4?7:[1,2,8][(boops-1)%3];if(boops>=4)boops=0;r.style.backgroundPosition=cell(idx);r.style.opacity="1";d.style.opacity="0";timer.push(setTimeout(()=>{r.style.opacity="0";d.style.opacity="1"},idx===7?1100:560));if(!matchMedia("(prefers-reduced-motion: reduce)").matches){inner.animate([{transform:"scale(1,1)"},{transform:"scale(1.1,.86)",offset:.18},{transform:"scale(.95,1.08)",offset:.45},{transform:"scale(1.03,.97)",offset:.72},{transform:"scale(1,1)"}],{duration:420})}}
+if(isPreview){
+ let idleTimer=null;
+ let idleIndex=0;
+ const idleFrames=[1,2,5,8];
+ function idle(){if(!document.hidden){const frame=idleFrames[idleIndex++%idleFrames.length];r.style.backgroundPosition=cell(frame);r.style.opacity="1";d.style.opacity="0";setTimeout(()=>{r.style.opacity="0";d.style.opacity="1"},420)}}
+ idleTimer=setInterval(idle,2600);
+ b.addEventListener("DOMNodeRemoved",()=>clearInterval(idleTimer),{once:true});
+}
 b.addEventListener("click",boop);return b}
-const initialBig=sprite("bunny",100,"preview");initialBig.id="bigMascot";big.replaceWith(initialBig);big=initialBig;
-function choose(name){selected=name;const label=name==="sheep"?"Sheep":name.charAt(0).toUpperCase()+name.slice(1);const next=sprite(name,100,label);next.id="bigMascot";big.replaceWith(next);big=next;document.getElementById("previewTitle").textContent=label.charAt(0).toUpperCase()+label.slice(1)+" is your Buddy!";document.getElementById("previewText").textContent="Tap your Buddy to see its reaction.";button.disabled=false;button.style.display="block";render()}
+const initialBig=sprite("bunny",136,"preview",true);initialBig.id="bigMascot";big.replaceWith(initialBig);big=initialBig;
+function choose(name){selected=name;const label=name==="sheep"?"Sheep":name.charAt(0).toUpperCase()+name.slice(1);const next=sprite(name,136,label,true);next.id="bigMascot";big.replaceWith(next);big=next;document.getElementById("previewTitle").textContent=label.charAt(0).toUpperCase()+label.slice(1)+" is your Buddy!";document.getElementById("previewText").textContent="Tap your Buddy to see its reaction.";button.disabled=false;button.style.display="block";render()}
 function render(){grid.innerHTML="";names.forEach(name=>{const card=document.createElement("button");card.type="button";card.className="buddy"+(selected===name?" selected":"");const m=sprite(name,82,name);m.tabIndex=-1;card.append(m);const n=document.createElement("span");n.className="mascot-name";n.textContent=name.replace(/-/g," ");const s=document.createElement("span");s.className="selected-label";s.textContent=selected===name?"✓ SELECTED":"";card.append(n,s);card.addEventListener("click",()=>choose(name));grid.append(card)})}
 render();
 const {data:sessionData,error:sessionError}=await supabase.auth.getSession();
