@@ -299,69 +299,89 @@ body{background:radial-gradient(ellipse at 8% 0%,#e4f5ff 0,transparent 42%),radi
 #homePage .category-welcome .tag{font-size:20px!important}
 @media(max-width:380px){#homePage .category-art{height:92px}#homePage .category-emoji{font-size:47px}#homePage .abc-art,#homePage .number-art{font-size:42px}}
 
-/* CATEGORY TILES — glossy 3D gradient style matching the supplied second reference */
-#homePage .category-tiles{gap:14px}
+/* CATEGORY TILES — soft inflated CLAYMORPHISM finish */
+#homePage .category-tiles{gap:16px}
 #homePage .category-card{
   position:relative;
   isolation:isolate;
-  min-height:148px;
+  overflow:hidden;
+  min-height:150px;
   padding:14px 10px 13px;
+  display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
   gap:7px;
-  border:1.5px solid rgba(255,255,255,.82);
-  border-radius:28px;
+  border:1px solid rgba(255,255,255,.78);
+  border-radius:30px;
   color:#fff;
-  background:linear-gradient(145deg,#64e69d,#12bd75);
-  box-shadow:inset 0 2px 0 rgba(255,255,255,.48),0 7px 0 rgba(0,0,0,.10),0 13px 24px rgba(24,95,75,.20);
-  text-shadow:0 2px 3px rgba(0,0,0,.18);
+  background:linear-gradient(145deg,#ffb47d,#ff718c);
+  box-shadow:
+    9px 9px 19px rgba(83,77,112,.19),
+    -8px -8px 18px rgba(255,255,255,.88),
+    inset 3px 3px 7px rgba(255,255,255,.52),
+    inset -4px -4px 9px rgba(70,50,95,.12);
+  text-shadow:0 2px 3px rgba(70,45,80,.16);
+  transition:transform .18s ease,box-shadow .18s ease;
 }
 #homePage .category-card::before{
   content:"";
   position:absolute;
   z-index:-1;
-  inset:0;
-  border-radius:inherit;
+  inset:2px;
+  border-radius:27px;
   pointer-events:none;
-  background:linear-gradient(125deg,rgba(255,255,255,.42),transparent 42%,rgba(255,255,255,.08) 72%,transparent);
+  background:
+    radial-gradient(ellipse at 22% 12%,rgba(255,255,255,.48),transparent 48%),
+    linear-gradient(145deg,rgba(255,255,255,.13),transparent 55%,rgba(80,50,110,.07));
 }
-#homePage .category-card:active{transform:translateY(3px) scale(.98);box-shadow:inset 0 2px 0 rgba(255,255,255,.4),0 3px 0 rgba(0,0,0,.10),0 7px 14px rgba(24,95,75,.16)}
+#homePage .category-card:active{
+  transform:scale(.975);
+  box-shadow:
+    4px 4px 10px rgba(83,77,112,.15),
+    -4px -4px 10px rgba(255,255,255,.8),
+    inset 4px 4px 8px rgba(70,50,95,.12),
+    inset -3px -3px 7px rgba(255,255,255,.45);
+}
 #homePage .category-art{
-  height:auto;
-  min-height:66px;
   width:100%;
-  background:transparent!important;
+  height:auto;
+  min-height:68px;
   display:flex;
   align-items:center;
   justify-content:center;
+  background:transparent!important;
 }
 #homePage .category-copy{
   min-height:0;
   padding:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
   background:transparent;
   color:#fff;
-  gap:3px;
 }
 #homePage .category-copy b{font-size:18px;line-height:1.15;color:#fff;font-weight:1000}
-#homePage .category-copy small{font-size:12px;margin-top:0;color:rgba(255,255,255,.96);font-weight:800}
-#homePage .category-emoji{font-size:48px;filter:drop-shadow(0 5px 3px rgba(0,0,0,.18))}
-#homePage .abc-art,#homePage .number-art{font-size:48px;text-shadow:0 3px 0 rgba(0,0,0,.12)}
-#homePage .category-abc{background:linear-gradient(145deg,#ff9a55 0%,#ff5c78 100%)}
-#homePage .category-numbers{background:linear-gradient(145deg,#55d5f4 0%,#328eea 100%)}
-#homePage .category-animals{background:linear-gradient(145deg,#8ce85f 0%,#20bf83 100%)}
-#homePage .category-video{background:linear-gradient(145deg,#ff8298 0%,#ed315c 100%)}
-#homePage .category-puzzles{background:linear-gradient(145deg,#ed8bd0 0%,#a35be7 100%)}
-#homePage .category-drawing{background:linear-gradient(145deg,#ffc46a 0%,#f58a32 100%)}
-#homePage .category-game{background:linear-gradient(145deg,#9d8cff 0%,#6250d9 100%)}
-#homePage .category-leaderboard{background:linear-gradient(145deg,#55d9e8 0%,#238dc9 100%)}
+#homePage .category-copy small{font-size:12px;margin-top:0;color:rgba(255,255,255,.97);font-weight:850}
+#homePage .category-emoji{font-size:49px;line-height:1.1;filter:drop-shadow(0 5px 4px rgba(65,45,85,.2))}
+#homePage .abc-art,#homePage .number-art{font-size:49px;text-shadow:0 3px 3px rgba(65,45,85,.16)}
+#homePage .category-abc{background:linear-gradient(145deg,#ffbd83 0%,#ff7795 100%)}
+#homePage .category-numbers{background:linear-gradient(145deg,#8ce5fb 0%,#55aaf4 100%)}
+#homePage .category-animals{background:linear-gradient(145deg,#b7f48a 0%,#64dca1 100%)}
+#homePage .category-video{background:linear-gradient(145deg,#ffacc5 0%,#fa7195 100%)}
+#homePage .category-puzzles{background:linear-gradient(145deg,#f6b3e3 0%,#c28aef 100%)}
+#homePage .category-drawing{background:linear-gradient(145deg,#ffda91 0%,#ffad68 100%)}
+#homePage .category-game{background:linear-gradient(145deg,#c1b5ff 0%,#8c7beb 100%)}
+#homePage .category-leaderboard{background:linear-gradient(145deg,#9cebf0 0%,#65bfe9 100%)}
 @media(max-width:380px){
-  #homePage .category-card{min-height:132px;border-radius:24px}
-  #homePage .category-art{min-height:58px}
-  #homePage .category-emoji{font-size:43px}
+  #homePage .category-card{min-height:136px;border-radius:26px}
+  #homePage .category-art{min-height:60px}
+  #homePage .category-emoji{font-size:44px}
   #homePage .category-copy b{font-size:16px}
-  #homePage .abc-art,#homePage .number-art{font-size:42px}
+  #homePage .abc-art,#homePage .number-art{font-size:43px}
 }
-
 
 </style>
 </head>
