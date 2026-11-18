@@ -24,9 +24,14 @@ html{background:#f4f1e9}
 body{min-height:100vh;min-height:100dvh;overflow-x:hidden;overflow-y:auto;position:relative;isolation:isolate;color:var(--ink);background:radial-gradient(ellipse at 12% 15%,rgba(238,207,190,.28),transparent 34%),radial-gradient(ellipse at 90% 78%,rgba(197,219,203,.35),transparent 38%),#f4f1e9;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px 28px}
 .background-glow{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
 .glow{position:absolute;border-radius:50%;filter:blur(65px);opacity:.42}
-.glow-one{width:230px;height:230px;background:#e4d9c8;top:5%;left:-100px}
-.glow-two{width:260px;height:260px;background:#d7e5d8;right:-110px;bottom:5%}
-.glow-three{width:180px;height:180px;background:#f2d6c8;left:15%;bottom:-90px}
+.glow-one{width:230px;height:230px;background:#fff0b8;top:5%;left:-100px}
+.glow-two{width:260px;height:260px;background:#f8e8a8;right:-110px;bottom:5%}
+.glow-three{width:180px;height:180px;background:#ffedc2;left:15%;bottom:-90px}
+/* Soft, warm yellow halo — subtle movement, no flashing. */
+.glow-one,.glow-two,.glow-three{opacity:.34;filter:blur(78px);animation:yellowHaloDrift 12s ease-in-out infinite alternate}
+.glow-two{animation-delay:-4s}.glow-three{animation-delay:-8s}
+@keyframes yellowHaloDrift{from{transform:translate3d(0,0,0) scale(.96);opacity:.27}to{transform:translate3d(12px,-10px,0) scale(1.08);opacity:.4}}
+@media(prefers-reduced-motion:reduce){.glow-one,.glow-two,.glow-three{animation:none!important}}
 #offlineBanner{display:none;position:fixed;top:0;left:0;width:100%;padding:11px 12px;background:#263f34;color:#fff;text-align:center;font-size:12px;font-weight:700;z-index:10001}
 .login-shell{width:100%;max-width:620px;margin:auto}
 .brand-row{min-height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 2px 18px}
@@ -218,7 +223,7 @@ function renderAnimatedText(text) {
     const letter = document.createElement("span");
     letter.className = character === " " ? "btn-letter space" : "btn-letter";
     letter.style.setProperty("--letter-index", index);
-    letter.textContent = character === " " ? "\u00A0" : character;
+    letter.textContent = character === " " ? "\\u00A0" : character;
     btnText.appendChild(letter);
   });
 }
@@ -265,7 +270,7 @@ if (brandAnimated && !window.matchMedia("(prefers-reduced-motion: reduce)").matc
         const letter = document.createElement("span");
         letter.className = character === " " ? "brand-letter space" : "brand-letter";
         letter.style.animationDelay = (index * 0.035) + "s";
-        letter.textContent = character === " " ? "\u00A0" : character;
+        letter.textContent = character === " " ? "\\u00A0" : character;
         brandAnimated.appendChild(letter);
         await wait(145);
       }
