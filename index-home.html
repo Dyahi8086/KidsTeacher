@@ -217,6 +217,23 @@ body{background:radial-gradient(ellipse at 8% 0%,#e4f5ff 0,transparent 42%),radi
 @media(max-width:380px){.top .brand{font-size:26px!important;letter-spacing:-1.3px!important;left:calc(50% + 4px)!important;max-width:calc(100% - 82px)!important}.top .brand .brand-gap{width:5px!important;flex-basis:5px!important}.nav-wrap{padding-left:13px!important;padding-right:13px!important}}
 @media(prefers-reduced-motion:reduce){.top .brand .brand-letter,.top .brand .brand-dot{animation:none!important}}
 
+
+/* Colourful clay tabs INSIDE the floating navigation shell */
+.nav-wrap{bottom:calc(13px + env(safe-area-inset-bottom))!important;padding:0 18px!important}
+.nav{background:linear-gradient(145deg,#fffdf4 0%,#f7f3e8 100%)!important;border:1px solid #fff!important;border-radius:27px!important;padding:8px!important;gap:5px!important;box-shadow:8px 9px 18px #aab4c655,-7px -7px 17px #ffffff,inset 2px 2px 5px #fff!important}
+.nav button,.nav button:nth-child(3){min-height:54px!important;border-radius:18px!important;background:transparent!important;color:#6d6680!important;box-shadow:none!important;gap:4px!important}
+.nav button:nth-child(1){--tab:#7566e8;--tabbg:#e8e3ff}
+.nav button:nth-child(2){--tab:#159b65;--tabbg:#d9f8e8}
+.nav button:nth-child(3){--tab:#e34d59;--tabbg:#ffe0e3}
+.nav button:nth-child(4){--tab:#dc5798;--tabbg:#ffe0ef}
+.nav button:nth-child(5){--tab:#218bc7;--tabbg:#d9f1ff}
+.nav button .ico{color:var(--tab)!important}
+.nav button .ico svg{stroke:currentColor!important}
+.nav button.active,.nav button:nth-child(3).active{background:linear-gradient(145deg,#fff 0%,var(--tabbg) 100%)!important;color:var(--tab)!important;box-shadow:4px 5px 9px #9ca6b544,inset 2px 2px 5px #fff!important;border:1px solid #ffffff!important;transform:translateY(-2px)!important}
+.nav button.active .ico,.nav button:nth-child(3).active .ico{color:var(--tab)!important}
+.nav button.active:after{content:"";position:absolute;bottom:3px;width:5px;height:5px;border-radius:50%;background:var(--tab);box-shadow:0 0 0 3px #ffffffaa}
+@media(max-width:380px){.nav{gap:2px!important;padding:6px!important}.nav button{min-height:51px!important}}
+
 </style>
 </head>
 <body>
