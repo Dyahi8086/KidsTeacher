@@ -1287,30 +1287,30 @@ body {
 }
 
 
-/* CENTERED GLASS LOGIN — visual styling only; keep all existing content and auth logic */
+/* VIDEO-REFERENCE STYLE — preserve existing login content and behavior */
 body {
     justify-content: center;
     align-items: center;
     padding: 22px 16px;
     background:
-        radial-gradient(ellipse at 12% 18%, rgba(255,255,255,.98) 0%, transparent 32%),
-        radial-gradient(ellipse at 86% 22%, rgba(232,190,255,.62) 0%, transparent 38%),
-        radial-gradient(ellipse at 18% 88%, rgba(255,190,220,.62) 0%, transparent 40%),
-        linear-gradient(145deg, #FCEAF3 0%, #EEDFFB 52%, #F9DDEB 100%);
+        radial-gradient(ellipse at 14% 12%, rgba(255,255,255,.98) 0%, transparent 34%),
+        radial-gradient(ellipse at 88% 18%, rgba(190,224,255,.68) 0%, transparent 40%),
+        radial-gradient(ellipse at 14% 90%, rgba(255,215,190,.62) 0%, transparent 42%),
+        linear-gradient(155deg, #DCEEFF 0%, #F7F6F0 52%, #FFE4D3 100%);
 }
 .background-glow {
     position: fixed;
     inset: -8%;
-    filter: blur(22px);
+    filter: blur(26px);
     transform: scale(1.06);
 }
 .glow {
-    opacity: .78;
-    filter: blur(82px);
+    opacity: .72;
+    filter: blur(86px);
 }
-.glow-one { background: radial-gradient(circle, #FFC5DD 0%, #F9D9E9 58%, transparent 76%); }
-.glow-two { background: radial-gradient(circle, #DCCBFF 0%, #EBDDFB 58%, transparent 76%); }
-.glow-three { background: radial-gradient(circle, #FFD8E8 0%, #F4C8E0 58%, transparent 76%); }
+.glow-one { background: radial-gradient(circle, #A9D7FF 0%, #D6ECFF 58%, transparent 76%); }
+.glow-two { background: radial-gradient(circle, #D4E5FF 0%, #EAF1FF 58%, transparent 76%); }
+.glow-three { background: radial-gradient(circle, #FFD2B5 0%, #FFE7D8 58%, transparent 76%); }
 .login-popup-box {
     width: min(100%, 500px);
     height: auto;
@@ -1320,16 +1320,31 @@ body {
     margin: auto;
     padding: clamp(28px, 5vh, 46px) 24px;
     border-radius: 34px;
-    border: 1px solid rgba(255,255,255,.88);
-    background: linear-gradient(145deg, rgba(255,255,255,.68), rgba(255,244,250,.42));
+    border: 1px solid rgba(255,255,255,.9);
+    background: linear-gradient(145deg, rgba(255,255,255,.62), rgba(255,250,245,.36));
     box-shadow:
-        0 24px 70px rgba(91,65,125,.18),
-        inset 0 2px 2px rgba(255,255,255,.94),
-        inset 0 -1px 18px rgba(255,255,255,.30);
-    backdrop-filter: blur(34px) saturate(165%);
-    -webkit-backdrop-filter: blur(34px) saturate(165%);
+        0 24px 70px rgba(75,112,153,.16),
+        inset 0 2px 2px rgba(255,255,255,.96),
+        inset 0 -1px 18px rgba(255,255,255,.32);
+    backdrop-filter: blur(36px) saturate(165%);
+    -webkit-backdrop-filter: blur(36px) saturate(165%);
 }
 .login-popup-box::before { display: none; content: none; }
+.app-title { color: #202C3B; }
+.app-subtitle, .privacy-text { color: #586879; }
+.privacy-text a { color: #344F6B; border-bottom-color: rgba(52,79,107,.48); }
+.icon-container {
+    background: linear-gradient(145deg, rgba(255,255,255,.92), rgba(236,245,255,.55));
+    border-color: rgba(255,255,255,.96);
+    box-shadow:
+        12px 12px 28px rgba(85,123,164,.12),
+        -8px -8px 24px rgba(255,255,255,.94),
+        inset 0 2px 4px rgba(255,255,255,.98),
+        inset 0 -2px 8px rgba(150,185,220,.12);
+}
+#loadingOverlay { background: rgba(230,241,252,.60); }
+.spinner { border-color: rgba(255,255,255,.92); border-top-color: #659BCB; }
+.loading-text { color: #344F6B; }
 @media (max-height: 720px) {
     .login-popup-box {
         height: auto;
