@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kids-teacher-v62';
+const CACHE_NAME = 'kids-teacher-v63';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -7,6 +7,7 @@ const ASSETS_TO_CACHE = [
   './child-name.html',
   './buddy-selection.html',
   './index-home.html',
+  './supabase-client.js',
   './privacy-policy.html',
   './terms.html',
   './manifest.json',
