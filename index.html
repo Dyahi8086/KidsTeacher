@@ -314,7 +314,6 @@
             const { getFirestore, doc, getDoc } = await import("https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js");
             const db = getFirestore(app);
             onAuthStateChanged(auth, async (user) => {
-                window.__ktAuthResolved = true;
                 window.__ktDestination = "./login.html";
                 if (user) {
                     try {
@@ -327,9 +326,12 @@
                             : (hasBuddy ? "./index-home.html" : "./buddy-selection.html");
                     } catch (error) {
                         console.error("Profile routing check failed:", error);
-                        window.__ktDestination = "./login.html";
+                        // Keep the signed-in user out of a false login/onboarding loop.
+                        window.__ktDestination = "./index-home.html";
                     }
                 }
+                // Mark routing complete only after the profile decision is ready.
+                window.__ktAuthResolved = true;
                 if (window.__ktSplashFinished) window.location.replace(window.__ktDestination);
             }, (error) => {
                 console.error("Splash auth check failed:", error);
