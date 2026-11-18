@@ -77,14 +77,24 @@ h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.
 @media(max-width:380px){.nav button{font-size:8px}.nav{gap:0;padding-left:4px;padding-right:4px}.nav button .ico svg{width:19px;height:19px}}
 
 @media(max-height:700px){.app{padding-bottom:94px}.hero{min-height:145px}.hero h2{font-size:23px}#drawingCanvas{height:260px}}
+
+.home-greeting{margin:4px 0 16px;min-height:94px;padding:13px 18px;border-radius:28px;gap:18px;background:linear-gradient(145deg,#fbffff,#e7f1f3);box-shadow:9px 9px 18px #c1ccce,-8px -8px 18px #fff,inset 2px 2px 5px #fff,inset -2px -2px 5px #dce7e9}
+.home-greeting .buddy-face{width:82px;height:82px;flex-basis:82px;filter:drop-shadow(0 5px 4px #35405235)}
+.home-greeting b{font:800 24px/1.1 Fredoka,sans-serif;color:#28243d}
+.home-greeting p{font-size:15px;margin-top:6px}
+.learning-letters{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:-3px;position:relative;z-index:1}
+.learning-letters span{width:31px;height:31px;display:grid;place-items:center;border-radius:10px;background:linear-gradient(145deg,#fff,#ffffffb8);font:900 19px Fredoka;box-shadow:3px 4px 7px #503b8050,inset 2px 2px 4px #fff;transform:rotate(var(--tilt,0deg))}
+.learning-letters .letter-a{color:#ff6279;--tilt:-8deg}.learning-letters .letter-b{color:#ffbd38;--tilt:5deg}.learning-letters .letter-c{color:#42c99b;--tilt:-4deg}
+.learning-letters .number-one{color:#36b9e9;--tilt:6deg}.learning-letters .number-two{color:#a276ed;--tilt:-5deg}.learning-letters .number-three{color:#f47b54;--tilt:7deg}
+@media(max-width:380px){.home-greeting{min-height:82px;gap:12px;padding:11px 13px}.home-greeting .buddy-face{width:70px;height:70px;flex-basis:70px}.home-greeting b{font-size:21px}.home-greeting p{font-size:13px}.learning-letters{gap:6px}.learning-letters span{width:28px;height:28px;font-size:17px}}
 </style>
 </head>
 <body>
 <div class="app">
 <header class="top"><div class="brand" aria-label="Kids Teacher"><span class="brand-word"><span class="brand-letter">K</span><span class="brand-letter">i</span><span class="brand-letter">d</span><span class="brand-letter">s</span></span><span class="brand-gap"></span><span class="brand-word teacher-word"><span class="brand-letter">T</span><span class="brand-letter">e</span><span class="brand-letter">a</span><span class="brand-letter">c</span><span class="brand-letter">h</span><span class="brand-letter">e</span><span class="brand-letter">r</span></span><span class="brand-dot"></span></div><button class="avatar" id="topAvatar" type="button" aria-label="Open profile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></header>
 <section id="homePage" class="page active">
-<div class="welcome"><div class="eyebrow">READY TO PLAY & LEARN?</div><h1 id="helloName">Hello, Friend! 👋</h1><p>Your little learning adventure starts here.</p></div>
-<div class="hero"><div class="hero-mascot" id="heroBuddy"></div><div class="tag">Welcome, Explorer!</div></div>
+<div class="buddy-strip home-greeting"><div class="buddy-face" id="homeBuddy"></div><div><b id="buddyLine">Hey, Dino!</b><p>Let's learn and play together.</p></div></div>
+<div class="hero"><div class="hero-mascot" id="heroBuddy"></div><div class="learning-letters" aria-label="Learn letters and numbers"><span class="letter-a">A</span><span class="letter-b">B</span><span class="letter-c">C</span><span class="number-one">1</span><span class="number-two">2</span><span class="number-three">3</span></div><div class="tag">Welcome, Explorer!</div></div>
 <div class="section-head"><h3>What shall we do?</h3><span>CHOOSE ONE</span></div>
 <div class="tiles">
 <button class="tile lilac" onclick="showTab('learn')"><span class="emoji">📚</span><b>Learn</b><small>Letters, numbers & more</small></button>
@@ -92,7 +102,6 @@ h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.
 <button class="tile mint" onclick="showTab('drawing')"><span class="emoji">✎</span><b>Drawing</b></button>
 <button class="tile blue" onclick="showTab('leaderboard')"><span class="emoji">🏆</span><b>Leaderboard</b></button>
 </div>
-<div class="buddy-strip"><div class="buddy-face" id="homeBuddy"></div><div><b id="buddyLine">Your buddy is ready!</b><p>Let's learn and play together.</p></div></div>
 </section>
 <section id="learnPage" class="page">
 <h1 class="page-title">Let's Learn! 📚</h1><p class="subline">Pick a fun activity to begin.</p>
@@ -167,10 +176,9 @@ window.handleDeleteAccount=async()=>{
 };
 function paintProfile(data){
  const name=(data.childName||data.buddy?.name||"Friend").trim(),buddy=data.buddy||{},buddyId=buddy.id||"bunny";
- document.getElementById("helloName").textContent="Hello, "+name+"! 👋";
  document.getElementById("leaderName").textContent=name;
  document.getElementById("profileName").textContent=name;
- document.getElementById("buddyLine").textContent=name+"'s Buddy is here!";
+ document.getElementById("buddyLine").textContent="Hey, "+name+"!";
  const spriteUrl=buddy.directions||base+buddyId+"-directions.webp";
  document.getElementById("homeBuddy").style.backgroundImage='url("'+spriteUrl+'")';
 document.getElementById("heroBuddy").style.backgroundImage=document.getElementById("homeBuddy").style.backgroundImage;
@@ -189,8 +197,7 @@ else{
  const {data,error}=await supabase.from("profiles").select("child_name,buddy").eq("id",user.id).maybeSingle();
  if(error){
   console.error("Supabase home profile lookup failed:",error);
-  document.getElementById("helloName").textContent="Profile load nahi hua. Internet check karo.";
- }else if(!data?.child_name){
+  }else if(!data?.child_name){
   window.location.replace("./child-name.html");
  }else if(!data.buddy?.id){
   window.location.replace("./buddy-selection.html");
