@@ -1522,11 +1522,10 @@ async function goToNextPage(user, isNewUser = false) {
         window.location.replace(destination);
     } catch (error) {
         console.error("Profile routing error:", error);
-        // Do not send an existing account into onboarding when Firestore is merely slow.
-        // Keep the authenticated session and let the parent retry the profile check.
-        setLoading(false);
-        redirectHandled = false;
-        showError("Profile load nahi ho paya. Internet stable hone par Continue with Google dobara dabao. Aapka account safe hai.");
+        // Google sign-in has already succeeded. Do not ask the parent to sign in again
+        // just because the profile read timed out. The dashboard retries the profile read
+        // and routes to child-name/buddy setup if the cloud profile is genuinely missing.
+        window.location.replace("./index-home.html");
     }
 }
 
