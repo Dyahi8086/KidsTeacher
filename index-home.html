@@ -162,6 +162,30 @@ h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.
 }
 @media(prefers-reduced-motion:reduce){#homePage .learning-letters span{animation:none!important}}
 
+
+/* Final refinements requested: logo, tile balance, uniform nav, floating dock */
+.top .brand{left:calc(50% + 10px)!important}
+.top .avatar{transform:translateX(3px)!important}
+#homePage .tile{justify-content:center!important;gap:4px!important;padding-top:14px!important;padding-bottom:14px!important}
+#homePage .tile .emoji{margin:0!important;line-height:1!important;display:grid!important;place-items:center!important}
+#homePage .tile .emoji svg{width:31px!important;height:31px!important;display:block}
+#homePage .tile b{margin:0!important;line-height:1.15!important}
+#homePage .tile small{margin:0!important;line-height:1.2!important}
+#homePage .tile .video-tile-icon{color:#fff!important;filter:drop-shadow(0 2px 3px rgba(90,20,30,.35))!important}
+.nav button:nth-child(3),.nav button:nth-child(3) .ico{color:#896d31!important}
+.nav button:nth-child(3).active{background:linear-gradient(145deg,#fff9d9,#f5df87)!important;color:#7154ca!important;box-shadow:inset 4px 4px 8px #d7bd5d77,inset -4px -4px 8px #fffde8!important}
+.nav button:nth-child(3).active .ico{color:#7154ca!important}
+.nav-wrap{bottom:calc(20px + env(safe-area-inset-bottom))!important;padding:0 20px!important;background:transparent!important}
+.nav{border-radius:29px!important;padding:9px 10px!important;box-shadow:10px 12px 22px #b8a85d88,-7px -7px 16px #fff,inset 3px 3px 7px #fff9d8,inset -3px -3px 7px #d6b643!important}
+#homePage .learning-letters span{width:56px!important;height:64px!important;flex-basis:56px!important;font-size:36px!important}
+@media(max-width:380px){
+ .top .brand{left:calc(50% + 8px)!important;max-width:calc(100% - 76px)!important}
+ #homePage .learning-letters{gap:6px!important}
+ #homePage .learning-letters span{width:48px!important;height:57px!important;flex-basis:48px!important;font-size:31px!important}
+ #homePage .tile{gap:3px!important}
+ .nav-wrap{padding-left:15px!important;padding-right:15px!important;bottom:calc(18px + env(safe-area-inset-bottom))!important}
+}
+
 </style>
 </head>
 <body>
@@ -173,7 +197,7 @@ h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.
 <div class="section-head"><h3>What shall we do?</h3><span>CHOOSE ONE</span></div>
 <div class="tiles">
 <button class="tile lilac" onclick="showTab('learn')"><span class="emoji">📚</span><b>Learn</b><small>Letters, numbers & more</small></button>
-<button class="tile peach" onclick="showTab('video')"><span class="emoji">▶</span><b>Video</b></button>
+<button class="tile peach" onclick="showTab('video')"><span class="emoji video-tile-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m10 9 5 3-5 3z" fill="currentColor"/></svg></span><b>Video</b></button>
 <button class="tile mint" onclick="showTab('drawing')"><span class="emoji">✎</span><b>Drawing</b></button>
 <button class="tile blue" onclick="showTab('leaderboard')"><span class="emoji">🏆</span><b>Leaderboard</b></button>
 </div>
