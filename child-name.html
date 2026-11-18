@@ -55,38 +55,42 @@ onAuthStateChanged(auth,u=>{
  if(!u){location.replace("./login.html");return}
  user=u;
  document.body.style.visibility="visible";
- const cached=localStorage.getItem("kt_child_name_"+u.uid)||"";
- if(cached) input.value=cached;
- // Profile lookup is deliberately background-only; it must not block the screen.
+ const key="kt_child_name_"+u.uid, stampKey="kt_child_saved_at_"+u.uid;
+ const cached=localStorage.getItem(key)||"";
+ const stamp=Number(localStorage.getItem(stampKey)||0);
+ if(cached && Date.now()-stamp<120000) input.value=cached;
  getDoc(doc(db,"users",u.uid)).then(snap=>{
-  if(!snap.exists())return;
+  if(!snap.exists()){
+   if(Date.now()-stamp>=120000){localStorage.removeItem(key);localStorage.removeItem(stampKey);input.value="";}
+   existingBuddy=null;
+   return;
+  }
   const data=snap.data();
   existingBuddy=data.buddy||null;
-  if(data.childName&&!input.value)input.value=data.childName;
+  if(data.childName){
+   input.value=data.childName;
+   localStorage.setItem(key,data.childName);
+   localStorage.setItem(stampKey,String(Date.now()));
+  }else{
+   localStorage.removeItem(key);localStorage.removeItem(stampKey);input.value="";
+  }
   if(data.childName&&data.buddy?.id)location.replace("./index-home.html");
- }).catch(err=>console.warn("Background profile lookup:",err));
+ }).catch(err=>console.warn("Profile lookup offline; temporary draft retained:",err));
 });
 
-form.addEventListener("submit",e=>{
+form.addEventListener("submit",async e=>{
  e.preventDefault();
  if(submitting)return;
  const name=input.value.trim().replace(/\s+/g," ");
  if(!name){status.textContent="Please enter your child's name.";return}
- if(!user){status.textContent="Login is still loading. Please try again in a moment.";return}
- submitting=true;
- button.disabled=true;
- button.textContent="Continue →";
- status.textContent="";
- // Save immediately on this device, scoped to the signed-in Gmail.
- localStorage.setItem("kt_child_name_"+user.uid,name);
- localStorage.setItem("kt_pending_child_name",name);
- // Start cloud sync without blocking the child's next screen.
- setDoc(doc(db,"users",user.uid),{
-  childName:name,
-  displayName:user.displayName||"",
-  email:user.email||"",
-  updatedAt:serverTimestamp()
- },{merge:true}).catch(err=>console.warn("Name cloud sync failed:",err));
+ if(!user){status.textContent="Login is still loading. Please try again.";return}
+ submitting=true;button.disabled=true;button.textContent="Continue →";status.textContent="";
+ const key="kt_child_name_"+user.uid;
+ localStorage.setItem(key,name);
+ localStorage.setItem("kt_child_saved_at_"+user.uid,String(Date.now()));
+ const save=setDoc(doc(db,"users",user.uid),{childName:name,displayName:user.displayName||"",email:user.email||"",updatedAt:serverTimestamp()},{merge:true});
+ try{await Promise.race([save,new Promise((_,reject)=>setTimeout(()=>reject(new Error("save-timeout")),2500))])}
+ catch(err){console.warn("Name cloud sync pending:",err)}
  location.replace("./buddy-selection.html");
 });
 </script>
