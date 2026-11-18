@@ -1279,6 +1279,38 @@ body {
     #loadingOverlay { background: rgba(255,242,247,.98); }
 }
 
+
+/* REQUESTED LOGIN SCREEN TWEAKS ONLY */
+.login-popup-box::before {
+    display: none;
+    content: none;
+}
+.top-illustration {
+    position: absolute;
+    z-index: 1;
+    top: 7%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(72vw, 300px);
+    height: min(31vh, 235px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+.top-illustration svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    filter: drop-shadow(0 12px 18px rgba(119, 82, 67, .12));
+}
+@media (max-height: 720px) {
+    .top-illustration {
+        top: 3%;
+        height: min(25vh, 175px);
+    }
+}
+
 </style>
 </head>
 
@@ -1288,6 +1320,45 @@ body {
     <div class="glow glow-one"></div>
     <div class="glow glow-two"></div>
     <div class="glow glow-three"></div>
+</div>
+
+<div class="top-illustration" aria-hidden="true">
+    <svg viewBox="0 0 320 230" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="bookLeft" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#FFFFFF"/>
+                <stop offset="1" stop-color="#FFE5D5"/>
+            </linearGradient>
+            <linearGradient id="bookRight" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#FFF8EE"/>
+                <stop offset="1" stop-color="#FFD6C5"/>
+            </linearGradient>
+            <linearGradient id="pencil" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#FFCF65"/>
+                <stop offset="1" stop-color="#F28A55"/>
+            </linearGradient>
+        </defs>
+        <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M42 57l5 12 12 5-12 5-5 12-5-12-12-5 12-5z" fill="#FFD56B" stroke="#F4B84C" stroke-width="2"/>
+            <path d="M267 39l4 9 9 4-9 4-4 9-4-9-9-4 9-4z" fill="#F7AFC4" stroke="#E995B0" stroke-width="2"/>
+            <path d="M278 150l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#9FC9E9" stroke="#7FB4DC" stroke-width="2"/>
+            <path d="M75 153c-8-10-8-21 0-31 8 10 8 21 0 31z" fill="#A8D9C0" stroke="#70B997" stroke-width="2"/>
+            <path d="M75 153l0-23" stroke="#70B997" stroke-width="2"/>
+            <ellipse cx="160" cy="190" rx="105" ry="13" fill="#D9A9A0" opacity=".18" stroke="none"/>
+            <path d="M70 111c29-17 59-15 90 5v75c-31-19-61-21-90-5z" fill="url(#bookLeft)" stroke="#D9A99B" stroke-width="3"/>
+            <path d="M160 116c31-20 61-22 90-5v75c-29-16-59-14-90 5z" fill="url(#bookRight)" stroke="#D9A99B" stroke-width="3"/>
+            <path d="M160 116v75" stroke="#D9A99B" stroke-width="3"/>
+            <path d="M87 127c19-8 38-7 56 2M87 141c19-8 38-7 56 2M87 155c19-8 38-7 56 2" stroke="#E8B9A9" stroke-width="3"/>
+            <path d="M177 129c18-9 37-10 55-4M177 144c18-9 37-10 55-4M177 159c18-9 37-10 55-4" stroke="#E8B9A9" stroke-width="3"/>
+            <path d="M205 87l47-40 11 11-47 40-13 4z" fill="url(#pencil)" stroke="#D77D4F" stroke-width="2"/>
+            <path d="M252 47l8-7 11 11-8 7z" fill="#F08E8E" stroke="#D77D4F" stroke-width="2"/>
+            <path d="M205 87l-2 15 13-4" fill="#E9B68A" stroke="#D77D4F" stroke-width="2"/>
+            <path d="M112 83c5-12 18-16 29-10 10 6 10 19 0 26-11 8-26 2-29-10" fill="#F7C4A8" stroke="#D99B80" stroke-width="2"/>
+            <path d="M122 91c3 3 7 3 10 0" stroke="#A66D5D" stroke-width="2"/>
+            <circle cx="124" cy="84" r="2" fill="#72514C" stroke="none"/>
+            <circle cx="137" cy="84" r="2" fill="#72514C" stroke="none"/>
+        </g>
+    </svg>
 </div>
 
 <div id="offlineBanner">
