@@ -492,6 +492,34 @@ body{
  .top .brand .brand-letter{animation:none!important;opacity:1!important;transform:none!important}
 }
 
+
+/* Final visibility and richer pink palette */
+body{
+ background:linear-gradient(145deg,#ffdce9 0%,#ffe8ef 38%,#f8d9ee 72%,#fce2dc 100%)!important;
+ background-attachment:fixed!important;
+}
+.buddy-strip.home-greeting{
+ background:linear-gradient(125deg,#ffe0e9 0%,#ffd9e8 48%,#ffe6d7 100%)!important;
+ border:1px solid rgba(255,255,255,.82)!important;
+ box-shadow:inset 5px 5px 12px rgba(255,255,255,.72),inset -6px -7px 14px rgba(221,125,159,.16),0 12px 26px rgba(188,103,145,.16)!important;
+}
+.top .brand{
+ gap:3px!important;
+}
+.top .brand .brand-word:first-child .brand-letter{color:#48addb!important;text-shadow:0 2px 0 #2789bc,0 4px 7px rgba(48,118,157,.22)!important}
+.top .brand .teacher-word .brand-letter{color:#f2c83d!important;text-shadow:0 2px 0 #d7a923,0 4px 7px rgba(174,131,28,.2)!important}
+.top .brand .brand-letter{
+ opacity:0!important;transform:translateX(-12px) scale(.82)!important;
+ animation:buddyMouthLetters 5.8s cubic-bezier(.2,.8,.2,1) infinite!important;
+}
+@keyframes buddyMouthLetters{
+ 0%,4%{opacity:0;transform:translateX(-12px) scale(.82)}
+ 12%,100%{opacity:1;transform:translateX(0) scale(1)}
+}
+@media(prefers-reduced-motion:reduce){
+ .top .brand .brand-letter{animation:none!important;opacity:1!important;transform:none!important}
+}
+
 </style>
 </head>
 <body>
