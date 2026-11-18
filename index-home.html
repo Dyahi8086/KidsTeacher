@@ -267,6 +267,50 @@ body{background:radial-gradient(ellipse at 8% 0%,#e4f5ff 0,transparent 42%),radi
 .nav button.active:after{display:none!important}
 @media(max-width:380px){.nav button{font-size:8px!important}.nav{gap:1px!important;padding-left:4px!important;padding-right:4px!important}.nav button .ico svg{width:20px!important;height:20px!important}}
 
+
+/* Complete soft neumorphism refresh: unified cool base, raised/inset clay surfaces */
+:root{--ink:#263047!important;--muted:#7c879c!important;--bg:#e8edf5!important}
+html,body{background:#e8edf5!important}
+body{background:linear-gradient(145deg,#edf2fa 0%,#e5ebf4 52%,#e9eef7 100%)!important;color:#263047!important}
+.app{background:transparent!important}
+.top .brand{color:#263047!important;text-shadow:none!important}
+.top .brand .teacher-word{color:#263047!important;text-shadow:none!important}
+.top .brand .brand-dot{background:#6b7de8!important;box-shadow:0 0 0 5px #6b7de81c!important}
+.avatar{background:#e8edf5!important;border:1px solid #f8fbff!important;color:#6474c9!important;box-shadow:7px 7px 15px #c4ccd9,-7px -7px 15px #fff,inset 1px 1px 2px #fff!important}
+.home-greeting,.buddy-strip{background:#e8edf5!important;border:1px solid #f8fbff!important;box-shadow:9px 9px 18px #c5cdd9,-9px -9px 18px #fff,inset 1px 1px 3px #fff!important}
+.home-greeting b{color:#263047!important}
+.home-greeting p,.buddy-strip p{color:#78849a!important}
+.hero{background:linear-gradient(145deg,#d9e4f5,#cbd9ee)!important;color:#34456d!important;border:1px solid #f7fbff!important;box-shadow:10px 10px 20px #b9c6d9,-10px -10px 20px #fff,inset 2px 2px 5px #fff,inset -3px -3px 7px #b8c6dc!important}
+.hero-learning-title{color:#52658c!important;text-shadow:0 1px 0 #fff!important}
+.hero .tag{color:#34456d!important;text-shadow:0 1px 0 #fff!important}
+.hero .learning-letters span{border:1px solid #ffffffd9!important;box-shadow:6px 7px 12px #aebbd0,-5px -5px 11px #fff,inset 2px 2px 4px #fff!important}
+.section-head h3{color:#263047!important}
+.section-head span{color:#8290a5!important}
+#homePage .tile{border:1px solid #f8fbff!important;border-radius:25px!important;box-shadow:9px 9px 17px #c1cad8,-8px -8px 17px #fff,inset 2px 2px 5px #ffffffb8!important;transition:transform .18s,box-shadow .18s!important}
+#homePage .tile.lilac{background:linear-gradient(145deg,#d9f5e8,#c5ead9)!important;color:#267b5b!important;box-shadow:9px 9px 17px #b5d2c5,-8px -8px 17px #fff,inset 2px 2px 5px #fff!important}
+#homePage .tile.peach{background:linear-gradient(145deg,#f9dce2,#f1cbd5)!important;color:#a9485c!important;box-shadow:9px 9px 17px #d8b9c2,-8px -8px 17px #fff,inset 2px 2px 5px #fff!important}
+#homePage .tile.mint{background:linear-gradient(145deg,#f4dff0,#eacfe5)!important;color:#984f83!important;box-shadow:9px 9px 17px #d2b9ce,-8px -8px 17px #fff,inset 2px 2px 5px #fff!important}
+#homePage .tile.blue{background:linear-gradient(145deg,#d8edfa,#c5e1f2)!important;color:#347da7!important;box-shadow:9px 9px 17px #b6ccda,-8px -8px 17px #fff,inset 2px 2px 5px #fff!important}
+#homePage .tile b,#homePage .tile small{color:inherit!important;text-shadow:0 1px 1px #ffffff!important}
+#homePage .tile .emoji{filter:none!important;text-shadow:0 2px 3px #65758b55!important}
+#homePage .tile:active{transform:translateY(2px) scale(.985)!important;box-shadow:inset 5px 5px 10px #b9c3d1,inset -5px -5px 10px #fff!important}
+.nav-wrap{background:transparent!important}
+.nav{background:#e8edf5!important;border:1px solid #f8fbff!important;border-radius:26px!important;box-shadow:9px 9px 18px #c2cad7,-9px -9px 18px #fff,inset 2px 2px 4px #fff!important}
+.nav button{color:#65738d!important}
+.nav button:nth-child(3),.nav button:nth-child(3) .ico{color:#65738d!important}
+.nav button .ico{color:inherit!important}
+.nav button.active,.nav button:nth-child(3).active{background:linear-gradient(145deg,#dfe7f7,#eef3fb)!important;color:#5c6ed0!important;border:1px solid #f9fbff!important;box-shadow:inset 5px 5px 9px #c3ccdc,inset -5px -5px 9px #fff!important}
+.nav button.active .ico,.nav button:nth-child(3).active .ico{color:#5c6ed0!important}
+.nav button.active:after{background:#7182e3!important;box-shadow:0 0 0 3px #e8edf5!important}
+.page-title{color:#263047!important}
+.lesson,.drawing-card,.rank-card,.profile-card,.player{background:#e8edf5!important;border:1px solid #f8fbff!important;box-shadow:8px 8px 16px #c4ccd9,-8px -8px 16px #fff!important;color:#263047!important}
+.lesson-icon,.profile-avatar{background:#e8edf5!important;box-shadow:inset 4px 4px 8px #c4ccd9,inset -4px -4px 8px #fff!important}
+#drawingCanvas{background:#edf2fa!important;border:1px solid #fff!important;box-shadow:inset 4px 4px 8px #c6cedb,inset -4px -4px 8px #fff!important}
+.tool-btn{background:#e8edf5!important;color:#5c6ed0!important;box-shadow:4px 4px 8px #c4ccd9,-4px -4px 8px #fff!important}
+.logout{background:#f2dfe5!important;box-shadow:4px 4px 8px #d2bbc3,-4px -4px 8px #fff!important}
+.delete-account{background:#e8edf5!important;box-shadow:4px 4px 8px #c4ccd9,-4px -4px 8px #fff!important}
+@media(prefers-reduced-motion:reduce){.hero-mascot,.learning-letters span{animation:none!important}}
+
 </style>
 </head>
 <body>
