@@ -73,9 +73,7 @@ if(!user){
     status.textContent="Profile load nahi hua. Internet check karke refresh karo.";
   }else if(profile?.child_name){
     input.value=profile.child_name;
-    if(profile.buddy){
-      location.replace("./index-home.html");
-    }
+    location.replace(profile.buddy?.id ? "./index-home.html" : "./buddy-selection.html");
   }
 }
 
@@ -92,18 +90,20 @@ form.addEventListener("submit",async event=>{
   button.textContent="Saving...";
   status.textContent="";
 
-  const {error}=await supabase
+  const {data:savedProfile,error}=await supabase
     .from("profiles")
-    .update({
+    .upsert({
+      id:user.id,
       child_name:name,
       display_name:user.user_metadata?.full_name||user.user_metadata?.name||"",
       email:user.email||"",
       updated_at:new Date().toISOString()
-    })
-    .eq("id",user.id);
+    },{onConflict:"id"})
+    .select("id,child_name")
+    .single();
 
-  if(error){
-    console.error("Supabase child name save failed:",error);
+  if(error||!savedProfile?.id){
+    console.error("Supabase child name save failed:",error||"Saved profile was not confirmed");
     status.textContent="Name save nahi hua. Dobara try karo.";
     submitting=false;
     button.disabled=false;
