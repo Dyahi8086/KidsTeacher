@@ -115,6 +115,29 @@ h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.
 .hero-learning-title{text-shadow:0 2px 0 #176b9a88}
 @media(max-width:380px){.learning-letters{gap:6px}.learning-letters span{width:39px;height:46px;font-size:25px}}
 @media(prefers-reduced-motion:reduce){.learning-letters span{animation:none}}
+
+/* Home polish: larger centered learning tiles, clearer activity cards and floating dock */
+#homePage .hero{justify-content:center;gap:14px;padding-top:24px;padding-bottom:26px}
+#homePage .learning-letters{width:100%;justify-content:center;align-items:center;gap:10px;margin:0 auto}
+#homePage .learning-letters span{width:54px;height:62px;border-radius:17px;font-size:34px}
+#homePage .hero .tag{margin-top:-5px;font-size:22px;line-height:1.15}
+#homePage .tile{font-weight:900}
+#homePage .tile .emoji{font-weight:1000;text-shadow:0 2px 0 #55304a66,0 4px 7px #3c294755;filter:drop-shadow(0 2px 2px #39254b55)}
+#homePage .tile b{font-weight:1000;text-shadow:0 2px 3px #3a254b66,0 1px 0 #51324a55;letter-spacing:.15px}
+#homePage .tile small{font-weight:900;text-shadow:0 2px 3px #3a254b66}
+.top{position:relative}
+.top .brand{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:max-content;max-width:calc(100% - 100px);padding-left:0;flex:none}
+.top .avatar{margin-left:auto;z-index:1}
+.nav-wrap{bottom:calc(10px + env(safe-area-inset-bottom));left:0;right:0;padding:0 18px;background:transparent}
+.nav{width:min(100%,500px);padding:7px 9px;border-radius:27px;box-shadow:10px 12px 22px #b8a85d88,-7px -7px 16px #fff,inset 3px 3px 7px #fff9d8,inset -3px -3px 7px #d6b643}
+@media(max-width:380px){
+ #homePage .learning-letters{gap:6px}
+ #homePage .learning-letters span{width:45px;height:54px;font-size:29px}
+ .top .brand{max-width:calc(100% - 82px);font-size:31px}
+ .nav-wrap{padding-left:12px;padding-right:12px}
+}
+@media(prefers-reduced-motion:reduce){#homePage .learning-letters span{animation:none}}
+
 </style>
 </head>
 <body>
