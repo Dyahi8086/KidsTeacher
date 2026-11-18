@@ -7,16 +7,16 @@
 <title>Kids Teacher • Home</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#29263d;--muted:#8b879c;--purple:#7565e8;--pink:#ff8eb4;--blue:#75c9f5;--yellow:#ffd66e;--green:#78d7b0;--bg:#f8f7ff}
+:root{--ink:#29263d;--muted:#8b879c;--purple:#7565e8;--pink:#ff8eb4;--blue:#75c9f5;--yellow:#ffd66e;--green:#78d7b0;--bg:#eaf0f1}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;min-height:100dvh;background:radial-gradient(circle at 4% 0%,#eeeaff 0,transparent 30%),radial-gradient(circle at 100% 30%,#ffeaf2 0,transparent 27%),var(--bg);font-family:Nunito,sans-serif;color:var(--ink)}
+body{margin:0;min-height:100dvh;background:radial-gradient(ellipse at 50% 0%,#f8fbfb 0,#eaf0f1 65%,#e1e9eb 100%);font-family:Nunito,sans-serif;color:var(--ink)}
 .app{width:min(100%,560px);min-height:100dvh;margin:auto;padding:calc(14px + env(safe-area-inset-top)) 17px calc(100px + env(safe-area-inset-bottom))}
 .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;padding:3px 1px}
-.brand{display:flex;align-items:center;gap:0;font:700 25px Fredoka,sans-serif;letter-spacing:-.9px;color:#191820;white-space:nowrap}
+.brand{display:flex;align-items:center;gap:0;font:700 28px Fredoka,sans-serif;letter-spacing:-1px;color:#6bb6e2;text-shadow:0 2px 0 #fff,0 5px 8px #799eb544;white-space:nowrap}
 .brand .brand-word{display:inline-flex;align-items:center}
 .brand .brand-letter{display:inline-block;opacity:0;transform:translateY(9px) scale(.88);animation:logoLetterIn .55s cubic-bezier(.2,.85,.25,1.25) forwards}
 .brand .brand-letter:nth-child(1){animation-delay:.04s}.brand .brand-letter:nth-child(2){animation-delay:.08s}.brand .brand-letter:nth-child(3){animation-delay:.12s}.brand .brand-letter:nth-child(4){animation-delay:.16s}
-.brand .brand-gap{width:6px}
+.brand .brand-gap{width:6px}.brand .teacher-word{color:#edc84c;text-shadow:0 2px 0 #fff6c9,0 5px 8px #ad955244}
 .brand .teacher-word .brand-letter:nth-child(1){animation-delay:.22s}.brand .teacher-word .brand-letter:nth-child(2){animation-delay:.26s}.brand .teacher-word .brand-letter:nth-child(3){animation-delay:.30s}.brand .teacher-word .brand-letter:nth-child(4){animation-delay:.34s}.brand .teacher-word .brand-letter:nth-child(5){animation-delay:.38s}.brand .teacher-word .brand-letter:nth-child(6){animation-delay:.42s}.brand .teacher-word .brand-letter:nth-child(7){animation-delay:.46s}
 .brand .brand-dot{width:7px;height:7px;border-radius:50%;background:#7565e8;margin:0 0 1px 4px;transform:scale(0);animation:logoDotIn .45s .62s cubic-bezier(.2,.85,.25,1.3) forwards;box-shadow:0 0 0 0 #7565e844}
 @keyframes logoLetterIn{to{opacity:1;transform:translateY(0) scale(1)}}
@@ -28,17 +28,17 @@ body{margin:0;min-height:100dvh;background:radial-gradient(circle at 4% 0%,#eeea
 @keyframes fade{from{opacity:.5;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 .welcome{margin:8px 0 16px}.eyebrow{font-size:12px;color:var(--muted);font-weight:900;letter-spacing:1px;text-transform:uppercase}
 h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.welcome p,.muted{margin:0;color:var(--muted);font-size:14px;font-weight:700}
-.hero{position:relative;overflow:hidden;border-radius:28px;padding:21px 20px;min-height:166px;background:linear-gradient(120deg,#7e71ee,#9d8df6 62%,#b5a9ff);color:white;box-shadow:0 13px 28px #7668db33}
+.hero{position:relative;overflow:hidden;border-radius:31px;padding:20px 19px;min-height:300px;background:linear-gradient(145deg,#a982ed,#8f68db 60%,#7959c7);color:white;box-shadow:9px 12px 22px #a7a2b588,-7px -7px 18px #fff;border:1px solid #c7aaff;text-align:center}
 .hero:after{content:"✦";position:absolute;right:18px;top:4px;font-size:92px;color:#ffffff25;transform:rotate(15deg)}
-.hero .tag{font-size:11px;font-weight:900;letter-spacing:1px;color:#f0edff}
-.hero h2{font:700 26px/1.08 Fredoka,sans-serif;margin:8px 0 7px;max-width:245px}
-.hero p{font-size:12px;font-weight:700;color:#f2efff;margin:0;max-width:220px}
+.hero-mascot{width:142px;height:142px;margin:0 auto 7px;background-repeat:no-repeat;background-size:300% 300%;background-position:50% 50%;filter:drop-shadow(0 9px 5px #3c2a6844);animation:mascotFloat 2.8s ease-in-out infinite}@keyframes mascotFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}.hero .tag{font-size:11px;font-weight:900;letter-spacing:1px;color:#f0edff}
+.hero h2{font:700 24px/1.08 Fredoka,sans-serif;margin:5px auto 7px;max-width:100%}
+.hero p{font-size:12px;font-weight:700;color:#f2efff;margin:0 auto;max-width:260px}
 .hero button{margin-top:13px;border:0;border-radius:13px;padding:10px 16px;background:white;color:#6759d0;font:900 13px Nunito;box-shadow:0 4px 0 #d8d1ff}
 .section-head{display:flex;justify-content:space-between;align-items:center;margin:22px 2px 11px}.section-head h3{font:700 19px Fredoka;margin:0}.section-head span{font-size:11px;color:var(--muted);font-weight:900}
-.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
-.tile{border:1px solid #fff;border-radius:22px;padding:15px 14px;min-height:116px;background:linear-gradient(145deg,#ffffffed,#ffffffa8);box-shadow:0 7px 18px #4b44710d;cursor:pointer;text-align:left;color:var(--ink);font-family:Nunito}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.tile{border:1px solid rgba(255,255,255,.75);border-radius:22px;padding:14px;min-height:91px;background:linear-gradient(145deg,#fff,#e8edef);box-shadow:6px 7px 12px #b2bec188,-5px -5px 12px #fff;cursor:pointer;text-align:center;color:var(--ink);font-family:Nunito;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .tile:active{transform:scale(.98)}.tile .emoji{font-size:30px;display:block;margin-bottom:7px}.tile b{display:block;font-size:14px;font-weight:900}.tile small{display:block;color:var(--muted);font-size:11px;font-weight:700;margin-top:2px}
-.tile.lilac{background:linear-gradient(145deg,#eeeaff,#fff)}.tile.peach{background:linear-gradient(145deg,#fff0e7,#fff)}.tile.mint{background:linear-gradient(145deg,#e5fbf2,#fff)}.tile.blue{background:linear-gradient(145deg,#e6f6ff,#fff)}
+.tile.lilac{background:linear-gradient(145deg,#a1dcae,#67c98b);color:#fff;box-shadow:5px 7px 0 #50ad73,7px 10px 15px #a9b9b988}.tile.peach{background:linear-gradient(145deg,#ffe58a,#f1c94b);color:#fff;box-shadow:5px 7px 0 #d7ae37,7px 10px 15px #a9b9b988}.tile.mint{background:linear-gradient(145deg,#f49bc0,#e879a6);color:#fff;box-shadow:5px 7px 0 #ca638d,7px 10px 15px #a9b9b988}.tile.blue{background:linear-gradient(145deg,#8bd1f0,#62b5e3);color:#fff;box-shadow:5px 7px 0 #4a9cc9,7px 10px 15px #a9b9b988}.tile small{color:#fff;opacity:.9}}
 .buddy-strip{display:flex;align-items:center;gap:13px;padding:13px 15px;margin-top:17px;background:#ffffffbd;border:1px solid white;border-radius:20px;box-shadow:0 7px 18px #4b44710d}
 .buddy-face{width:58px;height:58px;flex:0 0 58px;background-size:300% 300%;background-position:50% 50%;background-repeat:no-repeat}
 .buddy-strip b{font:700 16px Fredoka}.buddy-strip p{font-size:11px;color:var(--muted);font-weight:700;margin:3px 0 0}
@@ -60,12 +60,12 @@ h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.
 .logout{width:100%;margin-top:14px;padding:13px;border:0;border-radius:15px;background:#fff0f1;color:#d95b72;font:900 14px Nunito}
 .delete-account{width:100%;margin-top:10px;padding:13px;border:1px solid #f2b8b8;border-radius:15px;background:#fff;color:#c43f50;font:900 13px Nunito}
 .delete-note{margin:8px 8px 0;text-align:center;color:#9b8790;font-size:11px;font-weight:700;line-height:1.5}
-.nav-wrap{position:fixed;z-index:10;bottom:0;left:0;right:0;padding:12px 14px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent 0%,rgba(248,247,255,.72) 34%,#f8f7ff 100%);pointer-events:none}
-.nav{pointer-events:auto;position:relative;width:min(100%,520px);margin:auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;gap:3px;padding:8px 8px 7px;background:rgba(255,255,255,.84);border:1px solid rgba(255,255,255,.98);border-radius:25px;box-shadow:0 16px 42px rgba(54,48,94,.15),inset 0 1px 0 #fff;backdrop-filter:blur(26px) saturate(175%);-webkit-backdrop-filter:blur(26px) saturate(175%)}
-.nav button{position:relative;min-width:0;min-height:54px;border:0;background:transparent;border-radius:17px;padding:6px 1px;color:#9692a6;font:800 10px Nunito;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;transition:transform .2s cubic-bezier(.2,.8,.2,1),color .2s,background .2s}
+.nav-wrap{position:fixed;z-index:10;bottom:0;left:0;right:0;padding:12px 14px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent 0%,rgba(234,240,241,.72) 34%,#eaf0f1 100%);pointer-events:none}
+.nav{pointer-events:auto;position:relative;width:min(100%,520px);margin:auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;gap:3px;padding:8px 8px 7px;background:linear-gradient(145deg,#ffe985,#f1cf52);border:1px solid #fff1a8;border-radius:23px;box-shadow:7px 9px 0 #d4b544,9px 13px 19px #9aa8aa88,inset 0 2px 2px #fff9cf}
+.nav button{position:relative;min-width:0;min-height:54px;border:0;background:transparent;border-radius:17px;padding:6px 1px;color:#896d31;font:800 10px Nunito;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;transition:transform .2s cubic-bezier(.2,.8,.2,1),color .2s,background .2s}
 .nav button .ico{width:23px;height:23px;display:grid;place-items:center;transition:transform .22s cubic-bezier(.2,.8,.2,1),color .2s}
 .nav button .ico svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-.nav button.active:not(.nav-draw){color:#6355d8;background:linear-gradient(145deg,#f2f0ff,#e8e5ff)}
+.nav button.active:not(.nav-draw){color:#7154ca;background:linear-gradient(145deg,#fff5bf,#f7df79);box-shadow:inset 2px 2px 5px #d6b84d66,inset -2px -2px 5px #fff8cf}
 .nav button.active:not(.nav-draw) .ico{transform:translateY(-2px) scale(1.08)}
 .nav button.nav-draw{min-height:70px;margin-top:-30px;padding:8px 3px 7px;border-radius:21px;background:linear-gradient(145deg,#927fff 0%,#6858df 100%);color:#fff;box-shadow:0 7px 0 #5143bd,0 13px 25px rgba(101,85,220,.30);border:3px solid rgba(255,255,255,.98);transform:translateY(-4px)}
 .nav button.nav-draw .ico{width:29px;height:29px}
@@ -83,13 +83,13 @@ h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.
 <header class="top"><div class="brand" aria-label="Kids Teacher"><span class="brand-word"><span class="brand-letter">K</span><span class="brand-letter">i</span><span class="brand-letter">d</span><span class="brand-letter">s</span></span><span class="brand-gap"></span><span class="brand-word teacher-word"><span class="brand-letter">T</span><span class="brand-letter">e</span><span class="brand-letter">a</span><span class="brand-letter">c</span><span class="brand-letter">h</span><span class="brand-letter">e</span><span class="brand-letter">r</span></span><span class="brand-dot"></span></div><button class="avatar" id="topAvatar" type="button" aria-label="Open profile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></header>
 <section id="homePage" class="page active">
 <div class="welcome"><div class="eyebrow">READY TO PLAY & LEARN?</div><h1 id="helloName">Hello, Friend! 👋</h1><p>Your little learning adventure starts here.</p></div>
-<div class="hero"><div class="tag">TODAY'S ADVENTURE</div><h2>Let's make learning magical!</h2><p>Explore, create and discover something new today.</p><button onclick="showTab('learn')">Start Learning →</button></div>
+<div class="hero"><div class="hero-mascot" id="heroBuddy"></div><div class="tag">WELCOME, EXPLORER!</div><h2>Let's make learning magical!</h2><p>Explore, create and discover something new today.</p><button onclick="showTab('learn')">Start Learning →</button></div>
 <div class="section-head"><h3>What shall we do?</h3><span>CHOOSE ONE</span></div>
 <div class="tiles">
 <button class="tile lilac" onclick="showTab('learn')"><span class="emoji">📚</span><b>Learn</b><small>Letters, numbers & more</small></button>
-<button class="tile peach" onclick="showTab('drawing')"><span class="emoji">🎨</span><b>Drawing</b><small>Make colourful art</small></button>
-<button class="tile mint" onclick="showTab('leaderboard')"><span class="emoji">🏆</span><b>Leaderboard</b><small>See your learning place</small></button>
-<button class="tile blue" onclick="showTab('profile')"><span class="emoji">⭐</span><b>My Profile</b><small>Your name & buddy</small></button>
+<button class="tile peach" onclick="showTab('video')"><span class="emoji">▶</span><b>Video</b></button>
+<button class="tile mint" onclick="showTab('drawing')"><span class="emoji">✎</span><b>Drawing</b></button>
+<button class="tile blue" onclick="showTab('leaderboard')"><span class="emoji">🏆</span><b>Leaderboard</b></button>
 </div>
 <div class="buddy-strip"><div class="buddy-face" id="homeBuddy"></div><div><b id="buddyLine">Your buddy is ready!</b><p>Let's learn and play together.</p></div></div>
 </section>
@@ -100,7 +100,7 @@ h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.
 <div class="lesson" onclick="alert('Rhymes activity is coming soon!')"><div class="lesson-icon">🎵</div><div><b>Rhymes & Songs</b><small>Sing along and have fun</small></div></div>
 <div class="lesson" onclick="alert('Mini Quiz is coming soon!')"><div class="lesson-icon">🧩</div><div><b>Mini Quiz</b><small>Try a little brain challenge</small></div></div>
 </section>
-<section id="drawingPage" class="page">
+<section id="videoPage" class="page"><h1 class="page-title">Video Adventures ▶</h1><p class="subline">Stories, rhymes and learning videos.</p><div class="rank-card" style="background:linear-gradient(145deg,#ffe985,#f4d05b);color:#72551b;text-align:center;padding:30px 18px"><div style="font-size:54px">▶️</div><h2 style="font:700 23px Fredoka;margin:10px 0 5px">Watch & Learn</h2><p style="font-size:13px;font-weight:800;margin:0">Your video learning space</p></div></section><section id="drawingPage" class="page">
 <h1 class="page-title">Little Artist 🎨</h1><p class="subline">Draw anything you imagine!</p>
 <div class="drawing-card"><canvas id="drawingCanvas"></canvas><div class="tools">
 <button class="color active" data-color="#ff647c" style="background:#ff647c" aria-label="Pink"></button><button class="color" data-color="#7565e8" style="background:#7565e8" aria-label="Purple"></button><button class="color" data-color="#39b9e8" style="background:#39b9e8" aria-label="Blue"></button><button class="color" data-color="#45c78b" style="background:#45c78b" aria-label="Green"></button><button class="color" data-color="#ffb938" style="background:#ffb938" aria-label="Yellow"></button><button class="tool-btn" id="eraseBtn">Eraser</button><button class="tool-btn" id="clearBtn">Clear</button>
@@ -122,7 +122,7 @@ h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.
 <div class="nav-wrap"><nav class="nav" aria-label="Main navigation">
 <button class="active" data-tab="home"><span class="ico"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg></span>Home</button>
 <button data-tab="learn"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21z"/><path d="M4 5.5v13A2.5 2.5 0 0 1 6.5 16H20M8 7h8M8 10h7"/></svg></span>Learn</button>
-<button class="nav-draw" data-tab="drawing"><span class="ico"><svg viewBox="0 0 24 24"><path d="m4 16.5 10.9-10.9a2.1 2.1 0 0 1 3 3L7 19.5 3 21z"/><path d="m13.5 7.5 3 3M3 21l4-1.5"/></svg></span>Drawing</button>
+<button data-tab="video"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3z"/></svg></span>Video</button><button data-tab="drawing"><span class="ico"><svg viewBox="0 0 24 24"><path d="m4 16.5 10.9-10.9a2.1 2.1 0 0 1 3 3L7 19.5 3 21z"/><path d="m13.5 7.5 3 3M3 21l4-1.5"/></svg></span>Drawing</button>
 <button data-tab="leaderboard"><span class="ico"><svg viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H4v2a4 4 0 0 0 4 4M16 6h4v2a4 4 0 0 1-4 4M12 13v5M8 21h8M9 18h6"/></svg></span>Leaderboard</button>
 <button data-tab="profile"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 21a7 7 0 0 1 14 0"/></svg></span>Profile</button>
 </nav></div>
@@ -172,6 +172,7 @@ function paintProfile(data){
  document.getElementById("buddyLine").textContent=name+"'s Buddy is here!";
  const spriteUrl=buddy.directions||base+buddyId+"-directions.webp";
  document.getElementById("homeBuddy").style.backgroundImage='url("'+spriteUrl+'")';
+document.getElementById("heroBuddy").style.backgroundImage=document.getElementById("homeBuddy").style.backgroundImage;
  document.getElementById("profileBuddy").textContent="";
  document.getElementById("profileBuddy").style.backgroundImage='url("'+spriteUrl+'")';
  document.getElementById("profileBuddy").style.backgroundSize="300% 300%";
