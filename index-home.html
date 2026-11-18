@@ -267,6 +267,38 @@ body{background:radial-gradient(ellipse at 8% 0%,#e4f5ff 0,transparent 42%),radi
 .nav button.active:after{display:none!important}
 @media(max-width:380px){.nav button{font-size:8px!important}.nav{gap:1px!important;padding-left:4px!important;padding-right:4px!important}.nav button .ico svg{width:20px!important;height:20px!important}}
 
+
+/* Home categories: compact colorful cards inspired by the supplied reference */
+#homePage .categories-heading{margin-top:12px}
+#homePage .category-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-bottom:20px}
+#homePage .category-card{padding:0;overflow:hidden;min-width:0;border:1px solid rgba(255,255,255,.95);border-radius:24px;background:#fff;box-shadow:7px 8px 16px #8d83b52b,-5px -5px 13px #ffffffb8;display:flex;flex-direction:column;cursor:pointer;color:#28243d;font-family:Nunito,sans-serif;transition:transform .16s,box-shadow .16s}
+#homePage .category-card:active{transform:scale(.96)}
+#homePage .category-art{height:104px;display:flex;align-items:center;justify-content:center}
+#homePage .category-copy{min-height:54px;padding:7px 4px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,#fff,#fbfaff)}
+#homePage .category-copy b{font-size:16px;font-weight:900;line-height:1.1}
+#homePage .category-copy small{font-size:12px;color:#77738a;font-weight:700;margin-top:3px}
+#homePage .category-emoji{font-size:54px;line-height:1;filter:drop-shadow(0 5px 3px #34304a25)}
+#homePage .category-abc .category-art{background:#ffdc58}
+#homePage .category-numbers .category-art{background:#65c9f2}
+#homePage .category-animals .category-art{background:#a8e85d}
+#homePage .category-video .category-art{background:#ff9ab7}
+#homePage .category-puzzles .category-art{background:#f5a9d0}
+#homePage .category-drawing .category-art{background:#ffc36d}
+#homePage .category-game .category-art{background:#9c8af2}
+#homePage .category-leaderboard .category-art{background:#75d5ee}
+#homePage .abc-art,#homePage .number-art{display:flex;align-items:center;justify-content:center;gap:0;font:900 48px/1 Fredoka,sans-serif;text-shadow:0 3px 0 #00000018}
+#homePage .abc-art i,#homePage .number-art i{font-style:normal;display:inline-block}
+#homePage .abc-art i:nth-child(1){color:#16b979;transform:translateY(9px) rotate(-8deg)}
+#homePage .abc-art i:nth-child(2){color:#f13b70;transform:translateY(-9px)}
+#homePage .abc-art i:nth-child(3){color:#536de8;transform:translateY(10px) rotate(8deg)}
+#homePage .number-art i:nth-child(1){color:#ef4384;transform:translateY(8px) rotate(-8deg)}
+#homePage .number-art i:nth-child(2){color:#ffd52e;transform:translateY(-10px)}
+#homePage .number-art i:nth-child(3){color:#8652db;transform:translateY(8px) rotate(8deg)}
+#homePage .category-welcome{min-height:130px!important;padding:24px 16px!important;gap:12px!important;margin-top:8px}
+#homePage .category-welcome .hero-learning-title{font-size:18px}
+#homePage .category-welcome .tag{font-size:20px!important}
+@media(max-width:380px){#homePage .category-art{height:92px}#homePage .category-emoji{font-size:47px}#homePage .abc-art,#homePage .number-art{font-size:42px}}
+
 </style>
 </head>
 <body>
@@ -274,14 +306,18 @@ body{background:radial-gradient(ellipse at 8% 0%,#e4f5ff 0,transparent 42%),radi
 <header class="top"><div class="brand" aria-label="Kids Teacher"><span class="brand-word"><span class="brand-letter">K</span><span class="brand-letter">i</span><span class="brand-letter">d</span><span class="brand-letter">s</span></span><span class="brand-gap"></span><span class="brand-word teacher-word"><span class="brand-letter">T</span><span class="brand-letter">e</span><span class="brand-letter">a</span><span class="brand-letter">c</span><span class="brand-letter">h</span><span class="brand-letter">e</span><span class="brand-letter">r</span></span><span class="brand-dot"></span></div><button class="avatar" id="topAvatar" type="button" aria-label="Open profile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></header>
 <section id="homePage" class="page active">
 <div class="buddy-strip home-greeting"><div class="buddy-face" id="homeBuddy"></div><div><b id="buddyLine">Hey, Dino!</b><p>Let's learn and play together.</p></div></div>
-<div class="hero"><div class="hero-learning-title">LET'S LEARN & PLAY!</div><div class="learning-letters" aria-label="Learn letters and numbers"><span class="letter-a">A</span><span class="letter-b">B</span><span class="letter-c">C</span><span class="number-one">1</span><span class="number-two">2</span><span class="number-three">3</span></div><div class="tag">Welcome, Explorer!</div></div>
-<div class="section-head"><h3>What shall we do?</h3><span>CHOOSE ONE</span></div>
-<div class="tiles">
-<button class="tile lilac" onclick="showTab('learn')"><span class="emoji">📚</span><b>Learn</b><small>Letters, numbers & more</small></button>
-<button class="tile peach" onclick="showTab('video')"><span class="emoji video-tile-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m10 9 5 3-5 3z" fill="currentColor"/></svg></span><b>Video</b></button>
-<button class="tile mint" onclick="showTab('drawing')"><span class="emoji">✎</span><b>Drawing</b></button>
-<button class="tile blue" onclick="showTab('leaderboard')"><span class="emoji">🏆</span><b>Leaderboard</b></button>
+<div class="section-head categories-heading"><h3>Categories</h3><span>CHOOSE ONE</span></div>
+<div class="tiles category-tiles">
+<button class="category-card category-abc" onclick="showTab('learn')"><span class="category-art"><b class="abc-art"><i>A</i><i>B</i><i>C</i></b></span><span class="category-copy"><b>ABC</b><small>Learning</small></span></button>
+<button class="category-card category-numbers" onclick="showTab('learn')"><span class="category-art"><b class="number-art"><i>1</i><i>2</i><i>3</i></b></span><span class="category-copy"><b>Numbers</b><small>Learning</small></span></button>
+<button class="category-card category-animals" onclick="showTab('learn')"><span class="category-art"><span class="category-emoji">🦁</span></span><span class="category-copy"><b>Animals</b><small>World</small></span></button>
+<button class="category-card category-video" onclick="showTab('video')"><span class="category-art"><span class="category-emoji">▶️</span></span><span class="category-copy"><b>Video</b><small>Watch & learn</small></span></button>
+<button class="category-card category-puzzles" onclick="showTab('learn')"><span class="category-art"><span class="category-emoji">⭐🟢🔺</span></span><span class="category-copy"><b>Puzzles</b><small>Shapes & colors</small></span></button>
+<button class="category-card category-drawing" onclick="showTab('drawing')"><span class="category-art"><span class="category-emoji">🎨</span></span><span class="category-copy"><b>Drawing</b><small>Color & create</small></span></button>
+<button class="category-card category-game" onclick="showTab('learn')"><span class="category-art"><span class="category-emoji">🎮</span></span><span class="category-copy"><b>Game</b><small>Play & learn</small></span></button>
+<button class="category-card category-leaderboard" onclick="showTab('leaderboard')"><span class="category-art"><span class="category-emoji">🏆</span></span><span class="category-copy"><b>Leaderboard</b><small>Top learners</small></span></button>
 </div>
+<div class="hero category-welcome"><div class="hero-learning-title">LET'S LEARN & PLAY!</div><div class="tag">Welcome, Explorer!</div></div>
 </section>
 <section id="learnPage" class="page">
 <h1 class="page-title">Let's Learn! 📚</h1><p class="subline">Pick a fun activity to begin.</p>
