@@ -121,21 +121,6 @@ body {
     z-index: 10001;
 }
 
-/* LOGIN HERO IMAGE */
-
-.login-hero {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    height: 54dvh;
-    object-fit: cover;
-    object-position: center center;
-    z-index: 2;
-    pointer-events: none;
-}
-
 /* LOGIN PANEL */
 
 .login-popup-box {
@@ -150,8 +135,6 @@ body {
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 12px;
     align-items: center;
     text-align: center;
     padding:
@@ -1296,44 +1279,6 @@ body {
     #loadingOverlay { background: rgba(255,242,247,.98); }
 }
 
-
-/* FINAL MOBILE FIT: show the complete learning illustration and compact the panel */
-.login-hero {
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    height: 45dvh;
-    object-fit: contain;
-    object-position: bottom center;
-    z-index: 2;
-}
-
-.login-popup-box {
-    height: 56dvh;
-    min-height: 0;
-    max-height: none;
-    padding: 58px 24px max(24px, env(safe-area-inset-bottom));
-    justify-content: center;
-    gap: 8px;
-}
-
-.app-title { margin-bottom: 2px; }
-.app-subtitle { margin-bottom: 12px; }
-.privacy-text { margin-top: 12px; }
-
-@media (max-height: 720px) {
-    .login-hero { height: 43dvh; }
-    .login-popup-box {
-        height: 59dvh;
-        min-height: 0;
-        padding: 48px 20px max(18px, env(safe-area-inset-bottom));
-        gap: 7px;
-    }
-    .app-subtitle { margin-bottom: 8px; }
-    .privacy-text { margin-top: 8px; }
-}
-
 </style>
 </head>
 
@@ -1349,13 +1294,11 @@ body {
     ⚠️ No Internet Connection! Please check your network.
 </div>
 
-<img
-    class="login-hero"
-    src="./assets/assets/assets/login-learning.png"
-    alt="Children learning with books and numbers"
->
-
 <main class="login-popup-box">
+
+    <div class="icon-container">
+        <div class="icon-3d" aria-hidden="true">🎓</div>
+    </div>
 
     <h1 class="app-title">Parents Login</h1>
 
