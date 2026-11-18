@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kids-teacher-v61';
+const CACHE_NAME = 'kids-teacher-v62';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -7,6 +7,8 @@ const ASSETS_TO_CACHE = [
   './child-name.html',
   './buddy-selection.html',
   './index-home.html',
+  './privacy-policy.html',
+  './terms.html',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png'
