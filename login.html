@@ -1363,6 +1363,96 @@ body {
     .login-popup-box { padding-left: 18px; padding-right: 18px; }
 }
 
+
+/* COMPACT CENTER MODAL — match reference proportions; keep all login content */
+body {
+    justify-content: center;
+    align-items: center;
+    padding: 18px 0;
+    overflow: hidden;
+    background:
+        radial-gradient(ellipse at 12% 14%, rgba(255,255,255,.96) 0%, transparent 34%),
+        radial-gradient(ellipse at 88% 18%, rgba(195,222,255,.62) 0%, transparent 40%),
+        radial-gradient(ellipse at 14% 90%, rgba(255,210,183,.56) 0%, transparent 42%),
+        linear-gradient(145deg, #E6F3FF 0%, #F7F5EF 52%, #FFE5D4 100%);
+}
+.background-glow {
+    position: fixed;
+    inset: -12%;
+    filter: blur(42px);
+    transform: scale(1.12);
+}
+.glow { opacity: .82; filter: blur(100px); }
+.login-popup-box {
+    width: min(86vw, 420px);
+    max-width: 420px;
+    height: auto;
+    min-height: 0;
+    max-height: calc(100dvh - 48px);
+    flex: 0 1 auto;
+    margin: auto;
+    padding: clamp(24px, 4.2vh, 38px) clamp(18px, 5vw, 26px);
+    gap: 0;
+    border-radius: 27px;
+    border: 1px solid rgba(255,255,255,.94);
+    background: linear-gradient(145deg, rgba(255,255,255,.70), rgba(255,249,244,.48));
+    box-shadow:
+        0 18px 55px rgba(57,83,115,.20),
+        0 3px 14px rgba(255,255,255,.38),
+        inset 0 1px 2px rgba(255,255,255,.98);
+    backdrop-filter: blur(30px) saturate(155%);
+    -webkit-backdrop-filter: blur(30px) saturate(155%);
+    animation: modalAppear .45s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes modalAppear {
+    from { opacity: 0; transform: translateY(12px) scale(.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.login-popup-box::before { display: none !important; }
+.icon-container {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 15px;
+}
+.icon-3d { font-size: 36px; }
+.app-title {
+    font-size: clamp(27px, 7vw, 34px);
+    line-height: 1.12;
+    margin-bottom: 7px;
+}
+.app-subtitle {
+    font-size: 13px;
+    margin-bottom: 22px;
+}
+.google-btn-wrapper { max-width: 100%; }
+.google-btn {
+    min-height: 51px;
+    padding: 10px 13px;
+    gap: 9px;
+    font-size: clamp(15px, 4vw, 18px);
+}
+.google-icon-svg { width: 23px; height: 23px; }
+.privacy-text {
+    margin-top: 18px;
+    font-size: 10px;
+    line-height: 1.65;
+}
+@media (max-height: 720px) {
+    .login-popup-box {
+        width: min(86vw, 400px);
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .icon-container { width: 60px; height: 60px; margin-bottom: 10px; }
+    .icon-3d { font-size: 31px; }
+    .app-subtitle { margin-bottom: 15px; }
+    .google-btn { min-height: 47px; }
+    .privacy-text { margin-top: 13px; }
+}
+@media (max-width: 360px) {
+    .login-popup-box { width: 90vw; padding-left: 16px; padding-right: 16px; }
+}
+
 </style>
 </head>
 
