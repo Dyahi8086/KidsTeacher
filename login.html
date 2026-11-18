@@ -121,6 +121,20 @@ body {
     z-index: 10001;
 }
 
+/* LOGIN HERO IMAGE */
+
+.login-hero {
+    position: absolute;
+    top: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(92vw, 430px);
+    height: 34dvh;
+    object-fit: contain;
+    z-index: 2;
+    pointer-events: none;
+}
+
 /* LOGIN PANEL */
 
 .login-popup-box {
@@ -1294,11 +1308,13 @@ body {
     ⚠️ No Internet Connection! Please check your network.
 </div>
 
-<main class="login-popup-box">
+<img
+    class="login-hero"
+    src="./assets/assets/assets/login-learning.png"
+    alt="Children learning with books and numbers"
+>
 
-    <div class="icon-container">
-        <img src="./assets/assets/assets/login-learning.png" alt="Learning illustration" style="width:86px;height:86px;object-fit:contain;border-radius:50%;">
-    </div>
+<main class="login-popup-box">
 
     <h1 class="app-title">Parents Login</h1>
 
