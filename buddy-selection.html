@@ -114,7 +114,7 @@ button.addEventListener("click",async()=>{
  },{onConflict:"id"}).select("id,child_name,buddy").single();
  if(error||!savedProfile?.buddy?.id){
   console.error("Supabase buddy save failed:",error||"Buddy was not confirmed in saved profile");
-  status.textContent="Buddy save nahi hua. Internet ya profile permission check karni hogi.";
+  status.textContent="Save error: "+(error?.message||"Buddy data confirm nahi hua");
   button.disabled=false;button.textContent="Next →";return;
  }
  localStorage.setItem("kt_child_name_"+user.id,savedProfile.child_name);
