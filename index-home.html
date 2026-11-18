@@ -432,6 +432,66 @@ body{
  .brand .brand-letter{animation:none!important;opacity:1!important;transform:none!important}
 }
 
+
+/* Clear backdrop + buddy-led Kids Teacher wordmark */
+body{
+ background:linear-gradient(135deg,#dff4ff 0%,#f4edff 52%,#e2fff0 100%)!important;
+ background-attachment:fixed!important;
+}
+.app{background:transparent!important}
+.top{
+ display:flex!important;align-items:center!important;justify-content:flex-start!important;
+ gap:6px!important;position:relative!important;
+}
+.top .brand-buddy{
+ display:block!important;flex:0 0 48px!important;width:48px!important;height:54px!important;
+ background-repeat:no-repeat!important;background-size:300% 300%!important;
+ background-position:50% 50%!important;
+ filter:drop-shadow(0 3px 2px #32435a30)!important;
+}
+.top .brand{
+ position:relative!important;left:auto!important;top:auto!important;transform:none!important;
+ flex:1 1 auto!important;width:auto!important;max-width:none!important;min-width:0!important;
+ margin:0!important;padding:0!important;
+ display:flex!important;flex-direction:row!important;align-items:center!important;
+ justify-content:flex-start!important;gap:3px!important;
+ font:800 25px/1 Fredoka,sans-serif!important;letter-spacing:-.9px!important;
+ white-space:nowrap!important;
+}
+.top .brand .brand-word{display:inline-flex!important;flex-direction:row!important;align-items:center!important}
+.top .brand .teacher-word{margin-left:1px!important;color:#f0c83d!important}
+.top .brand .brand-letter{
+ display:inline-block!important;opacity:0!important;
+ transform:translateX(-17px) scale(.82)!important;
+ animation:buddyMouthLetters 5.8s cubic-bezier(.2,.8,.2,1) infinite!important;
+}
+.top .brand .brand-word:first-child .brand-letter:nth-child(1){animation-delay:0s!important}
+.top .brand .brand-word:first-child .brand-letter:nth-child(2){animation-delay:.13s!important}
+.top .brand .brand-word:first-child .brand-letter:nth-child(3){animation-delay:.26s!important}
+.top .brand .brand-word:first-child .brand-letter:nth-child(4){animation-delay:.39s!important}
+.top .brand .teacher-word .brand-letter:nth-child(1){animation-delay:.52s!important}
+.top .brand .teacher-word .brand-letter:nth-child(2){animation-delay:.65s!important}
+.top .brand .teacher-word .brand-letter:nth-child(3){animation-delay:.78s!important}
+.top .brand .teacher-word .brand-letter:nth-child(4){animation-delay:.91s!important}
+.top .brand .teacher-word .brand-letter:nth-child(5){animation-delay:1.04s!important}
+.top .brand .teacher-word .brand-letter:nth-child(6){animation-delay:1.17s!important}
+.top .brand .teacher-word .brand-letter:nth-child(7){animation-delay:1.30s!important}
+@keyframes buddyMouthLetters{
+  0%,3%{opacity:0;transform:translateX(-17px) scale(.82)}
+  8%,66%{opacity:1;transform:translateX(0) scale(1)}
+  74%,100%{opacity:0;transform:translateX(9px) scale(.92)}
+}
+.top .brand .brand-dot{display:none!important}
+.top .avatar{flex:0 0 50px!important;margin-left:auto!important}
+@media(max-width:380px){
+ .top .brand-buddy{width:41px!important;height:48px!important;flex-basis:41px!important}
+ .top .brand{font-size:20px!important;letter-spacing:-.8px!important;gap:2px!important}
+ .top .avatar{width:46px!important;height:46px!important;flex-basis:46px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .top .brand .brand-letter{animation:none!important;opacity:1!important;transform:none!important}
+}
+
 </style>
 </head>
 <body>
