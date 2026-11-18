@@ -17,15 +17,16 @@
 <h2>How information is used</h2>
 <p>Information is used to sign users in, keep each user's learning profile separate, show the child's chosen name and Buddy, and provide app features.</p>
 <h2>Storage and service providers</h2>
-<p>Kids Teacher uses Google Firebase Authentication and Cloud Firestore to authenticate users and store profile information. These services process information under Google's applicable terms and privacy policies. The app may also store a small account-specific profile cache on the device to help the interface load.</p>
+<p>Kids Teacher uses Google sign-in through Supabase Authentication. The app stores account profile information, including the parent account ID and email address, child name, selected Buddy, and learning progress when those features are used, in the Kids Teacher Supabase project. Google processes sign-in information under Google's applicable terms and privacy policy. Supabase processes authentication and database information under Supabase's applicable terms and privacy policy.</p>
+<p>The app may keep account-related information in the browser or device storage to support the sign-in session and app experience. Do not use a shared device without signing out.</p>
 <h2>Children's information</h2>
-<p>A parent or legal guardian should enter a child's name and supervise the child's use of the app. Please do not enter sensitive personal information.</p>
+<p>Kids Teacher is intended to be used with a parent or legal guardian's involvement. A parent or guardian should provide the child's name, supervise use of the app, and avoid entering sensitive personal information about a child.</p>
 <h2>Sharing</h2>
-<p>We do not sell personal information. Information is processed by the service providers needed to operate the app, as described above.</p>
+<p>We do not sell personal information. Information may be processed by Google for sign-in and Supabase for authentication and database hosting, as needed to operate the app.</p>
 <h2>Retention and deletion</h2>
-<p>Profile information remains in the Firebase project until it is deleted by the account owner or app administrator. Signing out clears the app's local profile cache on that device, but does not itself delete the cloud profile.</p>
+<p>Account and profile information may remain in the Supabase project until it is deleted by the app administrator. Signing out ends the local sign-in session but does not delete the cloud profile. To request deletion, contact the app owner through the Kids Teacher GitHub repository.</p>
 <h2>Security</h2>
-<p>Reasonable technical measures, including account-based access rules, are used to protect profile data. No online service can guarantee absolute security.</p>
+<p>The app uses account-based access controls intended to keep each user's profile separate. No online service can guarantee absolute security.</p>
 <h2>Changes and contact</h2>
-<p>This policy may be updated as Kids Teacher changes. For privacy questions or deletion requests, contact the Kids Teacher app owner through the GitHub repository where this app is published.</p>
+<p>This policy may be updated as Kids Teacher changes. For privacy questions or deletion requests, contact the Kids Teacher app owner through the <a href="https://github.com/Dyahi8086/KidsTeacher">Kids Teacher GitHub repository</a>.</p>
 </article></main></body></html>
