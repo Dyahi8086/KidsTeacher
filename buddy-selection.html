@@ -104,17 +104,21 @@ button.addEventListener("click",async()=>{
  if(!user){status.textContent="Login session not ready. Please wait and try again.";return}
  const selectedBuddy={id:selected,name:label,character:selected,emoji:"",directions:base+selected+"-directions.webp",reactions:base+selected+"-reactions.webp"};
  button.disabled=true;button.textContent="Continue →";status.textContent="";
- const {error}=await supabase.from("profiles").update({
+ const {data:savedProfile,error}=await supabase.from("profiles").upsert({
+  id:user.id,
+  email:user.email||"",
+  display_name:user.user_metadata?.full_name||user.user_metadata?.name||"",
+  child_name:label,
   buddy:selectedBuddy,
   updated_at:new Date().toISOString()
- }).eq("id",user.id);
- if(error){
-  console.error("Supabase buddy save failed:",error);
-  status.textContent="Buddy save nahi hua. Dobara try karo.";
+ },{onConflict:"id"}).select("id,child_name,buddy").single();
+ if(error||!savedProfile?.buddy?.id){
+  console.error("Supabase buddy save failed:",error||"Buddy was not confirmed in saved profile");
+  status.textContent="Buddy save nahi hua. Internet ya profile permission check karni hogi.";
   button.disabled=false;button.textContent="Next →";return;
  }
- localStorage.setItem("kt_child_name_"+user.id,label);
- localStorage.setItem("kt_buddy_"+user.id,JSON.stringify(selectedBuddy));
+ localStorage.setItem("kt_child_name_"+user.id,savedProfile.child_name);
+ localStorage.setItem("kt_buddy_"+user.id,JSON.stringify(savedProfile.buddy));
  location.replace("./index-home.html");
 });
 </script></body></html>
