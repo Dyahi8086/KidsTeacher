@@ -551,6 +551,45 @@ body{
  .top .brand .brand-letter{animation:none!important;opacity:1!important;transform:none!important}
 }
 
+
+/* Final precise logo + navigation correction */
+.top .brand-buddy{display:none!important;width:0!important;flex:0 0 0!important;margin:0!important}
+.top{gap:0!important}
+.top .brand{
+ flex:1 1 auto!important;justify-content:center!important;
+ margin-left:0!important;min-width:0!important;
+}
+.top .brand .brand-letter{
+ opacity:0!important;transform:translateX(-14px) scale(.86)!important;
+ animation:buddyLedWordmark 7.2s cubic-bezier(.2,.8,.2,1) infinite!important;
+}
+.top .brand .brand-word:first-child .brand-letter:nth-child(1){animation-delay:0s!important}
+.top .brand .brand-word:first-child .brand-letter:nth-child(2){animation-delay:.14s!important}
+.top .brand .brand-word:first-child .brand-letter:nth-child(3){animation-delay:.28s!important}
+.top .brand .brand-word:first-child .brand-letter:nth-child(4){animation-delay:.42s!important}
+.top .brand .teacher-word .brand-letter:nth-child(1){animation-delay:.56s!important}
+.top .brand .teacher-word .brand-letter:nth-child(2){animation-delay:.70s!important}
+.top .brand .teacher-word .brand-letter:nth-child(3){animation-delay:.84s!important}
+.top .brand .teacher-word .brand-letter:nth-child(4){animation-delay:.98s!important}
+.top .brand .teacher-word .brand-letter:nth-child(5){animation-delay:1.12s!important}
+.top .brand .teacher-word .brand-letter:nth-child(6){animation-delay:1.26s!important}
+.top .brand .teacher-word .brand-letter:nth-child(7){animation-delay:1.40s!important}
+@keyframes buddyLedWordmark{
+ 0%,5%{opacity:0;transform:translateX(-14px) scale(.86)}
+ 12%,65%{opacity:1;transform:translateX(0) scale(1)}
+ 76%,100%{opacity:0;transform:translateX(12px) scale(.9)}
+}
+/* Keep the yellow nav shell; make every icon and label ink-black */
+.nav button,
+.nav button:nth-child(3),
+.nav button.active:not(.nav-draw){color:#252638!important}
+.nav button .ico,
+.nav button:nth-child(3) .ico{color:#252638!important}
+.nav button.active:not(.nav-draw){background:linear-gradient(145deg,#fff9d9,#f5df87)!important}
+@media(prefers-reduced-motion:reduce){
+ .top .brand .brand-letter{animation:none!important;opacity:1!important;transform:none!important}
+}
+
 </style>
 </head>
 <body>
