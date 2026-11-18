@@ -51,50 +51,45 @@ const config={apiKey:"AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",authDomain:"kids-
 const app=initializeApp(config),auth=getAuth(app),db=getFirestore(app);
 const form=document.getElementById("nameForm"),input=document.getElementById("childName"),button=document.getElementById("saveBtn"),status=document.getElementById("status");
 let user=null,existingBuddy=null,submitting=false;
-onAuthStateChanged(auth,async u=>{
+onAuthStateChanged(auth,u=>{
  if(!u){location.replace("./login.html");return}
  user=u;
- try{
-  const snap=await Promise.race([getDoc(doc(db,"users",u.uid)),new Promise((_,reject)=>setTimeout(()=>reject(new Error("timeout")),6000))]);
-  if(snap.exists()){
-   const data=snap.data();
-   existingBuddy=data.buddy||null;
-   if(data.childName&&existingBuddy?.id){location.replace("./index-home.html");return}
-   if(data.childName&&!input.value)input.value=data.childName;
-  }
- }catch(err){console.warn("Profile check:",err)}
  document.body.style.visibility="visible";
+ const cached=localStorage.getItem("kt_child_name_"+u.uid)||"";
+ if(cached) input.value=cached;
+ // Profile lookup is deliberately background-only; it must not block the screen.
+ getDoc(doc(db,"users",u.uid)).then(snap=>{
+  if(!snap.exists())return;
+  const data=snap.data();
+  existingBuddy=data.buddy||null;
+  if(data.childName&&!input.value)input.value=data.childName;
+  if(data.childName&&data.buddy?.id)location.replace("./index-home.html");
+ }).catch(err=>console.warn("Background profile lookup:",err));
 });
+
 form.addEventListener("submit",async e=>{
  e.preventDefault();
  if(submitting)return;
- const name=input.value.trim().replace(/\\s+/g," ");
+ const name=input.value.trim().replace(/\s+/g," ");
  if(!name){status.textContent="Please enter your child's name.";return}
  if(!user){status.textContent="Please wait a moment and try again.";return}
- submitting=true;button.disabled=true;button.textContent="Saving…";status.textContent="";
+ submitting=true;button.disabled=true;button.textContent="Continue →";status.textContent="";
+ localStorage.setItem("kt_child_name_"+user.uid,name);
+ localStorage.setItem("kt_pending_child_name",name);
+ // Keep the screen responsive even if Firestore acknowledgement is slow.
  try{
-  // Save the name to this Gmail's own Firebase UID BEFORE opening Buddy Selection.
-  await setDoc(doc(db,"users",user.uid),{
-   childName:name,
-   displayName:user.displayName||"",
-   email:user.email||"",
-   updatedAt:serverTimestamp()
-  },{merge:true});
-  button.textContent="Continue →";
-  if(existingBuddy?.id){
-   await setDoc(doc(db,"users",user.uid),{
-    childName:name,
-    buddy:{...existingBuddy,name},
-    updatedAt:serverTimestamp()
-   },{merge:true});
-   location.replace("./index-home.html");
-  }else{
-   location.replace("./buddy-selection.html");
-  }
- }catch(err){
-  console.error("Child name save failed:",err);
-  submitting=false;button.disabled=false;button.textContent="Continue →";
-  status.textContent="Name save nahi hua. Internet check karke dobara try karo.";
+  await Promise.race([
+   setDoc(doc(db,"users",user.uid),{childName:name,displayName:user.displayName||"",email:user.email||"",updatedAt:serverTimestamp()},{merge:true}),
+   new Promise((_,reject)=>setTimeout(()=>reject(new Error("cloud-write-timeout")),4500))
+  ]);
+ }catch(err){console.warn("Name cloud sync pending:",err)}
+ if(existingBuddy?.id){
+  const buddy={...existingBuddy,name};
+  localStorage.setItem("kt_buddy_"+user.uid,JSON.stringify(buddy));
+  try{await Promise.race([setDoc(doc(db,"users",user.uid),{childName:name,buddy,updatedAt:serverTimestamp()},{merge:true}),new Promise((_,reject)=>setTimeout(()=>reject(new Error("cloud-write-timeout")),3500))])}catch(err){console.warn(err)}
+  location.replace("./index-home.html");
+ }else{
+  location.replace("./buddy-selection.html");
  }
 });
 </script>
