@@ -299,58 +299,61 @@ body{background:radial-gradient(ellipse at 8% 0%,#e4f5ff 0,transparent 42%),radi
 #homePage .category-welcome .tag{font-size:20px!important}
 @media(max-width:380px){#homePage .category-art{height:92px}#homePage .category-emoji{font-size:47px}#homePage .abc-art,#homePage .number-art{font-size:42px}}
 
-/* CATEGORY TILES — soft inflated CLAYMORPHISM finish */
-#homePage .category-tiles{gap:16px}
+/* CATEGORY TILES — clean, balanced claymorphism cards */
+#homePage .category-tiles{gap:15px;margin-bottom:20px}
 #homePage .category-card{
   position:relative;
   isolation:isolate;
   overflow:hidden;
   min-height:150px;
-  padding:14px 10px 13px;
+  padding:13px 10px 12px;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  gap:7px;
-  border:1px solid rgba(255,255,255,.78);
-  border-radius:30px;
+  gap:5px;
+  border:1px solid rgba(255,255,255,.88);
+  border-radius:25px;
   color:#fff;
-  background:linear-gradient(145deg,#ffb47d,#ff718c);
+  background:linear-gradient(145deg,#ffb47d,#ff7895);
   box-shadow:
-    9px 9px 19px rgba(83,77,112,.19),
-    -8px -8px 18px rgba(255,255,255,.88),
-    inset 3px 3px 7px rgba(255,255,255,.52),
-    inset -4px -4px 9px rgba(70,50,95,.12);
-  text-shadow:0 2px 3px rgba(70,45,80,.16);
-  transition:transform .18s ease,box-shadow .18s ease;
+    5px 6px 12px rgba(87,82,117,.13),
+    -4px -4px 10px rgba(255,255,255,.82),
+    inset 2px 2px 5px rgba(255,255,255,.62),
+    inset -2px -2px 5px rgba(75,54,100,.08);
+  text-shadow:0 1px 2px rgba(70,45,80,.12);
+  transition:transform .16s ease,box-shadow .16s ease;
 }
 #homePage .category-card::before{
   content:"";
   position:absolute;
   z-index:-1;
-  inset:2px;
-  border-radius:27px;
+  inset:1px;
+  border-radius:24px;
   pointer-events:none;
-  background:
-    radial-gradient(ellipse at 22% 12%,rgba(255,255,255,.48),transparent 48%),
-    linear-gradient(145deg,rgba(255,255,255,.13),transparent 55%,rgba(80,50,110,.07));
+  background:linear-gradient(135deg,rgba(255,255,255,.22),transparent 48%,rgba(75,54,100,.035));
 }
 #homePage .category-card:active{
   transform:scale(.975);
-  box-shadow:
-    4px 4px 10px rgba(83,77,112,.15),
-    -4px -4px 10px rgba(255,255,255,.8),
-    inset 4px 4px 8px rgba(70,50,95,.12),
-    inset -3px -3px 7px rgba(255,255,255,.45);
+  box-shadow:inset 3px 3px 7px rgba(75,54,100,.10),inset -2px -2px 6px rgba(255,255,255,.5);
 }
 #homePage .category-art{
   width:100%;
-  height:auto;
-  min-height:68px;
+  height:78px;
+  min-height:78px;
   display:flex;
   align-items:center;
   justify-content:center;
   background:transparent!important;
+}
+#homePage .category-model{
+  display:block;
+  width:90px;
+  height:78px;
+  max-width:100%;
+  object-fit:contain;
+  object-position:center;
+  filter:drop-shadow(0 5px 4px rgba(45,42,68,.16));
 }
 #homePage .category-copy{
   min-height:0;
@@ -365,22 +368,20 @@ body{background:radial-gradient(ellipse at 8% 0%,#e4f5ff 0,transparent 42%),radi
 }
 #homePage .category-copy b{font-size:18px;line-height:1.15;color:#fff;font-weight:1000}
 #homePage .category-copy small{font-size:12px;margin-top:0;color:rgba(255,255,255,.97);font-weight:850}
-#homePage .category-emoji{font-size:49px;line-height:1.1;filter:drop-shadow(0 5px 4px rgba(65,45,85,.2))}
-#homePage .abc-art,#homePage .number-art{font-size:49px;text-shadow:0 3px 3px rgba(65,45,85,.16)}
-#homePage .category-abc{background:linear-gradient(145deg,#ffbd83 0%,#ff7795 100%)}
-#homePage .category-numbers{background:linear-gradient(145deg,#8ce5fb 0%,#55aaf4 100%)}
-#homePage .category-animals{background:linear-gradient(145deg,#b7f48a 0%,#64dca1 100%)}
-#homePage .category-video{background:linear-gradient(145deg,#ffacc5 0%,#fa7195 100%)}
-#homePage .category-puzzles{background:linear-gradient(145deg,#f6b3e3 0%,#c28aef 100%)}
-#homePage .category-drawing{background:linear-gradient(145deg,#ffda91 0%,#ffad68 100%)}
-#homePage .category-game{background:linear-gradient(145deg,#c1b5ff 0%,#8c7beb 100%)}
-#homePage .category-leaderboard{background:linear-gradient(145deg,#9cebf0 0%,#65bfe9 100%)}
+#homePage .category-abc{background:linear-gradient(145deg,#ffb98a 0%,#ff8297 100%)}
+#homePage .category-numbers{background:linear-gradient(145deg,#9ae8fa 0%,#64b7f0 100%)}
+#homePage .category-animals{background:linear-gradient(145deg,#c0f39a 0%,#70dba5 100%)}
+#homePage .category-video{background:linear-gradient(145deg,#ffb1c8 0%,#f77d9e 100%)}
+#homePage .category-puzzles{background:linear-gradient(145deg,#f5b8e2 0%,#c18be9 100%)}
+#homePage .category-drawing{background:linear-gradient(145deg,#ffdda0 0%,#ffb276 100%)}
+#homePage .category-game{background:linear-gradient(145deg,#c4b8ff 0%,#9584ed 100%)}
+#homePage .category-leaderboard{background:linear-gradient(145deg,#a8edf0 0%,#73c7e8 100%)}
 @media(max-width:380px){
-  #homePage .category-card{min-height:136px;border-radius:26px}
-  #homePage .category-art{min-height:60px}
-  #homePage .category-emoji{font-size:44px}
+  #homePage .category-card{min-height:136px;border-radius:23px;padding:10px 8px}
+  #homePage .category-art{height:68px;min-height:68px}
+  #homePage .category-model{width:78px;height:68px}
   #homePage .category-copy b{font-size:16px}
-  #homePage .abc-art,#homePage .number-art{font-size:43px}
+  #homePage .category-copy small{font-size:11px}
 }
 
 </style>
@@ -392,14 +393,14 @@ body{background:radial-gradient(ellipse at 8% 0%,#e4f5ff 0,transparent 42%),radi
 <div class="buddy-strip home-greeting"><div class="buddy-face" id="homeBuddy"></div><div><b id="buddyLine">Hey, Dino!</b><p>Let's learn and play together.</p></div></div>
 <div class="section-head categories-heading"><h3>Categories</h3><span>CHOOSE ONE</span></div>
 <div class="tiles category-tiles">
-<button class="category-card category-abc" onclick="showTab('learn')"><span class="category-art"><b class="abc-art"><i>A</i><i>B</i><i>C</i></b></span><span class="category-copy"><b>ABC</b><small>Learning</small></span></button>
-<button class="category-card category-numbers" onclick="showTab('learn')"><span class="category-art"><b class="number-art"><i>1</i><i>2</i><i>3</i></b></span><span class="category-copy"><b>Numbers</b><small>Learning</small></span></button>
-<button class="category-card category-animals" onclick="showTab('learn')"><span class="category-art"><span class="category-emoji">🦁</span></span><span class="category-copy"><b>Animals</b><small>World</small></span></button>
-<button class="category-card category-video" onclick="showTab('video')"><span class="category-art"><span class="category-emoji">▶️</span></span><span class="category-copy"><b>Video</b><small>Watch & learn</small></span></button>
-<button class="category-card category-puzzles" onclick="showTab('learn')"><span class="category-art"><span class="category-emoji">⭐🟢🔺</span></span><span class="category-copy"><b>Puzzles</b><small>Shapes & colors</small></span></button>
-<button class="category-card category-drawing" onclick="showTab('drawing')"><span class="category-art"><span class="category-emoji">🎨</span></span><span class="category-copy"><b>Drawing</b><small>Color & create</small></span></button>
-<button class="category-card category-game" onclick="showTab('learn')"><span class="category-art"><span class="category-emoji">🎮</span></span><span class="category-copy"><b>Game</b><small>Play & learn</small></span></button>
-<button class="category-card category-leaderboard" onclick="showTab('leaderboard')"><span class="category-art"><span class="category-emoji">🏆</span></span><span class="category-copy"><b>Leaderboard</b><small>Top learners</small></span></button>
+<button class="category-card category-abc" onclick="showTab('learn')"><span class="category-art"><img class="category-model" src="https://polyfork.dev/files/floating-keyboard-b29cb8/renders/hero.png?v=1792474806" alt="3D alphabet keyboard" loading="lazy" decoding="async"></span><span class="category-copy"><b>ABC</b><small>Learning</small></span></button>
+<button class="category-card category-numbers" onclick="showTab('learn')"><span class="category-art"><img class="category-model" src="https://polyfork.dev/files/numeric-keypad-852767/renders/hero.png?v=1792474819" alt="3D number keypad" loading="lazy" decoding="async"></span><span class="category-copy"><b>Numbers</b><small>Learning</small></span></button>
+<button class="category-card category-animals" onclick="showTab('learn')"><span class="category-art"><img class="category-model" src="https://polyfork.dev/files/duck-357dc6/renders/hero.png?v=1794342839" alt="3D cartoon duck" loading="lazy" decoding="async"></span><span class="category-copy"><b>Animals</b><small>World</small></span></button>
+<button class="category-card category-video" onclick="showTab('video')"><span class="category-art"><img class="category-model" src="https://polyfork.dev/files/media-icon-416f95/renders/hero.png?v=1792475032" alt="3D media play icon" loading="lazy" decoding="async"></span><span class="category-copy"><b>Video</b><small>Watch & learn</small></span></button>
+<button class="category-card category-puzzles" onclick="showTab('learn')"><span class="category-art"><img class="category-model" src="https://polyfork.dev/files/grid-tray-caad10/renders/hero.png?v=1792474623" alt="3D puzzle grid tray" loading="lazy" decoding="async"></span><span class="category-copy"><b>Puzzles</b><small>Shapes & colors</small></span></button>
+<button class="category-card category-drawing" onclick="showTab('drawing')"><span class="category-art"><img class="category-model" src="https://polyfork.dev/files/colour-swatch-picker-118762/renders/hero.png?v=1792474889" alt="3D colour picker" loading="lazy" decoding="async"></span><span class="category-copy"><b>Drawing</b><small>Color & create</small></span></button>
+<button class="category-card category-game" onclick="showTab('learn')"><span class="category-art"><img class="category-model" src="https://polyfork.dev/files/virtual-thumbstick-975cdd/renders/hero.png?v=1792475178" alt="3D game controller joystick" loading="lazy" decoding="async"></span><span class="category-copy"><b>Game</b><small>Play & learn</small></span></button>
+<button class="category-card category-leaderboard" onclick="showTab('leaderboard')"><span class="category-art"><img class="category-model" src="https://polyfork.dev/files/natural-20-trophy-plinth-c31c9c/renders/hero.png?v=1792417890" alt="3D trophy model" loading="lazy" decoding="async"></span><span class="category-copy"><b>Leaderboard</b><small>Top learners</small></span></button>
 </div>
 <div class="hero category-welcome"><div class="hero-learning-title">LET'S LEARN & PLAY!</div><div class="tag">Welcome, Explorer!</div></div>
 </section>
