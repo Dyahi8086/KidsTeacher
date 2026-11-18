@@ -11,9 +11,14 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{margin:0;min-height:100dvh;background:radial-gradient(circle at 4% 0%,#eeeaff 0,transparent 30%),radial-gradient(circle at 100% 30%,#ffeaf2 0,transparent 27%),var(--bg);font-family:Nunito,sans-serif;color:var(--ink)}
 .app{width:min(100%,560px);min-height:100dvh;margin:auto;padding:calc(14px + env(safe-area-inset-top)) 17px calc(100px + env(safe-area-inset-bottom))}
-.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-.brand{font:700 18px Fredoka,sans-serif;letter-spacing:.1px}.brand span{color:var(--purple)}
-.avatar{width:43px;height:43px;border-radius:15px;background:#fff;box-shadow:0 5px 16px #6353aa1c;border:1px solid #fff;display:grid;place-items:center;font-size:22px}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;padding:3px 1px}
+.brand{display:flex;align-items:center;gap:2px;font:700 23px Fredoka,sans-serif;letter-spacing:-.65px;color:#29263d}
+.brand .teacher-word{color:#7565e8}
+.brand .brand-spark{display:inline-block;margin-left:5px;font-size:19px;color:#7565e8;animation:brandSpark 2.4s ease-in-out infinite}
+@keyframes brandSpark{0%,100%{transform:rotate(0) scale(1)}50%{transform:rotate(18deg) scale(1.18)}}
+.avatar{width:46px;height:46px;border-radius:16px;background:rgba(255,255,255,.76);box-shadow:0 7px 20px #6353aa18;border:1px solid #fff;display:grid;place-items:center;color:#5549aa;cursor:pointer;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.avatar svg{width:22px;height:22px;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;fill:none}
+
 .page{display:none;animation:fade .22s ease}.page.active{display:block}
 @keyframes fade{from{opacity:.5;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 .welcome{margin:8px 0 16px}.eyebrow{font-size:12px;color:var(--muted);font-weight:900;letter-spacing:1px;text-transform:uppercase}
@@ -50,16 +55,24 @@ h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.
 .logout{width:100%;margin-top:14px;padding:13px;border:0;border-radius:15px;background:#fff0f1;color:#d95b72;font:900 14px Nunito}
 .delete-account{width:100%;margin-top:10px;padding:13px;border:1px solid #f2b8b8;border-radius:15px;background:#fff;color:#c43f50;font:900 13px Nunito}
 .delete-note{margin:8px 8px 0;text-align:center;color:#9b8790;font-size:11px;font-weight:700;line-height:1.5}
-.nav-wrap{position:fixed;z-index:10;bottom:0;left:0;right:0;padding:9px 12px calc(9px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent,#f8f7ff 23%);pointer-events:none}
-.nav{pointer-events:auto;width:min(100%,520px);margin:auto;display:grid;grid-template-columns:repeat(5,1fr);gap:3px;padding:7px 6px;background:rgba(255,255,255,.9);border:1px solid white;border-radius:23px;box-shadow:0 8px 30px #4b447122;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
-.nav button{min-width:0;border:0;background:transparent;border-radius:15px;padding:7px 2px 6px;color:#8b879c;font:800 10px Nunito;display:flex;flex-direction:column;align-items:center;gap:3px}
-.nav button .ico{font-size:20px;line-height:1.1}.nav button.active{background:#eeecff;color:#6256d2}
+.nav-wrap{position:fixed;z-index:10;bottom:0;left:0;right:0;padding:12px 14px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent,#f8f7ff 32%);pointer-events:none}
+.nav{pointer-events:auto;position:relative;width:min(100%,520px);margin:auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;gap:4px;padding:9px 9px 8px;background:rgba(255,255,255,.88);border:1px solid rgba(255,255,255,.96);border-radius:27px;box-shadow:0 14px 36px rgba(67,57,111,.13),inset 0 1px 0 #fff;backdrop-filter:blur(24px) saturate(165%);-webkit-backdrop-filter:blur(24px) saturate(165%)}
+.nav button{position:relative;min-width:0;min-height:53px;border:0;background:transparent;border-radius:17px;padding:6px 2px;color:#9894a8;font:800 10px Nunito;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;transition:transform .18s,color .18s,background .18s}
+.nav button .ico{font-size:19px;line-height:1.1;filter:grayscale(.18);transition:transform .2s}
+.nav button.active:not(.nav-draw){background:linear-gradient(145deg,#f1efff,#e9e6ff);color:#6256d2}
+.nav button.active:not(.nav-draw) .ico{transform:translateY(-2px) scale(1.08);filter:none}
+.nav button.nav-draw{min-height:68px;margin-top:-27px;padding:8px 3px 7px;border-radius:22px;background:linear-gradient(145deg,#8d7cf5,#6555dc);color:#fff;box-shadow:0 7px 0 #5143bd,0 12px 22px rgba(101,85,220,.28);border:3px solid rgba(255,255,255,.95);transform:translateY(-3px)}
+.nav button.nav-draw .ico{font-size:25px;filter:none}
+.nav button.nav-draw.active{background:linear-gradient(145deg,#a091ff,#6b5be7);box-shadow:0 7px 0 #5143bd,0 13px 24px rgba(101,85,220,.34)}
+.nav button:active{transform:scale(.94)}
+.nav button.nav-draw:active{transform:translateY(1px) scale(.96);box-shadow:0 3px 0 #5143bd,0 7px 14px rgba(101,85,220,.25)}
+
 @media(max-height:700px){.app{padding-bottom:94px}.hero{min-height:145px}.hero h2{font-size:23px}#drawingCanvas{height:260px}}
 </style>
 </head>
 <body>
 <div class="app">
-<header class="top"><div class="brand">Kids <span>Teacher</span> ✦</div><div class="avatar" id="topAvatar">🌟</div></header>
+<header class="top"><div class="brand"><span>Kids</span><span class="teacher-word">Teacher</span><span class="brand-spark">✦</span></div><button class="avatar" id="topAvatar" type="button" aria-label="Open profile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></header>
 <section id="homePage" class="page active">
 <div class="welcome"><div class="eyebrow">READY TO PLAY & LEARN?</div><h1 id="helloName">Hello, Friend! 👋</h1><p>Your little learning adventure starts here.</p></div>
 <div class="hero"><div class="tag">TODAY'S ADVENTURE</div><h2>Let's make learning magical!</h2><p>Explore, create and discover something new today.</p><button onclick="showTab('learn')">Start Learning →</button></div>
@@ -115,6 +128,7 @@ window.showTab=function(tab){
  window.scrollTo({top:0,behavior:"smooth"});
 };
 document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
+document.getElementById("topAvatar").addEventListener("click",()=>showTab("profile"));
 window.handleLogout=async()=>{
  try{
   await supabase.auth.signOut();
