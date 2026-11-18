@@ -371,11 +371,72 @@ body{
  .brand .brand-letter,.brand .brand-dot,#homePage .learning-letters span{animation:none!important;opacity:1!important;transform:none!important}
 }
 
+
+/* Clear, crisp background + buddy-led wordmark animation */
+body{
+ background:linear-gradient(135deg,#b9e8fa 0%,#d8d9ff 48%,#c2f0df 100%)!important;
+ background-attachment:fixed!important;
+}
+.top{
+ display:flex!important;
+ align-items:center!important;
+ justify-content:flex-start!important;
+ gap:7px!important;
+ min-height:82px!important;
+ position:relative!important;
+}
+.brand-buddy{
+ display:block!important;
+ width:52px!important;height:58px!important;flex:0 0 52px!important;
+ background-repeat:no-repeat!important;background-size:300% 300%!important;background-position:50% 50%!important;
+ filter:drop-shadow(0 4px 3px #3a4a6655);
+}
+.top .brand{
+ position:relative!important;left:auto!important;top:auto!important;
+ transform:none!important;flex:1!important;width:auto!important;max-width:none!important;
+ padding:0!important;margin:0!important;
+ display:flex!important;flex-direction:row!important;align-items:center!important;
+ justify-content:flex-start!important;gap:5px!important;
+ font:700 25px/1 Fredoka,sans-serif!important;letter-spacing:-.8px!important;
+}
+.brand .brand-word{display:inline-flex!important;flex-direction:row!important;align-items:center!important}
+.brand .teacher-word{margin-left:1px!important}
+.brand .brand-letter{
+ opacity:0!important;transform:translateX(-13px) scale(.86)!important;
+ animation:buddyLedLetters 5.2s cubic-bezier(.2,.8,.2,1) infinite!important;
+}
+.brand .brand-word:first-child .brand-letter:nth-child(1){animation-delay:0s!important}
+.brand .brand-word:first-child .brand-letter:nth-child(2){animation-delay:.16s!important}
+.brand .brand-word:first-child .brand-letter:nth-child(3){animation-delay:.32s!important}
+.brand .brand-word:first-child .brand-letter:nth-child(4){animation-delay:.48s!important}
+.brand .teacher-word .brand-letter:nth-child(1){animation-delay:.64s!important}
+.brand .teacher-word .brand-letter:nth-child(2){animation-delay:.80s!important}
+.brand .teacher-word .brand-letter:nth-child(3){animation-delay:.96s!important}
+.brand .teacher-word .brand-letter:nth-child(4){animation-delay:1.12s!important}
+.brand .teacher-word .brand-letter:nth-child(5){animation-delay:1.28s!important}
+.brand .teacher-word .brand-letter:nth-child(6){animation-delay:1.44s!important}
+.brand .teacher-word .brand-letter:nth-child(7){animation-delay:1.60s!important}
+@keyframes buddyLedLetters{
+  0%,3%{opacity:0;transform:translateX(-13px) scale(.86)}
+  8%,70%{opacity:1;transform:translateX(0) scale(1)}
+  78%,100%{opacity:0;transform:translateX(8px) scale(.94)}
+}
+.brand .brand-dot{display:none!important}
+.top .avatar{flex:0 0 54px!important;margin-left:auto!important}
+@media(max-width:380px){
+ .brand-buddy{width:43px!important;height:50px!important;flex-basis:43px!important}
+ .top .brand{font-size:21px!important;letter-spacing:-.7px!important;gap:3px!important}
+ .top .avatar{width:48px!important;height:48px!important;flex-basis:48px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .brand .brand-letter{animation:none!important;opacity:1!important;transform:none!important}
+}
+
 </style>
 </head>
 <body>
 <div class="app">
-<header class="top"><div class="brand" aria-label="Kids Teacher"><span class="brand-word"><span class="brand-letter">K</span><span class="brand-letter">i</span><span class="brand-letter">d</span><span class="brand-letter">s</span></span><span class="brand-gap"></span><span class="brand-word teacher-word"><span class="brand-letter">T</span><span class="brand-letter">e</span><span class="brand-letter">a</span><span class="brand-letter">c</span><span class="brand-letter">h</span><span class="brand-letter">e</span><span class="brand-letter">r</span></span><span class="brand-dot"></span></div><button class="avatar" id="topAvatar" type="button" aria-label="Open profile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></header>
+<header class="top"><div class="brand-buddy" id="brandBuddy" aria-hidden="true"></div><div class="brand" aria-label="Kids Teacher"><span class="brand-word"><span class="brand-letter">K</span><span class="brand-letter">i</span><span class="brand-letter">d</span><span class="brand-letter">s</span></span><span class="brand-gap"></span><span class="brand-word teacher-word"><span class="brand-letter">T</span><span class="brand-letter">e</span><span class="brand-letter">a</span><span class="brand-letter">c</span><span class="brand-letter">h</span><span class="brand-letter">e</span><span class="brand-letter">r</span></span><span class="brand-dot"></span></div><button class="avatar" id="topAvatar" type="button" aria-label="Open profile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></header>
 <section id="homePage" class="page active">
 <div class="buddy-strip home-greeting"><div class="buddy-face" id="homeBuddy"></div><div><b id="buddyLine">Hey, Dino!</b><p>Let's learn and play together.</p></div></div>
 <div class="hero"><div class="hero-learning-title">LET'S LEARN & PLAY!</div><div class="learning-letters" aria-label="Learn letters and numbers"><span class="letter-a">A</span><span class="letter-b">B</span><span class="letter-c">C</span><span class="number-one">1</span><span class="number-two">2</span><span class="number-three">3</span></div><div class="tag">Welcome, Explorer!</div></div>
@@ -465,6 +526,7 @@ function paintProfile(data){
  document.getElementById("buddyLine").textContent="Hey, "+name+"!";
  const spriteUrl=buddy.directions||base+buddyId+"-directions.webp";
  document.getElementById("homeBuddy").style.backgroundImage='url("'+spriteUrl+'")';
+ document.getElementById("brandBuddy").style.backgroundImage='url("'+spriteUrl+'")';
  document.getElementById("homeBuddy").style.backgroundSize="300% 300%";
  document.getElementById("homeBuddy").style.backgroundPosition="50% 50%";
  document.getElementById("homeBuddy").style.backgroundRepeat="no-repeat";
