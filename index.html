@@ -293,63 +293,48 @@
 
     </div>
 
-    <!-- AUTH CHECK: returning users with a complete profile go straight to Home -->
+    <!-- SUPABASE AUTH CHECK: route returning users using their Supabase profile -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
-            authDomain: "kids-teacher-4387e.firebaseapp.com",
-            projectId: "kids-teacher-4387e",
-            storageBucket: "kids-teacher-4387e.firebasestorage.app",
-            messagingSenderId: "420221167346",
-            appId: "1:420221167346:web:da7ac80acdfd52339d526b",
-            measurementId: "G-VJVS2ZMNLY"
-        };
+        import { supabase } from "./supabase-client.js";
 
         try {
-            const app = initializeApp(firebaseConfig);
-            const auth = getAuth(app);
-            const { getFirestore, doc, getDoc } = await import("https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js");
-            const db = getFirestore(app);
-            onAuthStateChanged(auth, async (user) => {
-                window.__ktDestination = "./login.html";
-                if (user) {
-                    try {
-                        const profile = await getDoc(doc(db, "users", user.uid));
-                        const data = profile.exists() ? profile.data() : {};
-                        const hasName = !!data.childName;
-                        const hasBuddy = !!data.buddy?.id;
-                        window.__ktDestination = !hasName
-                            ? "./child-name.html"
-                            : (hasBuddy ? "./index-home.html" : "./buddy-selection.html");
-                    } catch (error) {
-                        console.error("Profile routing check failed:", error);
-                        // Keep the signed-in user out of a false login/onboarding loop.
-                        window.__ktDestination = "./index-home.html";
-                    }
-                }
-                // Mark routing complete only after the profile decision is ready.
-                window.__ktAuthResolved = true;
-                if (window.__ktSplashFinished) window.location.replace(window.__ktDestination);
-            }, (error) => {
-                console.error("Splash auth check failed:", error);
-                window.__ktAuthResolved = true;
-                window.__ktDestination = "./login.html";
-                if (window.__ktSplashFinished) window.location.replace(window.__ktDestination);
-            });
+            const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+            if (sessionError) throw sessionError;
+
+            const user = sessionData.session?.user || null;
+            window.__ktDestination = "./login.html";
+
+            if (user) {
+                const { data: profile, error } = await supabase
+                    .from("profiles")
+                    .select("child_name,buddy")
+                    .eq("id", user.id)
+                    .maybeSingle();
+
+                if (error) throw error;
+
+                window.__ktDestination = !profile?.child_name
+                    ? "./child-name.html"
+                    : (profile.buddy?.id ? "./index-home.html" : "./buddy-selection.html");
+            }
+
+            window.__ktAuthResolved = true;
+            if (window.__ktSplashFinished) {
+                window.location.replace(window.__ktDestination);
+            }
         } catch (error) {
-            console.error("Firebase splash initialization failed:", error);
+            console.error("Supabase splash profile check failed:", error);
             window.__ktAuthResolved = true;
             window.__ktDestination = "./login.html";
-            if (window.__ktSplashFinished) window.location.replace(window.__ktDestination);
+            if (window.__ktSplashFinished) {
+                window.location.replace(window.__ktDestination);
+            }
         }
     </script>
 
     <script>
-        // Preserve the original splash animation. Route only after Firebase
-        // confirms whether this visitor already has a saved login session.
+        // Preserve the original splash animation. Route after Supabase resolves
+        // the current session and saved profile.
         const dot = document.querySelector('.kt-dot');
         let routeStarted = false;
 
