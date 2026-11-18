@@ -28,7 +28,7 @@ body{margin:0;min-height:100dvh;background:radial-gradient(ellipse at 18% 8%,#ff
 @keyframes fade{from{opacity:.5;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 .welcome{margin:8px 0 16px}.welcome .eyebrow,.welcome p{display:none}.eyebrow{font-size:12px;color:var(--muted);font-weight:900;letter-spacing:1px;text-transform:uppercase}
 h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.welcome p,.muted{margin:0;color:var(--muted);font-size:14px;font-weight:700}
-.hero{position:relative;overflow:hidden;border-radius:35px;padding:27px 19px 25px;min-height:270px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:19px;background:radial-gradient(ellipse at 18% 12%,#f9e2ff 0,transparent 38%),radial-gradient(ellipse at 88% 90%,#a24be2 0,transparent 50%),linear-gradient(145deg,#d7a5ff 0%,#b77aef 48%,#9560db 100%);color:white;box-shadow:12px 14px 26px #a78ac866,-9px -9px 22px #fff,inset 4px 4px 9px #ffffffaa,inset -5px -6px 12px #7042b888;border:1px solid #eed7ff;text-align:center}
+.hero{position:relative;overflow:hidden;border-radius:35px;padding:27px 19px 25px;min-height:270px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:19px;background:radial-gradient(ellipse at 18% 12%,#e7fbff 0,transparent 38%),radial-gradient(ellipse at 88% 90%,#168fc9 0,transparent 50%),linear-gradient(145deg,#8fe3ff 0%,#55bce9 48%,#328fd0 100%);color:white;box-shadow:12px 14px 26px #75b4d266,-9px -9px 22px #fff,inset 4px 4px 9px #ffffffaa,inset -5px -6px 12px #236eaa88;border:1px solid #c8f3ff;text-align:center}
 .hero:after{content:"✦";position:absolute;right:18px;top:4px;font-size:92px;color:#ffffff25;transform:rotate(15deg)}
 .hero-mascot{width:190px;height:190px;flex:0 0 190px;margin:0 auto;background-repeat:no-repeat;background-size:300% 300%;background-position:50% 50%;filter:drop-shadow(0 10px 6px #3c2a684b);animation:mascotFloat 2.8s ease-in-out infinite}@keyframes mascotFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}.hero .tag{font:800 22px/1.15 Nunito,sans-serif;letter-spacing:.2px;color:#fff;text-shadow:0 2px 0 #7956bd66,0 4px 7px #51378a44;margin:0}
 .hero h2{display:none}
@@ -82,8 +82,10 @@ h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.
 .home-greeting .buddy-face{width:82px;height:82px;flex-basis:82px;filter:drop-shadow(0 5px 4px #35405235)}
 .home-greeting b{font:800 24px/1.1 Fredoka,sans-serif;color:#28243d}
 .home-greeting p{font-size:15px;margin-top:6px}
-.learning-letters{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:-3px;position:relative;z-index:1}
-.learning-letters span{width:31px;height:31px;display:grid;place-items:center;border-radius:10px;background:linear-gradient(145deg,#fff,#ffffffb8);font:900 19px Fredoka;box-shadow:3px 4px 7px #503b8050,inset 2px 2px 4px #fff;transform:rotate(var(--tilt,0deg))}
+.learning-letters{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:0;position:relative;z-index:1}
+.learning-letters span{width:48px;height:54px;display:grid;place-items:center;border-radius:15px;background:linear-gradient(145deg,#fff,#eafaff);font:900 30px Fredoka;box-shadow:5px 6px 10px #155d8b66,-3px -3px 7px #ffffff99,inset 3px 3px 5px #fff;transform:rotate(var(--tilt,0deg));animation:abcFloat 2.4s ease-in-out infinite;animation-delay:var(--delay,0s)}
+.learning-letters span:nth-child(1){--delay:0s}.learning-letters span:nth-child(2){--delay:.15s}.learning-letters span:nth-child(3){--delay:.3s}.learning-letters span:nth-child(4){--delay:.45s}.learning-letters span:nth-child(5){--delay:.6s}.learning-letters span:nth-child(6){--delay:.75s}
+@keyframes abcFloat{0%,100%{translate:0 0;rotate:0deg}50%{translate:0 -9px;rotate:2deg}}
 .learning-letters .letter-a{color:#ff6279;--tilt:-8deg}.learning-letters .letter-b{color:#ffbd38;--tilt:5deg}.learning-letters .letter-c{color:#42c99b;--tilt:-4deg}
 .learning-letters .number-one{color:#36b9e9;--tilt:6deg}.learning-letters .number-two{color:#a276ed;--tilt:-5deg}.learning-letters .number-three{color:#f47b54;--tilt:7deg}
 @media(max-width:380px){.home-greeting{min-height:82px;gap:12px;padding:11px 13px}.home-greeting .buddy-face{width:70px;height:70px;flex-basis:70px}.home-greeting b{font-size:21px}.home-greeting p{font-size:13px}.learning-letters{gap:6px}.learning-letters span{width:28px;height:28px;font-size:17px}}
@@ -102,6 +104,17 @@ h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.
 .learning-letters .number-three{background:linear-gradient(145deg,#ffe8dc,#ffae83);color:#d96336}
 .hero .tag{font-size:21px}
 @media(max-width:380px){.greeting-spark{width:56px;height:56px;flex-basis:56px}.learning-letters{gap:7px}.learning-letters span{width:42px;height:49px;font-size:26px}}
+
+.home-greeting .buddy-face{display:block;background-color:transparent;background-repeat:no-repeat;background-size:300% 300%;background-position:50% 50%;border-radius:0;box-shadow:none}
+.hero .learning-letters .letter-a{color:#ff315c;background:linear-gradient(145deg,#fff0f4,#ff9eb4)}
+.hero .learning-letters .letter-b{color:#e88a00;background:linear-gradient(145deg,#fff5d1,#ffd35d)}
+.hero .learning-letters .letter-c{color:#009d72;background:linear-gradient(145deg,#e1fff2,#79e5b8)}
+.hero .learning-letters .number-one{color:#007fb9;background:linear-gradient(145deg,#e1f9ff,#78dafa)}
+.hero .learning-letters .number-two{color:#7640c7;background:linear-gradient(145deg,#f2e8ff,#c29bff)}
+.hero .learning-letters .number-three{color:#d94a20;background:linear-gradient(145deg,#fff0e3,#ffb18b)}
+.hero-learning-title{text-shadow:0 2px 0 #176b9a88}
+@media(max-width:380px){.learning-letters{gap:6px}.learning-letters span{width:39px;height:46px;font-size:25px}}
+@media(prefers-reduced-motion:reduce){.learning-letters span{animation:none}}
 </style>
 </head>
 <body>
@@ -195,6 +208,10 @@ function paintProfile(data){
  document.getElementById("profileName").textContent=name;
  document.getElementById("buddyLine").textContent="Hey, "+name+"!";
  const spriteUrl=buddy.directions||base+buddyId+"-directions.webp";
+ document.getElementById("homeBuddy").style.backgroundImage='url("'+spriteUrl+'")';
+ document.getElementById("homeBuddy").style.backgroundSize="300% 300%";
+ document.getElementById("homeBuddy").style.backgroundPosition="50% 50%";
+ document.getElementById("homeBuddy").style.backgroundRepeat="no-repeat";
  document.getElementById("profileBuddy").textContent="";
  document.getElementById("profileBuddy").style.backgroundImage='url("'+spriteUrl+'")';
  document.getElementById("profileBuddy").style.backgroundSize="300% 300%";
