@@ -51,12 +51,54 @@ body{background:radial-gradient(ellipse at 8% 5%,rgba(255,213,193,.58),transpare
 h1{color:#171717;text-shadow:none}
 .sub{color:#796d67}
 @media(prefers-reduced-transparency:reduce){.preview,.buddy,#continue{backdrop-filter:none;-webkit-backdrop-filter:none}}
+
+/* KOB0YO-INSPIRED PREMIUM MASCOT PICKER */
+:root{--ink:#30262a;--muted:#897a78;--orange:#ff7958;--cream:#fff8f3}
+html,body{min-height:100%;background:#fff8f3}
+body{padding:calc(12px + env(safe-area-inset-top)) 16px calc(12px + env(safe-area-inset-bottom));background:radial-gradient(ellipse at 0% 0%,#ffe2d2 0,transparent 35%),radial-gradient(ellipse at 100% 24%,#ffe8db 0,transparent 34%),linear-gradient(160deg,#fffaf7 0%,#fff1e8 52%,#fffaf6 100%);overflow-x:hidden}
+.wrap{max-width:560px;min-height:calc(100dvh - 24px);gap:0}
+.page-kicker{display:flex;align-items:center;justify-content:center;gap:7px;margin:2px 0 10px;color:#9b7668;font-size:10px;font-weight:1000;letter-spacing:1.7px}
+.kicker-dot{width:7px;height:7px;border-radius:50%;background:#ff8969;box-shadow:0 0 0 4px #ff89691c}
+.step-pill{margin-left:auto;padding:7px 10px;border:1px solid #fff;background:#ffffffa8;border-radius:30px;color:#b37b68;letter-spacing:.7px}
+h1{font-size:clamp(32px,8vw,43px);letter-spacing:-1.5px;margin:8px 0 6px;color:#302329;text-shadow:0 2px 0 #fff}
+.sub{max-width:360px;margin:0 auto 16px;color:#8d7771;font-size:14px;font-weight:800;line-height:1.45}
+.preview{position:relative;overflow:hidden;min-height:112px;margin:0 0 17px;padding:10px 16px;gap:14px;border:1px solid #fff;border-radius:27px;background:linear-gradient(135deg,#ffffffed,#fff8f1c9);box-shadow:inset 0 2px 0 #fff,0 12px 28px #8f65501a;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.preview:after{content:"";position:absolute;width:140px;height:140px;right:-48px;top:-65px;border-radius:50%;background:radial-gradient(circle,#ffd8c8a8,transparent 70%);pointer-events:none}
+.preview-avatar{position:relative;z-index:1;display:grid;place-items:center;width:112px;height:96px;flex:0 0 112px;border-radius:24px;background:radial-gradient(circle at 50% 38%,#fff 0,#fff4e9 62%,#ffe6d7 100%)}
+#bigMascot{width:106px!important;height:100px!important}
+.preview-copy{position:relative;z-index:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.preview-kicker{font-size:9px;letter-spacing:1.6px;font-weight:1000;color:#e58a6d}
+.preview strong{font-size:16px;font-weight:1000;color:#3b2c30}
+.preview small{font-size:11px;line-height:1.35;color:#907e79;font-weight:800}
+.preview-sparkle{position:absolute;right:15px;bottom:12px;color:#ffb66f;font-size:20px}
+.grid-title{margin:1px 3px 10px;font-size:13px;color:#6f5c58}
+.grid-title:after{content:"";height:1px;flex:1;margin-left:10px;background:linear-gradient(90deg,#e8d7ce,transparent)}
+.grid{gap:11px}
+.buddy{min-height:174px;padding:10px 7px 9px;gap:3px;border-radius:25px;border:1px solid #fff;background:linear-gradient(150deg,#ffffffed 0%,#fffaf6d9 100%);box-shadow:inset 0 2px 0 #fff,0 8px 18px #9e75631a;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transition:transform .22s cubic-bezier(.2,.8,.2,1),box-shadow .22s,border-color .22s,background .22s}
+.buddy:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 28%,#ffe8d9a8,transparent 58%);opacity:.8}
+.buddy:active{transform:scale(.96)}
+.buddy.selected{border:1.7px solid #ff987b;background:linear-gradient(150deg,#fff7f0,#ffe8dc);box-shadow:inset 0 2px 0 #fff,0 0 0 3px #ff977b28,0 12px 24px #e77d5b2b}
+.buddy.selected:after{content:"✓";position:absolute;right:10px;top:10px;display:grid;place-items:center;width:23px;height:23px;border-radius:50%;background:linear-gradient(145deg,#ff9a79,#f26a4c);color:white;font-size:13px;font-weight:1000;box-shadow:0 3px 8px #e77d5b55}
+.buddy .mascot{position:relative;z-index:1;width:112px!important;height:112px!important;filter:drop-shadow(0 7px 5px #57423a18)}
+.mascot-inner{transition:transform .25s}
+.buddy:active .mascot-inner{transform:translateY(-4px) scale(1.04)}
+.mascot-name{position:relative;z-index:1;font-size:14px;font-weight:1000;letter-spacing:.1px;color:#49383a}
+.selected-label{position:relative;z-index:1;min-height:13px;font-size:9px;letter-spacing:.8px;color:#ed795b}
+.footer{position:sticky;z-index:5;bottom:0;margin-top:auto;padding:16px 0 calc(10px + env(safe-area-inset-bottom));background:linear-gradient(180deg,#fff8f300 0%,#fff7f1ed 22%,#fff7f1 100%)}
+#continue{min-height:58px;border-radius:19px;background:linear-gradient(110deg,#ff9a75,#ff714e 52%,#f45c3e);border:1px solid #ffffffc9;color:white;font-size:17px;letter-spacing:.3px;box-shadow:inset 0 2px 0 #ffffff72,0 5px 0 #df573b,0 12px 22px #e86c4a35;transition:transform .16s,box-shadow .16s}
+#continue:active:not(:disabled){transform:translateY(3px);box-shadow:inset 0 2px 0 #ffffff72,0 2px 0 #df573b,0 6px 12px #e86c4a30}
+#continue:disabled{opacity:.45}
+.status{color:#a36b5d}
+@media(min-width:480px){.buddy{min-height:190px}.buddy .mascot{width:122px!important;height:122px!important}}
+@media(max-height:760px){.sub{margin-bottom:11px}.preview{min-height:94px;margin-bottom:12px}.preview-avatar{height:80px}.buddy{min-height:148px}.buddy .mascot{width:94px!important;height:94px!important}.footer{padding-top:10px}}
+@media(prefers-reduced-motion:reduce){.buddy,.mascot-inner,#continue{transition:none}}
+
 </style>
 </head>
 <body><main class="wrap">
-
+<div class="page-kicker"><span class="kicker-dot"></span><span>YOUR LEARNING SIDEKICK</span><span class="step-pill">STEP 2 OF 3</span></div>
 <h1>Pick Your Buddy!</h1><p class="sub">This little friend will guide you on your learning adventure ✨</p>
-<div class="preview"><button id="bigMascot" class="mascot" type="button" aria-label="Boop your selected buddy"></button><div><strong id="previewTitle">Choose your favourite character</strong><small id="previewText">Your buddy will follow your cursor, blink and react when tapped.</small></div></div>
+<div class="preview"><div class="preview-avatar"><button id="bigMascot" class="mascot" type="button" aria-label="Boop your selected buddy"></button></div><div class="preview-copy"><span class="preview-kicker">YOUR BUDDY</span><strong id="previewTitle">Choose your favourite character</strong><small id="previewText">Tap a character to meet your new friend!</small></div><span class="preview-sparkle" aria-hidden="true">✦</span></div>
 <div class="grid-title"><span>Choose your favourite Buddy</span></div>
 <section class="grid" id="buddyGrid" aria-label="Choose a buddy"></section>
 <div class="footer"><button id="continue" style="display:none" disabled>Next →</button><p class="status" id="status" role="status"></p></div>
