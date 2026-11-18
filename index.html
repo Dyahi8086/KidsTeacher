@@ -265,12 +265,14 @@
 /* Refined original Bunny-K splash: same signature animation, softer fresh palette */
 html,body{background:#eaf2e9}
 #splash-screen{background:radial-gradient(circle at 50% 42%,#f8fbf4 0%,#eaf3e8 54%,#d7e7d8 100%)}
-.kt-mark{color:#fff;filter:drop-shadow(0 12px 18px rgba(31,72,54,.18))}
-.kt-ear{border-color:#fff}
-.kt-eyes span{background:#294b3b}
-.kt-smile{border-bottom-color:#294b3b}
-.kt-title{color:#294b3b;text-shadow:0 3px 0 rgba(255,255,255,.72)}
-.kt-dot{background:#f5b85b;filter:drop-shadow(0 0 7px #fff) drop-shadow(0 0 18px #f5d99b) drop-shadow(0 0 34px rgba(255,255,255,.8))}
+.kt-mark{width:184px;height:174px;font-size:154px;letter-spacing:-14px;padding-right:12px;color:#294b3b;filter:drop-shadow(0 12px 18px rgba(31,72,54,.22));animation:logoSequence 1.45s cubic-bezier(.22,1,.36,1) .15s forwards}
+.kt-ears{width:86px;height:66px;top:-2px;left:48px}
+.kt-ear{width:32px;height:65px;border:10px solid #294b3b}
+.kt-face{top:88px;left:70px;width:42px;height:30px}
+.kt-eyes span{background:#eaf2e9;width:7px;height:10px}
+.kt-smile{border-bottom-color:#eaf2e9;width:19px;height:10px}
+.kt-title{color:#294b3b;text-shadow:0 3px 0 rgba(255,255,255,.72);font-size:clamp(27px,7.2vw,36px);animation:titleSequence 1.35s cubic-bezier(.4,0,.2,1) 1.45s forwards}
+.kt-dot{background:#f5b85b;filter:drop-shadow(0 0 7px #fff) drop-shadow(0 0 18px #f5d99b) drop-shadow(0 0 34px rgba(255,255,255,.8));animation:starBurstLaunch 1s cubic-bezier(.2,.8,.2,1) 2.75s both}
 
 </style>
 </head>
