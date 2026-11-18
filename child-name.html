@@ -27,6 +27,16 @@ input::placeholder{color:#827987;font-weight:700;font-size:24px}
 button{position:relative;width:88%;height:76px;border:4px solid #45364d;border-radius:19px;background:linear-gradient(90deg,#ff6268 0 20%,#ffb43f 20% 40%,#58c98e 40% 60%,#40b9e9 60% 80%,#a477e8 80%);color:#fff;font:1000 27px Nunito,sans-serif;letter-spacing:1px;text-shadow:0 3px 0 #53415d,1px 4px 0 #53415d;-webkit-text-stroke:.5px #493b51;box-shadow:0 8px 0 #45364d,0 13px 18px rgba(55,45,68,.16);transition:transform .12s,box-shadow .12s}
 button:active{transform:translateY(6px);box-shadow:0 2px 0 #45364d,0 5px 10px rgba(55,45,68,.14)}
 button:disabled{opacity:.6}
+button .letter{display:inline-block}
+button.name-entered .letter{animation:letterBounce .65s ease-in-out infinite alternate}
+button.name-entered .letter:nth-child(2){animation-delay:.06s}
+button.name-entered .letter:nth-child(3){animation-delay:.12s}
+button.name-entered .letter:nth-child(4){animation-delay:.18s}
+button.name-entered .letter:nth-child(5){animation-delay:.24s}
+button.name-entered .letter:nth-child(6){animation-delay:.30s}
+button.name-entered .letter:nth-child(7){animation-delay:.36s}
+button.name-entered .letter:nth-child(8){animation-delay:.42s}
+@keyframes letterBounce{from{transform:translateY(0) rotate(0)}to{transform:translateY(-7px) rotate(-4deg)}}
 #status{min-height:18px;margin:16px 0 0;color:#b33d68;font-size:13px;font-weight:800}
 @media(max-height:700px){h1{font-size:44px;margin-bottom:17px}.paper{min-height:125px;padding-top:24px;margin-bottom:18px}input{height:54px}button{height:65px}}
 </style>
@@ -39,7 +49,7 @@ button:disabled{opacity:.6}
 <h1><span>What's</span><span class="your">your child's</span><span class="name">name?</span></h1>
 <form id="nameForm">
 <div class="paper"><input id="childName" type="text" maxlength="24" autocomplete="given-name" placeholder="Type here..." required></div>
-<button id="saveBtn" type="submit">CONTINUE</button>
+<button id="saveBtn" type="submit"><span class="letter">C</span><span class="letter">O</span><span class="letter">N</span><span class="letter">T</span><span class="letter">I</span><span class="letter">N</span><span class="letter">U</span><span class="letter">E</span></button>
 </form>
 <p id="status" role="status"></p>
 </main>
@@ -50,6 +60,11 @@ const form=document.getElementById("nameForm");
 const input=document.getElementById("childName");
 const button=document.getElementById("saveBtn");
 const status=document.getElementById("status");
+
+function updateContinueAnimation(){
+  button.classList.toggle("name-entered",input.value.trim().length>0);
+}
+input.addEventListener("input",updateContinueAnimation);
 let user=null;
 let submitting=false;
 
@@ -106,7 +121,8 @@ form.addEventListener("submit",async event=>{
     status.textContent="Name save nahi hua. Dobara try karo.";
     submitting=false;
     button.disabled=false;
-    button.textContent="CONTINUE";
+    button.innerHTML='<span class="letter">C</span><span class="letter">O</span><span class="letter">N</span><span class="letter">T</span><span class="letter">I</span><span class="letter">N</span><span class="letter">U</span><span class="letter">E</span>';
+    updateContinueAnimation();
     return;
   }
 
