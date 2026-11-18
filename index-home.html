@@ -234,6 +234,23 @@ body{background:radial-gradient(ellipse at 8% 0%,#e4f5ff 0,transparent 42%),radi
 .nav button.active:after{content:"";position:absolute;bottom:3px;width:5px;height:5px;border-radius:50%;background:var(--tab);box-shadow:0 0 0 3px #ffffffaa}
 @media(max-width:380px){.nav{gap:2px!important;padding:6px!important}.nav button{min-height:51px!important}}
 
+
+/* Navigation corrected to the requested inset-colour clay pill + raised centre Video action */
+.nav-wrap{bottom:calc(15px + env(safe-area-inset-bottom))!important;padding:0 18px!important}
+.nav{position:relative!important;isolation:isolate!important;display:flex!important;align-items:center!important;overflow:visible!important;background:linear-gradient(145deg,#ffe98a 0%,#ffd84f 52%,#f3bf32 100%)!important;border:2px solid #fff2b5!important;border-radius:30px!important;padding:8px 9px!important;gap:4px!important;box-shadow:0 10px 20px #c5a33d55,inset 3px 3px 7px #fff9d2,inset -4px -5px 8px #c59a2f88!important}
+.nav button{position:relative!important;z-index:1!important;flex:1 1 0!important;min-width:0!important;min-height:54px!important;border:0!important;border-radius:19px!important;background:transparent!important;color:#80652a!important;box-shadow:none!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:4px!important;font-weight:800!important}
+.nav button .ico{width:25px!important;height:25px!important;display:grid!important;place-items:center!important;color:currentColor!important}
+.nav button .ico svg{width:24px!important;height:24px!important;stroke:currentColor!important}
+.nav button.active{background:linear-gradient(145deg,#fff8d8,#ffeaa0)!important;color:#6e55c7!important;border:1px solid #fffbdc!important;box-shadow:4px 5px 9px #a77f2d44,inset 2px 2px 5px #fff!important;transform:translateY(-1px)!important}
+.nav button.active:after{content:""!important;position:absolute!important;bottom:3px!important;width:5px!important;height:5px!important;border-radius:50%!important;background:#7659d7!important;box-shadow:0 0 0 3px #ffffffaa!important}
+.nav button[data-tab="video"]{z-index:3!important;flex:0 0 66px!important;width:66px!important;height:66px!important;min-height:66px!important;margin:-24px 1px 0!important;border-radius:50%!important;background:linear-gradient(145deg,#ff8b83 0%,#f04457 60%,#cf2948 100%)!important;color:#fff!important;border:3px solid #fff!important;box-shadow:0 7px 13px #a52c4b66,inset 3px 3px 6px #ffffff77,inset -3px -4px 6px #a91d3f88!important;gap:3px!important}
+.nav button[data-tab="video"] .ico{width:27px!important;height:27px!important;color:#fff!important}
+.nav button[data-tab="video"] .ico svg{width:26px!important;height:26px!important;stroke:#fff!important;stroke-width:2.1!important}
+.nav button[data-tab="video"]{font-size:10px!important}
+.nav button[data-tab="video"].active{background:linear-gradient(145deg,#ff9c91 0%,#ef4055 65%,#c92545 100%)!important;color:#fff!important;box-shadow:0 8px 16px #a52c4b77,inset 3px 3px 6px #ffffff77,inset -3px -4px 6px #a91d3f88!important;transform:translateY(-1px)!important}
+.nav button[data-tab="video"].active:after{display:none!important}
+@media(max-width:390px){.nav-wrap{padding:0 13px!important}.nav{gap:2px!important;padding:7px 6px!important}.nav button{font-size:10px!important}.nav button[data-tab="video"]{flex-basis:60px!important;width:60px!important;height:60px!important;min-height:60px!important;margin-top:-21px!important}}
+
 </style>
 </head>
 <body>
