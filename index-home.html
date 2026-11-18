@@ -705,6 +705,48 @@ body{
 @keyframes logoLetterIn{from{opacity:.25;transform:translateY(8px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
 @media(max-width:380px){.brand{font-size:29px!important;gap:5px!important}}
 
+
+/* FINAL FIX: keep the Kids Teacher wordmark visible; reveal letters once, never loop-hide them */
+body{
+ background:linear-gradient(135deg,#f5d8e8 0%,#e8d7ef 48%,#d4e6f5 100%)!important;
+}
+.top{position:relative!important;justify-content:center!important}
+.top .brand{
+ position:absolute!important;left:50%!important;top:50%!important;
+ transform:translate(-50%,-50%)!important;
+ display:flex!important;flex-direction:row!important;align-items:center!important;
+ justify-content:center!important;gap:7px!important;
+ width:max-content!important;max-width:calc(100% - 108px)!important;
+ margin:0!important;padding:0!important;flex:none!important;
+ white-space:nowrap!important;z-index:5!important;
+ font:700 34px/1 Fredoka,sans-serif!important;letter-spacing:-1px!important;
+}
+.top .brand .brand-word{display:inline-flex!important;align-items:center!important;justify-content:center!important}
+.top .brand .brand-gap{display:none!important}
+.top .brand .brand-dot{display:inline-block!important;flex:0 0 8px!important;width:8px!important;height:8px!important;border-radius:50%!important;background:#3289ed!important;margin-left:1px!important;box-shadow:0 0 0 5px #3289ed22!important}
+.top .brand .brand-letter{
+ opacity:1!important;transform:none!important;
+ animation:brandLetterReveal .42s cubic-bezier(.2,.85,.25,1.2) both!important;
+}
+.top .brand .brand-word:first-child{color:#35a9df!important;text-shadow:0 2px 0 #c7efff,0 4px 0 #2582b8,0 7px 10px #548eb655!important}
+.top .brand .teacher-word{color:#edbd27!important;text-shadow:0 2px 0 #fff0a0,0 4px 0 #c79518,0 7px 10px #9c7d3e55!important}
+.top .brand .brand-word:first-child .brand-letter:nth-child(1){animation-delay:.04s!important}
+.top .brand .brand-word:first-child .brand-letter:nth-child(2){animation-delay:.12s!important}
+.top .brand .brand-word:first-child .brand-letter:nth-child(3){animation-delay:.20s!important}
+.top .brand .brand-word:first-child .brand-letter:nth-child(4){animation-delay:.28s!important}
+.top .brand .teacher-word .brand-letter:nth-child(1){animation-delay:.36s!important}
+.top .brand .teacher-word .brand-letter:nth-child(2){animation-delay:.44s!important}
+.top .brand .teacher-word .brand-letter:nth-child(3){animation-delay:.52s!important}
+.top .brand .teacher-word .brand-letter:nth-child(4){animation-delay:.60s!important}
+.top .brand .teacher-word .brand-letter:nth-child(5){animation-delay:.68s!important}
+.top .brand .teacher-word .brand-letter:nth-child(6){animation-delay:.76s!important}
+.top .brand .teacher-word .brand-letter:nth-child(7){animation-delay:.84s!important}
+@keyframes brandLetterReveal{
+ from{opacity:0;transform:translateY(8px) scale(.9)}
+ to{opacity:1;transform:translateY(0) scale(1)}
+}
+@media(max-width:380px){.top .brand{font-size:29px!important;gap:5px!important}}
+
 </style>
 </head>
 <body>
