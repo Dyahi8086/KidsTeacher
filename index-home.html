@@ -61,20 +61,18 @@ h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.
 .delete-account{width:100%;margin-top:10px;padding:13px;border:1px solid #f2b8b8;border-radius:15px;background:#fff;color:#c43f50;font:900 13px Nunito}
 .delete-note{margin:8px 8px 0;text-align:center;color:#9b8790;font-size:11px;font-weight:700;line-height:1.5}
 .nav-wrap{position:fixed;z-index:10;bottom:0;left:0;right:0;padding:10px 14px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent 0%,rgba(234,240,241,.78) 30%,#eaf0f1 100%);pointer-events:none}
-.nav{pointer-events:auto;position:relative;width:min(100%,520px);margin:auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:center;gap:2px;padding:8px 8px;background:linear-gradient(145deg,#fff5a8 0%,#ffe56b 48%,#f5ce45 100%);border:2px solid #fff9cf;border-radius:25px;box-shadow:7px 8px 0 #d8b843,10px 13px 19px #a9b7b988,inset 3px 3px 7px #fffde2,inset -4px -4px 8px #d5b33d}
-.nav button{position:relative;min-width:0;min-height:55px;border:0;background:transparent;border-radius:16px;padding:5px 0;color:#765d2e;font:900 9px Nunito;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;white-space:nowrap;transition:transform .2s,color .2s,background .2s,box-shadow .2s}
-.nav button .ico{width:24px;height:24px;display:grid;place-items:center;transition:transform .22s cubic-bezier(.2,.8,.2,1),color .2s;filter:drop-shadow(0 2px 1px #8a6d2922)}
-.nav button .ico svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
-.nav button:nth-child(1) .ico{color:#7650d9}
-.nav button:nth-child(2) .ico{color:#1785a8}
-.nav button:nth-child(3){color:#a82f36}
-.nav button:nth-child(3) .ico{color:#e53945}
-.nav button:nth-child(4) .ico{color:#d34c91}
-.nav button:nth-child(5) .ico{color:#a87918}
-.nav button.active{color:#674bbd;background:linear-gradient(145deg,#fffbdc,#ffe98d);box-shadow:inset 4px 4px 8px #d7bd5d77,inset -4px -4px 8px #fffde8,0 2px 5px #b48d2b22}
-.nav button:nth-child(3).active{color:#b72e38;background:linear-gradient(145deg,#ffe4e3,#ffb8b7);box-shadow:inset 4px 4px 8px #d98c8c77,inset -4px -4px 8px #fff1ee,0 2px 5px #c45b5b33}
-.nav button.active .ico{transform:translateY(-2px) scale(1.1)}
-.nav button:active{transform:scale(.93);box-shadow:inset 3px 3px 7px #c49e3d66}
+.nav{pointer-events:auto;position:relative;width:min(100%,520px);margin:auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:center;gap:2px;padding:6px 7px;background:linear-gradient(145deg,#fff0a0,#f3d45e);border:1px solid #fff8cc;border-radius:24px;box-shadow:9px 10px 19px #c2b36d,-8px -8px 17px #fff,inset 3px 3px 7px #fff9d8,inset -3px -3px 7px #d6b643}
+.nav button{position:relative;min-width:0;min-height:49px;border:0;background:transparent;border-radius:14px;padding:4px 0;color:#896d31;font:800 9px Nunito;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;white-space:nowrap;transition:transform .2s,color .2s,background .2s}
+.nav button .ico{width:23px;height:23px;display:grid;place-items:center;transition:transform .22s cubic-bezier(.2,.8,.2,1),color .2s}
+.nav button .ico svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}\n.nav button:nth-child(3){color:#b72e38}.nav button:nth-child(3) .ico{color:#e53945}.nav button:nth-child(3).active{background:linear-gradient(145deg,#ffe4e3,#ffb8b7);box-shadow:inset 4px 4px 8px #d98c8c77,inset -4px -4px 8px #fff1ee}
+.nav button.active:not(.nav-draw){color:#7154ca;background:linear-gradient(145deg,#fff9d9,#f5df87);box-shadow:inset 4px 4px 8px #d7bd5d77,inset -4px -4px 8px #fffde8}
+.nav button.active:not(.nav-draw) .ico{transform:translateY(-2px) scale(1.08)}
+.nav button.nav-draw{min-height:70px;margin-top:-30px;padding:8px 3px 7px;border-radius:21px;background:linear-gradient(145deg,#927fff 0%,#6858df 100%);color:#fff;box-shadow:0 7px 0 #5143bd,0 13px 25px rgba(101,85,220,.30);border:3px solid rgba(255,255,255,.98);transform:translateY(-4px)}
+.nav button.nav-draw .ico{width:29px;height:29px}
+.nav button.nav-draw .ico svg{width:25px;height:25px;stroke-width:2}
+.nav button.nav-draw.active{background:linear-gradient(145deg,#a092ff,#705fe9);box-shadow:0 7px 0 #5143bd,0 15px 27px rgba(101,85,220,.38)}
+.nav button:active{transform:scale(.94)}
+.nav button.nav-draw:active{transform:translateY(0) scale(.96);box-shadow:0 3px 0 #5143bd,0 7px 14px rgba(101,85,220,.25)}
 @media(max-width:380px){.nav button{font-size:8px}.nav{gap:1px;padding-left:4px;padding-right:4px}.nav button .ico svg{width:20px;height:20px}}
 @media(max-width:380px){.nav button{font-size:8px}.nav{gap:0;padding-left:4px;padding-right:4px}.nav button .ico svg{width:19px;height:19px}}
 
