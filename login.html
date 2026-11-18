@@ -171,7 +171,10 @@ function setLoading(active, message = "Connecting to Google...") {
   overlay.style.display = active ? "flex" : "none";
   loadingText.textContent = message;
   if (active) renderLoadingText();
-  else // Show the complete Kids Teacher name, fade it out, then type it letter by letter.
+  else renderAnimatedText("Continue with Google");
+}
+
+// Animate the Kids Teacher wordmark independently of the Google button.
 const brandAnimated = document.getElementById("brandAnimated");
 if (brandAnimated && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const brandFullName = "kids teacher";
@@ -189,7 +192,7 @@ if (brandAnimated && !window.matchMedia("(prefers-reduced-motion: reduce)").matc
         const letter = document.createElement("span");
         letter.className = character === " " ? "brand-letter space" : "brand-letter";
         letter.style.animationDelay = (index * 0.035) + "s";
-        letter.textContent = character === " " ? "\u00A0" : character;
+        letter.textContent = character === " " ? "\\u00A0" : character;
         brandAnimated.appendChild(letter);
         await wait(145);
       }
@@ -201,8 +204,6 @@ if (brandAnimated && !window.matchMedia("(prefers-reduced-motion: reduce)").matc
   typeBrandName();
 }
 
-renderAnimatedText("Continue with Google");
-}
 function friendlyError(error) {
   const message = String(error?.message || "");
   if (!navigator.onLine) return "Please check your internet connection.";
