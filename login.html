@@ -77,17 +77,90 @@ body{min-height:100vh;min-height:100dvh;overflow-x:hidden;overflow-y:auto;positi
 @media(max-height:700px) and (min-width:481px){body{justify-content:flex-start}.illustration-panel{min-height:260px}.login-content{padding-top:27px;padding-bottom:25px}.app-subtitle{margin-bottom:23px}.made-for{margin-top:20px}.privacy-text{margin-top:17px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){#loadingOverlay{background:rgba(244,241,233,.97)}}
+/* Claymorphism refresh */
+body{
+  padding:22px 16px 30px;
+  background:
+    radial-gradient(circle at 12% 14%,rgba(255,255,255,.92),transparent 28%),
+    radial-gradient(circle at 88% 76%,rgba(206,224,207,.55),transparent 32%),
+    linear-gradient(145deg,#f7f1e7 0%,#f1eee5 48%,#f5f0e8 100%);
+}
+.login-shell{max-width:620px}
+.login-popup-box{
+  border:1px solid rgba(255,255,255,.9);
+  border-radius:42px;
+  background:linear-gradient(145deg,#fffdf7,#f6f2e9);
+  box-shadow:
+    20px 20px 42px rgba(190,183,168,.48),
+    -18px -18px 42px rgba(255,255,255,.98),
+    inset 2px 2px 5px rgba(255,255,255,.95),
+    inset -2px -2px 5px rgba(217,209,194,.22);
+}
+.illustration-panel{
+  min-height:330px;
+  background:linear-gradient(145deg,#edf5e9,#dcebdc);
+  border-radius:38px 38px 0 0;
+  box-shadow:
+    inset 9px 9px 20px rgba(190,207,190,.56),
+    inset -9px -9px 20px rgba(255,255,255,.86);
+}
+.orb-one{
+  background:linear-gradient(145deg,rgba(255,255,255,.58),rgba(213,229,214,.18));
+  box-shadow:8px 8px 18px rgba(180,197,182,.24),-7px -7px 16px rgba(255,255,255,.65),inset 2px 2px 7px rgba(255,255,255,.6);
+}
+.orb-two{
+  background:linear-gradient(145deg,#f6d6c9,#edc1b1);
+  box-shadow:9px 9px 18px rgba(203,160,145,.32),-7px -7px 15px rgba(255,255,255,.55);
+}
+.book-art{filter:drop-shadow(8px 12px 7px rgba(81,105,83,.18)) drop-shadow(-3px -3px 3px rgba(255,255,255,.65))}
+.quote-pill{
+  background:linear-gradient(145deg,#fffef8,#f3f0e6);
+  box-shadow:7px 7px 15px rgba(184,194,180,.48),-7px -7px 15px rgba(255,255,255,.96),inset 1px 1px 2px #fff;
+  border:1px solid rgba(255,255,255,.88);
+}
+.login-content{
+  background:linear-gradient(145deg,#fffdf8,#f8f4eb);
+  box-shadow:inset 0 7px 18px rgba(226,219,204,.20);
+}
+.app-title{color:#294b3b;text-shadow:2px 2px 2px rgba(183,191,173,.38),-1px -1px 2px #fff}
+.google-btn{
+  background:linear-gradient(145deg,#315d48,#1d4934);
+  border:1px solid rgba(255,255,255,.55);
+  border-bottom:0;
+  border-radius:24px;
+  box-shadow:
+    10px 10px 20px rgba(166,177,160,.62),
+    -8px -8px 18px rgba(255,255,255,.98),
+    inset 2px 2px 5px rgba(255,255,255,.26),
+    inset -3px -3px 7px rgba(9,42,26,.24);
+}
+.google-btn:active{
+  transform:translateY(2px);
+  box-shadow:inset 6px 6px 12px rgba(12,48,30,.38),inset -4px -4px 9px rgba(255,255,255,.14);
+}
+.made-for{
+  display:inline-block;
+  padding:10px 18px;
+  border-radius:24px;
+  background:linear-gradient(145deg,#fffdf8,#f2eee5);
+  box-shadow:5px 5px 11px rgba(198,191,176,.32),-5px -5px 11px rgba(255,255,255,.92);
+}
+.privacy-text a{color:#28503b}
+.page-footer{
+  text-shadow:1px 1px 1px rgba(255,255,255,.9);
+}
+@media(max-width:480px){
+  body{padding:18px 14px 25px}
+  .login-popup-box{border-radius:34px}
+  .illustration-panel{border-radius:30px 30px 0 0;min-height:280px}
+}
 </style>
 </head>
 <body>
 <div class="background-glow"><div class="glow glow-one"></div><div class="glow glow-two"></div><div class="glow glow-three"></div></div>
 <div id="offlineBanner">⚠️ No Internet Connection! Please check your network.</div>
 <div class="login-shell">
-  <header class="brand-row">
-    <div class="brand-lockup"><span class="brand-mark" aria-hidden="true">k</span></div>
-    
-  </header>
-  <main class="login-popup-box">
+    <main class="login-popup-box">
     <section class="illustration-panel" aria-label="Learning illustration">
       <div class="soft-orb orb-one"></div><div class="soft-orb orb-two"></div>
       <svg class="book-art" viewBox="0 0 420 250" role="img" aria-label="Open book with a pencil illustration">
