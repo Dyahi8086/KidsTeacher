@@ -80,43 +80,40 @@ const initialBig=sprite("bunny",100,"preview");initialBig.id="bigMascot";big.rep
 function choose(name){selected=name;const label=name==="sheep"?"Sheep":name.charAt(0).toUpperCase()+name.slice(1);const next=sprite(name,100,label);next.id="bigMascot";big.replaceWith(next);big=next;document.getElementById("previewTitle").textContent=label.charAt(0).toUpperCase()+label.slice(1)+" is your Buddy!";document.getElementById("previewText").textContent="Tap your Buddy to see its reaction.";button.disabled=false;button.style.display="block";render()}
 function render(){grid.innerHTML="";names.forEach(name=>{const card=document.createElement("button");card.type="button";card.className="buddy"+(selected===name?" selected":"");const m=sprite(name,82,name);m.tabIndex=-1;card.append(m);const n=document.createElement("span");n.className="mascot-name";n.textContent=name.replace(/-/g," ");const s=document.createElement("span");s.className="selected-label";s.textContent=selected===name?"✓ SELECTED":"";card.append(n,s);card.addEventListener("click",()=>choose(name));grid.append(card)})}
 render();
-onAuthStateChanged(auth,async u=>{
+onAuthStateChanged(auth,u=>{
  if(!u){location.replace("./login.html");return}
  user=u;
- let profile={};
- try{
-  const snap=await Promise.race([getDoc(doc(db,"users",u.uid)),new Promise((_,reject)=>setTimeout(()=>reject(new Error("timeout")),6000))]);
-  if(snap.exists())profile=snap.data();
-  childName=(profile.childName||"").trim();
-  if(!childName){location.replace("./child-name.html");return}
-  if(profile.buddy?.id){
-   localStorage.setItem("kt_selected_buddy",JSON.stringify(profile.buddy));
-   location.replace("./index-home.html");return;
-  }
- }catch(e){
-  console.warn("Buddy profile check:",e);
-  childName="";
-  if(!childName){location.replace("./child-name.html");return}
- }
+ childName=(localStorage.getItem("kt_child_name_"+u.uid)||"").trim();
  document.body.style.visibility="visible";
+ getDoc(doc(db,"users",u.uid)).then(snap=>{
+  if(!snap.exists())return;
+  const profile=snap.data();
+  if(profile.childName){childName=profile.childName;localStorage.setItem("kt_child_name_"+u.uid,childName)}
+  if(profile.buddy?.id){
+   localStorage.setItem("kt_buddy_"+u.uid,JSON.stringify(profile.buddy));
+   location.replace("./index-home.html");
+  }
+ }).catch(err=>console.warn("Background buddy profile lookup:",err));
+ if(!childName){childName=(localStorage.getItem("kt_pending_child_name")||"").trim()}
+ if(!childName){location.replace("./child-name.html");return}
 });
+
 button.addEventListener("click",async()=>{
  if(!selected)return;
  const label=(childName||"").trim();
  if(!label){status.textContent="Please enter your child's name first.";return}
  if(!user){status.textContent="Login session not ready. Please wait and try again.";return}
- const buddy={id:selected,name:label,character:selected,emoji:"",directions:base+selected+"-directions.webp",reactions:base+selected+"-reactions.webp"};
- button.disabled=true;button.textContent="Saving your Buddy…";status.textContent="";
+ const selectedBuddy={id:selected,name:label,character:selected,emoji:"",directions:base+selected+"-directions.webp",reactions:base+selected+"-reactions.webp"};
+ button.disabled=true;button.textContent="Continue →";status.textContent="";
+ localStorage.setItem("kt_child_name_"+user.uid,label);
+ localStorage.setItem("kt_buddy_"+user.uid,JSON.stringify(selectedBuddy));
+ localStorage.setItem("kt_pending_child_name",label);
  try{
-  await setDoc(doc(db,"users",user.uid),{buddy,childName:label,displayName:user.displayName||"",email:user.email||"",updatedAt:serverTimestamp()},{merge:true});
-  localStorage.setItem("kt_child_name",label);
-  localStorage.setItem("kt_selected_buddy",JSON.stringify(buddy));
-  button.textContent="Let's Go! ✨";
-  location.replace("./index-home.html");
- }catch(e){
-  console.error("Buddy profile save failed:",e);
-  button.disabled=false;button.textContent="Continue →";
-  status.textContent="Buddy save nahi hua. Internet/Firebase connection check karke dobara try karo.";
- }
+  await Promise.race([
+   setDoc(doc(db,"users",user.uid),{buddy:selectedBuddy,childName:label,displayName:user.displayName||"",email:user.email||"",updatedAt:serverTimestamp()},{merge:true}),
+   new Promise((_,reject)=>setTimeout(()=>reject(new Error("cloud-write-timeout")),5000))
+  ]);
+ }catch(err){console.warn("Buddy cloud sync pending:",err)}
+ location.replace("./index-home.html");
 });
 </script></body></html>
