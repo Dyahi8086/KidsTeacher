@@ -26,7 +26,7 @@ body{margin:0;min-height:100dvh;background:radial-gradient(ellipse at 18% 8%,#ff
 
 .page{display:none;animation:fade .22s ease}.page.active{display:block}
 @keyframes fade{from{opacity:.5;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-.welcome{margin:8px 0 16px}.eyebrow{font-size:12px;color:var(--muted);font-weight:900;letter-spacing:1px;text-transform:uppercase}
+.welcome{margin:8px 0 16px}.welcome .eyebrow,.welcome p{display:none}.eyebrow{font-size:12px;color:var(--muted);font-weight:900;letter-spacing:1px;text-transform:uppercase}
 h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.welcome p,.muted{margin:0;color:var(--muted);font-size:14px;font-weight:700}
 .hero{position:relative;overflow:hidden;border-radius:35px;padding:27px 19px 25px;min-height:310px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:radial-gradient(ellipse at 25% 12%,#d9c3ff 0,transparent 38%),radial-gradient(ellipse at 85% 90%,#7955c6 0,transparent 48%),linear-gradient(145deg,#b895f3 0%,#a17ee9 48%,#8d6bd8 100%);color:white;box-shadow:12px 14px 26px #9d8bbf66,-9px -9px 22px #fff,inset 4px 4px 9px #ffffff88,inset -5px -6px 12px #6946b866;border:1px solid #d7c4ff;text-align:center}
 .hero:after{content:"✦";position:absolute;right:18px;top:4px;font-size:92px;color:#ffffff25;transform:rotate(15deg)}
@@ -38,7 +38,7 @@ h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.
 .tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .tile{border:1px solid rgba(255,255,255,.95);border-radius:25px;padding:12px;min-height:88px;background:linear-gradient(145deg,#fff,#e8edef);box-shadow:8px 9px 17px #b8c5c8,-8px -8px 17px #fff,inset 2px 2px 5px #ffffffaa;cursor:pointer;text-align:center;color:var(--ink);font-family:Nunito;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .16s,box-shadow .16s}
 .tile:active{transform:translateY(2px) scale(.985);box-shadow:inset 5px 5px 10px #00000012,inset -5px -5px 10px #ffffff55}.tile .emoji{font-size:27px;display:block;margin-bottom:5px;text-shadow:0 3px 4px #0002}.tile b{display:block;font-size:14px;font-weight:900}.tile small{display:block;color:var(--muted);font-size:11px;font-weight:700;margin-top:2px}
-.tile.lilac{background:linear-gradient(145deg,#b7edc0,#79d69b);color:#fff;box-shadow:8px 9px 16px #a4cbb0,-7px -7px 15px #fff,inset 3px 3px 6px #ffffff99,inset -3px -3px 7px #4eaf76aa}.tile.peach{background:linear-gradient(145deg,#fff0a7,#f4d45f);color:#fff;box-shadow:8px 9px 16px #d7c88e,-7px -7px 15px #fff,inset 3px 3px 6px #ffffffaa,inset -3px -3px 7px #d3aa38aa}.tile.mint{background:linear-gradient(145deg,#f9b7d4,#eb8bb4);color:#fff;box-shadow:8px 9px 16px #d3a5b9,-7px -7px 15px #fff,inset 3px 3px 6px #ffffff99,inset -3px -3px 7px #c76691aa}.tile.blue{background:linear-gradient(145deg,#a2e1f8,#70c2eb);color:#fff;box-shadow:8px 9px 16px #a6c8d6,-7px -7px 15px #fff,inset 3px 3px 6px #ffffff99,inset -3px -3px 7px #4c9fc9aa}.tile small{color:#fff;opacity:.95}
+.tile.lilac{background:linear-gradient(145deg,#9ff0b7,#42cf83);color:#fff;box-shadow:8px 9px 16px #91c9a5,-7px -7px 15px #fff,inset 3px 3px 6px #ffffffbb,inset -3px -3px 7px #299c5caa}.tile.peach{background:linear-gradient(145deg,#fff08b,#ffc928);color:#fff;box-shadow:8px 9px 16px #d8bd70,-7px -7px 15px #fff,inset 3px 3px 6px #ffffffbb,inset -3px -3px 7px #d49b14aa}.tile.mint{background:linear-gradient(145deg,#ff9fc9,#f45d9c);color:#fff;box-shadow:8px 9px 16px #d49ab5,-7px -7px 15px #fff,inset 3px 3px 6px #ffffffbb,inset -3px -3px 7px #ca3978aa}.tile.blue{background:linear-gradient(145deg,#80dcff,#36aeea);color:#fff;box-shadow:8px 9px 16px #96c4d8,-7px -7px 15px #fff,inset 3px 3px 6px #ffffffbb,inset -3px -3px 7px #2188c2aa}.tile small{color:#fff;opacity:1}
 .buddy-strip{display:flex;align-items:center;gap:13px;padding:13px 15px;margin-top:17px;background:linear-gradient(145deg,#f9ffff,#e5edef);border:1px solid #fff;border-radius:23px;box-shadow:8px 8px 16px #c1ccce,-8px -8px 16px #fff,inset 1px 1px 3px #fff}
 .buddy-face{width:58px;height:58px;flex:0 0 58px;background-size:300% 300%;background-position:50% 50%;background-repeat:no-repeat}
 .buddy-strip b{font:700 16px Fredoka}.buddy-strip p{font-size:11px;color:var(--muted);font-weight:700;margin:3px 0 0}
@@ -60,19 +60,19 @@ h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.
 .logout{width:100%;margin-top:14px;padding:13px;border:0;border-radius:15px;background:#fff0f1;color:#d95b72;font:900 14px Nunito}
 .delete-account{width:100%;margin-top:10px;padding:13px;border:1px solid #f2b8b8;border-radius:15px;background:#fff;color:#c43f50;font:900 13px Nunito}
 .delete-note{margin:8px 8px 0;text-align:center;color:#9b8790;font-size:11px;font-weight:700;line-height:1.5}
-.nav-wrap{position:fixed;z-index:10;bottom:0;left:0;right:0;padding:10px 14px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent 0%,rgba(234,240,241,.78) 30%,#eaf0f1 100%);pointer-events:none}
-.nav{pointer-events:auto;position:relative;width:min(100%,520px);margin:auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:center;gap:2px;padding:6px 7px;background:linear-gradient(145deg,#fff0a0,#f3d45e);border:1px solid #fff8cc;border-radius:24px;box-shadow:9px 10px 19px #c2b36d,-8px -8px 17px #fff,inset 3px 3px 7px #fff9d8,inset -3px -3px 7px #d6b643}
+.nav-wrap{position:fixed;z-index:10;bottom:0;left:0;right:0;padding:19px 14px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent 0%,rgba(234,240,241,.82) 30%,#eaf0f1 100%);pointer-events:none}
+.nav{pointer-events:auto;position:relative;width:min(100%,520px);margin:auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:center;gap:2px;padding:7px 8px;background:linear-gradient(145deg,#ffffff,#eaf1f3);border:1px solid #fff;border-radius:25px;box-shadow:9px 10px 20px #bdcbd0,-8px -8px 18px #fff,inset 3px 3px 7px #fff,inset -3px -3px 7px #d8e3e6}
 .nav button{position:relative;min-width:0;min-height:49px;border:0;background:transparent;border-radius:14px;padding:4px 0;color:#896d31;font:800 9px Nunito;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;white-space:nowrap;transition:transform .2s,color .2s,background .2s}
 .nav button .ico{width:23px;height:23px;display:grid;place-items:center;transition:transform .22s cubic-bezier(.2,.8,.2,1),color .2s}
 .nav button .ico svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .nav button.active:not(.nav-draw){color:#7154ca;background:linear-gradient(145deg,#fff9d9,#f5df87);box-shadow:inset 4px 4px 8px #d7bd5d77,inset -4px -4px 8px #fffde8}
 .nav button.active:not(.nav-draw) .ico{transform:translateY(-2px) scale(1.08)}
-.nav button.nav-draw{min-height:70px;margin-top:-30px;padding:8px 3px 7px;border-radius:21px;background:linear-gradient(145deg,#927fff 0%,#6858df 100%);color:#fff;box-shadow:0 7px 0 #5143bd,0 13px 25px rgba(101,85,220,.30);border:3px solid rgba(255,255,255,.98);transform:translateY(-4px)}
-.nav button.nav-draw .ico{width:29px;height:29px}
-.nav button.nav-draw .ico svg{width:25px;height:25px;stroke-width:2}
-.nav button.nav-draw.active{background:linear-gradient(145deg,#a092ff,#705fe9);box-shadow:0 7px 0 #5143bd,0 15px 27px rgba(101,85,220,.38)}
+.nav:before{content:"";position:absolute;z-index:0;left:50%;top:-27px;transform:translateX(-50%);width:88px;height:88px;border-radius:50%;background:linear-gradient(145deg,#f4fafb,#e6eef0);box-shadow:8px 8px 16px #c4d0d3,-7px -7px 16px #fff,inset 2px 2px 5px #fff}.nav button.nav-video{z-index:1;min-height:68px;width:68px;height:68px;justify-self:center;margin-top:-34px;padding:8px 3px 6px;border-radius:50%;background:linear-gradient(145deg,#8f82ff 0%,#6252e6 100%);color:#fff;box-shadow:0 7px 0 #493bb8,0 13px 24px rgba(90,72,205,.36),inset 3px 3px 7px #ffffff77;border:3px solid #fff;transform:translateY(-3px);font-size:9px}
+.nav button.nav-video .ico{width:30px;height:30px}
+.nav button.nav-video .ico svg{width:27px;height:27px;stroke-width:2.2}
+.nav button.nav-video.active{background:linear-gradient(145deg,#a092ff,#705fe9);box-shadow:0 7px 0 #493bb8,0 15px 27px rgba(90,72,205,.42),inset 3px 3px 7px #ffffff77}
 .nav button:active{transform:scale(.94)}
-.nav button.nav-draw:active{transform:translateY(0) scale(.96);box-shadow:0 3px 0 #5143bd,0 7px 14px rgba(101,85,220,.25)}
+.nav button.nav-video:active{transform:translateY(0) scale(.96);box-shadow:0 3px 0 #493bb8,0 7px 14px rgba(90,72,205,.25)}
 @media(max-width:380px){.nav button{font-size:8px}.nav{gap:0;padding-left:4px;padding-right:4px}.nav button .ico svg{width:19px;height:19px}}
 
 @media(max-height:700px){.app{padding-bottom:94px}.hero{min-height:145px}.hero h2{font-size:23px}#drawingCanvas{height:260px}}
@@ -122,7 +122,7 @@ h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.
 <div class="nav-wrap"><nav class="nav" aria-label="Main navigation">
 <button class="active" data-tab="home"><span class="ico"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg></span>Home</button>
 <button data-tab="learn"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21z"/><path d="M4 5.5v13A2.5 2.5 0 0 1 6.5 16H20M8 7h8M8 10h7"/></svg></span>Learn</button>
-<button data-tab="video"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3z"/></svg></span>Video</button><button data-tab="drawing"><span class="ico"><svg viewBox="0 0 24 24"><path d="m4 16.5 10.9-10.9a2.1 2.1 0 0 1 3 3L7 19.5 3 21z"/><path d="m13.5 7.5 3 3M3 21l4-1.5"/></svg></span>Drawing</button>
+<button data-tab="video" class="nav-video"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3z"/></svg></span>Video</button><button data-tab="drawing"><span class="ico"><svg viewBox="0 0 24 24"><path d="m4 16.5 10.9-10.9a2.1 2.1 0 0 1 3 3L7 19.5 3 21z"/><path d="m13.5 7.5 3 3M3 21l4-1.5"/></svg></span>Drawing</button>
 <button data-tab="leaderboard"><span class="ico"><svg viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H4v2a4 4 0 0 0 4 4M16 6h4v2a4 4 0 0 1-4 4M12 13v5M8 21h8M9 18h6"/></svg></span>Leaderboard</button>
 
 </nav></div>
