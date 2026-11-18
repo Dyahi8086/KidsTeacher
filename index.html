@@ -29,7 +29,9 @@ html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#f4efff;fon
 @keyframes floatUp{0%,100%{transform:translateY(0) rotate(0deg) scale(1)}33%{transform:translateY(-30px) rotate(120deg) scale(1.1)}66%{transform:translateY(15px) rotate(240deg) scale(.9)}}
 .star{position:absolute;width:5px;height:5px;border-radius:50%;background:#f4bd58;animation:twinkle 2s ease-in-out infinite}
 @keyframes twinkle{0%,100%{opacity:.2;transform:scale(1)}50%{opacity:1;transform:scale(1.6)}}
-.character-container{position:relative;z-index:2;width:180px;height:240px;transform:translateX(-300px);animation:walkIn 1.8s cubic-bezier(.34,1.56,.64,1) .5s forwards;filter:drop-shadow(0 16px 18px rgba(75,45,122,.12))}
+.character-container{position:relative;z-index:2;flex:0 0 240px;width:156px;height:240px;transform:translateX(-300px);animation:walkIn 1.8s cubic-bezier(.34,1.56,.64,1) .5s forwards;filter:drop-shadow(0 16px 18px rgba(75,45,122,.12))}
+.char-body{position:relative;width:100%;height:100%}
+#characterSvg{display:block;width:100%;height:100%;overflow:visible}
 @keyframes walkIn{0%{transform:translateX(-300px)}60%{transform:translateX(10px)}80%{transform:translateX(-5px)}100%{transform:translateX(0)}}
 #leftLeg{animation:legWalk .6s ease-in-out .5s 3;transform-origin:42px 140px}
 #rightLeg{animation:legWalk .6s ease-in-out .8s 3 reverse;transform-origin:72px 140px}
@@ -47,13 +49,13 @@ html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#f4efff;fon
 @keyframes blink{0%,85%,100%{transform:scaleY(1)}88%,95%{transform:scaleY(.1)}}
 .mouth{animation:smile .5s ease-in-out 2.2s forwards}
 @keyframes smile{0%{d:path("M 55 74 Q 65 80 75 74")}100%{d:path("M 50 74 Q 65 88 80 74")}}
-.kt-title{position:relative;z-index:3;margin-top:4px;color:#4a2d7a;font-size:clamp(27px,7vw,36px);font-weight:900;letter-spacing:.3px;text-align:center;opacity:0;transform:translateY(14px) scale(.92);animation:titleIn .8s cubic-bezier(.34,1.56,.64,1) 2s forwards;text-shadow:0 3px 0 rgba(255,255,255,.7)}
+.kt-title{position:relative;z-index:3;flex:0 0 auto;margin-top:22px;padding:0 14px;color:#4a2d7a;font-size:clamp(27px,7vw,36px);font-weight:900;line-height:1.12;letter-spacing:.3px;text-align:center;white-space:nowrap;opacity:0;transform:translateY(14px) scale(.92);animation:titleIn .8s cubic-bezier(.34,1.56,.64,1) 2s forwards;text-shadow:0 3px 0 rgba(255,255,255,.7)}
 @keyframes titleIn{to{opacity:1;transform:translateY(0) scale(1)}}
-.kt-subtitle{position:relative;z-index:3;margin-top:8px;color:#8b78aa;font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;opacity:0;animation:subtitleIn .7s ease 2.45s forwards}
+.kt-subtitle{position:relative;z-index:3;flex:0 0 auto;margin-top:10px;padding:0 10px;color:#8b78aa;font-size:clamp(10px,3.2vw,13px);font-weight:800;line-height:1.4;letter-spacing:2px;text-align:center;text-transform:uppercase;opacity:0;animation:subtitleIn .7s ease 2.45s forwards}
 @keyframes subtitleIn{to{opacity:1}}
 .kt-dot{position:absolute;top:50%;left:50%;width:24px;height:24px;opacity:0;background:#fff;clip-path:polygon(50% 0%,61% 36%,100% 50%,61% 64%,50% 100%,39% 64%,0 50%,39% 36%);filter:drop-shadow(0 0 8px #fff) drop-shadow(0 0 20px #c4a5ff);transform:translate(-50%,-50%) scale(.12);animation:starBurstLaunch .75s cubic-bezier(.2,.8,.2,1) 4.25s both}
 @keyframes starBurstLaunch{0%{opacity:0;transform:translate(-50%,-50%) scale(.12) rotate(0)}20%{opacity:1;transform:translate(-50%,-50%) scale(1.25) rotate(35deg)}55%{opacity:1;transform:translate(-50%,80px) scale(.9) rotate(120deg)}100%{opacity:0;transform:translate(-50%,-42vh) scale(2.8) rotate(280deg)}}
-@media(max-height:650px){.character-container{transform:scale(.82) translateX(-300px);margin-top:-18px}.kt-title{margin-top:-4px}}
+@media(max-height:650px){.character-container{flex-basis:190px;width:124px;height:190px}.kt-title{margin-top:12px;font-size:clamp(24px,6vw,30px)}.kt-subtitle{margin-top:7px;letter-spacing:1.5px}}
 @media(prefers-reduced-motion:reduce){.float-shape,.star,.splash-halo,.character-container,#leftLeg,#rightLeg,#leftArm,#rightArm,.char-body,.bag-strap,.eye,.mouth,.kt-title,.kt-subtitle,.kt-dot{animation:none!important}.character-container{transform:none;opacity:1}.kt-title,.kt-subtitle{opacity:1;transform:none}.kt-dot{display:none}}
 </style>
 </head>
