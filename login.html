@@ -1344,46 +1344,7 @@ body {
 </div>
 
 <script type="module">
-
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-
-import {
-    getAuth,
-    GoogleAuthProvider,
-    signInWithPopup,
-    getAdditionalUserInfo,
-    onAuthStateChanged,
-    setPersistence,
-    browserLocalPersistence
-}
-from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-
-/* FIREBASE CONFIG */
-
-const firebaseConfig = {
-    apiKey: "AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",
-    authDomain: "kids-teacher-4387e.firebaseapp.com",
-    projectId: "kids-teacher-4387e",
-    storageBucket: "kids-teacher-4387e.firebasestorage.app",
-    messagingSenderId: "420221167346",
-    appId: "1:420221167346:web:da7ac80acdfd52339d526b",
-    measurementId: "G-VJVS2ZMNLY"
-};
-
-/* INITIALIZE FIREBASE */
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const provider = new GoogleAuthProvider();
-
-provider.setCustomParameters({
-    prompt: "select_account"
-});
-
-/* ELEMENTS */
+import { supabase } from "./supabase-client.js";
 
 const googleBtn = document.getElementById("googleBtn");
 const btnText = document.getElementById("btnText");
@@ -1393,242 +1354,151 @@ const errorBox = document.getElementById("errorBox");
 const successBox = document.getElementById("successBox");
 const offlineBanner = document.getElementById("offlineBanner");
 
-/* STATE */
-
 let isBusy = false;
 let redirectHandled = false;
-let popupLoginInProgress = false;
-
-/* ANIMATED BUTTON TEXT */
 
 function renderAnimatedText(text) {
-    btnText.replaceChildren();
-
-    [...text].forEach((character, index) => {
-        const letter = document.createElement("span");
-
-        letter.className = character === " "
-            ? "btn-letter space"
-            : "btn-letter";
-
-        letter.style.setProperty("--letter-index", index);
-
-        letter.textContent = character === " "
-            ? "\u00A0"
-            : character;
-
-        btnText.appendChild(letter);
-    });
+  btnText.replaceChildren();
+  [...text].forEach((character, index) => {
+    const letter = document.createElement("span");
+    letter.className = character === " " ? "btn-letter space" : "btn-letter";
+    letter.style.setProperty("--letter-index", index);
+    letter.textContent = character === " " ? "\u00A0" : character;
+    btnText.appendChild(letter);
+  });
 }
-
 function renderLoadingText() {
-    btnText.replaceChildren();
-
-    const loading = document.createElement("span");
-    loading.className = "btn-loading";
-    loading.textContent = "Connecting...";
-
-    btnText.appendChild(loading);
+  btnText.replaceChildren();
+  const loading = document.createElement("span");
+  loading.className = "btn-loading";
+  loading.textContent = "Connecting...";
+  btnText.appendChild(loading);
 }
+function showError(message) {
+  errorBox.textContent = message;
+  errorBox.style.display = "block";
+  successBox.style.display = "none";
+}
+function hideMessages() {
+  errorBox.style.display = "none";
+  successBox.style.display = "none";
+}
+function setLoading(active, message = "Connecting to Google...") {
+  isBusy = active;
+  googleBtn.disabled = active;
+  overlay.style.display = active ? "flex" : "none";
+  loadingText.textContent = message;
+  if (active) renderLoadingText();
+  else renderAnimatedText("Continue with Google");
+}
+function friendlyError(error) {
+  const message = String(error?.message || "");
+  if (!navigator.onLine) return "Please check your internet connection.";
+  if (/provider is not enabled|Unsupported provider/i.test(message))
+    return "Google login provider Supabase mein enable nahi hai.";
+  if (/redirect|callback/i.test(message))
+    return "Google login redirect setting check karo.";
+  return "Login failed: " + (message || "Please try again.");
+}
+async function goToNextPage(user) {
+  if (redirectHandled) return;
+  redirectHandled = true;
+  setLoading(true, "Getting your learning space ready...");
+  try {
+    const { data: profile, error } = await supabase
+      .from("profiles")
+      .select("child_name,buddy")
+      .eq("id", user.id)
+      .maybeSingle();
+    if (error) throw error;
 
-/* INITIAL BUTTON TEXT */
+    if (!profile) {
+      const { error: insertError } = await supabase.from("profiles").insert({
+        id: user.id,
+        email: user.email || "",
+        display_name: user.user_metadata?.full_name || user.user_metadata?.name || ""
+      });
+      if (insertError && insertError.code !== "23505") throw insertError;
+      window.location.replace("./child-name.html");
+      return;
+    }
+    if (profile.child_name && profile.buddy?.id) {
+      window.location.replace("./index-home.html");
+    } else if (profile.child_name) {
+      window.location.replace("./buddy-selection.html");
+    } else {
+      window.location.replace("./child-name.html");
+    }
+  } catch (error) {
+    console.error("Supabase profile routing error:", error);
+    redirectHandled = false;
+    setLoading(false);
+    showError("Profile load nahi ho paya. Internet check karke dobara try karo.");
+  }
+}
 
 renderAnimatedText("Continue with Google");
+document.body.style.visibility = "visible";
 
-/* MESSAGES */
-
-function showError(message) {
-    errorBox.textContent = message;
-    errorBox.style.display = "block";
-    successBox.style.display = "none";
+// Only route automatically after an OAuth callback, not merely because a
+// previously signed-in account exists when the parent opens the login screen.
+const { data: initialSession, error: sessionError } = await supabase.auth.getSession();
+if (sessionError) console.error("Supabase session check:", sessionError);
+const returnedFromOAuth = new URLSearchParams(window.location.search).has("code");
+if (returnedFromOAuth && initialSession.session?.user) {
+  await goToNextPage(initialSession.session.user);
+} else if (returnedFromOAuth && !initialSession.session) {
+  showError("Google login complete nahi hua. Dobara try karo.");
 }
-
-function hideMessages() {
-    errorBox.style.display = "none";
-    successBox.style.display = "none";
-}
-
-/* FRIENDLY ERRORS */
-
-function friendlyError(error) {
-    const code = error?.code || "";
-
-    switch (code) {
-        case "auth/api-key-not-valid":
-        case "auth/invalid-api-key":
-        case "auth/api-key-not-valid.-please-pass-a-valid-api-key.":
-            return "Firebase API key invalid hai. Firebase Web App configuration check karo.";
-
-        case "auth/unauthorized-domain":
-            return "GitHub Pages domain Firebase Authorized Domains mein add karo.";
-
-        case "auth/operation-not-allowed":
-            return "Firebase Console mein Google Sign-In enable karo.";
-
-        case "auth/network-request-failed":
-            return "Internet connection check karo aur dobara try karo.";
-            
-        case "auth/popup-blocked":
-            return "Browser ne Google Login block kar diya. Dobara try karo.";
-
-        case "auth/too-many-requests":
-            return "Bahut saare attempts ho gaye. Thodi der baad try karo.";
-
-        case "auth/web-storage-unsupported":
-            return "Browser storage support nahi kar raha. Chrome mein try karo.";
-
-        default:
-            return "Login failed: " + (code || error.message || "Unknown error");
-    }
-}
-
-/* LOADING CONTROL */
-
-function setLoading(active, message = "Connecting to Google...") {
-    isBusy = active;
-
-    googleBtn.disabled = active;
-    overlay.style.display = active ? "flex" : "none";
-    loadingText.textContent = message;
-
-    if (active) {
-        renderLoadingText();
-    } else {
-        renderAnimatedText("Continue with Google");
-    }
-}
-
-/* ROUTE USERS WITHOUT SHOWING THE WRONG STEP */
-async function goToNextPage(user, isNewUser = false) {
-    if (redirectHandled) return;
-    redirectHandled = true;
-    setLoading(true, "Getting your learning space ready...");
-    try {
-        localStorage.setItem("kidsTeacherUser", user.uid);
-        if (isNewUser) {
-            window.location.replace("./child-name.html");
-            return;
-        }
-        const profileRef = doc(db, "users", user.uid);
-        const snap = await Promise.race([
-            getDoc(profileRef),
-            new Promise((_, reject) => setTimeout(() => reject(new Error("Profile check timed out")), 7000))
-        ]);
-        const data = snap.exists() ? snap.data() : {};
-        let destination;
-        if (data.childName && data.buddy?.id) destination = "./index-home.html";
-        else if (data.childName) destination = "./buddy-selection.html";
-        else destination = "./child-name.html";
-        window.location.replace(destination);
-    } catch (error) {
-        console.error("Profile routing error:", error);
-        // Google sign-in has already succeeded. Do not ask the parent to sign in again
-        // just because the profile read timed out. The dashboard retries the profile read
-        // and routes to child-name/buddy setup if the cloud profile is genuinely missing.
-        window.location.replace("./index-home.html");
-    }
-}
-
-/* GOOGLE LOGIN */
 
 googleBtn.addEventListener("click", async () => {
-    if (isBusy) return;
-
-    hideMessages();
-
-    if (!navigator.onLine) {
-        showError("Please check your internet connection.");
-        return;
+  if (isBusy) return;
+  hideMessages();
+  if (!navigator.onLine) {
+    showError("Please check your internet connection.");
+    return;
+  }
+  if (navigator.vibrate) navigator.vibrate(40);
+  setLoading(true);
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: new URL("login.html", import.meta.url).href,
+      queryParams: { prompt: "select_account" }
     }
-
-    if (navigator.vibrate) {
-        navigator.vibrate(40);
-    }
-
-    try {
-        setLoading(true);
-
-        await setPersistence(
-            auth,
-            browserLocalPersistence
-        );
-
-        popupLoginInProgress = true;
-        const result = await signInWithPopup(auth, provider);
-        if (result && result.user) {
-            const details = getAdditionalUserInfo(result);
-            await goToNextPage(result.user, !!details?.isNewUser);
-        }
-
-    } catch (error) {
-        popupLoginInProgress = false;
-        console.error("Google Login Error:", error);
-
-        setLoading(false);
-        showError(friendlyError(error));
-    }
-});
-
-/* AUTH STATE */
-
-onAuthStateChanged(auth, user => {
-    // Do not auto-route an old signed-in Gmail account here.
-    // Let the parent explicitly choose the Google account from the login button.
-    document.body.style.visibility = "visible";
-});
-
-/* INITIALIZATION */
-setPersistence(auth, browserLocalPersistence).catch(error => {
-    console.error("Firebase Persistence Error:", error);
+  });
+  if (error) {
+    console.error("Supabase Google Login Error:", error);
+    setLoading(false);
     showError(friendlyError(error));
+  }
 });
-
-/* INTERNET STATUS */
-
 
 function updateNetworkStatus() {
-    offlineBanner.style.display =
-        navigator.onLine ? "none" : "block";
+  offlineBanner.style.display = navigator.onLine ? "none" : "block";
 }
-
 window.addEventListener("online", updateNetworkStatus);
 window.addEventListener("offline", updateNetworkStatus);
-
 updateNetworkStatus();
 
-/* TOUCH SPARKLES */
-
 const sparkleEmojis = ["✨", "⭐", "🌟", "💫"];
-
 document.addEventListener("pointerdown", event => {
-    if (event.target.closest("#googleBtn")) return;
-
-    const sparkle = document.createElement("span");
-    sparkle.className = "sparkle";
-
-    sparkle.textContent =
-        sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
-
-    sparkle.style.left = event.clientX + "px";
-    sparkle.style.top = event.clientY + "px";
-
-    document.body.appendChild(sparkle);
-
-    setTimeout(() => sparkle.remove(), 800);
+  if (event.target.closest("#googleBtn")) return;
+  const sparkle = document.createElement("span");
+  sparkle.className = "sparkle";
+  sparkle.textContent = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
+  sparkle.style.left = event.clientX + "px";
+  sparkle.style.top = event.clientY + "px";
+  document.body.appendChild(sparkle);
+  setTimeout(() => sparkle.remove(), 800);
 });
 
-/* SERVICE WORKER */
-
 if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-        navigator.serviceWorker
-            .register("./service-worker.js")
-            .catch(error => {
-                console.error("Service Worker Error:", error);
-            });
-    });
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js")
+      .catch(error => console.error("Service Worker Error:", error));
+  });
 }
-
 </script>
 </body>
 </html>
