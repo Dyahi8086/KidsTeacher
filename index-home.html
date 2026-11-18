@@ -590,6 +590,33 @@ body{
  .top .brand .brand-letter{animation:none!important;opacity:1!important;transform:none!important}
 }
 
+
+/* Floating navigation: soft pastel glass finish */
+.nav{
+ background:linear-gradient(135deg,rgba(255,190,218,.94) 0%,rgba(203,190,255,.94) 48%,rgba(174,226,255,.96) 100%)!important;
+ border:1px solid rgba(255,255,255,.96)!important;
+ box-shadow:8px 10px 22px rgba(128,104,160,.22),-5px -5px 16px rgba(255,255,255,.92),inset 2px 2px 6px rgba(255,255,255,.88),inset -3px -3px 8px rgba(105,91,160,.13)!important;
+ -webkit-backdrop-filter:blur(18px) saturate(1.35)!important;
+ backdrop-filter:blur(18px) saturate(1.35)!important;
+}
+.nav-wrap{
+ background:linear-gradient(180deg,transparent 0%,rgba(250,222,239,.34) 35%,rgba(232,222,250,.52) 100%)!important;
+ -webkit-backdrop-filter:blur(5px)!important;
+ backdrop-filter:blur(5px)!important;
+}
+/* Native-feeling press feedback for all tappable learning controls */
+.tile,.nav button,button,[role="button"],a{
+ -webkit-tap-highlight-color:transparent;
+ touch-action:manipulation;
+}
+.tile:active,.nav button:active,button:active,[role="button"]:active,a:active{
+ transform:scale(.95)!important;
+ transition:transform .11s ease-out!important;
+}
+@media(prefers-reduced-motion:reduce){
+ .tile,.nav button,button,[role="button"],a{transition:none!important}
+}
+
 </style>
 </head>
 <body>
