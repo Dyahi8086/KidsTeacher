@@ -14,284 +14,118 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        html, body {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background: #ff3b00;
-        }
-
-        /* =========================================
-           STAGE 1-3: RED ORANGE SPLASH SCREEN
-           ========================================= */
-
-        #splash-screen {
-            position: fixed;
-            inset: 0;
-            width: 100%;
-            height: 100vh;
-            height: 100dvh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 99990;
-            overflow: hidden;
-
-            background: linear-gradient(
-                145deg,
-                #ff3b00 0%,
-                #ff4b00 48%,
-                #ff2600 100%
-            );
-        }
-
-        /* STEP 1: BUNNY K LOGO (Appears, holds, then shrinks out) */
-        .kt-mark {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 150px;
-            height: 142px;
-
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-
-            color: #fff;
-            font-family: Arial, sans-serif;
-            font-size: 132px;
-            font-weight: 900;
-            line-height: .88;
-            letter-spacing: -12px;
-            padding-right: 10px;
-
-            opacity: 0;
-            transform: translate(-50%, -50%) scale(0.5);
-
-            animation: logoSequence 0.95s cubic-bezier(.22, 1, .36, 1) 0.1s forwards;
-        }
-
-        .kt-ears {
-            position: absolute;
-            width: 76px;
-            height: 58px;
-            top: 0;
-            left: 39px;
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            z-index: 2;
-        }
-
-        .kt-ear {
-            width: 29px;
-            height: 59px;
-            border: 10px solid #fff;
-            border-radius: 50% 50% 45% 45%;
-            background: transparent;
-        }
-
-        .kt-ear:first-child {
-            transform: rotate(-12deg);
-        }
-
-        .kt-ear:last-child {
-            transform: rotate(13deg);
-        }
-
-        .kt-face {
-            position: absolute;
-            z-index: 3;
-            top: 75px;
-            left: 57px;
-            width: 38px;
-            height: 28px;
-            pointer-events: none;
-        }
-
-        .kt-eyes {
-            display: flex;
-            justify-content: space-between;
-            padding: 0 4px;
-        }
-
-        .kt-eyes span {
-            width: 6px;
-            height: 9px;
-            border-radius: 50%;
-            background: #ff3b00;
-        }
-
-        .kt-smile {
-            width: 17px;
-            height: 9px;
-            margin: 1px auto 0;
-            border-bottom: 3px solid #ff3b00;
-            border-radius: 0 0 15px 15px;
-        }
-
-        @keyframes logoSequence {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.55);
-            }
-            25% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1.04);
-            }
-            38%, 75% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.25);
-            }
-        }
-
-        /* STEP 2: APP NAME EXPANDS IN CENTER, THEN COLLAPSES INTO DOT */
-        .kt-title {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-
-            color: #fff;
-            font-family: 'Nunito', Arial, sans-serif;
-            font-size: clamp(24px, 6.8vw, 34px);
-            font-weight: 900;
-            letter-spacing: 1.5px;
-            text-align: center;
-            white-space: nowrap;
-
-            opacity: 0;
-            clip-path: inset(0 50% 0 50%);
-
-            animation: titleSequence 1.05s cubic-bezier(.4, 0, .2, 1) 0.9s forwards;
-        }
-
-        @keyframes titleSequence {
-            0% {
-                opacity: 0;
-                clip-path: inset(0 50% 0 50%);
-                transform: translate(-50%, -50%) scale(0.92);
-            }
-            28% {
-                opacity: 1;
-                clip-path: inset(0 0% 0 0%);
-                transform: translate(-50%, -50%) scale(1);
-            }
-            72% {
-                opacity: 1;
-                clip-path: inset(0 0% 0 0%);
-                transform: translate(-50%, -50%) scale(1);
-            }
-            96% {
-                opacity: 1;
-                clip-path: inset(0 49% 0 49%);
-                transform: translate(-50%, -50%) scale(0.35);
-            }
-            100% {
-                opacity: 0;
-                clip-path: inset(0 50% 0 50%);
-                transform: translate(-50%, -50%) scale(0.1);
-            }
-        }
-
-        /* STEP 3: GLOWING STAR-BURST — replaces the plain white dot */
-        .kt-dot {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 34px;
-            height: 34px;
-            opacity: 0;
-            background: #fff;
-            clip-path: polygon(
-                50% 0%, 61% 36%, 100% 50%, 61% 64%,
-                50% 100%, 39% 64%, 0% 50%, 39% 36%
-            );
-            filter:
-                drop-shadow(0 0 7px #fff)
-                drop-shadow(0 0 18px #ffe7a3)
-                drop-shadow(0 0 34px #fff);
-            transform: translate(-50%, -50%) scale(.15) rotate(0deg);
-            animation: starBurstLaunch 0.9s cubic-bezier(.2,.8,.2,1) 1.88s both;
-        }
-
-        .kt-dot::before,
-        .kt-dot::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, transparent, #fff, transparent);
-            opacity: .9;
-        }
-
-        .kt-dot::before { transform: rotate(45deg) scale(.45, 1.5); }
-        .kt-dot::after  { transform: rotate(-45deg) scale(.45, 1.5); }
-
-        @keyframes starBurstLaunch {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(.12) rotate(0deg);
-            }
-            18% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1.25) rotate(35deg);
-            }
-            42% {
-                opacity: 1;
-                transform: translate(-50%, 105px) scale(.85) rotate(95deg);
-            }
-            72% {
-                opacity: 1;
-                transform: translate(-50%, -18vh) scale(1.8) rotate(190deg);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(-50%, -42vh) scale(3.2) rotate(280deg);
-            }
-        }
-
-    </style>
+*{box-sizing:border-box}
+html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#f4efff;font-family:'Nunito',Arial,sans-serif}
+#splash-screen{position:fixed;inset:0;width:100%;height:100vh;height:100dvh;display:flex;align-items:center;justify-content:center;z-index:99990;overflow:hidden;background:linear-gradient(145deg,#f3ecff 0%,#f8f3ff 48%,#e8f7f0 100%)}
+.splash-scene{position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+.splash-halo{position:absolute;width:min(82vw,390px);height:min(82vw,390px);border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.88) 0%,rgba(255,255,255,.35) 55%,transparent 72%);filter:blur(2px);animation:haloPulse 3.2s ease-in-out infinite}
+@keyframes haloPulse{0%,100%{transform:scale(.92);opacity:.65}50%{transform:scale(1.08);opacity:1}}
+.float-shape{position:absolute;border-radius:50%;opacity:.18;animation:floatUp 8s ease-in-out infinite}
+.float-shape:nth-child(2){animation-delay:-2s;animation-duration:10s}
+.float-shape:nth-child(3){animation-delay:-4s;animation-duration:7s}
+.float-shape:nth-child(4){animation-delay:-1s;animation-duration:9s}
+.float-shape:nth-child(5){animation-delay:-3s;animation-duration:11s}
+.float-shape:nth-child(6){animation-delay:-5s;animation-duration:6s}
+@keyframes floatUp{0%,100%{transform:translateY(0) rotate(0deg) scale(1)}33%{transform:translateY(-30px) rotate(120deg) scale(1.1)}66%{transform:translateY(15px) rotate(240deg) scale(.9)}}
+.star{position:absolute;width:5px;height:5px;border-radius:50%;background:#f4bd58;animation:twinkle 2s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.2;transform:scale(1)}50%{opacity:1;transform:scale(1.6)}}
+.character-container{position:relative;z-index:2;width:180px;height:240px;transform:translateX(-300px);animation:walkIn 1.8s cubic-bezier(.34,1.56,.64,1) .5s forwards;filter:drop-shadow(0 16px 18px rgba(75,45,122,.12))}
+@keyframes walkIn{0%{transform:translateX(-300px)}60%{transform:translateX(10px)}80%{transform:translateX(-5px)}100%{transform:translateX(0)}}
+#leftLeg{animation:legWalk .6s ease-in-out .5s 3;transform-origin:42px 140px}
+#rightLeg{animation:legWalk .6s ease-in-out .8s 3 reverse;transform-origin:72px 140px}
+@keyframes legWalk{0%,100%{transform:rotateZ(0)}50%{transform:rotateZ(25deg)}}
+#leftArm{animation:armWalk .6s ease-in-out .5s 3;transform-origin:24px 95px}
+#rightArm{animation:waveArm .6s ease-in-out 2.35s infinite;transform-origin:106px 95px}
+@keyframes armWalk{0%,100%{transform:rotateZ(0)}50%{transform:rotateZ(-20deg)}}
+@keyframes waveArm{0%,100%{transform:rotateZ(0)}50%{transform:rotateZ(-35deg)}}
+.char-body{animation:bodyBounce .6s ease-in-out .5s 3}
+@keyframes bodyBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.bag{position:absolute;bottom:45px;right:5px;transform-origin:center top}
+.bag-strap{animation:strapSwing .6s ease-in-out .5s 3;transform-origin:30px 5px}
+@keyframes strapSwing{0%,100%{transform:rotateZ(0)}50%{transform:rotateZ(-8deg)}}
+.eye{animation:blink 3s ease-in-out infinite}
+@keyframes blink{0%,85%,100%{transform:scaleY(1)}88%,95%{transform:scaleY(.1)}}
+.mouth{animation:smile .5s ease-in-out 2.2s forwards}
+@keyframes smile{0%{d:path("M 55 74 Q 65 80 75 74")}100%{d:path("M 50 74 Q 65 88 80 74")}}
+.kt-title{position:relative;z-index:3;margin-top:4px;color:#4a2d7a;font-size:clamp(27px,7vw,36px);font-weight:900;letter-spacing:.3px;text-align:center;opacity:0;transform:translateY(14px) scale(.92);animation:titleIn .8s cubic-bezier(.34,1.56,.64,1) 2s forwards;text-shadow:0 3px 0 rgba(255,255,255,.7)}
+@keyframes titleIn{to{opacity:1;transform:translateY(0) scale(1)}}
+.kt-subtitle{position:relative;z-index:3;margin-top:8px;color:#8b78aa;font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;opacity:0;animation:subtitleIn .7s ease 2.45s forwards}
+@keyframes subtitleIn{to{opacity:1}}
+.kt-dot{position:absolute;top:50%;left:50%;width:24px;height:24px;opacity:0;background:#fff;clip-path:polygon(50% 0%,61% 36%,100% 50%,61% 64%,50% 100%,39% 64%,0 50%,39% 36%);filter:drop-shadow(0 0 8px #fff) drop-shadow(0 0 20px #c4a5ff);transform:translate(-50%,-50%) scale(.12);animation:starBurstLaunch .75s cubic-bezier(.2,.8,.2,1) 4.25s both}
+@keyframes starBurstLaunch{0%{opacity:0;transform:translate(-50%,-50%) scale(.12) rotate(0)}20%{opacity:1;transform:translate(-50%,-50%) scale(1.25) rotate(35deg)}55%{opacity:1;transform:translate(-50%,80px) scale(.9) rotate(120deg)}100%{opacity:0;transform:translate(-50%,-42vh) scale(2.8) rotate(280deg)}}
+@media(max-height:650px){.character-container{transform:scale(.82) translateX(-300px);margin-top:-18px}.kt-title{margin-top:-4px}}
+@media(prefers-reduced-motion:reduce){.float-shape,.star,.splash-halo,.character-container,#leftLeg,#rightLeg,#leftArm,#rightArm,.char-body,.bag-strap,.eye,.mouth,.kt-title,.kt-subtitle,.kt-dot{animation:none!important}.character-container{transform:none;opacity:1}.kt-title,.kt-subtitle{opacity:1;transform:none}.kt-dot{display:none}}
+</style>
 </head>
 
 <body>
-
-    <!-- KIDS TEACHER SPLASH SCREEN -->
-    <div id="splash-screen" aria-label="Kids Teacher loading screen">
-
-        <!-- 1. Bunny K Logo -->
-        <div class="kt-mark" aria-hidden="true">
-            K
-            <div class="kt-ears">
-                <span class="kt-ear"></span>
-                <span class="kt-ear"></span>
-            </div>
-            <div class="kt-face">
-                <div class="kt-eyes">
-                    <span></span>
-                    <span></span>
-                </div>
-                <div class="kt-smile"></div>
-            </div>
-        </div>
-
-        <!-- 2. Brand Title -->
-        <div class="kt-title">KIDS TEACHER</div>
-
-        <!-- 3. Glowing Star-Burst Effect -->
-        <div class="kt-dot" aria-hidden="true"></div>
-
+<div id="splash-screen" aria-label="Kids Teacher splash screen">
+  <div class="splash-scene">
+    <div class="splash-halo" aria-hidden="true"></div>
+    <div class="float-shape" style="width:86px;height:86px;top:16%;left:12%;background:#bda3ff"></div>
+    <div class="float-shape" style="width:48px;height:48px;top:23%;right:15%;background:#f5bd66"></div>
+    <div class="float-shape" style="width:64px;height:64px;bottom:18%;left:17%;background:#9bd8bd"></div>
+    <div class="float-shape" style="width:36px;height:36px;bottom:24%;right:14%;background:#f4a9ce"></div>
+    <div class="star" style="top:22%;left:29%"></div>
+    <div class="star" style="top:31%;right:27%;animation-delay:.7s"></div>
+    <div class="star" style="bottom:24%;left:31%;animation-delay:1.2s"></div>
+    <div class="character-container flex-shrink-0 relative" id="characterContainer">
+     <div class="char-body relative"><!-- SVG Character - Cute student -->
+      <svg viewBox="0 0 130 200" width="100%" height="100%" id="characterSvg"><!-- Shadow --> <ellipse cx="65" cy="195" rx="35" ry="5" fill="rgba(0,0,0,0.08)" /> <!-- Legs group --> <g id="leftLeg">
+        <rect x="42" y="140" width="16" height="45" rx="8" fill="#5b4a8a" />
+        <ellipse cx="48" cy="186" rx="14" ry="8" fill="#7c3aed" />
+        <ellipse cx="48" cy="183" rx="14" ry="5" fill="#8b5cf6" />
+       </g> <g id="rightLeg">
+        <rect x="72" y="140" width="16" height="45" rx="8" fill="#5b4a8a" />
+        <ellipse cx="82" cy="186" rx="14" ry="8" fill="#7c3aed" />
+        <ellipse cx="82" cy="183" rx="14" ry="5" fill="#8b5cf6" />
+       </g> <!-- Body (shirt) --> <rect x="32" y="90" width="66" height="58" rx="20" fill="#8b5cf6" /> <rect x="38" y="95" width="54" height="48" rx="16" fill="#a78bfa" /> <!-- Shirt pocket --> <rect x="46" y="105" width="18" height="14" rx="4" fill="#7c3aed" opacity="0.3" /> <!-- Arms --> <g id="leftArm">
+        <rect x="15" y="95" width="18" height="40" rx="9" fill="#fbbf80" />
+        <circle cx="24" cy="138" r="8" fill="#fdd8a8" />
+       </g> <g id="rightArm" class="wave-arm">
+        <rect x="97" y="95" width="18" height="40" rx="9" fill="#fbbf80" />
+        <circle cx="106" cy="138" r="8" fill="#fdd8a8" />
+       </g> <!-- Head --> <circle cx="65" cy="60" r="38" fill="#fdd8a8" /> <!-- Hair --> <path d="M 27 55 Q 30 15 65 18 Q 100 15 103 55" fill="#4a2d7a" /> <path d="M 30 48 Q 35 25 65 22 Q 95 25 100 48" fill="#5b3a94" /> <!-- Hair tufts --> <path d="M 55 20 Q 60 8 68 18" fill="#4a2d7a" stroke="#4a2d7a" stroke-width="2" /> <path d="M 62 18 Q 70 6 75 20" fill="#4a2d7a" stroke="#4a2d7a" stroke-width="2" /> <!-- Face --> <!-- Eyes --> <g class="eye" style="transform-origin: 50px 58px;">
+        <ellipse cx="50" cy="58" rx="7" ry="8" fill="white" />
+        <ellipse cx="52" cy="59" rx="4" ry="5" fill="#2d1b4e" />
+        <ellipse cx="53" cy="57" rx="1.5" ry="2" fill="white" />
+       </g> <g class="eye" style="transform-origin: 80px 58px; animation-delay: 0.1s;">
+        <ellipse cx="80" cy="58" rx="7" ry="8" fill="white" />
+        <ellipse cx="78" cy="59" rx="4" ry="5" fill="#2d1b4e" />
+        <ellipse cx="77" cy="57" rx="1.5" ry="2" fill="white" />
+       </g> <!-- Eyebrows --> <path d="M 42 47 Q 50 43 57 47" stroke="#4a2d7a" stroke-width="2.5" fill="none" stroke-linecap="round" /> <path d="M 73 47 Q 80 43 88 47" stroke="#4a2d7a" stroke-width="2.5" fill="none" stroke-linecap="round" /> <!-- Cheeks (blush) --> <ellipse cx="38" cy="70" rx="8" ry="5" fill="#f9a8d4" opacity="0.5" /> <ellipse cx="92" cy="70" rx="8" ry="5" fill="#f9a8d4" opacity="0.5" /> <!-- Mouth --> <path class="mouth" d="M 55 74 Q 65 80 75 74" stroke="#c2185b" stroke-width="2.5" fill="none" stroke-linecap="round" id="mouth" /> <!-- Nose --> <circle cx="65" cy="68" r="2" fill="#e8b88a" />
+      </svg><!-- School bag on shoulder -->
+      <div class="bag" id="schoolBag">
+       <svg viewBox="0 0 50 55" width="50" height="55"><rect x="5" y="10" width="40" height="38" rx="8" fill="#7c3aed" /> <rect x="10" y="15" width="30" height="28" rx="5" fill="#8b5cf6" /> <!-- Bag flap --> <g class="bag-flap" id="bagFlap">
+         <rect x="5" y="10" width="40" height="12" rx="6" fill="#6d28d9" />
+         <ellipse cx="25" cy="16" rx="18" ry="5" fill="#5b21b6" opacity="0.4" />
+        </g> <!-- Bag strap --> <g class="bag-strap" id="bagStrap">
+         <path d="M 20 10 Q 10 0 5 15" stroke="#5b21b6" stroke-width="3" fill="none" stroke-linecap="round" />
+        </g> <!-- Pocket --> <rect x="15" y="22" width="14" height="10" rx="3" fill="#6d28d9" opacity="0.5" /> <circle cx="25" cy="27" r="2" fill="#fbbf24" />
+       </svg>
+      </div></div>
     </div>
+    <div class="kt-title">Kids Teacher</div>
+    <div class="kt-subtitle">Let's learn together</div>
+    <div class="kt-dot" aria-hidden="true"></div>
+  </div>
+</div>
+<!--
+Mascot animation adapted from official-alimm/Signup-Form.
+Copyright (c) Ali Mohammad. Source: https://github.com/official-alimm/Signup-Form
+MIT License:
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+-->
 
     <!-- SUPABASE AUTH CHECK: route returning users using their Supabase profile -->
     <script type="module">
@@ -356,7 +190,7 @@
         }
 
         // Safety fallback if the browser skips the animation event.
-        window.setTimeout(finishSplash, 3000);
+        window.setTimeout(finishSplash, 5100);
 
         // If Firebase takes unusually long, do not leave the splash stuck.
         window.setTimeout(() => {
@@ -364,7 +198,7 @@
                 routeStarted = true;
                 window.location.replace(window.__ktDestination || './login.html');
             }
-        }, 5500);
+        }, 6800);
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', async () => {
