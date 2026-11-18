@@ -102,11 +102,7 @@ h1{font:700 31px/1.08 Fredoka,sans-serif;letter-spacing:-.5px;margin:5px 0 6px}.
 <button data-tab="profile"><span class="ico">👤</span>Profile</button>
 </nav></div>
 <script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import {getAuth,onAuthStateChanged,signOut} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-import {getFirestore,doc,getDoc} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-const firebaseConfig={apiKey:"AIzaSyDidxkZQGLjJO4_Ido5FI6Q0s9vay0E3mA",authDomain:"kids-teacher-4387e.firebaseapp.com",projectId:"kids-teacher-4387e",storageBucket:"kids-teacher-4387e.firebasestorage.app",messagingSenderId:"420221167346",appId:"1:420221167346:web:da7ac80acdfd52339d526b",measurementId:"G-VJVS2ZMNLY"};
-const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
+import {supabase} from "./supabase-client.js";
 const base="https://raw.githubusercontent.com/nilbuild/page-mascot/main/public/mascots/";
 window.showTab=function(tab){
  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
@@ -117,15 +113,7 @@ window.showTab=function(tab){
 document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
 window.handleLogout=async()=>{
  try{
-  const uid=auth.currentUser?.uid;
-  await signOut(auth);
-  if(uid){
-   localStorage.removeItem("kt_child_name_"+uid);
-   localStorage.removeItem("kt_child_saved_at_"+uid);
-   localStorage.removeItem("kt_buddy_"+uid);
-  }
-  localStorage.removeItem("kt_pending_child_name");
-  localStorage.removeItem("kidsAgeGroup");
+  await supabase.auth.signOut();
   window.location.replace("./login.html");
  }catch(e){console.error(e)}
 };
@@ -144,38 +132,25 @@ function paintProfile(data){
  document.getElementById("profileBuddy").style.backgroundColor="#ffffff";
  document.getElementById("profileBuddy").style.backgroundRepeat="no-repeat";
 }
-onAuthStateChanged(auth,user=>{
- if(!user){window.location.replace("./login.html");return}
- let cachedBuddy={};
- try{cachedBuddy=JSON.parse(localStorage.getItem("kt_buddy_"+user.uid)||"{}")}catch{}
- const cachedName=localStorage.getItem("kt_child_name_"+user.uid)||"";
- if(cachedName&&cachedBuddy.id)paintProfile({childName:cachedName,buddy:cachedBuddy});
- getDoc(doc(db,"users",user.uid)).then(snap=>{
-  if(!snap.exists()){
-   localStorage.removeItem("kt_child_name_"+user.uid);
-   localStorage.removeItem("kt_child_saved_at_"+user.uid);
-   localStorage.removeItem("kt_buddy_"+user.uid);
-   window.location.replace("./child-name.html");
-   return;
-  }
-  const data=snap.data();
-  if(data.childName){
-   localStorage.setItem("kt_child_name_"+user.uid,data.childName);
-   localStorage.setItem("kt_child_saved_at_"+user.uid,String(Date.now()));
-  }else{
-   localStorage.removeItem("kt_child_name_"+user.uid);
-   localStorage.removeItem("kt_child_saved_at_"+user.uid);
-  }
-  if(data.buddy?.id)localStorage.setItem("kt_buddy_"+user.uid,JSON.stringify(data.buddy));
-  else localStorage.removeItem("kt_buddy_"+user.uid);
-  if(!data.childName){window.location.replace("./child-name.html");return}
-  if(!data.buddy?.id){window.location.replace("./buddy-selection.html");return}
-  paintProfile(data);
- }).catch(err=>{
-  console.warn("Cloud profile unavailable; using this account's local profile:",err);
-  if(!cachedName||!cachedBuddy.id)document.getElementById("helloName").textContent="Profile sync pending. Internet check karo.";
- });
-});
+const {data:sessionData,error:sessionError}=await supabase.auth.getSession();
+if(sessionError)console.error("Supabase session check:",sessionError);
+const user=sessionData.session?.user||null;
+if(!user){window.location.replace("./login.html");}
+else{
+ const {data,error}=await supabase.from("profiles").select("child_name,buddy").eq("id",user.id).maybeSingle();
+ if(error){
+  console.error("Supabase home profile lookup failed:",error);
+  document.getElementById("helloName").textContent="Profile load nahi hua. Internet check karo.";
+ }else if(!data?.child_name){
+  window.location.replace("./child-name.html");
+ }else if(!data.buddy?.id){
+  window.location.replace("./buddy-selection.html");
+ }else{
+  localStorage.setItem("kt_child_name_"+user.id,data.child_name);
+  localStorage.setItem("kt_buddy_"+user.id,JSON.stringify(data.buddy));
+  paintProfile({childName:data.child_name,buddy:data.buddy});
+ }
+}
 
 const canvas=document.getElementById("drawingCanvas"),ctx=canvas.getContext("2d");let drawing=false,color="#ff647c",eraser=false;
 function sizeCanvas(){const ratio=window.devicePixelRatio||1,rect=canvas.getBoundingClientRect();const old=document.createElement("canvas");old.width=canvas.width;old.height=canvas.height;old.getContext("2d").drawImage(canvas,0,0);canvas.width=rect.width*ratio;canvas.height=rect.height*ratio;ctx.setTransform(ratio,0,0,ratio,0,0);if(old.width&&old.height)ctx.drawImage(old,0,0,old.width,old.height,0,0,rect.width,rect.height);ctx.lineCap="round";ctx.lineJoin="round"}new ResizeObserver(sizeCanvas).observe(canvas);
