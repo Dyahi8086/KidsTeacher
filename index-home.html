@@ -617,6 +617,53 @@ body{
  .tile,.nav button,button,[role="button"],a{transition:none!important}
 }
 
+
+/* Claymorphism + neumorphism blend: floating pastel navigation and tactile buttons */
+.nav-wrap{
+ bottom:0!important;
+ padding:10px 14px calc(14px + env(safe-area-inset-bottom))!important;
+ background:linear-gradient(180deg,transparent 0%,rgba(255,226,239,.16) 42%,rgba(255,224,238,.42) 100%)!important;
+ backdrop-filter:blur(7px)!important;
+ -webkit-backdrop-filter:blur(7px)!important;
+}
+.nav{
+ background:linear-gradient(145deg,rgba(255,226,241,.97) 0%,rgba(224,224,255,.96) 52%,rgba(211,239,255,.97) 100%)!important;
+ border:1px solid rgba(255,255,255,.98)!important;
+ border-radius:27px!important;
+ box-shadow:9px 11px 20px rgba(170,135,174,.27),-7px -7px 18px rgba(255,255,255,.95),inset 3px 3px 7px rgba(255,255,255,.92),inset -3px -3px 8px rgba(171,151,205,.20)!important;
+}
+.nav button{
+ color:#51456f!important;
+ border-radius:17px!important;
+ transition:transform .16s cubic-bezier(.2,.8,.2,1),background .2s,box-shadow .2s!important;
+ -webkit-tap-highlight-color:transparent;
+}
+.nav button:nth-child(3),
+.nav button:nth-child(3) .ico{color:#51456f!important}
+.nav button.active:not(.nav-draw){
+ color:#5140a0!important;
+ background:linear-gradient(145deg,#fff0fa,#e4ddff)!important;
+ box-shadow:inset 4px 4px 8px rgba(177,155,210,.24),inset -4px -4px 8px rgba(255,255,255,.98),0 3px 8px rgba(158,132,191,.16)!important;
+}
+.nav button.active:not(.nav-draw) .ico{color:#5140a0!important}
+.nav button:active,.tile:active,button.tile:active{
+ transform:scale(.95)!important;
+}
+.tile{
+ transition:transform .16s cubic-bezier(.2,.8,.2,1),box-shadow .16s!important;
+ -webkit-tap-highlight-color:transparent;
+}
+.tile:active{
+ transform:scale(.95)!important;
+ filter:saturate(1.12);
+}
+button:not(.nav button):not(.tile){
+ -webkit-tap-highlight-color:transparent;
+}
+@media(prefers-reduced-motion:reduce){
+ .nav button,.tile{transition:none!important}
+}
+
 </style>
 </head>
 <body>
