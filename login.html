@@ -192,7 +192,7 @@ if (brandAnimated && !window.matchMedia("(prefers-reduced-motion: reduce)").matc
         const letter = document.createElement("span");
         letter.className = character === " " ? "brand-letter space" : "brand-letter";
         letter.style.animationDelay = (index * 0.035) + "s";
-        letter.textContent = character === " " ? "\\u00A0" : character;
+        letter.textContent = character === " " ? "\u00A0" : character;
         brandAnimated.appendChild(letter);
         await wait(145);
       }
