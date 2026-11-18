@@ -33,6 +33,7 @@ body{min-height:100vh;min-height:100dvh;overflow-x:hidden;overflow-y:auto;positi
 .brand-lockup{display:flex;align-items:center;gap:11px}
 .brand-mark{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#263f34;color:#f8f5ec;font:italic 700 25px 'Outfit',sans-serif;box-shadow:7px 7px 16px #d8d6cc,-6px -6px 15px #fffdf6}
 .brand-name{font:italic 700 19px 'Outfit',sans-serif;color:#2e493b;letter-spacing:-.5px}
+.brand-name{display:inline-block;min-width:132px;white-space:nowrap;transition:opacity .42s ease,transform .42s ease}.brand-name.is-hiding{opacity:0;transform:translateY(5px)}.brand-name .brand-letter{display:inline-block;animation:brandLetterIn .24s ease both}.brand-name .brand-letter.space{width:.28em}@keyframes brandLetterIn{from{opacity:0;transform:translateY(9px) scale(.82);filter:blur(3px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}@media(prefers-reduced-motion:reduce){.brand-name,.brand-name .brand-letter{animation:none!important;transition:none!important}}
 .parent-pill{padding:10px 17px;border-radius:30px;border:1px solid #e4dfd4;background:#f8f6ef;color:#827d71;font-size:10px;font-weight:800;letter-spacing:.17em;box-shadow:5px 5px 12px #dfdcd2,-5px -5px 12px #fffdf7}
 .login-popup-box{position:relative;z-index:10;width:100%;display:flex;flex-direction:column;align-items:stretch;text-align:center;overflow:hidden;background:var(--cream);border:1px solid rgba(224,220,209,.9);border-radius:38px;box-shadow:18px 18px 42px rgba(194,190,178,.4),-15px -15px 38px rgba(255,255,250,.95)}
 .login-popup-box:before{display:none}
@@ -83,7 +84,7 @@ body{min-height:100vh;min-height:100dvh;overflow-x:hidden;overflow-y:auto;positi
 <div id="offlineBanner">⚠️ No Internet Connection! Please check your network.</div>
 <div class="login-shell">
   <header class="brand-row">
-    <div class="brand-lockup"><span class="brand-mark" aria-hidden="true">k</span><span class="brand-name">kids teacher</span></div>
+    <div class="brand-lockup"><span class="brand-mark" aria-hidden="true">k</span><span class="brand-name" id="brandAnimated" aria-label="kids teacher">kids teacher</span></div>
     <span class="parent-pill">PARENT AREA</span>
   </header>
   <main class="login-popup-box">
@@ -170,7 +171,37 @@ function setLoading(active, message = "Connecting to Google...") {
   overlay.style.display = active ? "flex" : "none";
   loadingText.textContent = message;
   if (active) renderLoadingText();
-  else renderAnimatedText("Continue with Google");
+  else // Show the complete Kids Teacher name, fade it out, then type it letter by letter.
+const brandAnimated = document.getElementById("brandAnimated");
+if (brandAnimated && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const brandFullName = "kids teacher";
+  const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+  const typeBrandName = async () => {
+    while (true) {
+      brandAnimated.classList.remove("is-hiding");
+      brandAnimated.textContent = brandFullName;
+      await wait(1700);
+      brandAnimated.classList.add("is-hiding");
+      await wait(460);
+      brandAnimated.textContent = "";
+      brandAnimated.classList.remove("is-hiding");
+      for (const [index, character] of [...brandFullName].entries()) {
+        const letter = document.createElement("span");
+        letter.className = character === " " ? "brand-letter space" : "brand-letter";
+        letter.style.animationDelay = (index * 0.035) + "s";
+        letter.textContent = character === " " ? "\u00A0" : character;
+        brandAnimated.appendChild(letter);
+        await wait(145);
+      }
+      await wait(1650);
+      brandAnimated.classList.add("is-hiding");
+      await wait(480);
+    }
+  };
+  typeBrandName();
+}
+
+renderAnimatedText("Continue with Google");
 }
 function friendlyError(error) {
   const message = String(error?.message || "");
