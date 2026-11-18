@@ -115,7 +115,20 @@ window.showTab=function(tab){
  window.scrollTo({top:0,behavior:"smooth"});
 };
 document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
-window.handleLogout=async()=>{try{await signOut(auth);localStorage.removeItem("kidsAgeGroup");window.location.replace("./login.html")}catch(e){console.error(e)}};
+window.handleLogout=async()=>{
+ try{
+  const uid=auth.currentUser?.uid;
+  await signOut(auth);
+  if(uid){
+   localStorage.removeItem("kt_child_name_"+uid);
+   localStorage.removeItem("kt_child_saved_at_"+uid);
+   localStorage.removeItem("kt_buddy_"+uid);
+  }
+  localStorage.removeItem("kt_pending_child_name");
+  localStorage.removeItem("kidsAgeGroup");
+  window.location.replace("./login.html");
+ }catch(e){console.error(e)}
+};
 function paintProfile(data){
  const name=(data.childName||data.buddy?.name||"Friend").trim(),buddy=data.buddy||{},buddyId=buddy.id||"bunny";
  document.getElementById("helloName").textContent="Hello, "+name+"! 👋";
@@ -139,13 +152,22 @@ onAuthStateChanged(auth,user=>{
  if(cachedName&&cachedBuddy.id)paintProfile({childName:cachedName,buddy:cachedBuddy});
  getDoc(doc(db,"users",user.uid)).then(snap=>{
   if(!snap.exists()){
-   if(!cachedName)window.location.replace("./child-name.html");
-   else if(!cachedBuddy.id)window.location.replace("./buddy-selection.html");
+   localStorage.removeItem("kt_child_name_"+user.uid);
+   localStorage.removeItem("kt_child_saved_at_"+user.uid);
+   localStorage.removeItem("kt_buddy_"+user.uid);
+   window.location.replace("./child-name.html");
    return;
   }
   const data=snap.data();
-  if(data.childName)localStorage.setItem("kt_child_name_"+user.uid,data.childName);
+  if(data.childName){
+   localStorage.setItem("kt_child_name_"+user.uid,data.childName);
+   localStorage.setItem("kt_child_saved_at_"+user.uid,String(Date.now()));
+  }else{
+   localStorage.removeItem("kt_child_name_"+user.uid);
+   localStorage.removeItem("kt_child_saved_at_"+user.uid);
+  }
   if(data.buddy?.id)localStorage.setItem("kt_buddy_"+user.uid,JSON.stringify(data.buddy));
+  else localStorage.removeItem("kt_buddy_"+user.uid);
   if(!data.childName){window.location.replace("./child-name.html");return}
   if(!data.buddy?.id){window.location.replace("./buddy-selection.html");return}
   paintProfile(data);
