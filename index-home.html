@@ -251,6 +251,22 @@ body{background:radial-gradient(ellipse at 8% 0%,#e4f5ff 0,transparent 42%),radi
 .nav button[data-tab="video"].active:after{display:none!important}
 @media(max-width:390px){.nav-wrap{padding:0 13px!important}.nav{gap:2px!important;padding:7px 6px!important}.nav button{font-size:10px!important}.nav button[data-tab="video"]{flex-basis:60px!important;width:60px!important;height:60px!important;min-height:60px!important;margin-top:-21px!important}}
 
+
+/* Restore the original single-row yellow clay navigation (no raised centre button) */
+.nav-wrap{position:fixed!important;left:0!important;right:0!important;bottom:0!important;padding:10px 14px calc(12px + env(safe-area-inset-bottom))!important;background:linear-gradient(180deg,transparent 0%,rgba(234,240,241,.78) 30%,#eaf0f1 100%)!important;pointer-events:none!important}
+.nav{pointer-events:auto!important;position:relative!important;width:min(100%,520px)!important;margin:auto!important;display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;align-items:center!important;gap:2px!important;padding:6px 7px!important;background:linear-gradient(145deg,#fff0a0,#f3d45e)!important;border:1px solid #fff8cc!important;border-radius:24px!important;box-shadow:9px 10px 19px #c2b36d,-8px -8px 17px #fff,inset 3px 3px 7px #fff9d8,inset -3px -3px 7px #d6b643!important}
+.nav button{position:relative!important;min-width:0!important;width:auto!important;height:auto!important;min-height:49px!important;margin:0!important;border:0!important;background:transparent!important;border-radius:14px!important;padding:4px 0!important;color:#896d31!important;font:800 9px Nunito,sans-serif!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3px!important;white-space:nowrap!important;box-shadow:none!important;transform:none!important}
+.nav button .ico{width:23px!important;height:23px!important;display:grid!important;place-items:center!important;color:currentColor!important}
+.nav button .ico svg{width:21px!important;height:21px!important;fill:none!important;stroke:currentColor!important;stroke-width:1.9!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+.nav button[data-tab="video"]{flex:initial!important;width:auto!important;height:auto!important;min-height:49px!important;margin:0!important;border:0!important;border-radius:14px!important;background:transparent!important;color:#e53945!important;box-shadow:none!important}
+.nav button[data-tab="video"] .ico{color:#e53945!important}
+.nav button.active{background:linear-gradient(145deg,#fff9d9,#f5df87)!important;color:#7154ca!important;box-shadow:inset 4px 4px 8px #d7bd5d77,inset -4px -4px 8px #fffde8!important;border:0!important;transform:none!important}
+.nav button.active .ico{color:inherit!important;transform:translateY(-2px) scale(1.08)!important}
+.nav button[data-tab="video"].active{background:linear-gradient(145deg,#ffe4e3,#ffb8b7)!important;color:#b72e38!important;box-shadow:inset 4px 4px 8px #d98c8c77,inset -4px -4px 8px #fff1ee!important}
+.nav button[data-tab="video"].active .ico{color:#e53945!important}
+.nav button.active:after{display:none!important}
+@media(max-width:380px){.nav button{font-size:8px!important}.nav{gap:1px!important;padding-left:4px!important;padding-right:4px!important}.nav button .ico svg{width:20px!important;height:20px!important}}
+
 </style>
 </head>
 <body>
