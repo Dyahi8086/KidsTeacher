@@ -165,11 +165,35 @@ body{background:radial-gradient(ellipse at 0% 7%,#d7f8e9 0 12%,transparent 34%),
 .buddy.selected:after{background:linear-gradient(145deg,#8de2b7,#39ad83)!important}
 #continue{background:linear-gradient(110deg,#a6ebcb 0%,#70d7b0 48%,#65c7e9 100%)!important;box-shadow:inset 0 5px 7px rgba(255,255,255,.62),inset 0 -6px 8px rgba(43,143,100,.12),0 7px 0 #45ad91,0 13px 20px rgba(73,163,150,.18)!important}
 
+
+/* POLISHED WARM MINT + AQUA CLAY THEME — NO STAR DECORATIONS */
+:root{--ink:#164e4a;--muted:#71827c;--cream:#fffaf1}
+body{background:radial-gradient(ellipse at 0% 0%,#d8f7e9 0%,transparent 34%),radial-gradient(ellipse at 100% 22%,#d9f2fa 0%,transparent 34%),radial-gradient(ellipse at 85% 100%,#ffe5d4 0%,transparent 35%),linear-gradient(145deg,#fffaf1 0%,#f4fff8 52%,#f1fbff 100%)!important;color:#164e4a}
+h1{color:#164e4a!important;text-shadow:0 2px 0 #fff,0 5px 12px rgba(36,102,88,.12)!important;letter-spacing:-1.3px}
+.sub{color:#71827c!important}
+.preview{background:linear-gradient(125deg,#fffdf5 0%,#e7fff1 58%,#e9f8ff 100%)!important;border:1px solid rgba(255,255,255,.98)!important;box-shadow:inset 0 3px 8px rgba(255,255,255,.96),inset 0 -3px 8px rgba(105,176,145,.10),0 9px 0 #c6e8d7,0 16px 24px rgba(59,125,103,.13)!important}
+.preview-avatar{background:linear-gradient(145deg,#fff9ed,#e0f8eb 65%,#e5f5ff)!important}
+.preview-kicker{color:#269c75!important}
+.preview strong{color:#164e4a!important}
+.preview small{color:#71827c!important}
+.grid-title{color:#52736a!important}
+.grid-title:after{background:linear-gradient(90deg,#c8e5d7,transparent)!important}
+.buddy{background:linear-gradient(145deg,#fffefa 0%,#f0fff6 58%,#eff9ff 100%)!important;border:1px solid rgba(255,255,255,.98)!important;box-shadow:inset 0 3px 8px rgba(255,255,255,.96),inset 0 -3px 8px rgba(108,174,143,.09),0 7px 0 #c9e8d8,0 13px 20px rgba(65,127,105,.12)!important}
+.buddy:before{background:radial-gradient(circle at 50% 22%,rgba(255,255,255,.92),transparent 62%)!important}
+.buddy.selected{transform:translateY(4px)!important;border:3px solid #36ad83!important;background:linear-gradient(145deg,#eafff2,#d5f5e5 58%,#e5f5ff)!important;box-shadow:inset 0 5px 10px rgba(75,147,111,.13),inset 0 -2px 5px rgba(255,255,255,.9),0 2px 0 #80c9a8,0 6px 13px rgba(57,153,112,.15)!important}
+.buddy.selected:after{content:"✓"!important;background:linear-gradient(145deg,#8de2b7,#27a978)!important;color:#fff!important;box-shadow:0 4px 9px rgba(39,169,120,.3)!important}
+.mascot-name{color:#245e53!important}
+.selected-label{color:#269c75!important}
+#continue{background:linear-gradient(110deg,#70d9ad 0%,#37bf91 52%,#36acd0 100%)!important;color:#fff!important;border:1px solid rgba(255,255,255,.9)!important;text-shadow:0 2px 0 rgba(22,105,88,.25)!important;box-shadow:inset 0 5px 8px rgba(255,255,255,.5),inset 0 -5px 8px rgba(28,135,111,.13),0 7px 0 #289b82,0 14px 22px rgba(48,157,133,.2)!important}
+#continue:active:not(:disabled){transform:translateY(4px)!important;box-shadow:inset 0 4px 7px rgba(255,255,255,.4),0 2px 0 #289b82,0 6px 10px rgba(48,157,133,.15)!important}
+.footer{background:linear-gradient(180deg,rgba(246,255,250,0),rgba(246,255,250,.94) 24%,#f6fffa 100%)!important}
+.preview-sparkle,.buddy-effect{display:none!important}
+
 </style>
 </head>
 <body><main class="wrap">
-<h1>Pick Your Buddy!</h1><p class="sub">This little friend will guide you on your learning adventure ✨</p>
-<div class="preview"><div class="preview-avatar"><button id="bigMascot" class="mascot" type="button" aria-label="Boop your selected buddy"></button></div><div class="preview-copy"><span class="preview-kicker">YOUR BUDDY</span><strong id="previewTitle">Choose your favourite character</strong><small id="previewText">Tap a character to meet your new friend!</small></div><span class="preview-sparkle" aria-hidden="true">✦</span></div>
+<h1>Pick Your Buddy!</h1><p class="sub">This little friend will guide you on your learning adventure</p>
+<div class="preview"><div class="preview-avatar"><button id="bigMascot" class="mascot" type="button" aria-label="Boop your selected buddy"></button></div><div class="preview-copy"><span class="preview-kicker">YOUR BUDDY</span><strong id="previewTitle">Choose your favourite character</strong><small id="previewText">Tap a character to meet your new friend!</small></div></div>
 <div class="grid-title"><span>Choose your favourite Buddy</span></div>
 <section class="grid" id="buddyGrid" aria-label="Choose a buddy"></section>
 <div class="footer"><button id="continue" style="display:none" disabled>Next →</button><p class="status" id="status" role="status"></p></div>
