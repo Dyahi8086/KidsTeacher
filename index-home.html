@@ -491,6 +491,15 @@ body{background:linear-gradient(145deg,#eaf8ff 0%,#f8fbff 48%,#f3f0ff 100%)!impo
 .nav button:active{transform:translateY(2px) scale(.96)!important}
 @media(max-width:380px){.nav{padding:6px 4px!important;gap:0!important}.nav button{font-size:8px!important}.nav button .ico,.nav button .ico svg{width:28px!important;height:28px!important}}
 
+
+/* Genuine Blender-rendered 3Dicons (CC0), not emoji or CSS-drawn symbols */
+.nav button .ico{width:38px!important;height:38px!important;display:grid!important;place-items:center!important;filter:drop-shadow(0 4px 3px rgba(40,65,90,.16))!important}
+.nav button .ico img{display:block!important;width:38px!important;height:38px!important;object-fit:contain!important}
+.nav button .ico svg{display:none!important}
+.nav button{min-height:60px!important}
+.nav button.active .ico{transform:translateY(-3px) scale(1.06)!important}
+@media(max-width:380px){.nav button .ico,.nav button .ico img{width:33px!important;height:33px!important}}
+
 </style></head>
 <body>
 <div class="app">
@@ -537,11 +546,11 @@ body{background:linear-gradient(145deg,#eaf8ff 0%,#f8fbff 48%,#f3f0ff 100%)!impo
 </section>
 </div>
 <div class="nav-wrap"><nav class="nav" aria-label="Main navigation">
-<button class="active" data-tab="home" aria-label="Home"><span class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="nh" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff9e9e"/><stop offset="1" stop-color="#ef4f78"/></linearGradient><linearGradient id="nd" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#dcefff"/></linearGradient></defs><path d="M5 22 24 6l19 16" fill="none" stroke="#c83d65" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 21v20h28V21L24 9z" fill="url(#nd)" stroke="#d4e4ef" stroke-width="2"/><path d="M19 41V28a5 5 0 0 1 10 0v13" fill="#55baf5" stroke="#318dcc" stroke-width="2"/><path d="M10 22 24 10l14 12" fill="none" stroke="url(#nh)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Home</button>
-<button data-tab="drawing" aria-label="Drawing"><span class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="db" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe58a"/><stop offset="1" stop-color="#f5a623"/></linearGradient></defs><path d="M8 9q0-4 4-4h24q4 0 4 4v29q0 4-4 4H12q-4 0-4-4z" fill="url(#db)" stroke="#d99118" stroke-width="2"/><path d="M15 14h18M15 20h18" stroke="#fff4c7" stroke-width="2" stroke-linecap="round"/><path d="m17 32 12-12 5 5-12 12-7 2z" fill="#f17d9a" stroke="#c74f76" stroke-width="2"/><path d="m29 20 3-3 5 5-3 3" fill="#70c9ed" stroke="#358db7" stroke-width="2"/></svg></span>Drawing</button>
-<button data-tab="video" aria-label="Video"><span class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="vp" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#79dcff"/><stop offset="1" stop-color="#328fe8"/></linearGradient></defs><rect x="4" y="9" width="40" height="30" rx="8" fill="url(#vp)" stroke="#287dc5" stroke-width="2"/><path d="m20 16 14 8-14 8z" fill="#fff" stroke="#e4f8ff" stroke-width="1.5"/><path d="M8 13h8" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".8"/></svg></span>Video</button>
-<button data-tab="leaderboard" aria-label="Leaderboard"><span class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="tr" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe77b"/><stop offset="1" stop-color="#f4a928"/></linearGradient></defs><path d="M15 6h18v13a9 9 0 0 1-18 0z" fill="url(#tr)" stroke="#d28a18" stroke-width="2"/><path d="M15 11H7v5a9 9 0 0 0 10 9M33 11h8v5a9 9 0 0 1-10 9" fill="none" stroke="#e5a02a" stroke-width="4" stroke-linecap="round"/><path d="M24 28v8M16 42h16M19 36h10" stroke="#b87924" stroke-width="4" stroke-linecap="round"/><path d="m24 9 2 4 4 .6-3 3 .7 4.2-3.7-2-3.7 2 .7-4.2-3-3 4-.6z" fill="#fff5bd"/></svg></span>Leaderboard</button>
-<button data-tab="profile" aria-label="Profile"><span class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="pr" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b9a2ff"/><stop offset="1" stop-color="#7856d9"/></linearGradient></defs><circle cx="24" cy="16" r="10" fill="#ffd3ad" stroke="#c98e70" stroke-width="2"/><path d="M9 41c1-10 7-15 15-15s14 5 15 15" fill="url(#pr)" stroke="#6847c1" stroke-width="2"/><path d="M16 14q8-10 16 0" fill="none" stroke="#70442e" stroke-width="4" stroke-linecap="round"/><circle cx="20" cy="17" r="1.5" fill="#49342c"/><circle cx="28" cy="17" r="1.5" fill="#49342c"/><path d="M21 22q3 3 6 0" fill="none" stroke="#bd6b66" stroke-width="1.5" stroke-linecap="round"/></svg></span>Profile</button>
+<button class="active" data-tab="home" aria-label="Home"><span class="ico"><img src="https://3dicons.sgp1.cdn.digitaloceanspaces.com/v1/dynamic/color/explorer-dynamic-color.png" alt="" loading="lazy"></span>Home</button>
+<button data-tab="drawing" aria-label="Drawing"><span class="ico"><img src="https://3dicons.sgp1.cdn.digitaloceanspaces.com/v1/dynamic/color/pencil-dynamic-color.png" alt="" loading="lazy"></span>Drawing</button>
+<button data-tab="video" aria-label="Video"><span class="ico"><img src="https://3dicons.sgp1.cdn.digitaloceanspaces.com/v1/dynamic/color/video-camera-dynamic-color.png" alt="" loading="lazy"></span>Video</button>
+<button data-tab="leaderboard" aria-label="Leaderboard"><span class="ico"><img src="https://3dicons.sgp1.cdn.digitaloceanspaces.com/v1/dynamic/color/trophy-dynamic-color.png" alt="" loading="lazy"></span>Leaderboard</button>
+<button data-tab="profile" aria-label="Profile"><span class="ico"><img src="https://3dicons.sgp1.cdn.digitaloceanspaces.com/v1/dynamic/color/boy-dynamic-color.png" alt="" loading="lazy"></span>Profile</button>
 </nav></div>
 <script type="module">
 import {supabase} from "./supabase-client.js";
