@@ -232,6 +232,29 @@ h1 .wiggle-letter{display:inline-block;animation:titleLetterBob 2.8s ease-in-out
 @media(max-height:760px){.buddy{min-height:128px!important}.buddy .mascot{width:116px!important;height:108px!important}}
 @media(prefers-reduced-motion:reduce){h1 .wiggle-letter{animation:none!important}}
 
+
+/* KEEP HEADER + BUDDY PREVIEW EXACTLY AS-IS. CLAYMORPHISM ONLY BELOW THE DIVIDER */
+.grid{gap:12px!important;padding:0 1px 14px!important}
+.buddy{position:relative;min-height:145px!important;padding:5px 5px 7px!important;border:1px solid rgba(255,255,255,.96)!important;border-radius:25px!important;background:linear-gradient(145deg,#f7fff9 0%,#e5f5eb 100%)!important;box-shadow:inset 4px 4px 8px rgba(255,255,255,.98),inset -4px -4px 9px rgba(166,199,178,.22),0 6px 0 #c6dfce,0 11px 17px rgba(75,117,91,.14)!important;transition:transform .22s cubic-bezier(.2,.8,.2,1),box-shadow .22s,border-color .22s!important}
+.buddy:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.78),transparent 56%)!important;opacity:1!important}
+.buddy .mascot{position:relative;z-index:1;width:132px!important;height:122px!important;max-width:100%!important;filter:drop-shadow(0 7px 5px rgba(64,91,72,.18))!important}
+.mascot-name{position:relative;z-index:1;margin-top:-2px!important;font-size:14px!important;font-weight:1000!important;color:#315f51!important}
+.selected-label{position:relative;z-index:1;min-height:12px!important;color:#269b75!important}
+.buddy:active{transform:translateY(3px) scale(.985)!important;box-shadow:inset 5px 5px 9px rgba(164,197,175,.28),inset -4px -4px 8px rgba(255,255,255,.92),0 2px 0 #c6dfce!important}
+.buddy.selected{transform:translateY(5px)!important;border:2px solid #53bd8d!important;background:linear-gradient(145deg,#e5f8ec,#ccebd9)!important;box-shadow:inset 5px 5px 10px rgba(139,183,153,.27),inset -4px -4px 9px rgba(255,255,255,.94),0 1px 0 #b2d9c0,0 4px 9px rgba(65,145,98,.13)!important}
+.buddy.selected:after{content:"✓";position:absolute;z-index:3;right:9px;top:9px;display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:linear-gradient(145deg,#8be0b4,#35ad7c);color:#fff;font-size:15px;font-weight:1000;box-shadow:inset 0 2px 3px rgba(255,255,255,.55),0 3px 7px rgba(40,139,96,.28)}
+.footer{position:sticky!important;z-index:5!important;bottom:0!important;padding:12px 0 calc(9px + env(safe-area-inset-bottom))!important;background:linear-gradient(180deg,rgba(234,245,238,0),rgba(234,245,238,.9) 30%,#eaf5ee 100%)!important}
+#continue{display:none;min-height:62px!important;border:1px solid rgba(255,255,255,.95)!important;border-radius:23px!important;background:linear-gradient(145deg,#b9f0d2 0%,#79d9ad 54%,#49bd8c 100%)!important;color:#fff!important;font:1000 19px Nunito,sans-serif!important;letter-spacing:.35px!important;text-shadow:0 2px 0 rgba(35,126,87,.25)!important;box-shadow:inset 5px 5px 9px rgba(255,255,255,.66),inset -5px -5px 9px rgba(37,144,98,.14),0 6px 0 #42a979,0 12px 20px rgba(58,153,108,.2)!important;transition:transform .18s,box-shadow .18s!important}
+#continue:after{content:"";display:inline-block;width:8px;height:8px;margin-left:11px;border-top:3px solid white;border-right:3px solid white;transform:rotate(45deg);vertical-align:2px;animation:nextNudge 1.05s ease-in-out infinite}
+#continue:active:not(:disabled){transform:translateY(4px)!important;box-shadow:inset 4px 4px 8px rgba(37,144,98,.18),inset -4px -4px 8px rgba(255,255,255,.6),0 2px 0 #42a979!important}
+#continue:disabled{opacity:.48!important;animation:none!important}
+@keyframes nextNudge{0%,100%{translate:0 0}50%{translate:4px 0}}
+#continue[style*="display: block"]{animation:nextReveal .35s ease-out both}
+@keyframes nextReveal{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:480px){.buddy{min-height:140px!important}.buddy .mascot{width:128px!important;height:118px!important}}
+@media(max-height:760px){.buddy{min-height:126px!important}.buddy .mascot{width:112px!important;height:104px!important}}
+@media(prefers-reduced-motion:reduce){#continue:after{animation:none}.buddy,#continue{transition:none!important}}
+
 </style>
 </head>
 <body><main class="wrap">
