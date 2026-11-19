@@ -155,6 +155,16 @@ body{background:radial-gradient(ellipse at 0% 12%,#e2f8ec 0 13%,transparent 31%)
 .buddy.selected:after{content:"✓";display:grid;place-items:center;width:25px;height:25px;position:absolute;right:11px;top:11px;border-radius:50%;background:linear-gradient(145deg,#8de2b7,#39ad7c);color:#fff;font-size:15px;font-weight:1000;box-shadow:0 3px 8px rgba(49,147,104,.3)}
 #continue{background:linear-gradient(110deg,#a7e9c9 0%,#6fd4a8 52%,#45b98a 100%);box-shadow:inset 0 5px 7px rgba(255,255,255,.62),inset 0 -6px 8px rgba(43,143,100,.16),0 7px 0 #3eaa7d,0 13px 20px rgba(73,163,120,.2)}
 
+
+/* COLORFUL MINT + SKY + PEACH CLAY PALETTE; NO PURPLE */
+body{background:radial-gradient(ellipse at 0% 7%,#d7f8e9 0 12%,transparent 34%),radial-gradient(ellipse at 100% 28%,#dff4ff 0 12%,transparent 34%),radial-gradient(ellipse at 85% 100%,#ffe5d5 0 14%,transparent 36%),linear-gradient(145deg,#fffaf0 0%,#f0fff8 48%,#f3fbff 100%)!important}
+.preview{background:linear-gradient(125deg,#fffdf5 0%,#e5fff1 58%,#e9f8ff 100%)!important}
+.preview-avatar{background:linear-gradient(145deg,#fff9ed,#e1f8eb 65%,#e5f5ff)!important}
+.buddy{background:linear-gradient(145deg,#fffefa 0%,#f0fff6 58%,#eff9ff 100%)!important}
+.buddy.selected{transform:translateY(5px)!important;border:3px solid #39ad83!important;background:linear-gradient(145deg,#eafff2,#d5f5e5 58%,#e5f5ff)!important;box-shadow:inset 0 5px 10px rgba(75,147,111,.14),inset 0 -2px 5px rgba(255,255,255,.9),0 2px 0 #80c9a8,0 5px 12px rgba(57,153,112,.13)!important}
+.buddy.selected:after{background:linear-gradient(145deg,#8de2b7,#39ad83)!important}
+#continue{background:linear-gradient(110deg,#a6ebcb 0%,#70d7b0 48%,#65c7e9 100%)!important;box-shadow:inset 0 5px 7px rgba(255,255,255,.62),inset 0 -6px 8px rgba(43,143,100,.12),0 7px 0 #45ad91,0 13px 20px rgba(73,163,150,.18)!important}
+
 </style>
 </head>
 <body><main class="wrap">
@@ -185,7 +195,7 @@ if(isPreview){
 b.addEventListener("click",boop);return b}
 const initialBig=sprite("bunny",136,"preview",true);initialBig.id="bigMascot";big.replaceWith(initialBig);big=initialBig;
 function choose(name){selected=name;const label=name==="sheep"?"Sheep":name.charAt(0).toUpperCase()+name.slice(1);const next=sprite(name,136,label,true);next.id="bigMascot";big.replaceWith(next);big=next;document.getElementById("previewTitle").textContent=label.charAt(0).toUpperCase()+label.slice(1)+" is your Buddy!";document.getElementById("previewText").textContent="Tap your Buddy to see its reaction.";button.disabled=false;button.style.display="block";render()}
-function render(){grid.innerHTML="";names.forEach(name=>{const card=document.createElement("button");card.type="button";card.className="buddy"+(selected===name?" selected":"");const m=sprite(name,82,name);m.tabIndex=-1;card.append(m);const n=document.createElement("span");n.className="mascot-name";n.textContent=name.replace(/-/g," ");const s=document.createElement("span");s.className="selected-label";s.textContent=selected===name?"✓ SELECTED":"";card.append(n,s);card.addEventListener("click",()=>choose(name));grid.append(card)})}
+function render(){grid.innerHTML="";names.forEach(name=>{const card=document.createElement("button");card.type="button";card.className="buddy"+(selected===name?" selected":"");const m=sprite(name,82,name);m.tabIndex=-1;card.append(m);const n=document.createElement("span");n.className="mascot-name";n.textContent=name.replace(/-/g," ");const s=document.createElement("span");s.className="selected-label";s.textContent=selected===name?"✓ SELECTED":"";card.append(n,s);card.addEventListener("click",()=>{if(selected===name){selected=null;const reset=sprite("bunny",136,"preview",true);reset.id="bigMascot";big.replaceWith(reset);big=reset;document.getElementById("previewTitle").textContent="Choose your favourite character";document.getElementById("previewText").textContent="Tap a character to meet your new friend!";button.disabled=true;button.style.display="none";status.textContent="";render()}else{choose(name)}});grid.append(card)})}
 render();
 const {data:sessionData,error:sessionError}=await supabase.auth.getSession();
 if(sessionError)console.error("Supabase session check:",sessionError);
