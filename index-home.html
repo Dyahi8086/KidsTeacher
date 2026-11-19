@@ -319,6 +319,52 @@ body{background:radial-gradient(ellipse at 8% 0%,#e4f5ff 0,transparent 42%),radi
 #homePage .category-leaderboard{background:linear-gradient(145deg,#a8edf0,#73c7e8)}
 @media(max-width:380px){#homePage .category-card{min-height:148px;border-radius:23px;padding:9px 7px}#homePage .category-art{height:92px;min-height:92px}#homePage .category-clay-icon{width:96px;height:88px}#homePage .category-copy b{font-size:16px}#homePage .category-copy small{font-size:11px}}
 
+
+/* HOME CATEGORIES — MOBILE BENTO GRID */
+#homePage .category-tiles{
+ display:grid!important;
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ grid-template-rows:116px 116px 116px 116px 116px!important;
+ grid-template-areas:
+  "abc abc"
+  "numbers animals"
+  "video animals"
+  "puzzles drawing"
+  "game leaderboard"!important;
+ gap:13px!important;
+ margin:0 0 20px!important;
+}
+#homePage .category-abc{grid-area:abc;flex-direction:row!important;justify-content:flex-start!important;gap:18px!important;padding:10px 24px!important;text-align:left!important}
+#homePage .category-abc .category-art{width:42%!important;height:100%!important;min-height:0!important;flex:0 0 42%!important}
+#homePage .category-abc .category-clay-icon{width:108px!important;height:100px!important}
+#homePage .category-abc .category-copy{align-items:flex-start!important;text-align:left!important}
+#homePage .category-abc .category-copy b{font-size:22px!important}
+#homePage .category-abc .category-copy small{font-size:13px!important}
+#homePage .category-numbers{grid-area:numbers}
+#homePage .category-animals{grid-area:animals}
+#homePage .category-animals .category-art{height:calc(100% - 44px)!important;min-height:0!important}
+#homePage .category-animals .category-clay-icon{width:120px!important;height:122px!important}
+#homePage .category-video{grid-area:video}
+#homePage .category-puzzles{grid-area:puzzles}
+#homePage .category-drawing{grid-area:drawing}
+#homePage .category-game{grid-area:game}
+#homePage .category-leaderboard{grid-area:leaderboard}
+#homePage .category-card{min-width:0!important;min-height:0!important;border-radius:24px!important;padding:8px!important;gap:3px!important}
+#homePage .category-card .category-art{height:72px!important;min-height:72px!important}
+#homePage .category-card .category-clay-icon{width:88px!important;height:82px!important}
+#homePage .category-card .category-copy b{font-size:15px!important}
+#homePage .category-card .category-copy small{font-size:10px!important}
+#homePage .category-animals .category-copy b{font-size:17px!important}
+#homePage .category-animals .category-copy small{font-size:11px!important}
+#homePage .category-card:active{transform:scale(.975)!important;filter:saturate(1.08)}
+@media(max-width:380px){
+ #homePage .category-tiles{grid-template-rows:104px 104px 104px 104px 104px!important;gap:10px!important}
+ #homePage .category-abc{gap:10px!important;padding:8px 14px!important}
+ #homePage .category-abc .category-clay-icon{width:90px!important;height:86px!important}
+ #homePage .category-card .category-art{height:65px!important;min-height:65px!important}
+ #homePage .category-card .category-clay-icon{width:76px!important;height:74px!important}
+}
+
 </style></head>
 <body>
 <div class="app">
