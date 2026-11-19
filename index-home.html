@@ -365,6 +365,42 @@ body{background:radial-gradient(ellipse at 8% 0%,#e4f5ff 0,transparent 42%),radi
  #homePage .category-card .category-clay-icon{width:76px!important;height:74px!important}
 }
 
+
+/* HOME: remove 3D clay object icons; brighter, crisp flat-color UI */
+:root{--bg:#f5fbff!important}
+body{background:linear-gradient(145deg,#eaf8ff 0%,#f8fbff 48%,#f3f0ff 100%)!important}
+.app{background:transparent!important}
+#homePage .category-card{
+ border:1px solid rgba(255,255,255,.96)!important;
+ box-shadow:0 5px 14px rgba(60,95,130,.10)!important;
+}
+#homePage .category-art{height:72px!important;min-height:72px!important}
+#homePage .category-clay-icon{display:none!important}
+#homePage .category-flat-icon{
+ display:grid!important;place-items:center;
+ width:76px;height:70px;font-family:system-ui,sans-serif;
+ font-size:48px;line-height:1;
+ filter:none!important;text-shadow:none!important;
+}
+#homePage .category-abc .category-flat-icon{font-size:52px}
+#homePage .category-animals .category-flat-icon{font-size:55px}
+#homePage .category-abc{background:linear-gradient(135deg,#ffad78,#ff6f87)!important}
+#homePage .category-numbers{background:linear-gradient(135deg,#69d8ff,#349eea)!important}
+#homePage .category-animals{background:linear-gradient(135deg,#9be978,#42c98b)!important}
+#homePage .category-video{background:linear-gradient(135deg,#ff9cba,#f45d91)!important}
+#homePage .category-puzzles{background:linear-gradient(135deg,#e5a5f2,#ad75e8)!important}
+#homePage .category-drawing{background:linear-gradient(135deg,#ffd27d,#ff9d54)!important}
+#homePage .category-game{background:linear-gradient(135deg,#a99bff,#7669e8)!important}
+#homePage .category-leaderboard{background:linear-gradient(135deg,#79e5e2,#35b9d5)!important}
+#homePage .category-copy b{font-size:16px!important;text-shadow:none!important}
+#homePage .category-copy small{font-size:11px!important;text-shadow:none!important}
+#homePage .category-abc .category-art{height:100%!important;min-height:0!important}
+#homePage .category-abc .category-flat-icon{font-size:64px;width:100%;height:100%}
+#homePage .category-animals .category-flat-icon{font-size:64px}
+#homePage .category-card:active{transform:scale(.98)!important;filter:brightness(.97)}
+.nav-wrap{background:linear-gradient(180deg,transparent,rgba(245,251,255,.8) 45%,#f5fbff)!important}
+@media(max-width:380px){#homePage .category-flat-icon{font-size:42px;width:64px;height:62px}}
+
 </style></head>
 <body>
 <div class="app">
@@ -373,14 +409,14 @@ body{background:radial-gradient(ellipse at 8% 0%,#e4f5ff 0,transparent 42%),radi
 <div class="buddy-strip home-greeting"><div class="buddy-face" id="homeBuddy"></div><div><b id="buddyLine">Hey, Dino!</b><p>Let's learn and play together.</p></div></div>
 <div class="section-head categories-heading"><h3>Categories</h3><span>CHOOSE ONE</span></div>
 <div class="tiles category-tiles">
-<button class="category-card category-abc" onclick="showTab('learn')"><span class="category-art"><img class="category-clay-icon" src="https://3dicons.sgp1.cdn.digitaloceanspaces.com/v1/dynamic/clay/text-dynamic-clay.png" alt="ABC learning 3D clay icon" loading="lazy" decoding="async"></span><span class="category-copy"><b>ABC</b><small>Learning</small></span></button>
-<button class="category-card category-numbers" onclick="showTab('learn')"><span class="category-art"><img class="category-clay-icon" src="https://3dicons.sgp1.cdn.digitaloceanspaces.com/v1/dynamic/clay/calculator-dynamic-clay.png" alt="Numbers learning 3D clay icon" loading="lazy" decoding="async"></span><span class="category-copy"><b>Numbers</b><small>Learning</small></span></button>
-<button class="category-card category-animals" onclick="showTab('learn')"><span class="category-art"><img class="category-clay-icon" src="https://3dicons.sgp1.cdn.digitaloceanspaces.com/v1/dynamic/clay/explorer-dynamic-clay.png" alt="Animal world explorer 3D clay icon" loading="lazy" decoding="async"></span><span class="category-copy"><b>Animals</b><small>World</small></span></button>
-<button class="category-card category-video" onclick="showTab('video')"><span class="category-art"><img class="category-clay-icon" src="https://3dicons.sgp1.cdn.digitaloceanspaces.com/v1/dynamic/clay/play-dynamic-clay.png" alt="Video 3D clay icon" loading="lazy" decoding="async"></span><span class="category-copy"><b>Video</b><small>Watch & learn</small></span></button>
-<button class="category-card category-puzzles" onclick="showTab('learn')"><span class="category-art"><img class="category-clay-icon" src="https://3dicons.sgp1.cdn.digitaloceanspaces.com/v1/dynamic/clay/puzzle-dynamic-clay.png" alt="Puzzles 3D clay icon" loading="lazy" decoding="async"></span><span class="category-copy"><b>Puzzles</b><small>Shapes & colors</small></span></button>
-<button class="category-card category-drawing" onclick="showTab('drawing')"><span class="category-art"><img class="category-clay-icon" src="https://3dicons.sgp1.cdn.digitaloceanspaces.com/v1/dynamic/clay/paint-kit-dynamic-clay.png" alt="Drawing 3D clay icon" loading="lazy" decoding="async"></span><span class="category-copy"><b>Drawing</b><small>Color & create</small></span></button>
-<button class="category-card category-game" onclick="showTab('learn')"><span class="category-art"><img class="category-clay-icon" src="https://3dicons.sgp1.cdn.digitaloceanspaces.com/v1/dynamic/clay/chess-dynamic-clay.png" alt="Game 3D clay icon" loading="lazy" decoding="async"></span><span class="category-copy"><b>Game</b><small>Play & learn</small></span></button>
-<button class="category-card category-leaderboard" onclick="showTab('leaderboard')"><span class="category-art"><img class="category-clay-icon" src="https://3dicons.sgp1.cdn.digitaloceanspaces.com/v1/dynamic/clay/trophy-dynamic-clay.png" alt="Leaderboard 3D clay icon" loading="lazy" decoding="async"></span><span class="category-copy"><b>Leaderboard</b><small>Top learners</small></span></button>
+<button class="category-card category-abc" onclick="showTab('learn')"><span class="category-art"><span class="category-flat-icon" aria-hidden="true">🔤</span></span><span class="category-copy"><b>ABC</b><small>Learning</small></span></button>
+<button class="category-card category-numbers" onclick="showTab('learn')"><span class="category-art"><span class="category-flat-icon" aria-hidden="true">🔢</span></span><span class="category-copy"><b>Numbers</b><small>Learning</small></span></button>
+<button class="category-card category-animals" onclick="showTab('learn')"><span class="category-art"><span class="category-flat-icon" aria-hidden="true">🐾</span></span><span class="category-copy"><b>Animals</b><small>World</small></span></button>
+<button class="category-card category-video" onclick="showTab('video')"><span class="category-art"><span class="category-flat-icon" aria-hidden="true">▶️</span></span><span class="category-copy"><b>Video</b><small>Watch & learn</small></span></button>
+<button class="category-card category-puzzles" onclick="showTab('learn')"><span class="category-art"><span class="category-flat-icon" aria-hidden="true">🧩</span></span><span class="category-copy"><b>Puzzles</b><small>Shapes & colors</small></span></button>
+<button class="category-card category-drawing" onclick="showTab('drawing')"><span class="category-art"><span class="category-flat-icon" aria-hidden="true">🎨</span></span><span class="category-copy"><b>Drawing</b><small>Color & create</small></span></button>
+<button class="category-card category-game" onclick="showTab('learn')"><span class="category-art"><span class="category-flat-icon" aria-hidden="true">🎮</span></span><span class="category-copy"><b>Game</b><small>Play & learn</small></span></button>
+<button class="category-card category-leaderboard" onclick="showTab('leaderboard')"><span class="category-art"><span class="category-flat-icon" aria-hidden="true">🏆</span></span><span class="category-copy"><b>Leaderboard</b><small>Top learners</small></span></button>
 </div>
 <div class="hero category-welcome"><div class="hero-learning-title">LET'S LEARN & PLAY!</div><div class="tag">Welcome, Explorer!</div></div>
 </section>
