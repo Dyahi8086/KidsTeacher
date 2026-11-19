@@ -269,6 +269,34 @@ h1 .wiggle-letter{display:inline-block;animation:titleLetterBob 2.8s ease-in-out
 @media(max-width:480px){.buddy{min-height:140px!important}.buddy .mascot{width:128px!important;height:128px!important;flex-basis:128px!important}}
 @media(max-height:760px){.buddy{min-height:126px!important}.buddy .mascot{width:116px!important;height:116px!important;flex-basis:116px!important}.footer{padding-bottom:calc(18px + env(safe-area-inset-bottom))!important}}
 
+
+/* KIDS TEACHER — POLISHED 3D MASCOT FINISH */
+.buddy{
+  perspective:700px!important;
+  transform-style:preserve-3d!important;
+  background:linear-gradient(150deg,#fffefa 0%,#f1fff7 58%,#e7f7f2 100%)!important;
+  border:1px solid rgba(255,255,255,.96)!important;
+  box-shadow:inset 0 3px 7px rgba(255,255,255,.98),inset 0 -4px 8px rgba(133,185,153,.16),0 7px 0 #c8e6d4,0 12px 18px rgba(72,125,91,.13)!important;
+  transition:transform .24s cubic-bezier(.2,.8,.2,1),box-shadow .24s,border-color .24s!important;
+}
+.buddy .mascot{overflow:visible!important;filter:drop-shadow(0 9px 6px rgba(44,77,58,.22)) drop-shadow(0 1px 1px rgba(255,255,255,.7))!important;transform:translateZ(18px);will-change:transform}
+.buddy .mascot-inner{transform-origin:50% 82%;animation:buddyIdleFloat 3.6s ease-in-out infinite;will-change:transform}
+.buddy:nth-child(2n) .mascot-inner{animation-delay:-1.1s}
+.buddy:nth-child(3n) .mascot-inner{animation-delay:-2.2s}
+@keyframes buddyIdleFloat{0%,100%{transform:translateY(0) rotate(0) scale(1)}50%{transform:translateY(-3px) rotate(-1deg) scale(1.012)}}
+.buddy:active{transform:translateY(4px) scale(.975)!important;box-shadow:inset 5px 5px 10px rgba(148,190,160,.22),inset -4px -4px 9px rgba(255,255,255,.94),0 2px 0 #c8e6d4!important}
+.buddy.selected{transform:translateY(4px) scale(.99)!important;border:2px solid #39bd87!important;background:linear-gradient(145deg,#edfff4,#d4f6e4)!important;box-shadow:inset 5px 5px 10px rgba(116,177,139,.20),inset -4px -4px 9px rgba(255,255,255,.95),0 2px 0 #8bd4ae,0 7px 14px rgba(48,151,104,.16)!important}
+.buddy.selected .mascot-inner{animation:buddySelectedBounce 1.9s ease-in-out infinite}
+@keyframes buddySelectedBounce{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-4px) scale(1.025)}}
+.buddy.selected:after{content:"✓"!important;background:linear-gradient(145deg,#8be7b8,#20aa76)!important;box-shadow:inset 0 2px 3px rgba(255,255,255,.55),0 4px 9px rgba(32,151,101,.3)!important}
+.preview-avatar{box-shadow:inset 5px 5px 10px rgba(255,255,255,.92),inset -5px -5px 10px rgba(123,185,148,.18),0 7px 14px rgba(61,143,101,.12)!important}
+.preview-avatar #bigMascot{filter:drop-shadow(0 10px 7px rgba(44,77,58,.23))!important}
+#bigMascot .mascot-inner{animation:previewBuddyFloat 3.1s ease-in-out infinite}
+@keyframes previewBuddyFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-5px) scale(1.025)}}
+#continue{background:linear-gradient(145deg,#ffdbe5 0%,#f5b9cb 55%,#e99bb5 100%)!important;color:#8e4f67!important;border:1px solid rgba(255,255,255,.95)!important;text-shadow:0 1px 0 rgba(255,255,255,.9)!important;box-shadow:inset 5px 5px 9px rgba(255,255,255,.82),inset -5px -5px 9px rgba(195,126,151,.2),0 6px 0 #d990aa,0 12px 19px rgba(183,111,139,.2)!important}
+#continue:active:not(:disabled){transform:translateY(4px)!important;box-shadow:inset 4px 4px 8px rgba(191,118,144,.2),inset -4px -4px 8px rgba(255,255,255,.75),0 2px 0 #d990aa!important}
+@media(prefers-reduced-motion:reduce){.buddy .mascot-inner,.buddy.selected .mascot-inner,#bigMascot .mascot-inner{animation:none!important}}
+
 </style>
 </head>
 <body><main class="wrap">
