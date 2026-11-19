@@ -58,7 +58,7 @@ body{min-height:100vh;min-height:100dvh;overflow-x:hidden;overflow-y:auto;positi
 .google-btn:active{transform:translateY(3px);border-bottom-width:3px;filter:brightness(1.08)}
 .google-btn:disabled{opacity:.65;cursor:wait}
 .google-icon-svg{width:27px;height:27px;flex-shrink:0;background:#fff;border-radius:50%;padding:3px}
-.btn-text{display:inline-flex;align-items:center;justify-content:center;white-space:pre;font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:-.25px}
+.btn-text{display:block;white-space:nowrap;font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:0;text-align:center;line-height:1.25}
 .btn-letter{display:inline-block;animation:letterWave 1.8s ease-in-out infinite;animation-delay:calc(var(--letter-index)*.075s)}
 @keyframes letterWave{0%,70%,100%{transform:translateY(0)}35%{transform:translateY(-3px)}}
 .btn-letter.space{width:.28em;animation:none}
@@ -218,21 +218,10 @@ let isBusy = false;
 let redirectHandled = false;
 
 function renderAnimatedText(text) {
-  btnText.replaceChildren();
-  [...text].forEach((character, index) => {
-    const letter = document.createElement("span");
-    letter.className = character === " " ? "btn-letter space" : "btn-letter";
-    letter.style.setProperty("--letter-index", index);
-    letter.textContent = character === " " ? "\\u00A0" : character;
-    btnText.appendChild(letter);
-  });
+  btnText.textContent = text;
 }
 function renderLoadingText() {
-  btnText.replaceChildren();
-  const loading = document.createElement("span");
-  loading.className = "btn-loading";
-  loading.textContent = "Connecting...";
-  btnText.appendChild(loading);
+  btnText.textContent = "Connecting...";
 }
 function showError(message) {
   errorBox.textContent = message;
