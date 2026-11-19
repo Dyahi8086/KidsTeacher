@@ -255,6 +255,20 @@ h1 .wiggle-letter{display:inline-block;animation:titleLetterBob 2.8s ease-in-out
 @media(max-height:760px){.buddy{min-height:126px!important}.buddy .mascot{width:112px!important;height:104px!important}}
 @media(prefers-reduced-motion:reduce){#continue:after{animation:none}.buddy,#continue{transition:none!important}}
 
+
+/* FINAL CLEANUP: KEEP THE ORIGINAL MASCOT REACTIONS, REMOVE JITTER/OVERLAPPING IDLE TIMERS */
+.buddy{min-height:140px!important;padding:7px 6px 8px!important}
+.buddy .mascot{width:132px!important;height:132px!important;max-width:100%!important;flex:0 0 132px!important}
+.mascot-name{margin-top:-5px!important}
+.selected-label{display:none!important}
+.buddy.selected{transform:translateY(4px)!important}
+.footer{padding:18px 0 calc(20px + env(safe-area-inset-bottom))!important;background:linear-gradient(180deg,rgba(234,245,238,0),rgba(234,245,238,.94) 28%,#eaf5ee 100%)!important}
+#continue{margin:0 4px!important;width:calc(100% - 8px)!important;min-height:60px!important;padding:16px 22px!important;border-radius:24px!important;background:linear-gradient(145deg,#baf0d3 0%,#79d9ad 55%,#48bd8c 100%)!important;color:#fff!important;box-shadow:inset 4px 4px 8px rgba(255,255,255,.62),inset -4px -4px 8px rgba(38,142,98,.14),0 6px 0 #42a979,0 12px 19px rgba(58,153,108,.18)!important}
+#continue:after{content:none!important;display:none!important}
+#continue:active:not(:disabled){transform:translateY(4px)!important;box-shadow:inset 4px 4px 8px rgba(37,144,98,.18),inset -4px -4px 8px rgba(255,255,255,.6),0 2px 0 #42a979!important}
+@media(max-width:480px){.buddy{min-height:140px!important}.buddy .mascot{width:128px!important;height:128px!important;flex-basis:128px!important}}
+@media(max-height:760px){.buddy{min-height:126px!important}.buddy .mascot{width:116px!important;height:116px!important;flex-basis:116px!important}.footer{padding-bottom:calc(18px + env(safe-area-inset-bottom))!important}}
+
 </style>
 </head>
 <body><main class="wrap">
@@ -270,23 +284,23 @@ const heading=document.getElementById("buddyHeading");heading.innerHTML=[..."Pic
 const names=["nurse","cap","panda","wizard","skater","bunny","cat","knight","tiger","sheep"];
 const base="https://raw.githubusercontent.com/nilbuild/page-mascot/main/public/mascots/";
 const grid=document.getElementById("buddyGrid");let big=document.getElementById("bigMascot"),button=document.getElementById("continue"),status=document.getElementById("status");
-let user=null,selected=null,childName="";
+let user=null,selected=null,childName="",previewIdleTimer=null,previewIdleTimeout=null;
 const directions=["up-left","up","up-right","left","center","right","down-left","down","down-right"];
 const clockwise=["right","down-right","down","down-left","left","up-left","up","up-right"];
 const reactions=["blink","heart","sparkle","surprised","wink","bashful","sleepy","dizzy","delighted"];
 function sprite(name,size,label,isPreview=false){const b=document.createElement("div");b.className="mascot";b.style.width=size+"px";b.style.height=size+"px";b.setAttribute("aria-label","Boop "+label);const inner=document.createElement("span");inner.className="mascot-inner";const d=document.createElement("span"),r=document.createElement("span");d.className="sheet direction";r.className="sheet reaction";d.style.backgroundImage='url("'+base+name+'-directions.webp")';r.style.backgroundImage='url("'+base+name+'-reactions.webp")';r.style.opacity="0";inner.append(d,r);b.append(inner);let timer=[],boops=0,last=0,sector=-1;function cell(i){return ((i%3)*50)+"% "+(Math.floor(i/3)*50)+"%"}d.style.backgroundPosition=cell(4);r.style.backgroundPosition=cell(0);function boop(){timer.forEach(clearTimeout);timer=[];const now=Date.now();boops=now-last<1600?boops+1:1;last=now;const idx=boops>=4?7:[1,2,8][(boops-1)%3];if(boops>=4)boops=0;r.style.backgroundPosition=cell(idx);r.style.opacity="1";d.style.opacity="0";timer.push(setTimeout(()=>{r.style.opacity="0";d.style.opacity="1"},idx===7?1100:560));if(!matchMedia("(prefers-reduced-motion: reduce)").matches){inner.animate([{transform:"scale(1,1)"},{transform:"scale(1.1,.86)",offset:.18},{transform:"scale(.95,1.08)",offset:.45},{transform:"scale(1.03,.97)",offset:.72},{transform:"scale(1,1)"}],{duration:420})}}
 if(isPreview){
- let idleTimer=null;
+ if(previewIdleTimer)clearInterval(previewIdleTimer);
+ if(previewIdleTimeout)clearTimeout(previewIdleTimeout);
  let idleIndex=0;
  const idleFrames=[1,2,5,8];
- function idle(){if(!document.hidden){const frame=idleFrames[idleIndex++%idleFrames.length];r.style.backgroundPosition=cell(frame);r.style.opacity="1";d.style.opacity="0";setTimeout(()=>{r.style.opacity="0";d.style.opacity="1"},420)}}
- idleTimer=setInterval(idle,2600);
- b.addEventListener("DOMNodeRemoved",()=>clearInterval(idleTimer),{once:true});
+ function idle(){if(!document.hidden){const frame=idleFrames[idleIndex++%idleFrames.length];r.style.backgroundPosition=cell(frame);r.style.opacity="1";d.style.opacity="0";previewIdleTimeout=setTimeout(()=>{r.style.opacity="0";d.style.opacity="1"},420)}}
+ previewIdleTimer=setInterval(idle,3200);
 }
 b.addEventListener("click",boop);return b}
 const initialBig=sprite("bunny",136,"preview",true);initialBig.id="bigMascot";big.replaceWith(initialBig);big=initialBig;
 function choose(name){selected=name;const label=name==="sheep"?"Sheep":name.charAt(0).toUpperCase()+name.slice(1);const next=sprite(name,136,label,true);next.id="bigMascot";big.replaceWith(next);big=next;document.getElementById("previewTitle").textContent=label.charAt(0).toUpperCase()+label.slice(1)+" is your Buddy!";document.getElementById("previewText").textContent="Tap your Buddy to see its reaction.";button.disabled=false;button.style.display="block";render()}
-function render(){grid.innerHTML="";names.forEach(name=>{const card=document.createElement("button");card.type="button";card.className="buddy"+(selected===name?" selected":"");const m=sprite(name,82,name);m.tabIndex=-1;card.append(m);const n=document.createElement("span");n.className="mascot-name";n.textContent=name.replace(/-/g," ");const s=document.createElement("span");s.className="selected-label";s.textContent=selected===name?"✓ SELECTED":"";card.append(n,s);card.addEventListener("click",()=>{if(selected===name){selected=null;const reset=sprite("bunny",136,"preview",true);reset.id="bigMascot";big.replaceWith(reset);big=reset;document.getElementById("previewTitle").textContent="Choose your favourite character";document.getElementById("previewText").textContent="Tap a character to meet your new friend!";button.disabled=true;button.style.display="none";status.textContent="";render()}else{choose(name)}});grid.append(card)})}
+function render(){grid.innerHTML="";names.forEach(name=>{const card=document.createElement("button");card.type="button";card.className="buddy"+(selected===name?" selected":"");const m=sprite(name,82,name);m.tabIndex=-1;card.append(m);const n=document.createElement("span");n.className="mascot-name";n.textContent=name.replace(/-/g," ");const s=document.createElement("span");s.className="selected-label";s.textContent="";card.append(n,s);card.addEventListener("click",()=>{if(selected===name){selected=null;const reset=sprite("bunny",136,"preview",true);reset.id="bigMascot";big.replaceWith(reset);big=reset;document.getElementById("previewTitle").textContent="Choose your favourite character";document.getElementById("previewText").textContent="Tap a character to meet your new friend!";button.disabled=true;button.style.display="none";status.textContent="";render()}else{choose(name)}});grid.append(card)})}
 render();
 const {data:sessionData,error:sessionError}=await supabase.auth.getSession();
 if(sessionError)console.error("Supabase session check:",sessionError);
