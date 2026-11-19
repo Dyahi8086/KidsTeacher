@@ -475,30 +475,12 @@ body{background:linear-gradient(145deg,#eaf8ff 0%,#f8fbff 48%,#f3f0ff 100%)!impo
 }
 
 
-/* Colourful 3D toy-style bottom navigation */
-.nav-wrap{padding:12px 16px calc(15px + env(safe-area-inset-bottom))!important;background:linear-gradient(180deg,transparent,rgba(239,247,255,.82) 38%,#eef6ff 100%)!important}
-.nav{background:linear-gradient(145deg,#fff,#eaf3ff)!important;border:1px solid #fff!important;border-radius:25px!important;padding:8px 7px!important;gap:3px!important;box-shadow:8px 9px 18px rgba(98,128,158,.20),-7px -7px 16px rgba(255,255,255,.95),inset 2px 2px 5px #fff!important}
-.nav button{min-height:57px!important;border-radius:17px!important;color:#65758c!important;font-size:9px!important;font-weight:900!important;gap:3px!important}
-.nav button .ico{width:31px!important;height:31px!important;filter:drop-shadow(0 3px 2px rgba(45,65,90,.20))!important;transform:translateY(-1px)}
-.nav button .ico svg{width:31px!important;height:31px!important;stroke-width:1.5!important;overflow:visible}
-.nav button.active{background:linear-gradient(145deg,#e2f5ff,#c9e8ff)!important;color:#2879bd!important;box-shadow:inset 3px 3px 7px rgba(98,153,190,.18),inset -3px -3px 7px #fff,0 3px 7px rgba(95,145,185,.12)!important}
-.nav button.active .ico{transform:translateY(-3px) scale(1.08)!important}
-.nav button:nth-child(2) .ico{filter:drop-shadow(0 3px 2px rgba(208,142,34,.25))!important}
-.nav button:nth-child(3) .ico{filter:drop-shadow(0 3px 2px rgba(42,128,190,.28))!important}
-.nav button:nth-child(4) .ico{filter:drop-shadow(0 3px 2px rgba(191,132,35,.28))!important}
-.nav button:nth-child(5) .ico{filter:drop-shadow(0 3px 2px rgba(109,75,180,.25))!important}
-.nav button:nth-child(3),.nav button:nth-child(3).active{color:#2879bd!important;background:transparent!important;box-shadow:none!important}
-.nav button:active{transform:translateY(2px) scale(.96)!important}
-@media(max-width:380px){.nav{padding:6px 4px!important;gap:0!important}.nav button{font-size:8px!important}.nav button .ico,.nav button .ico svg{width:28px!important;height:28px!important}}
 
-
-/* Genuine Blender-rendered 3Dicons (CC0), not emoji or CSS-drawn symbols */
-.nav button .ico{width:38px!important;height:38px!important;display:grid!important;place-items:center!important;filter:drop-shadow(0 4px 3px rgba(40,65,90,.16))!important}
-.nav button .ico img{display:block!important;width:38px!important;height:38px!important;object-fit:contain!important}
-.nav button .ico svg{display:none!important}
-.nav button{min-height:60px!important}
-.nav button.active .ico{transform:translateY(-3px) scale(1.06)!important}
-@media(max-width:380px){.nav button .ico,.nav button .ico img{width:33px!important;height:33px!important}}
+/* Cartoon / illustrated navigation icons; restore the original yellow bar */
+.nav button .ico{width:27px;height:27px;display:grid;place-items:center}
+.nav button .ico img{width:27px;height:27px;object-fit:contain;display:block}
+.nav button .ico svg{display:none}
+@media(max-width:380px){.nav button .ico,.nav button .ico img{width:25px;height:25px}}
 
 </style></head>
 <body>
@@ -546,11 +528,11 @@ body{background:linear-gradient(145deg,#eaf8ff 0%,#f8fbff 48%,#f3f0ff 100%)!impo
 </section>
 </div>
 <div class="nav-wrap"><nav class="nav" aria-label="Main navigation">
-<button class="active" data-tab="home" aria-label="Home"><span class="ico"><img src="https://3dicons.sgp1.cdn.digitaloceanspaces.com/v1/dynamic/color/explorer-dynamic-color.png" alt="" loading="lazy"></span>Home</button>
-<button data-tab="drawing" aria-label="Drawing"><span class="ico"><img src="https://3dicons.sgp1.cdn.digitaloceanspaces.com/v1/dynamic/color/pencil-dynamic-color.png" alt="" loading="lazy"></span>Drawing</button>
-<button data-tab="video" aria-label="Video"><span class="ico"><img src="https://3dicons.sgp1.cdn.digitaloceanspaces.com/v1/dynamic/color/video-camera-dynamic-color.png" alt="" loading="lazy"></span>Video</button>
-<button data-tab="leaderboard" aria-label="Leaderboard"><span class="ico"><img src="https://3dicons.sgp1.cdn.digitaloceanspaces.com/v1/dynamic/color/trophy-dynamic-color.png" alt="" loading="lazy"></span>Leaderboard</button>
-<button data-tab="profile" aria-label="Profile"><span class="ico"><img src="https://3dicons.sgp1.cdn.digitaloceanspaces.com/v1/dynamic/color/boy-dynamic-color.png" alt="" loading="lazy"></span>Profile</button>
+<button class="active" data-tab="home" aria-label="Home"><span class="ico"><img src="https://raw.githubusercontent.com/hfg-gmuend/openmoji/master/color/svg/1F3E0.svg" alt="" loading="lazy"></span>Home</button>
+<button data-tab="drawing" aria-label="Drawing"><span class="ico"><img src="https://raw.githubusercontent.com/hfg-gmuend/openmoji/master/color/svg/1F58C.svg" alt="" loading="lazy"></span>Drawing</button>
+<button data-tab="video" aria-label="Video"><span class="ico"><img src="https://raw.githubusercontent.com/hfg-gmuend/openmoji/master/color/svg/1F4F9.svg" alt="" loading="lazy"></span>Video</button>
+<button data-tab="leaderboard" aria-label="Leaderboard"><span class="ico"><img src="https://raw.githubusercontent.com/hfg-gmuend/openmoji/master/color/svg/1F3C6.svg" alt="" loading="lazy"></span>Leaderboard</button>
+<button data-tab="profile" aria-label="Profile"><span class="ico"><img src="https://raw.githubusercontent.com/hfg-gmuend/openmoji/master/color/svg/1F464.svg" alt="" loading="lazy"></span>Profile</button>
 </nav></div>
 <script type="module">
 import {supabase} from "./supabase-client.js";
