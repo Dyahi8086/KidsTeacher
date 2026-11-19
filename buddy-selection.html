@@ -348,6 +348,21 @@ h1 .wiggle-letter{display:inline-block;animation:titleLetterBob 2.8s ease-in-out
   .buddy .mascot{width:112px!important;height:112px!important;flex-basis:112px!important}
 }
 
+
+/* Restore the original mint-green clay Next button */
+#continue{
+ margin:0 4px!important;width:calc(100% - 8px)!important;min-height:60px!important;
+ padding:16px 22px!important;border-radius:24px!important;
+ background:linear-gradient(145deg,#baf0d3 0%,#79d9ad 55%,#48bd8c 100%)!important;
+ color:#fff!important;
+ box-shadow:inset 4px 4px 8px rgba(255,255,255,.62),inset -4px -4px 8px rgba(38,142,98,.14),0 6px 0 #42a979,0 12px 19px rgba(58,153,108,.18)!important;
+}
+#continue:after{content:none!important;display:none!important}
+#continue:active:not(:disabled){
+ transform:translateY(4px)!important;
+ box-shadow:inset 4px 4px 8px rgba(37,144,98,.18),inset -4px -4px 8px rgba(255,255,255,.6),0 2px 0 #42a979!important;
+}
+
 </style>
 </head>
 <body><main class="wrap">
