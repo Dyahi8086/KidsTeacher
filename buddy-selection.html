@@ -93,6 +93,31 @@ h1{font-size:clamp(32px,8vw,43px);letter-spacing:-1.5px;margin:8px 0 6px;color:#
 @media(max-height:760px){.sub{margin-bottom:11px}.preview{min-height:94px;margin-bottom:12px}.preview-avatar{height:96px}.buddy{min-height:148px}.buddy .mascot{width:94px!important;height:94px!important}.footer{padding-top:10px}}
 @media(prefers-reduced-motion:reduce){.buddy,.mascot-inner,#continue{transition:none}}
 
+
+/* 3D CLAYMORPHISM BUDDY PICKER */
+:root{--ink:#49364d;--muted:#917d91;--cream:#fff3e8;--orange:#ff8a62}
+body{background:radial-gradient(circle at 7% 7%,#ffdce9 0 5%,transparent 5.5%),radial-gradient(circle at 94% 88%,#d5f5e4 0 6%,transparent 6.5%),linear-gradient(145deg,#fff6eb,#ffeddf 58%,#fff7ee);color:#49364d}
+h1{color:#49364d;text-shadow:0 3px 0 #fff,0 7px 12px rgba(112,78,90,.14)}
+.sub{color:#927b7c}
+.preview{background:linear-gradient(145deg,#fffaf4,#ffe9dc);border:0;border-radius:30px;box-shadow:inset 5px 5px 10px rgba(255,255,255,.95),inset -5px -5px 12px rgba(214,173,161,.22),0 9px 0 #e6c6b8,0 15px 22px rgba(117,76,73,.14);backdrop-filter:none;-webkit-backdrop-filter:none}
+.preview-avatar{background:linear-gradient(145deg,#fff8ef,#ffe4d5);border-radius:26px;box-shadow:inset 4px 4px 9px rgba(255,255,255,.9),inset -4px -4px 9px rgba(224,183,166,.22)}
+.preview strong{color:#49364d}
+.preview-kicker{color:#e58a6d}
+.grid-title{color:#78616a}
+.buddy{background:linear-gradient(145deg,#fffaf4,#ffeadf);border:0;border-radius:27px;box-shadow:inset 5px 5px 10px rgba(255,255,255,.96),inset -5px -5px 11px rgba(217,180,167,.25),0 8px 0 #e4c4b7,0 13px 19px rgba(117,76,73,.13);backdrop-filter:none;-webkit-backdrop-filter:none;transition:transform .18s,box-shadow .18s}
+.buddy:before{background:radial-gradient(circle at 50% 22%,rgba(255,255,255,.8),transparent 60%);opacity:1}
+.buddy:active{transform:translateY(3px) scale(.98)}
+.buddy.selected{border:2px solid #ff9a79;background:linear-gradient(145deg,#fff7ee,#ffe2d6);box-shadow:inset 4px 4px 9px rgba(255,255,255,.95),inset -4px -4px 9px rgba(222,164,148,.2),0 0 0 3px rgba(255,137,98,.13),0 8px 0 #e2b7a9,0 13px 20px rgba(190,104,78,.16)}
+.buddy.selected:after{background:linear-gradient(145deg,#ffad87,#f36d50);box-shadow:0 4px 7px rgba(194,96,71,.28)}
+.buddy .mascot{filter:drop-shadow(0 8px 5px rgba(96,66,63,.18))}
+.mascot-name{color:#57414c}
+.selected-label{color:#e77859}
+#continue{background:linear-gradient(110deg,#c28aef 0 20%,#68c8f0 20% 40%,#70d5a3 40% 60%,#ffd16b 60% 80%,#ff8ba5 80%);border:0;border-radius:23px;color:#fff;text-shadow:0 3px 0 rgba(111,76,128,.32);box-shadow:inset 0 5px 7px rgba(255,255,255,.55),inset 0 -6px 8px rgba(115,70,120,.15),0 7px 0 #b18acb,0 13px 20px rgba(117,76,73,.18)}
+#continue:active:not(:disabled){transform:translateY(5px);box-shadow:inset 0 4px 7px rgba(255,255,255,.4),0 2px 0 #b18acb,0 5px 10px rgba(117,76,73,.14)}
+#continue:disabled{opacity:.48;box-shadow:none}
+.footer{background:linear-gradient(180deg,rgba(255,243,232,0),#fff3e8ed 25%,#fff3e8)}
+@media(prefers-reduced-motion:reduce){.buddy,.mascot-inner,#continue{transition:none}}
+
 </style>
 </head>
 <body><main class="wrap">
