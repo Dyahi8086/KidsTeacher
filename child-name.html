@@ -61,6 +61,23 @@ button.name-entered .letter{animation:letterBounce .65s ease-in-out infinite alt
 @media(max-height:700px){.scene{padding:12px 8px}h1{font-size:42px}.paper{min-height:125px;padding-top:24px}}
 @media(prefers-reduced-motion:reduce){.doodle,button.name-entered .letter{animation:none!important}}
 
+/* 3D CLAYMORPHISM */
+body{background:radial-gradient(ellipse at 8% 8%,#ffdce8 0 9%,transparent 10%),radial-gradient(ellipse at 92% 90%,#d6f5e4 0 12%,transparent 13%),linear-gradient(145deg,#fff5e9,#ffefdf);color:#51465e}
+.doodle{filter:drop-shadow(0 7px 3px rgba(123,91,82,.2));font-size:clamp(27px,7.5vw,56px)}
+.scene{width:min(100%,430px);padding:20px 8px}
+h1{font-size:clamp(38px,9.5vw,55px);line-height:1.04;letter-spacing:-1.2px;color:#ff6f8c;-webkit-text-stroke:0;text-shadow:0 3px 0 #df496a,0 6px 0 rgba(126,72,73,.12);filter:drop-shadow(0 5px 3px rgba(150,91,83,.15))}
+h1 .your{color:#ffad35;text-shadow:0 3px 0 #db7e20,0 6px 0 rgba(126,72,73,.12)}
+h1 .name{color:#51c77f;text-shadow:0 3px 0 #29965d,0 6px 0 rgba(126,72,73,.12)}
+.paper{width:92%;min-height:150px;padding:32px 18px 24px;background:linear-gradient(145deg,#fffdf6,#ffebdc);border:5px solid #d6b8f2;border-radius:30px;box-shadow:inset 5px 5px 10px rgba(255,255,255,.95),inset -5px -5px 12px rgba(201,161,213,.24),0 9px 0 #b79bd7,0 15px 20px rgba(110,78,111,.18);transform:none}
+.paper:before{display:block;top:-5px;right:25px;width:54px;height:18px;background:#e8d2fa;border:0;border-radius:0 0 0 16px}
+.paper:after{left:22px;right:22px;bottom:15px;border-bottom:3px dotted #c4a9bf;opacity:.75}
+input{height:62px;color:#78638e;font-size:27px;font-weight:900}
+input::placeholder{color:#9a879e;font-size:24px}
+button{width:89%;height:78px;border:0;border-radius:28px;background:linear-gradient(100deg,#bb82ef 0 19%,#55bff0 19% 39%,#65d49c 39% 59%,#ffd15d 59% 80%,#ff829c 80%);color:#fff;font:1000 27px Nunito,sans-serif;letter-spacing:1px;text-shadow:0 3px 0 rgba(111,76,128,.38);-webkit-text-stroke:0;box-shadow:inset 0 5px 7px rgba(255,255,255,.45),inset 0 -6px 8px rgba(110,65,130,.16),0 8px 0 #a77bc3,0 14px 20px rgba(110,78,111,.2);transition:transform .14s,box-shadow .14s}
+button:active{transform:translateY(6px);box-shadow:inset 0 4px 7px rgba(255,255,255,.35),0 2px 0 #a77bc3,0 5px 9px rgba(110,78,111,.16)}
+button .letter{display:inline-block;filter:drop-shadow(0 2px 1px rgba(108,68,100,.22))}
+#status{color:#c35c83}
+@media(max-height:700px){h1{font-size:43px}.paper{min-height:125px;padding-top:24px}button{height:67px}}
 </style>
 </head>
 <body>
