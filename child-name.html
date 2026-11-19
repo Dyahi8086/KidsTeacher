@@ -39,6 +39,28 @@ button.name-entered .letter:nth-child(8){animation-delay:.42s}
 @keyframes letterBounce{from{transform:translateY(0) rotate(0)}to{transform:translateY(-7px) rotate(-4deg)}}
 #status{min-height:18px;margin:16px 0 0;color:#b33d68;font-size:13px;font-weight:800}
 @media(max-height:700px){h1{font-size:44px;margin-bottom:17px}.paper{min-height:125px;padding-top:24px;margin-bottom:18px}input{height:54px}button{height:65px}}
+
+/* Soft neumorphism refresh */
+:root{--neo-bg:#f1f3f6;--neo-light:#ffffff;--neo-shadow:#d3d8e0;--neo-ink:#394354;--neo-accent:#6f8fd8}
+body{background:var(--neo-bg);color:var(--neo-ink)}
+.doodle{filter:drop-shadow(5px 6px 7px rgba(174,182,194,.45));opacity:.82}
+.scene{width:min(100%,430px);padding:24px 10px}
+h1{color:#718bd0;text-shadow:2px 3px 0 rgba(255,255,255,.9),4px 6px 10px rgba(160,170,190,.35);-webkit-text-stroke:0;letter-spacing:-1.2px}
+h1 .your{color:#d99b57;text-shadow:2px 3px 0 rgba(255,255,255,.9),4px 6px 10px rgba(160,170,190,.3)}
+h1 .name{color:#5cae91;text-shadow:2px 3px 0 rgba(255,255,255,.9),4px 6px 10px rgba(160,170,190,.3)}
+.paper{width:92%;min-height:150px;padding:32px 18px 24px;background:var(--neo-bg);border:0;border-radius:26px;box-shadow:10px 10px 22px var(--neo-shadow),-10px -10px 22px var(--neo-light),inset 1px 1px 2px rgba(255,255,255,.8);transform:none}
+.paper:before{display:none}
+.paper:after{left:25px;right:25px;bottom:17px;border-bottom:2px dotted #aeb7c5;opacity:.65}
+input{color:#536b9d;font-size:26px}
+input::placeholder{color:#9aa3b1}
+button{width:88%;height:74px;border:0;border-radius:24px;background:var(--neo-bg);color:#617dbb;font-size:25px;letter-spacing:1.2px;text-shadow:none;-webkit-text-stroke:0;box-shadow:9px 9px 18px var(--neo-shadow),-9px -9px 18px var(--neo-light),inset 1px 1px 2px rgba(255,255,255,.8);transition:transform .16s,box-shadow .16s}
+button:active{transform:translateY(2px);box-shadow:inset 6px 6px 12px var(--neo-shadow),inset -6px -6px 12px var(--neo-light)}
+button:disabled{opacity:.65}
+button.name-entered .letter{animation:letterBounce .65s ease-in-out infinite alternate}
+#status{color:#bd7180}
+@media(max-height:700px){.scene{padding:12px 8px}h1{font-size:42px}.paper{min-height:125px;padding-top:24px}}
+@media(prefers-reduced-motion:reduce){.doodle,button.name-entered .letter{animation:none!important}}
+
 </style>
 </head>
 <body>
