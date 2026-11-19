@@ -482,6 +482,88 @@ body{background:linear-gradient(145deg,#eaf8ff 0%,#f8fbff 48%,#f3f0ff 100%)!impo
 .nav button .ico svg{display:none}
 @media(max-width:380px){.nav button .ico,.nav button .ico img{width:25px;height:25px}}
 
+
+/* FULL PAGE CARTOON / ILLUSTRATED THEME */
+:root{--ink:#26364b;--muted:#718296;--purple:#8065d8;--pink:#ff7897;--blue:#63c7ee;--yellow:#ffd65e;--green:#67cf9a;--bg:#fff7e9}
+body{
+ background:
+ radial-gradient(ellipse at 0% 8%,#c9f1ed 0,transparent 30%),
+ radial-gradient(ellipse at 100% 28%,#ffe0c8 0,transparent 28%),
+ radial-gradient(ellipse at 85% 95%,#dcecff 0,transparent 30%),
+ #fff8ec!important;
+ color:#26364b!important
+}
+.app{max-width:560px!important;padding-left:17px!important;padding-right:17px!important}
+.brand{color:#203b5b!important;text-shadow:0 2px 0 #fff,0 4px 0 #b6dff0,0 7px 10px #7394a655!important}
+.brand .teacher-word{color:#ffbd42!important;text-shadow:0 2px 0 #fff6d5,0 4px 0 #e39b2c,0 7px 10px #b9803655!important}
+.avatar{background:linear-gradient(145deg,#fff,#e5f5ff)!important;border:2px solid #fff!important;box-shadow:0 5px 0 #c5d9e5,0 8px 14px #526b8525!important;border-radius:20px!important}
+.hero{
+ background:linear-gradient(145deg,#fff1d9 0%,#ffe2d6 100%)!important;
+ border:3px solid #fff!important;border-radius:30px!important;
+ box-shadow:0 6px 0 #e9cbb8,0 10px 18px #a17e6b24!important;
+ color:#26364b!important
+}
+.hero .tag{color:#26364b!important;text-shadow:0 2px 0 #fff!important}
+.hero-mascot{filter:drop-shadow(0 5px 2px #52617430)!important}
+.section-head h3,.page-title{color:#253850!important;text-shadow:0 2px 0 #fff!important}
+.section-head span{color:#8292a3!important}
+.category-tiles{gap:13px!important}
+#homePage .category-card{
+ border:3px solid #fff!important;border-radius:23px!important;
+ box-shadow:0 5px 0 #d6dfe4,0 8px 13px #54687b1b!important;
+ overflow:hidden!important;transform:translateZ(0)
+}
+#homePage .category-card:active{transform:translateY(3px) scale(.985)!important;box-shadow:0 2px 0 #d6dfe4!important}
+#homePage .category-art{height:112px!important;position:relative}
+#homePage .category-art:after{content:"";position:absolute;inset:9px 12px auto auto;width:13px;height:13px;border-radius:50%;background:#ffffff88;box-shadow:-90px 65px 0 -3px #ffffff77;pointer-events:none}
+#homePage .category-copy{background:#fff!important;min-height:55px!important}
+#homePage .category-copy b{color:#26364b!important;font-family:Fredoka,Nunito,sans-serif!important;font-size:16px!important}
+#homePage .category-copy small{color:#718296!important;font-weight:800!important}
+#homePage .category-abc .category-art{background:#ffe36f!important}
+#homePage .category-numbers .category-art{background:#8edcf8!important}
+#homePage .category-animals .category-art{background:#a9e978!important}
+#homePage .category-video .category-art{background:#ffb2c8!important}
+#homePage .category-puzzles .category-art{background:#cbb3ff!important}
+#homePage .category-drawing .category-art{background:#ffd09a!important}
+#homePage .category-game .category-art{background:#a9e8d3!important}
+#homePage .category-leaderboard .category-art{background:#9bdcf1!important}
+#homePage .category-flat-icon{filter:drop-shadow(0 3px 0 #34465b28)!important}
+#homePage .abc-art i,#homePage .number-art i{filter:drop-shadow(0 3px 0 #34465b35)!important}
+.buddy-strip,.lesson,.drawing-card,.rank-card,.profile-card{
+ background:#fffdf7!important;border:2px solid #fff!important;border-radius:23px!important;
+ box-shadow:0 5px 0 #e5d9ca,0 8px 15px #66788a17!important
+}
+.buddy-face,.lesson-icon,.profile-avatar{border:2px solid #fff!important;box-shadow:0 4px 0 #d8e2e5!important}
+.lesson{margin-bottom:13px!important}
+.lesson-icon{border-radius:17px!important;background:#fff0c9!important}
+.lesson:nth-of-type(3) .lesson-icon{background:#ffe1d9!important}
+.lesson:nth-of-type(4) .lesson-icon{background:#dcf7e9!important}
+#drawingCanvas{border:2px dashed #e7bd8c!important;background:#fffefa!important}
+.tool-btn{background:#e4f5ff!important;color:#286d9b!important;border:2px solid #fff!important;box-shadow:0 3px 0 #b9d9e8!important}
+.color{box-shadow:0 0 0 2px #fff,0 3px 0 #cbd5dc!important}
+.rank-card{background:#fff4d5!important}
+.player{background:#fff!important;border:2px solid #f2e7d7!important;border-radius:17px!important}
+.profile-card{background:linear-gradient(145deg,#fff0d9,#fff)!important}
+.logout{border:2px solid #fff!important;box-shadow:0 4px 0 #e6a9b4!important}
+.delete-account{box-shadow:0 3px 0 #edc5c5!important}
+.nav-wrap{padding:9px 14px calc(12px + env(safe-area-inset-bottom))!important;background:linear-gradient(180deg,transparent,#fff8eced 38%,#fff8ec 100%)!important}
+.nav{
+ background:#fffdf8!important;border:2px solid #fff!important;border-radius:23px!important;
+ padding:7px 5px!important;box-shadow:0 5px 0 #e8d9bd,0 9px 18px #596d7b22!important
+}
+.nav button{min-height:53px!important;color:#65758a!important;font:900 9px Nunito,sans-serif!important;border-radius:16px!important}
+.nav button .ico,.nav button .ico img{width:29px!important;height:29px!important;object-fit:contain!important}
+.nav button .ico{filter:drop-shadow(0 2px 1px #40546a22)!important}
+.nav button.active{background:#fff0bd!important;color:#755322!important;box-shadow:inset 0 0 0 2px #ffdc7b,0 3px 0 #ebc96f!important}
+.nav button.active .ico{transform:translateY(-2px) scale(1.08)!important}
+.nav button:active{transform:translateY(2px)!important}
+@media(max-width:380px){
+ .app{padding-left:13px!important;padding-right:13px!important}
+ #homePage .category-art{height:96px!important}
+ .nav button{font-size:8px!important}
+ .nav button .ico,.nav button .ico img{width:25px!important;height:25px!important}
+}
+
 </style></head>
 <body>
 <div class="app">
@@ -529,10 +611,10 @@ body{background:linear-gradient(145deg,#eaf8ff 0%,#f8fbff 48%,#f3f0ff 100%)!impo
 </div>
 <div class="nav-wrap"><nav class="nav" aria-label="Main navigation">
 <button class="active" data-tab="home" aria-label="Home"><span class="ico"><img src="https://raw.githubusercontent.com/hfg-gmuend/openmoji/master/color/svg/1F3E0.svg" alt="" loading="lazy"></span>Home</button>
-<button data-tab="drawing" aria-label="Drawing"><span class="ico"><img src="https://raw.githubusercontent.com/hfg-gmuend/openmoji/master/color/svg/1F58C.svg" alt="" loading="lazy"></span>Drawing</button>
-<button data-tab="video" aria-label="Video"><span class="ico"><img src="https://raw.githubusercontent.com/hfg-gmuend/openmoji/master/color/svg/1F4F9.svg" alt="" loading="lazy"></span>Video</button>
+<button data-tab="learn" aria-label="Learn"><span class="ico"><img src="https://raw.githubusercontent.com/hfg-gmuend/openmoji/master/color/svg/1F4DA.svg" alt="" loading="lazy"></span>Learn</button>
+<button data-tab="video" aria-label="Video"><span class="ico"><img src="https://raw.githubusercontent.com/hfg-gmuend/openmoji/master/color/svg/1F3AC.svg" alt="" loading="lazy"></span>Video</button>
+<button data-tab="drawing" aria-label="Drawing"><span class="ico"><img src="https://raw.githubusercontent.com/hfg-gmuend/openmoji/master/color/svg/1F3A8.svg" alt="" loading="lazy"></span>Drawing</button>
 <button data-tab="leaderboard" aria-label="Leaderboard"><span class="ico"><img src="https://raw.githubusercontent.com/hfg-gmuend/openmoji/master/color/svg/1F3C6.svg" alt="" loading="lazy"></span>Leaderboard</button>
-<button data-tab="profile" aria-label="Profile"><span class="ico"><img src="https://raw.githubusercontent.com/hfg-gmuend/openmoji/master/color/svg/1F464.svg" alt="" loading="lazy"></span>Profile</button>
 </nav></div>
 <script type="module">
 import {supabase} from "./supabase-client.js";
