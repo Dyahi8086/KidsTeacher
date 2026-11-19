@@ -145,12 +145,15 @@ h1{margin-top:12px}
 @media(max-height:760px){.sub{margin-bottom:12px}.preview{min-height:112px}.buddy{min-height:158px}.buddy .mascot{width:104px!important;height:104px!important}}
 
 
-/* FIX: bottom Continue bar must never cover buddy cards */
-.footer{position:relative!important;inset:auto!important;bottom:auto!important;z-index:1!important;flex:0 0 auto;margin-top:18px!important;padding:10px 0 calc(18px + env(safe-area-inset-bottom))!important;background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;pointer-events:auto!important}
-.grid{padding-bottom:0!important;margin-bottom:0}
-.wrap{min-height:0!important}
-#continue{position:relative;z-index:1}
-@media(max-width:480px){.footer{margin-top:16px!important;padding-bottom:calc(22px + env(safe-area-inset-bottom))!important}}
+
+/* MINT GREEN BACKGROUND + CLEAR SELECTED BUDDY CARD */
+body{background:radial-gradient(ellipse at 0% 12%,#e2f8ec 0 13%,transparent 31%),radial-gradient(ellipse at 100% 72%,#d8f4e6 0 12%,transparent 30%),linear-gradient(145deg,#fffaf2 0%,#f5fff8 52%,#fff7ef 100%)}
+.preview{background:linear-gradient(145deg,#fffefa,#e5faed)}
+.preview-avatar{background:linear-gradient(145deg,#fbfffc,#ddf6e7)}
+.buddy{background:linear-gradient(145deg,#fffefa,#effaf3);border:1px solid rgba(255,255,255,.98)}
+.buddy.selected{border:3px solid #48b98a!important;background:linear-gradient(145deg,#f7fff9,#d9f5e5)!important;box-shadow:inset 0 3px 8px rgba(255,255,255,.95),inset 0 -4px 9px rgba(120,190,151,.18),0 0 0 4px rgba(72,185,138,.20),0 8px 0 #9ed9b8,0 15px 22px rgba(57,145,102,.20)!important}
+.buddy.selected:after{content:"✓";display:grid;place-items:center;width:25px;height:25px;position:absolute;right:11px;top:11px;border-radius:50%;background:linear-gradient(145deg,#8de2b7,#39ad7c);color:#fff;font-size:15px;font-weight:1000;box-shadow:0 3px 8px rgba(49,147,104,.3)}
+#continue{background:linear-gradient(110deg,#a7e9c9 0%,#6fd4a8 52%,#45b98a 100%);box-shadow:inset 0 5px 7px rgba(255,255,255,.62),inset 0 -6px 8px rgba(43,143,100,.16),0 7px 0 #3eaa7d,0 13px 20px rgba(73,163,120,.2)}
 
 </style>
 </head>
