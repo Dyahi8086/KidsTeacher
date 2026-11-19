@@ -58,7 +58,7 @@ body{min-height:100vh;min-height:100dvh;overflow-x:hidden;overflow-y:auto;positi
 .google-btn:active{transform:translateY(3px);border-bottom-width:3px;filter:brightness(1.08)}
 .google-btn:disabled{opacity:.65;cursor:wait}
 .google-icon-svg{width:27px;height:27px;flex-shrink:0;background:#fff;border-radius:50%;padding:3px}
-.btn-text{display:block;white-space:nowrap;font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:0;text-align:center;line-height:1.25}
+.btn-text{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:0;text-align:center;line-height:1.25}.btn-letter{display:inline-block;animation:letterWave 1.8s ease-in-out infinite;animation-delay:calc(var(--letter-index)*.075s)}.btn-letter.space{width:.28em;animation:none}@keyframes letterWave{0%,70%,100%{transform:translateY(0)}35%{transform:translateY(-3px)}}
 .btn-letter{display:inline-block;animation:letterWave 1.8s ease-in-out infinite;animation-delay:calc(var(--letter-index)*.075s)}
 @keyframes letterWave{0%,70%,100%{transform:translateY(0)}35%{transform:translateY(-3px)}}
 .btn-letter.space{width:.28em;animation:none}
@@ -67,7 +67,7 @@ body{min-height:100vh;min-height:100dvh;overflow-x:hidden;overflow-y:auto;positi
 .made-for{color:#9a9487;font:italic 500 14px 'Outfit',sans-serif;margin-top:29px}
 .made-for span{color:#c78f77;margin-right:7px}
 .privacy-text{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;color:#a19b8f;font-weight:600;line-height:1.8;margin-top:24px;padding:0 5px}
-.privacy-text a{color:#344c3d;text-decoration:underline;text-underline-offset:3px;font-weight:800}
+.privacy-text a{color:#344c3d;text-decoration:underline;text-underline-offset:3px;font-weight:800}.privacy-text a:last-child{white-space:nowrap}
 #errorBox,#successBox{display:none;width:100%;max-width:440px;padding:11px 14px;margin:13px auto 0;border-radius:14px;font-size:12px;font-weight:700;overflow-wrap:anywhere}
 #errorBox{background:#fff1f1;border:1px solid #feb2b2;color:#b42318}
 #successBox{background:#ecfdf3;border:1px solid #a6f4c5;color:#067647}
@@ -218,10 +218,21 @@ let isBusy = false;
 let redirectHandled = false;
 
 function renderAnimatedText(text) {
-  btnText.textContent = text;
+  btnText.replaceChildren();
+  [...text].forEach((character, index) => {
+    const letter = document.createElement("span");
+    letter.className = character === " " ? "btn-letter space" : "btn-letter";
+    letter.style.setProperty("--letter-index", index);
+    letter.textContent = character === " " ? "\u00A0" : character;
+    btnText.appendChild(letter);
+  });
 }
 function renderLoadingText() {
-  btnText.textContent = "Connecting...";
+  btnText.replaceChildren();
+  const loading = document.createElement("span");
+  loading.className = "btn-loading";
+  loading.textContent = "Connecting...";
+  btnText.appendChild(loading);
 }
 function showError(message) {
   errorBox.textContent = message;
