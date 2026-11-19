@@ -216,10 +216,26 @@ h1{color:#245e53!important;text-shadow:2px 2px 3px rgba(255,255,255,.95),-2px -2
 .footer{background:linear-gradient(180deg,rgba(234,245,238,0),rgba(234,245,238,.94) 25%,#eaf5ee 100%)!important}
 @media(prefers-reduced-motion:reduce){.buddy,#continue{transition:none!important}}
 
+
+/* COMPACT CARDS, BIGGER BUDDIES + SOFT PINK CLAY NEXT */
+.buddy{min-height:148px!important;padding:5px 5px 7px!important;gap:0!important;border-radius:22px!important}
+.buddy .mascot{width:138px!important;height:128px!important;max-width:100%!important;filter:drop-shadow(3px 5px 5px rgba(73,111,87,.15))!important}
+.mascot-name{font-size:14px!important;margin-top:-2px!important}
+.selected-label{min-height:12px!important}
+.grid{gap:10px!important}
+#continue{display:none;min-height:62px!important;border-radius:22px!important;background:linear-gradient(145deg,#ffe9ee 0%,#f9cbd7 55%,#efb5c5 100%)!important;color:#98596d!important;border:1px solid rgba(255,255,255,.95)!important;text-shadow:1px 1px 0 #fff!important;box-shadow:inset 5px 5px 10px rgba(255,255,255,.9),inset -5px -5px 10px rgba(210,151,169,.28),7px 8px 15px rgba(192,139,154,.24),0 5px 0 #dfa9b8!important;font-size:19px!important;letter-spacing:.3px!important}
+#continue:active:not(:disabled){transform:translateY(3px)!important;box-shadow:inset 4px 4px 8px rgba(210,151,169,.3),inset -4px -4px 8px rgba(255,255,255,.8),0 2px 0 #dfa9b8!important}
+.footer{padding-top:12px!important}
+h1 .wiggle-letter{display:inline-block;animation:titleLetterBob 2.8s ease-in-out infinite;animation-delay:calc(var(--i)*85ms);transform-origin:50% 75%}
+@keyframes titleLetterBob{0%,82%,100%{transform:translateY(0) rotate(0)}87%{transform:translateY(-3px) rotate(-5deg)}92%{transform:translateY(1px) rotate(4deg)}96%{transform:translateY(-1px) rotate(-2deg)}}
+@media(max-width:480px){.buddy{min-height:142px!important}.buddy .mascot{width:132px!important;height:122px!important}}
+@media(max-height:760px){.buddy{min-height:128px!important}.buddy .mascot{width:116px!important;height:108px!important}}
+@media(prefers-reduced-motion:reduce){h1 .wiggle-letter{animation:none!important}}
+
 </style>
 </head>
 <body><main class="wrap">
-<h1>Pick Your Buddy!</h1><p class="sub">This little friend will guide you on your learning adventure</p>
+<h1 id="buddyHeading">Pick Your Buddy!</h1><p class="sub">This little friend will guide you on your learning adventure</p>
 <div class="preview"><div class="preview-avatar"><button id="bigMascot" class="mascot" type="button" aria-label="Boop your selected buddy"></button></div><div class="preview-copy"><span class="preview-kicker">YOUR BUDDY</span><strong id="previewTitle">Choose your favourite character</strong><small id="previewText">Tap a character to meet your new friend!</small></div></div>
 <div class="grid-title"><span>Choose your favourite Buddy</span></div>
 <section class="grid" id="buddyGrid" aria-label="Choose a buddy"></section>
@@ -227,6 +243,7 @@ h1{color:#245e53!important;text-shadow:2px 2px 3px rgba(255,255,255,.95),-2px -2
 </main>
 <script type="module">
 import {supabase} from "./supabase-client.js";
+const heading=document.getElementById("buddyHeading");heading.innerHTML=[..."Pick Your Buddy!"].map((ch,i)=>ch===" "?" ":`<span class="wiggle-letter" style="--i:${i}">${ch}</span>`).join("");
 const names=["nurse","cap","panda","wizard","skater","bunny","cat","knight","tiger","sheep"];
 const base="https://raw.githubusercontent.com/nilbuild/page-mascot/main/public/mascots/";
 const grid=document.getElementById("buddyGrid");let big=document.getElementById("bigMascot"),button=document.getElementById("continue"),status=document.getElementById("status");
