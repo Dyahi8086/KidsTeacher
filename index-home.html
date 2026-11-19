@@ -440,6 +440,40 @@ body{background:linear-gradient(145deg,#eaf8ff 0%,#f8fbff 48%,#f3f0ff 100%)!impo
 #homePage .category-card:active{transform:translateY(3px) scale(.985)!important;box-shadow:0 3px 0 rgba(45,70,80,.12),0 7px 12px rgba(45,70,80,.12),inset 0 3px 8px rgba(30,40,50,.12)!important}
 @media(max-width:380px){#homePage .category-flat-icon{font-size:42px!important}#homePage .category-abc .category-flat-icon,#homePage .category-numbers .category-flat-icon{font-size:40px!important}}
 
+
+/* Real dimensional letterforms for ABC and 123 — no emoji glyphs */
+#homePage .category-abc .category-art,
+#homePage .category-numbers .category-art{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ overflow:visible!important;
+}
+#homePage .category-abc .category-flat-icon,
+#homePage .category-numbers .category-flat-icon{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ gap:0!important;width:100%!important;height:100%!important;
+ background:none!important;box-shadow:none!important;border-radius:0!important;
+ filter:none!important;transform:none!important;
+ font-family:Fredoka,system-ui,sans-serif!important;font-weight:1000!important;
+ font-size:clamp(48px,11vw,76px)!important;line-height:1!important;
+ -webkit-text-stroke:0!important;
+}
+#homePage .abc-art i,#homePage .number-art i{
+ display:inline-block!important;font-style:normal!important;
+ font-weight:1000!important;letter-spacing:-5px!important;
+ transform:translateY(var(--lift,0)) rotate(var(--tilt,0deg));
+ filter:drop-shadow(0 5px 1px rgba(25,50,80,.2)) drop-shadow(0 10px 7px rgba(25,50,80,.17));
+}
+#homePage .abc-art i:nth-child(1){--lift:7px;--tilt:-13deg;color:#21d58b;text-shadow:0 1px 0 #a7ffd7,0 2px 0 #13a96c,0 3px 0 #078653,0 4px 0 #08744c,0 7px 0 #075f42,0 10px 8px #075f4255}
+#homePage .abc-art i:nth-child(2){--lift:-7px;--tilt:2deg;color:#ff4c78;text-shadow:0 1px 0 #ffb3c6,0 2px 0 #e73560,0 3px 0 #c51e4b,0 4px 0 #a91c42,0 7px 0 #871634,0 10px 8px #87163455}
+#homePage .abc-art i:nth-child(3){--lift:5px;--tilt:13deg;color:#557dff;text-shadow:0 1px 0 #b5c7ff,0 2px 0 #4166e6,0 3px 0 #304fc4,0 4px 0 #263fa4,0 7px 0 #1d3184,0 10px 8px #1d318455}
+#homePage .number-art i:nth-child(1){--lift:6px;--tilt:-12deg;color:#ff4c88;text-shadow:0 1px 0 #ffc0d6,0 2px 0 #e33370,0 3px 0 #c3225d,0 4px 0 #a91a50,0 7px 0 #851440,0 10px 8px #85144055}
+#homePage .number-art i:nth-child(2){--lift:-8px;--tilt:0deg;color:#ffd43b;text-shadow:0 1px 0 #fff2a0,0 2px 0 #e9ad1d,0 3px 0 #cc8c0c,0 4px 0 #a97009,0 7px 0 #875807,0 10px 8px #87580755}
+#homePage .number-art i:nth-child(3){--lift:6px;--tilt:12deg;color:#9b62ff;text-shadow:0 1px 0 #ddc5ff,0 2px 0 #8048df,0 3px 0 #6834c2,0 4px 0 #5528a6,0 7px 0 #421e86,0 10px 8px #421e8655}
+@media(max-width:380px){
+ #homePage .category-abc .category-flat-icon,#homePage .category-numbers .category-flat-icon{font-size:clamp(44px,12vw,62px)!important}
+ #homePage .abc-art i,#homePage .number-art i{letter-spacing:-4px!important}
+}
+
 </style></head>
 <body>
 <div class="app">
@@ -448,8 +482,8 @@ body{background:linear-gradient(145deg,#eaf8ff 0%,#f8fbff 48%,#f3f0ff 100%)!impo
 <div class="buddy-strip home-greeting"><div class="buddy-face" id="homeBuddy"></div><div><b id="buddyLine">Hey, Dino!</b><p>Let's learn and play together.</p></div></div>
 <div class="section-head categories-heading"><h3>Categories</h3><span>CHOOSE ONE</span></div>
 <div class="tiles category-tiles">
-<button class="category-card category-abc" onclick="showTab('learn')"><span class="category-art"><span class="category-flat-icon" aria-hidden="true">🔤</span></span><span class="category-copy"><b>ABC</b><small>Learning</small></span></button>
-<button class="category-card category-numbers" onclick="showTab('learn')"><span class="category-art"><span class="category-flat-icon" aria-hidden="true">🔢</span></span><span class="category-copy"><b>Numbers</b><small>Learning</small></span></button>
+<button class="category-card category-abc" onclick="showTab('learn')"><span class="category-art"><span class="category-flat-icon abc-art" aria-label="3D colourful ABC letters"><i>A</i><i>B</i><i>C</i></span></span><span class="category-copy"><b>ABC</b><small>Learning</small></span></button>
+<button class="category-card category-numbers" onclick="showTab('learn')"><span class="category-art"><span class="category-flat-icon number-art" aria-label="3D colourful numbers"><i>1</i><i>2</i><i>3</i></span></span><span class="category-copy"><b>Numbers</b><small>Learning</small></span></button>
 <button class="category-card category-animals" onclick="showTab('learn')"><span class="category-art"><span class="category-flat-icon" aria-hidden="true">🐾</span></span><span class="category-copy"><b>Animals</b><small>World</small></span></button>
 <button class="category-card category-video" onclick="showTab('video')"><span class="category-art"><span class="category-flat-icon" aria-hidden="true">▶️</span></span><span class="category-copy"><b>Video</b><small>Watch & learn</small></span></button>
 <button class="category-card category-puzzles" onclick="showTab('learn')"><span class="category-art"><span class="category-flat-icon" aria-hidden="true">🧩</span></span><span class="category-copy"><b>Puzzles</b><small>Shapes & colors</small></span></button>
