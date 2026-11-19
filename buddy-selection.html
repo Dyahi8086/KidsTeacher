@@ -144,6 +144,14 @@ h1{margin-top:12px}
 @media(max-width:480px){.buddy{min-height:176px}.buddy .mascot{width:116px!important;height:116px!important}.preview{margin-top:2px}}
 @media(max-height:760px){.sub{margin-bottom:12px}.preview{min-height:112px}.buddy{min-height:158px}.buddy .mascot{width:104px!important;height:104px!important}}
 
+
+/* FIX: bottom Continue bar must never cover buddy cards */
+.footer{position:relative!important;inset:auto!important;bottom:auto!important;z-index:1!important;flex:0 0 auto;margin-top:18px!important;padding:10px 0 calc(18px + env(safe-area-inset-bottom))!important;background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;pointer-events:auto!important}
+.grid{padding-bottom:0!important;margin-bottom:0}
+.wrap{min-height:0!important}
+#continue{position:relative;z-index:1}
+@media(max-width:480px){.footer{margin-top:16px!important;padding-bottom:calc(22px + env(safe-area-inset-bottom))!important}}
+
 </style>
 </head>
 <body><main class="wrap">
