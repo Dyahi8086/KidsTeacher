@@ -701,6 +701,48 @@ body{
  #homePage .home-greeting{min-height:100px!important}
 }
 
+
+/* FINAL GRID RESET: remove stale named-area placement that caused card overlap */
+#homePage .category-tiles{
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ grid-template-rows:none!important;
+ grid-template-areas:none!important;
+ grid-auto-rows:158px!important;
+ align-items:stretch!important;
+ gap:13px!important;
+}
+#homePage .category-card,
+#homePage .category-numbers,
+#homePage .category-animals,
+#homePage .category-video,
+#homePage .category-puzzles,
+#homePage .category-drawing,
+#homePage .category-game,
+#homePage .category-leaderboard{
+ grid-area:auto!important;
+ grid-row:auto!important;
+ grid-column:auto!important;
+ height:158px!important;
+ min-height:158px!important;
+}
+#homePage .category-abc{
+ grid-column:1/-1!important;
+ grid-row:auto!important;
+ height:150px!important;
+ min-height:150px!important;
+ flex-direction:row!important;
+}
+#homePage .category-animals .category-art{height:auto!important;min-height:0!important}
+#homePage .category-art{flex:1 1 auto!important}
+@media(max-width:380px){
+ #homePage .category-tiles{grid-auto-rows:148px!important;gap:10px!important}
+ #homePage .category-card,
+ #homePage .category-numbers,#homePage .category-animals,#homePage .category-video,
+ #homePage .category-puzzles,#homePage .category-drawing,#homePage .category-game,
+ #homePage .category-leaderboard{height:148px!important;min-height:148px!important}
+ #homePage .category-abc{height:138px!important;min-height:138px!important}
+}
+
 </style></head>
 <body>
 <div class="app">
