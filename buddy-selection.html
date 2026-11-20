@@ -510,6 +510,21 @@ html,body{width:100%!important;max-width:100%!important;overflow-x:clip!importan
 #continue:before,#continue:after{content:none!important;display:none!important}
 #continue:active:not(:disabled){box-shadow:inset 0 7px 11px rgba(0,95,55,.22),0 2px 0 #078e57,0 5px 9px rgba(0,170,103,.16)!important}
 
+
+/* REFINED COMPACT BUBBLE CTA */
+.footer{display:flex!important;flex-direction:column!important;align-items:center!important;padding:10px 0 calc(7px + env(safe-area-inset-bottom))!important}
+#continue{
+ width:min(92%,420px)!important;
+ min-height:56px!important;
+ padding:12px 22px!important;
+ margin:0 auto!important;
+ border-radius:999px!important;
+ font-size:18px!important;
+ letter-spacing:.2px!important;
+ box-shadow:inset 0 3px 5px rgba(255,255,255,.18),inset 0 -6px 9px rgba(0,103,61,.22),0 4px 0 #078e57,0 8px 15px rgba(0,170,103,.20)!important;
+}
+#continue:active:not(:disabled){transform:translateY(3px) scale(.99)!important;box-shadow:inset 0 6px 9px rgba(0,95,55,.2),0 1px 0 #078e57,0 4px 8px rgba(0,170,103,.14)!important}
+
 </style>
 </head>
 <body><main class="wrap">
