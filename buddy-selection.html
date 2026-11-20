@@ -409,6 +409,46 @@ h1 .wiggle-letter{display:inline-block;animation:titleLetterBob 2.8s ease-in-out
 }
 @media(prefers-reduced-motion:reduce){#continue{transition:none!important}}
 
+
+/* INFLATED GEL-BUBBLE NEXT BUTTON */
+#continue{
+ min-height:72px!important;
+ border:2px solid rgba(255,255,255,.98)!important;
+ border-radius:999px!important;
+ background:
+  radial-gradient(ellipse at 24% 8%,rgba(255,255,255,.95) 0%,rgba(255,255,255,.42) 17%,transparent 39%),
+  linear-gradient(180deg,#a8ffd0 0%,#63e9aa 38%,#20c987 100%)!important;
+ color:#fff!important;
+ font-size:21px!important;
+ letter-spacing:.4px!important;
+ text-shadow:0 2px 3px rgba(16,125,81,.28)!important;
+ box-shadow:
+  inset 0 7px 10px rgba(255,255,255,.82),
+  inset 0 -9px 13px rgba(0,143,87,.25),
+  inset 4px 0 8px rgba(255,255,255,.22),
+  0 9px 0 #20a875,
+  0 16px 25px rgba(32,190,126,.28)!important;
+}
+#continue:before{
+ content:""!important;position:absolute!important;
+ left:10%!important;top:7px!important;width:34%!important;height:18px!important;
+ border-radius:50%!important;
+ background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(255,255,255,0))!important;
+ filter:blur(1px)!important;pointer-events:none!important;
+}
+#continue:active:not(:disabled){
+ transform:translateY(7px) scale(.985)!important;
+ box-shadow:
+  inset 0 8px 12px rgba(0,133,79,.22),
+  inset 0 -3px 6px rgba(255,255,255,.45),
+  0 2px 0 #20a875,
+  0 5px 10px rgba(32,190,126,.18)!important;
+}
+#continue:disabled{
+ opacity:.52!important;
+ filter:saturate(.8)!important;
+}
+
 </style>
 </head>
 <body><main class="wrap">
