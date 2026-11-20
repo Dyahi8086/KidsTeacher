@@ -1178,19 +1178,32 @@ html,body{
   box-shadow:none!important;
 }
 
-/* DEFINITIVE FIX: remove every decorative white bubble/highlight dot */
-#homePage .category-card::before{
-  background:none!important;
-  box-shadow:none!important;
-  opacity:0!important;
-}
-#homePage .category-card::after{
-  display:none!important;
+/* HARD FIX: remove all white decorative dots and bubble overlays */
+#homePage .category-card::before,
+#homePage .category-card::after,
+#homePage .category-card .category-art::before,
+#homePage .category-card .category-art::after,
+#homePage .category-card .category-copy::before,
+#homePage .category-card .category-copy::after{
   content:none!important;
-  background:none!important;
+  display:none!important;
+  background-image:none!important;
   box-shadow:none!important;
   opacity:0!important;
 }
+#homePage .category-card{
+  background-image:none!important;
+}
+#homePage .category-card .category-art,
+#homePage .category-card .category-copy{
+  background-image:none!important;
+}
+#homePage .category-abc .category-copy:before{
+  content:""!important;display:block!important;
+  background:rgba(255,255,255,.88)!important;
+  box-shadow:0 0 5px rgba(255,255,255,.45)!important;
+}
+
 </style></head>
 <body>
 <div class="app">
