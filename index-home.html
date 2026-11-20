@@ -918,6 +918,45 @@ body{
 #homePage .category-card:active{transform:translateY(4px) scale(.985)!important}
 @media(max-width:380px){#homePage .category-card{min-height:170px!important;height:170px!important;border-radius:33px!important}#homePage .category-abc{min-height:150px!important;height:150px!important}}
 
+
+/* PREMIUM TOY-GEL FINISH — REFLECTIONS, THICK RIMS, DEPTH */
+#homePage .category-tiles{gap:15px!important;row-gap:17px!important}
+#homePage .category-card{
+ position:relative!important;isolation:isolate!important;overflow:hidden!important;
+ border:2px solid rgba(255,255,255,.98)!important;border-radius:36px!important;
+ background-clip:padding-box!important;
+ box-shadow:inset 0 3px 0 rgba(255,255,255,.98),inset 0 8px 13px rgba(255,255,255,.48),inset 0 -10px 13px rgba(0,45,95,.18),0 5px 0 rgba(40,76,111,.25),0 12px 17px rgba(48,74,108,.22),0 20px 28px rgba(57,88,120,.12)!important;
+}
+#homePage .category-card:before{
+ content:""!important;position:absolute!important;z-index:3!important;inset:4px!important;border-radius:30px!important;pointer-events:none!important;
+ background:radial-gradient(ellipse 19% 7% at 15% 8%,rgba(255,255,255,.92) 0%,rgba(255,255,255,.54) 44%,transparent 100%),radial-gradient(ellipse 10% 5% at 88% 8%,rgba(255,255,255,.82) 0%,rgba(255,255,255,.34) 52%,transparent 100%),linear-gradient(180deg,rgba(255,255,255,.12),transparent 25%,transparent 78%,rgba(255,255,255,.08))!important;
+ box-shadow:inset 0 2px 4px rgba(255,255,255,.85),inset 0 -3px 6px rgba(255,255,255,.18)!important;
+}
+#homePage .category-card:after{
+ content:""!important;position:absolute!important;z-index:3!important;left:auto!important;right:9%!important;top:8%!important;width:13px!important;height:13px!important;border-radius:50%!important;background:rgba(255,255,255,.56)!important;filter:blur(.2px)!important;pointer-events:none!important;box-shadow:-220px 52px 0 -4px rgba(255,255,255,.42),-145px 132px 0 -5px rgba(255,255,255,.35)!important;
+}
+#homePage .category-card .category-art,#homePage .category-card .category-copy{position:relative!important;z-index:2!important;background:transparent!important}
+#homePage .category-card .category-art{filter:drop-shadow(0 5px 5px rgba(13,52,90,.16))!important}
+#homePage .category-flat-icon{filter:drop-shadow(0 5px 4px rgba(12,48,85,.28))!important}
+#homePage .category-copy b{font-size:20px!important;letter-spacing:-.25px!important;text-shadow:0 2px 0 rgba(0,0,0,.12),0 4px 5px rgba(0,0,0,.20)!important}
+#homePage .category-copy small{font-size:13px!important;text-shadow:0 2px 4px rgba(0,0,0,.20)!important}
+#homePage .category-abc{border-radius:40px!important;min-height:176px!important;height:176px!important;padding:9px 15px!important;box-shadow:inset 0 3px 0 rgba(255,255,255,.98),inset 0 9px 14px rgba(255,255,255,.48),inset 0 -11px 14px rgba(130,65,0,.16),0 6px 0 rgba(124,91,38,.24),0 14px 20px rgba(95,82,60,.22),0 20px 28px rgba(95,82,60,.12)!important}
+#homePage .category-abc .category-art{width:48%!important;flex:0 0 48%!important}
+#homePage .category-abc .category-copy{width:52%!important;flex:1 1 52%!important;align-items:flex-start!important;justify-content:center!important;padding-left:27px!important;position:relative!important}
+#homePage .category-abc .category-copy:before{content:""!important;position:absolute!important;left:7px!important;top:18%!important;bottom:18%!important;width:3px!important;border-radius:5px!important;background:rgba(255,255,255,.88)!important;box-shadow:0 0 5px rgba(255,255,255,.45)!important}
+#homePage .category-abc .category-copy b{font-size:25px!important}
+#homePage .category-abc .category-copy small{font-size:15px!important}
+#homePage .category-numbers{background:linear-gradient(145deg,#73e5ff 0%,#22c5f3 48%,#079bdc 100%)!important}
+#homePage .category-animals{background:linear-gradient(145deg,#baff69 0%,#69ed48 48%,#19c962 100%)!important}
+#homePage .category-video{background:linear-gradient(145deg,#ffadd0 0%,#ff65a8 48%,#ec3785 100%)!important}
+#homePage .category-puzzles{background:linear-gradient(145deg,#e1b4ff 0%,#b875f4 48%,#8d48e4 100%)!important}
+#homePage .category-drawing{background:linear-gradient(145deg,#ffdc91 0%,#ffae4c 48%,#f27d2e 100%)!important}
+#homePage .category-game{background:linear-gradient(145deg,#a7d5ff 0%,#7799ff 48%,#4e69e8 100%)!important}
+#homePage .category-leaderboard{background:linear-gradient(145deg,#fff08b 0%,#ffd04a 48%,#efa126 100%)!important}
+#homePage .category-card:active{transform:translateY(4px) scale(.985)!important}
+#homePage .home-greeting{box-shadow:inset 0 4px 0 rgba(255,255,255,.95),inset 0 9px 14px rgba(255,255,255,.5),inset 0 -10px 14px rgba(30,102,150,.16),0 6px 0 rgba(64,125,158,.22),0 14px 22px rgba(51,100,138,.2)!important}
+@media(max-width:380px){#homePage .category-tiles{gap:11px!important;row-gap:14px!important}#homePage .category-card{border-radius:31px!important}#homePage .category-card:before{border-radius:26px!important}#homePage .category-abc{border-radius:35px!important}#homePage .category-abc .category-copy{padding-left:22px!important}}
+
 </style></head>
 <body>
 <div class="app">
