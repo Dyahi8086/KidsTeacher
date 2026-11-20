@@ -1177,6 +1177,20 @@ html,body{
   background:linear-gradient(145deg,rgba(255,255,255,.16),transparent 38%,rgba(255,255,255,.025))!important;
   box-shadow:none!important;
 }
+
+/* DEFINITIVE FIX: remove every decorative white bubble/highlight dot */
+#homePage .category-card::before{
+  background:none!important;
+  box-shadow:none!important;
+  opacity:0!important;
+}
+#homePage .category-card::after{
+  display:none!important;
+  content:none!important;
+  background:none!important;
+  box-shadow:none!important;
+  opacity:0!important;
+}
 </style></head>
 <body>
 <div class="app">
