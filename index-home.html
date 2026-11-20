@@ -1074,21 +1074,21 @@ body{
 #homePage{padding-bottom:calc(112px + env(safe-area-inset-bottom))!important}
 
 
-/* Numbers icon: blend away the PNG's black canvas on the blue card */
+/* Numbers 1-2-3 PNG: preserve its real purple, green and orange colours.
+   The uploaded PNG has transparent corners; do not use lighten blending. */
 #homePage .category-numbers .category-art{
-  background:#20bce9!important;
+  background:linear-gradient(145deg,#54dfff 0%,#16b9e9 58%,#078fc9 100%)!important;
 }
 #homePage .category-numbers .category-art img.toy-icon{
-  mix-blend-mode:lighten!important;
+  display:block!important;
+  mix-blend-mode:normal!important;
   background:transparent!important;
   border:0!important;
   box-shadow:none!important;
   border-radius:0!important;
+  filter:drop-shadow(0 5px 5px #07517a44)!important;
+  object-fit:contain!important;
 }
-
-
-/* Make the 1-2-3 toy icon vivid instead of washed-out */
-#homePage .category-numbers .category-art img.toy-icon{filter:saturate(2.25) contrast(1.18) brightness(1.04) drop-shadow(0 5px 5px #123b5b55)!important;mix-blend-mode:lighten!important;}
 </style></head>
 <body>
 <div class="app">
@@ -1098,7 +1098,7 @@ body{
 <div class="section-head categories-heading"><h3>Categories</h3><span>CHOOSE ONE</span></div>
 <div class="tiles category-tiles">
 <button class="category-card category-abc" onclick="showTab('learn')"><span class="category-art"><img class="toy-icon" src="assets/icons/abc-3d.png" alt="" loading="lazy" decoding="async"></span><span class="category-copy"><b>ABC</b><small>Learning</small></span></button>
-<button class="category-card category-numbers" onclick="showTab('learn')"><span class="category-art"><img class="toy-icon" src="assets/icons/numbers-123-3d.png?v=2" alt="" loading="lazy" decoding="async"></span><span class="category-copy"><b>Numbers</b><small>Learning</small></span></button>
+<button class="category-card category-numbers" onclick="showTab('learn')"><span class="category-art"><img class="toy-icon" src="assets/icons/numbers-123-3d.png?v=3" alt="" loading="lazy" decoding="async"></span><span class="category-copy"><b>Numbers</b><small>Learning</small></span></button>
 <button class="category-card category-animals" onclick="showTab('learn')"><span class="category-art"><img class="toy-icon" src="assets/icons/animals-lion-3d.png" alt="" loading="lazy" decoding="async"></span><span class="category-copy"><b>Animals</b><small>World</small></span></button>
 <button class="category-card category-video" onclick="showTab('video')"><span class="category-art"><img class="toy-icon" src="assets/icons/video-3d.png" alt="" loading="lazy" decoding="async"></span><span class="category-copy"><b>Video</b><small>Watch & learn</small></span></button>
 <button class="category-card category-puzzles" onclick="showTab('learn')"><span class="category-art"><img class="toy-icon" src="assets/icons/puzzle-3d.png" alt="" loading="lazy" decoding="async"></span><span class="category-copy"><b>Puzzles</b><small>Shapes & colors</small></span></button>
