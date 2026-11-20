@@ -1073,6 +1073,19 @@ body{
 #homePage .category-tiles{padding-bottom:18px!important}
 #homePage{padding-bottom:calc(112px + env(safe-area-inset-bottom))!important}
 
+
+/* Numbers icon: blend away the PNG's black canvas on the blue card */
+#homePage .category-numbers .category-art{
+  background:#20bce9!important;
+}
+#homePage .category-numbers .category-art img.toy-icon{
+  mix-blend-mode:screen!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+}
+
 </style></head>
 <body>
 <div class="app">
