@@ -887,6 +887,37 @@ body{
  #homePage .abc-art i,#homePage .number-art i{font-size:51px!important}
 }
 
+
+/* EXACT CONTINUOUS GEL-BUBBLE CARDS — REMOVE INNER PANELS */
+#homePage .category-card .category-art{background:transparent!important;border:0!important;box-shadow:none!important;border-radius:inherit!important}
+#homePage .category-card .category-copy{background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+#homePage .category-card{
+ padding:8px 10px 9px!important;overflow:hidden!important;border-radius:38px!important;
+ border:2px solid rgba(255,255,255,.96)!important;
+ box-shadow:inset 0 5px 8px rgba(255,255,255,.88),inset 0 -7px 10px rgba(0,0,0,.10),0 7px 0 rgba(78,117,139,.22),0 14px 22px rgba(55,88,112,.20)!important;
+}
+#homePage .category-card:before{inset:5px!important;border-radius:32px!important;background:linear-gradient(145deg,rgba(255,255,255,.20),transparent 45%,rgba(255,255,255,.05))!important}
+#homePage .category-card:after{left:8%!important;top:8px!important;width:22%!important;height:15px!important;background:rgba(255,255,255,.78)!important;filter:blur(2px)!important}
+#homePage .category-card .category-art{width:100%!important;min-height:112px!important;height:auto!important;flex:1 1 auto!important;display:flex!important;align-items:center!important;justify-content:center!important}
+#homePage .category-card .category-copy{width:100%!important;min-height:60px!important;flex:0 0 auto!important;display:flex!important;align-items:center!important;justify-content:center!important;flex-direction:column!important;padding:4px 5px 7px!important;text-align:center!important}
+#homePage .category-abc{background:linear-gradient(145deg,#fff36b 0%,#ffd747 42%,#ffad35 100%)!important;min-height:174px!important;height:174px!important;display:flex!important;flex-direction:row!important;align-items:stretch!important;padding:8px 14px!important;border-radius:40px!important}
+#homePage .category-abc .category-art{width:48%!important;flex:0 0 48%!important;min-height:0!important;height:auto!important}
+#homePage .category-abc .category-copy{width:52%!important;flex:1 1 52%!important;min-height:0!important;align-items:flex-start!important;text-align:left!important;padding-left:12px!important}
+#homePage .category-numbers{background:linear-gradient(145deg,#7be5ff 0%,#28c5f3 52%,#079cde 100%)!important}
+#homePage .category-animals{background:linear-gradient(145deg,#baff70 0%,#71ed50 52%,#23ca67 100%)!important}
+#homePage .category-video{background:linear-gradient(145deg,#ffb3d3 0%,#ff75b2 52%,#ed478f 100%)!important}
+#homePage .category-puzzles{background:linear-gradient(145deg,#e1baff 0%,#bd83f7 52%,#9256e9 100%)!important}
+#homePage .category-drawing{background:linear-gradient(145deg,#ffe0a1 0%,#ffb45c 52%,#f58b39 100%)!important}
+#homePage .category-game{background:linear-gradient(145deg,#a8dcff 0%,#789fff 52%,#526be8 100%)!important}
+#homePage .category-leaderboard{background:linear-gradient(145deg,#fff09a 0%,#ffd052 52%,#f3a52e 100%)!important}
+#homePage .category-copy b{font-size:19px!important;font-weight:1000!important;color:#fff!important;text-shadow:0 2px 0 rgba(0,0,0,.10),0 4px 6px rgba(0,0,0,.18)!important}
+#homePage .category-copy small{font-size:13px!important;font-weight:900!important;color:#fff!important;text-shadow:0 2px 4px rgba(0,0,0,.16)!important}
+#homePage .category-abc .category-copy b{font-size:24px!important}
+#homePage .category-flat-icon{filter:drop-shadow(0 7px 5px rgba(30,65,88,.28))!important}
+#homePage .abc-art i,#homePage .number-art i{text-shadow:0 3px 0 rgba(0,0,0,.12),0 7px 6px rgba(0,0,0,.22)!important}
+#homePage .category-card:active{transform:translateY(4px) scale(.985)!important}
+@media(max-width:380px){#homePage .category-card{min-height:170px!important;height:170px!important;border-radius:33px!important}#homePage .category-abc{min-height:150px!important;height:150px!important}}
+
 </style></head>
 <body>
 <div class="app">
