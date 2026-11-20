@@ -957,6 +957,72 @@ body{
 #homePage .home-greeting{box-shadow:inset 0 4px 0 rgba(255,255,255,.95),inset 0 9px 14px rgba(255,255,255,.5),inset 0 -10px 14px rgba(30,102,150,.16),0 6px 0 rgba(64,125,158,.22),0 14px 22px rgba(51,100,138,.2)!important}
 @media(max-width:380px){#homePage .category-tiles{gap:11px!important;row-gap:14px!important}#homePage .category-card{border-radius:31px!important}#homePage .category-card:before{border-radius:26px!important}#homePage .category-abc{border-radius:35px!important}#homePage .category-abc .category-copy{padding-left:22px!important}}
 
+
+/* FINAL MOBILE GRID FIX — MATCH REFERENCE SIZE, NO OVERLAP */
+#homePage .category-tiles{
+ display:grid!important;
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ grid-template-rows:176px 176px 176px 176px 176px!important;
+ grid-template-areas:
+  "abc abc"
+  "numbers animals"
+  "video puzzles"
+  "drawing game"
+  "leaderboard leaderboard"!important;
+ column-gap:14px!important;
+ row-gap:16px!important;
+ align-items:stretch!important;
+ margin:0 0 24px!important;
+}
+#homePage .category-card{
+ width:100%!important;height:100%!important;min-height:0!important;max-height:none!important;
+ margin:0!important;align-self:stretch!important;justify-self:stretch!important;
+ padding:8px 9px!important;gap:2px!important;box-sizing:border-box!important;
+}
+#homePage .category-abc{
+ grid-area:abc!important;height:100%!important;min-height:0!important;
+ display:flex!important;flex-direction:row!important;align-items:stretch!important;
+}
+#homePage .category-numbers{grid-area:numbers!important}
+#homePage .category-animals{grid-area:animals!important}
+#homePage .category-video{grid-area:video!important}
+#homePage .category-puzzles{grid-area:puzzles!important}
+#homePage .category-drawing{grid-area:drawing!important}
+#homePage .category-game{grid-area:game!important}
+#homePage .category-leaderboard{grid-area:leaderboard!important}
+#homePage .category-card .category-art{
+ flex:1 1 auto!important;width:100%!important;height:auto!important;min-height:0!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;
+}
+#homePage .category-card .category-copy{
+ flex:0 0 auto!important;width:100%!important;min-height:53px!important;height:auto!important;
+ padding:3px 4px 5px!important;display:flex!important;align-items:center!important;
+ justify-content:center!important;text-align:center!important;
+}
+#homePage .category-abc .category-art{width:48%!important;flex:0 0 48%!important}
+#homePage .category-abc .category-copy{
+ width:52%!important;flex:1 1 52%!important;min-height:0!important;
+ align-items:flex-start!important;justify-content:center!important;padding-left:27px!important;
+}
+#homePage .category-abc .category-copy:before{left:7px!important}
+#homePage .category-abc .category-copy b{font-size:25px!important}
+#homePage .category-abc .category-copy small{font-size:15px!important}
+#homePage .category-animals .category-art{height:auto!important;min-height:0!important}
+#homePage .category-animals .category-copy{min-height:53px!important}
+#homePage .category-flat-icon{font-size:55px!important}
+#homePage .abc-art i,#homePage .number-art i{font-size:57px!important}
+#homePage .category-leaderboard .category-art{width:48%!important;flex:0 0 48%!important}
+#homePage .category-leaderboard .category-copy{width:52%!important;flex:1 1 52%!important;align-items:flex-start!important}
+@media(max-width:380px){
+ #homePage .category-tiles{grid-template-rows:156px 156px 156px 156px 156px!important;column-gap:11px!important;row-gap:13px!important}
+ #homePage .category-card{border-radius:31px!important;padding:7px!important}
+ #homePage .category-abc{border-radius:35px!important}
+ #homePage .category-abc .category-copy{padding-left:22px!important}
+ #homePage .category-card .category-copy{min-height:48px!important}
+ #homePage .category-flat-icon{font-size:48px!important}
+ #homePage .abc-art i,#homePage .number-art i{font-size:50px!important}
+}
+
 </style></head>
 <body>
 <div class="app">
