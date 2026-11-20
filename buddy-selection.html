@@ -496,6 +496,20 @@ h1 .wiggle-letter{display:inline-block;animation:titleLetterBob 2.8s ease-in-out
 }
 @media(prefers-reduced-motion:reduce){#continue{transition:none!important}}
 
+
+/* CLEAN EDGE + SOLID MINT BUBBLE BUTTON */
+html,body{width:100%!important;max-width:100%!important;overflow-x:clip!important}
+.wrap{width:100%!important;max-width:560px!important;overflow:visible!important}
+.grid{padding-bottom:104px!important}
+.footer{background:linear-gradient(180deg,rgba(234,245,238,0),rgba(234,245,238,.88) 35%,#eaf5ee 100%)!important}
+#continue{
+ border:0!important;
+ background:linear-gradient(180deg,#72f5bd 0%,#25df91 42%,#08c77b 76%,#00a866 100%)!important;
+ box-shadow:inset 0 3px 5px rgba(255,255,255,.20),inset 0 -8px 12px rgba(0,103,61,.24),0 6px 0 #078e57,0 12px 20px rgba(0,170,103,.25)!important;
+}
+#continue:before,#continue:after{content:none!important;display:none!important}
+#continue:active:not(:disabled){box-shadow:inset 0 7px 11px rgba(0,95,55,.22),0 2px 0 #078e57,0 5px 9px rgba(0,170,103,.16)!important}
+
 </style>
 </head>
 <body><main class="wrap">
