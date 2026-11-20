@@ -363,6 +363,52 @@ h1 .wiggle-letter{display:inline-block;animation:titleLetterBob 2.8s ease-in-out
  box-shadow:inset 4px 4px 8px rgba(37,144,98,.18),inset -4px -4px 8px rgba(255,255,255,.6),0 2px 0 #42a979!important;
 }
 
+
+/* NEXT BUTTON — TRUE MINT CLAYMORPHISM */
+#continue{
+ position:relative!important;
+ min-height:66px!important;
+ width:calc(100% - 10px)!important;
+ margin:0 5px!important;
+ padding:17px 24px!important;
+ border:2px solid rgba(255,255,255,.98)!important;
+ border-radius:25px!important;
+ background:linear-gradient(145deg,#c9f8df 0%,#8be5bb 46%,#55c99a 100%)!important;
+ color:#fff!important;
+ font:1000 20px Nunito,sans-serif!important;
+ letter-spacing:.5px!important;
+ text-shadow:0 2px 0 rgba(37,132,91,.25)!important;
+ box-shadow:
+  inset 5px 5px 10px rgba(255,255,255,.88),
+  inset -6px -6px 11px rgba(37,147,99,.18),
+  0 8px 0 #39a979,
+  0 14px 23px rgba(55,158,112,.24)!important;
+ transition:transform .16s ease,box-shadow .16s ease,filter .16s ease!important;
+}
+#continue:before{
+ content:""!important;
+ position:absolute!important;
+ left:18px!important;right:18px!important;top:7px!important;
+ height:35%!important;border-radius:20px!important;
+ background:linear-gradient(180deg,rgba(255,255,255,.38),rgba(255,255,255,0))!important;
+ pointer-events:none!important;
+}
+#continue:active:not(:disabled){
+ transform:translateY(6px) scale(.99)!important;
+ box-shadow:
+  inset 5px 5px 10px rgba(37,147,99,.20),
+  inset -5px -5px 9px rgba(255,255,255,.52),
+  0 2px 0 #39a979,
+  0 5px 10px rgba(55,158,112,.16)!important;
+ filter:saturate(1.05)!important;
+}
+#continue:disabled{
+ opacity:.5!important;
+ filter:saturate(.72)!important;
+ box-shadow:inset 3px 3px 7px rgba(255,255,255,.65),0 3px 0 #75bd9b!important;
+}
+@media(prefers-reduced-motion:reduce){#continue{transition:none!important}}
+
 </style>
 </head>
 <body><main class="wrap">
