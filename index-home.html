@@ -1089,6 +1089,62 @@ body{
   filter:drop-shadow(0 5px 5px #07517a44)!important;
   object-fit:contain!important;
 }
+
+/* HOME POLISH: keep the fixed navigation clear of the last row */
+#homePage{
+  padding-bottom:calc(245px + env(safe-area-inset-bottom))!important;
+}
+#homePage .category-tiles{
+  padding-bottom:24px!important;
+  scroll-margin-bottom:190px;
+}
+/* Leaderboard: balanced horizontal feature card, matching the ABC hero */
+#homePage .category-leaderboard{
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:14px!important;
+  padding:12px 20px!important;
+  min-height:150px!important;
+  height:150px!important;
+}
+#homePage .category-leaderboard .category-art{
+  width:36%!important;
+  height:100%!important;
+  min-height:0!important;
+  flex:0 0 36%!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+#homePage .category-leaderboard .category-art img.toy-icon{
+  width:112px!important;
+  height:112px!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  object-fit:contain!important;
+}
+#homePage .category-leaderboard .category-copy{
+  width:auto!important;
+  min-width:0!important;
+  flex:1 1 auto!important;
+  min-height:0!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  text-align:left!important;
+  padding:8px 0 8px 16px!important;
+  border-left:3px solid rgba(255,255,255,.78)!important;
+}
+#homePage .category-leaderboard .category-copy b{font-size:20px!important}
+#homePage .category-leaderboard .category-copy small{font-size:13px!important}
+@media(max-width:380px){
+  #homePage{padding-bottom:calc(255px + env(safe-area-inset-bottom))!important}
+  #homePage .category-leaderboard{height:138px!important;min-height:138px!important;padding:10px 14px!important;gap:10px!important}
+  #homePage .category-leaderboard .category-art{width:34%!important;flex-basis:34%!important}
+  #homePage .category-leaderboard .category-art img.toy-icon{width:96px!important;height:96px!important}
+  #homePage .category-leaderboard .category-copy{padding-left:12px!important}
+}
 </style></head>
 <body>
 <div class="app">
