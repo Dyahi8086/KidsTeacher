@@ -1047,6 +1047,32 @@ body{
  #homePage .category-numbers .category-art .toy-icon{height:108px!important}
 }
 
+
+/* FIX: keep every uploaded 3D PNG inside its art area without stretching/cropping */
+#homePage .category-card .category-art{
+  min-width:0!important;overflow:hidden!important;
+}
+#homePage .category-card .category-art img.toy-icon{
+  display:block!important;
+  width:100px!important;height:100px!important;
+  max-width:calc(100% - 16px)!important;max-height:calc(100% - 8px)!important;
+  object-fit:contain!important;object-position:center center!important;
+  flex:0 1 auto!important;
+  margin:0 auto!important;
+}
+#homePage .category-abc .category-art img.toy-icon,
+#homePage .category-numbers .category-art img.toy-icon{width:112px!important;height:104px!important}
+#homePage .category-leaderboard .category-art{
+  display:flex!important;align-items:center!important;justify-content:center!important;
+}
+#homePage .category-leaderboard .category-art img.toy-icon{
+  width:108px!important;height:108px!important;object-fit:contain!important;
+  object-position:center!important;
+}
+#homePage .category-card .category-copy{position:relative!important;z-index:3!important}
+#homePage .category-tiles{padding-bottom:18px!important}
+#homePage{padding-bottom:calc(112px + env(safe-area-inset-bottom))!important}
+
 </style></head>
 <body>
 <div class="app">
