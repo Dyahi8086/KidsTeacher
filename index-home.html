@@ -810,6 +810,83 @@ body{
 }
 /* Keep bottom navigation exactly as it is */
 
+
+/* REFERENCE-MATCHED BRIGHT GEL BUBBLE THEME */
+#homePage .category-tiles{gap:16px!important;align-items:stretch!important}
+#homePage .category-card{
+ position:relative!important;isolation:isolate!important;overflow:hidden!important;
+ min-height:190px!important;height:190px!important;padding:8px!important;
+ display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:space-between!important;
+ border:2px solid rgba(255,255,255,.95)!important;border-radius:34px!important;
+ color:#fff!important;
+ box-shadow:inset 0 5px 8px rgba(255,255,255,.78),inset 0 -8px 12px rgba(0,0,0,.10),0 7px 0 rgba(71,108,132,.20),0 15px 23px rgba(65,89,117,.20)!important;
+}
+#homePage .category-card:before{
+ content:""!important;position:absolute!important;z-index:-1!important;inset:5px!important;border-radius:28px!important;
+ background:linear-gradient(145deg,rgba(255,255,255,.38),transparent 42%,rgba(255,255,255,.08))!important;
+ pointer-events:none!important;
+}
+#homePage .category-card:after{
+ content:""!important;position:absolute!important;z-index:0!important;left:9%!important;top:7px!important;
+ width:23%!important;height:15px!important;border-radius:50%!important;
+ background:rgba(255,255,255,.68)!important;filter:blur(2px)!important;pointer-events:none!important;
+}
+#homePage .category-art{
+ position:relative!important;z-index:1!important;width:100%!important;height:auto!important;min-height:105px!important;
+ flex:1 1 auto!important;display:flex!important;align-items:center!important;justify-content:center!important;
+ background:transparent!important;border-radius:26px!important;
+}
+#homePage .category-flat-icon{font-size:58px!important;line-height:1!important;filter:drop-shadow(0 7px 4px rgba(30,65,88,.28))!important}
+#homePage .abc-art i,#homePage .number-art i{font-size:58px!important;text-shadow:0 3px 0 rgba(0,0,0,.12),0 7px 6px rgba(0,0,0,.22)!important}
+#homePage .category-copy{
+ position:relative!important;z-index:1!important;flex:0 0 auto!important;width:100%!important;min-height:57px!important;
+ padding:5px 4px 8px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+ border-radius:22px!important;background:transparent!important;text-align:center!important;
+}
+#homePage .category-copy b{font-size:19px!important;font-weight:1000!important;color:#fff!important;text-shadow:0 2px 0 rgba(0,0,0,.12),0 4px 6px rgba(0,0,0,.18)!important}
+#homePage .category-copy small{font-size:13px!important;font-weight:900!important;color:#fff!important;text-shadow:0 2px 4px rgba(0,0,0,.18)!important}
+#homePage .category-abc{
+ grid-column:1/-1!important;min-height:164px!important;height:164px!important;
+ display:flex!important;flex-direction:row!important;align-items:stretch!important;justify-content:stretch!important;
+ padding:8px!important;border-radius:36px!important;
+ background:linear-gradient(145deg,#fff36c 0%,#ffc54b 48%,#ff963d 100%)!important;
+}
+#homePage .category-abc .category-art{width:48%!important;flex:0 0 48%!important;height:100%!important;min-height:0!important}
+#homePage .category-abc .category-copy{width:52%!important;flex:1 1 52%!important;min-height:0!important;align-items:flex-start!important;text-align:left!important;padding-left:10px!important}
+#homePage .category-abc .category-copy b{font-size:23px!important}
+#homePage .category-numbers{background:linear-gradient(145deg,#83e8ff 0%,#26baf2 65%,#079de0 100%)!important}
+#homePage .category-animals{background:linear-gradient(145deg,#b7ff70 0%,#67e94f 65%,#20c96e 100%)!important}
+#homePage .category-video{background:linear-gradient(145deg,#ffb5d2 0%,#ff6fae 65%,#ed438d 100%)!important}
+#homePage .category-puzzles{background:linear-gradient(145deg,#dfb8ff 0%,#b879f5 65%,#9253e9 100%)!important}
+#homePage .category-drawing{background:linear-gradient(145deg,#ffe0a0 0%,#ffb45b 65%,#f58a38 100%)!important}
+#homePage .category-game{background:linear-gradient(145deg,#a8d7ff 0%,#729cff 65%,#526be8 100%)!important}
+#homePage .category-leaderboard{background:linear-gradient(145deg,#fff09a 0%,#ffc94f 65%,#f2a52e 100%)!important}
+#homePage .home-greeting{
+ position:relative!important;overflow:hidden!important;min-height:145px!important;padding:16px 20px!important;
+ border:2px solid rgba(255,255,255,.96)!important;border-radius:36px!important;
+ background:linear-gradient(145deg,#e8fbff 0%,#bfeeff 60%,#8edbff 100%)!important;
+ box-shadow:inset 0 5px 9px rgba(255,255,255,.85),inset 0 -7px 12px rgba(39,128,175,.15),0 7px 0 #b4d8e6,0 15px 24px rgba(56,120,155,.20)!important;
+}
+#homePage .home-greeting:before{content:""!important;position:absolute!important;left:7%!important;top:7px!important;width:25%!important;height:14px!important;border-radius:50%!important;background:#ffffffb8!important;filter:blur(3px)!important}
+#homePage .home-greeting b{color:#194d82!important;text-shadow:0 2px 0 rgba(255,255,255,.55)!important}
+#homePage .home-greeting p{color:#54728d!important;font-weight:800!important}
+#homePage .buddy-face{filter:drop-shadow(0 7px 5px rgba(31,71,103,.25))!important}
+#homePage .avatar{
+ border:2px solid #fff!important;border-radius:28px!important;
+ background:linear-gradient(145deg,#fff,#dff6ff)!important;
+ box-shadow:inset 0 4px 8px #fff,0 7px 0 #c9e5ef,0 13px 20px rgba(54,115,149,.2)!important;
+}
+#homePage .section-head h3{color:#244d79!important}
+#homePage .section-head span{color:#6f8297!important}
+/* Category card press: soft gel compression */
+#homePage .category-card:active{transform:translateY(4px) scale(.985)!important;box-shadow:inset 0 7px 12px rgba(0,0,0,.12),0 2px 0 rgba(71,108,132,.18),0 5px 10px rgba(65,89,117,.14)!important}
+@media(max-width:380px){
+ #homePage .category-card{min-height:170px!important;height:170px!important;border-radius:29px!important}
+ #homePage .category-abc{min-height:148px!important;height:148px!important}
+ #homePage .category-flat-icon{font-size:51px!important}
+ #homePage .abc-art i,#homePage .number-art i{font-size:51px!important}
+}
+
 </style></head>
 <body>
 <div class="app">
