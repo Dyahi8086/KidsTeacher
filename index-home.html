@@ -1170,6 +1170,13 @@ html,body{
 #homePage .category-card:after{
   background:rgba(255,255,255,.48)!important;
 }
+
+/* REMOVE DECORATIVE WHITE BUBBLES / DOTS FROM CATEGORY TILES */
+#homePage .category-card:after{display:none!important;content:none!important;box-shadow:none!important}
+#homePage .category-card:before{
+  background:linear-gradient(145deg,rgba(255,255,255,.16),transparent 38%,rgba(255,255,255,.025))!important;
+  box-shadow:none!important;
+}
 </style></head>
 <body>
 <div class="app">
