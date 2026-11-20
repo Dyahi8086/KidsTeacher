@@ -449,6 +449,53 @@ h1 .wiggle-letter{display:inline-block;animation:titleLetterBob 2.8s ease-in-out
  filter:saturate(.8)!important;
 }
 
+
+/* INFLATED GLOSSY BUBBLE BUTTON — SOFT 3D GEL LOOK */
+#continue{
+ position:relative!important;isolation:isolate!important;overflow:hidden!important;
+ width:calc(100% - 10px)!important;margin:0 5px!important;
+ min-height:72px!important;padding:17px 26px!important;
+ border:2px solid rgba(255,255,255,.9)!important;border-radius:999px!important;
+ background:linear-gradient(180deg,#8fffd0 0%,#32e99a 38%,#08c879 72%,#00a95e 100%)!important;
+ color:#fff!important;font:1000 22px Nunito,sans-serif!important;
+ letter-spacing:.4px!important;text-shadow:0 2px 3px rgba(0,102,61,.28)!important;
+ box-shadow:
+  inset 0 5px 7px rgba(255,255,255,.92),
+  inset 0 -8px 12px rgba(0,115,66,.28),
+  0 5px 0 #078d55,
+  0 12px 22px rgba(0,185,111,.32),
+  0 0 24px rgba(63,255,173,.22)!important;
+ transform:translateY(0)!important;
+ transition:transform .16s ease,filter .16s ease,box-shadow .16s ease!important;
+}
+#continue:before{
+ content:""!important;position:absolute!important;z-index:-1!important;
+ left:7%!important;top:6px!important;width:27%!important;height:23px!important;
+ border-radius:50%!important;transform:rotate(-13deg)!important;
+ background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(255,255,255,.22))!important;
+ filter:blur(.2px)!important;pointer-events:none!important;
+}
+#continue:after{
+ content:""!important;position:absolute!important;z-index:-1!important;
+ right:7%!important;top:7px!important;width:12%!important;height:13px!important;
+ border-radius:50%!important;transform:rotate(18deg)!important;
+ background:rgba(255,255,255,.72)!important;filter:blur(1px)!important;
+}
+#continue:active:not(:disabled){
+ transform:translateY(5px) scale(.985)!important;
+ filter:saturate(1.12)!important;
+ box-shadow:
+  inset 0 7px 12px rgba(0,99,57,.25),
+  inset 0 -3px 7px rgba(255,255,255,.28),
+  0 1px 0 #078d55,
+  0 4px 10px rgba(0,185,111,.22)!important;
+}
+#continue:disabled{
+ opacity:.5!important;filter:saturate(.72)!important;
+ box-shadow:inset 0 4px 8px rgba(255,255,255,.65),0 3px 0 #55b98d!important;
+}
+@media(prefers-reduced-motion:reduce){#continue{transition:none!important}}
+
 </style>
 </head>
 <body><main class="wrap">
