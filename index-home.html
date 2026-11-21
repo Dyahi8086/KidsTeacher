@@ -1391,6 +1391,83 @@ html,body{
 .nav button:nth-child(3).active{background:linear-gradient(145deg,#ffe6f2,#ffc1df)!important;box-shadow:inset 0 4px 8px #fff9,inset 0 -4px 8px #d76aa333!important}
 .nav button.nav-draw{background:linear-gradient(145deg,#b6a7ff,#7866e9)!important;color:#fff!important;box-shadow:0 7px 0 #5949c1,0 13px 23px rgba(101,85,220,.28),inset 0 4px 7px #fff8!important}
 
+
+
+/* REFERENCE LOOK — soft fabric pastel background + clay toy buttons */
+html,body{
+ background:#b9e4f1!important;
+ background-image:
+  radial-gradient(ellipse at 10% 8%,rgba(105,204,229,.48),transparent 34%),
+  radial-gradient(ellipse at 94% 18%,rgba(186,199,242,.48),transparent 36%),
+  radial-gradient(ellipse at 16% 78%,rgba(255,194,218,.42),transparent 40%),
+  radial-gradient(ellipse at 90% 92%,rgba(255,151,191,.38),transparent 38%),
+  linear-gradient(145deg,#aee0ed 0%,#c4dff0 43%,#e8c9e8 72%,#f4b8d0 100%)!important;
+ background-attachment:fixed!important;
+}
+.app,#homePage{background:transparent!important}
+#homePage .home-greeting{
+ display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;
+ gap:15px!important;min-height:118px!important;padding:14px 20px!important;margin:10px 0 22px!important;
+ border-radius:35px!important;border:2px solid rgba(255,255,255,.94)!important;
+ background:linear-gradient(145deg,#fffefa 0%,#fffaf5 55%,#f6eee9 100%)!important;
+ box-shadow:inset 0 7px 11px rgba(255,255,255,.98),inset 0 -7px 10px rgba(178,148,142,.13),0 7px 0 rgba(122,139,164,.16),0 16px 24px rgba(76,103,138,.22)!important;
+}
+#homePage .home-greeting .buddy-face{
+ width:100px!important;height:100px!important;flex:0 0 100px!important;
+ filter:drop-shadow(0 7px 6px rgba(49,54,88,.24))!important;
+}
+#homePage .home-greeting>div:last-child{min-width:0!important;text-align:left!important}
+#homePage .home-greeting b{
+ color:#98695b!important;font:800 25px/1.1 Fredoka,sans-serif!important;
+ text-shadow:0 2px 0 #fff,0 4px 7px rgba(125,80,65,.13)!important;
+}
+#homePage .home-greeting p{display:block!important;color:#927b77!important;font-size:13px!important;font-weight:800!important;margin:6px 0 0!important}
+#homePage .section-head{margin:19px 4px 12px!important}
+#homePage .section-head h3{color:#fffaf5!important;text-shadow:0 2px 0 rgba(111,133,166,.22),0 4px 8px rgba(81,104,143,.22)!important;font-size:24px!important}
+#homePage .section-head span{color:#fff!important;text-shadow:0 2px 5px rgba(68,91,130,.25)!important}
+
+/* Glossy rounded clay cards in the exact reference palette */
+#homePage .category-card{
+ border:2px solid rgba(255,255,255,.78)!important;border-radius:35px!important;
+ color:#fff!important;
+ box-shadow:inset 0 7px 12px rgba(255,255,255,.65),inset 0 -10px 13px rgba(53,48,93,.15),0 7px 0 rgba(75,84,124,.18),0 15px 22px rgba(60,72,112,.22)!important;
+}
+#homePage .category-abc{background:linear-gradient(145deg,#fff06a 0%,#ffd51b 48%,#f4b900 100%)!important}
+#homePage .category-numbers{background:linear-gradient(145deg,#b7edff 0%,#80d5f4 52%,#55b6e3 100%)!important}
+#homePage .category-animals{background:linear-gradient(145deg,#a8f65d 0%,#6cdb31 52%,#42bd24 100%)!important}
+#homePage .category-video{background:linear-gradient(145deg,#ff62bb 0%,#f42c9b 55%,#d9167c 100%)!important}
+#homePage .category-puzzles{background:linear-gradient(145deg,#d77cff 0%,#a94be8 54%,#8035c5 100%)!important}
+#homePage .category-drawing{background:linear-gradient(145deg,#ffd68b 0%,#ffae54 55%,#ed8435 100%)!important}
+#homePage .category-game{background:linear-gradient(145deg,#a9ef9d 0%,#66d77b 55%,#35b65d 100%)!important}
+#homePage .category-leaderboard{background:linear-gradient(145deg,#b4efff 0%,#70d5ed 55%,#37afd4 100%)!important}
+#homePage .category-card .category-art,#homePage .category-card .category-copy{background:transparent!important}
+#homePage .category-card .category-copy b{color:#fff!important;font-weight:900!important;text-shadow:0 2px 2px rgba(63,43,91,.26),0 4px 8px rgba(40,38,77,.17)!important}
+#homePage .category-card .category-copy small{color:#fffafc!important;text-shadow:0 2px 4px rgba(55,44,86,.22)!important}
+#homePage .category-card .category-art img.toy-icon{
+ filter:drop-shadow(0 8px 6px rgba(45,43,77,.25))!important;
+}
+
+/* Cream pill navigation from the reference */
+.nav-wrap{background:linear-gradient(180deg,transparent 0%,rgba(228,220,233,.38) 30%,rgba(246,235,230,.88) 100%)!important}
+.nav{
+ background:linear-gradient(145deg,#fffefa 0%,#fff8f1 58%,#eee5df 100%)!important;
+ border:2px solid rgba(255,255,255,.96)!important;border-radius:35px!important;
+ box-shadow:inset 0 7px 11px rgba(255,255,255,.98),inset 0 -8px 11px rgba(161,132,120,.13),0 7px 0 rgba(132,115,109,.14),0 15px 25px rgba(78,75,99,.22)!important;
+}
+.nav button{color:#92776e!important}
+.nav button:nth-child(3),.nav button:nth-child(3) .ico{color:#c74b62!important}
+.nav button.active:not(.nav-draw){
+ color:#4b6d9a!important;background:linear-gradient(145deg,#fff,#f4e9df)!important;
+ box-shadow:inset 0 4px 8px rgba(255,255,255,.96),inset 0 -4px 7px rgba(149,125,108,.13),0 3px 7px rgba(98,90,103,.12)!important;
+}
+.nav button:nth-child(3).active{background:linear-gradient(145deg,#ffe5e9,#ffcbd5)!important;color:#b8445d!important}
+.nav button.nav-draw{background:linear-gradient(145deg,#d9c5ff,#9577ec)!important;color:#fff!important;box-shadow:0 7px 0 #7059bd,0 13px 23px rgba(101,85,220,.24),inset 0 4px 7px #fff8!important}
+@media(max-width:380px){
+ #homePage .home-greeting{min-height:105px!important;padding:11px 13px!important;gap:10px!important}
+ #homePage .home-greeting .buddy-face{width:82px!important;height:82px!important;flex-basis:82px!important}
+ #homePage .home-greeting b{font-size:22px!important}
+}
+
 </style></head>
 <body>
 <div class="app">
