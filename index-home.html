@@ -1499,6 +1499,159 @@ body:before{
 }
 .app,#homePage{background:transparent!important}
 
+
+
+/* KIDS TEACHER — 3D CLAYMORPHISM / TACTILE CLAY THEME
+   Visual-only layer: preserves all existing markup, links and JavaScript. */
+:root{
+ --ink:#38516e!important;
+ --muted:#71869b!important;
+ --purple:#8875c9!important;
+}
+html,body{
+ background:#c7e5f1!important;
+ background-image:
+  radial-gradient(ellipse at 12% 4%,rgba(145,213,231,.42),transparent 36%),
+  radial-gradient(ellipse at 90% 20%,rgba(203,194,232,.35),transparent 38%),
+  radial-gradient(ellipse at 20% 82%,rgba(255,192,211,.32),transparent 42%),
+  linear-gradient(155deg,#b8dfed 0%,#d1e3ef 42%,#e5d8eb 72%,#f3c9d8 100%)!important;
+ background-attachment:fixed!important;
+ background-repeat:no-repeat!important;
+ background-size:cover!important;
+}
+body:before{content:none!important;display:none!important}
+.app,#homePage,.page{background:transparent!important}
+
+/* Wizard greeting: floating mascot breaks the card edge */
+#homePage .home-greeting{
+ position:relative!important;
+ overflow:visible!important;
+ isolation:isolate!important;
+ min-height:112px!important;
+ padding:12px 18px!important;
+ gap:10px!important;
+ border-radius:30px!important;
+ border:1px solid rgba(206,220,235,.95)!important;
+ background:linear-gradient(145deg,#fff7ec 0%,#f8f0e9 58%,#f2e9ef 100%)!important;
+ box-shadow:inset 3px 3px 7px rgba(255,255,255,.95),inset -4px -5px 9px rgba(178,164,166,.16),7px 8px 0 rgba(126,143,164,.12),0 15px 24px rgba(89,111,139,.18)!important;
+}
+#homePage .home-greeting .buddy-face{
+ position:relative!important;
+ z-index:5!important;
+ width:82px!important;height:82px!important;flex:0 0 82px!important;
+ transform:scale(1.25) translate(-5px,-7px)!important;
+ transform-origin:center bottom!important;
+ filter:drop-shadow(0 9px 5px rgba(63,72,104,.25))!important;
+}
+#homePage .home-greeting>div:last-child{position:relative!important;z-index:2!important;min-width:0!important}
+#homePage .home-greeting b{
+ color:#8b665b!important;
+ font:800 23px/1.1 Fredoka,sans-serif!important;
+ text-shadow:0 1px 0 #fff,0 3px 5px rgba(113,86,77,.12)!important;
+}
+#homePage .home-greeting p{display:block!important;color:#8d817d!important;font-size:12px!important;font-weight:800!important;margin:5px 0 0!important}
+
+/* Soft tactile category tiles — each has its own pastel clay colour */
+#homePage .category-tiles{gap:14px!important}
+#homePage .category-card{
+ position:relative!important;
+ overflow:visible!important;
+ isolation:isolate!important;
+ min-height:164px!important;
+ border:1px solid rgba(125,151,179,.28)!important;
+ border-radius:29px!important;
+ color:#fff!important;
+ box-shadow:inset 3px 3px 7px rgba(255,255,255,.52),inset -5px -6px 10px rgba(63,81,112,.13),0 7px 0 rgba(93,111,139,.16),0 13px 20px rgba(73,91,123,.18)!important;
+ text-shadow:0 2px 3px rgba(57,67,93,.16)!important;
+}
+#homePage .category-abc{background:linear-gradient(145deg,#ffe98b 0%,#ffd45e 56%,#efb64d 100%)!important}
+#homePage .category-numbers{background:linear-gradient(145deg,#bcecff 0%,#8bd3ef 55%,#69b9dd 100%)!important}
+#homePage .category-animals{background:linear-gradient(145deg,#c9efaa 0%,#9bdc83 55%,#72c47c 100%)!important}
+#homePage .category-video{background:linear-gradient(145deg,#ffc4d8 0%,#f69ab9 55%,#df7fa9 100%)!important}
+#homePage .category-puzzles{background:linear-gradient(145deg,#d9c8f6 0%,#bba2e6 55%,#9c85cd 100%)!important}
+#homePage .category-drawing{background:linear-gradient(145deg,#ffdbb4 0%,#f6bd8b 55%,#dfa174 100%)!important}
+#homePage .category-game{background:linear-gradient(145deg,#c0e8d5 0%,#8fd1b4 55%,#6db99e 100%)!important}
+#homePage .category-leaderboard{background:linear-gradient(145deg,#c5e7ef 0%,#91cbdc 55%,#70afc7 100%)!important}
+#homePage .category-card .category-art{
+ position:relative!important;
+ z-index:3!important;
+ width:100%!important;
+ height:108px!important;
+ min-height:108px!important;
+ overflow:visible!important;
+ background:transparent!important;
+}
+#homePage .category-card .category-art img.toy-icon,
+#homePage .category-card .category-art img.category-clay-icon{
+ position:relative!important;
+ z-index:4!important;
+ max-width:100%!important;
+ object-fit:contain!important;
+ transform:translateY(-9px) scale(1.18)!important;
+ transform-origin:center bottom!important;
+ filter:drop-shadow(0 10px 6px rgba(53,64,91,.24))!important;
+}
+#homePage .category-card .category-copy{
+ position:relative!important;z-index:2!important;
+ background:transparent!important;
+ color:#fff!important;
+}
+#homePage .category-card .category-copy b{
+ color:#fff!important;
+ text-shadow:0 2px 2px rgba(65,65,85,.24),0 4px 7px rgba(65,65,85,.13)!important;
+}
+#homePage .category-card .category-copy small{
+ color:rgba(255,255,255,.96)!important;
+ text-shadow:0 2px 4px rgba(65,65,85,.19)!important;
+}
+
+/* Remove the small white oval/bubble shine decorations */
+#homePage .category-card:after,
+#homePage .category-card:before,
+#homePage .category-welcome:after,
+#homePage .category-welcome:before{content:none!important;display:none!important}
+
+/* Floating welcome tile below categories */
+#homePage .category-welcome{
+ overflow:visible!important;
+ border:1px solid rgba(174,164,203,.35)!important;
+ border-radius:28px!important;
+ background:linear-gradient(145deg,#e7ddf5 0%,#d7dff2 55%,#f3dce9 100%)!important;
+ color:#6e638e!important;
+ box-shadow:inset 3px 3px 7px rgba(255,255,255,.72),inset -4px -5px 9px rgba(108,103,144,.12),0 7px 0 rgba(111,111,151,.13),0 13px 20px rgba(80,91,127,.14)!important;
+}
+#homePage .category-welcome .tag,#homePage .category-welcome .hero-learning-title{
+ color:#6e638e!important;text-shadow:0 1px 0 rgba(255,255,255,.8),0 3px 6px rgba(89,84,122,.12)!important;
+}
+
+/* Bottom dock: soft clay tray, not a bright white bubble */
+.nav-wrap{background:linear-gradient(180deg,transparent 0%,rgba(215,224,237,.38) 34%,rgba(224,216,233,.72) 100%)!important}
+.nav{
+ background:linear-gradient(145deg,#f7f0eb 0%,#e9e4e9 58%,#dcdfe9 100%)!important;
+ border:1px solid rgba(161,164,187,.34)!important;
+ border-radius:27px!important;
+ box-shadow:inset 3px 3px 7px rgba(255,255,255,.85),inset -4px -5px 9px rgba(114,119,146,.12),0 6px 0 rgba(115,124,151,.14),0 13px 21px rgba(74,87,119,.17)!important;
+}
+.nav button{color:#65758d!important}
+.nav button:nth-child(3),.nav button:nth-child(3) .ico{color:#bf6684!important}
+.nav button.active:not(.nav-draw){
+ color:#526e9d!important;
+ background:linear-gradient(145deg,#dceafa,#c7d9ef)!important;
+ box-shadow:inset 2px 2px 5px rgba(255,255,255,.8),inset -3px -3px 6px rgba(90,117,159,.13),0 3px 6px rgba(85,101,137,.12)!important;
+}
+.nav button:nth-child(3).active{background:linear-gradient(145deg,#f8d9e5,#edb9cc)!important;color:#a94f70!important}
+.nav button.nav-draw{
+ background:linear-gradient(145deg,#d8c9ef,#b3a0d8)!important;
+ color:#fff!important;
+ box-shadow:0 6px 0 #9582ba,0 11px 19px rgba(103,89,143,.22),inset 2px 2px 5px rgba(255,255,255,.55)!important;
+}
+@media(max-width:380px){
+ #homePage .home-greeting{min-height:104px!important;padding:10px 12px!important;gap:8px!important}
+ #homePage .home-greeting .buddy-face{width:72px!important;height:72px!important;flex-basis:72px!important;transform:scale(1.2) translate(-4px,-6px)!important}
+ #homePage .home-greeting b{font-size:21px!important}
+ #homePage .category-card .category-art{height:98px!important;min-height:98px!important}
+}
+
 </style></head>
 <body>
 <div class="app">
