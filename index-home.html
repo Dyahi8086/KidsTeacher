@@ -1468,6 +1468,37 @@ html,body{
  #homePage .home-greeting b{font-size:22px!important}
 }
 
+
+
+/* BACKGROUND MATCH — soft blue-to-lavender-to-pink fabric look */
+html,body{
+ background-color:#b9dce9!important;
+ background-image:
+  radial-gradient(ellipse at 9% 4%,rgba(117,207,226,.42) 0%,transparent 42%),
+  radial-gradient(ellipse at 94% 8%,rgba(179,198,235,.38) 0%,transparent 43%),
+  radial-gradient(ellipse at 12% 48%,rgba(174,202,229,.22) 0%,transparent 45%),
+  radial-gradient(ellipse at 90% 57%,rgba(211,180,218,.24) 0%,transparent 48%),
+  radial-gradient(ellipse at 48% 100%,rgba(255,151,190,.42) 0%,transparent 55%),
+  linear-gradient(155deg,#a9dce9 0%,#b8d9ec 28%,#c9d6ed 52%,#dfc6e5 74%,#f1b9d1 100%),
+  repeating-linear-gradient(112deg,rgba(255,255,255,.035) 0px,rgba(255,255,255,.035) 1px,rgba(74,111,150,.018) 2px,transparent 5px)!important;
+ background-attachment:fixed!important;
+ background-repeat:no-repeat!important;
+ background-size:cover!important;
+}
+body:before{
+ content:""!important;
+ position:fixed!important;
+ inset:0!important;
+ z-index:-1!important;
+ pointer-events:none!important;
+ opacity:.42!important;
+ background:
+  radial-gradient(ellipse at 20% 12%,transparent 0 38%,rgba(255,255,255,.10) 39%,transparent 42%),
+  radial-gradient(ellipse at 78% 30%,transparent 0 35%,rgba(74,123,161,.06) 36%,transparent 40%),
+  radial-gradient(ellipse at 30% 78%,transparent 0 34%,rgba(255,255,255,.10) 35%,transparent 39%)!important;
+}
+.app,#homePage{background:transparent!important}
+
 </style></head>
 <body>
 <div class="app">
