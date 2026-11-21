@@ -1709,6 +1709,64 @@ html,body{
 .nav button{color:#596f9b!important}
 .nav button.active:not(.nav-draw){background:linear-gradient(145deg,#e5f5ff,#c9e5ff)!important;color:#315d9e!important}
 
+
+
+/* FIX CATEGORY ICON OVERFLOW: keep all artwork within its own card */
+#homePage .category-card{
+  overflow:hidden!important;
+  clip-path:inset(0 round 29px)!important;
+}
+#homePage .category-card .category-art{
+  overflow:hidden!important;
+  min-width:0!important;
+  flex-shrink:0!important;
+  height:108px!important;
+  min-height:108px!important;
+  padding:4px 8px 0!important;
+  box-sizing:border-box!important;
+}
+#homePage .category-card .category-art img.toy-icon,
+#homePage .category-card .category-art img.category-clay-icon{
+  position:relative!important;
+  inset:auto!important;
+  transform:none!important;
+  translate:none!important;
+  rotate:none!important;
+  margin:0 auto!important;
+  width:auto!important;
+  height:96px!important;
+  max-width:100%!important;
+  max-height:96px!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  filter:drop-shadow(0 4px 4px rgba(45,58,91,.20))!important;
+}
+#homePage .category-abc .category-art img.toy-icon,
+#homePage .category-numbers .category-art img.toy-icon{
+  height:96px!important;
+  max-height:96px!important;
+}
+@media(max-width:380px){
+ #homePage .category-card .category-art{
+  height:94px!important;
+  min-height:94px!important;
+  padding:3px 6px 0!important;
+ }
+ #homePage .category-card .category-art img.toy-icon,
+ #homePage .category-card .category-art img.category-clay-icon{
+  height:84px!important;
+  max-height:84px!important;
+  max-width:100%!important;
+  transform:none!important;
+  translate:none!important;
+ }
+ #homePage .category-abc .category-art img.toy-icon,
+ #homePage .category-numbers .category-art img.toy-icon{
+  height:84px!important;
+  max-height:84px!important;
+ }
+}
+
 </style></head>
 <body>
 <div class="app">
