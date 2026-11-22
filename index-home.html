@@ -1874,6 +1874,77 @@ body:after{
 }
 .app,#homePage,.page{background:transparent!important}
 
+
+
+/* RAINBOW GARDEN + NEUMORPHIC BACKGROUND — background decoration only */
+html,body{
+  background:#cce9e8!important;
+  background-image:
+    radial-gradient(ellipse at 50% 0%,#eafaff 0%,rgba(234,250,255,0) 42%),
+    linear-gradient(180deg,#b8e5f4 0%,#cde9f0 48%,#d8edda 100%)!important;
+  background-attachment:fixed!important;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+}
+body:before{
+  content:""!important;
+  display:block!important;
+  position:fixed!important;
+  inset:0!important;
+  z-index:-1!important;
+  pointer-events:none!important;
+  opacity:.94!important;
+  background:
+    /* rainbow arch */
+    radial-gradient(ellipse 78% 51% at 50% 111%,
+      transparent 0 47%,
+      #ff8290 47.5% 50%,
+      #ffb56d 50.5% 53%,
+      #ffe58a 53.5% 56%,
+      #8edb9b 56.5% 59%,
+      #83cfff 59.5% 62%,
+      #b39aef 62.5% 65%,
+      transparent 65.5% 100%),
+    /* soft puffy clouds */
+    radial-gradient(ellipse 10% 4% at 14% 20%,#ffffffd9 0 65%,transparent 70%),
+    radial-gradient(ellipse 7% 3% at 19% 18%,#ffffffd9 0 65%,transparent 70%),
+    radial-gradient(ellipse 9% 3.5% at 24% 21%,#ffffffd0 0 65%,transparent 70%),
+    radial-gradient(ellipse 11% 4% at 77% 28%,#ffffffd9 0 65%,transparent 70%),
+    radial-gradient(ellipse 7% 3% at 82% 26%,#ffffffd9 0 65%,transparent 70%),
+    radial-gradient(ellipse 9% 3.5% at 87% 29%,#ffffffd0 0 65%,transparent 70%);
+}
+body:after{
+  content:""!important;
+  display:block!important;
+  position:fixed!important;
+  inset:0!important;
+  z-index:-1!important;
+  pointer-events:none!important;
+  opacity:.98!important;
+  background:
+    /* left tree foliage and trunk */
+    radial-gradient(ellipse 7% 8% at 5% 78%,#79c982 0 66%,transparent 70%),
+    radial-gradient(ellipse 6% 7% at 10% 73%,#91d991 0 66%,transparent 70%),
+    radial-gradient(ellipse 7% 8% at 14% 79%,#6fbd79 0 66%,transparent 70%),
+    linear-gradient(90deg,transparent 0 8.5%,#b88765 8.5% 10%,transparent 10% 100%),
+    /* right tree foliage and trunk */
+    radial-gradient(ellipse 7% 8% at 88% 77%,#77c780 0 66%,transparent 70%),
+    radial-gradient(ellipse 6% 7% at 93% 73%,#96db91 0 66%,transparent 70%),
+    radial-gradient(ellipse 7% 8% at 97% 79%,#69b978 0 66%,transparent 70%),
+    linear-gradient(90deg,transparent 0 91.5%,#b88765 91.5% 93%,transparent 93% 100%),
+    /* rolling soft green hills */
+    radial-gradient(ellipse 70% 20% at 3% 111%,#8fd38a 0 64%,transparent 65%),
+    radial-gradient(ellipse 70% 22% at 100% 112%,#79c77f 0 64%,transparent 65%),
+    radial-gradient(ellipse 70% 18% at 50% 115%,#b1e39c 0 64%,transparent 65%);
+  filter:drop-shadow(0 8px 12px rgba(84,133,120,.10));
+}
+.app,#homePage,.page{background:transparent!important}
+
+/* Neumorphism surface feel for the page backdrop */
+#homePage{
+  filter:drop-shadow(0 1px 0 rgba(255,255,255,.22));
+}
+
 </style></head>
 <body>
 <div class="app">
