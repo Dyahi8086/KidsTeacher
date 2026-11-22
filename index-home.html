@@ -1822,6 +1822,58 @@ body:before{
 }
 .app,#homePage,.page{background:transparent!important}
 
+
+
+/* RAINBOW + GREEN NATURE WORLD — background only */
+html,body{
+  min-height:100%!important;
+  background-color:#aee5f8!important;
+  background-image:
+    radial-gradient(ellipse at 13% 12%,rgba(255,255,255,.72) 0 5%,transparent 17%),
+    radial-gradient(ellipse at 83% 18%,rgba(255,255,255,.62) 0 4%,transparent 15%),
+    linear-gradient(180deg,#8ed8f5 0%,#b9e9fb 42%,#d9f4ff 72%,#c9ebc2 100%)!important;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+  background-attachment:fixed!important;
+}
+body:before{
+  content:""!important;
+  display:block!important;
+  position:fixed!important;
+  inset:0!important;
+  z-index:-1!important;
+  pointer-events:none!important;
+  opacity:.9!important;
+  background:
+    radial-gradient(ellipse 88% 68% at 50% 116%,
+      transparent 0 48%,
+      rgba(255,92,112,.88) 48.5% 51.5%,
+      rgba(255,166,70,.9) 52% 55%,
+      rgba(255,226,91,.92) 55.5% 58.5%,
+      rgba(104,207,119,.9) 59% 62%,
+      rgba(72,177,237,.9) 62.5% 65.5%,
+      rgba(164,125,226,.86) 66% 69%,
+      transparent 69.5% 100%);
+}
+body:after{
+  content:""!important;
+  display:block!important;
+  position:fixed!important;
+  inset:0!important;
+  z-index:-1!important;
+  pointer-events:none!important;
+  background:
+    radial-gradient(ellipse 72% 30% at 5% 112%,#7fcf79 0 58%,transparent 59%),
+    radial-gradient(ellipse 78% 35% at 96% 115%,#55b96e 0 58%,transparent 59%),
+    radial-gradient(ellipse 68% 24% at 52% 117%,#a1df83 0 60%,transparent 61%),
+    radial-gradient(ellipse 18% 7% at 18% 18%,rgba(255,255,255,.65) 0 48%,transparent 52%),
+    radial-gradient(ellipse 22% 8% at 23% 18%,rgba(255,255,255,.58) 0 48%,transparent 52%),
+    radial-gradient(ellipse 16% 6% at 78% 30%,rgba(255,255,255,.58) 0 48%,transparent 52%),
+    radial-gradient(ellipse 20% 7% at 83% 30%,rgba(255,255,255,.52) 0 48%,transparent 52%);
+  opacity:.94!important;
+}
+.app,#homePage,.page{background:transparent!important}
+
 </style></head>
 <body>
 <div class="app">
