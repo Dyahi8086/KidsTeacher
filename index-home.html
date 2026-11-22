@@ -1945,6 +1945,61 @@ body:after{
   filter:drop-shadow(0 1px 0 rgba(255,255,255,.22));
 }
 
+
+
+/* SOFT LAYERED PASTEL CLOUDS & HILLS — TOY-WORLD DEPTH */
+html,body{
+  min-height:100%!important;
+  background-color:#c9e9f5!important;
+  background-image:
+    linear-gradient(180deg,#a9d9f0 0%,#c5e5f2 38%,#e0e8f2 68%,#e6e9df 100%)!important;
+  background-attachment:fixed!important;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+}
+body:before{
+  content:""!important;
+  display:block!important;
+  position:fixed!important;
+  inset:0!important;
+  z-index:-1!important;
+  pointer-events:none!important;
+  opacity:1!important;
+  background:
+    /* distant soft cloud banks */
+    radial-gradient(ellipse 18% 6% at 9% 18%,rgba(255,255,255,.84) 0 58%,transparent 72%),
+    radial-gradient(ellipse 12% 5% at 17% 16%,rgba(255,255,255,.80) 0 58%,transparent 72%),
+    radial-gradient(ellipse 16% 6% at 25% 19%,rgba(255,255,255,.74) 0 58%,transparent 72%),
+    radial-gradient(ellipse 18% 6% at 73% 27%,rgba(255,255,255,.78) 0 58%,transparent 72%),
+    radial-gradient(ellipse 12% 5% at 81% 25%,rgba(255,255,255,.82) 0 58%,transparent 72%),
+    radial-gradient(ellipse 16% 6% at 89% 28%,rgba(255,255,255,.74) 0 58%,transparent 72%),
+    /* soft atmospheric glow */
+    radial-gradient(ellipse 75% 42% at 50% 0%,rgba(255,255,255,.30),transparent 74%),
+    linear-gradient(180deg,rgba(170,220,244,.12),rgba(255,255,255,.08) 58%,transparent 100%);
+}
+body:after{
+  content:""!important;
+  display:block!important;
+  position:fixed!important;
+  inset:0!important;
+  z-index:-1!important;
+  pointer-events:none!important;
+  opacity:1!important;
+  background:
+    /* far rolling hills */
+    radial-gradient(ellipse 78% 24% at 8% 105%,#c6e6c4 0 62%,transparent 63%),
+    radial-gradient(ellipse 80% 25% at 96% 104%,#c0e1bd 0 62%,transparent 63%),
+    /* middle hills */
+    radial-gradient(ellipse 76% 22% at 0% 112%,#a9dba9 0 62%,transparent 63%),
+    radial-gradient(ellipse 74% 23% at 100% 112%,#a4d6a4 0 62%,transparent 63%),
+    /* foreground soft toy hills */
+    radial-gradient(ellipse 76% 20% at 48% 116%,#d5edb7 0 62%,transparent 63%),
+    radial-gradient(ellipse 38% 11% at 5% 109%,rgba(255,255,255,.25) 0 58%,transparent 62%),
+    radial-gradient(ellipse 36% 10% at 95% 108%,rgba(255,255,255,.22) 0 58%,transparent 62%);
+  filter:drop-shadow(0 -7px 12px rgba(92,139,127,.13));
+}
+.app,#homePage,.page{background:transparent!important}
+
 </style></head>
 <body>
 <div class="app">
