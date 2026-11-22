@@ -1792,6 +1792,36 @@ body:before{
   background:transparent!important;
 }
 
+
+
+/* FULL LAVENDER CLAYMORPHISM BACKGROUND — background only */
+html,body{
+  min-height:100%!important;
+  background-color:#c9b8ee!important;
+  background-image:
+    radial-gradient(ellipse at 12% 8%,rgba(244,237,255,.72) 0%,rgba(244,237,255,0) 38%),
+    radial-gradient(ellipse at 88% 28%,rgba(177,151,225,.28) 0%,rgba(177,151,225,0) 42%),
+    radial-gradient(ellipse at 18% 78%,rgba(229,215,255,.48) 0%,rgba(229,215,255,0) 40%),
+    radial-gradient(ellipse at 92% 92%,rgba(163,139,215,.24) 0%,rgba(163,139,215,0) 40%),
+    linear-gradient(145deg,#e5d9fb 0%,#d6c7f1 28%,#cbb9eb 58%,#bca8e2 100%)!important;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+  background-attachment:fixed!important;
+}
+body:before{
+  content:""!important;
+  display:block!important;
+  position:fixed!important;
+  inset:0!important;
+  z-index:-1!important;
+  pointer-events:none!important;
+  background:
+    radial-gradient(ellipse at 50% -12%,rgba(255,255,255,.22),transparent 52%),
+    linear-gradient(180deg,rgba(255,255,255,.05),rgba(95,69,151,.045))!important;
+  opacity:.8!important;
+}
+.app,#homePage,.page{background:transparent!important}
+
 </style></head>
 <body>
 <div class="app">
